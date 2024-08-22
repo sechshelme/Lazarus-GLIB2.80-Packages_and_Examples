@@ -1,7 +1,3 @@
-  //{%MainUnit sdl3.pas}
-
-//    {$include common_glib.inc}
-
 
 {$include gobject/gtype.inc}                   // io.
 {$include gobject/gtypeplugin.inc}             // io.
@@ -23,13 +19,5 @@
 {$include gobject/gbinding.inc}                // io. -> gobject, gclosure
 {$include gobject/gbindinggroup.inc}           // io. -> gbinding, gclosure
 {$include gobject/gtypemodule.inc}             // io. -> gobject
-
-
-
-
-
-
-//{$include glib/giochannel.inc}              //  -> gmain, gstring, gunicode, gconvert    ( Komischer Record )
-
 
 

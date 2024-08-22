@@ -1,8 +1,3 @@
-  //{%MainUnit sdl3.pas}
-
-//    {$include common_glib.inc}
-
-
 
 {$include gio/giotypes.inc}
 {$include gio/gioenums.inc}                // io.
@@ -158,9 +153,5 @@
 {$include gio/gmenumodel.inc}              // io.
 {$include gio/gmenu.inc}                   // io. -> gmenumodel
 {$include gio/gmenuexporter.inc}           // io. -> gmenumodel
-
-
-//{$include glib/giochannel.inc}              //  -> gmain, gstring, gunicode, gconvert    ( Komischer Record )
-
 
 

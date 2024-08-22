@@ -1,7 +1,3 @@
-  //{%MainUnit sdl3.pas}
-
-    {$include common_glib.inc}
-
 
 {$include glib/gtypes.inc}                  // Komplizierte Makros entfernt     ( neu übersetzen )
 {$include glib/gversion.inc}                // io.

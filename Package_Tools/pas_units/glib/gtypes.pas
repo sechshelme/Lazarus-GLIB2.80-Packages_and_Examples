@@ -28,6 +28,7 @@ type
   //  Tgboolean = Tgint;
   Tgboolean = Boolean32;
 
+  PPguchar = ^Pguchar;
   Pguchar = ^Tguchar;
   Tguchar = byte;
 
@@ -37,6 +38,7 @@ type
   Pgulong = ^Tgulong;
   Tgulong = dword;
 
+  PPguint = ^Pguint; 
   Pguint = ^Tguint;
   Tguint = cuint;
 

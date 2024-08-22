@@ -11,14 +11,14 @@ uses
   {$ENDIF}
 
   {$DEFINE read_interface}
-  {$include gobject2_8_includes.inc}
+  {$include gobject280_includes.inc}
   {$UNDEF read_interface}
 
 
 implementation
 
 {$DEFINE read_implementation}
-{$include gobject2_8_includes.inc}
+{$include gobject280_includes.inc}
 {$UNDEF read_implementation}
 
 end.
