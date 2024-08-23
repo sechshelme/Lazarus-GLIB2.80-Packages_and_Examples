@@ -2,30 +2,11 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 21-08-2024   19:51                        //
+//   Erzeugt am: 23-08-2024   18:15                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
 {$IFDEF read_interface}
-
-// Ausgelagert
-//type
-//  TGValue = record
-//    g_type: TGType;
-//    Data: array[0..1] of record
-//      case longint of
-//        0: (v_int: Tgint);
-//        1: (v_uint: Tguint);
-//        2: (v_long: Tglong);
-//        3: (v_ulong: Tgulong);
-//        4: (v_int64: Tgint64);
-//        5: (v_uint64: Tguint64);
-//        6: (v_float: Tgfloat);
-//        7: (v_double: Tgdouble);
-//        8: (v_pointer: Tgpointer);
-//      end;
-//  end;
-//  PGValue = ^TGValue;
 
 type
   TGValueTransform = procedure(src_value: PGValue; dest_value: PGValue); cdecl;

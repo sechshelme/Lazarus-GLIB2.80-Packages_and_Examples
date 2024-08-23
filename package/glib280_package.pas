@@ -8,7 +8,7 @@ unit GLIB280_package;
 interface
 
 uses
-  gio280, glib280, gobject280, LazarusPackageIntf;
+  glib280, LazarusPackageIntf;
 
 implementation
 

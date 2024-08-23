@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 21-08-2024   19:51                        //
+//   Erzeugt am: 23-08-2024   18:15                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -27,7 +27,7 @@ type
   //  Tgboolean = Tgint;
   Tgboolean = Boolean32;
 
-  PPguchar = ^Pguchar; // ???????
+  PPguchar = ^Pguchar;
   Pguchar = ^Tguchar;
   Tguchar = byte;
 
@@ -37,7 +37,7 @@ type
   Pgulong = ^Tgulong;
   Tgulong = dword;
 
-  PPguint = ^Pguint;  // ?????
+  PPguint = ^Pguint; 
   Pguint = ^Tguint;
   Tguint = cuint;
 

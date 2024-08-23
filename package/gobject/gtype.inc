@@ -2,39 +2,13 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 21-08-2024   19:51                        //
+//   Erzeugt am: 23-08-2024   18:15                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
 {$IFDEF read_interface}
 
   // unwichtige Makros entfernt
-type
-  PGType = ^TGType;
-  TGType = Tguintptr;
-
-
-  // ====== von gvalue.h
-type
-  TGValue = record
-    g_type: TGType;
-    Data: array[0..1] of record
-      case longint of
-        0: (v_int: Tgint);
-        1: (v_uint: Tguint);
-        2: (v_long: Tglong);
-        3: (v_ulong: Tgulong);
-        4: (v_int64: Tgint64);
-        5: (v_uint64: Tguint64);
-        6: (v_float: Tgfloat);
-        7: (v_double: Tgdouble);
-        8: (v_pointer: Tgpointer);
-      end;
-  end;
-  PGValue = ^TGValue;
-
-  // ==========
-
 const
   G_TYPE_FUNDAMENTAL_SHIFT = 2;
   G_TYPE_FUNDAMENTAL_MAX = 255 shl G_TYPE_FUNDAMENTAL_SHIFT;
@@ -291,20 +265,22 @@ function G_TYPE_IS_FINAL(_type: TGType): Tgboolean;
 function G_TYPE_IS_DEPRECATED(_type: TGType): Tgboolean;
 
 
-function G_TYPE_CHECK_INSTANCE_CAST(instance: Pointer; g_type: TGType): PGTypeInstance;
+//function G_TYPE_CHECK_INSTANCE_CAST(instance: Pointer; g_type: TGType): PGTypeInstance;
 function G_TYPE_CHECK_INSTANCE_TYPE(instance: Pointer; g_type: TGType): Tgboolean;
 function G_TYPE_CHECK_INSTANCE_FUNDAMENTAL_TYPE(instance: PGTypeInstance; g_type: TGType): Tgboolean;
 function G_TYPE_INSTANCE_GET_CLASS(instance: Tgpointer; g_type: TGType): PGTypeClass;
 function G_TYPE_INSTANCE_GET_INTERFACE(instance: Pointer; g_type: TGType): Pointer;
-function G_TYPE_CHECK_CLASS_CAST(g_class: pointer; g_type: TGType): Pointer;
+//function G_TYPE_CHECK_CLASS_CAST(g_class: pointer; g_type: TGType): Pointer;
 function G_TYPE_CHECK_CLASS_TYPE(g_class: pointer; g_type: TGType): Tgboolean;
-function G_TYPE_CHECK_VALUE(Value: Pointer): Tgboolean;
+//function G_TYPE_CHECK_VALUE(Value: Pointer): Tgboolean;
 function G_TYPE_CHECK_VALUE_TYPE(Value: pointer; g_type: TGType): Tgboolean;
 function G_TYPE_FROM_INSTANCE(instance: Tgpointer): TGType;
 function G_TYPE_FROM_CLASS(g_class: Tgpointer): TGType;
 function G_TYPE_FROM_INTERFACE(g_iface: Pointer): TGType;
-function G_TYPE_INSTANCE_GET_PRIVATE(instance, g_type, c_type: TGType): Tgpointer;
-function G_TYPE_CLASS_GET_PRIVATE(klass, g_type, c_type: TGType): Tgpointer;
+//function G_TYPE_INSTANCE_GET_PRIVATE(instance, g_type, c_type: TGType): Tgpointer;
+//function G_TYPE_CLASS_GET_PRIVATE(klass, g_type, c_type: TGType): Tgpointer;
+
+// bla bla
 
 function GPOINTER_TO_TYPE(p: Tgpointer): TGType;
 function GTYPE_TO_POINTER(t: TGType): Tgpointer;
@@ -453,11 +429,11 @@ begin
   G_TYPE_MAKE_FUNDAMENTAL := TGType(x shl G_TYPE_FUNDAMENTAL_SHIFT);
 end;
 
-function G_TYPE_CHECK_INSTANCE_CAST(instance: Pointer; g_type: TGType
-  ): PGTypeInstance;
-begin
-  G_TYPE_CHECK_INSTANCE_CAST := g_type_check_instance_cast(instance, g_type);
-end;
+//function G_TYPE_CHECK_INSTANCE_CAST(instance: Pointer; g_type: TGType
+//  ): PGTypeInstance;
+//begin
+//  G_TYPE_CHECK_INSTANCE_CAST := g_type_check_instance_cast(instance, g_type);
+//end;
 
 function G_TYPE_CHECK_INSTANCE_TYPE(instance: Pointer; g_type: TGType
   ): Tgboolean;
@@ -480,20 +456,20 @@ begin
   G_TYPE_INSTANCE_GET_INTERFACE := g_type_interface_peek((PGTypeInstance(instance))^.g_class, g_type);
 end;
 
-function G_TYPE_CHECK_CLASS_CAST(g_class: pointer; g_type: TGType): Pointer;
-begin
-  G_TYPE_CHECK_CLASS_CAST := g_type_check_class_cast(PGTypeClass(g_class), g_type);
-end;
+//function G_TYPE_CHECK_CLASS_CAST(g_class: pointer; g_type: TGType): Pointer;
+//begin
+//  G_TYPE_CHECK_CLASS_CAST := g_type_check_class_cast(PGTypeClass(g_class), g_type);
+//end;
 
 function G_TYPE_CHECK_CLASS_TYPE(g_class: pointer; g_type: TGType): Tgboolean;
 begin
   G_TYPE_CHECK_CLASS_TYPE := g_type_check_class_is_a(PGTypeClass(g_class), g_type);
 end;
 
-function G_TYPE_CHECK_VALUE(Value: Pointer): Tgboolean;
-begin
-  G_TYPE_CHECK_VALUE := g_type_check_value(PGValue(Value));
-end;
+//function G_TYPE_CHECK_VALUE(Value: Pointer): Tgboolean;
+//begin
+//  G_TYPE_CHECK_VALUE := g_type_check_value(PGValue(Value));
+//end;
 
 function G_TYPE_CHECK_VALUE_TYPE(Value: pointer; g_type: TGType): Tgboolean;
 begin
@@ -522,16 +498,16 @@ begin
   G_TYPE_CHECK_INSTANCE_FUNDAMENTAL_TYPE := g_type_check_instance_is_fundamentally_a(instance, g_type);
 end;
 
-function G_TYPE_INSTANCE_GET_PRIVATE(instance, g_type, c_type: TGType): Tgpointer;
-begin
-  G_TYPE_INSTANCE_GET_PRIVATE := g_type_instance_get_private(PGTypeInstance(instance), g_type);
-end;
+//function G_TYPE_INSTANCE_GET_PRIVATE(instance, g_type, c_type: TGType): Tgpointer;
+//begin
+//  G_TYPE_INSTANCE_GET_PRIVATE := g_type_instance_get_private(PGTypeInstance(instance), g_type);
+//end;
 
 
-function G_TYPE_CLASS_GET_PRIVATE(klass, g_type, c_type: TGType): Tgpointer;
-begin
-  G_TYPE_CLASS_GET_PRIVATE := g_type_class_get_private(PGTypeClass(klass), g_type);
-end;
+//function G_TYPE_CLASS_GET_PRIVATE(klass, g_type, c_type: TGType): Tgpointer;
+//begin
+//  G_TYPE_CLASS_GET_PRIVATE := g_type_class_get_private(PGTypeClass(klass), g_type);
+//end;
 
 
 // =====

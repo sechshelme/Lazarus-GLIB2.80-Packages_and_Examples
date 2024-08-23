@@ -1,15 +1,12 @@
-unit glib280;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 23-08-2024   18:15                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  Strings,
-  ctypes;
-
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 const
   {$IFDEF Linux}
@@ -46,9 +43,9 @@ type
   // ====
 
 const
-  //  GLIB_MAJOR_VERSION = 2;
-  //  GLIB_MINOR_VERSION = 80;
-  //  GLIB_MICRO_VERSION = 0;
+//  GLIB_MAJOR_VERSION = 2;
+//  GLIB_MINOR_VERSION = 80;
+//  GLIB_MICRO_VERSION = 0;
 
 
   {$IFDEF Linux}
@@ -58,23 +55,6 @@ const
   G_DIR_SEPARATOR = '';
   {$ENDIF}
 
-const
-   G_MINFLOAT   = 5.0e-324;
-   G_MAXFLOAT   = 1.7e308;
-   G_MINDOUBLE  = G_MINFLOAT;  // since gdouble is the same
-   G_MAXDOUBLE  = G_MAXFLOAT;  // as gfloat
-   G_MAXSHORT   = 32767;
-   G_MINSHORT   = -G_MAXSHORT-1;
-   G_MAXUSHORT  = 2*G_MAXSHORT+1;
-   G_MAXINT     = 2147483647;
-   G_MININT     = -G_MAXINT-1;
-   G_MAXUINT    = 4294967295;   //  2*G_MAXINT+1;
-   G_MINLONG    = G_MININT;        // since glong is the same
-   G_MAXLONG    = G_MAXINT;        // as gint
-   G_MAXULONG   = G_MAXUINT;
-   G_MAXINT64   = 9223372036854775807;
-   G_MININT64   = -G_MAXINT64-1;
-   G_MAXUINT64  = qword(2)*qword(G_MAXINT64)+1;
 
 type
   Tgint8 = int8;
@@ -110,13 +90,6 @@ type
 
   Tgoffset = SizeInt;
 
-  // gio
-
-type
-  PGType = ^TGType;
-  TGType = Tguintptr;
-
-
   // no GLIB
 
   TFILE = record //  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h
@@ -150,9 +123,9 @@ const         // nur Linux    /usr/lib/x86_64-linux-gnu/glib-2.0/include/glibcon
   GLIB_SYSDEF_MSG_DONTROUTE = 4;
 
 
-type
-  Tpid_t = cint;    // /usr/include/x86_64-linux-gnu/bits/types.h
-  Tuid_t = cuint;
+  type
+    Tpid_t=cint;    // /usr/include/x86_64-linux-gnu/bits/types.h
+    Tuid_t=cuint;
 
 const
   __SIZEOF_PTHREAD_MUTEX_T = 40;
@@ -168,40 +141,9 @@ type
 
   Tpthread_t = culong;  // /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
 
-
-  {$DEFINE read_interface}
-  {$include glib280_includes.inc}
-type
-  TGValue = record
-    g_type: TGType;
-    Data: array[0..1] of record
-      case longint of
-        0: (v_int: Tgint);
-        1: (v_uint: Tguint);
-        2: (v_long: Tglong);
-        3: (v_ulong: Tgulong);
-        4: (v_int64: Tgint64);
-        5: (v_uint64: Tguint64);
-        6: (v_float: Tgfloat);
-        7: (v_double: Tgdouble);
-        8: (v_pointer: Tgpointer);
-      end;
-  end;
-  PGValue = ^TGValue;
+{$ENDIF read_interface}
 
 
-  {$include gobject280_includes.inc}
-  {$include gio280_includes.inc}
-  {$UNDEF read_interface}
+{$IFDEF read_implementation}
 
-
-
-implementation
-
-{$DEFINE read_implementation}
-{$include glib280_includes.inc}
-{$include gobject280_includes.inc}
-{$include gio280_includes.inc}
-{$UNDEF read_implementation}
-
-end.
+{$ENDIF read_implementation}

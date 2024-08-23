@@ -6,21 +6,13 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files>
       <Item>
-        <Filename Value="gio280.pas"/>
-        <UnitName Value="gio280"/>
-      </Item>
-      <Item>
         <Filename Value="glib280.pas"/>
         <UnitName Value="glib280"/>
-      </Item>
-      <Item>
-        <Filename Value="gobject280.pas"/>
-        <UnitName Value="gobject280"/>
       </Item>
     </Files>
     <RequiredPkgs>

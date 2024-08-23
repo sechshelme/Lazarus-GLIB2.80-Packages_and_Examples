@@ -32,8 +32,8 @@ implementation
 { TForm1 }
 
 const
-  srcPath = '/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GTK4/Package_Tools/glib/Package_Tools/pas_units/';
-  destPath = '/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GTK4/Package_Tools/glib/package/';
+  srcPath = '/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GLIB2.80/Package_Tools/pas_units';
+  destPath = '/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GLIB2.80/package';
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
