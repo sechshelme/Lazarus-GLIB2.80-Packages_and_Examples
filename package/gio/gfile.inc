@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -156,8 +156,7 @@ function g_file_new_tmp_finish(Result: PGAsyncResult; iostream: PPGFileIOStream;
 procedure g_file_new_tmp_dir_async(tmpl: PChar; io_priority: longint; cancellable: PGCancellable; callback: TGAsyncReadyCallback; user_data: Tgpointer); cdecl; external libgio2;
 function g_file_new_tmp_dir_finish(Result: PGAsyncResult; error: PPGError): PGFile; cdecl; external libgio2;
 function g_file_parse_name(parse_name: PChar): PGFile; cdecl; external libgio2;
-function g_file_new_build_filename(first_element: Pgchar; args: array of const): PGFile; cdecl; external libgio2;
-function g_file_new_build_filename(first_element: Pgchar): PGFile; cdecl; external libgio2;
+function g_file_new_build_filename(first_element: Pgchar): PGFile; varargs; cdecl; external libgio2;
 function g_file_new_build_filenamev(args: PPgchar): PGFile; cdecl; external libgio2;
 function g_file_dup(file_: PGFile): PGFile; cdecl; external libgio2;
 function g_file_hash(_file: Tgconstpointer): Tguint; cdecl; external libgio2;

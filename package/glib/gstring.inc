@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -48,11 +48,9 @@ function g_string_replace(_string: PGString; find: Pgchar; replace: Pgchar; limi
 function g_string_ascii_down(_string: PGString): PGString; cdecl; external libglib2;
 function g_string_ascii_up(_string: PGString): PGString; cdecl; external libglib2;
 procedure g_string_vprintf(_string: PGString; format: Pgchar; args: Tva_list); cdecl; external libglib2;
-procedure g_string_printf(_string: PGString; format: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_string_printf(_string: PGString; format: Pgchar); cdecl; external libglib2;
+procedure g_string_printf(_string: PGString; format: Pgchar); varargs; cdecl; external libglib2;
 procedure g_string_append_vprintf(_string: PGString; format: Pgchar; args: Tva_list); cdecl; external libglib2;
-procedure g_string_append_printf(_string: PGString; format: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_string_append_printf(_string: PGString; format: Pgchar); cdecl; external libglib2;
+procedure g_string_append_printf(_string: PGString; format: Pgchar); varargs; cdecl; external libglib2;
 function g_string_append_uri_escaped(_string: PGString; unescaped: Pgchar; reserved_chars_allowed: Pgchar; allow_utf8: Tgboolean): PGString; cdecl; external libglib2;
 
 

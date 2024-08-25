@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -15,8 +15,7 @@ type
 
 
 function g_subprocess_get_type: TGType; cdecl; external libgio2;
-function g_subprocess_new(flags: TGSubprocessFlags; error: PPGError; argv0: Pgchar; args: array of const): PGSubprocess; cdecl; external libgio2;
-function g_subprocess_new(flags: TGSubprocessFlags; error: PPGError; argv0: Pgchar): PGSubprocess; cdecl; external libgio2;
+function g_subprocess_new(flags: TGSubprocessFlags; error: PPGError; argv0: Pgchar): PGSubprocess; varargs; cdecl; external libgio2;
 function g_subprocess_newv(argv: PPgchar; flags: TGSubprocessFlags; error: PPGError): PGSubprocess; cdecl; external libgio2;
 function g_subprocess_get_stdin_pipe(subprocess: PGSubprocess): PGOutputStream; cdecl; external libgio2;
 function g_subprocess_get_stdout_pipe(subprocess: PGSubprocess): PGInputStream; cdecl; external libgio2;

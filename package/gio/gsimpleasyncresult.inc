@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -16,9 +16,7 @@ type
 function g_simple_async_result_get_type: TGType; cdecl; external libgio2;
 function g_simple_async_result_new(source_object: PGObject; callback: TGAsyncReadyCallback; user_data: Tgpointer; source_tag: Tgpointer): PGSimpleAsyncResult; cdecl; external libgio2;
 function g_simple_async_result_new_error(source_object: PGObject; callback: TGAsyncReadyCallback; user_data: Tgpointer; domain: TGQuark; code: Tgint;
-  format: PChar; args: array of const): PGSimpleAsyncResult; cdecl; external libgio2;
-function g_simple_async_result_new_error(source_object: PGObject; callback: TGAsyncReadyCallback; user_data: Tgpointer; domain: TGQuark; code: Tgint;
-  format: PChar): PGSimpleAsyncResult; cdecl; external libgio2;
+  format: PChar): PGSimpleAsyncResult; varargs; cdecl; external libgio2;
 function g_simple_async_result_new_from_error(source_object: PGObject; callback: TGAsyncReadyCallback; user_data: Tgpointer; error: PGError): PGSimpleAsyncResult; cdecl; external libgio2;
 function g_simple_async_result_new_take_error(source_object: PGObject; callback: TGAsyncReadyCallback; user_data: Tgpointer; error: PGError): PGSimpleAsyncResult; cdecl; external libgio2;
 procedure g_simple_async_result_set_op_res_gpointer(simple: PGSimpleAsyncResult; op_res: Tgpointer; destroy_op_res: TGDestroyNotify); cdecl; external libgio2;
@@ -36,8 +34,7 @@ procedure g_simple_async_result_run_in_thread(simple: PGSimpleAsyncResult; func:
 procedure g_simple_async_result_set_from_error(simple: PGSimpleAsyncResult; error: PGError); cdecl; external libgio2;
 procedure g_simple_async_result_take_error(simple: PGSimpleAsyncResult; error: PGError); cdecl; external libgio2;
 function g_simple_async_result_propagate_error(simple: PGSimpleAsyncResult; dest: PPGError): Tgboolean; cdecl; external libgio2;
-procedure g_simple_async_result_set_error(simple: PGSimpleAsyncResult; domain: TGQuark; code: Tgint; format: PChar; args: array of const); cdecl; external libgio2;
-procedure g_simple_async_result_set_error(simple: PGSimpleAsyncResult; domain: TGQuark; code: Tgint; format: PChar); cdecl; external libgio2;
+procedure g_simple_async_result_set_error(simple: PGSimpleAsyncResult; domain: TGQuark; code: Tgint; format: PChar); varargs; cdecl; external libgio2;
 procedure g_simple_async_result_set_error_va(simple: PGSimpleAsyncResult; domain: TGQuark; code: Tgint; format: PChar; args: Tva_list); cdecl; external libgio2;
 function g_simple_async_result_is_valid(Result: PGAsyncResult; Source: PGObject; source_tag: Tgpointer): Tgboolean; cdecl; external libgio2;
 procedure g_simple_async_report_error_in_idle(obj: PGObject; callback: TGAsyncReadyCallback; user_data: Tgpointer; domain: TGQuark; code: Tgint;

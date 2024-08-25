@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -72,15 +72,12 @@ function g_strncasecmp(s1: Pgchar; s2: Pgchar; n: Tguint): Tgint; cdecl; externa
 function g_strdown(_string: Pgchar): Pgchar; cdecl; external libglib2;
 function g_strup(_string: Pgchar): Pgchar; cdecl; external libglib2;
 function g_strdup(str: Pgchar): Pgchar; cdecl; external libglib2;
-function g_strdup_printf(format: Pgchar; args: array of const): Pgchar; cdecl; external libglib2;
-function g_strdup_printf(format: Pgchar): Pgchar; cdecl; external libglib2;
+function g_strdup_printf(format: Pgchar): Pgchar; varargs; cdecl; external libglib2;
 function g_strdup_vprintf(format: Pgchar; args: Tva_list): Pgchar; cdecl; external libglib2;
 function g_strndup(str: Pgchar; n: Tgsize): Pgchar; cdecl; external libglib2;
 function g_strnfill(length: Tgsize; fill_char: Tgchar): Pgchar; cdecl; external libglib2;
-function g_strconcat(string1: Pgchar; args: array of const): Pgchar; cdecl; external libglib2;
-function g_strconcat(string1: Pgchar): Pgchar; cdecl; external libglib2;
-function g_strjoin(separator: Pgchar; args: array of const): Pgchar; cdecl; external libglib2;
-function g_strjoin(separator: Pgchar): Pgchar; cdecl; external libglib2;
+function g_strconcat(string1: Pgchar): Pgchar; varargs; cdecl; external libglib2;
+function g_strjoin(separator: Pgchar): Pgchar; varargs; cdecl; external libglib2;
 function g_strcompress(Source: Pgchar): Pgchar; cdecl; external libglib2;
 function g_strescape(Source: Pgchar; exceptions: Pgchar): Pgchar; cdecl; external libglib2;
 function g_memdup(mem: Tgconstpointer; byte_size: Tguint): Tgpointer; cdecl; external libglib2;

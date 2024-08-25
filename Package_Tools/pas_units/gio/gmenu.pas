@@ -41,19 +41,16 @@ function g_menu_item_new_from_model(model: PGMenuModel; item_index: Tgint): PGMe
 function g_menu_item_new_submenu(_label: Pgchar; submenu: PGMenuModel): PGMenuItem; cdecl; external libgio2;
 function g_menu_item_new_section(_label: Pgchar; section: PGMenuModel): PGMenuItem; cdecl; external libgio2;
 function g_menu_item_get_attribute_value(menu_item: PGMenuItem; attribute: Pgchar; expected_type: PGVariantType): PGVariant; cdecl; external libgio2;
-function g_menu_item_get_attribute(menu_item: PGMenuItem; attribute: Pgchar; format_string: Pgchar; args: array of const): Tgboolean; cdecl; external libgio2;
-function g_menu_item_get_attribute(menu_item: PGMenuItem; attribute: Pgchar; format_string: Pgchar): Tgboolean; cdecl; external libgio2;
+function g_menu_item_get_attribute(menu_item: PGMenuItem; attribute: Pgchar; format_string: Pgchar): Tgboolean; varargs; cdecl; external libgio2;
 function g_menu_item_get_link(menu_item: PGMenuItem; link: Pgchar): PGMenuModel; cdecl; external libgio2;
 procedure g_menu_item_set_attribute_value(menu_item: PGMenuItem; attribute: Pgchar; Value: PGVariant); cdecl; external libgio2;
-procedure g_menu_item_set_attribute(menu_item: PGMenuItem; attribute: Pgchar; format_string: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_menu_item_set_attribute(menu_item: PGMenuItem; attribute: Pgchar; format_string: Pgchar); cdecl; external libgio2;
+procedure g_menu_item_set_attribute(menu_item: PGMenuItem; attribute: Pgchar; format_string: Pgchar); varargs; cdecl; external libgio2;
 procedure g_menu_item_set_link(menu_item: PGMenuItem; link: Pgchar; model: PGMenuModel); cdecl; external libgio2;
 procedure g_menu_item_set_label(menu_item: PGMenuItem; _label: Pgchar); cdecl; external libgio2;
 procedure g_menu_item_set_submenu(menu_item: PGMenuItem; submenu: PGMenuModel); cdecl; external libgio2;
 procedure g_menu_item_set_section(menu_item: PGMenuItem; section: PGMenuModel); cdecl; external libgio2;
 procedure g_menu_item_set_action_and_target_value(menu_item: PGMenuItem; action: Pgchar; target_value: PGVariant); cdecl; external libgio2;
-procedure g_menu_item_set_action_and_target(menu_item: PGMenuItem; action: Pgchar; format_string: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_menu_item_set_action_and_target(menu_item: PGMenuItem; action: Pgchar; format_string: Pgchar); cdecl; external libgio2;
+procedure g_menu_item_set_action_and_target(menu_item: PGMenuItem; action: Pgchar; format_string: Pgchar); varargs; cdecl; external libgio2;
 procedure g_menu_item_set_detailed_action(menu_item: PGMenuItem; detailed_action: Pgchar); cdecl; external libgio2;
 procedure g_menu_item_set_icon(menu_item: PGMenuItem; icon: PGIcon); cdecl; external libgio2;
 

@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -213,10 +213,8 @@ procedure g_scanner_scope_foreach_symbol(scanner: PGScanner; scope_id: Tguint; f
 function g_scanner_lookup_symbol(scanner: PGScanner; symbol: Pgchar): Tgpointer; cdecl; external libglib2;
 procedure g_scanner_unexp_token(scanner: PGScanner; expected_token: TGTokenType; identifier_spec: Pgchar; symbol_spec: Pgchar; symbol_name: Pgchar;
   message: Pgchar; is_error: Tgint); cdecl; external libglib2;
-procedure g_scanner_error(scanner: PGScanner; format: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_scanner_error(scanner: PGScanner; format: Pgchar); cdecl; external libglib2;
-procedure g_scanner_warn(scanner: PGScanner; format: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_scanner_warn(scanner: PGScanner; format: Pgchar); cdecl; external libglib2;
+procedure g_scanner_error(scanner: PGScanner; format: Pgchar); varargs; cdecl; external libglib2;
+procedure g_scanner_warn(scanner: PGScanner; format: Pgchar); varargs; cdecl; external libglib2;
 
 function g_scanner_freeze_symbol_table(scanner: Pointer): pointer;
 function g_scanner_thaw_symbol_table(scanner: Pointer): pointer;

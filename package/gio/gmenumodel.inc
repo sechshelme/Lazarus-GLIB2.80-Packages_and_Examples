@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -80,8 +80,7 @@ function g_menu_model_is_mutable(model: PGMenuModel): Tgboolean; cdecl; external
 function g_menu_model_get_n_items(model: PGMenuModel): Tgint; cdecl; external libgio2;
 function g_menu_model_iterate_item_attributes(model: PGMenuModel; item_index: Tgint): PGMenuAttributeIter; cdecl; external libgio2;
 function g_menu_model_get_item_attribute_value(model: PGMenuModel; item_index: Tgint; attribute: Pgchar; expected_type: PGVariantType): PGVariant; cdecl; external libgio2;
-function g_menu_model_get_item_attribute(model: PGMenuModel; item_index: Tgint; attribute: Pgchar; format_string: Pgchar; args: array of const): Tgboolean; cdecl; external libgio2;
-function g_menu_model_get_item_attribute(model: PGMenuModel; item_index: Tgint; attribute: Pgchar; format_string: Pgchar): Tgboolean; cdecl; external libgio2;
+function g_menu_model_get_item_attribute(model: PGMenuModel; item_index: Tgint; attribute: Pgchar; format_string: Pgchar): Tgboolean; varargs; cdecl; external libgio2;
 function g_menu_model_iterate_item_links(model: PGMenuModel; item_index: Tgint): PGMenuLinkIter; cdecl; external libgio2;
 function g_menu_model_get_item_link(model: PGMenuModel; item_index: Tgint; link: Pgchar): PGMenuModel; cdecl; external libgio2;
 procedure g_menu_model_items_changed(model: PGMenuModel; position: Tgint; removed: Tgint; added: Tgint); cdecl; external libgio2;

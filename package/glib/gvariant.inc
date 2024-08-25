@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -60,8 +60,7 @@ function g_variant_new_handle(Value: Tgint32): PGVariant; cdecl; external libgli
 function g_variant_new_double(Value: Tgdouble): PGVariant; cdecl; external libglib2;
 function g_variant_new_string(_string: Pgchar): PGVariant; cdecl; external libglib2;
 function g_variant_new_take_string(_string: Pgchar): PGVariant; cdecl; external libglib2;
-function g_variant_new_printf(format_string: Pgchar; args: array of const): PGVariant; cdecl; external libglib2;
-function g_variant_new_printf(format_string: Pgchar): PGVariant; cdecl; external libglib2;
+function g_variant_new_printf(format_string: Pgchar): PGVariant; varargs; cdecl; external libglib2;
 function g_variant_new_object_path(object_path: Pgchar): PGVariant; cdecl; external libglib2;
 function g_variant_is_object_path(_string: Pgchar): Tgboolean; cdecl; external libglib2;
 function g_variant_new_signature(signature: Pgchar): PGVariant; cdecl; external libglib2;
@@ -99,11 +98,9 @@ function g_variant_new_tuple(children: PPGVariant; n_children: Tgsize): PGVarian
 function g_variant_new_dict_entry(key: PGVariant; Value: PGVariant): PGVariant; cdecl; external libglib2;
 function g_variant_get_maybe(Value: PGVariant): PGVariant; cdecl; external libglib2;
 function g_variant_n_children(Value: PGVariant): Tgsize; cdecl; external libglib2;
-procedure g_variant_get_child(Value: PGVariant; index_: Tgsize; format_string: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_variant_get_child(Value: PGVariant; index_: Tgsize; format_string: Pgchar); cdecl; external libglib2;
+procedure g_variant_get_child(Value: PGVariant; index_: Tgsize; format_string: Pgchar); varargs; cdecl; external libglib2;
 function g_variant_get_child_value(Value: PGVariant; index_: Tgsize): PGVariant; cdecl; external libglib2;
-function g_variant_lookup(dictionary: PGVariant; key: Pgchar; format_string: Pgchar; args: array of const): Tgboolean; cdecl; external libglib2;
-function g_variant_lookup(dictionary: PGVariant; key: Pgchar; format_string: Pgchar): Tgboolean; cdecl; external libglib2;
+function g_variant_lookup(dictionary: PGVariant; key: Pgchar; format_string: Pgchar): Tgboolean; varargs; cdecl; external libglib2;
 function g_variant_lookup_value(dictionary: PGVariant; key: Pgchar; expected_type: PGVariantType): PGVariant; cdecl; external libglib2;
 function g_variant_get_fixed_array(Value: PGVariant; n_elements: Pgsize; element_size: Tgsize): Tgconstpointer; cdecl; external libglib2;
 function g_variant_get_size(Value: PGVariant): Tgsize; cdecl; external libglib2;
@@ -134,10 +131,8 @@ function g_variant_iter_copy(iter: PGVariantIter): PGVariantIter; cdecl; externa
 function g_variant_iter_n_children(iter: PGVariantIter): Tgsize; cdecl; external libglib2;
 procedure g_variant_iter_free(iter: PGVariantIter); cdecl; external libglib2;
 function g_variant_iter_next_value(iter: PGVariantIter): PGVariant; cdecl; external libglib2;
-function g_variant_iter_next(iter: PGVariantIter; format_string: Pgchar; args: array of const): Tgboolean; cdecl; external libglib2;
-function g_variant_iter_next(iter: PGVariantIter; format_string: Pgchar): Tgboolean; cdecl; external libglib2;
-function g_variant_iter_loop(iter: PGVariantIter; format_string: Pgchar; args: array of const): Tgboolean; cdecl; external libglib2;
-function g_variant_iter_loop(iter: PGVariantIter; format_string: Pgchar): Tgboolean; cdecl; external libglib2;
+function g_variant_iter_next(iter: PGVariantIter; format_string: Pgchar): Tgboolean; varargs; cdecl; external libglib2;
+function g_variant_iter_loop(iter: PGVariantIter; format_string: Pgchar): Tgboolean; varargs; cdecl; external libglib2;
 
 type
   TGVariantBuilder = record
@@ -188,20 +183,15 @@ procedure g_variant_builder_clear(builder: PGVariantBuilder); cdecl; external li
 procedure g_variant_builder_open(builder: PGVariantBuilder; _type: PGVariantType); cdecl; external libglib2;
 procedure g_variant_builder_close(builder: PGVariantBuilder); cdecl; external libglib2;
 procedure g_variant_builder_add_value(builder: PGVariantBuilder; Value: PGVariant); cdecl; external libglib2;
-procedure g_variant_builder_add(builder: PGVariantBuilder; format_string: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_variant_builder_add(builder: PGVariantBuilder; format_string: Pgchar); cdecl; external libglib2;
-procedure g_variant_builder_add_parsed(builder: PGVariantBuilder; format: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_variant_builder_add_parsed(builder: PGVariantBuilder; format: Pgchar); cdecl; external libglib2;
-function g_variant_new(format_string: Pgchar; args: array of const): PGVariant; cdecl; external libglib2;
-function g_variant_new(format_string: Pgchar): PGVariant; cdecl; external libglib2;
-procedure g_variant_get(Value: PGVariant; format_string: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_variant_get(Value: PGVariant; format_string: Pgchar); cdecl; external libglib2;
+procedure g_variant_builder_add(builder: PGVariantBuilder; format_string: Pgchar); varargs; cdecl; external libglib2;
+procedure g_variant_builder_add_parsed(builder: PGVariantBuilder; format: Pgchar); varargs; cdecl; external libglib2;
+function g_variant_new(format_string: Pgchar): PGVariant; cdecl; varargs; external libglib2;
+procedure g_variant_get(Value: PGVariant; format_string: Pgchar); varargs; cdecl; external libglib2;
 function g_variant_new_va(format_string: Pgchar; endptr: PPgchar; app: Pva_list): PGVariant; cdecl; external libglib2;
 procedure g_variant_get_va(Value: PGVariant; format_string: Pgchar; endptr: PPgchar; app: Pva_list); cdecl; external libglib2;
 function g_variant_check_format_string(Value: PGVariant; format_string: Pgchar; copy_only: Tgboolean): Tgboolean; cdecl; external libglib2;
 function g_variant_parse(_type: PGVariantType; Text: Pgchar; limit: Pgchar; endptr: PPgchar; error: PPGError): PGVariant; cdecl; external libglib2;
-function g_variant_new_parsed(format: Pgchar; args: array of const): PGVariant; cdecl; external libglib2;
-function g_variant_new_parsed(format: Pgchar): PGVariant; cdecl; external libglib2;
+function g_variant_new_parsed(format: Pgchar): PGVariant; varargs; cdecl; external libglib2;
 function g_variant_new_parsed_va(format: Pgchar; app: Pva_list): PGVariant; cdecl; external libglib2;
 function g_variant_parse_error_print_context(error: PGError; source_str: Pgchar): Pgchar; cdecl; external libglib2;
 function g_variant_compare(one: Tgconstpointer; two: Tgconstpointer): Tgint; cdecl; external libglib2;
@@ -222,12 +212,10 @@ type
 
 function g_variant_dict_new(from_asv: PGVariant): PGVariantDict; cdecl; external libglib2;
 procedure g_variant_dict_init(dict: PGVariantDict; from_asv: PGVariant); cdecl; external libglib2;
-function g_variant_dict_lookup(dict: PGVariantDict; key: Pgchar; format_string: Pgchar; args: array of const): Tgboolean; cdecl; external libglib2;
-function g_variant_dict_lookup(dict: PGVariantDict; key: Pgchar; format_string: Pgchar): Tgboolean; cdecl; external libglib2;
+function g_variant_dict_lookup(dict: PGVariantDict; key: Pgchar; format_string: Pgchar): Tgboolean; varargs; cdecl; external libglib2;
 function g_variant_dict_lookup_value(dict: PGVariantDict; key: Pgchar; expected_type: PGVariantType): PGVariant; cdecl; external libglib2;
 function g_variant_dict_contains(dict: PGVariantDict; key: Pgchar): Tgboolean; cdecl; external libglib2;
-procedure g_variant_dict_insert(dict: PGVariantDict; key: Pgchar; format_string: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_variant_dict_insert(dict: PGVariantDict; key: Pgchar; format_string: Pgchar); cdecl; external libglib2;
+procedure g_variant_dict_insert(dict: PGVariantDict; key: Pgchar; format_string: Pgchar); varargs; cdecl; external libglib2;
 procedure g_variant_dict_insert_value(dict: PGVariantDict; key: Pgchar; Value: PGVariant); cdecl; external libglib2;
 function g_variant_dict_remove(dict: PGVariantDict; key: Pgchar): Tgboolean; cdecl; external libglib2;
 procedure g_variant_dict_clear(dict: PGVariantDict); cdecl; external libglib2;

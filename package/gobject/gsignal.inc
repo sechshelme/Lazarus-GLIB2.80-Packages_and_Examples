@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -84,20 +84,14 @@ function g_signal_newv(signal_name: Pgchar; itype: TGType; signal_flags: TGSigna
 function g_signal_new_valist(signal_name: Pgchar; itype: TGType; signal_flags: TGSignalFlags; class_closure: PGClosure; accumulator: TGSignalAccumulator;
   accu_data: Tgpointer; c_marshaller: TGSignalCMarshaller; return_type: TGType; n_params: Tguint; args: Tva_list): Tguint; cdecl; external libgobject2_0;
 function g_signal_new(signal_name: Pgchar; itype: TGType; signal_flags: TGSignalFlags; class_offset: Tguint; accumulator: TGSignalAccumulator;
-  accu_data: Tgpointer; c_marshaller: TGSignalCMarshaller; return_type: TGType; n_params: Tguint; args: array of const): Tguint; cdecl; external libgobject2_0;
-function g_signal_new(signal_name: Pgchar; itype: TGType; signal_flags: TGSignalFlags; class_offset: Tguint; accumulator: TGSignalAccumulator;
-  accu_data: Tgpointer; c_marshaller: TGSignalCMarshaller; return_type: TGType; n_params: Tguint): Tguint; cdecl; external libgobject2_0;
+  accu_data: Tgpointer; c_marshaller: TGSignalCMarshaller; return_type: TGType; n_params: Tguint): Tguint; varargs; cdecl; external libgobject2_0;
 function g_signal_new_class_handler(signal_name: Pgchar; itype: TGType; signal_flags: TGSignalFlags; class_handler: TGCallback; accumulator: TGSignalAccumulator;
-  accu_data: Tgpointer; c_marshaller: TGSignalCMarshaller; return_type: TGType; n_params: Tguint; args: array of const): Tguint; cdecl; external libgobject2_0;
-function g_signal_new_class_handler(signal_name: Pgchar; itype: TGType; signal_flags: TGSignalFlags; class_handler: TGCallback; accumulator: TGSignalAccumulator;
-  accu_data: Tgpointer; c_marshaller: TGSignalCMarshaller; return_type: TGType; n_params: Tguint): Tguint; cdecl; external libgobject2_0;
+  accu_data: Tgpointer; c_marshaller: TGSignalCMarshaller; return_type: TGType; n_params: Tguint): Tguint; varargs; cdecl; external libgobject2_0;
 procedure g_signal_set_va_marshaller(signal_id: Tguint; instance_type: TGType; va_marshaller: TGSignalCVaMarshaller); cdecl; external libgobject2_0;
 procedure g_signal_emitv(instance_and_params: PGValue; signal_id: Tguint; detail: TGQuark; return_value: PGValue); cdecl; external libgobject2_0;
 procedure g_signal_emit_valist(instance: Tgpointer; signal_id: Tguint; detail: TGQuark; var_args: Tva_list); cdecl; external libgobject2_0;
-procedure g_signal_emit(instance: Tgpointer; signal_id: Tguint; detail: TGQuark; args: array of const); cdecl; external libgobject2_0;
-procedure g_signal_emit(instance: Tgpointer; signal_id: Tguint; detail: TGQuark); cdecl; external libgobject2_0;
-procedure g_signal_emit_by_name(instance: Tgpointer; detailed_signal: Pgchar; args: array of const); cdecl; external libgobject2_0;
-procedure g_signal_emit_by_name(instance: Tgpointer; detailed_signal: Pgchar); cdecl; external libgobject2_0;
+procedure g_signal_emit(instance: Tgpointer; signal_id: Tguint; detail: TGQuark); varargs; cdecl; external libgobject2_0;
+procedure g_signal_emit_by_name(instance: Tgpointer; detailed_signal: Pgchar); varargs; cdecl; external libgobject2_0;
 function g_signal_lookup(Name: Pgchar; itype: TGType): Tguint; cdecl; external libgobject2_0;
 function g_signal_name(signal_id: Tguint): Pgchar; cdecl; external libgobject2_0;
 procedure g_signal_query(signal_id: Tguint; query: PGSignalQuery); cdecl; external libgobject2_0;
@@ -130,8 +124,7 @@ procedure g_clear_signal_handler(handler_id_ptr: Pgulong; instance: Tgpointer); 
 procedure g_signal_override_class_closure(signal_id: Tguint; instance_type: TGType; class_closure: PGClosure); cdecl; external libgobject2_0;
 procedure g_signal_override_class_handler(signal_name: Pgchar; instance_type: TGType; class_handler: TGCallback); cdecl; external libgobject2_0;
 procedure g_signal_chain_from_overridden(instance_and_params: PGValue; return_value: PGValue); cdecl; external libgobject2_0;
-procedure g_signal_chain_from_overridden_handler(instance: Tgpointer; args: array of const); cdecl; external libgobject2_0;
-procedure g_signal_chain_from_overridden_handler(instance: Tgpointer); cdecl; external libgobject2_0;
+procedure g_signal_chain_from_overridden_handler(instance: Tgpointer); varargs; cdecl; external libgobject2_0;
 
 function g_signal_accumulator_true_handled(ihint: PGSignalInvocationHint; return_accu: PGValue; handler_return: PGValue; dummy: Tgpointer): Tgboolean; cdecl; external libgobject2_0;
 function g_signal_accumulator_first_wins(ihint: PGSignalInvocationHint; return_accu: PGValue; handler_return: PGValue; dummy: Tgpointer): Tgboolean; cdecl; external libgobject2_0;

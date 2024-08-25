@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -67,19 +67,14 @@ procedure g_object_interface_install_property(g_iface: Tgpointer; pspec: PGParam
 function g_object_interface_find_property(g_iface: Tgpointer; property_name: Pgchar): PGParamSpec; cdecl; external libgobject2_0;
 function g_object_interface_list_properties(g_iface: Tgpointer; n_properties_p: Pguint): PPGParamSpec; cdecl; external libgobject2_0;
 function g_object_get_type: TGType; cdecl; external libgobject2_0;
-function g_object_new(object_type: TGType; first_property_name: Pgchar; args: array of const): Tgpointer; cdecl; external libgobject2_0;
-function g_object_new(object_type: TGType; first_property_name: Pgchar): Tgpointer; cdecl; external libgobject2_0;
+function g_object_new(object_type: TGType; first_property_name: Pgchar): Tgpointer; varargs; cdecl; external libgobject2_0;
 function g_object_new_with_properties(object_type: TGType; n_properties: Tguint; names: PPchar; values: PGValue): PGObject; cdecl; external libgobject2_0;
 function g_object_newv(object_type: TGType; n_parameters: Tguint; parameters: PGParameter): Tgpointer; cdecl; external libgobject2_0;
 function g_object_new_valist(object_type: TGType; first_property_name: Pgchar; var_args: Tva_list): PGObject; cdecl; external libgobject2_0;
-procedure g_object_set(_object: Tgpointer; first_property_name: Pgchar; args: array of const); cdecl; external libgobject2_0;
-procedure g_object_set(_object: Tgpointer; first_property_name: Pgchar); cdecl; external libgobject2_0;
-procedure g_object_get(_object: Tgpointer; first_property_name: Pgchar; args: array of const); cdecl; external libgobject2_0;
-procedure g_object_get(_object: Tgpointer; first_property_name: Pgchar); cdecl; external libgobject2_0;
-function g_object_connect(_object: Tgpointer; signal_spec: Pgchar; args: array of const): Tgpointer; cdecl; external libgobject2_0;
-function g_object_connect(_object: Tgpointer; signal_spec: Pgchar): Tgpointer; cdecl; external libgobject2_0;
-procedure g_object_disconnect(_object: Tgpointer; signal_spec: Pgchar; args: array of const); cdecl; external libgobject2_0;
-procedure g_object_disconnect(_object: Tgpointer; signal_spec: Pgchar); cdecl; external libgobject2_0;
+procedure g_object_set(_object: Tgpointer; first_property_name: Pgchar); varargs; cdecl; external libgobject2_0;
+procedure g_object_get(_object: Tgpointer; first_property_name: Pgchar); varargs; cdecl; external libgobject2_0;
+function g_object_connect(_object: Tgpointer; signal_spec: Pgchar): Tgpointer; varargs; cdecl; external libgobject2_0;
+procedure g_object_disconnect(_object: Tgpointer; signal_spec: Pgchar); varargs; cdecl; external libgobject2_0;
 procedure g_object_setv(_object: PGObject; n_properties: Tguint; names: PPgchar; values: PGValue); cdecl; external libgobject2_0;
 procedure g_object_set_valist(_object: PGObject; first_property_name: Pgchar; var_args: Tva_list); cdecl; external libgobject2_0;
 procedure g_object_getv(_object: PGObject; n_properties: Tguint; names: PPgchar; values: PGValue); cdecl; external libgobject2_0;

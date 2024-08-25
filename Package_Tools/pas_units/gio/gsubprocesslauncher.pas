@@ -17,8 +17,7 @@ type
 
 function g_subprocess_launcher_get_type: TGType; cdecl; external libgio2;
 function g_subprocess_launcher_new(flags: TGSubprocessFlags): PGSubprocessLauncher; cdecl; external libgio2;
-function g_subprocess_launcher_spawn(self: PGSubprocessLauncher; error: PPGError; argv0: Pgchar; args: array of const): PGSubprocess; cdecl; external libgio2;
-function g_subprocess_launcher_spawn(self: PGSubprocessLauncher; error: PPGError; argv0: Pgchar): PGSubprocess; cdecl; external libgio2;
+function g_subprocess_launcher_spawn(self: PGSubprocessLauncher; error: PPGError; argv0: Pgchar): PGSubprocess; varargs; cdecl; external libgio2;
 function g_subprocess_launcher_spawnv(self: PGSubprocessLauncher; argv: PPgchar; error: PPGError): PGSubprocess; cdecl; external libgio2;
 procedure g_subprocess_launcher_set_environ(self: PGSubprocessLauncher; env: PPgchar); cdecl; external libgio2;
 procedure g_subprocess_launcher_setenv(self: PGSubprocessLauncher; variable: Pgchar; Value: Pgchar; overwrite: Tgboolean); cdecl; external libgio2;

@@ -46,10 +46,8 @@ function g_settings_set_value(settings: PGSettings; key: Pgchar; Value: PGVarian
 function g_settings_get_value(settings: PGSettings; key: Pgchar): PGVariant; cdecl; external libgio2;
 function g_settings_get_user_value(settings: PGSettings; key: Pgchar): PGVariant; cdecl; external libgio2;
 function g_settings_get_default_value(settings: PGSettings; key: Pgchar): PGVariant; cdecl; external libgio2;
-function g_settings_set(settings: PGSettings; key: Pgchar; format: Pgchar; args: array of const): Tgboolean; cdecl; external libgio2;
-function g_settings_set(settings: PGSettings; key: Pgchar; format: Pgchar): Tgboolean; cdecl; external libgio2;
-procedure g_settings_get(settings: PGSettings; key: Pgchar; format: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_settings_get(settings: PGSettings; key: Pgchar; format: Pgchar); cdecl; external libgio2;
+function g_settings_set(settings: PGSettings; key: Pgchar; format: Pgchar): Tgboolean; varargs; cdecl; external libgio2;
+procedure g_settings_get(settings: PGSettings; key: Pgchar; format: Pgchar); varargs; cdecl; external libgio2;
 procedure g_settings_reset(settings: PGSettings; key: Pgchar); cdecl; external libgio2;
 function g_settings_get_int(settings: PGSettings; key: Pgchar): Tgint; cdecl; external libgio2;
 function g_settings_set_int(settings: PGSettings; key: Pgchar; Value: Tgint): Tgboolean; cdecl; external libgio2;

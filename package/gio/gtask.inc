@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -21,9 +21,7 @@ function g_task_get_type: TGType; cdecl; external libgio2;
 function g_task_new(source_object: Tgpointer; cancellable: PGCancellable; callback: TGAsyncReadyCallback; callback_data: Tgpointer): PGTask; cdecl; external libgio2;
 procedure g_task_report_error(source_object: Tgpointer; callback: TGAsyncReadyCallback; callback_data: Tgpointer; source_tag: Tgpointer; error: PGError); cdecl; external libgio2;
 procedure g_task_report_new_error(source_object: Tgpointer; callback: TGAsyncReadyCallback; callback_data: Tgpointer; source_tag: Tgpointer; domain: TGQuark;
-  code: Tgint; format: PChar; args: array of const); cdecl; external libgio2;
-procedure g_task_report_new_error(source_object: Tgpointer; callback: TGAsyncReadyCallback; callback_data: Tgpointer; source_tag: Tgpointer; domain: TGQuark;
-  code: Tgint; format: PChar); cdecl; external libgio2;
+  code: Tgint; format: PChar); varargs; cdecl; external libgio2;
 procedure g_task_set_task_data(task: PGTask; task_data: Tgpointer; task_data_destroy: TGDestroyNotify); cdecl; external libgio2;
 procedure g_task_set_priority(task: PGTask; priority: Tgint); cdecl; external libgio2;
 procedure g_task_set_check_cancellable(task: PGTask; check_cancellable: Tgboolean); cdecl; external libgio2;
@@ -52,8 +50,7 @@ procedure g_task_return_pointer(task: PGTask; Result: Tgpointer; result_destroy:
 procedure g_task_return_boolean(task: PGTask; Result: Tgboolean); cdecl; external libgio2;
 procedure g_task_return_int(task: PGTask; Result: Tgssize); cdecl; external libgio2;
 procedure g_task_return_error(task: PGTask; error: PGError); cdecl; external libgio2;
-procedure g_task_return_prefixed_error(task: PGTask; error: PGError; format: PChar; args: array of const); cdecl; external;
-procedure g_task_return_prefixed_error(task: PGTask; error: PGError; format: PChar); cdecl; external;
+procedure g_task_return_prefixed_error(task: PGTask; error: PGError; format: PChar); varargs; cdecl; external;
 procedure g_task_return_new_error(task: PGTask; domain: TGQuark; code: Tgint; format: PChar);varargs cdecl; external libgio2;
 procedure g_task_return_new_error_literal(task: PGTask; domain: TGQuark; code: Tgint; message: PChar); cdecl; external libgio2;
 procedure g_task_return_value(task: PGTask; Result: PGValue); cdecl; external libgio2;

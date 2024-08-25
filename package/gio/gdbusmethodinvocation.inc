@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -29,8 +29,7 @@ procedure g_dbus_method_invocation_return_value(invocation: PGDBusMethodInvocati
 procedure g_dbus_method_invocation_return_value_with_unix_fd_list(invocation: PGDBusMethodInvocation; parameters: PGVariant; fd_list: PGUnixFDList); cdecl; external libgio2;
 {$endif}
 
-procedure g_dbus_method_invocation_return_error(invocation: PGDBusMethodInvocation; domain: TGQuark; code: Tgint; format: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_dbus_method_invocation_return_error(invocation: PGDBusMethodInvocation; domain: TGQuark; code: Tgint; format: Pgchar); cdecl; external libgio2;
+procedure g_dbus_method_invocation_return_error(invocation: PGDBusMethodInvocation; domain: TGQuark; code: Tgint; format: Pgchar); varargs; cdecl; external libgio2;
 procedure g_dbus_method_invocation_return_error_valist(invocation: PGDBusMethodInvocation; domain: TGQuark; code: Tgint; format: Pgchar; var_args: Tva_list); cdecl; external libgio2;
 procedure g_dbus_method_invocation_return_error_literal(invocation: PGDBusMethodInvocation; domain: TGQuark; code: Tgint; message: Pgchar); cdecl; external libgio2;
 procedure g_dbus_method_invocation_return_gerror(invocation: PGDBusMethodInvocation; error: PGError); cdecl; external libgio2;

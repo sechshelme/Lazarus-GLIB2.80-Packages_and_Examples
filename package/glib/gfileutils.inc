@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -74,11 +74,9 @@ function g_mkstemp(tmpl: Pgchar): Tgint; cdecl; external libglib2;
 function g_mkstemp_full(tmpl: Pgchar; flags: Tgint; mode: Tgint): Tgint; cdecl; external libglib2;
 function g_file_open_tmp(tmpl: Pgchar; name_used: PPgchar; error: PPGError): Tgint; cdecl; external libglib2;
 function g_dir_make_tmp(tmpl: Pgchar; error: PPGError): Pgchar; cdecl; external libglib2;
-function g_build_path(separator: Pgchar; first_element: Pgchar; args: array of const): Pgchar; cdecl; external libglib2;
-function g_build_path(separator: Pgchar; first_element: Pgchar): Pgchar; cdecl; external libglib2;
+function g_build_path(separator: Pgchar; first_element: Pgchar): Pgchar; varargs; cdecl; external libglib2;
 function g_build_pathv(separator: Pgchar; args: PPgchar): Pgchar; cdecl; external libglib2;
-function g_build_filename(first_element: Pgchar; args: array of const): Pgchar; cdecl; external libglib2;
-function g_build_filename(first_element: Pgchar): Pgchar; cdecl; external libglib2;
+function g_build_filename(first_element: Pgchar): Pgchar; varargs; cdecl; external libglib2;
 function g_build_filenamev(args: PPgchar): Pgchar; cdecl; external libglib2;
 function g_build_filename_valist(first_element: Pgchar; args: Pva_list): Pgchar; cdecl; external libglib2;
 function g_mkdir_with_parents(pathname: Pgchar; mode: Tgint): Tgint; cdecl; external libglib2;

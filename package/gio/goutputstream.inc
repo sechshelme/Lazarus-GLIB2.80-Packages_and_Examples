@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -57,9 +57,7 @@ function g_output_stream_writev(stream: PGOutputStream; vectors: PGOutputVector;
   error: PPGError): Tgboolean; cdecl; external libgio2;
 function g_output_stream_writev_all(stream: PGOutputStream; vectors: PGOutputVector; n_vectors: Tgsize; bytes_written: Pgsize; cancellable: PGCancellable;
   error: PPGError): Tgboolean; cdecl; external libgio2;
-function g_output_stream_printf(stream: PGOutputStream; bytes_written: Pgsize; cancellable: PGCancellable; error: PPGError; format: Pgchar;
-  args: array of const): Tgboolean; cdecl; external libgio2;
-function g_output_stream_printf(stream: PGOutputStream; bytes_written: Pgsize; cancellable: PGCancellable; error: PPGError; format: Pgchar): Tgboolean; cdecl; external libgio2;
+function g_output_stream_printf(stream: PGOutputStream; bytes_written: Pgsize; cancellable: PGCancellable; error: PPGError; format: Pgchar): Tgboolean; varargs; cdecl; external libgio2;
 function g_output_stream_vprintf(stream: PGOutputStream; bytes_written: Pgsize; cancellable: PGCancellable; error: PPGError; format: Pgchar;
   args: Tva_list): Tgboolean; cdecl; external libgio2;
 function g_output_stream_write_bytes(stream: PGOutputStream; bytes: PGBytes; cancellable: PGCancellable; error: PPGError): Tgssize; cdecl; external libgio2;

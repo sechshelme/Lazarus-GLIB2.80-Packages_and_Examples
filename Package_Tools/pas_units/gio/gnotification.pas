@@ -23,12 +23,10 @@ procedure g_notification_set_urgent(notification: PGNotification; urgent: Tgbool
 procedure g_notification_set_priority(notification: PGNotification; priority: TGNotificationPriority); cdecl; external libgio2;
 procedure g_notification_set_category(notification: PGNotification; category: Pgchar); cdecl; external libgio2;
 procedure g_notification_add_button(notification: PGNotification; _label: Pgchar; detailed_action: Pgchar); cdecl; external libgio2;
-procedure g_notification_add_button_with_target(notification: PGNotification; _label: Pgchar; action: Pgchar; target_format: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_notification_add_button_with_target(notification: PGNotification; _label: Pgchar; action: Pgchar; target_format: Pgchar); cdecl; external libgio2;
+procedure g_notification_add_button_with_target(notification: PGNotification; _label: Pgchar; action: Pgchar; target_format: Pgchar); varargs; cdecl; external libgio2;
 procedure g_notification_add_button_with_target_value(notification: PGNotification; _label: Pgchar; action: Pgchar; target: PGVariant); cdecl; external libgio2;
 procedure g_notification_set_default_action(notification: PGNotification; detailed_action: Pgchar); cdecl; external libgio2;
-procedure g_notification_set_default_action_and_target(notification: PGNotification; action: Pgchar; target_format: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_notification_set_default_action_and_target(notification: PGNotification; action: Pgchar; target_format: Pgchar); cdecl; external libgio2;
+procedure g_notification_set_default_action_and_target(notification: PGNotification; action: Pgchar; target_format: Pgchar); varargs; cdecl; external libgio2;
 procedure g_notification_set_default_action_and_target_value(notification: PGNotification; action: Pgchar; target: PGVariant); cdecl; external libgio2;
 
 // === Konventiert am: 20-8-24 17:27:36 ===

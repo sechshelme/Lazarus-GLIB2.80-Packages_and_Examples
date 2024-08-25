@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -62,8 +62,7 @@ function g_markup_parse_context_get_element_stack(context: PGMarkupParseContext)
 procedure g_markup_parse_context_get_position(context: PGMarkupParseContext; line_number: Pgint; char_number: Pgint); cdecl; external libglib2;
 function g_markup_parse_context_get_user_data(context: PGMarkupParseContext): Tgpointer; cdecl; external libglib2;
 function g_markup_escape_text(Text: Pgchar; length: Tgssize): Pgchar; cdecl; external libglib2;
-function g_markup_printf_escaped(format: PChar; args: array of const): Pgchar; cdecl; external libglib2;
-function g_markup_printf_escaped(format: PChar): Pgchar; cdecl; external libglib2;
+function g_markup_printf_escaped(format: PChar): Pgchar; varargs; cdecl; external libglib2;
 function g_markup_vprintf_escaped(format: PChar; args: Tva_list): Pgchar; cdecl; external libglib2;
 
 type
@@ -79,9 +78,7 @@ const
   G_MARKUP_COLLECT_OPTIONAL = 1 shl 16;
 
 function g_markup_collect_attributes(element_name: Pgchar; attribute_names: PPgchar; attribute_values: PPgchar; error: PPGError; first_type: TGMarkupCollectType;
-  first_attr: Pgchar; args: array of const): Tgboolean; cdecl; external libglib2;
-function g_markup_collect_attributes(element_name: Pgchar; attribute_names: PPgchar; attribute_values: PPgchar; error: PPGError; first_type: TGMarkupCollectType;
-  first_attr: Pgchar): Tgboolean; cdecl; external libglib2;
+  first_attr: Pgchar): Tgboolean; varargs; cdecl; external libglib2;
 
 function G_MARKUP_ERROR: TGQuark;
 

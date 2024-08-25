@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -67,8 +67,7 @@ type
   PGDebugKey = ^TGDebugKey;
 
 function g_parse_debug_string(_string: Pgchar; keys: PGDebugKey; nkeys: Tguint): Tguint; cdecl; external libglib2;
-function g_snprintf(_string: Pgchar; n: Tgulong; format: Pgchar; args: array of const): Tgint; cdecl; external libglib2;
-function g_snprintf(_string: Pgchar; n: Tgulong; format: Pgchar): Tgint; cdecl; external libglib2;
+function g_snprintf(_string: Pgchar; n: Tgulong; format: Pgchar): Tgint; varargs; cdecl; external libglib2;
 function g_vsnprintf(_string: Pgchar; n: Tgulong; format: Pgchar; args: Tva_list): Tgint; cdecl; external libglib2;
 procedure g_nullify_pointer(nullify_location: Pgpointer); cdecl; external libglib2;
 

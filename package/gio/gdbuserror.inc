@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -26,8 +26,7 @@ function g_dbus_error_register_error(error_domain: TGQuark; error_code: Tgint; d
 function g_dbus_error_unregister_error(error_domain: TGQuark; error_code: Tgint; dbus_error_name: Pgchar): Tgboolean; cdecl; external libgio2;
 procedure g_dbus_error_register_error_domain(error_domain_quark_name: Pgchar; quark_volatile: Pgsize; entries: PGDBusErrorEntry; num_entries: Tguint); cdecl; external libgio2;
 function g_dbus_error_new_for_dbus_error(dbus_error_name: Pgchar; dbus_error_message: Pgchar): PGError; cdecl; external libgio2;
-procedure g_dbus_error_set_dbus_error(error: PPGError; dbus_error_name: Pgchar; dbus_error_message: Pgchar; format: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_dbus_error_set_dbus_error(error: PPGError; dbus_error_name: Pgchar; dbus_error_message: Pgchar; format: Pgchar); cdecl; external libgio2;
+procedure g_dbus_error_set_dbus_error(error: PPGError; dbus_error_name: Pgchar; dbus_error_message: Pgchar; format: Pgchar); varargs; cdecl; external libgio2;
 procedure g_dbus_error_set_dbus_error_valist(error: PPGError; dbus_error_name: Pgchar; dbus_error_message: Pgchar; format: Pgchar; var_args: Tva_list); cdecl; external libgio2;
 function g_dbus_error_encode_gerror(error: PGError): Pgchar; cdecl; external libgio2;
 

@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -22,8 +22,7 @@ type
 
 function g_initable_get_type: TGType; cdecl; external libgio2;
 function g_initable_init(initable: PGInitable; cancellable: PGCancellable; error: PPGError): Tgboolean; cdecl; external libgio2;
-function g_initable_new(object_type: TGType; cancellable: PGCancellable; error: PPGError; first_property_name: Pgchar; args: array of const): Tgpointer; cdecl; external libgio2;
-function g_initable_new(object_type: TGType; cancellable: PGCancellable; error: PPGError; first_property_name: Pgchar): Tgpointer; cdecl; external libgio2;
+function g_initable_new(object_type: TGType; cancellable: PGCancellable; error: PPGError; first_property_name: Pgchar): Tgpointer; varargs; cdecl; external libgio2;
 function g_initable_newv(object_type: TGType; n_parameters: Tguint; parameters: PGParameter; cancellable: PGCancellable; error: PPGError): Tgpointer; cdecl; external libgio2;
 function g_initable_new_valist(object_type: TGType; first_property_name: Pgchar; var_args: Tva_list; cancellable: PGCancellable; error: PPGError): PGObject; cdecl; external libgio2;
 

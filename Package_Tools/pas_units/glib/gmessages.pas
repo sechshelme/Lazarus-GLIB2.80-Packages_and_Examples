@@ -40,8 +40,7 @@ function g_log_set_handler_full(log_domain: Pgchar; log_levels: TGLogLevelFlags;
 procedure g_log_remove_handler(log_domain: Pgchar; handler_id: Tguint); cdecl; external libglib2;
 procedure g_log_default_handler(log_domain: Pgchar; log_level: TGLogLevelFlags; message: Pgchar; unused_data: Tgpointer); cdecl; external libglib2;
 function g_log_set_default_handler(log_func: TGLogFunc; user_data: Tgpointer): TGLogFunc; cdecl; external libglib2;
-procedure g_log(log_domain: Pgchar; log_level: TGLogLevelFlags; format: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_log(log_domain: Pgchar; log_level: TGLogLevelFlags; format: Pgchar); cdecl; external libglib2;
+procedure g_log(log_domain: Pgchar; log_level: TGLogLevelFlags; format: Pgchar); varargs; cdecl; external libglib2;
 procedure g_logv(log_domain: Pgchar; log_level: TGLogLevelFlags; format: Pgchar; args: Tva_list); cdecl; external libglib2;
 function g_log_set_fatal_mask(log_domain: Pgchar; fatal_mask: TGLogLevelFlags): TGLogLevelFlags; cdecl; external libglib2;
 function g_log_set_always_fatal(fatal_mask: TGLogLevelFlags): TGLogLevelFlags; cdecl; external libglib2;
@@ -65,8 +64,7 @@ type
 
   TGLogWriterFunc = function(log_level: TGLogLevelFlags; fields: PGLogField; n_fields: Tgsize; user_data: Tgpointer): TGLogWriterOutput; cdecl;
 
-procedure g_log_structured(log_domain: Pgchar; log_level: TGLogLevelFlags; args: array of const); cdecl; external libglib2;
-procedure g_log_structured(log_domain: Pgchar; log_level: TGLogLevelFlags); cdecl; external libglib2;
+procedure g_log_structured(log_domain: Pgchar; log_level: TGLogLevelFlags); varargs; cdecl; external libglib2;
 procedure g_log_structured_array(log_level: TGLogLevelFlags; fields: PGLogField; n_fields: Tgsize); cdecl; external libglib2;
 procedure g_log_variant(log_domain: Pgchar; log_level: TGLogLevelFlags; fields: PGVariant); cdecl; external libglib2;
 procedure g_log_set_writer_func(func: TGLogWriterFunc; user_data: Tgpointer; user_data_free: TGDestroyNotify); cdecl; external libglib2;
@@ -87,10 +85,8 @@ procedure g_warn_message(domain: PChar; _file: PChar; line: longint; func: PChar
 procedure g_assert_warning(log_domain: PChar; _file: PChar; line: longint; pretty_function: PChar; expression: PChar); cdecl; external libglib2;
 procedure g_log_structured_standard(log_domain: Pgchar; log_level: TGLogLevelFlags; _file: Pgchar; line: Pgchar; func: Pgchar;
   message_format: Pgchar); varargs cdecl; external libglib2;
-procedure g_error(format: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_error(format: Pgchar); cdecl; external libglib2;
-procedure g_critical(format: Pgchar; args: array of const); cdecl; external libglib2;
-procedure g_critical(format: Pgchar); cdecl; external libglib2;
+procedure g_error(format: Pgchar); varargs; cdecl; external libglib2;
+procedure g_critical(format: Pgchar); varargs; cdecl; external libglib2;
 
 type
   TGPrintFunc = procedure(_string: Pgchar); cdecl;

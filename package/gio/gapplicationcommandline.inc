@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -41,10 +41,8 @@ function g_application_command_line_get_cwd(cmdline: PGApplicationCommandLine): 
 function g_application_command_line_get_is_remote(cmdline: PGApplicationCommandLine): Tgboolean; cdecl; external libgio2;
 procedure g_application_command_line_print_literal(cmdline: PGApplicationCommandLine; message: Pgchar); cdecl; external libgio2;
 procedure g_application_command_line_printerr_literal(cmdline: PGApplicationCommandLine; message: Pgchar); cdecl; external libgio2;
-procedure g_application_command_line_print(cmdline: PGApplicationCommandLine; format: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_application_command_line_print(cmdline: PGApplicationCommandLine; format: Pgchar); cdecl; external libgio2;
-procedure g_application_command_line_printerr(cmdline: PGApplicationCommandLine; format: Pgchar; args: array of const); cdecl; external libgio2;
-procedure g_application_command_line_printerr(cmdline: PGApplicationCommandLine; format: Pgchar); cdecl; external libgio2;
+procedure g_application_command_line_print(cmdline: PGApplicationCommandLine; format: Pgchar); varargs; cdecl; external libgio2;
+procedure g_application_command_line_printerr(cmdline: PGApplicationCommandLine; format: Pgchar); varargs; cdecl; external libgio2;
 function g_application_command_line_get_exit_status(cmdline: PGApplicationCommandLine): longint; cdecl; external libgio2;
 procedure g_application_command_line_set_exit_status(cmdline: PGApplicationCommandLine; exit_status: longint); cdecl; external libgio2;
 function g_application_command_line_get_platform_data(cmdline: PGApplicationCommandLine): PGVariant; cdecl; external libgio2;

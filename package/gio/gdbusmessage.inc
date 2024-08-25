@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 23-08-2024   18:15                        //
+//   Erzeugt am: 25-08-2024   17:20                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -13,8 +13,7 @@ function g_dbus_message_new: PGDBusMessage; cdecl; external libgio2;
 function g_dbus_message_new_signal(path: Pgchar; interface_: Pgchar; signal: Pgchar): PGDBusMessage; cdecl; external libgio2;
 function g_dbus_message_new_method_call(Name: Pgchar; path: Pgchar; interface_: Pgchar; method: Pgchar): PGDBusMessage; cdecl; external libgio2;
 function g_dbus_message_new_method_reply(method_call_message: PGDBusMessage): PGDBusMessage; cdecl; external libgio2;
-function g_dbus_message_new_method_error(method_call_message: PGDBusMessage; error_name: Pgchar; error_message_format: Pgchar; args: array of const): PGDBusMessage; cdecl; external libgio2;
-function g_dbus_message_new_method_error(method_call_message: PGDBusMessage; error_name: Pgchar; error_message_format: Pgchar): PGDBusMessage; cdecl; external libgio2;
+function g_dbus_message_new_method_error(method_call_message: PGDBusMessage; error_name: Pgchar; error_message_format: Pgchar): PGDBusMessage; varargs; cdecl; external libgio2;
 function g_dbus_message_new_method_error_valist(method_call_message: PGDBusMessage; error_name: Pgchar; error_message_format: Pgchar; var_args: Tva_list): PGDBusMessage; cdecl; external libgio2;
 function g_dbus_message_new_method_error_literal(method_call_message: PGDBusMessage; error_name: Pgchar; error_message: Pgchar): PGDBusMessage; cdecl; external libgio2;
 function g_dbus_message_print(message: PGDBusMessage; indent: Tguint): Pgchar; cdecl; external libgio2;
