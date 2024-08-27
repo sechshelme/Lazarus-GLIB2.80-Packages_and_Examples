@@ -24,7 +24,20 @@ uses
     g_print('Call g_object_new.'#10);
     show_ref_count(instance);
 
+    g_object_ref(instance);
+    g_print('Call g_object_ref.'#10);
+    show_ref_count(instance);
+
     g_object_unref(instance);
+    g_print('Call g_object_unref.'#10);
+    show_ref_count(instance);
+
+    g_object_unref(instance);
+    show_ref_count(instance);
+    g_print('Call g_object_unref.'#10);
+    g_print('Now the reference count is zero and the instance is destroyed.'#10);
+    g_print('The instance memories are possibly returned to the system.'#10);
+    g_print('Therefore, the access to the same address may cause a segmentation error.'#10);
 
     Exit(0);
   end;
