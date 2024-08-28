@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 25-08-2024   17:20                        //
+//   Erzeugt am: 28-08-2024   16:44                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -94,8 +94,8 @@ const
   G_PRIORITY_HIGH_IDLE = 100;
   G_PRIORITY_DEFAULT_IDLE = 200;
   G_PRIORITY_LOW = 300;
-  G_SOURCE_REMOVE_ = 0;
-  G_SOURCE_CONTINUE = 1;
+  G_SOURCE_REMOVE_ = gFalse;
+  G_SOURCE_CONTINUE = gTrue;
 
 function g_main_context_new: PGMainContext; cdecl; external libglib2;
 function g_main_context_new_with_flags(flags: TGMainContextFlags): PGMainContext; cdecl; external libglib2;

@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 25-08-2024   17:20                        //
+//   Erzeugt am: 28-08-2024   16:44                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -10,8 +10,8 @@
 
 
 const
-  G_DBUS_METHOD_INVOCATION_HANDLED = not 0;
-  G_DBUS_METHOD_INVOCATION_UNHANDLED = 0;
+  G_DBUS_METHOD_INVOCATION_HANDLED = gTrue;
+  G_DBUS_METHOD_INVOCATION_UNHANDLED = gFalse;
 
 function g_dbus_method_invocation_get_type: TGType; cdecl; external libgio2;
 function g_dbus_method_invocation_get_sender(invocation: PGDBusMethodInvocation): Pgchar; cdecl; external libgio2;

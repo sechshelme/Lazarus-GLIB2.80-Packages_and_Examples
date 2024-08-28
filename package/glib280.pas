@@ -59,22 +59,22 @@ const
   {$ENDIF}
 
 const
-   G_MINFLOAT   = 5.0e-324;
-   G_MAXFLOAT   = 1.7e308;
-   G_MINDOUBLE  = G_MINFLOAT;  // since gdouble is the same
-   G_MAXDOUBLE  = G_MAXFLOAT;  // as gfloat
-   G_MAXSHORT   = 32767;
-   G_MINSHORT   = -G_MAXSHORT-1;
-   G_MAXUSHORT  = 2*G_MAXSHORT+1;
-   G_MAXINT     = 2147483647;
-   G_MININT     = -G_MAXINT-1;
-   G_MAXUINT    = 4294967295;   //  2*G_MAXINT+1;
-   G_MINLONG    = G_MININT;        // since glong is the same
-   G_MAXLONG    = G_MAXINT;        // as gint
-   G_MAXULONG   = G_MAXUINT;
-   G_MAXINT64   = 9223372036854775807;
-   G_MININT64   = -G_MAXINT64-1;
-   G_MAXUINT64  = qword(2)*qword(G_MAXINT64)+1;
+  G_MINFLOAT = 5.0e-324;
+  G_MAXFLOAT = 1.7e308;
+  G_MINDOUBLE = G_MINFLOAT;
+  G_MAXDOUBLE = G_MAXFLOAT;
+  G_MAXSHORT = 32767;
+  G_MINSHORT = -G_MAXSHORT - 1;
+  G_MAXUSHORT = 2 * G_MAXSHORT + 1;
+  G_MAXINT = 2147483647;
+  G_MININT = -G_MAXINT - 1;
+  G_MAXUINT = 4294967295;
+  G_MINLONG = G_MININT;
+  G_MAXLONG = G_MAXINT;
+  G_MAXULONG = G_MAXUINT;
+  G_MAXINT64 = 9223372036854775807;
+  G_MININT64 = -G_MAXINT64 - 1;
+  G_MAXUINT64 = qword(2) * qword(G_MAXINT64) + 1;
 
 type
   Tgint8 = int8;
@@ -193,7 +193,6 @@ type
   {$include gobject280_includes.inc}
   {$include gio280_includes.inc}
   {$UNDEF read_interface}
-
 
 
 implementation

@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 25-08-2024   17:20                        //
+//   Erzeugt am: 28-08-2024   16:44                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -66,6 +66,10 @@ type
   TGFreeFunc = procedure(Data: Tgpointer); cdecl;
   TGTranslateFunc = function(str: Pgchar; Data: Tgpointer): Pgchar; cdecl;
   PGTranslateFunc = ^TGTranslateFunc;
+
+const
+  gFalse = Tgboolean(0);
+  gTrue = not gFalse;
 
 const
   G_E = 2.7182818284590452353602874713526624977572470937000;
