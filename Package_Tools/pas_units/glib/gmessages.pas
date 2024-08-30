@@ -85,6 +85,10 @@ procedure g_warn_message(domain: PChar; _file: PChar; line: longint; func: PChar
 procedure g_assert_warning(log_domain: PChar; _file: PChar; line: longint; pretty_function: PChar; expression: PChar); cdecl; external libglib2;
 procedure g_log_structured_standard(log_domain: Pgchar; log_level: TGLogLevelFlags; _file: Pgchar; line: Pgchar; func: Pgchar;
   message_format: Pgchar); varargs cdecl; external libglib2;
+
+const
+  G_LOG_DOMAIN: PChar = nil;
+
 procedure g_error(format: Pgchar); varargs; cdecl; external libglib2;
 procedure g_critical(format: Pgchar); varargs; cdecl; external libglib2;
 
