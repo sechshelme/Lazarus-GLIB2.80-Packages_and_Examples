@@ -6,11 +6,12 @@ uses
   glib280;
 
   // https://github.com/ToshioCP/Gobject-tutorial/blob/main/gfm/sec3.md
+  // https://github.com/ToshioCP/Gobject-tutorial/blob/main/src/tdouble1/tdouble.c
 
 type
   TTDouble = record
     parent: TGObject;
-    Value: cdouble;
+    Value: Tgdouble;
   end;
   PTDouble = ^TTDouble;
 
@@ -20,10 +21,12 @@ type
 
   procedure t_double_class_init(_class: TTDoubleClass); cdecl;
   begin
+    WriteLn('class_init');
   end;
 
   procedure t_double_init(self: TTDouble); cdecl;
   begin
+    WriteLn('init');
   end;
 
   function t_double_get_type: TGType; cdecl;
@@ -39,7 +42,7 @@ type
       info.class_init := TGClassInitFunc(@t_double_class_init);
       info.class_finalize := nil;
       info.class_data := nil;
-      info.instance_size := SizeOf(TDouble);
+      info.instance_size := SizeOf(TTDouble);
       info.n_preallocs := 0;
       info.instance_init := TGInstanceInitFunc(@t_double_init);
       info.value_table := nil;
@@ -67,7 +70,6 @@ type
 
   function t_doube_get_value(self: PTDouble; Value: Pgdouble): Tgboolean;
   begin
-    //  return_val_if_fail
     if T_IS_DOUBLE(self) then begin
       Value^ := self^.Value;
       Result := True;
@@ -81,6 +83,15 @@ type
   begin
     if T_IS_DOUBLE(self) then begin
       self^.Value := Value;
+    end else begin
+      g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'gFALSE');
+    end;
+  end;
+
+  procedure t_double_mul(self:PTDouble;value:Tgdouble);
+  begin
+    if T_IS_DOUBLE(self) then begin
+      self^.Value *= Value;
     end else begin
       g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'gFALSE');
     end;
@@ -104,20 +115,29 @@ type
     value: Tgdouble;
   begin
     d:=t_double_new(10.0);
-
     if t_doube_get_value(d, @value) then begin
       g_print('t_doube_get_value io. :  %lf.'#10, value);
     end else begin
       g_print('t_doube_get_value error'#10);
     end;
 
+    t_double_set_value(d, -20.0);
+    if t_doube_get_value(d, @value) then begin
+      g_print('New Size: %lf'#10, value);
+    end else begin
+      g_print('t_doube_get_value error'#10);
+    end;
+
+    t_double_mul(d, 3.3);
+    if t_doube_get_value(d, @value) then begin
+      g_print('New Size: %lf'#10, value);
+    end else begin
+      g_print('t_doube_get_value error'#10);
+    end;
 
     g_object_unref(d);
 
     Result := 0;
-
-
-    g_return_if_fail_warning(nil, nil, 'gFalse');
   end;
 
 begin
