@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 30-08-2024   19:48                        //
+//   Erzeugt am: 03-09-2024   16:56                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -117,14 +117,14 @@ function g_param_spec_pool_list(pool:PGParamSpecPool; owner_type:TGType; n_pspec
 procedure g_param_spec_pool_free(pool:PGParamSpecPool);cdecl;external libglib2;
 
 function G_TYPE_IS_PARAM(_type : longint) : Tgboolean;
-function G_PARAM_SPEC(pspec : PGTypeInstance) : PGParamSpec;
-function G_IS_PARAM_SPEC(pspec : PGTypeInstance) : Tgboolean;
+function G_PARAM_SPEC(pspec : Pointer) : PGParamSpec;
+function G_IS_PARAM_SPEC(pspec : Pointer) : Tgboolean;
 function G_PARAM_SPEC_CLASS(pclass : PGTypeClass) : PGTypeClass;
 function G_IS_PARAM_SPEC_CLASS(pclass : PGTypeClass) : Tgboolean;
-function G_PARAM_SPEC_GET_CLASS(pspec : PGTypeInstance) : PGTypeClass;
-function G_PARAM_SPEC_TYPE(pspec : PGTypeInstance) : TGType;
-function G_PARAM_SPEC_TYPE_NAME(pspec :  PGTypeInstance) : Pgchar;
-function G_PARAM_SPEC_VALUE_TYPE(pspec : PGTypeInstance) : TGType;
+function G_PARAM_SPEC_GET_CLASS(pspec : Pointer) : PGParamSpecClass;
+function G_PARAM_SPEC_TYPE(pspec : Pointer) : TGType;
+function G_PARAM_SPEC_TYPE_NAME(pspec :  Pointer) : Pgchar;
+function G_PARAM_SPEC_VALUE_TYPE(pspec : Pointer) : TGType;
 function G_VALUE_HOLDS_PARAM(value : PGValue) : Tgboolean;
 
 // === Konventiert am: 13-8-24 14:36:58 ===
@@ -140,12 +140,12 @@ begin
   G_TYPE_IS_PARAM:=(G_TYPE_FUNDAMENTAL(_type))=G_TYPE_PARAM;
 end;
 
-function G_PARAM_SPEC(pspec: PGTypeInstance): PGParamSpec;
+function G_PARAM_SPEC(pspec: Pointer): PGParamSpec;
 begin
   G_PARAM_SPEC:=PGParamSpec( g_type_check_instance_cast(pspec,G_TYPE_PARAM));
 end;
 
-function G_IS_PARAM_SPEC(pspec: PGTypeInstance): Tgboolean;
+function G_IS_PARAM_SPEC(pspec: Pointer): Tgboolean;
 begin
   G_IS_PARAM_SPEC:=g_type_check_instance_is_a(pspec,G_TYPE_PARAM);
 end;
@@ -160,22 +160,22 @@ begin
   G_IS_PARAM_SPEC_CLASS:=g_type_check_class_is_a(pclass,G_TYPE_PARAM);
 end;
 
-function G_PARAM_SPEC_GET_CLASS(pspec: PGTypeInstance): PGTypeClass;
+function G_PARAM_SPEC_GET_CLASS(pspec : Pointer) : PGParamSpecClass;
 begin
-  Result:=pspec^.g_class;
+   G_PARAM_SPEC_GET_CLASS:=PGParamSpecClass(G_TYPE_INSTANCE_GET_CLASS(pspec,G_TYPE_PARAM));
 end;
 
-function G_PARAM_SPEC_TYPE(pspec: PGTypeInstance): TGType;
+function G_PARAM_SPEC_TYPE(pspec: Pointer): TGType;
 begin
-  Result:=  pspec^.g_class^.g_type;
+   G_PARAM_SPEC_TYPE:=G_TYPE_FROM_INSTANCE(pspec);
 end;
 
-function G_PARAM_SPEC_TYPE_NAME(pspec: PGTypeInstance): Pgchar;
+function G_PARAM_SPEC_TYPE_NAME(pspec: Pointer): Pgchar;
 begin
   G_PARAM_SPEC_TYPE_NAME:=g_type_name(G_PARAM_SPEC_TYPE(pspec));
 end;
 
-function G_PARAM_SPEC_VALUE_TYPE(pspec: PGTypeInstance): TGType;
+function G_PARAM_SPEC_VALUE_TYPE(pspec: Pointer): TGType;
 begin
   G_PARAM_SPEC_VALUE_TYPE:=G_PARAM_SPEC(pspec)^.value_type;    // ????
 end;

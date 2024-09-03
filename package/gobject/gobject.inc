@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 30-08-2024   19:48                        //
+//   Erzeugt am: 03-09-2024   16:56                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -166,6 +166,7 @@ function G_IS_INITIALLY_UNOWNED_CLASS(klass: Tgpointer): Tgboolean;
 function G_INITIALLY_UNOWNED_GET_CLASS(obj: Tgpointer): PGInitiallyUnownedClass;
 
 procedure G_OBJECT_WARN_INVALID_PSPEC(anObject: Tgpointer; pname: PGChar; property_id: Tgint; pspec: Tgpointer);
+procedure G_OBJECT_WARN_INVALID_PROPERTY_ID(obj: Pointer; property_id: Tguint; pspec: PGParamSpec);
 
 
 // === Konventiert am: 13-8-24 13:48:38 ===
@@ -268,17 +269,24 @@ var
   _pspec: PGParamSpec;
   _property_id: Tguint;
 begin
-  //_object := PGObject (anObject);
-  //_pspec := PGParamSpec (pspec);
-  //_property_id := (property_id);
+  _object := PGObject (anObject);
+  _pspec := PGParamSpec (pspec);
+  _property_id := (property_id);
   //g_error ('%s: invalid %s id %u for "%s" of type `%s'' in `%s''',
-  //           ['',
+  //           '',
   //           pname,
   //           _property_id,
   //           _pspec^.name,
   //           g_type_name (G_PARAM_SPEC_TYPE (_pspec)),
-  //           G_OBJECT_TYPE_NAME (_object)]);
+  //           G_OBJECT_TYPE_NAME (_object));
 end;
+
+procedure G_OBJECT_WARN_INVALID_PROPERTY_ID(obj: Pointer; property_id: Tguint; pspec: PGParamSpec);
+begin
+  G_OBJECT_WARN_INVALID_PSPEC(obj, 'property', property_id, pspec);
+end;
+
+
 
 
 {$ENDIF read_implementation}

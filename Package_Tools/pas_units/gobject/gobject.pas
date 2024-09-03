@@ -167,6 +167,7 @@ function G_IS_INITIALLY_UNOWNED_CLASS(klass: Tgpointer): Tgboolean;
 function G_INITIALLY_UNOWNED_GET_CLASS(obj: Tgpointer): PGInitiallyUnownedClass;
 
 procedure G_OBJECT_WARN_INVALID_PSPEC(anObject: Tgpointer; pname: PGChar; property_id: Tgint; pspec: Tgpointer);
+procedure G_OBJECT_WARN_INVALID_PROPERTY_ID(obj: Pointer; property_id: Tguint; pspec: PGParamSpec);
 
 
 // === Konventiert am: 13-8-24 13:48:38 ===
@@ -277,6 +278,13 @@ begin
   //           g_type_name (G_PARAM_SPEC_TYPE (_pspec)),
   //           G_OBJECT_TYPE_NAME (_object)]);
 end;
+
+procedure G_OBJECT_WARN_INVALID_PROPERTY_ID(obj: Pointer; property_id: Tguint; pspec: PGParamSpec);
+begin
+  G_OBJECT_WARN_INVALID_PSPEC(obj, 'property', property_id, pspec);
+end;
+
+
 
 
 end.
