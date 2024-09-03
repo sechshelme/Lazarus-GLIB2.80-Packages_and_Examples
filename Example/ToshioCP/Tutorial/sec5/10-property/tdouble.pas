@@ -21,7 +21,8 @@ type
   PTDoubleClass = ^TTDoubleClass;
 
 function t_double_get_type: TGType;
-function t_double_new(Value: Tgdouble): PTDouble;
+function t_double_new: PTDouble;
+function t_double_new_with_value(Value: Tgdouble): PTDouble;
 function t_doube_get_value(self: PTDouble; Value: Pgdouble): Tgboolean;
 procedure t_double_set_value(self: PTDouble; Value: Tgdouble);
 function t_double_add(self: PTDouble; other: PTDouble): PTDouble;
@@ -45,6 +46,14 @@ const
 var
   t_double_signal: Tguint;
   double_property: PGParamSpec;
+
+procedure div_by_zero_cb(self: PGObject; Data: Tgpointer); cdecl;
+var
+  c: PChar absolute Data;
+begin
+  g_printerr(#10'Error: division by zero.'#10#10);
+end;
+
 
 procedure t_double_set_property(object_: PGObject; property_id: Tguint; Value: PGValue; pspec: PGParamSpec); cdecl;
 var
@@ -80,11 +89,11 @@ procedure t_double_class_init(_class: PTDoubleClass); cdecl;
 var
   gobject_class: PGObjectClass;
 begin
-  t_double_signal := g_signal_new(
+  t_double_signal := g_signal_new_class_handler(
     'div-by-zero',
     G_TYPE_FROM_CLASS(_class),
     G_SIGNAL_RUN_LAST or G_SIGNAL_NO_RECURSE or G_SIGNAL_NO_HOOKS,
-    0,
+    G_CALLBACK(@div_by_zero_cb),
     nil,
     nil,
     nil,
@@ -126,19 +135,26 @@ begin
   Result := type_;
 end;
 
-function t_double_new(Value: Tgdouble): PTDouble;
+function t_double_new: PTDouble;
 var
   d: PTDouble;
 begin
   d := g_object_new(T_TYPE_DOUBLE, nil);
-  d^.Value := Value;
+  Result := d;
+end;
+
+function t_double_new_with_value(Value: Tgdouble): PTDouble;
+var
+  d: PTDouble;
+begin
+  d := g_object_new(T_TYPE_DOUBLE, 'value', Value, nil);
   Result := d;
 end;
 
 function t_doube_get_value(self: PTDouble; Value: Pgdouble): Tgboolean;
 begin
   if T_IS_DOUBLE(self) then begin
-    Value^ := self^.Value;
+    g_object_get(self, 'value', Value, nil);
     Result := True;
   end else begin
     g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'FALSE');
@@ -149,7 +165,7 @@ end;
 procedure t_double_set_value(self: PTDouble; Value: Tgdouble);
 begin
   if T_IS_DOUBLE(self) then begin
-    self^.Value := Value;
+    g_object_set(self, 'value', Value, nil);
   end else begin
     g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'FALSE');
   end;
@@ -168,7 +184,7 @@ begin
     Exit(nil);
   end;
   t_doube_get_value(other, @Value);
-  Result := t_double_new(self^.Value + Value);
+  Result := t_double_new_with_value(self^.Value + Value);
 end;
 
 function t_double_sub(self: PTDouble; other: PTDouble): PTDouble;
@@ -184,7 +200,7 @@ begin
     Exit(nil);
   end;
   t_doube_get_value(other, @Value);
-  Result := t_double_new(self^.Value - Value);
+  Result := t_double_new_with_value(self^.Value - Value);
 end;
 
 function t_double_mul(self: PTDouble; other: PTDouble): PTDouble;
@@ -200,7 +216,7 @@ begin
     Exit(nil);
   end;
   t_doube_get_value(other, @Value);
-  Result := t_double_new(self^.Value * Value);
+  Result := t_double_new_with_value(self^.Value * Value);
 end;
 
 function t_double_div(self: PTDouble; other: PTDouble): PTDouble;
@@ -220,7 +236,7 @@ begin
     g_signal_emit(self, t_double_signal, 0);
     Exit(nil);
   end;
-  Result := t_double_new(self^.Value / Value);
+  Result := t_double_new_with_value(self^.Value / Value);
 end;
 
 function t_double_uminus(self: PTDouble): PTDouble;
@@ -229,7 +245,7 @@ begin
     g_return_if_fail_warning(G_LOG_DOMAIN, 'self', 'FALSE');
     Exit(nil);
   end;
-  Result := t_double_new(-self^.Value);
+  Result := t_double_new_with_value(-self^.Value);
 end;
 
 function T_TYPE_DOUBLE: TGType;

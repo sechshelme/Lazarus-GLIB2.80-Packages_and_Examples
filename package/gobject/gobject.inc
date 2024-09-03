@@ -272,13 +272,13 @@ begin
   _object := PGObject (anObject);
   _pspec := PGParamSpec (pspec);
   _property_id := (property_id);
-  //g_error ('%s: invalid %s id %u for "%s" of type `%s'' in `%s''',
-  //           '',
-  //           pname,
-  //           _property_id,
-  //           _pspec^.name,
-  //           g_type_name (G_PARAM_SPEC_TYPE (_pspec)),
-  //           G_OBJECT_TYPE_NAME (_object));
+  g_print ('%s: invalid %s id %u for "%s" of type `%s'' in `%s''',
+             '',
+             pname,
+             _property_id,
+             _pspec^.name,
+             g_type_name (G_PARAM_SPEC_TYPE (_pspec)),
+             G_OBJECT_TYPE_NAME (_object));
 end;
 
 procedure G_OBJECT_WARN_INVALID_PROPERTY_ID(obj: Pointer; property_id: Tguint; pspec: PGParamSpec);

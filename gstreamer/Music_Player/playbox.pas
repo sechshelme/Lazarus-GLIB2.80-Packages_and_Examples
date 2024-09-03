@@ -5,11 +5,12 @@ unit PlayBox;
 interface
 
 uses
-  Classes, SysUtils, Controls, StdCtrls, ExtCtrls, Buttons,
+  Classes, SysUtils, Controls, StdCtrls, ExtCtrls, Buttons, Graphics,
   Common;
 
 type
   TPlayBoxEvent = procedure(cmd: Tcommand) of object;
+
   TBox = class(TPanel)
   private
     FOnPlayBoxEvent: TPlayBoxEvent;
@@ -22,11 +23,11 @@ type
   end;
 
 
-  TEditBox=class(TBox)
+  TEditBox = class(TBox)
     constructor Create(AOwner: TComponent); override;
   end;
 
-  TPlayBox=class(TBox)
+  TPlayBox = class(TBox)
     constructor Create(AOwner: TComponent); override;
   end;
 
@@ -52,26 +53,35 @@ end;
 
 procedure TBox.LoadButtons(const props: TcmdProps);
 var
-  i: Integer;
+  i: integer;
   Btn: TBitBtn;
   propsCount: SizeInt;
+  pic: TPicture;
+  path: string;
 begin
-  propsCount:=Length(props);
+  propsCount := Length(props);
 
   Width := 100;
-  Height :=  propsCount*30+20;
-  Left:=-100;
-  Left:=TControl( Owner).Width-Width;
+  Height := propsCount * 30 + 20;
+  Left := -100;
+  Left := TControl(Owner).Width - Width;
 
+  pic := TPicture.Create;
   for i := 0 to propsCount - 1 do begin
     Btn := TBitBtn.Create(Self);
     Btn.Caption := props[i].Caption;
     Btn.Tag := PtrInt(props[i].cmd);
     Btn.OnClick := @BtnClick;
-    Btn.Left:=10;
-    Btn.Top:=i*30+10;
+    Btn.Left := 10;
+    Btn.Top := i * 30 + 10;
     Btn.Parent := Self;
+    path := 'png/' + props[i].IconPath + '.png';
+    if FileExists(path) then  begin
+      pic.LoadFromFile('png/' + props[i].IconPath + '.png');
+    end;
+    btn.Glyph := pic.Bitmap;
   end;
+  pic.Free;
 end;
 
 { TEditBox }
@@ -79,7 +89,7 @@ end;
 constructor TEditBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  Anchors:=[akTop,akRight];
+  Anchors := [akTop, akRight];
   LoadButtons(EditCmdProb);
 end;
 
@@ -88,9 +98,9 @@ end;
 constructor TPlayBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  Anchors:=[akBottom,akRight];
+  Anchors := [akBottom, akRight];
   LoadButtons(PlayCmdProp);
-  Top:=TControl(Owner).Height-Height;
+  Top := TControl(Owner).Height - Height;
 end;
 
 end.

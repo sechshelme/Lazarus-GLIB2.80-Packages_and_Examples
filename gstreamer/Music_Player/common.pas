@@ -3,7 +3,7 @@ unit Common;
 interface
 
 const
-  MusicDir:String = '/n4800/Multimedia/Music/Disco/Boney M';
+  MusicDir:String = '';
 
 type
   Tcommand = (cmNone, cmNew, cmSave, cmOpen, cmClose, cmAdd, cmRemove,cmRemoveAll, cmUp, cmDown, cmPlay,cmPause, cmStop, cmNext, cmPrev);
@@ -11,8 +11,11 @@ type
   TcmdProp = record
     cmd: Tcommand;
     Caption: string;
+    IconPath:String;
   end;
   TcmdProps = array of TcmdProp;
+
+  // /home/tux/fpcupdeluxe_trunk/lazarus/images/general_purpose
 
 const
   FileCmdProb: TcmdProps = (
@@ -32,11 +35,11 @@ const
   //▶️⏸⏯⏹⏺⏭⏮⏩⏪
 
   PlayCmdProp: TcmdProps = (
-  (cmd: cmPlay; Caption: '▶️'),
-  (cmd: cmPause; Caption: '⏸️'),
-    (cmd: cmStop; Caption: '⏹️'),
-    (cmd: cmNext; Caption: '⏭️'),
-    (cmd: cmPrev; Caption: '⏮'));
+  (cmd: cmPlay; Caption: 'Play️'; IconPath:'Play_01_64'),
+  (cmd: cmPause; Caption: 'Pause️';IconPath:'Pause_01_64'),
+    (cmd: cmStop; Caption: 'Stop'; IconPath:'Stop_01_64'),
+    (cmd: cmNext; Caption: 'Next️'; IconPath:'Forward_02_64'),
+    (cmd: cmPrev; Caption: 'Prev'; IconPath:'Backward_02_64'));
 
 implementation
 
