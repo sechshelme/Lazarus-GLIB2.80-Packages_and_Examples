@@ -21,10 +21,14 @@ type
   PTDoubleClass = ^TTDoubleClass;
 
 function t_double_get_type: TGType;
+function t_double_new(Value: Tgdouble): PTDouble;
 function t_doube_get_value(self: PTDouble; Value: Pgdouble): Tgboolean;
 procedure t_double_set_value(self: PTDouble; Value: Tgdouble);
-procedure t_double_mul(self: PTDouble; Value: Tgdouble);
-function t_double_new(Value: Tgdouble): PTDouble;
+function t_double_add(self: PTDouble; other: PTDouble): PTDouble;
+function t_double_sub(self: PTDouble; other: PTDouble): PTDouble;
+function t_double_mul(self: PTDouble; other: PTDouble): PTDouble;
+function t_double_div(self: PTDouble; other: PTDouble): PTDouble;
+function t_double_uminus(self: PTDouble): PTDouble;
 
 function T_TYPE_DOUBLE: TGType;
 function T_DOUBLE(obj: Pointer): PTDouble;
@@ -35,10 +39,13 @@ implementation
 var
   t_double_signal: Tguint;
 
+  // ==== private
+
 procedure t_double_class_init(_class: PTDoubleClass); cdecl;
 begin
   WriteLn('class_init');
-  t_double_signal := g_signal_new('test',
+  t_double_signal := g_signal_new(
+    'div-by-zero',
     G_TYPE_FROM_CLASS(_class),
     G_SIGNAL_RUN_LAST or G_SIGNAL_NO_RECURSE or G_SIGNAL_NO_HOOKS,
     0,
@@ -53,6 +60,8 @@ procedure t_double_init(self: TTDouble); cdecl;
 begin
   WriteLn('init');
 end;
+
+// ==== public
 
 function t_double_get_type: TGType;
 const
@@ -76,13 +85,22 @@ begin
   Result := type_;
 end;
 
+function t_double_new(Value: Tgdouble): PTDouble;
+var
+  d: PTDouble;
+begin
+  d := g_object_new(T_TYPE_DOUBLE, nil);
+  d^.Value := Value;
+  Result := d;
+end;
+
 function t_doube_get_value(self: PTDouble; Value: Pgdouble): Tgboolean;
 begin
   if T_IS_DOUBLE(self) then begin
     Value^ := self^.Value;
     Result := True;
   end else begin
-    g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'gFALSE');
+    g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'FALSE');
     Result := False;
   end;
 end;
@@ -92,26 +110,85 @@ begin
   if T_IS_DOUBLE(self) then begin
     self^.Value := Value;
   end else begin
-    g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'gFALSE');
+    g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'FALSE');
   end;
 end;
 
-procedure t_double_mul(self: PTDouble; Value: Tgdouble);
-begin
-  if T_IS_DOUBLE(self) then begin
-    self^.Value *= Value;
-  end else begin
-    g_return_if_fail_warning(G_LOG_DOMAIN, nil, 'gFALSE');
-  end;
-end;
-
-function t_double_new(Value: Tgdouble): PTDouble;
+function t_double_add(self: PTDouble; other: PTDouble): PTDouble;
 var
-  d: PTDouble;
+  Value: Tgdouble;
 begin
-  d := g_object_new(T_TYPE_DOUBLE, nil);
-  d^.Value := Value;
-  Result := d;
+  if not T_IS_DOUBLE(self) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'self', 'FALSE');
+    Exit(nil);
+  end;
+  if not T_IS_DOUBLE(other) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'other', 'FALSE');
+    Exit(nil);
+  end;
+  t_doube_get_value(other, @Value);
+  Result := t_double_new(self^.Value + Value);
+end;
+
+function t_double_sub(self: PTDouble; other: PTDouble): PTDouble;
+var
+  Value: Tgdouble;
+begin
+  if not T_IS_DOUBLE(self) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'self', 'FALSE');
+    Exit(nil);
+  end;
+  if not T_IS_DOUBLE(other) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'other', 'FALSE');
+    Exit(nil);
+  end;
+  t_doube_get_value(other, @Value);
+  Result := t_double_new(self^.Value - Value);
+end;
+
+function t_double_mul(self: PTDouble; other: PTDouble): PTDouble;
+var
+  Value: Tgdouble;
+begin
+  if not T_IS_DOUBLE(self) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'self', 'FALSE');
+    Exit(nil);
+  end;
+  if not T_IS_DOUBLE(other) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'other', 'FALSE');
+    Exit(nil);
+  end;
+  t_doube_get_value(other, @Value);
+  Result := t_double_new(self^.Value * Value);
+end;
+
+function t_double_div(self: PTDouble; other: PTDouble): PTDouble;
+var
+  Value: Tgdouble;
+begin
+  if not T_IS_DOUBLE(self) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'self', 'FALSE');
+    Exit(nil);
+  end;
+  if not T_IS_DOUBLE(other) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'other', 'FALSE');
+    Exit(nil);
+  end;
+  t_doube_get_value(other, @Value);
+  if Value = 0.0 then begin
+    g_signal_emit(self, t_double_signal, 0);
+    Exit(nil);
+  end;
+  Result := t_double_new(self^.Value / Value);
+end;
+
+function t_double_uminus(self: PTDouble): PTDouble;
+begin
+  if not T_IS_DOUBLE(self) then begin
+    g_return_if_fail_warning(G_LOG_DOMAIN, 'self', 'FALSE');
+    Exit(nil);
+  end;
+  Result := t_double_new(-self^.Value);
 end;
 
 function T_TYPE_DOUBLE: TGType;
