@@ -19,26 +19,25 @@ var
   stderr: PFILE; cvar;external lib_stdio;
 
   // https://fluendo.com/fluendo-sdk/docs/tutorials/playback_controls.html
+  // https://stackoverflow.com/questions/75877505/application-get-100-cpu-after-first-fireing-of-gtk3-g-io-add-watch-of-a-named
 
   function fileno(f: PFILE): cint; cdecl; external libglib2;
 
   function onKeyPress(Source: PGIOChannel; condition: TGIOCondition; Data: Tgpointer): Tgboolean; cdecl;
   var
     loop: PGMainLoop absolute Data;
-    len, ter_pos: SizeUInt;
+    len, term_pos: SizeUInt;
     status: TGIOStatus;
     error_: PGError = nil;
     buffer: Pgchar = nil;
-    //    buffer: Pgchar;
   begin
-    status := g_io_channel_read_line(Source, @buffer, @len, @ter_pos, @error_);
+    status := g_io_channel_read_line(Source, @buffer, @len, @term_pos, @error_);
     if status = G_IO_STATUS_NORMAL then begin
-      buffer[ter_pos] := #0;
+      buffer[term_pos] := #0;
 
       WriteLn('len:    ', len);
-      WriteLn('terpos: ', ter_pos);
+      WriteLn('terpos: ', term_pos);
       WriteLn('Buffer: ', buffer);
-      WriteLn('Buffer: ', string(buffer));
       if strcomp(buffer, 'q') = 0 then begin
         g_main_loop_quit(loop);
       end;
@@ -51,11 +50,13 @@ var
   var
     loop: PGMainLoop;
     channel: PGIOChannel;
+    err: PGError;
   begin
     loop := g_main_loop_new(nil, False);
 
     channel := g_io_channel_unix_new(fileno(stdin));
-    g_io_channel_set_encoding(channel, nil, nil);
+//    channel := g_io_channel_new_file('/dev/stdin', 'r', @err);
+
 
     g_io_add_watch(channel, G_IO_IN, @onKeyPress, loop);
 
