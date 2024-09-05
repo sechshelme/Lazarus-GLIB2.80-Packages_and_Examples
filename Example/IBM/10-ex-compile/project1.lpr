@@ -5,6 +5,8 @@ uses
   Math,
   glib280;
 
+// https://developer.ibm.com/tutorials/l-glib/
+
   procedure print_list(ls: PGList);
   var
     First: PGList;
@@ -39,7 +41,9 @@ uses
     print_list(list);
 
     g_list_insert(list, PChar('neuer Eintrag'), 2);
+    g_print('Der 2. Eintrag ist: %s'#10, g_list_nth_data(list, 1));
     g_list_reverse(list);
+    g_print('Der 2. Eintrag ist: %s'#10, g_list_nth_data(list, 1));
     print_list(list);
 
     g_list_free_full(list, @list_clear_cp);

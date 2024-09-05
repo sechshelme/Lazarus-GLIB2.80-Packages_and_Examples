@@ -5,6 +5,8 @@ uses
   Math,
   glib280;
 
+// https://developer.ibm.com/tutorials/l-glib/
+
   function main(argc: cint; argv: PPChar): cint;
   var
     list: PGList = nil;
