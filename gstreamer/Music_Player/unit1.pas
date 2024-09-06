@@ -25,9 +25,10 @@ type
     MainMenu: TMenuBar;
     EditBox: TEditBox;
     PlayBox: TPlayBox;
-    music: TStreamer;
+    SekStream,
+    PriStream: TStreamer;
     IsChange: boolean;
-    procedure LoadNewMusic(const titel: string; TrackPos: integer);
+    procedure LoadNewMusic(const titel: string);
     procedure BoxEventProc(cmd: Tcommand);
   public
     ListBoxSongs: TSoundListBox;
@@ -81,7 +82,7 @@ begin
     end;
 
     cmPlay: begin
-      if music = nil then begin
+      if PriStream = nil then begin
         index := ListBoxSongs.ItemIndex;
         if ListBoxSongs.Count > 0 then begin
           if index < 0 then begin
@@ -89,43 +90,41 @@ begin
             ListBoxSongs.ItemIndex := index;
           end;
           s := ListBoxSongs.Items[index];
-          LoadNewMusic(s, TrackBar1.Position);
+          LoadNewMusic(s);
         end;
       end else begin
-        music.Play;
+        PriStream.Play;
       end;
     end;
     cmPause: begin
-      if music <> nil then begin
-        music.Pause;
+      if PriStream <> nil then begin
+        PriStream.Pause;
       end;
     end;
     cmStop: begin
-      if music <> nil then begin
-        music.Stop;
-        FreeAndNil(music);
+      if PriStream <> nil then begin
+        PriStream.Stop;
+        FreeAndNil(PriStream);
         TrackBar1.Position := 0;
         TrackBar1.Max := 1000;
       end;
     end;
     cmNext: begin
-      if (music <> nil) and (music.Duration > 0) then begin
+      if (PriStream <> nil) and (PriStream.Duration > 0) then begin
         if ListBoxSongs.Next then  begin
-          if (music <> nil) and (music.isPlayed) then begin
-            LoadNewMusic(ListBoxSongs.GetTitle, 0);
+          if (PriStream <> nil) and (PriStream.isPlayed) then begin
+            LoadNewMusic(ListBoxSongs.GetTitle);
           end;
         end;
       end;
     end;
     cmPrev: begin
-      WriteLn('prev 1');
-      if (music <> nil) and (music.Duration > 0) then begin
-        WriteLn('prev 2');
-        if music.Position > 2000 then begin
-          music.Position := 0;
-        end else  begin
+      if (PriStream <> nil) and (PriStream.Duration > 0) then begin
+        if PriStream.Position > 2000 then begin
+          PriStream.Position := 0;
+        end else begin
           if ListBoxSongs.Prev then begin
-            LoadNewMusic(ListBoxSongs.GetTitle, 0);
+            LoadNewMusic(ListBoxSongs.GetTitle);
           end;
         end;
       end;
@@ -137,7 +136,8 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   sl: TStringList;
 begin
-  music := nil;
+  PriStream := nil;
+  SekStream := nil;
 
   MainMenu := TMenuBar.Create(Self);
   MainMenu.OnMenuBarEvent := @BoxEventProc;
@@ -182,23 +182,26 @@ end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
-  if music <> nil then begin
-    FreeAndNil(music);
+  if PriStream <> nil then begin
+    FreeAndNil(PriStream);
+  end;
+  if SekStream <> nil then begin
+    FreeAndNil(PriStream);
   end;
 end;
 
-procedure TForm1.LoadNewMusic(const titel: string; TrackPos: integer);
+procedure TForm1.LoadNewMusic(const titel: string);
 begin
-  if music <> nil then begin
-    FreeAndNil(music);
+  if PriStream <> nil then begin
+    FreeAndNil(PriStream);
   end;
-  music := TStreamer.Create(titel);
+  PriStream := TStreamer.Create(titel);
 
   TrackBar1.Max := 0;
   TrackBar1.Position := 0;
 
-  //  Mix_FadeInMusic(music, 1, 3000);
-  music.Play;
+  //  Mix_FadeInMusic(PriStream, 1, 3000);
+  PriStream.Play;
 end;
 
 procedure TForm1.TrackBar1Change(Sender: TObject);
@@ -211,26 +214,34 @@ var
   SDur, SPos: integer;
   OldChangeProc: TNotifyEvent;
 begin
-  if (ListBoxSongs.Count > 0) and (music <> nil) then begin
+  if (ListBoxSongs.Count > 0) and (PriStream <> nil) then begin
     if IsChange then begin
-      music.Position := TrackBar1.Position;
+      PriStream.Position := TrackBar1.Position;
       IsChange := False;
     end else begin
       OldChangeProc := TrackBar1.OnChange;
       TrackBar1.OnChange := nil;
-      SPos := music.Position;
-      SDur := music.Duration;
+      SPos := PriStream.Position;
+      SDur := PriStream.Duration;
       TrackBar1.Max := SDur;
       TrackBar1.Position := SPos;
       TrackBar1.OnChange := OldChangeProc;
       Label1.Caption := GstClockToStr(SDur);
       Label3.Caption := GstClockToStr(SPos);
-      if music.isEnd then begin
+      if PriStream.isEnd then begin
         if ListBoxSongs.Next then  begin
-          WriteLn('load');
-          LoadNewMusic(ListBoxSongs.GetTitle, 0);
+          LoadNewMusic(ListBoxSongs.GetTitle);
         end;
       end;
+      //if PriStream.Duration > 0 then begin
+      //  if PriStream.isEnd or ( PriStream.Duration-PriStream.Position<CFTime) then begin
+      //    if SekStream<>nil then FreeAndNil(SekStream);
+      //    SekStream:=PriStream;
+      //    if ListBoxSongs.Next then  begin
+      //      LoadNewMusic(ListBoxSongs.GetTitle);
+      //    end;
+      //  end;
+      //end;
     end;
   end;
 end;
