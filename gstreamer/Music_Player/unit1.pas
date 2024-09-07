@@ -28,7 +28,7 @@ type
     SekStream,
     PriStream: TStreamer;
     IsChange: boolean;
-    procedure LoadNewMusic(const titel: string);
+    procedure LoadNewMusic(const titel: string; freeed: boolean);
     procedure BoxEventProc(cmd: Tcommand);
   public
     ListBoxSongs: TSoundListBox;
@@ -90,7 +90,7 @@ begin
             ListBoxSongs.ItemIndex := index;
           end;
           s := ListBoxSongs.Items[index];
-          LoadNewMusic(s);
+          LoadNewMusic(s, True);
         end;
       end else begin
         PriStream.Play;
@@ -113,7 +113,7 @@ begin
       if (PriStream <> nil) and (PriStream.Duration > 0) then begin
         if ListBoxSongs.Next then  begin
           if (PriStream <> nil) and (PriStream.isPlayed) then begin
-            LoadNewMusic(ListBoxSongs.GetTitle);
+            LoadNewMusic(ListBoxSongs.GetTitle, True);
           end;
         end;
       end;
@@ -124,7 +124,7 @@ begin
           PriStream.Position := 0;
         end else begin
           if ListBoxSongs.Prev then begin
-            LoadNewMusic(ListBoxSongs.GetTitle);
+            LoadNewMusic(ListBoxSongs.GetTitle, True);
           end;
         end;
       end;
@@ -190,9 +190,9 @@ begin
   end;
 end;
 
-procedure TForm1.LoadNewMusic(const titel: string);
+procedure TForm1.LoadNewMusic(const titel: string; freeed: boolean);
 begin
-  if PriStream <> nil then begin
+  if freeed and (PriStream <> nil) then begin
     FreeAndNil(PriStream);
   end;
   PriStream := TStreamer.Create(titel);
@@ -228,20 +228,22 @@ begin
       TrackBar1.OnChange := OldChangeProc;
       Label1.Caption := GstClockToStr(SDur);
       Label3.Caption := GstClockToStr(SPos);
-      if PriStream.isEnd then begin
-        if ListBoxSongs.Next then  begin
-          LoadNewMusic(ListBoxSongs.GetTitle);
-        end;
-      end;
-      //if PriStream.Duration > 0 then begin
-      //  if PriStream.isEnd or ( PriStream.Duration-PriStream.Position<CFTime) then begin
-      //    if SekStream<>nil then FreeAndNil(SekStream);
-      //    SekStream:=PriStream;
-      //    if ListBoxSongs.Next then  begin
-      //      LoadNewMusic(ListBoxSongs.GetTitle);
-      //    end;
+      //if PriStream.isEnd then begin
+      //  if ListBoxSongs.Next then  begin
+      //    LoadNewMusic(ListBoxSongs.GetTitle);
       //  end;
       //end;
+      if PriStream.Duration > 0 then begin
+        if PriStream.isEnd or (PriStream.Duration - PriStream.Position < CFTime) then begin
+          if SekStream <> nil then begin
+            FreeAndNil(SekStream);
+          end;
+          SekStream := PriStream;
+          if ListBoxSongs.Next then  begin
+            LoadNewMusic(ListBoxSongs.GetTitle, False);
+          end;
+        end;
+      end;
     end;
   end;
 end;
