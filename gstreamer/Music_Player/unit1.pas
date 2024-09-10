@@ -213,6 +213,7 @@ procedure TForm1.Timer1Timer(Sender: TObject);
 var
   SDur, SPos: integer;
   OldChangeProc: TNotifyEvent;
+  volume: extended;
 begin
   if (ListBoxSongs.Count > 0) and (PriStream <> nil) then begin
     if IsChange then begin
@@ -233,6 +234,12 @@ begin
       //    LoadNewMusic(ListBoxSongs.GetTitle);
       //  end;
       //end;
+      volume := PriStream.Position / FITime;
+      if volume > 1.0 then begin
+        volume := 1.0;
+      end;
+      PriStream.Volume := volume;
+      //      WriteLn(PriStream.Volume:10:5);
       if PriStream.Duration > 0 then begin
         if PriStream.isEnd or (PriStream.Duration - PriStream.Position < CFTime) then begin
           if SekStream <> nil then begin

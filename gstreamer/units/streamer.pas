@@ -28,6 +28,8 @@ type
     pipelineElement: TPipelineElement;
     FPosition: integer;
     function GetDuration: integer;
+    procedure SetVolume(vol: gdouble);
+    function GetVolume: gdouble;
     procedure SetPosition(AValue: integer);
     function GetPosition: integer;
   public
@@ -36,7 +38,6 @@ type
     procedure Play;
     procedure Pause;
     procedure Stop;
-    procedure SetVolume(vol: gdouble);
     procedure SetEqualizer0(vol: gdouble);
     procedure SetEqualizer1(vol: gdouble);
     procedure SetEqualizer2(vol: gdouble);
@@ -45,6 +46,7 @@ type
     function getState: string;
     property Position: integer read GetPosition write SetPosition;
     property Duration: integer read GetDuration;
+    property Volume:gdouble read GetVolume write SetVolume;
     function isPlayed: boolean;
     function isEnd: boolean;
   end;
@@ -126,7 +128,6 @@ procedure eos_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer);
 var
   pE: PPipelineElement absolute Data;
 begin
-  //  gst_element_set_state(pE^.pipeline, GST_STATE_READY);
   pe^.FIsEnd := True;
 end;
 
@@ -207,6 +208,11 @@ begin
     WriteLn(current);
   end;
   Result := pipelineElement.Duration div G_USEC_PER_SEC;
+end;
+
+function TStreamer.GetVolume: gdouble;
+begin
+  g_object_get(pipelineElement.volume, 'volume', @Result, nil);
 end;
 
 procedure TStreamer.SetVolume(vol: gdouble);
