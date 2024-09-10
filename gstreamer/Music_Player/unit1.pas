@@ -158,6 +158,10 @@ begin
   PlayBox.OnPlayBoxEvent := @BoxEventProc;
 
 
+  sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
+  ListBoxSongs.Items.AddStrings(sl);
+  sl.Free;
+
   ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
   ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
   ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
@@ -170,11 +174,7 @@ begin
   ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
   ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
 
-  sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
-  ListBoxSongs.Items.AddStrings(sl);
-  sl.Free;
-
-  Timer1.Interval := 100;
+  Timer1.Interval := 200;
   TrackBar1.TickStyle := tsNone;
   TrackBar1.Max := 1000;
   Width := 1024;
@@ -215,7 +215,7 @@ var
   OldChangeProc: TNotifyEvent;
   volume: extended;
 begin
-  if (ListBoxSongs.Count > 0) and (PriStream <> nil) then begin
+  if (*(ListBoxSongs.Count > 0) and*) (PriStream <> nil) then begin
     if IsChange then begin
       PriStream.Position := TrackBar1.Position;
       IsChange := False;
@@ -229,17 +229,11 @@ begin
       TrackBar1.OnChange := OldChangeProc;
       Label1.Caption := GstClockToStr(SDur);
       Label3.Caption := GstClockToStr(SPos);
-      //if PriStream.isEnd then begin
-      //  if ListBoxSongs.Next then  begin
-      //    LoadNewMusic(ListBoxSongs.GetTitle);
-      //  end;
-      //end;
       volume := PriStream.Position / FITime;
       if volume > 1.0 then begin
         volume := 1.0;
       end;
       PriStream.Volume := volume;
-      //      WriteLn(PriStream.Volume:10:5);
       if PriStream.Duration > 0 then begin
         if PriStream.isEnd or (PriStream.Duration - PriStream.Position < CFTime) then begin
           if SekStream <> nil then begin
@@ -251,6 +245,18 @@ begin
           end;
         end;
       end;
+    end;
+  end;
+  if SekStream <> nil then begin
+    if SekStream.Duration > 0 then begin
+      volume:=(SekStream.Duration-SekStream.Position)/FITime;
+      if volume>1.0 then volume:=1.0;;
+      SekStream.Volume:=volume;
+      WriteLn(SekStream.Volume:4:2);
+    end;
+
+    if SekStream.isEnd then begin
+      FreeAndNil(SekStream);
     end;
   end;
 end;

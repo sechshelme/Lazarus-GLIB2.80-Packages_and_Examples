@@ -145,8 +145,8 @@ begin
     Anchors := [akLeft, akTop, akRight];
     OnChange := @TrackBarChange;
     Parent := Self;
-    max:=0;
-    Position:=0;
+    max := 0;
+    Position := 0;
   end;
 
   PlayBtn := TButton.Create(Self);
@@ -234,7 +234,7 @@ var
   si: single;
 begin
   if st <> nil then begin
-    st.SetVolume(VolumeBar.Position / 10);
+    st.Volume := VolumeBar.Position / 10;
 
     st.SetEqualizer0(EqualizerBar[0].Position);
     st.SetEqualizer1(EqualizerBar[1].Position);

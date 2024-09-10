@@ -4,9 +4,9 @@ interface
 
 const
   MusicDir: string = '';
-  //  CFTime = 13 * 1000; // 3s
-  CFTime = 00; // 3s
-  FITime = 3 * 1000;
+   CFTime = 13 * 1000; // 3s
+  FITime = CFTime;
+  FATime =FITime;
 
 type
   Tcommand = (cmNone, cmNew, cmSave, cmOpen, cmClose, cmAdd, cmRemove, cmRemoveAll, cmUp, cmDown, cmPlay, cmPause, cmStop, cmNext, cmPrev);
