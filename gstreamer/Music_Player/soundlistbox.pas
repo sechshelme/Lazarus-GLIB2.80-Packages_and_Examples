@@ -32,8 +32,6 @@ constructor TSoundListBox.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
   Anchors := [akTop, akLeft, akBottom, akRight];
-  Top := 50;
-  Left := 16;
 end;
 
 procedure TSoundListBox.Add(const song: string);

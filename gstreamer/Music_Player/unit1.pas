@@ -145,17 +145,25 @@ begin
 
   ListBoxSongs := TSoundListBox.Create(self);
   ListBoxSongs.Anchors := [akTop, akLeft, akBottom, akRight];
-  ListBoxSongs.Width := ClientWidth - 150;
-  ListBoxSongs.Height := ClientHeight - 70;
+  ListBoxSongs.Top := 140;
+  ListBoxSongs.Left := 5;
+  ListBoxSongs.Width := ClientWidth - 10;
+  ListBoxSongs.Height := ClientHeight - 170;
   ListBoxSongs.Parent := self;
-
-  EditBox := TEditBox.Create(Self);
-  EditBox.Parent := Self;
-  EditBox.OnPlayBoxEvent := @BoxEventProc;
 
   PlayBox := TPlayBox.Create(Self);
   PlayBox.Parent := Self;
+  PlayBox.Left := 5;
+  PlayBox.Top := 70;
+  PlayBox.Height := 50;
   PlayBox.OnPlayBoxEvent := @BoxEventProc;
+
+  EditBox := TEditBox.Create(Self);
+  EditBox.Top := 70;
+  EditBox.Left := ClientWidth - EditBox.Width - 5;
+  EditBox.Height := 50;
+  EditBox.Parent := Self;
+  EditBox.OnPlayBoxEvent := @BoxEventProc;
 
 
   sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
@@ -199,8 +207,6 @@ begin
 
   TrackBar1.Max := 0;
   TrackBar1.Position := 0;
-
-  //  Mix_FadeInMusic(PriStream, 1, 3000);
   PriStream.Play;
 end;
 
@@ -249,10 +255,13 @@ begin
   end;
   if SekStream <> nil then begin
     if SekStream.Duration > 0 then begin
-      volume:=(SekStream.Duration-SekStream.Position)/FITime;
-      if volume>1.0 then volume:=1.0;;
-      SekStream.Volume:=volume;
-      WriteLn(SekStream.Volume:4:2);
+      volume := (SekStream.Duration - SekStream.Position) / FITime;
+      if volume > 1.0 then begin
+        volume := 1.0;
+      end;
+      ;
+      SekStream.Volume := volume;
+      WriteLn(SekStream.Volume: 4: 2);
     end;
 
     if SekStream.isEnd then begin

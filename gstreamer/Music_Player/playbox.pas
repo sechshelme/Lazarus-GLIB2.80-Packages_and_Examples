@@ -42,10 +42,6 @@ begin
   end;
 end;
 
-// 🐑🐑🐑🐑🐑🐑🐑▶️ ⏸ ⏯ ⏹ ⏺ ⏭ ⏮ ⏩ ⏪
-// ▶️ ⏸⏯ ⏹⏺ ⏭⏮ ⏩⏪
-// ▶️ ⏸⏯ ⏹⏺ ⏭   ⏮   ⏩⏪
-
 constructor TBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
@@ -61,10 +57,7 @@ var
 begin
   propsCount := Length(props);
 
-  Width := 100;
-  Height := propsCount * 30 + 20;
-  Left := -100;
-  Left := TControl(Owner).Width - Width;
+  Width := propsCount * 100;
 
   pic := TPicture.Create;
   for i := 0 to propsCount - 1 do begin
@@ -72,8 +65,8 @@ begin
     Btn.Caption := props[i].Caption;
     Btn.Tag := PtrInt(props[i].cmd);
     Btn.OnClick := @BtnClick;
-    Btn.Left := 10;
-    Btn.Top := i * 30 + 10;
+    Btn.Top := 10;
+    Btn.Left := i * 100 + 10;
     Btn.Parent := Self;
     path := 'png/' + props[i].IconPath + '.png';
     if FileExists(path) then  begin
@@ -84,6 +77,15 @@ begin
   pic.Free;
 end;
 
+{ TPlayBox }
+
+constructor TPlayBox.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  Anchors := [akLeft, akTop];
+  LoadButtons(PlayCmdProp);
+end;
+
 { TEditBox }
 
 constructor TEditBox.Create(AOwner: TComponent);
@@ -91,16 +93,6 @@ begin
   inherited Create(AOwner);
   Anchors := [akTop, akRight];
   LoadButtons(EditCmdProb);
-end;
-
-{ TPlayBox }
-
-constructor TPlayBox.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-  Anchors := [akBottom, akRight];
-  LoadButtons(PlayCmdProp);
-  Top := TControl(Owner).Height - Height;
 end;
 
 end.
