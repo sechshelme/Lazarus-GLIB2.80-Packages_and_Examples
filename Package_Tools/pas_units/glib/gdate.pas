@@ -88,6 +88,7 @@ type
     year: 0..65535;
   end;
   PGDate=^TGDate;
+  PPGDate=^PGDate;
 
 function g_date_new:PGDate;cdecl;external libglib2;
 function g_date_new_dmy(day:TGDateDay; month:TGDateMonth; year:TGDateYear):PGDate;cdecl;external libglib2;

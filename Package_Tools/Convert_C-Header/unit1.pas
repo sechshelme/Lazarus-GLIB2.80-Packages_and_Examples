@@ -46,16 +46,17 @@ var
   i, j, k: integer;
 begin
   Memo1.Clear;
-  slFile := FindAllFiles('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GTK4/Package_Tools/glib/Package_Tools/include-C', '*.h', True);
+  slFile := FindAllFiles('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GLIB2.80/Package_Tools/include-C', '*.h', True);
   Memo1.Lines := slFile;
 
   for i := 0 to slFile.Count - 1 do begin
     slHeader := TStringList.Create;
     slHeader.LoadFromFile(slFile[i]);
     for j := 0 to slHeader.Count - 1 do begin
+      slHeader[j] := StringReplace(slHeader[j], 'GST_API', 'extern', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'G_BEGIN_DECLS', '', [rfReplaceAll]);
+      slHeader[j] := StringReplace(slHeader[j], 'G_END_DECLS', '', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'G_GNUC_CONST', '', [rfReplaceAll]);
-      slHeader[j] := StringReplace(slHeader[j], 'GIO_AVAILABLE_IN_ALL', '', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'GIO_AVAILABLE_IN_ALL', '', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'GIO_AVAILABLE_IN_2_28', '', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'GIO_AVAILABLE_IN_2_30', '', [rfReplaceAll]);
@@ -84,9 +85,7 @@ begin
 
 
 
-      slHeader[j] := DeleteLines(slHeader[j], '_IN_2_62_FOR(');
-      slHeader[j] := DeleteLines(slHeader[j], '_IN_2_66_FOR(');
-      slHeader[j] := DeleteLines(slHeader[j], '_IN_2_68_FOR(');
+
       slHeader[j] := DeleteLines(slHeader[j], 'G_DEFINE_AUTOPTR_CLEANUP_FUNC(');
       slHeader[j] := DeleteLines(slHeader[j], 'GLIB_DEPRECATED_IN_2_38_FOR(');
 

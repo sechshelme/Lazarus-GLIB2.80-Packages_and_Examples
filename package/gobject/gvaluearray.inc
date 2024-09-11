@@ -15,6 +15,7 @@ type
     n_prealloced: Tguint;
   end;
   PGValueArray = ^TGValueArray;
+  PPGValueArray = ^PGValueArray;
 
 function g_value_array_get_type: TGType; cdecl; external libgobject2_0;
 function g_value_array_get_nth(value_array: PGValueArray; index_: Tguint): PGValue; cdecl; external libgobject2_0;
