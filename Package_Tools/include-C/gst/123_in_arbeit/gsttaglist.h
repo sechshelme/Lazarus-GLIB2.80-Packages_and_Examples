@@ -401,23 +401,23 @@ gboolean     gst_tag_list_get_sample_index  (const GstTagList * list,
 
 #ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
 /* refcounting */
-static inline GstTagList *
-gst_tag_list_ref (GstTagList * taglist)
-{
-  return (GstTagList *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (taglist));
-}
+//static inline GstTagList *
+//gst_tag_list_ref (GstTagList * taglist)
+//{
+//  return (GstTagList *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (taglist));
+//}
 
-static inline void
-gst_tag_list_unref (GstTagList * taglist)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (taglist));
-}
+//static inline void
+//gst_tag_list_unref (GstTagList * taglist)
+//{
+//  gst_mini_object_unref (GST_MINI_OBJECT_CAST (taglist));
+//}
 
-static inline void
-gst_clear_tag_list (GstTagList ** taglist_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) taglist_ptr);
-}
+//static inline void
+//gst_clear_tag_list (GstTagList ** taglist_ptr)
+//{
+//  gst_clear_mini_object ((GstMiniObject **) taglist_ptr);
+//}
 #else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstTagList *  gst_tag_list_ref   (GstTagList * taglist);
@@ -434,21 +434,21 @@ GstTagList* gst_tag_list_copy(const GstTagList* taglist);
 
 #define gst_tag_list_copy(taglist) GST_TAG_LIST (gst_mini_object_copy (GST_MINI_OBJECT_CAST (taglist)))
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-static inline gboolean
-gst_tag_list_replace (GstTagList **old_taglist, GstTagList *new_taglist)
-{
-    return gst_mini_object_replace ((GstMiniObject **) old_taglist,
-        (GstMiniObject *) new_taglist);
-}
+//#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
+//static inline gboolean
+//gst_tag_list_replace (GstTagList **old_taglist, GstTagList *new_taglist)
+//{
+//    return gst_mini_object_replace ((GstMiniObject **) old_taglist,
+//        (GstMiniObject *) new_taglist);
+//}
 
-static inline gboolean
-gst_tag_list_take (GstTagList **old_taglist, GstTagList *new_taglist)
-{
-  return gst_mini_object_take ((GstMiniObject **) old_taglist,
-      (GstMiniObject *) new_taglist);
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
+//static inline gboolean
+//gst_tag_list_take (GstTagList **old_taglist, GstTagList *new_taglist)
+//{
+//  return gst_mini_object_take ((GstMiniObject **) old_taglist,
+//      (GstMiniObject *) new_taglist);
+//}
+//#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 gboolean  gst_tag_list_replace (GstTagList ** old_taglist,
                                 GstTagList * new_taglist);

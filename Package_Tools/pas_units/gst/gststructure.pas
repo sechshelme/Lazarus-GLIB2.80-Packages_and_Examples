@@ -151,7 +151,6 @@ end;
 function GST_IS_STRUCTURE(obj: Pointer): Tgboolean;
 begin
   // #define GST_IS_STRUCTURE(object)       ((object) && (GST_STRUCTURE(object)->type == GST_TYPE_STRUCTURE))
-
   Result := g_type_check_instance_is_a(obj, GST_TYPE_STRUCTURE);
 end;
 
