@@ -2,7 +2,7 @@
 // gcc main.c -o main `pkg-config --cflags --libs gstreamer-1.0 gstreamer-audio-1.0`
 
 // === Windows
-// x86_64-w64-mingw32-gcc  main.c -o main `pkg-config --cflags --libs gstreamer-1.0 gstreamer-audio-1.0
+// x86_64-w64-mingw32-gcc  main.c -o main `pkg-config --cflags --libs gstreamer-1.0 gstreamer-audio-1.0 ?????
 
 // x86_64-w64-mingw32-gcc  main.c -o main -lgstreamer-1.0-0 -Ldll
 

@@ -17,6 +17,10 @@ uses
   gstclock,    // Makros entfernt, aber auflösbar
 
   gstdatetime,
+  gstformat,
+  gstbufferpool,
+  gstbuffer,
+  gstsample,
   gsttaglist,
   gststructure,          // GST_IS_STRUCTURE ???
   gstminiobject,

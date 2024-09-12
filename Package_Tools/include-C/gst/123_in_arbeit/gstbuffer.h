@@ -432,33 +432,6 @@ extern
 gboolean       gst_buffer_unset_flags      (GstBuffer * buffer, GstBufferFlags flags);
 
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-/* refcounting */
-static inline GstBuffer *
-gst_buffer_ref (GstBuffer * buf)
-{
-  return (GstBuffer *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (buf));
-}
-
-static inline void
-gst_buffer_unref (GstBuffer * buf)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (buf));
-}
-
-static inline void
-gst_clear_buffer (GstBuffer ** buf_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) buf_ptr);
-}
-
-/* copy buffer */
-static inline GstBuffer *
-gst_buffer_copy (const GstBuffer * buf)
-{
-  return GST_BUFFER (gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (buf)));
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstBuffer * gst_buffer_ref       (GstBuffer * buf);
 
@@ -470,7 +443,6 @@ void        gst_clear_buffer     (GstBuffer ** buf_ptr);
 
 extern
 GstBuffer * gst_buffer_copy      (const GstBuffer * buf);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 
 extern
 GstBuffer * gst_buffer_copy_deep (const GstBuffer * buf);
@@ -572,19 +544,9 @@ gboolean        gst_buffer_copy_into            (GstBuffer *dest, GstBuffer *src
  */
 #define         gst_buffer_make_writable(buf)   GST_BUFFER_CAST (gst_mini_object_make_writable (GST_MINI_OBJECT_CAST (buf)))
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-static inline gboolean
-gst_buffer_replace (GstBuffer **obuf, GstBuffer *nbuf)
-{
-  return gst_mini_object_replace ((GstMiniObject **) obuf, (GstMiniObject *) nbuf);
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 gboolean        gst_buffer_replace              (GstBuffer ** obuf,
                                                  GstBuffer * nbuf);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
-
-/* creating a region */
 
 extern
 GstBuffer*      gst_buffer_copy_region          (GstBuffer *parent, GstBufferCopyFlags flags,
@@ -825,17 +787,11 @@ GstReferenceTimestampMeta * gst_buffer_get_reference_timestamp_meta (GstBuffer *
  */
 typedef GstMapInfo GstBufferMapInfo;
 
-static inline void _gst_buffer_map_info_clear(GstBufferMapInfo *info)
-{
-  /* we need to check for NULL, it is possible that we tried to map a buffer
-   * without memory and we should be able to unmap that fine */
-  if (G_LIKELY (info->memory)) {
-    gst_memory_unmap (info->memory, info);
-    gst_memory_unref (info->memory);
-  }
-}
+// xxxxxxxxxxxxxxxxxxxxxx
+//static inline void _gst_buffer_map_info_clear(GstBufferMapInfo *info)
 
-G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(GstBufferMapInfo, _gst_buffer_map_info_clear)
+
+// G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(GstBufferMapInfo, _gst_buffer_map_info_clear)
 
 
 

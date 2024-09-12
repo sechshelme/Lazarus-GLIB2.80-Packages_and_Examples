@@ -87,21 +87,6 @@ void                 gst_sample_set_segment   (GstSample * sample, const GstSegm
 extern
 gboolean             gst_sample_set_info      (GstSample *sample, GstStructure *info);
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-/* refcounting */
-static inline GstSample *
-gst_sample_ref (GstSample * sample)
-{
-  return GST_SAMPLE_CAST (gst_mini_object_ref (GST_MINI_OBJECT_CAST (
-      sample)));
-}
-
-static inline void
-gst_sample_unref (GstSample * sample)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (sample));
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstSample * gst_sample_ref    (GstSample * sample);
 
@@ -147,26 +132,11 @@ void        gst_sample_unref  (GstSample * sample);
  */
 #define         gst_sample_make_writable(sample)   GST_SAMPLE_CAST (gst_mini_object_make_writable (GST_MINI_OBJECT_CAST (sample)))
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-/* copy sample */
-static inline GstSample *
-gst_sample_copy (const GstSample * sample)
-{
-  return GST_SAMPLE_CAST (gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (sample)));
-}
-
-static inline void
-gst_clear_sample (GstSample ** sample_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) sample_ptr);
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstSample *   gst_sample_copy (const GstSample * sample);
 
 extern
 void          gst_clear_sample (GstSample ** sample_ptr);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 
 /**
  * gst_value_set_sample:
