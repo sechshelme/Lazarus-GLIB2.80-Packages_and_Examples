@@ -3,7 +3,7 @@ unit gstbuffer;
 interface
 
 uses
-  glib280, common_GST, gstobject, gstminiobject, gstbufferpool;
+  glib280, common_GST, gstobject, gstminiobject, gstmemory;
 
 {$IFDEF FPC}
 {$PACKRECORDS C}
@@ -31,7 +31,6 @@ type
     GST_BUFFER_FLAG_NON_DROPPABLE = GST_MINI_OBJECT_FLAG_LAST shl 12;
     GST_BUFFER_FLAG_LAST = GST_MINI_OBJECT_FLAG_LAST shl 16;
 type
-  PGstBuffer = ^TGstBuffer;
   TGstBuffer = record
       mini_object : TGstMiniObject;
       pool : PGstBufferPool;
@@ -41,6 +40,8 @@ type
       offset : Tguint64;
       offset_end : Tguint64;
     end;
+  PGstBuffer = ^TGstBuffer;
+  PPGstBuffer = ^PGstBuffer;
 
 function gst_buffer_get_type:TGType;cdecl;external gstreamerlib;
 function gst_buffer_get_max_memory:Tguint;cdecl;external gstreamerlib;
@@ -150,8 +151,16 @@ type
   PGstBufferMapInfo = ^TGstBufferMapInfo;
   TGstBufferMapInfo = TGstMapInfo;
 { xxxxxxxxxxxxxxxxxxxxxx }
-{static inline void _gst_buffer_map_info_clear(GstBufferMapInfo *info) }
-{ G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(GstBufferMapInfo, _gst_buffer_map_info_clear) }
+//static inline void _gst_buffer_map_info_clear(GstBufferMapInfo *info)
+//{
+//  /* we need to check for NULL, it is possible that we tried to map a buffer
+//   * without memory and we should be able to unmap that fine */
+//  if (G_LIKELY (info->memory)) {
+//    gst_memory_unmap (info->memory, info);
+//    gst_memory_unref (info->memory);
+//  }
+//}
+
 
 function  GST_TYPE_BUFFER :TGType;
 

@@ -228,7 +228,7 @@ typedef struct {
  *
  * Initializer for #GstMapInfo
  */
-#define GST_MAP_INFO_INIT { NULL, (GstMapFlags) 0, NULL, 0, 0, { NULL, NULL, NULL, NULL}, {NULL, NULL, NULL, NULL}}
+//#define GST_MAP_INFO_INIT { NULL, (GstMapFlags) 0, NULL, 0, 0, { NULL, NULL, NULL, NULL}, {NULL, NULL, NULL, NULL}}
 
 /**
  * GstMemoryMapFunction:
@@ -327,26 +327,11 @@ void           gst_memory_init         (GstMemory *mem, GstMemoryFlags flags,
 extern
 gboolean       gst_memory_is_type      (GstMemory *mem, const gchar *mem_type);
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-/* refcounting */
-static inline GstMemory *
-gst_memory_ref (GstMemory * memory)
-{
-  return (GstMemory *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (memory));
-}
-
-static inline void
-gst_memory_unref (GstMemory * memory)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (memory));
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstMemory *    gst_memory_ref   (GstMemory * memory);
 
 extern
 void           gst_memory_unref (GstMemory * memory);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 
 /* getting/setting memory properties */
 
@@ -423,14 +408,15 @@ gboolean       gst_memory_is_span      (GstMemory *mem1, GstMemory *mem2, gsize 
  */
 typedef GstMapInfo GstMemoryMapInfo;
 
-static inline void _gst_memory_map_info_clear(GstMemoryMapInfo *info)
-{
-  if (G_LIKELY (info->memory)) {
-    gst_memory_unmap (info->memory, info);
-  }
-}
+// xxxxxxxxxxxxxxxxxxxx
+//static inline void _gst_memory_map_info_clear(GstMemoryMapInfo *info)
+//{
+//  if (G_LIKELY (info->memory)) {
+//    gst_memory_unmap (info->memory, info);
+//  }
+//}
 
-G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(GstMemoryMapInfo, _gst_memory_map_info_clear)
+//G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(GstMemoryMapInfo, _gst_memory_map_info_clear)
 
 
 

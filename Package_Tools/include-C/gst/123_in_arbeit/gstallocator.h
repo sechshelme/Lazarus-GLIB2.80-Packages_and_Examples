@@ -32,11 +32,11 @@ typedef struct _GstAllocatorPrivate GstAllocatorPrivate;
 typedef struct _GstAllocatorClass GstAllocatorClass;
 
 #define GST_TYPE_ALLOCATOR                 (gst_allocator_get_type())
+#define GST_ALLOCATOR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_ALLOCATOR, GstAllocator))
+#define GST_ALLOCATOR_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_ALLOCATOR, GstAllocatorClass))
 #define GST_IS_ALLOCATOR(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_ALLOCATOR))
 #define GST_IS_ALLOCATOR_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_ALLOCATOR))
 #define GST_ALLOCATOR_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_ALLOCATOR, GstAllocatorClass))
-#define GST_ALLOCATOR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_ALLOCATOR, GstAllocator))
-#define GST_ALLOCATOR_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_ALLOCATOR, GstAllocatorClass))
 #define GST_ALLOCATOR_CAST(obj)            ((GstAllocator *)(obj))
 
 #define GST_TYPE_ALLOCATION_PARAMS (gst_allocation_params_get_type())

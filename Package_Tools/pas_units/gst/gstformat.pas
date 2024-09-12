@@ -3,7 +3,7 @@ unit gstformat;
 interface
 
 uses
-  glib280, common_GST, gstobject;
+  glib280, common_GST, gstobject, gstiterator;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

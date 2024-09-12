@@ -17,6 +17,10 @@ uses
   gstclock,    // Makros entfernt, aber auflösbar
 
   gstdatetime,
+
+  gstallocator,
+  gstmemory,        //          ( PGstAllocator = Pointer ) wegen Kompflickt
+  gstiterator,
   gstformat,
   gstbufferpool,
   gstbuffer,

@@ -70,6 +70,19 @@ type
       end;
   end;
 
+  TGstBufferPoolPrivate = record
+  end;
+  PGstBufferPoolPrivate = ^TGstBufferPoolPrivate;
+
+  TGstBufferPool = record
+    obj: TGstObject;
+    flushing: Tgint;
+    priv: PGstBufferPoolPrivate;
+    _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
+  end;
+  PGstBufferPool = ^TGstBufferPool;
+
+
 
 implementation
 
