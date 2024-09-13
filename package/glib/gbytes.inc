@@ -10,7 +10,7 @@
 
 function g_bytes_new(Data: Tgconstpointer; size: Tgsize): PGBytes; cdecl; external libglib2;
 function g_bytes_new_take(Data: Tgpointer; size: Tgsize): PGBytes; cdecl; external libglib2;
-function g_bytes_new_static(Data: Tgconstpointer; size: Tgsize): PGBytes; cdecl; external libglib2;
+function g_bytes_new_static(Data: TgconstpointerTgconstpointer; size: Tgsize): PGBytes; cdecl; external libglib2;
 function g_bytes_new_with_free_func(Data: Tgconstpointer; size: Tgsize; free_func: TGDestroyNotify; user_data: Tgpointer): PGBytes; cdecl; external libglib2;
 function g_bytes_new_from_bytes(bytes: PGBytes; offset: Tgsize; length: Tgsize): PGBytes; cdecl; external libglib2;
 function g_bytes_get_data(bytes: PGBytes; size: Pgsize): Tgconstpointer; cdecl; external libglib2;

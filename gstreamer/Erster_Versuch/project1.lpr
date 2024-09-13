@@ -19,6 +19,7 @@ uses
   gstdatetime,
 
 
+  gstquery,
   gstbufferlist,
   gstbytearrayinterface,
   gstcapsfeatures,

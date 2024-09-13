@@ -3,7 +3,7 @@ unit gstmessage;
 interface
 
 uses
-  glib280, common_GST, gstobject, gststructure, gstminiobject, gsttaglist;
+  glib280, common_GST, gstobject, gststructure, gstminiobject, gsttaglist, gstquery;
 
 {$IFDEF FPC}
 {$PACKRECORDS C}

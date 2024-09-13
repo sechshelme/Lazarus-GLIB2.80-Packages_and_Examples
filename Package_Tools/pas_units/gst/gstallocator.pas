@@ -36,7 +36,6 @@ type
         end;
   PGstAllocatorPrivate=^TGstAllocatorPrivate;
 
-  PGstAllocator = ^TGstAllocator;
   TGstAllocator = record
       obj : TGstObject;
       mem_type : Pgchar;
@@ -50,6 +49,8 @@ type
       _gst_reserved : array[0..(GST_PADDING-2)-1] of Tgpointer;
       priv : PGstAllocatorPrivate;
     end;
+  PGstAllocator = ^TGstAllocator;
+  PPGstAllocator = ^PGstAllocator;
 
   PGstAllocatorClass = ^TGstAllocatorClass;
   TGstAllocatorClass = record

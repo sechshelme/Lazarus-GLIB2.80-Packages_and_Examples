@@ -74,7 +74,7 @@ typedef enum {
 #define GST_QUERY_MAKE_TYPE(num,flags) \
     (((num) << GST_QUERY_NUM_SHIFT) | (flags))
 
-#define _FLAG(name) GST_QUERY_TYPE_##name
+//#define _FLAG(name) GST_QUERY_TYPE_##name
 
 
 /**
@@ -238,33 +238,6 @@ GstQueryTypeFlags
 extern
 GType           gst_query_get_type             (void);
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-/* refcounting */
-static inline GstQuery *
-gst_query_ref (GstQuery * q)
-{
-  return GST_QUERY_CAST (gst_mini_object_ref (GST_MINI_OBJECT_CAST (q)));
-}
-
-static inline void
-gst_query_unref (GstQuery * q)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (q));
-}
-
-static inline void
-gst_clear_query (GstQuery ** query_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) query_ptr);
-}
-
-/* copy query */
-static inline GstQuery *
-gst_query_copy (const GstQuery * q)
-{
-  return GST_QUERY_CAST (gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (q)));
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstQuery *  gst_query_ref   (GstQuery * q);
 
@@ -276,7 +249,6 @@ void        gst_clear_query (GstQuery ** query_ptr);
 
 extern
 GstQuery *  gst_query_copy  (const GstQuery * q);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 
 /**
  * gst_query_is_writable:
@@ -295,20 +267,6 @@ GstQuery *  gst_query_copy  (const GstQuery * q);
  */
 #define         gst_query_make_writable(q)      GST_QUERY_CAST (gst_mini_object_make_writable (GST_MINI_OBJECT_CAST (q)))
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-static inline gboolean
-gst_query_replace (GstQuery **old_query, GstQuery *new_query)
-{
-  return gst_mini_object_replace ((GstMiniObject **) old_query, (GstMiniObject *) new_query);
-}
-
-static inline gboolean
-gst_query_take (GstQuery **old_query, GstQuery *new_query)
-{
-  return gst_mini_object_take ((GstMiniObject **) old_query,
-      (GstMiniObject *) new_query);
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 gboolean        gst_query_replace               (GstQuery ** old_query,
                                                  GstQuery * new_query);
@@ -316,8 +274,6 @@ gboolean        gst_query_replace               (GstQuery ** old_query,
 extern
 gboolean        gst_query_take                  (GstQuery ** old_query,
                                                  GstQuery * new_query);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
-
 /* application specific query */
 
 extern
