@@ -18,6 +18,13 @@ uses
 
   gstdatetime,
 
+
+  gstbufferlist,
+  gstbytearrayinterface,
+  gstcapsfeatures,
+  gstsegment,
+  gstcaps,
+  gstmeta,
   gstallocator,
   gstmemory,        //          ( PGstAllocator = Pointer ) wegen Kompflickt
   gstiterator,

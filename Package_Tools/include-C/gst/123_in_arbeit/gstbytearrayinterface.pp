@@ -1,4 +1,36 @@
-/* Copyright (C) 2023 Netflix Inc.
+
+unit gstbytearrayinterface;
+interface
+
+{
+  Automatically converted by H2Pas 1.0.0 from gstbytearrayinterface.h
+  The following command line parameters were used:
+    -p
+    -T
+    -d
+    -c
+    -e
+    gstbytearrayinterface.h
+}
+
+{ Pointers to basic pascal types, inserted by h2pas conversion program.}
+Type
+  PLongint  = ^Longint;
+  PSmallInt = ^SmallInt;
+  PByte     = ^Byte;
+  PWord     = ^Word;
+  PDWord    = ^DWord;
+  PDouble   = ^Double;
+
+Type
+PGstByteArrayInterface  = ^GstByteArrayInterface;
+Pguint8  = ^guint8;
+{$IFDEF FPC}
+{$PACKRECORDS C}
+{$ENDIF}
+
+
+{ Copyright (C) 2023 Netflix Inc.
  *  Author: Xavier Claessens <xavier.claessens@collabora.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -15,16 +47,11 @@
  * License along with this library; if not, write to the
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA 02110-1301, USA.
- */
-
-#pragma once
-
-#include <glib.h>
-#include <gst/gstconfig.h>
-
-
-
-/**
+  }
+(** unsupported pragma#pragma once*)
+{$include <glib.h>}
+{$include <gst/gstconfig.h>}
+{*
  * GstByteArrayInterface:
  * @data: A pointer to an array of bytes.
  * @len: Number of bytes in @data.
@@ -39,19 +66,18 @@
  * array cannot grow.
  *
  * Since: 1.24
- */
-typedef struct _GstByteArrayInterface GstByteArrayInterface;
-struct _GstByteArrayInterface
-{
-  guint8 *data;
-  gsize len;
-  gboolean (*resize) (GstByteArrayInterface *self, gsize length);
+  }
+type
+{ < private >  }
+  PGstByteArrayInterface = ^TGstByteArrayInterface;
+  TGstByteArrayInterface = record
+      data : Pguint8;
+      len : Tgsize;
+      resize : function (self:PGstByteArrayInterface; length:Tgsize):Tgboolean;cdecl;
+      _gst_reserved : array[0..(GST_PADDING)-1] of Tgpointer;
+    end;
 
-  /* < private > */
-  gpointer _gst_reserved[GST_PADDING];
-};
-
-/**
+{*
  * gst_byte_array_interface_init:
  * @self: A #GstByteArrayInterface.
  * @length: New size.
@@ -59,71 +85,43 @@ struct _GstByteArrayInterface
  * Initialize #GstByteArrayInterface structure.
  *
  * Since: 1.24
- */
+  }
+{ xxxxxxxxxxxxxxxxxxxxxx }
+{
 static inline void
 gst_byte_array_interface_init (GstByteArrayInterface *self)
-{
-  memset (self, 0, sizeof (GstByteArrayInterface));
-}
 
-/**
- * gst_byte_array_interface_set_size:
- * @self: A #GstByteArrayInterface.
- * @length: New size.
- *
- * Reallocate data pointer to fit at least @length bytes. @self->len is updated
- * to @length.
- *
- * Returns: %TRUE on success, %FALSE otherwise.
- * Since: 1.24
- */
+  memset (self, 0, sizeof (GstByteArrayInterface));
+
 static inline gboolean
 gst_byte_array_interface_set_size (GstByteArrayInterface *self, gsize length)
-{
+
   if (self->resize == NULL || !self->resize (self, length))
     return FALSE;
   self->len = length;
   return TRUE;
-}
 
-/**
- * gst_byte_array_interface_append:
- * @self: A #GstByteArrayInterface.
- * @size: Number of bytes to append to the array.
- *
- * Grow the array by @size bytes and return a pointer to the newly added memory.
- *
- * Returns: Pointer to added memory, or %NULL if reallocation failed.
- * Since: 1.24
- */
 static inline guint8 *
 gst_byte_array_interface_append (GstByteArrayInterface *self, gsize size)
-{
+
   gsize orig = self->len;
   if (!gst_byte_array_interface_set_size (self, self->len + size))
     return NULL;
   return self->data + orig;
-}
 
-/**
- * gst_byte_array_interface_append_data:
- * @self: A #GstByteArrayInterface.
- * @data: Source data.
- * @size: Size of @data.
- *
- * Append @size bytes from @data, reallocating @self->data pointer if necessary.
- *
- * Returns: %TRUE on success, %FALSE otherwise.
- * Since: 1.24
- */
 static inline gboolean
 gst_byte_array_interface_append_data (GstByteArrayInterface *self, const guint8 *data, gsize size)
-{
+
   guint8 *ptr = gst_byte_array_interface_append (self, size);
   if (ptr == NULL)
     return FALSE;
   memcpy (ptr, data, size);
   return TRUE;
-}
 
 
+ }
+
+implementation
+
+
+end.

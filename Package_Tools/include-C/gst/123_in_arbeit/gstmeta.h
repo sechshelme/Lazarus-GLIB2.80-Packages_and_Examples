@@ -76,7 +76,9 @@ typedef enum {
  *
  * Sets a metadata flag on a metadata.
  */
-#define GST_META_FLAG_SET(meta,flag)           (GST_META_FLAGS (meta) |= (flag))
+// xxxxxxxxxxxxxxxxxxxxxxxx
+//#define GST_META_FLAG_SET(meta,flag)           (GST_META_FLAGS (meta) |= (flag))
+#define GST_META_FLAG_SET(meta,flag)           (GST_META_FLAGS (meta) = (flag))
 /**
  * GST_META_FLAG_UNSET:
  * @meta: a #GstMeta.
@@ -85,7 +87,9 @@ typedef enum {
  * Clears a metadata flag.
  *
  */
-#define GST_META_FLAG_UNSET(meta,flag)         (GST_META_FLAGS (meta) &= ~(flag))
+// xxxxxxxxxxxxxxxxxxxxxxxx
+//#define GST_META_FLAG_UNSET(meta,flag)         (GST_META_FLAGS (meta) &= ~(flag))
+#define GST_META_FLAG_UNSET(meta,flag)         (GST_META_FLAGS (meta) = ~(flag))
 
 /**
  * GST_META_TAG_MEMORY_STR:

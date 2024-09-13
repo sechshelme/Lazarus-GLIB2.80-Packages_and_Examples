@@ -13,28 +13,6 @@ uses
 var
   _gst_mini_object_type: TGType; cvar;external gstreamerlib;
 
-type
-  PGstMiniObject = ^TGstMiniObject;
-  PPGstMiniObject = ^PGstMiniObject;
-
-  PGstMiniObjectCopyFunction = ^TGstMiniObjectCopyFunction;
-  TGstMiniObjectCopyFunction = function(obj: PGstMiniObject): PGstMiniObject; cdecl;
-  TGstMiniObjectDisposeFunction = function(obj: PGstMiniObject): Tgboolean; cdecl;
-  TGstMiniObjectFreeFunction = procedure(obj: PGstMiniObject); cdecl;
-  TGstMiniObjectNotify = procedure(user_data: Tgpointer; obj: PGstMiniObject); cdecl;
-
-  TGstMiniObject = record
-    _type: TGType;
-    refcount: Tgint;
-    lockstate: Tgint;
-    flags: Tguint;
-    copy: TGstMiniObjectCopyFunction;
-    _dispose: TGstMiniObjectDisposeFunction;
-    Free: TGstMiniObjectFreeFunction;
-    priv_uint: Tguint;
-    priv_pointer: Tgpointer;
-  end;
-
 function gst_mini_object_get_type: TGType; cdecl; external gstreamerlib;
 
 type
@@ -81,7 +59,7 @@ function gst_mini_object_steal(olddata: PPGstMiniObject): PGstMiniObject; cdecl;
 
 
 function GST_TYPE_MINI_OBJECT: TGType;
-//function GST_IS_MINI_OBJECT_TYPE(obj:Pointer;_type : TGType) : Tgboolean;
+function GST_IS_MINI_OBJECT_TYPE(obj:TGType;_type : TGType) : Tgboolean;
 function GST_MINI_OBJECT_CAST(obj: Pointer): PGstMiniObject;
 function GST_MINI_OBJECT_CONST_CAST(obj: Pointer): PGstMiniObject;
 function GST_MINI_OBJECT(obj: Pointer): PGstMiniObject;
@@ -94,9 +72,9 @@ function GST_MINI_OBJECT_IS_LOCKABLE(obj: Pointer): Tgboolean;
 
 function GST_MINI_OBJECT_TYPE(obj: Pointer): TGType;
 function GST_MINI_OBJECT_FLAGS(obj: Pointer): Tguint;
-function GST_MINI_OBJECT_FLAG_IS_SET(obj: Pointer; flag: Tguint32): Tgboolean;
-procedure GST_MINI_OBJECT_FLAG_SET(var obj: Tguint32; flag: Tguint32);
-procedure GST_MINI_OBJECT_FLAG_UNSET(var obj: Tguint32; flag: Tguint32);
+function GST_MINI_OBJECT_FLAG_IS_SET(obj: PGstMiniObject; flag: Tguint32): Tgboolean;
+procedure GST_MINI_OBJECT_FLAG_SET(var obj: PGstMiniObject; flag: Tguint32);
+procedure GST_MINI_OBJECT_FLAG_UNSET(var obj: PGstMiniObject; flag: Tguint32);
 
 //function GST_DEFINE_MINI_OBJECT_TYPE(TypeName,type_name : longint) : longint;
 
@@ -114,12 +92,11 @@ begin
   Result := _gst_mini_object_type;
 end;
 
-//function GST_IS_MINI_OBJECT_TYPE(obj: Pointer; _type: TGType): Tgboolean;
-//begin
 // #define GST_IS_MINI_OBJECT_TYPE(obj,type)  ((obj) && GST_MINI_OBJECT_TYPE(obj) == (type))
-// ????????????
-//  GST_IS_MINI_OBJECT_TYPE:=obj and GST_MINI_OBJECT_TYPE(obj)=_type;
-//end;
+function GST_IS_MINI_OBJECT_TYPE(obj: TGType; _type: TGType): Tgboolean;
+begin
+  Result:= obj=_type;
+end;
 
 function GST_MINI_OBJECT_CAST(obj: Pointer): PGstMiniObject;
 begin
@@ -146,21 +123,20 @@ begin
   GST_MINI_OBJECT_FLAGS := (GST_MINI_OBJECT_CAST(obj))^.flags;
 end;
 
-function GST_MINI_OBJECT_FLAG_IS_SET(obj: Pointer; flag: Tguint32): Tgboolean;
+function GST_MINI_OBJECT_FLAG_IS_SET(obj: PGstMiniObject; flag: Tguint32  ): Tgboolean;
 begin
   // #define GST_MINI_OBJECT_FLAG_IS_SET(obj,flag)        !!(GST_MINI_OBJECT_FLAGS (obj) & (flag))
-
   Result := not (not (GST_MINI_OBJECT_FLAGS(obj) and flag) <> 0);
 end;
 
-procedure GST_MINI_OBJECT_FLAG_SET(var obj: Tguint32; flag: Tguint32);
+procedure GST_MINI_OBJECT_FLAG_SET(var obj: PGstMiniObject; flag: Tguint32);
 begin
-  obj := obj or flag;
+  obj^.flags := obj^.flags or flag;
 end;
 
-procedure GST_MINI_OBJECT_FLAG_UNSET(var obj: Tguint32; flag: Tguint32);
+procedure GST_MINI_OBJECT_FLAG_UNSET(var obj: PGstMiniObject; flag: Tguint32);
 begin
-  obj := obj and not flag;
+  obj^.flags := obj^.flags and not flag;
 end;
 
 function GST_MINI_OBJECT_IS_LOCKABLE(obj: Pointer): Tgboolean;

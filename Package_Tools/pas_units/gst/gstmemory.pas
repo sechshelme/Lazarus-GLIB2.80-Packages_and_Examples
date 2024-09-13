@@ -101,9 +101,9 @@ type
 function GST_TYPE_MEMORY: TGType;
 
 function GST_MEMORY_CAST(mem: Pointer): PGstMemory;
-function GST_MEMORY_FLAGS(mem: PGstMemory): Tguint;
+function GST_MEMORY_FLAGS(mem: Pointer): Tguint;
 function GST_MEMORY_FLAG_IS_SET(mem: Pointer; flag: Tguint32): Tgboolean;
-procedure GST_MEMORY_FLAG_UNSET(var mem: Tguint32; flag: Tguint32);
+procedure GST_MEMORY_FLAG_UNSET(var mem: Pointer; flag: Tguint32);
 function GST_MEMORY_IS_READONLY(mem: PGstMemory): Tgboolean;
 function GST_MEMORY_IS_NO_SHARE(mem: PGstMemory): Tgboolean;
 function GST_MEMORY_IS_ZERO_PREFIXED(mem: PGstMemory): Tgboolean;
@@ -113,10 +113,10 @@ function GST_MEMORY_IS_NOT_MAPPABLE(mem: PGstMemory): Tgboolean;
 
 function GST_MAP_READWRITE: TGstMapFlags;
 
-function gst_memory_lock(m, f: longint): longint;
-function gst_memory_unlock(m, f: longint): longint;
-function gst_memory_is_writable(m: longint): longint;
-function gst_memory_make_writable(m: longint): longint;
+function gst_memory_lock(m:Pointer; f: TGstLockFlags): Tgboolean;
+procedure gst_memory_unlock(m:Pointer; f: TGstLockFlags);
+function gst_memory_is_writable(m: Pointer): Tgboolean;
+function gst_memory_make_writable(m: Pointer): PGstMemory;
 
 
 
@@ -135,7 +135,7 @@ begin
   GST_MEMORY_CAST := PGstMemory(mem);
 end;
 
-function GST_MEMORY_FLAGS(mem: PGstMemory): Tguint;
+function GST_MEMORY_FLAGS(mem: Pointer): Tguint;
 begin
   GST_MEMORY_FLAGS := GST_MINI_OBJECT_FLAGS(mem);
 end;
@@ -145,7 +145,7 @@ begin
   GST_MEMORY_FLAG_IS_SET := GST_MINI_OBJECT_FLAG_IS_SET(mem, flag);
 end;
 
-procedure GST_MEMORY_FLAG_UNSET(var mem: Tguint32; flag: Tguint32);
+procedure GST_MEMORY_FLAG_UNSET(var mem: Pointer; flag: Tguint32);
 begin
   GST_MINI_OBJECT_FLAG_UNSET(mem, flag);
 end;
@@ -185,26 +185,17 @@ begin
   GST_MAP_READWRITE := TGstMapFlags(GST_MAP_READ or GST_MAP_WRITE);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function gst_memory_lock(m, f: longint): longint;
+function gst_memory_lock(m: Pointer; f: TGstLockFlags): Tgboolean;
 begin
   gst_memory_lock := gst_mini_object_lock(GST_MINI_OBJECT_CAST(m), f);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function gst_memory_unlock(m, f: longint): longint;
+procedure gst_memory_unlock(m: Pointer; f: TGstLockFlags);
 begin
-  gst_memory_unlock := gst_mini_object_unlock(GST_MINI_OBJECT_CAST(m), f);
+  gst_mini_object_unlock(GST_MINI_OBJECT_CAST(m), f);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function gst_memory_is_writable(m: longint): longint;
+function gst_memory_is_writable(m: Pointer): Tgboolean;
 begin
   gst_memory_is_writable := gst_mini_object_is_writable(GST_MINI_OBJECT_CAST(m));
 end;
@@ -212,7 +203,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }
-function gst_memory_make_writable(m: longint): longint;
+function gst_memory_make_writable(m: Pointer): PGstMemory;
 begin
   gst_memory_make_writable := GST_MEMORY_CAST(gst_mini_object_make_writable(GST_MINI_OBJECT_CAST(m)));
 end;

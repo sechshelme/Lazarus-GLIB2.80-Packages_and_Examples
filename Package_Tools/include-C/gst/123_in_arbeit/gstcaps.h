@@ -127,12 +127,6 @@ typedef enum {
  * Creates a new #GstCaps static caps from an input string.
  * This can be used in pad templates.
  */
-#define GST_STATIC_CAPS(string) \
-{ \
-  /* caps */ NULL, \
-  /* string */ string, \
-  GST_PADDING_INIT \
-}
 
 typedef struct _GstCaps GstCaps;
 typedef struct _GstStaticCaps GstStaticCaps;
@@ -189,26 +183,6 @@ extern GstCaps * _gst_caps_none;
  */
 #define GST_CAPS_FLAG_UNSET(caps,flag)         GST_MINI_OBJECT_FLAG_UNSET (caps, flag)
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-/* refcounting */
-static inline GstCaps *
-gst_caps_ref (GstCaps * caps)
-{
-  return (GstCaps *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (caps));
-}
-
-static inline void
-gst_caps_unref (GstCaps * caps)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (caps));
-}
-
-static inline void
-gst_clear_caps (GstCaps ** caps_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) caps_ptr);
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstCaps * gst_caps_ref   (GstCaps * caps);
 
@@ -217,7 +191,6 @@ void      gst_caps_unref (GstCaps * caps);
 
 extern
 void      gst_clear_caps (GstCaps ** caps_ptr);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 
 /* copy caps */
 extern
@@ -255,19 +228,6 @@ GstCaps * gst_caps_copy (const GstCaps * caps);
  */
 #define         gst_caps_make_writable(caps)   GST_CAPS_CAST (gst_mini_object_make_writable (GST_MINI_OBJECT_CAST (caps)))
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-static inline gboolean
-gst_caps_replace (GstCaps **old_caps, GstCaps *new_caps)
-{
-    return gst_mini_object_replace ((GstMiniObject **) old_caps, (GstMiniObject *) new_caps);
-}
-
-static inline gboolean
-gst_caps_take (GstCaps **old_caps, GstCaps *new_caps)
-{
-    return gst_mini_object_take ((GstMiniObject **) old_caps, (GstMiniObject *) new_caps);
-}
-#else  /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 gboolean  gst_caps_replace (GstCaps ** old_caps,
                             GstCaps * new_caps);
@@ -275,7 +235,6 @@ gboolean  gst_caps_replace (GstCaps ** old_caps,
 extern
 gboolean  gst_caps_take    (GstCaps ** old_caps,
                             GstCaps * new_caps);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 
 /**
  * GstCaps:

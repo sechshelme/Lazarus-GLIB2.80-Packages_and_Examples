@@ -83,6 +83,44 @@ type
   PGstBufferPool = ^TGstBufferPool;
 
 
+  type
+  PGstMiniObject = ^TGstMiniObject;
+  PPGstMiniObject = ^PGstMiniObject;
+
+  PGstMiniObjectCopyFunction = ^TGstMiniObjectCopyFunction;
+  TGstMiniObjectCopyFunction = function(obj: PGstMiniObject): PGstMiniObject; cdecl;
+  TGstMiniObjectDisposeFunction = function(obj: PGstMiniObject): Tgboolean; cdecl;
+  TGstMiniObjectFreeFunction = procedure(obj: PGstMiniObject); cdecl;
+  TGstMiniObjectNotify = procedure(user_data: Tgpointer; obj: PGstMiniObject); cdecl;
+
+  TGstMiniObject = record
+    _type: TGType;
+    refcount: Tgint;
+    lockstate: Tgint;
+    flags: Tguint;
+    copy: TGstMiniObjectCopyFunction;
+    _dispose: TGstMiniObjectDisposeFunction;
+    Free: TGstMiniObjectFreeFunction;
+    priv_uint: Tguint;
+    priv_pointer: Tgpointer;
+  end;
+
+  type
+    TGstBuffer = record
+        mini_object : TGstMiniObject;
+        pool : PGstBufferPool;
+        pts : TGstClockTime;
+        dts : TGstClockTime;
+        duration : TGstClockTime;
+        offset : Tguint64;
+        offset_end : Tguint64;
+      end;
+    PGstBuffer = ^TGstBuffer;
+    PPGstBuffer = ^PGstBuffer;
+
+
+
+
 
 implementation
 

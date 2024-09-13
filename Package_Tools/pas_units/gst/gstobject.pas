@@ -79,8 +79,8 @@ function GST_OBJECT_PARENT(obj: Pointer): PGstObject;
 function GST_OBJECT_FLAGS(obj: Pointer): Tguint32;
 function GST_OBJECT_FLAG_IS_SET(obj: Pointer; flag: TGstObjectFlags): Tgboolean;
 
-procedure GST_OBJECT_FLAG_SET(var obj: Tguint32; flag: Tguint32);
-procedure GST_OBJECT_FLAG_UnSET(var obj: Tguint32; flag: Tguint32);
+procedure GST_OBJECT_FLAG_SET(var obj: PGstObject; flag: Tguint32);
+procedure GST_OBJECT_FLAG_UNSET(var obj: PGstObject; flag: Tguint32);
 
 // === Konventiert am: 11-9-24 13:47:40 ===
 
@@ -188,16 +188,14 @@ begin
   GST_OBJECT_FLAG_IS_SET := ((GST_OBJECT_FLAGS(obj)) and flag) = flag;
 end;
 
-// #define GST_OBJECT_FLAG_SET(obj,flag)          (GST_OBJECT_FLAGS (obj) |= (flag)) }
-procedure GST_OBJECT_FLAG_SET(var obj: Tguint32; flag: Tguint32);
+procedure GST_OBJECT_FLAG_SET(var obj: PGstObject; flag: Tguint32);
 begin
-  obj := obj or flag;
+  obj^.flags := obj^.flags or flag;
 end;
 
-// #define GST_OBJECT_FLAG_UNSET(obj,flag)        (GST_OBJECT_FLAGS (obj) &= ~(flag)) }
-procedure GST_OBJECT_FLAG_UnSET(var obj: Tguint32; flag: Tguint32);
+procedure GST_OBJECT_FLAG_UNSET(var obj: PGstObject; flag: Tguint32);
 begin
-  obj := obj and not flag;
+  obj^.flags := obj^.flags and not flag;
 end;
 
 

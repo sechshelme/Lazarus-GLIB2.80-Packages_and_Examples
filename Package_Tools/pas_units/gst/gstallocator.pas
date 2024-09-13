@@ -32,6 +32,10 @@ type
     GST_ALLOCATOR_FLAG_NO_COPY = GST_OBJECT_FLAG_LAST shl 1;
     GST_ALLOCATOR_FLAG_LAST = GST_OBJECT_FLAG_LAST shl 16;
 type
+  TGstAllocatorPrivate=record
+        end;
+  PGstAllocatorPrivate=^TGstAllocatorPrivate;
+
   PGstAllocator = ^TGstAllocator;
   TGstAllocator = record
       obj : TGstObject;

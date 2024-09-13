@@ -58,48 +58,6 @@ typedef struct _GstBufferList GstBufferList;
 typedef gboolean   (*GstBufferListFunc)   (GstBuffer **buffer, guint idx,
                                            gpointer user_data);
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-/* refcounting */
-static inline GstBufferList *
-gst_buffer_list_ref (GstBufferList * list)
-{
-  return GST_BUFFER_LIST_CAST (gst_mini_object_ref (GST_MINI_OBJECT_CAST (
-      list)));
-}
-
-static inline void
-gst_buffer_list_unref(GstBufferList* list)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (list));
-}
-
-static inline void
-gst_clear_buffer_list (GstBufferList ** list_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) list_ptr);
-}
-
-/* copy */
-static inline GstBufferList *
-gst_buffer_list_copy (const GstBufferList * list)
-{
-  return GST_BUFFER_LIST_CAST (gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (list)));
-}
-
-static inline gboolean
-gst_buffer_list_replace (GstBufferList **old_list, GstBufferList *new_list)
-{
-  return gst_mini_object_replace ((GstMiniObject **) old_list,
-      (GstMiniObject *) new_list);
-}
-
-static inline gboolean
-gst_buffer_list_take (GstBufferList **old_list, GstBufferList *new_list)
-{
-  return gst_mini_object_take ((GstMiniObject **) old_list,
-      (GstMiniObject *) new_list);
-}
-#else  /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstBufferList * gst_buffer_list_ref     (GstBufferList * list);
 
@@ -119,7 +77,6 @@ gboolean        gst_buffer_list_replace (GstBufferList ** old_list,
 extern
 gboolean        gst_buffer_list_take    (GstBufferList ** old_list,
                                          GstBufferList * new_list);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 
 /**
  * gst_buffer_list_is_writable:
@@ -178,7 +135,7 @@ GstBufferList *          gst_buffer_list_copy_deep             (const GstBufferL
 extern
 gsize                    gst_buffer_list_calculate_size        (GstBufferList * list);
 
-#define gst_buffer_list_add(l,b) gst_buffer_list_insert((l),-1,(b));
+#define gst_buffer_list_add(l,b) gst_buffer_list_insert((l),-1,(b))
 
 
 
