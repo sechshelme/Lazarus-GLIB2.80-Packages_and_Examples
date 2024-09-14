@@ -19,9 +19,12 @@ uses
   gstdatetime,
 
 
+  gsttaskpool,           // io.
+  gsttask,               // io. -> gsttaskpool,
+  gstevent,
   gstpadtemplate,                   // ( PGstPad = Pointer ) wegen Kompflickt
   gstpad,
-  gstquery,
+  gstquery,          vvvv
   gstbufferlist,
   gstbytearrayinterface,
   gstcapsfeatures,

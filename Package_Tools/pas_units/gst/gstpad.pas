@@ -3,7 +3,7 @@ unit gstpad;
 interface
 
 uses
-  glib280, common_GST, gstobject, gstpadtemplate;
+  glib280, common_GST, gstobject, gstpadtemplate, gsttask, gstbufferlist, gstevent;
 
 {$IFDEF FPC}
 {$PACKRECORDS C}
@@ -66,6 +66,23 @@ type
 
   type
     PGstPad = ^TGstPad;
+
+    TGstPadActivateFunction = function (pad:PGstPad; parent:PGstObject):Tgboolean;cdecl;
+    TGstPadActivateModeFunction = function (pad:PGstPad; parent:PGstObject; mode:TGstPadMode; active:Tgboolean):Tgboolean;cdecl;
+    TGstPadChainFunction = function (pad:PGstPad; parent:PGstObject; buffer:PGstBuffer):TGstFlowReturn;cdecl;
+    TGstPadChainListFunction = function (pad:PGstPad; parent:PGstObject; list:PGstBufferList):TGstFlowReturn;cdecl;
+    TGstPadGetRangeFunction = function (pad:PGstPad; parent:PGstObject; offset:Tguint64; length:Tguint; buffer:PPGstBuffer):TGstFlowReturn;cdecl;
+    TGstPadEventFunction = function (pad:PGstPad; parent:PGstObject; event:PGstEvent):Tgboolean;cdecl;
+    TGstPadEventFullFunction = function (pad:PGstPad; parent:PGstObject; event:PGstEvent):TGstFlowReturn;cdecl;
+
+    PGstPadIterIntLinkFunction = ^TGstPadIterIntLinkFunction;
+    TGstPadIterIntLinkFunction = function (pad:PGstPad; parent:PGstObject):PGstIterator;cdecl;
+
+    TGstPadQueryFunction = function (pad:PGstPad; parent:PGstObject; query:PGstQuery):Tgboolean;cdecl;
+    TGstPadLinkFunction = function (pad:PGstPad; parent:PGstObject; peer:PGstPad):TGstPadLinkReturn;cdecl;
+    TGstPadUnlinkFunction = procedure (pad:PGstPad; parent:PGstObject);cdecl;
+    TGstPadForwardFunction = function (pad:PGstPad; user_data:Tgpointer):Tgboolean;cdecl;
+
     TGstPad = record
         obj : TGstObject;
         element_private : Tgpointer;
@@ -123,22 +140,6 @@ type
 
 
 type
-  TGstPadActivateFunction = function (pad:PGstPad; parent:PGstObject):Tgboolean;cdecl;
-  TGstPadActivateModeFunction = function (pad:PGstPad; parent:PGstObject; mode:TGstPadMode; active:Tgboolean):Tgboolean;cdecl;
-  TGstPadChainFunction = function (pad:PGstPad; parent:PGstObject; buffer:PGstBuffer):TGstFlowReturn;cdecl;
-  TGstPadChainListFunction = function (pad:PGstPad; parent:PGstObject; list:PGstBufferList):TGstFlowReturn;cdecl;
-  TGstPadGetRangeFunction = function (pad:PGstPad; parent:PGstObject; offset:Tguint64; length:Tguint; buffer:PPGstBuffer):TGstFlowReturn;cdecl;
-  TGstPadEventFunction = function (pad:PGstPad; parent:PGstObject; event:PGstEvent):Tgboolean;cdecl;
-  TGstPadEventFullFunction = function (pad:PGstPad; parent:PGstObject; event:PGstEvent):TGstFlowReturn;cdecl;
-
-  PGstPadIterIntLinkFunction = ^TGstPadIterIntLinkFunction;
-  TGstPadIterIntLinkFunction = function (pad:PGstPad; parent:PGstObject):PGstIterator;cdecl;
-
-  TGstPadQueryFunction = function (pad:PGstPad; parent:PGstObject; query:PGstQuery):Tgboolean;cdecl;
-  TGstPadLinkFunction = function (pad:PGstPad; parent:PGstObject; peer:PGstPad):TGstPadLinkReturn;cdecl;
-  TGstPadUnlinkFunction = procedure (pad:PGstPad; parent:PGstObject);cdecl;
-  TGstPadForwardFunction = function (pad:PGstPad; user_data:Tgpointer):Tgboolean;cdecl;
-
   PGstPadProbeType = ^TGstPadProbeType;
   TGstPadProbeType =  Longint;
   Const

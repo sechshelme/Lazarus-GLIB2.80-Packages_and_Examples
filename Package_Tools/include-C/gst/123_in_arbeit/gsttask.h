@@ -40,8 +40,8 @@ typedef void         (*GstTaskFunction)          (gpointer user_data);
 /* --- standard type macros --- */
 #define GST_TYPE_TASK                   (gst_task_get_type ())
 #define GST_TASK(task)                  (G_TYPE_CHECK_INSTANCE_CAST ((task), GST_TYPE_TASK, GstTask))
-#define GST_IS_TASK(task)               (G_TYPE_CHECK_INSTANCE_TYPE ((task), GST_TYPE_TASK))
 #define GST_TASK_CLASS(tclass)          (G_TYPE_CHECK_CLASS_CAST ((tclass), GST_TYPE_TASK, GstTaskClass))
+#define GST_IS_TASK(task)               (G_TYPE_CHECK_INSTANCE_TYPE ((task), GST_TYPE_TASK))
 #define GST_IS_TASK_CLASS(tclass)       (G_TYPE_CHECK_CLASS_TYPE ((tclass), GST_TYPE_TASK))
 #define GST_TASK_GET_CLASS(task)        (G_TYPE_INSTANCE_GET_CLASS ((task), GST_TYPE_TASK, GstTaskClass))
 #define GST_TASK_CAST(task)             ((GstTask*)(task))

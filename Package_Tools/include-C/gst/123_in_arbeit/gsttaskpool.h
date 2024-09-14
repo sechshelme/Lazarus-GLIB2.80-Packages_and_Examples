@@ -29,8 +29,8 @@
 /* --- standard type macros --- */
 #define GST_TYPE_TASK_POOL             (gst_task_pool_get_type ())
 #define GST_TASK_POOL(pool)            (G_TYPE_CHECK_INSTANCE_CAST ((pool), GST_TYPE_TASK_POOL, GstTaskPool))
-#define GST_IS_TASK_POOL(pool)         (G_TYPE_CHECK_INSTANCE_TYPE ((pool), GST_TYPE_TASK_POOL))
 #define GST_TASK_POOL_CLASS(pclass)    (G_TYPE_CHECK_CLASS_CAST ((pclass), GST_TYPE_TASK_POOL, GstTaskPoolClass))
+#define GST_IS_TASK_POOL(pool)         (G_TYPE_CHECK_INSTANCE_TYPE ((pool), GST_TYPE_TASK_POOL))
 #define GST_IS_TASK_POOL_CLASS(pclass) (G_TYPE_CHECK_CLASS_TYPE ((pclass), GST_TYPE_TASK_POOL))
 #define GST_TASK_POOL_GET_CLASS(pool)  (G_TYPE_INSTANCE_GET_CLASS ((pool), GST_TYPE_TASK_POOL, GstTaskPoolClass))
 #define GST_TASK_POOL_CAST(pool)       ((GstTaskPool*)(pool))
