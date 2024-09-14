@@ -3,7 +3,7 @@ unit gstpad;
 interface
 
 uses
-  glib280, common_GST, gstobject, gstpadtemplate, gsttask, gstbufferlist, gstevent;
+  glib280, common_GST, gstobject, gstpadtemplate, gsttask, gstbufferlist, gstevent, gstiterator, gstcaps, gstbuffer;
 
 {$IFDEF FPC}
 {$PACKRECORDS C}
@@ -65,6 +65,10 @@ type
 
 
   type
+    TGstPadPrivate=record
+            end;
+    PGstPadPrivate=^TGstPadPrivate;
+
     PGstPad = ^TGstPad;
 
     TGstPadActivateFunction = function (pad:PGstPad; parent:PGstObject):Tgboolean;cdecl;
@@ -297,83 +301,83 @@ function gst_pad_query_default(pad:PGstPad; parent:PGstObject; query:PGstQuery):
 function gst_pad_forward(pad:PGstPad; forward:TGstPadForwardFunction; user_data:Tgpointer):Tgboolean;cdecl;external gstreamerlib;
 
 
-function GST_PAD_LINK_FAILED(ret : longint) : longint;
-function GST_PAD_LINK_SUCCESSFUL(ret : longint) : longint;
+function GST_PAD_LINK_FAILED(ret : longint) : Tgboolean;
+function GST_PAD_LINK_SUCCESSFUL(ret : longint) : Tgboolean;
 
-function GST_PAD_PROBE_INFO_TYPE(d : longint) : longint;
-function GST_PAD_PROBE_INFO_ID(d : longint) : longint;
-function GST_PAD_PROBE_INFO_DATA(d : longint) : longint;
-function GST_PAD_PROBE_INFO_FLOW_RETURN(d : longint) : longint;
-function GST_PAD_PROBE_INFO_BUFFER(d : longint) : longint;
-function GST_PAD_PROBE_INFO_BUFFER_LIST(d : longint) : longint;
-function GST_PAD_PROBE_INFO_EVENT(d : longint) : longint;
-function GST_PAD_PROBE_INFO_QUERY(d : longint) : longint;
-function GST_PAD_PROBE_INFO_OFFSET(d : longint) : longint;
-function GST_PAD_PROBE_INFO_SIZE(d : longint) : longint;
+function GST_PAD_PROBE_INFO_TYPE(d : PGstPadProbeInfo) : TGstPadProbeType;
+function GST_PAD_PROBE_INFO_ID(d : PGstPadProbeInfo) : Tgulong;
+function GST_PAD_PROBE_INFO_DATA(d : PGstPadProbeInfo) : Tgpointer;
+function GST_PAD_PROBE_INFO_FLOW_RETURN(d : PGstPadProbeInfo) : TGstFlowReturn;
+function GST_PAD_PROBE_INFO_BUFFER(d : PGstPadProbeInfo) : PGstBuffer;
+function GST_PAD_PROBE_INFO_BUFFER_LIST(d : PGstPadProbeInfo) : PGstBufferList;
+function GST_PAD_PROBE_INFO_EVENT(d : PGstPadProbeInfo) : PGstEvent;
+function GST_PAD_PROBE_INFO_QUERY(d : PGstPadProbeInfo) : PGstQuery;
+function GST_PAD_PROBE_INFO_OFFSET(d : PGstPadProbeInfo) : Tguint64;
+function GST_PAD_PROBE_INFO_SIZE(d : PGstPadProbeInfo) : Tguint;
 
-function GST_PAD_NAME(pad : longint) : longint;
-function GST_PAD_PARENT(pad : longint) : longint;
-function GST_PAD_ELEMENT_PRIVATE(pad : longint) : longint;
-function GST_PAD_PAD_TEMPLATE(pad : longint) : longint;
-function GST_PAD_DIRECTION(pad : longint) : longint;
-function GST_PAD_TASK(pad : longint) : longint;
-function GST_PAD_MODE(pad : longint) : longint;
-function GST_PAD_ACTIVATEFUNC(pad : longint) : longint;
-function GST_PAD_ACTIVATEMODEFUNC(pad : longint) : longint;
-function GST_PAD_CHAINFUNC(pad : longint) : longint;
-function GST_PAD_CHAINLISTFUNC(pad : longint) : longint;
-function GST_PAD_GETRANGEFUNC(pad : longint) : longint;
-function GST_PAD_EVENTFUNC(pad : longint) : longint;
-function GST_PAD_EVENTFULLFUNC(pad : longint) : longint;
-function GST_PAD_QUERYFUNC(pad : longint) : longint;
-function GST_PAD_ITERINTLINKFUNC(pad : longint) : longint;
-function GST_PAD_PEER(pad : longint) : longint;
-function GST_PAD_LINKFUNC(pad : longint) : longint;
-function GST_PAD_UNLINKFUNC(pad : longint) : longint;
-function GST_PAD_IS_SRC(pad : longint) : longint;
-function GST_PAD_IS_SINK(pad : longint) : longint;
-function GST_PAD_IS_LINKED(pad : longint) : longint;
-function GST_PAD_IS_ACTIVE(pad : longint) : longint;
-function GST_PAD_IS_BLOCKED(pad : longint) : longint;
-function GST_PAD_IS_BLOCKING(pad : longint) : longint;
-function GST_PAD_IS_FLUSHING(pad : longint) : longint;
-function GST_PAD_SET_FLUSHING(pad : longint) : longint;
-function GST_PAD_UNSET_FLUSHING(pad : longint) : longint;
-function GST_PAD_IS_EOS(pad : longint) : longint;
-function GST_PAD_NEEDS_RECONFIGURE(pad : longint) : longint;
-function GST_PAD_HAS_PENDING_EVENTS(pad : longint) : longint;
-function GST_PAD_IS_FIXED_CAPS(pad : longint) : longint;
-function GST_PAD_NEEDS_PARENT(pad : longint) : longint;
-function GST_PAD_IS_PROXY_CAPS(pad : longint) : longint;
-function GST_PAD_SET_PROXY_CAPS(pad : longint) : longint;
-function GST_PAD_UNSET_PROXY_CAPS(pad : longint) : longint;
-function GST_PAD_IS_PROXY_ALLOCATION(pad : longint) : longint;
-function GST_PAD_SET_PROXY_ALLOCATION(pad : longint) : longint;
-function GST_PAD_UNSET_PROXY_ALLOCATION(pad : longint) : longint;
-function GST_PAD_IS_PROXY_SCHEDULING(pad : longint) : longint;
-function GST_PAD_SET_PROXY_SCHEDULING(pad : longint) : longint;
-function GST_PAD_UNSET_PROXY_SCHEDULING(pad : longint) : longint;
-function GST_PAD_IS_ACCEPT_INTERSECT(pad : longint) : longint;
-function GST_PAD_SET_ACCEPT_INTERSECT(pad : longint) : longint;
-function GST_PAD_UNSET_ACCEPT_INTERSECT(pad : longint) : longint;
-function GST_PAD_IS_ACCEPT_TEMPLATE(pad : longint) : longint;
-function GST_PAD_SET_ACCEPT_TEMPLATE(pad : longint) : longint;
-function GST_PAD_UNSET_ACCEPT_TEMPLATE(pad : longint) : longint;
-function GST_PAD_GET_STREAM_LOCK(pad : longint) : longint;
-function GST_PAD_STREAM_LOCK(pad : longint) : longint;
+function GST_PAD_NAME(pad : Pointer) : Pgchar;
+function GST_PAD_PARENT(pad : Pointer) : Pointer;
+function GST_PAD_ELEMENT_PRIVATE(pad : Pointer) : Tgpointer;
+function GST_PAD_PAD_TEMPLATE(pad : Pointer) : PGstPadTemplate;
+function GST_PAD_DIRECTION(pad : Pointer) : TGstPadDirection;
+function GST_PAD_TASK(pad : Pointer) : PGstTask;
+function GST_PAD_MODE(pad : Pointer) : TGstPadMode;
+function GST_PAD_ACTIVATEFUNC(pad : Pointer) : TGstPadActivateFunction;
+function GST_PAD_ACTIVATEMODEFUNC(pad : Pointer) : TGstPadActivateModeFunction;
+function GST_PAD_CHAINFUNC(pad : Pointer) : TGstPadChainFunction;
+function GST_PAD_CHAINLISTFUNC(pad : Pointer) : TGstPadChainListFunction;
+function GST_PAD_GETRANGEFUNC(pad : Pointer) : TGstPadGetRangeFunction;
+function GST_PAD_EVENTFUNC(pad : Pointer) : TGstPadEventFunction;
+function GST_PAD_EVENTFULLFUNC(pad : Pointer) : TGstPadEventFullFunction;
+function GST_PAD_QUERYFUNC(pad : Pointer) : TGstPadQueryFunction;
+function GST_PAD_ITERINTLINKFUNC(pad : Pointer) : TGstPadIterIntLinkFunction;
+function GST_PAD_PEER(pad : Pointer) : PGstPad;
+function GST_PAD_LINKFUNC(pad : Pointer) : TGstPadLinkFunction;
+function GST_PAD_UNLINKFUNC(pad : Pointer) : TGstPadUnlinkFunction;
+function GST_PAD_IS_SRC(pad : Pointer) : Tgboolean;
+function GST_PAD_IS_SINK(pad : Pointer) : Tgboolean;
+function GST_PAD_IS_LINKED(pad : Pointer) : Tgboolean;
+function GST_PAD_IS_ACTIVE(pad : Pointer) : Tgboolean;
+function GST_PAD_IS_BLOCKED(pad : Pointer) : Tgboolean;
+function GST_PAD_IS_BLOCKING(pad : Pointer) : Tgboolean;
+function GST_PAD_IS_FLUSHING(pad : Pointer) : Tgboolean;
+procedure GST_PAD_SET_FLUSHING(var pad : Pointer);
+procedure GST_PAD_UNSET_FLUSHING(var pad : Pointer);
+function GST_PAD_IS_EOS(pad : Pointer) : Tgboolean;
+function GST_PAD_NEEDS_RECONFIGURE(pad : Pointer) : longint;
+function GST_PAD_HAS_PENDING_EVENTS(pad : Pointer) : Tgboolean;
+function GST_PAD_IS_FIXED_CAPS(pad : Pointer) : longint;
+function GST_PAD_NEEDS_PARENT(pad : Pointer) : longint;
+function GST_PAD_IS_PROXY_CAPS(pad : Pointer) : longint;
+function GST_PAD_SET_PROXY_CAPS(pad : Pointer) : longint;
+function GST_PAD_UNSET_PROXY_CAPS(pad : Pointer) : longint;
+function GST_PAD_IS_PROXY_ALLOCATION(pad : Pointer) : longint;
+function GST_PAD_SET_PROXY_ALLOCATION(pad : Pointer) : longint;
+function GST_PAD_UNSET_PROXY_ALLOCATION(pad : Pointer) : longint;
+function GST_PAD_IS_PROXY_SCHEDULING(pad : Pointer) : longint;
+function GST_PAD_SET_PROXY_SCHEDULING(pad : Pointer) : longint;
+function GST_PAD_UNSET_PROXY_SCHEDULING(pad : Pointer) : longint;
+function GST_PAD_IS_ACCEPT_INTERSECT(pad : Pointer) : longint;
+function GST_PAD_SET_ACCEPT_INTERSECT(pad : Pointer) : longint;
+function GST_PAD_UNSET_ACCEPT_INTERSECT(pad : Pointer) : longint;
+function GST_PAD_IS_ACCEPT_TEMPLATE(pad : Pointer) : longint;
+function GST_PAD_SET_ACCEPT_TEMPLATE(pad : Pointer) : longint;
+function GST_PAD_UNSET_ACCEPT_TEMPLATE(pad : Pointer) : longint;
+function GST_PAD_GET_STREAM_LOCK(pad : Pointer) : longint;
+function GST_PAD_STREAM_LOCK(pad : Pointer) : longint;
 
 {#define GST_PAD_STREAM_AUTO_LOCK(pad, var) g_autoptr(GRecMutexLocker) G_GNUC_UNUSED var = g_rec_mutex_locker_new(GST_PAD_GET_STREAM_LOCK(pad)) }
 
-function GST_PAD_STREAM_TRYLOCK(pad : longint) : longint;
-function GST_PAD_STREAM_UNLOCK(pad : longint) : longint;
-function GST_PAD_LAST_FLOW_RETURN(pad : longint) : longint;
-function GST_PAD_BLOCK_GET_COND(pad : longint) : longint;
-function GST_PAD_BLOCK_WAIT(pad : longint) : longint;
-function GST_PAD_BLOCK_SIGNAL(pad : longint) : longint;
-function GST_PAD_BLOCK_BROADCAST(pad : longint) : longint;
+function GST_PAD_STREAM_TRYLOCK(pad : Pointer) : longint;
+function GST_PAD_STREAM_UNLOCK(pad : Pointer) : longint;
+function GST_PAD_LAST_FLOW_RETURN(pad : Pointer) : longint;
+function GST_PAD_BLOCK_GET_COND(pad : Pointer) : longint;
+function GST_PAD_BLOCK_WAIT(pad : Pointer) : longint;
+function GST_PAD_BLOCK_SIGNAL(pad : Pointer) : longint;
+function GST_PAD_BLOCK_BROADCAST(pad : Pointer) : longint;
 
-function gst_pad_get_name(pad : longint) : longint;
-function gst_pad_get_parent(pad : longint) : longint;
+function gst_pad_get_name(pad : Pointer) : longint;
+function gst_pad_get_parent(pad : Pointer) : longint;
 
 function gst_pad_set_activate_function(p,f : longint) : longint;
 function gst_pad_set_activatemode_function(p,f : longint) : longint;
@@ -398,10 +402,12 @@ function GST_PAD(obj : Pointer) : PGstPad;
 function GST_PAD_CLASS(klass : Pointer) : PGstPadClass;
 function GST_IS_PAD(obj : Pointer) : Tgboolean;
 function GST_IS_PAD_CLASS(klass : Pointer) : Tgboolean;
-begin
+
+function GST_PAD_CAST(obj : Pointer) : PGstPad;
+
 
 implementation
-{ was #define dname(params) para_def_expr }
+
 function GST_TYPE_PAD : TGType;
   begin
     GST_TYPE_PAD:=gst_pad_get_type;
@@ -427,351 +433,195 @@ begin
   Result := g_type_check_class_is_a(klass,  GST_TYPE_PAD);
 end;
 
-begin
-  GST_PAD_CAST:=PGstPad(obj);
-  Result := PGstPadClass(PGTypeInstance(obj)^.g_class);
+// ====
 
-{ was #define dname(params) para_def_expr }
-
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_LINK_FAILED(ret : longint) : longint;
+function GST_PAD_LINK_FAILED(ret: longint): Tgboolean;
 begin
   GST_PAD_LINK_FAILED:=ret<GST_PAD_LINK_OK;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_LINK_SUCCESSFUL(ret : longint) : longint;
+function GST_PAD_LINK_SUCCESSFUL(ret: longint): Tgboolean;
 begin
   GST_PAD_LINK_SUCCESSFUL:=ret>=GST_PAD_LINK_OK;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_TYPE(d : longint) : longint;
+function GST_PAD_PROBE_INFO_TYPE(d: PGstPadProbeInfo): TGstPadProbeType;
 begin
   GST_PAD_PROBE_INFO_TYPE:=d^._type;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_ID(d : longint) : longint;
+function GST_PAD_PROBE_INFO_ID(d: PGstPadProbeInfo): Tgulong;
 begin
   GST_PAD_PROBE_INFO_ID:=d^.id;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_DATA(d : longint) : longint;
+function GST_PAD_PROBE_INFO_DATA(d: PGstPadProbeInfo): Tgpointer;
 begin
   GST_PAD_PROBE_INFO_DATA:=d^.data;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_FLOW_RETURN(d : longint) : longint;
+function GST_PAD_PROBE_INFO_FLOW_RETURN(d: PGstPadProbeInfo): TGstFlowReturn;
 begin
-  GST_PAD_PROBE_INFO_FLOW_RETURN:=d^.(ABI.(abi.flow_ret));
+  GST_PAD_PROBE_INFO_FLOW_RETURN:=d^.ABI.abi.flow_ret;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_BUFFER(d : longint) : longint;
+function GST_PAD_PROBE_INFO_BUFFER(d: PGstPadProbeInfo): PGstBuffer;
 begin
   GST_PAD_PROBE_INFO_BUFFER:=GST_BUFFER_CAST(GST_PAD_PROBE_INFO_DATA(d));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_BUFFER_LIST(d : longint) : longint;
+function GST_PAD_PROBE_INFO_BUFFER_LIST(d: PGstPadProbeInfo): PGstBufferList;
 begin
   GST_PAD_PROBE_INFO_BUFFER_LIST:=GST_BUFFER_LIST_CAST(GST_PAD_PROBE_INFO_DATA(d));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_EVENT(d : longint) : longint;
+function GST_PAD_PROBE_INFO_EVENT(d: PGstPadProbeInfo): PGstEvent;
 begin
   GST_PAD_PROBE_INFO_EVENT:=GST_EVENT_CAST(GST_PAD_PROBE_INFO_DATA(d));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_QUERY(d : longint) : longint;
+function GST_PAD_PROBE_INFO_QUERY(d: PGstPadProbeInfo): PGstQuery;
 begin
-  GST_PAD_PROBE_INFO_QUERY:=GST_QUERY_CAST(GST_PAD_PROBE_INFO_DATA(d));
+  GST_PAD_PROBE_INFO_QUERY:=PGstQuery(GST_PAD_PROBE_INFO_DATA(d));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_OFFSET(d : longint) : longint;
+function GST_PAD_PROBE_INFO_OFFSET(d: PGstPadProbeInfo): Tguint64;
 begin
   GST_PAD_PROBE_INFO_OFFSET:=d^.offset;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PROBE_INFO_SIZE(d : longint) : longint;
+function GST_PAD_PROBE_INFO_SIZE(d: PGstPadProbeInfo): Tguint;
 begin
   GST_PAD_PROBE_INFO_SIZE:=d^.size;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_NAME(pad : longint) : longint;
+function GST_PAD_NAME(pad: Pointer): Pgchar;
 begin
   GST_PAD_NAME:=GST_OBJECT_NAME(pad);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PARENT(pad : longint) : longint;
+function GST_PAD_PARENT(pad: Pointer): Pointer;
 begin
-  GST_PAD_PARENT:=GST_ELEMENT_CAST(GST_OBJECT_PARENT(pad));
+  //  GST_PAD_PARENT:= GST_ELEMENT_CAST(GST_OBJECT_PARENT(pad));
+  Result:=Pointer(GST_OBJECT_PARENT(pad));;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_ELEMENT_PRIVATE(pad : longint) : longint;
+function GST_PAD_ELEMENT_PRIVATE(pad: Pointer): Tgpointer;
 begin
   GST_PAD_ELEMENT_PRIVATE:=(GST_PAD_CAST(pad))^.element_private;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PAD_TEMPLATE(pad : longint) : longint;
+function GST_PAD_PAD_TEMPLATE(pad: Pointer): PGstPadTemplate;
 begin
   GST_PAD_PAD_TEMPLATE:=(GST_PAD_CAST(pad))^.padtemplate;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_DIRECTION(pad : longint) : longint;
+function GST_PAD_DIRECTION(pad: Pointer): TGstPadDirection;
 begin
   GST_PAD_DIRECTION:=(GST_PAD_CAST(pad))^.direction;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_TASK(pad : longint) : longint;
+function GST_PAD_TASK(pad: Pointer): PGstTask;
 begin
   GST_PAD_TASK:=(GST_PAD_CAST(pad))^.task;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_MODE(pad : longint) : longint;
+function GST_PAD_MODE(pad: Pointer): TGstPadMode;
 begin
   GST_PAD_MODE:=(GST_PAD_CAST(pad))^.mode;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_ACTIVATEFUNC(pad : longint) : longint;
+function GST_PAD_ACTIVATEFUNC(pad: Pointer): TGstPadActivateFunction;
 begin
   GST_PAD_ACTIVATEFUNC:=(GST_PAD_CAST(pad))^.activatefunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_ACTIVATEMODEFUNC(pad : longint) : longint;
+function GST_PAD_ACTIVATEMODEFUNC(pad: Pointer): TGstPadActivateModeFunction;
 begin
   GST_PAD_ACTIVATEMODEFUNC:=(GST_PAD_CAST(pad))^.activatemodefunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_CHAINFUNC(pad : longint) : longint;
+function GST_PAD_CHAINFUNC(pad: Pointer): TGstPadChainFunction;
 begin
   GST_PAD_CHAINFUNC:=(GST_PAD_CAST(pad))^.chainfunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_CHAINLISTFUNC(pad : longint) : longint;
+function GST_PAD_CHAINLISTFUNC(pad: Pointer): TGstPadChainListFunction;
 begin
   GST_PAD_CHAINLISTFUNC:=(GST_PAD_CAST(pad))^.chainlistfunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_GETRANGEFUNC(pad : longint) : longint;
+function GST_PAD_GETRANGEFUNC(pad: Pointer): TGstPadGetRangeFunction;
 begin
   GST_PAD_GETRANGEFUNC:=(GST_PAD_CAST(pad))^.getrangefunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_EVENTFUNC(pad : longint) : longint;
+function GST_PAD_EVENTFUNC(pad: Pointer): TGstPadEventFunction;
 begin
   GST_PAD_EVENTFUNC:=(GST_PAD_CAST(pad))^.eventfunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_EVENTFULLFUNC(pad : longint) : longint;
+function GST_PAD_EVENTFULLFUNC(pad: Pointer): TGstPadEventFullFunction;
 begin
-  GST_PAD_EVENTFULLFUNC:=(GST_PAD_CAST(pad))^.(ABI.(abi.eventfullfunc));
+  GST_PAD_EVENTFULLFUNC:=(GST_PAD_CAST(pad))^.ABI.abi.eventfullfunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_QUERYFUNC(pad : longint) : longint;
+function GST_PAD_QUERYFUNC(pad: Pointer): TGstPadQueryFunction;
 begin
   GST_PAD_QUERYFUNC:=(GST_PAD_CAST(pad))^.queryfunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_ITERINTLINKFUNC(pad : longint) : longint;
+function GST_PAD_ITERINTLINKFUNC(pad: Pointer): TGstPadIterIntLinkFunction;
 begin
   GST_PAD_ITERINTLINKFUNC:=(GST_PAD_CAST(pad))^.iterintlinkfunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_PEER(pad : longint) : longint;
+function GST_PAD_PEER(pad: Pointer): PGstPad;
 begin
   GST_PAD_PEER:=(GST_PAD_CAST(pad))^.peer;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_LINKFUNC(pad : longint) : longint;
+function GST_PAD_LINKFUNC(pad: Pointer): TGstPadLinkFunction;
 begin
   GST_PAD_LINKFUNC:=(GST_PAD_CAST(pad))^.linkfunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_UNLINKFUNC(pad : longint) : longint;
+function GST_PAD_UNLINKFUNC(pad: Pointer): TGstPadUnlinkFunction;
 begin
   GST_PAD_UNLINKFUNC:=(GST_PAD_CAST(pad))^.unlinkfunc;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_IS_SRC(pad : longint) : longint;
+function GST_PAD_IS_SRC(pad: Pointer): Tgboolean;
 begin
   GST_PAD_IS_SRC:=(GST_PAD_DIRECTION(pad))=GST_PAD_SRC;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_IS_SINK(pad : longint) : longint;
+function GST_PAD_IS_SINK(pad: Pointer): Tgboolean;
 begin
   GST_PAD_IS_SINK:=(GST_PAD_DIRECTION(pad))=GST_PAD_SINK;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_IS_LINKED(pad : longint) : longint;
-begin
-  GST_PAD_IS_LINKED:=(GST_PAD_PEER(pad))<>NULL;
-end;
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_IS_ACTIVE(pad : longint) : longint;
-begin
-  GST_PAD_IS_ACTIVE:=(GST_PAD_MODE(pad))<>GST_PAD_MODE_NONE;
-end;
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_IS_BLOCKED(pad : longint) : longint;
-begin
-  GST_PAD_IS_BLOCKED:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_BLOCKED);
-end;
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_IS_BLOCKING(pad : longint) : longint;
-begin
-  GST_PAD_IS_BLOCKING:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_BLOCKING);
-end;
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_IS_FLUSHING(pad : longint) : longint;
+function GST_PAD_IS_FLUSHING(pad: Pointer): Tgboolean;
 begin
   GST_PAD_IS_FLUSHING:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_FLUSHING);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_SET_FLUSHING(pad : longint) : longint;
+procedure GST_PAD_SET_FLUSHING(var pad: Pointer);
 begin
-  GST_PAD_SET_FLUSHING:=GST_OBJECT_FLAG_SET(pad,GST_PAD_FLAG_FLUSHING);
+  GST_OBJECT_FLAG_SET(pad,GST_PAD_FLAG_FLUSHING);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_UNSET_FLUSHING(pad : longint) : longint;
+procedure GST_PAD_UNSET_FLUSHING(var pad: Pointer);
 begin
-  GST_PAD_UNSET_FLUSHING:=GST_OBJECT_FLAG_UNSET(pad,GST_PAD_FLAG_FLUSHING);
+  GST_OBJECT_FLAG_UNSET(pad,GST_PAD_FLAG_FLUSHING);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_IS_EOS(pad : longint) : longint;
+function GST_PAD_IS_EOS(pad: Pointer): Tgboolean;
 begin
   GST_PAD_IS_EOS:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_EOS);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_NEEDS_RECONFIGURE(pad : longint) : longint;
-begin
-  GST_PAD_NEEDS_RECONFIGURE:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_NEED_RECONFIGURE);
-end;
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_PAD_HAS_PENDING_EVENTS(pad : longint) : longint;
+function GST_PAD_HAS_PENDING_EVENTS(pad: Pointer): Tgboolean;
 begin
   GST_PAD_HAS_PENDING_EVENTS:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_PENDING_EVENTS);
 end;
@@ -779,7 +629,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_IS_FIXED_CAPS(pad : longint) : longint;
+function GST_PAD_IS_FIXED_CAPS(pad: Pointer): longint;
 begin
   GST_PAD_IS_FIXED_CAPS:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_FIXED_CAPS);
 end;
@@ -787,7 +637,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_NEEDS_PARENT(pad : longint) : longint;
+function GST_PAD_NEEDS_PARENT(pad: Pointer): longint;
 begin
   GST_PAD_NEEDS_PARENT:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_NEED_PARENT);
 end;
@@ -795,7 +645,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_IS_PROXY_CAPS(pad : longint) : longint;
+function GST_PAD_IS_PROXY_CAPS(pad: Pointer): longint;
 begin
   GST_PAD_IS_PROXY_CAPS:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_PROXY_CAPS);
 end;
@@ -803,7 +653,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_SET_PROXY_CAPS(pad : longint) : longint;
+function GST_PAD_SET_PROXY_CAPS(pad: Pointer): longint;
 begin
   GST_PAD_SET_PROXY_CAPS:=GST_OBJECT_FLAG_SET(pad,GST_PAD_FLAG_PROXY_CAPS);
 end;
@@ -811,7 +661,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_UNSET_PROXY_CAPS(pad : longint) : longint;
+function GST_PAD_UNSET_PROXY_CAPS(pad: Pointer): longint;
 begin
   GST_PAD_UNSET_PROXY_CAPS:=GST_OBJECT_FLAG_UNSET(pad,GST_PAD_FLAG_PROXY_CAPS);
 end;
@@ -819,7 +669,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_IS_PROXY_ALLOCATION(pad : longint) : longint;
+function GST_PAD_IS_PROXY_ALLOCATION(pad: Pointer): longint;
 begin
   GST_PAD_IS_PROXY_ALLOCATION:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_PROXY_ALLOCATION);
 end;
@@ -827,7 +677,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_SET_PROXY_ALLOCATION(pad : longint) : longint;
+function GST_PAD_SET_PROXY_ALLOCATION(pad: Pointer): longint;
 begin
   GST_PAD_SET_PROXY_ALLOCATION:=GST_OBJECT_FLAG_SET(pad,GST_PAD_FLAG_PROXY_ALLOCATION);
 end;
@@ -835,7 +685,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_UNSET_PROXY_ALLOCATION(pad : longint) : longint;
+function GST_PAD_UNSET_PROXY_ALLOCATION(pad: Pointer): longint;
 begin
   GST_PAD_UNSET_PROXY_ALLOCATION:=GST_OBJECT_FLAG_UNSET(pad,GST_PAD_FLAG_PROXY_ALLOCATION);
 end;
@@ -843,7 +693,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_IS_PROXY_SCHEDULING(pad : longint) : longint;
+function GST_PAD_IS_PROXY_SCHEDULING(pad: Pointer): longint;
 begin
   GST_PAD_IS_PROXY_SCHEDULING:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_PROXY_SCHEDULING);
 end;
@@ -851,7 +701,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_SET_PROXY_SCHEDULING(pad : longint) : longint;
+function GST_PAD_SET_PROXY_SCHEDULING(pad: Pointer): longint;
 begin
   GST_PAD_SET_PROXY_SCHEDULING:=GST_OBJECT_FLAG_SET(pad,GST_PAD_FLAG_PROXY_SCHEDULING);
 end;
@@ -859,7 +709,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_UNSET_PROXY_SCHEDULING(pad : longint) : longint;
+function GST_PAD_UNSET_PROXY_SCHEDULING(pad: Pointer): longint;
 begin
   GST_PAD_UNSET_PROXY_SCHEDULING:=GST_OBJECT_FLAG_UNSET(pad,GST_PAD_FLAG_PROXY_SCHEDULING);
 end;
@@ -867,7 +717,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_IS_ACCEPT_INTERSECT(pad : longint) : longint;
+function GST_PAD_IS_ACCEPT_INTERSECT(pad: Pointer): longint;
 begin
   GST_PAD_IS_ACCEPT_INTERSECT:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_ACCEPT_INTERSECT);
 end;
@@ -875,7 +725,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_SET_ACCEPT_INTERSECT(pad : longint) : longint;
+function GST_PAD_SET_ACCEPT_INTERSECT(pad: Pointer): longint;
 begin
   GST_PAD_SET_ACCEPT_INTERSECT:=GST_OBJECT_FLAG_SET(pad,GST_PAD_FLAG_ACCEPT_INTERSECT);
 end;
@@ -883,7 +733,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_UNSET_ACCEPT_INTERSECT(pad : longint) : longint;
+function GST_PAD_UNSET_ACCEPT_INTERSECT(pad: Pointer): longint;
 begin
   GST_PAD_UNSET_ACCEPT_INTERSECT:=GST_OBJECT_FLAG_UNSET(pad,GST_PAD_FLAG_ACCEPT_INTERSECT);
 end;
@@ -891,7 +741,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_IS_ACCEPT_TEMPLATE(pad : longint) : longint;
+function GST_PAD_IS_ACCEPT_TEMPLATE(pad: Pointer): longint;
 begin
   GST_PAD_IS_ACCEPT_TEMPLATE:=GST_OBJECT_FLAG_IS_SET(pad,GST_PAD_FLAG_ACCEPT_TEMPLATE);
 end;
@@ -899,7 +749,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_SET_ACCEPT_TEMPLATE(pad : longint) : longint;
+function GST_PAD_SET_ACCEPT_TEMPLATE(pad: Pointer): longint;
 begin
   GST_PAD_SET_ACCEPT_TEMPLATE:=GST_OBJECT_FLAG_SET(pad,GST_PAD_FLAG_ACCEPT_TEMPLATE);
 end;
@@ -907,7 +757,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_UNSET_ACCEPT_TEMPLATE(pad : longint) : longint;
+function GST_PAD_UNSET_ACCEPT_TEMPLATE(pad: Pointer): longint;
 begin
   GST_PAD_UNSET_ACCEPT_TEMPLATE:=GST_OBJECT_FLAG_UNSET(pad,GST_PAD_FLAG_ACCEPT_TEMPLATE);
 end;
@@ -915,7 +765,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_GET_STREAM_LOCK(pad : longint) : longint;
+function GST_PAD_GET_STREAM_LOCK(pad: Pointer): longint;
 begin
   GST_PAD_GET_STREAM_LOCK:=@((GST_PAD_CAST(pad))^.stream_rec_lock);
 end;
@@ -923,7 +773,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_STREAM_LOCK(pad : longint) : longint;
+function GST_PAD_STREAM_LOCK(pad: Pointer): longint;
 begin
   GST_PAD_STREAM_LOCK:=g_rec_mutex_lock(GST_PAD_GET_STREAM_LOCK(pad));
 end;
@@ -931,7 +781,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_STREAM_TRYLOCK(pad : longint) : longint;
+function GST_PAD_STREAM_TRYLOCK(pad: Pointer): longint;
 begin
   GST_PAD_STREAM_TRYLOCK:=g_rec_mutex_trylock(GST_PAD_GET_STREAM_LOCK(pad));
 end;
@@ -939,7 +789,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_STREAM_UNLOCK(pad : longint) : longint;
+function GST_PAD_STREAM_UNLOCK(pad: Pointer): longint;
 begin
   GST_PAD_STREAM_UNLOCK:=g_rec_mutex_unlock(GST_PAD_GET_STREAM_LOCK(pad));
 end;
@@ -947,7 +797,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_LAST_FLOW_RETURN(pad : longint) : longint;
+function GST_PAD_LAST_FLOW_RETURN(pad: Pointer): longint;
 begin
   GST_PAD_LAST_FLOW_RETURN:=(GST_PAD_CAST(pad))^.(ABI.(abi.last_flowret));
 end;
@@ -955,7 +805,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_BLOCK_GET_COND(pad : longint) : longint;
+function GST_PAD_BLOCK_GET_COND(pad: Pointer): longint;
 begin
   GST_PAD_BLOCK_GET_COND:=@((GST_PAD_CAST(pad))^.block_cond);
 end;
@@ -963,7 +813,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_BLOCK_WAIT(pad : longint) : longint;
+function GST_PAD_BLOCK_WAIT(pad: Pointer): longint;
 begin
   GST_PAD_BLOCK_WAIT:=g_cond_wait(GST_PAD_BLOCK_GET_COND(pad),GST_OBJECT_GET_LOCK(pad));
 end;
@@ -971,7 +821,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_BLOCK_SIGNAL(pad : longint) : longint;
+function GST_PAD_BLOCK_SIGNAL(pad: Pointer): longint;
 begin
   GST_PAD_BLOCK_SIGNAL:=g_cond_signal(GST_PAD_BLOCK_GET_COND(pad));
 end;
@@ -979,7 +829,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function GST_PAD_BLOCK_BROADCAST(pad : longint) : longint;
+function GST_PAD_BLOCK_BROADCAST(pad: Pointer): longint;
 begin
   GST_PAD_BLOCK_BROADCAST:=g_cond_broadcast(GST_PAD_BLOCK_GET_COND(pad));
 end;
@@ -987,7 +837,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function gst_pad_get_name(pad : longint) : longint;
+function gst_pad_get_name(pad: Pointer): longint;
 begin
   gst_pad_get_name:=gst_object_get_name(GST_OBJECT_CAST(pad));
 end;
@@ -995,7 +845,7 @@ end;
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
 { return type might be wrong }   
-function gst_pad_get_parent(pad : longint) : longint;
+function gst_pad_get_parent(pad: Pointer): longint;
 begin
   gst_pad_get_parent:=gst_object_get_parent(GST_OBJECT_CAST(pad));
 end;

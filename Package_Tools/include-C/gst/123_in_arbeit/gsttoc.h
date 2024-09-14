@@ -228,17 +228,18 @@ GstTocEntry *      gst_toc_entry_get_parent              (GstTocEntry *entry);
 extern
 const gchar *      gst_toc_entry_type_get_nick     (GstTocEntryType type);
 
-static inline void
-_gst_autoptr_toc_unref (GstToc *toc)
-{
-  gst_toc_unref (toc);
-}
+// xxxxxxxxxx
+//static inline void
+//_gst_autoptr_toc_unref (GstToc *toc)
+//{
+//  gst_toc_unref (toc);
+//}
 
-static inline void
-_gst_autoptr_toc_entry_unref (GstTocEntry *entry)
-{
-  gst_toc_entry_unref (entry);
-}
+//static inline void
+//_gst_autoptr_toc_entry_unref (GstTocEntry *entry)
+//{
+//  gst_toc_entry_unref (entry);
+//}
 
 
 

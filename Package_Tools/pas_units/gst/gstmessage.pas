@@ -212,6 +212,12 @@ function gst_message_get_num_redirect_entries(message:PGstMessage):Tgsize;cdecl;
 function gst_message_new_instant_rate_request(src:PGstObject; rate_multiplier:Tgdouble):PGstMessage;cdecl;external gstreamerlib;
 procedure gst_message_parse_instant_rate_request(message:PGstMessage; rate_multiplier:Pgdouble);cdecl;external gstreamerlib;
 
+
+// Ausgelagert
+function gst_event_new_sink_message(Name: Pgchar; msg: PGstMessage): PGstEvent; cdecl; external gstreamerlib;
+procedure gst_event_parse_sink_message(event: PGstEvent; msg: PPGstMessage); cdecl; external gstreamerlib;
+
+
 function  GST_TYPE_MESSAGE:TGType;
 function GST_MESSAGE(obj : longint) : longint;
 function GST_IS_MESSAGE(obj : longint) : longint;

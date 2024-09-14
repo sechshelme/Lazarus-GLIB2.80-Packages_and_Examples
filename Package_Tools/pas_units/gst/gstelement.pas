@@ -191,7 +191,7 @@ function gst_element_get_pad_template_list(element:PGstElement):PGList;cdecl;ext
 function gst_element_get_metadata(element:PGstElement; key:Pgchar):Pgchar;cdecl;external gstreamerlib;
 
 
-function GST_ELEMENT_CAST(obj : longint) : PGstElement;
+function GST_ELEMENT_CAST(obj : Pointer) : PGstElement;
 
 function GST_STATE(elem : longint) : longint;
 function GST_STATE_NEXT(elem : longint) : longint;
@@ -226,11 +226,6 @@ function gst_element_get_name(elem : longint) : longint;
 function gst_element_set_name(elem,name : longint) : longint;
 function gst_element_get_parent(elem : longint) : longint;
 function gst_element_set_parent(elem,parent : longint) : longint;
-
-
-
-
-
 
 // === Konventiert am: 11-9-24 16:14:38 ===
 
@@ -276,7 +271,7 @@ end;
 
 { was #define dname(params) para_def_expr }
 { argument types are unknown }
-function GST_ELEMENT_CAST(obj : longint) : PGstElement;
+function GST_ELEMENT_CAST(obj: Pointer): PGstElement;
 begin
   GST_ELEMENT_CAST:=PGstElement(obj);
 end;

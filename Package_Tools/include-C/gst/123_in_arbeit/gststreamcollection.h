@@ -30,11 +30,11 @@
 
 
 #define GST_TYPE_STREAM_COLLECTION             (gst_stream_collection_get_type ())
+#define GST_STREAM_COLLECTION(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_STREAM_COLLECTION, GstStreamCollection))
+#define GST_STREAM_COLLECTION_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_STREAM_COLLECTION, GstStreamCollectionClass))
 #define GST_IS_STREAM_COLLECTION(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_STREAM_COLLECTION))
 #define GST_IS_STREAM_COLLECTION_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_STREAM_COLLECTION))
 #define GST_STREAM_COLLECTION_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_STREAM_COLLECTION, GstStreamCollectionClass))
-#define GST_STREAM_COLLECTION(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_STREAM_COLLECTION, GstStreamCollection))
-#define GST_STREAM_COLLECTION_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_STREAM_COLLECTION, GstStreamCollectionClass))
 #define GST_STREAM_COLLECTION_CAST(obj)        ((GstStreamCollection*)(obj))
 
 typedef struct _GstStreamCollection GstStreamCollection;

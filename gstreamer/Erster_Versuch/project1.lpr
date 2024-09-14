@@ -21,10 +21,14 @@ uses
 
   gsttaskpool,           // io.
   gsttask,               // io. -> gsttaskpool,
+
+  gsttoc,
+  gststreamcollection,
+  gststreams,
   gstevent,
   gstpadtemplate,                   // ( PGstPad = Pointer ) wegen Kompflickt
   gstpad,
-  gstquery,          vvvv
+  gstquery,
   gstbufferlist,
   gstbytearrayinterface,
   gstcapsfeatures,
