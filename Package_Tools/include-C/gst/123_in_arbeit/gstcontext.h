@@ -45,33 +45,6 @@ extern GType _gst_context_type;
 extern
 GType           gst_context_get_type            (void);
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-/* refcounting */
-static inline GstContext *
-gst_context_ref (GstContext * context)
-{
-  return (GstContext *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (context));
-}
-
-static inline void
-gst_context_unref (GstContext * context)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (context));
-}
-
-static inline void
-gst_clear_context (GstContext ** context_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) context_ptr);
-}
-
-/* copy context */
-static inline GstContext *
-gst_context_copy (const GstContext * context)
-{
-  return GST_CONTEXT_CAST (gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (context)));
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstContext * gst_context_ref    (GstContext * context);
 
@@ -83,7 +56,6 @@ void         gst_clear_context  (GstContext ** context_ptr);
 
 extern
 GstContext * gst_context_copy   (const GstContext * context);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 
 /**
  * gst_context_is_writable:
@@ -106,18 +78,9 @@ GstContext * gst_context_copy   (const GstContext * context);
  */
 #define         gst_context_make_writable(context)  GST_CONTEXT_CAST (gst_mini_object_make_writable (GST_MINI_OBJECT_CAST (context)))
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-static inline gboolean
-gst_context_replace (GstContext **old_context, GstContext *new_context)
-{
-  return gst_mini_object_replace ((GstMiniObject **) old_context, (GstMiniObject *) new_context);
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 gboolean              gst_context_replace                  (GstContext ** old_context,
                                                             GstContext * new_context);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
-
 extern
 GstContext *          gst_context_new                      (const gchar * context_type,
                                                             gboolean persistent) ;

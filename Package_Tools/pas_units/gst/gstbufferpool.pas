@@ -3,7 +3,7 @@ unit gstbufferpool;
 interface
 
 uses
-  glib280, common_GST, gstobject, gstformat, gststructure, gstbuffer,gstallocator, gstcaps, gstpad;
+  glib280, common_GST, gstobject, gstformat, gststructure, gstbuffer, gstallocator, gstcaps, gstpad;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}
@@ -70,9 +70,9 @@ function gst_buffer_pool_config_validate_params(config: PGstStructure; caps: PGs
 function gst_buffer_pool_acquire_buffer(pool: PGstBufferPool; buffer: PPGstBuffer; params: PGstBufferPoolAcquireParams): TGstFlowReturn; cdecl; external gstreamerlib;
 procedure gst_buffer_pool_release_buffer(pool: PGstBufferPool; buffer: PGstBuffer); cdecl; external gstreamerlib;
 
-function GST_BUFFER_POOL_CAST(obj: longint): PGstBufferPool;
+function GST_BUFFER_POOL_CAST(obj: Pointer): PGstBufferPool;
 
-function GST_BUFFER_POOL_IS_FLUSHING(pool: longint): longint;
+function GST_BUFFER_POOL_IS_FLUSHING(pool: PGstBufferPool): Tgint;
 
 // === Konventiert am: 12-9-24 18:04:11 ===
 
@@ -115,18 +115,12 @@ begin
   Result := PGstBufferPoolClass(PGTypeInstance(obj)^.g_class);
 end;
 
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-function GST_BUFFER_POOL_CAST(obj: longint): PGstBufferPool;
+function GST_BUFFER_POOL_CAST(obj: Pointer): PGstBufferPool;
 begin
   GST_BUFFER_POOL_CAST := PGstBufferPool(obj);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_BUFFER_POOL_IS_FLUSHING(pool: longint): longint;
+function GST_BUFFER_POOL_IS_FLUSHING(pool: PGstBufferPool): Tgint;
 begin
   GST_BUFFER_POOL_IS_FLUSHING := g_atomic_int_get(@(pool^.flushing));
 end;

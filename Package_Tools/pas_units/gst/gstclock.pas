@@ -52,6 +52,7 @@ type
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
   PGstClock = ^TGstClock;
+  PPGstClock = ^PGstClock;
 
   TGstClockCallback = function(clock: PGstClock; time: TGstClockTime; id: TGstClockID; user_data: Tgpointer): Tgboolean; cdecl;
 

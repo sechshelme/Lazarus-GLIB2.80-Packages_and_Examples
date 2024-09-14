@@ -22,6 +22,8 @@ uses
   gsttaskpool,           // io.
   gsttask,               // io. -> gsttaskpool,
 
+  gstcontext,
+
   gsttoc,
   gststreamcollection,
   gststreams,

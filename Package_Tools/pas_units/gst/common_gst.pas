@@ -83,7 +83,7 @@ type
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
   PGstBufferPool = ^TGstBufferPool;
-
+  PPGstBufferPool = ^PGstBufferPool;
 
 type
   PGstMiniObject = ^TGstMiniObject;

@@ -3,7 +3,7 @@ unit gstmessage;
 interface
 
 uses
-  glib280, common_GST, gstobject, gststructure, gstminiobject, gsttaglist, gstquery;
+  glib280, common_GST, gstobject, gststructure, gstminiobject, gsttaglist, gstquery, gstformat, gstclock;
 
 {$IFDEF FPC}
 {$PACKRECORDS C}
@@ -133,8 +133,9 @@ function gst_message_new_buffering(src:PGstObject; percent:Tgint):PGstMessage;cd
 procedure gst_message_parse_buffering(message:PGstMessage; percent:Pgint);cdecl;external gstreamerlib;
 procedure gst_message_set_buffering_stats(message:PGstMessage; mode:TGstBufferingMode; avg_in:Tgint; avg_out:Tgint; buffering_left:Tgint64);cdecl;external gstreamerlib;
 procedure gst_message_parse_buffering_stats(message:PGstMessage; mode:PGstBufferingMode; avg_in:Pgint; avg_out:Pgint; buffering_left:Pgint64);cdecl;external gstreamerlib;
-function gst_message_new_state_changed(src:PGstObject; oldstate:TGstState; newstate:TGstState; pending:TGstState):PGstMessage;cdecl;external gstreamerlib;
-procedure gst_message_parse_state_changed(message:PGstMessage; oldstate:PGstState; newstate:PGstState; pending:PGstState);cdecl;external gstreamerlib;
+// ausgelagert
+//function gst_message_new_state_changed(src:PGstObject; oldstate:TGstState; newstate:TGstState; pending:TGstState):PGstMessage;cdecl;external gstreamerlib;
+//procedure gst_message_parse_state_changed(message:PGstMessage; oldstate:PGstState; newstate:PGstState; pending:PGstState);cdecl;external gstreamerlib;
 function gst_message_new_state_dirty(src:PGstObject):PGstMessage;cdecl;external gstreamerlib;
 function gst_message_new_step_done(src:PGstObject; format:TGstFormat; amount:Tguint64; rate:Tgdouble; flush:Tgboolean;
            intermediate:Tgboolean; duration:Tguint64; eos:Tgboolean):PGstMessage;cdecl;external gstreamerlib;

@@ -190,6 +190,11 @@ function gst_element_get_pad_template(element:PGstElement; name:Pgchar):PGstPadT
 function gst_element_get_pad_template_list(element:PGstElement):PGList;cdecl;external gstreamerlib;
 function gst_element_get_metadata(element:PGstElement; key:Pgchar):Pgchar;cdecl;external gstreamerlib;
 
+// ausgelagert
+function gst_message_new_state_changed(src:PGstObject; oldstate:TGstState; newstate:TGstState; pending:TGstState):PGstMessage;cdecl;external gstreamerlib;
+procedure gst_message_parse_state_changed(message:PGstMessage; oldstate:PGstState; newstate:PGstState; pending:PGstState);cdecl;external gstreamerlib;
+
+
 
 function GST_ELEMENT_CAST(obj : Pointer) : PGstElement;
 
