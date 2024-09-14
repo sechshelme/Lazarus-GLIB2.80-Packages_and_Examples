@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 03-09-2024   16:56                        //
+//   Erzeugt am: 13-09-2024   21:37                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -269,16 +269,16 @@ var
   _pspec: PGParamSpec;
   _property_id: Tguint;
 begin
-  _object := PGObject (anObject);
-  _pspec := PGParamSpec (pspec);
-  _property_id := (property_id);
-  g_print ('%s: invalid %s id %u for "%s" of type `%s'' in `%s''',
-             '',
-             pname,
-             _property_id,
-             _pspec^.name,
-             g_type_name (G_PARAM_SPEC_TYPE (_pspec)),
-             G_OBJECT_TYPE_NAME (_object));
+  //_object := PGObject (anObject);
+  //_pspec := PGParamSpec (pspec);
+  //_property_id := (property_id);
+  //g_error ('%s: invalid %s id %u for "%s" of type `%s'' in `%s''',
+  //           ['',
+  //           pname,
+  //           _property_id,
+  //           _pspec^.name,
+  //           g_type_name (G_PARAM_SPEC_TYPE (_pspec)),
+  //           G_OBJECT_TYPE_NAME (_object)]);
 end;
 
 procedure G_OBJECT_WARN_INVALID_PROPERTY_ID(obj: Pointer; property_id: Tguint; pspec: PGParamSpec);

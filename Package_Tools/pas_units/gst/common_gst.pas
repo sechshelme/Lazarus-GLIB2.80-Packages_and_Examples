@@ -1,11 +1,13 @@
 unit common_GST;
 
-{$mode ObjFPC}{$H+}
-
 interface
 
 uses
   glib280;
+
+{$IFDEF FPC}
+{$PACKRECORDS C}
+{$ENDIF}
 
 const
   {$ifdef Linux}
@@ -118,6 +120,13 @@ type
     PGstBuffer = ^TGstBuffer;
     PPGstBuffer = ^PGstBuffer;
 
+  type
+    PGstPadDirection = ^TGstPadDirection;
+    TGstPadDirection =  Longint;
+    Const
+      GST_PAD_UNKNOWN = 0;
+      GST_PAD_SRC = 1;
+      GST_PAD_SINK = 2;
 
 
 

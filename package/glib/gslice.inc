@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 03-09-2024   16:56                        //
+//   Erzeugt am: 13-09-2024   21:37                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -11,7 +11,7 @@
 
 function g_slice_alloc(block_size:Tgsize):Tgpointer;cdecl;external libglib2;
 function g_slice_alloc0(block_size:Tgsize):Tgpointer;cdecl;external libglib2;
-function g_slice_copy(block_size:Tgsize; mem_block:b):Tgpointer;cdecl;external libglib2;
+function g_slice_copy(block_size:Tgsize; mem_block:Tgconstpointer):Tgpointer;cdecl;external libglib2;
 procedure g_slice_free1(block_size:Tgsize; mem_block:Tgpointer);cdecl;external libglib2;
 procedure g_slice_free_chain_with_offset(block_size:Tgsize; mem_chain:Tgpointer; next_offset:Tgsize);cdecl;external libglib2;
 

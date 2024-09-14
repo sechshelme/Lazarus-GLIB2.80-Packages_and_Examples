@@ -3,7 +3,7 @@ unit gstquery;
 interface
 
 uses
-  glib280, common_GST, gstobject, gststructure, gstformat, gstcaps, gstallocator;
+  glib280, common_GST, gstobject, gststructure, gstformat, gstcaps, gstallocator, gstbufferpool;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

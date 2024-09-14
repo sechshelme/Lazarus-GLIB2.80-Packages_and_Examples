@@ -3,7 +3,7 @@ unit gstbufferpool;
 interface
 
 uses
-  glib280, common_GST, gstobject, gstformat, gststructure, gstbuffer;
+  glib280, common_GST, gstobject, gstformat, gststructure, gstbuffer,gstallocator, gstcaps, gstpad;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}
@@ -55,7 +55,7 @@ function gst_buffer_pool_set_active(pool: PGstBufferPool; active: Tgboolean): Tg
 function gst_buffer_pool_is_active(pool: PGstBufferPool): Tgboolean; cdecl; external gstreamerlib;
 function gst_buffer_pool_set_config(pool: PGstBufferPool; config: PGstStructure): Tgboolean; cdecl; external gstreamerlib;
 function gst_buffer_pool_get_config(pool: PGstBufferPool): PGstStructure; cdecl; external gstreamerlib;
-function gst_buffer_pool_get_options(pool: PGstBufferPool): ^Pgchar; cdecl; external gstreamerlib;
+function gst_buffer_pool_get_options(pool: PGstBufferPool): PPgchar; cdecl; external gstreamerlib;
 function gst_buffer_pool_has_option(pool: PGstBufferPool; option: Pgchar): Tgboolean; cdecl; external gstreamerlib;
 procedure gst_buffer_pool_set_flushing(pool: PGstBufferPool; flushing: Tgboolean); cdecl; external gstreamerlib;
 procedure gst_buffer_pool_config_set_params(config: PGstStructure; caps: PGstCaps; size: Tguint; min_buffers: Tguint; max_buffers: Tguint); cdecl; external gstreamerlib;

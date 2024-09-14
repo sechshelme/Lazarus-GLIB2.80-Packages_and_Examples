@@ -39,13 +39,13 @@ typedef struct _GstStaticPadTemplate GstStaticPadTemplate;
 
 
 
-#define GST_TYPE_STATIC_PAD_TEMPLATE	(gst_static_pad_template_get_type ())
-
 #define GST_TYPE_PAD_TEMPLATE		(gst_pad_template_get_type ())
 #define GST_PAD_TEMPLATE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PAD_TEMPLATE,GstPadTemplate))
 #define GST_PAD_TEMPLATE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PAD_TEMPLATE,GstPadTemplateClass))
 #define GST_IS_PAD_TEMPLATE(obj)	(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PAD_TEMPLATE))
 #define GST_IS_PAD_TEMPLATE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PAD_TEMPLATE))
+
+#define GST_TYPE_STATIC_PAD_TEMPLATE	(gst_static_pad_template_get_type ())
 
 /**
  * GstPadPresence:
@@ -188,13 +188,15 @@ struct _GstStaticPadTemplate {
  *                           GST_STATIC_CAPS_ANY);
  * ]|
  */
-#define GST_STATIC_PAD_TEMPLATE(padname, dir, pres, caps) \
-{ \
-  /* name_template */    padname, \
-  /* direction */        dir, \
-  /* presence */         pres, \
-  /* caps */             caps \
-}
+// xxxxxxxxxxxxxx
+
+//#define GST_STATIC_PAD_TEMPLATE(padname, dir, pres, caps) \
+///{ \
+//  /* name_template */    padname, \
+//  /* direction */        dir, \
+//  /* presence */         pres, \
+//  /* caps */             caps \
+//}
 
 /* templates and factories */
 

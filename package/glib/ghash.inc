@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 03-09-2024   16:56                        //
+//   Erzeugt am: 13-09-2024   21:37                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -36,7 +36,7 @@ function g_hash_table_replace(hash_table: PGHashTable; key: Tgpointer; Value: Tg
 function g_hash_table_add(hash_table: PGHashTable; key: Tgpointer): Tgboolean; cdecl; external libglib2;
 function g_hash_table_remove(hash_table: PGHashTable; key: Tgconstpointer): Tgboolean; cdecl; external libglib2;
 procedure g_hash_table_remove_all(hash_table: PGHashTable); cdecl; external libglib2;
-function g_hash_table_steal(hash_table: PGHashTable; key: bb): Tgboolean; cdecl; external libglib2;
+function g_hash_table_steal(hash_table: PGHashTable; key: Tgconstpointer): Tgboolean; cdecl; external libglib2;
 function g_hash_table_steal_extended(hash_table: PGHashTable; lookup_key: Tgconstpointer; stolen_key: Pgpointer; stolen_value: Pgpointer): Tgboolean; cdecl; external libglib2;
 procedure g_hash_table_steal_all(hash_table: PGHashTable); cdecl; external libglib2;
 function g_hash_table_steal_all_keys(hash_table: PGHashTable): PGPtrArray; cdecl; external libglib2;

@@ -19,6 +19,8 @@ uses
   gstdatetime,
 
 
+  gstpadtemplate,                   // ( PGstPad = Pointer ) wegen Kompflickt
+  gstpad,
   gstquery,
   gstbufferlist,
   gstbytearrayinterface,
