@@ -57,11 +57,3 @@ main (int argc, char *argv[])
 GST_PAD_TEMPLATE_IS_FIXED(0);
 }
 
-GST_URI_TYPE_IS_VALID
-GstStreamCollection
-GstElementFactory
-GST_PADDING_LARGE
-GstSeekFlags
-GstURIType
-
-__GST_SIGN

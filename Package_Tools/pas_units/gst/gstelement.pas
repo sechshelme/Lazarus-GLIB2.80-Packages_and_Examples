@@ -62,7 +62,6 @@ const
 function gst_make_element_message_details(Name: PChar; args: array of const): PGstStructure; cdecl; external gstreamerlib;
 function gst_make_element_message_details(Name: PChar): PGstStructure; cdecl; external gstreamerlib;
 
-
 type
   TGstElement = record
     obj: TGstObject;
@@ -129,7 +128,20 @@ type
 
 function gst_device_create_element(device: PGstDevice; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
 function gst_device_reconfigure_element(device: PGstDevice; element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
+// ----
 
+// ausgelagert      gstmessage.h
+function gst_message_new_state_changed(src: PGstObject; oldstate: TGstState; newstate: TGstState; pending: TGstState): PGstMessage; cdecl; external gstreamerlib;
+procedure gst_message_parse_state_changed(message: PGstMessage; oldstate: PGstState; newstate: PGstState; pending: PGstState); cdecl; external gstreamerlib;
+
+function gst_message_new_structure_change(src: PGstObject; _type: TGstStructureChangeType; owner: PGstElement; busy: Tgboolean): PGstMessage; cdecl; external gstreamerlib;
+procedure gst_message_parse_structure_change(message: PGstMessage; _type: PGstStructureChangeType; owner: PPGstElement; busy: Pgboolean); cdecl; external gstreamerlib;
+function gst_message_new_stream_status(src: PGstObject; _type: TGstStreamStatusType; owner: PGstElement): PGstMessage; cdecl; external gstreamerlib;
+procedure gst_message_parse_stream_status(message: PGstMessage; _type: PGstStreamStatusType; owner: PPGstElement); cdecl; external gstreamerlib;
+
+function gst_message_new_request_state(src: PGstObject; state: TGstState): PGstMessage; cdecl; external gstreamerlib;
+procedure gst_message_parse_request_state(message: PGstMessage; state: PGstState); cdecl; external gstreamerlib;
+// ---
 
 procedure gst_element_class_add_pad_template(klass: PGstElementClass; templ: PGstPadTemplate); cdecl; external gstreamerlib;
 procedure gst_element_class_add_static_pad_template(klass: PGstElementClass; static_templ: PGstStaticPadTemplate); cdecl; external gstreamerlib;
@@ -210,19 +222,6 @@ procedure gst_element_remove_property_notify_watch(element: PGstElement; watch_i
 function gst_element_get_pad_template(element: PGstElement; Name: Pgchar): PGstPadTemplate; cdecl; external gstreamerlib;
 function gst_element_get_pad_template_list(element: PGstElement): PGList; cdecl; external gstreamerlib;
 function gst_element_get_metadata(element: PGstElement; key: Pgchar): Pgchar; cdecl; external gstreamerlib;
-
-// ausgelagert      gstmessage.h
-function gst_message_new_state_changed(src: PGstObject; oldstate: TGstState; newstate: TGstState; pending: TGstState): PGstMessage; cdecl; external gstreamerlib;
-procedure gst_message_parse_state_changed(message: PGstMessage; oldstate: PGstState; newstate: PGstState; pending: PGstState); cdecl; external gstreamerlib;
-
-function gst_message_new_structure_change(src: PGstObject; _type: TGstStructureChangeType; owner: PGstElement; busy: Tgboolean): PGstMessage; cdecl; external gstreamerlib;
-procedure gst_message_parse_structure_change(message: PGstMessage; _type: PGstStructureChangeType; owner: PPGstElement; busy: Pgboolean); cdecl; external gstreamerlib;
-function gst_message_new_stream_status(src: PGstObject; _type: TGstStreamStatusType; owner: PGstElement): PGstMessage; cdecl; external gstreamerlib;
-procedure gst_message_parse_stream_status(message: PGstMessage; _type: PGstStreamStatusType; owner: PPGstElement); cdecl; external gstreamerlib;
-
-function gst_message_new_request_state(src: PGstObject; state: TGstState): PGstMessage; cdecl; external gstreamerlib;
-procedure gst_message_parse_request_state(message: PGstMessage; state: PGstState); cdecl; external gstreamerlib;
-// ---
 
 function GST_ELEMENT_CAST(obj: Pointer): PGstElement;
 

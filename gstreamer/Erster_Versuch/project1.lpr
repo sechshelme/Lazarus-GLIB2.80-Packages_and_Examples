@@ -5,26 +5,27 @@ uses
   glib280,
   ctypes,
 
-
   common_GST,
   gst,                    // io.
   gstconfig,              // io.
   gstobject,              // io. -> gstconfig
-  gstminiobject,
-
+  gstminiobject,          // io.
   gstmemory,              // io.
   gstallocator,           // io. -> gstmemory
   gstcontrolbinding,      // io. -> gstobject, gstconfig
   gstclock,               // io.
   gstdatetime,            // io.
   gststructure,           // io. -> gstdatetime
+  gstcontext,             // io. -> gststructure
   gsttaskpool,            // io.
   gsttask,                // io. -> gsttaskpool,
   gstbytearrayinterface,  // io.    ( move() )
   gstmeta,                // io. -> gststructure, gstbytearrayinterface
   gstcapsfeatures,        // io.
   gstcaps,                // io. -> gststructure, gstcapsfeatures
+  gstdevice,              // io. -> gstcaps, gststructure
   gstbuffer,              // io. -> gstmemory, gstallocator, gstmeta, gstcaps, gstclock
+  gststreamcollection,    // io.
   gstiterator,            // io.
   gstformat,              // io. -> gstiterator
   gstsegment,             // io. -> gstformat
@@ -34,24 +35,19 @@ uses
   gsttoc,                 // io. -> gsttaglist
   gstplugin,              // io. -> gststructure
   gstpluginfeature,       // io. -> gstplugin
-
-
-  gstelement,       // Makros entfernt
+  gstpadtemplate,         // io. -> gstcaps          // ( PGstPad = Pointer ) wegen Kompflickt
+  gstevent,               // io. -> gststructure, gstsegment, gststreamcollection, gstcaps, gsttaglist, gsttoc, gstformat, gstclock
+  gstpad,                 // io. -> gstpadtemplate, gsttask, gstbufferlist, gstevent, gstiterator, gstcaps, gstbuffer
+  gstbufferpool,          // io. -> gstformat, gststructure, gstbuffer, gstallocator, gstcaps, gstpad
+  gstquery,               // io. -> gstformat, gststructure, gstcaps, gstallocator, gstbufferpool, gstpad, gstcontext
+  gstmessage,             // io. -> gststructure, gsttaglist, gstquery, gstformat, gstclock, gsttoc, gstcontext, gstevent, gstdevice, gststreamcollection
+  gstbus,                 // io. -> gstmessage
+  gststreams,             // io. -> gstcaps, gstevent, gsttaglist
+  gstelement,             // io. -> gststructure, gstbus, gstclock, gstmessage, gstpad, gstcontext, gstdevice, gstcaps, gstpadtemplate, gstiterator, gstconfig, gstevent, gstformat, gstsegment; Makros entfernt
+  gsturi,                 // io. -> gstelement
   gstelementfactory,      // io. -> gstelement, gsturi, gstplugin, gstpluginfeature, gstcaps
-
-  gsturi,
-  gstcontext,
-  gstdevice,
-
-  gststreamcollection,
-  gststreams,
-  gstevent,
-  gstpadtemplate,                   // ( PGstPad = Pointer ) wegen Kompflickt
-  gstpad,
-  gstquery,
-  gstbufferpool,
-  gstmessage,
-  gstbus,
+  gstparse,               // io. -> gstelement
+  gstbin,                 // io. -> gstelement, gstbus, gstclock, gstmessage, gstiterator
 
 
 
@@ -71,6 +67,9 @@ uses
   procedure tutorial_main(argc: cint; argv: PPChar);
   var
     pipeline, filesrc, volume: PGstElement;
+    ch: ansichar;
+    vol: single = 1.0;
+    quit: boolean = False;
   begin
     gst_init(@argc, @argv);
 
@@ -100,14 +99,48 @@ uses
       WriteLn('volume io.');
     end;
 
-    g_object_set(volume, 'volume', 0.1, nil);
-
-
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
-
     repeat
-    until KeyPressed;
+      g_object_set(volume, 'volume', vol, nil);
+      if KeyPressed then begin
+        ch := ReadKey;
+        case ch of
+          #27: begin
+            quit := True;
+          end;
+          '1': begin
+            gst_element_set_state(pipeline, GST_STATE_READY);
+          end;
+          '2': begin
+            gst_element_set_state(pipeline, GST_STATE_PLAYING);
+          end;
+          '3': begin
+            gst_element_set_state(pipeline, GST_STATE_PAUSED);
+          end;
+          '+': begin
+            vol += 0.1;
+            if vol >= 1.0 then begin
+              vol := 1.0;
+            end;
+            WriteLn('volume: ', vol: 4: 2);
+          end;
+          '-': begin
+            vol -= 0.1;
+            if vol <= 0.0 then begin
+              vol := 0.0;
+            end;
+            WriteLn('volume: ', vol: 4: 2);
+          end;
+          'm': begin
+            g_object_set(volume, 'mute', gTRUE, nil);
+          end;
+          'M': begin
+            g_object_set(volume, 'mute', gFALSE, nil);
+          end;
+        end;
+      end;
+    until quit;
 
     gst_object_unref(pipeline);
     gst_object_unref(filesrc);

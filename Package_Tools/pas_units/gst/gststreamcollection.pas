@@ -82,9 +82,6 @@ begin
   Result := PGstStreamCollectionClass(PGTypeInstance(obj)^.g_class);
 end;
 
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
 function GST_STREAM_COLLECTION_CAST(obj: Pointer): PGstStreamCollection;
 begin
   GST_STREAM_COLLECTION_CAST := PGstStreamCollection(obj);

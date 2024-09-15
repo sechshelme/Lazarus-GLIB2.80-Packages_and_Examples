@@ -144,6 +144,12 @@ procedure gst_message_parse_buffering_stats(message: PGstMessage; mode: PGstBuff
 // ausgelagert
 //function gst_message_new_state_changed(src:PGstObject; oldstate:TGstState; newstate:TGstState; pending:TGstState):PGstMessage;cdecl;external gstreamerlib;
 //procedure gst_message_parse_state_changed(message:PGstMessage; oldstate:PGstState; newstate:PGstState; pending:PGstState);cdecl;external gstreamerlib;
+//function gst_message_new_structure_change(src:PGstObject; _type:TGstStructureChangeType; owner:PGstElement; busy:Tgboolean):PGstMessage;cdecl;external gstreamerlib;
+//procedure gst_message_parse_structure_change(message:PGstMessage; _type:PGstStructureChangeType; owner:PPGstElement; busy:Pgboolean);cdecl;external gstreamerlib;
+//function gst_message_new_stream_status(src:PGstObject; _type:TGstStreamStatusType; owner:PGstElement):PGstMessage;cdecl;external gstreamerlib;
+//procedure gst_message_parse_stream_status(message:PGstMessage; _type:PGstStreamStatusType; owner:PPGstElement);cdecl;external gstreamerlib;
+//function gst_message_new_request_state(src:PGstObject; state:TGstState):PGstMessage;cdecl;external gstreamerlib;
+//procedure gst_message_parse_request_state(message:PGstMessage; state:PGstState);cdecl;external gstreamerlib;
 function gst_message_new_state_dirty(src: PGstObject): PGstMessage; cdecl; external gstreamerlib;
 function gst_message_new_step_done(src: PGstObject; format: TGstFormat; amount: Tguint64; rate: Tgdouble; flush: Tgboolean;
   intermediate: Tgboolean; duration: Tguint64; eos: Tgboolean): PGstMessage; cdecl; external gstreamerlib;
@@ -166,14 +172,8 @@ function gst_message_new_latency(src: PGstObject): PGstMessage; cdecl; external 
 function gst_message_new_async_start(src: PGstObject): PGstMessage; cdecl; external gstreamerlib;
 function gst_message_new_async_done(src: PGstObject; running_time: TGstClockTime): PGstMessage; cdecl; external gstreamerlib;
 procedure gst_message_parse_async_done(message: PGstMessage; running_time: PGstClockTime); cdecl; external gstreamerlib;
-//function gst_message_new_structure_change(src:PGstObject; _type:TGstStructureChangeType; owner:PGstElement; busy:Tgboolean):PGstMessage;cdecl;external gstreamerlib;
-//procedure gst_message_parse_structure_change(message:PGstMessage; _type:PGstStructureChangeType; owner:PPGstElement; busy:Pgboolean);cdecl;external gstreamerlib;
-//function gst_message_new_stream_status(src:PGstObject; _type:TGstStreamStatusType; owner:PGstElement):PGstMessage;cdecl;external gstreamerlib;
-//procedure gst_message_parse_stream_status(message:PGstMessage; _type:PGstStreamStatusType; owner:PPGstElement);cdecl;external gstreamerlib;
 procedure gst_message_set_stream_status_object(message: PGstMessage; obj: PGValue); cdecl; external gstreamerlib;
 function gst_message_get_stream_status_object(message: PGstMessage): PGValue; cdecl; external gstreamerlib;
-//function gst_message_new_request_state(src:PGstObject; state:TGstState):PGstMessage;cdecl;external gstreamerlib;
-//procedure gst_message_parse_request_state(message:PGstMessage; state:PGstState);cdecl;external gstreamerlib;
 function gst_message_new_step_start(src: PGstObject; active: Tgboolean; format: TGstFormat; amount: Tguint64; rate: Tgdouble;
   flush: Tgboolean; intermediate: Tgboolean): PGstMessage; cdecl; external gstreamerlib;
 procedure gst_message_parse_step_start(message: PGstMessage; active: Pgboolean; format: PGstFormat; amount: Pguint64; rate: Pgdouble;
@@ -224,7 +224,7 @@ procedure gst_message_parse_instant_rate_request(message: PGstMessage; rate_mult
 // Ausgelagert
 function gst_event_new_sink_message(Name: Pgchar; msg: PGstMessage): PGstEvent; cdecl; external gstreamerlib;
 procedure gst_event_parse_sink_message(event: PGstEvent; msg: PPGstMessage); cdecl; external gstreamerlib;
-
+// ----
 
 function GST_TYPE_MESSAGE: TGType;
 function GST_MESSAGE(obj: Pointer): PGstMessage;

@@ -30,8 +30,8 @@ type
   //  _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   //end;
   //PGstDeviceClass = ^TGstDeviceClass;
- // function gst_device_create_element(device: PGstDevice; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
- // function gst_device_reconfigure_element(device: PGstDevice; element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
+  // function gst_device_create_element(device: PGstDevice; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
+  // function gst_device_reconfigure_element(device: PGstDevice; element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
 
 function gst_device_get_type: TGType; cdecl; external gstreamerlib;
 function gst_device_get_caps(device: PGstDevice): PGstCaps; cdecl; external gstreamerlib;
@@ -48,9 +48,11 @@ function GST_DEVICE_CAST(obj: Pointer): PGstDevice;
 
 function GST_TYPE_DEVICE: TGType;
 function GST_DEVICE(obj: Pointer): PGstDevice;
+// ausgelagert
 //function GST_DEVICE_CLASS(klass: Pointer): PGstDeviceClass;
 function GST_IS_DEVICE(obj: Pointer): Tgboolean;
 function GST_IS_DEVICE_CLASS(klass: Pointer): Tgboolean;
+// ausgelagert
 //function GST_DEVICE_GET_CLASS(obj: Pointer): PGstDeviceClass;
 
 

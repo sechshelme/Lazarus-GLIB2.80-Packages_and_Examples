@@ -3,7 +3,7 @@ unit gstevent;
 interface
 
 uses
-  glib280, common_GST, gstobject, gststructure, gstsegment, gststreamcollection, gstcaps, gsttaglist, gsttoc, gstformat, gstclock, gstminiobject;
+  glib280, common_GST, gstobject, gstminiobject, gststructure, gstsegment, gststreamcollection, gstcaps, gsttaglist, gsttoc, gstformat, gstclock;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}
