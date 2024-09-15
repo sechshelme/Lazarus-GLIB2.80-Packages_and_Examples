@@ -46,8 +46,20 @@ typedef struct _GstPluginDesc GstPluginDesc;
  *
  * Get the error quark.
  *
- * Returns: The error quark used in GError messages
+ Returns: The error quark used in GError messages
  */
+
+
+#define GST_TYPE_PLUGIN                (gst_plugin_get_type ())
+#define GST_PLUGIN(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PLUGIN, GstPlugin))
+#define GST_PLUGIN_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PLUGIN, GstPluginClass))
+#define GST_IS_PLUGIN(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PLUGIN))
+#define GST_IS_PLUGIN_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PLUGIN))
+#define GST_PLUGIN_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_PLUGIN, GstPluginClass))
+#define GST_PLUGIN_CAST(obj)           ((GstPlugin*)(obj))
+
+
+
 
 extern
 GQuark gst_plugin_error_quark (void);
@@ -185,13 +197,8 @@ struct _GstPluginDesc {
 };
 
 
-#define GST_TYPE_PLUGIN   (gst_plugin_get_type())
-#define GST_IS_PLUGIN(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PLUGIN))
-#define GST_IS_PLUGIN_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PLUGIN))
-#define GST_PLUGIN_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_PLUGIN, GstPluginClass))
-#define GST_PLUGIN(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PLUGIN, GstPlugin))
-#define GST_PLUGIN_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PLUGIN, GstPluginClass))
-#define GST_PLUGIN_CAST(obj)           ((GstPlugin*)(obj))
+
+
 
 #ifdef GST_PACKAGE_RELEASE_DATETIME
 #define __GST_PACKAGE_RELEASE_DATETIME GST_PACKAGE_RELEASE_DATETIME
@@ -211,8 +218,8 @@ struct _GstPluginDesc {
  *
  * Since: 1.2
  */
-#define GST_PLUGIN_STATIC_DECLARE(name) \
-  extern void G_PASTE(gst_plugin_, G_PASTE(name, _register)) (void)
+//#define GST_PLUGIN_STATIC_DECLARE(name) \
+//  extern void G_PASTE(gst_plugin_, G_PASTE(name, _register)) (void)
 
 /**
  * GST_PLUGIN_STATIC_REGISTER:
@@ -225,7 +232,7 @@ struct _GstPluginDesc {
  *
  * Since: 1.2
  */
-#define GST_PLUGIN_STATIC_REGISTER(name) G_PASTE(gst_plugin_, G_PASTE(name, _register)) ()
+//#define GST_PLUGIN_STATIC_REGISTER(name) G_PASTE(gst_plugin_, G_PASTE(name, _register)) ()
 
 /**
  * GST_PLUGIN_DEFINE:
@@ -252,39 +259,6 @@ struct _GstPluginDesc {
  * If defined, the GST_PACKAGE_RELEASE_DATETIME will also be used for the
  * #GstPluginDesc,release_datetime field.
  */
-#define GST_PLUGIN_DEFINE(major,minor,name,description,init,version,license,package,origin) \
- \
-GST_PLUGIN_EXPORT const GstPluginDesc * G_PASTE(gst_plugin_, G_PASTE(name, _get_desc)) (void); \
-GST_PLUGIN_EXPORT void G_PASTE(gst_plugin_, G_PASTE(name, _register)) (void); \
-\
-static const GstPluginDesc gst_plugin_desc = { \
-  major, \
-  minor, \
-  G_STRINGIFY(name), \
-  (gchar *) description, \
-  init, \
-  version, \
-  license, \
-  PACKAGE, \
-  package, \
-  origin, \
-  __GST_PACKAGE_RELEASE_DATETIME, \
-  GST_PADDING_INIT \
-};                                       \
-\
-const GstPluginDesc * \
-G_PASTE(gst_plugin_, G_PASTE(name, _get_desc)) (void) \
-{ \
-    return &gst_plugin_desc; \
-} \
-\
-void \
-G_PASTE(gst_plugin_, G_PASTE(name, _register)) (void) \
-{ \
-  gst_plugin_register_static (major, minor, G_STRINGIFY(name), \
-      description, init, version, license, \
-      PACKAGE, package, origin); \
-} \
 
 
 /**

@@ -208,6 +208,10 @@ const
   PGstQuery = ^TGstQuery;
   PPGstQuery = ^PGstQuery;
 
+            type
+              TGstElementFactory=record
+                  end;
+              PGstElementFactory=^TGstElementFactory;
 
 
 

@@ -32,8 +32,8 @@
 
 #define GST_TYPE_PLUGIN_FEATURE                 (gst_plugin_feature_get_type())
 #define GST_PLUGIN_FEATURE(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PLUGIN_FEATURE, GstPluginFeature))
-#define GST_IS_PLUGIN_FEATURE(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PLUGIN_FEATURE))
 #define GST_PLUGIN_FEATURE_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PLUGIN_FEATURE, GstPluginFeatureClass))
+#define GST_IS_PLUGIN_FEATURE(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PLUGIN_FEATURE))
 #define GST_IS_PLUGIN_FEATURE_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PLUGIN_FEATURE))
 #define GST_PLUGIN_FEATURE_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_PLUGIN_FEATURE, GstPluginFeatureClass))
 #define GST_PLUGIN_FEATURE_CAST(obj)            ((GstPluginFeature*)(obj))
@@ -140,11 +140,7 @@ void            gst_plugin_feature_list_debug           (GList *list);
  *
  * Debug the plugin feature names in @list.
  */
-#ifndef GST_DISABLE_GST_DEBUG
 #define GST_PLUGIN_FEATURE_LIST_DEBUG(list) gst_plugin_feature_list_debug(list)
-#else
-#define GST_PLUGIN_FEATURE_LIST_DEBUG(list)
-#endif
 
 extern
 gboolean        gst_plugin_feature_check_version        (GstPluginFeature *feature,

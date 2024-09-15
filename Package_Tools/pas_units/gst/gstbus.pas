@@ -70,8 +70,7 @@ procedure gst_bus_remove_signal_watch(bus:PGstBus);cdecl;external gstreamerlib;
 procedure gst_bus_enable_sync_message_emission(bus:PGstBus);cdecl;external gstreamerlib;
 procedure gst_bus_disable_sync_message_emission(bus:PGstBus);cdecl;external gstreamerlib;
 
-function GST_BUS_CAST(obj : polongint) : PGstBus;
-
+function GST_BUS_CAST(obj : Pointer) : PGstBus;
 
 // === Konventiert am: 11-9-24 16:59:47 ===
 
@@ -115,11 +114,9 @@ begin
 end;
 
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-function GST_BUS_CAST(obj : longint) : PGstBus;
+function GST_BUS_CAST(obj: Pointer): PGstBus;
 begin
-  GST_BUS_CAST:=PGstBus(bus);
+  GST_BUS_CAST:=PGstBus(obj);
 end;
 
 

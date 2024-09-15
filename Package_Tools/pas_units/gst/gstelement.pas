@@ -3,7 +3,7 @@ unit gstelement;
 interface
 
 uses
-  glib280, common_GST, gstobject, gststructure, gstbus;
+  glib280, common_GST, gstobject, gststructure, gstbus, gstclock, gstmessage, gstpad, gstcontext, gstdevice, gstcaps, gstpadtemplate, gstiterator, gstconfig, gstevent, gstformat, gstsegment;
 
 {$IFDEF FPC}
 {$PACKRECORDS C}
@@ -59,7 +59,6 @@ type
 
 
 type
-  PGstElement = ^TGstElement;
   TGstElement = record
       obj : TGstObject;
       state_lock : TGRecMutex;
@@ -84,8 +83,9 @@ type
       contexts : PGList;
       _gst_reserved : array[0..(GST_PADDING-1)-1] of Tgpointer;
     end;
+  PGstElement = ^TGstElement;
+  PPGstElement = ^PGstElement;
 
-  PGstElementClass = ^TGstElementClass;
   TGstElementClass = record
       parent_class : TGstObjectClass;
       metadata : Tgpointer;
@@ -111,6 +111,20 @@ type
       set_context : procedure (element:PGstElement; context:PGstContext);cdecl;
       _gst_reserved : array[0..(GST_PADDING_LARGE-2)-1] of Tgpointer;
     end;
+  PGstElementClass = ^TGstElementClass;
+
+  // ausgelagert
+  TGstDeviceClass = record
+    parent_class: TGstObjectClass;
+    create_element: function(device: PGstDevice; Name: Pgchar): PGstElement; cdecl;
+    reconfigure_element: function(device: PGstDevice; element: PGstElement): Tgboolean; cdecl;
+    _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
+  end;
+  PGstDeviceClass = ^TGstDeviceClass;
+
+  function gst_device_create_element(device: PGstDevice; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
+  function gst_device_reconfigure_element(device: PGstDevice; element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
+
 
 procedure gst_element_class_add_pad_template(klass:PGstElementClass; templ:PGstPadTemplate);cdecl;external gstreamerlib;
 procedure gst_element_class_add_static_pad_template(klass:PGstElementClass; static_templ:PGstStaticPadTemplate);cdecl;external gstreamerlib;
@@ -190,47 +204,61 @@ function gst_element_get_pad_template(element:PGstElement; name:Pgchar):PGstPadT
 function gst_element_get_pad_template_list(element:PGstElement):PGList;cdecl;external gstreamerlib;
 function gst_element_get_metadata(element:PGstElement; key:Pgchar):Pgchar;cdecl;external gstreamerlib;
 
-// ausgelagert
+// ausgelagert      gstmessage.h
 function gst_message_new_state_changed(src:PGstObject; oldstate:TGstState; newstate:TGstState; pending:TGstState):PGstMessage;cdecl;external gstreamerlib;
 procedure gst_message_parse_state_changed(message:PGstMessage; oldstate:PGstState; newstate:PGstState; pending:PGstState);cdecl;external gstreamerlib;
+
+function gst_message_new_structure_change(src:PGstObject; _type:TGstStructureChangeType; owner:PGstElement; busy:Tgboolean):PGstMessage;cdecl;external gstreamerlib;
+procedure gst_message_parse_structure_change(message:PGstMessage; _type:PGstStructureChangeType; owner:PPGstElement; busy:Pgboolean);cdecl;external gstreamerlib;
+function gst_message_new_stream_status(src:PGstObject; _type:TGstStreamStatusType; owner:PGstElement):PGstMessage;cdecl;external gstreamerlib;
+procedure gst_message_parse_stream_status(message:PGstMessage; _type:PGstStreamStatusType; owner:PPGstElement);cdecl;external gstreamerlib;
+
+function gst_message_new_request_state(src:PGstObject; state:TGstState):PGstMessage;cdecl;external gstreamerlib;
+procedure gst_message_parse_request_state(message:PGstMessage; state:PGstState);cdecl;external gstreamerlib;
 
 
 
 function GST_ELEMENT_CAST(obj : Pointer) : PGstElement;
 
-function GST_STATE(elem : longint) : longint;
-function GST_STATE_NEXT(elem : longint) : longint;
-function GST_STATE_PENDING(elem : longint) : longint;
-function GST_STATE_TARGET(elem : longint) : longint;
-function GST_STATE_RETURN(elem : longint) : longint;
-function __GST_SIGN(val : longint) : longint;
+function GST_STATE(elem : Pointer) : TGstState;
+function GST_STATE_NEXT(elem : Pointer) : TGstState;
+function GST_STATE_PENDING(elem : Pointer) : TGstState;
+function GST_STATE_TARGET(elem : Pointer) : TGstState;
+function GST_STATE_RETURN(elem : Pointer) : TGstStateChangeReturn;
+function __GST_SIGN(val : longint) : LongInt;
 function GST_STATE_GET_NEXT(cur,pending : longint) : TGstState;
 function GST_STATE_TRANSITION(cur,next : longint) : TGstStateChange;
 function GST_STATE_TRANSITION_CURRENT(trans : longint) : TGstState;
 function GST_STATE_TRANSITION_NEXT(trans : longint) : TGstState;
 
-function GST_ELEMENT_IS_LOCKED_STATE(elem : longint) : longint;
-function GST_ELEMENT_NAME(elem : longint) : longint;
-function GST_ELEMENT_PARENT(elem : longint) : longint;
-function GST_ELEMENT_BUS(elem : longint) : longint;
-function GST_ELEMENT_CLOCK(elem : longint) : longint;
-function GST_ELEMENT_PADS(elem : longint) : longint;
-function GST_ELEMENT_START_TIME(elem : longint) : longint;
+function GST_ELEMENT_NAME(elem : Pointer) : Pgchar;
+function GST_ELEMENT_PARENT(elem : Pointer) : PGstElement;
+function GST_ELEMENT_BUS(elem : Pointer) : PGstBus;
+function GST_ELEMENT_CLOCK(elem : Pointer) : PGstClock;
+function GST_ELEMENT_PADS(elem : Pointer) : PGList;
+function GST_ELEMENT_START_TIME(elem : Pointer) : TGstClockTime;
 
-function GST_STATE_GET_LOCK(elem : longint) : longint;
-function GST_STATE_GET_COND(elem : longint) : longint;
-function GST_STATE_LOCK(elem : longint) : longint;
-function GST_STATE_TRYLOCK(elem : longint) : longint;
-function GST_STATE_UNLOCK(elem : longint) : longint;
-function GST_STATE_WAIT(elem : longint) : longint;
-function GST_STATE_WAIT_UNTIL(elem,end_time : longint) : longint;
-function GST_STATE_SIGNAL(elem : longint) : longint;
-function GST_STATE_BROADCAST(elem : longint) : longint;
+function GST_STATE_GET_LOCK(elem : Pointer) : PGRecMutex;
+function GST_STATE_GET_COND(elem : Pointer) : PGCond;
+procedure GST_STATE_LOCK(elem : Pointer);
+function GST_STATE_TRYLOCK(elem : Pointer) : Tgboolean;
+procedure GST_STATE_UNLOCK(elem : Pointer);
+procedure GST_STATE_WAIT(elem : Pointer);
+function GST_STATE_WAIT_UNTIL(elem:Pointer;end_time : Tgint64) : Tgboolean;
+procedure GST_STATE_SIGNAL(elem : Pointer);
+procedure GST_STATE_BROADCAST(elem : Pointer);
 
-function gst_element_get_name(elem : longint) : longint;
-function gst_element_set_name(elem,name : longint) : longint;
-function gst_element_get_parent(elem : longint) : longint;
-function gst_element_set_parent(elem,parent : longint) : longint;
+function gst_element_get_name(elem : Pointer) : Pgchar;
+function gst_element_set_name(elem:Pointer;name : Pgchar) : Tgboolean;
+function gst_element_get_parent(elem : Pointer) : PGstObject;
+function gst_element_set_parent(elem:Pointer;parent : PGstObject) : Tgboolean;
+
+
+// ausgleager
+function GST_DEVICE_CLASS(klass: Pointer): PGstDeviceClass;
+function GST_DEVICE_GET_CLASS(obj: Pointer): PGstDeviceClass;
+// ----
+
 
 // === Konventiert am: 11-9-24 16:14:38 ===
 
@@ -273,260 +301,172 @@ begin
   Result := PGstElementClass(PGTypeInstance(obj)^.g_class);
 end;
 
+// ====
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
 function GST_ELEMENT_CAST(obj: Pointer): PGstElement;
 begin
   GST_ELEMENT_CAST:=PGstElement(obj);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE(elem : longint) : longint;
+function GST_STATE(elem: Pointer): TGstState;
 begin
   GST_STATE:=(GST_ELEMENT_CAST(elem))^.current_state;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_NEXT(elem : longint) : longint;
+function GST_STATE_NEXT(elem: Pointer): TGstState;
 begin
   GST_STATE_NEXT:=(GST_ELEMENT_CAST(elem))^.next_state;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_PENDING(elem : longint) : longint;
+function GST_STATE_PENDING(elem: Pointer): TGstState;
 begin
   GST_STATE_PENDING:=(GST_ELEMENT_CAST(elem))^.pending_state;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_TARGET(elem : longint) : longint;
+function GST_STATE_TARGET(elem: Pointer): TGstState;
 begin
   GST_STATE_TARGET:=(GST_ELEMENT_CAST(elem))^.target_state;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_RETURN(elem : longint) : longint;
+function GST_STATE_RETURN(elem: Pointer): TGstStateChangeReturn;
 begin
   GST_STATE_RETURN:=(GST_ELEMENT_CAST(elem))^.last_return;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function __GST_SIGN(val : longint) : longint;
-var
-   if_local1, if_local2 : longint;
-(* result types are not known *)
+// #define __GST_SIGN(val)                 ((val) < 0 ? -1 : ((val) > 0 ? 1 : 0))
+function __GST_SIGN(val: longint): LongInt;
 begin
-  if 0 then
-    if_local1:=1
-  else
-    if_local1:=0;
-  if 0 then
-    if_local2:=-(1)
-  else
-    if_local2:=val>(if_local1);
-  __GST_SIGN:=val<(if_local2);
+  Result:=0;
+  if val<0 then Exit(-1);
+  if val>0 then Exit(1);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
 function GST_STATE_GET_NEXT(cur,pending : longint) : TGstState;
 begin
-  GST_STATE_GET_NEXT:=TGstState(Tcur(+(__GST_SIGN(Tgint(Tpending(-(Tgint(cur))))))));
+  GST_STATE_GET_NEXT:=TGstState(cur+__GST_SIGN(pending-cur));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
 function GST_STATE_TRANSITION(cur,next : longint) : TGstStateChange;
 begin
   GST_STATE_TRANSITION:=TGstStateChange((cur shl 3) or next);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
 function GST_STATE_TRANSITION_CURRENT(trans : longint) : TGstState;
 begin
   GST_STATE_TRANSITION_CURRENT:=TGstState(trans shr 3);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
 function GST_STATE_TRANSITION_NEXT(trans : longint) : TGstState;
 begin
-  GST_STATE_TRANSITION_NEXT:=TGstState(Ttrans(@($7)));
+  GST_STATE_TRANSITION_NEXT:=TGstState(trans and $7);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_ELEMENT_IS_LOCKED_STATE(elem : longint) : longint;
-begin
-  GST_ELEMENT_IS_LOCKED_STATE:=GST_OBJECT_FLAG_IS_SET(elem,GST_ELEMENT_FLAG_LOCKED_STATE);
-end;
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_ELEMENT_NAME(elem : longint) : longint;
+function GST_ELEMENT_NAME(elem: Pointer): Pgchar;
 begin
   GST_ELEMENT_NAME:=GST_OBJECT_NAME(elem);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_ELEMENT_PARENT(elem : longint) : longint;
+function GST_ELEMENT_PARENT(elem: Pointer): PGstElement;
 begin
   GST_ELEMENT_PARENT:=GST_ELEMENT_CAST(GST_OBJECT_PARENT(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_ELEMENT_BUS(elem : longint) : longint;
+function GST_ELEMENT_BUS(elem: Pointer): PGstBus;
 begin
   GST_ELEMENT_BUS:=(GST_ELEMENT_CAST(elem))^.bus;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_ELEMENT_CLOCK(elem : longint) : longint;
+function GST_ELEMENT_CLOCK(elem: Pointer): PGstClock;
 begin
   GST_ELEMENT_CLOCK:=(GST_ELEMENT_CAST(elem))^.clock;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_ELEMENT_PADS(elem : longint) : longint;
+function GST_ELEMENT_PADS(elem: Pointer): PGList;
 begin
   GST_ELEMENT_PADS:=(GST_ELEMENT_CAST(elem))^.pads;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_ELEMENT_START_TIME(elem : longint) : longint;
+function GST_ELEMENT_START_TIME(elem: Pointer): TGstClockTime;
 begin
   GST_ELEMENT_START_TIME:=(GST_ELEMENT_CAST(elem))^.start_time;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_GET_LOCK(elem : longint) : longint;
+function GST_STATE_GET_LOCK(elem: Pointer): PGRecMutex;
 begin
   GST_STATE_GET_LOCK:=@((GST_ELEMENT_CAST(elem))^.state_lock);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_GET_COND(elem : longint) : longint;
+function GST_STATE_GET_COND(elem: Pointer): PGCond;
 begin
   GST_STATE_GET_COND:=@((GST_ELEMENT_CAST(elem))^.state_cond);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_LOCK(elem : longint) : longint;
+procedure GST_STATE_LOCK(elem: Pointer);
 begin
-  GST_STATE_LOCK:=g_rec_mutex_lock(GST_STATE_GET_LOCK(elem));
+  g_rec_mutex_lock(GST_STATE_GET_LOCK(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_TRYLOCK(elem : longint) : longint;
+function GST_STATE_TRYLOCK(elem: Pointer): Tgboolean;
 begin
   GST_STATE_TRYLOCK:=g_rec_mutex_trylock(GST_STATE_GET_LOCK(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_UNLOCK(elem : longint) : longint;
+procedure GST_STATE_UNLOCK(elem: Pointer);
 begin
-  GST_STATE_UNLOCK:=g_rec_mutex_unlock(GST_STATE_GET_LOCK(elem));
+  g_rec_mutex_unlock(GST_STATE_GET_LOCK(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_WAIT(elem : longint) : longint;
+procedure GST_STATE_WAIT(elem: Pointer);
 begin
-  GST_STATE_WAIT:=g_cond_wait(GST_STATE_GET_COND(elem),GST_OBJECT_GET_LOCK(elem));
+  g_cond_wait(GST_STATE_GET_COND(elem),GST_OBJECT_GET_LOCK(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_WAIT_UNTIL(elem,end_time : longint) : longint;
+function GST_STATE_WAIT_UNTIL(elem: Pointer; end_time: Tgint64): Tgboolean;
 begin
   GST_STATE_WAIT_UNTIL:=g_cond_wait_until(GST_STATE_GET_COND(elem),GST_OBJECT_GET_LOCK(elem),end_time);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_SIGNAL(elem : longint) : longint;
+procedure GST_STATE_SIGNAL(elem: Pointer);
 begin
-  GST_STATE_SIGNAL:=g_cond_signal(GST_STATE_GET_COND(elem));
+  g_cond_signal(GST_STATE_GET_COND(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function GST_STATE_BROADCAST(elem : longint) : longint;
+procedure GST_STATE_BROADCAST(elem: Pointer);
 begin
-  GST_STATE_BROADCAST:=g_cond_broadcast(GST_STATE_GET_COND(elem));
+  g_cond_broadcast(GST_STATE_GET_COND(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function gst_element_get_name(elem : longint) : longint;
+function gst_element_get_name(elem: Pointer): Pgchar;
 begin
   gst_element_get_name:=gst_object_get_name(GST_OBJECT_CAST(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function gst_element_set_name(elem,name : longint) : longint;
+function gst_element_set_name(elem: Pointer; name: Pgchar): Tgboolean;
 begin
   gst_element_set_name:=gst_object_set_name(GST_OBJECT_CAST(elem),name);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function gst_element_get_parent(elem : longint) : longint;
+function gst_element_get_parent(elem: Pointer): PGstObject;
 begin
   gst_element_get_parent:=gst_object_get_parent(GST_OBJECT_CAST(elem));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }   
-function gst_element_set_parent(elem,parent : longint) : longint;
+function gst_element_set_parent(elem: Pointer; parent: PGstObject): Tgboolean;
 begin
   gst_element_set_parent:=gst_object_set_parent(GST_OBJECT_CAST(elem),parent);
 end;
 
+// ausgelagert
+function GST_DEVICE_CLASS(klass: Pointer): PGstDeviceClass;
+begin
+  Result := PGstDeviceClass(g_type_check_class_cast(klass, GST_TYPE_DEVICE));
+end;
+
+function GST_DEVICE_GET_CLASS(obj: Pointer): PGstDeviceClass;
+begin
+  Result := PGstDeviceClass(PGTypeInstance(obj)^.g_class);
+end;
+
+// ----
 
 end.

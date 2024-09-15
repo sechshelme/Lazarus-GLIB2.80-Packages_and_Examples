@@ -86,13 +86,14 @@ typedef enum {
  *
  * Tests if the type direction is valid.
  */
-#define GST_URI_TYPE_IS_VALID(type) ((type) == GST_URI_SRC || (type) == GST_URI_SINK)
-
 /* uri handler functions */
 #define GST_TYPE_URI_HANDLER               (gst_uri_handler_get_type ())
 #define GST_URI_HANDLER(obj)               (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_URI_HANDLER, GstURIHandler))
 #define GST_IS_URI_HANDLER(obj)            (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_URI_HANDLER))
 #define GST_URI_HANDLER_GET_INTERFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GST_TYPE_URI_HANDLER, GstURIHandlerInterface))
+
+// xxxxxxxxxxxxxxxxxxx
+//#define GST_URI_TYPE_IS_VALID(type) ((type) == GST_URI_SRC || (type) == GST_URI_SINK)
 
 /**
  * GstURIHandler:
@@ -151,7 +152,6 @@ gboolean        gst_uri_has_protocol            (const gchar * uri,
 extern
 gchar *         gst_uri_get_location            (const gchar * uri) ;
 
-GST_DEPRECATED_FOR(gst_uri_new)
 gchar *         gst_uri_construct               (const gchar * protocol,
                                                  const gchar * location) ;
 extern
@@ -357,31 +357,6 @@ gboolean gst_uri_set_fragment          (GstUri * uri, const gchar * fragment);
 extern
 GHashTable * gst_uri_get_media_fragment_table  (const GstUri * uri);
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-static inline GstUri *
-gst_uri_copy (const GstUri * uri)
-{
-  return GST_URI_CAST (gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (uri)));
-}
-
-static inline GstUri *
-gst_uri_ref (GstUri * uri)
-{
-  return GST_URI_CAST (gst_mini_object_ref (GST_MINI_OBJECT_CAST (uri)));
-}
-
-static inline void
-gst_uri_unref (GstUri * uri)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (uri));
-}
-
-static inline void
-gst_clear_uri (GstUri ** uri_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) uri_ptr);
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstUri * gst_uri_copy  (const GstUri * uri);
 
@@ -393,10 +368,5 @@ void     gst_uri_unref (GstUri * uri);
 
 extern
 void     gst_clear_uri (GstUri ** uri_ptr);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
-
-
-
-
 
 #endif /* __GST_URI_H__ */

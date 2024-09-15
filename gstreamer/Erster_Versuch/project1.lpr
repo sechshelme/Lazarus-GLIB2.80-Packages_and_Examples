@@ -7,10 +7,10 @@ uses
 
 
   common_GST,
-  gst,                    // include entfernen
-
+  gst,                    // io.
   gstconfig,              // io.
   gstobject,              // io. -> gstconfig
+  gstminiobject,
   gstcontrolbinding,      // io. -> gstobject, gstconfig
 
 
@@ -19,10 +19,15 @@ uses
   gstdatetime,
 
 
+  gstplugin,      // makros entfernt
+  gstpluginfeature,
+  gstelementfactory,
   gsttaskpool,           // io.
   gsttask,               // io. -> gsttaskpool,
 
+  gsturi,
   gstcontext,
+  gstdevice,
 
   gsttoc,
   gststreamcollection,
@@ -46,7 +51,6 @@ uses
   gstsample,
   gsttaglist,
   gststructure,          // GST_IS_STRUCTURE ???
-  gstminiobject,
   gstmessage,
   gstbus,
   gstelement,       // Makros entfernt

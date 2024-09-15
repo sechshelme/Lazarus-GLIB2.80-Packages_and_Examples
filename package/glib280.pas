@@ -188,6 +188,7 @@ type
       end;
   end;
   PGValue = ^TGValue;
+  PPGValue = ^PGValue;
 
 
   {$include gobject280_includes.inc}
