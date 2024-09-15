@@ -55,8 +55,6 @@ gst_byte_array_interface_append_data (GstByteArrayInterface *self, const guint8 
     return FALSE;
   memcpy (ptr, data, size);
   return TRUE;
-
-
  }
 
 // === Konventiert am: 13-9-24 16:14:15 ===
@@ -90,8 +88,6 @@ begin
 end;
 
 { xxxxxxxxxxxxxxxxxxxxxx }
-
-
 
 function gst_byte_array_interface_append_data(self: PGstByteArrayInterface; Data: Pguint8; size: Tgsize): Tgboolean;
 var

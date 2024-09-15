@@ -56,7 +56,6 @@ function GST_TYPE_CAPS_FEATURES: TGType;
 function GST_CAPS_FEATURES_ANY: PGstCapsFeatures;
 function GST_CAPS_FEATURES_MEMORY_SYSTEM_MEMORY: PGstCapsFeatures;
 
-
 function GST_CAPS_FEATURES_CAST(obj: Pointer): PGstCapsFeatures;
 function GST_CAPS_FEATURES(obj: Pointer): PGstCapsFeatures;
 

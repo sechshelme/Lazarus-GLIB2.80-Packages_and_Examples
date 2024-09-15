@@ -44,8 +44,8 @@ function GST_IS_BUFFER_LIST(obj: TGType): Tgboolean;
 function GST_BUFFER_LIST_CAST(obj: Pointer): PGstBufferList;
 function GST_BUFFER_LIST(obj: Pointer): PGstBufferList;
 
-function gst_buffer_list_is_writable(list: PGstBufferList): Tgboolean;
-function gst_buffer_list_make_writable(list: PGstBufferList): PGstBufferList;
+function gst_buffer_list_is_writable(list: Pointer): Tgboolean;
+function gst_buffer_list_make_writable(list: Pointer): PGstBufferList;
 
 procedure gst_buffer_list_add(l: PGstBufferList; b: PGstBuffer);
 
@@ -74,12 +74,12 @@ begin
   GST_BUFFER_LIST := GST_BUFFER_LIST_CAST(obj);
 end;
 
-function gst_buffer_list_is_writable(list: PGstBufferList): Tgboolean;
+function gst_buffer_list_is_writable(list: Pointer): Tgboolean;
 begin
   gst_buffer_list_is_writable := gst_mini_object_is_writable(GST_MINI_OBJECT_CAST(list));
 end;
 
-function gst_buffer_list_make_writable(list: PGstBufferList): PGstBufferList;
+function gst_buffer_list_make_writable(list: Pointer): PGstBufferList;
 begin
   gst_buffer_list_make_writable := GST_BUFFER_LIST_CAST(gst_mini_object_make_writable(GST_MINI_OBJECT_CAST(list)));
 end;

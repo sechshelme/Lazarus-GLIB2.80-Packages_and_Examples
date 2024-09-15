@@ -11,49 +11,47 @@ uses
   gstconfig,              // io.
   gstobject,              // io. -> gstconfig
   gstminiobject,
+
+  gstmemory,              // io.
+  gstallocator,           // io. -> gstmemory
   gstcontrolbinding,      // io. -> gstobject, gstconfig
+  gstclock,               // io.
+  gstdatetime,            // io.
+  gststructure,           // io. -> gstdatetime
+  gsttaskpool,            // io.
+  gsttask,                // io. -> gsttaskpool,
+  gstbytearrayinterface,  // io.    ( move() )
+  gstmeta,                // io. -> gststructure, gstbytearrayinterface
+  gstcapsfeatures,        // io.
+  gstcaps,                // io. -> gststructure, gstcapsfeatures
+  gstbuffer,              // io. -> gstmemory, gstallocator, gstmeta, gstcaps, gstclock
+  gstiterator,            // io.
+  gstformat,              // io. -> gstiterator
+  gstsegment,             // io. -> gstformat
+  gstbufferlist,          // io.
+  gstsample,              // io. -> gstbuffer, gstcaps, gstsegment, gststructure, gstbufferlist
+  gsttaglist,             // io. -> gstdatetime, gstsample
+  gsttoc,                 // io. -> gsttaglist
+  gstplugin,              // io. -> gststructure
+  gstpluginfeature,       // io. -> gstplugin
 
 
-  gstclock,    // Makros entfernt, aber auflösbar
-
-  gstdatetime,
-
-
-  gstplugin,      // makros entfernt
-  gstpluginfeature,
-  gstelementfactory,
-  gsttaskpool,           // io.
-  gsttask,               // io. -> gsttaskpool,
+  gstelement,       // Makros entfernt
+  gstelementfactory,      // io. -> gstelement, gsturi, gstplugin, gstpluginfeature, gstcaps
 
   gsturi,
   gstcontext,
   gstdevice,
 
-  gsttoc,
   gststreamcollection,
   gststreams,
   gstevent,
   gstpadtemplate,                   // ( PGstPad = Pointer ) wegen Kompflickt
   gstpad,
   gstquery,
-  gstbufferlist,
-  gstbytearrayinterface,
-  gstcapsfeatures,
-  gstsegment,
-  gstcaps,
-  gstmeta,
-  gstallocator,
-  gstmemory,        //          ( PGstAllocator = Pointer ) wegen Kompflickt
-  gstiterator,
-  gstformat,
   gstbufferpool,
-  gstbuffer,
-  gstsample,
-  gsttaglist,
-  gststructure,          // GST_IS_STRUCTURE ???
   gstmessage,
   gstbus,
-  gstelement,       // Makros entfernt
 
 
 

@@ -3,7 +3,7 @@ unit gstsample;
 interface
 
 uses
-  glib280, common_GST, gstobject, gstbuffer, gstcaps, gstsegment, gststructure, gstbufferlist, gstminiobject;
+  glib280, common_GST, gstobject, gstminiobject, gstbuffer, gstcaps, gstsegment, gststructure, gstbufferlist;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

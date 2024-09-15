@@ -12,7 +12,6 @@ uses
 
 function gst_plugin_error_quark: TGQuark; cdecl; external gstreamerlib;
 
-
 type
   PGstPluginError = ^TGstPluginError;
   TGstPluginError = longint;

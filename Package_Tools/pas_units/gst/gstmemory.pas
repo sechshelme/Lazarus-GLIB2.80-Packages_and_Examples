@@ -31,6 +31,7 @@ const
 
 type
   PGstMemory = ^TGstMemory;
+
   TGstMemory = record
     mini_object: TGstMiniObject;
     allocator: Pointer;
@@ -72,8 +73,8 @@ type
   TGstMemoryShareFunction = function(mem: PGstMemory; offset: Tgssize; size: Tgssize): PGstMemory; cdecl;
   TGstMemoryIsSpanFunction = function(mem1: PGstMemory; mem2: PGstMemory; offset: Pgsize): Tgboolean; cdecl;
 
+// ausgelagert
 // procedure gst_memory_init(mem: PGstMemory; flags: TGstMemoryFlags; allocator: PGstAllocator; parent: PGstMemory; maxsize: Tgsize; align: Tgsize; offset: Tgsize; size: Tgsize); cdecl; external gstreamerlib;
-procedure gst_memory_init(mem: PGstMemory; flags: TGstMemoryFlags; allocator: Pointer; parent: PGstMemory; maxsize: Tgsize; align: Tgsize; offset: Tgsize; size: Tgsize); cdecl; external gstreamerlib;
 function gst_memory_is_type(mem: PGstMemory; mem_type: Pgchar): Tgboolean; cdecl; external gstreamerlib;
 function gst_memory_ref(memory: PGstMemory): PGstMemory; cdecl; external gstreamerlib;
 procedure gst_memory_unref(memory: PGstMemory); cdecl; external gstreamerlib;
@@ -89,14 +90,8 @@ function gst_memory_is_span(mem1: PGstMemory; mem2: PGstMemory; offset: Pgsize):
 type
   PGstMemoryMapInfo = ^TGstMemoryMapInfo;
   TGstMemoryMapInfo = TGstMapInfo;
-  { xxxxxxxxxxxxxxxxxxxx }
-  {static inline void _gst_memory_map_info_clear(GstMemoryMapInfo *info) }
-  { }
-  {  if (G_LIKELY (info->memory))  }
-  {    gst_memory_unmap (info->memory, info); }
-  {   }
-  { }
-  {G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(GstMemoryMapInfo, _gst_memory_map_info_clear) }
+
+procedure gst_memory_map_info_clear(info: PGstMemoryMapInfo);
 
 function GST_TYPE_MEMORY: TGType;
 
@@ -113,17 +108,22 @@ function GST_MEMORY_IS_NOT_MAPPABLE(mem: PGstMemory): Tgboolean;
 
 function GST_MAP_READWRITE: TGstMapFlags;
 
-function gst_memory_lock(m:Pointer; f: TGstLockFlags): Tgboolean;
-procedure gst_memory_unlock(m:Pointer; f: TGstLockFlags);
+function gst_memory_lock(m: Pointer; f: TGstLockFlags): Tgboolean;
+procedure gst_memory_unlock(m: Pointer; f: TGstLockFlags);
 function gst_memory_is_writable(m: Pointer): Tgboolean;
 function gst_memory_make_writable(m: Pointer): PGstMemory;
-
-
 
 // === Konventiert am: 12-9-24 19:13:01 ===
 
 
 implementation
+
+procedure gst_memory_map_info_clear(info: PGstMemoryMapInfo);
+begin
+  if info^.memory <> nil then begin
+    gst_memory_unmap(info^.memory, info);
+  end;
+end;
 
 function GST_TYPE_MEMORY: TGType;
 begin
@@ -200,9 +200,6 @@ begin
   gst_memory_is_writable := gst_mini_object_is_writable(GST_MINI_OBJECT_CAST(m));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
 function gst_memory_make_writable(m: Pointer): PGstMemory;
 begin
   gst_memory_make_writable := GST_MEMORY_CAST(gst_mini_object_make_writable(GST_MINI_OBJECT_CAST(m)));

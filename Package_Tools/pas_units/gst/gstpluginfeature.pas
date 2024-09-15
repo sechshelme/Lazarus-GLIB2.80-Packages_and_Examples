@@ -45,7 +45,7 @@ function gst_plugin_feature_rank_compare_func(p1: Tgconstpointer; p2: Tgconstpoi
 
 function GST_PLUGIN_FEATURE_CAST(obj: Pointer): PGstPluginFeature;
 function gst_plugin_feature_get_name(feature: Pointer): Pgchar;
-function gst_plugin_feature_set_name(feature:Pointer; Name: Pgchar): Tgboolean;
+function gst_plugin_feature_set_name(feature: Pointer; Name: Pgchar): Tgboolean;
 
 // === Konventiert am: 15-9-24 17:12:04 ===
 

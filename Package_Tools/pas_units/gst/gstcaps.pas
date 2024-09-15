@@ -186,7 +186,7 @@ begin
   Result._gst_reserved[3] := nil;
 end;
 
-function GST_STATIC_CAPS_NONE: TGstStaticCaps; { return type might be wrong }
+function GST_STATIC_CAPS_NONE: TGstStaticCaps;
 begin
   Result.caps := nil;
   Result._string := 'NONE';
