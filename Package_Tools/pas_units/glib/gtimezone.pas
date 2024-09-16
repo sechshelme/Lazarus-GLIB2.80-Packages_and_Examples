@@ -10,7 +10,6 @@ uses
   {$ENDIF}
 
 type
-
   PGTimeType = ^TGTimeType;
   TGTimeType = longint;
 

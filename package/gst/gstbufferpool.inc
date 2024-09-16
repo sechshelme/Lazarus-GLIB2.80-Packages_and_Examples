@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -54,7 +54,7 @@ function gst_buffer_pool_set_active(pool: PGstBufferPool; active: Tgboolean): Tg
 function gst_buffer_pool_is_active(pool: PGstBufferPool): Tgboolean; cdecl; external gstreamerlib;
 function gst_buffer_pool_set_config(pool: PGstBufferPool; config: PGstStructure): Tgboolean; cdecl; external gstreamerlib;
 function gst_buffer_pool_get_config(pool: PGstBufferPool): PGstStructure; cdecl; external gstreamerlib;
-function gst_buffer_pool_get_options(pool: PGstBufferPool): ^Pgchar; cdecl; external gstreamerlib;
+function gst_buffer_pool_get_options(pool: PGstBufferPool): PPgchar; cdecl; external gstreamerlib;
 function gst_buffer_pool_has_option(pool: PGstBufferPool; option: Pgchar): Tgboolean; cdecl; external gstreamerlib;
 procedure gst_buffer_pool_set_flushing(pool: PGstBufferPool; flushing: Tgboolean); cdecl; external gstreamerlib;
 procedure gst_buffer_pool_config_set_params(config: PGstStructure; caps: PGstCaps; size: Tguint; min_buffers: Tguint; max_buffers: Tguint); cdecl; external gstreamerlib;
@@ -69,9 +69,9 @@ function gst_buffer_pool_config_validate_params(config: PGstStructure; caps: PGs
 function gst_buffer_pool_acquire_buffer(pool: PGstBufferPool; buffer: PPGstBuffer; params: PGstBufferPoolAcquireParams): TGstFlowReturn; cdecl; external gstreamerlib;
 procedure gst_buffer_pool_release_buffer(pool: PGstBufferPool; buffer: PGstBuffer); cdecl; external gstreamerlib;
 
-function GST_BUFFER_POOL_CAST(obj: longint): PGstBufferPool;
+function GST_BUFFER_POOL_CAST(obj: Pointer): PGstBufferPool;
 
-function GST_BUFFER_POOL_IS_FLUSHING(pool: longint): longint;
+function GST_BUFFER_POOL_IS_FLUSHING(pool: PGstBufferPool): Tgint;
 
 // === Konventiert am: 12-9-24 18:04:11 ===
 
@@ -117,18 +117,12 @@ begin
   Result := PGstBufferPoolClass(PGTypeInstance(obj)^.g_class);
 end;
 
-
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-function GST_BUFFER_POOL_CAST(obj: longint): PGstBufferPool;
+function GST_BUFFER_POOL_CAST(obj: Pointer): PGstBufferPool;
 begin
   GST_BUFFER_POOL_CAST := PGstBufferPool(obj);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_BUFFER_POOL_IS_FLUSHING(pool: longint): longint;
+function GST_BUFFER_POOL_IS_FLUSHING(pool: PGstBufferPool): Tgint;
 begin
   GST_BUFFER_POOL_IS_FLUSHING := g_atomic_int_get(@(pool^.flushing));
 end;

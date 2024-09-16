@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -12,75 +12,10 @@ type
   PGstQueryTypeFlags = ^TGstQueryTypeFlags;
   TGstQueryTypeFlags = longint;
 
-const
-  GST_QUERY_TYPE_UPSTREAM = 1 shl 0;
-  GST_QUERY_TYPE_DOWNSTREAM = 1 shl 1;
-  GST_QUERY_TYPE_SERIALIZED = 1 shl 2;
-
-const
-  GST_QUERY_NUM_SHIFT = 8;
-
-type
-  PGstQueryType = ^TGstQueryType;
-  TGstQueryType = longint;
-
-  //typedef enum {
-  //  GST_QUERY_UNKNOWN      = GST_QUERY_MAKE_TYPE (0, 0),
-  //  GST_QUERY_POSITION     = GST_QUERY_MAKE_TYPE (10, _FLAG(BOTH)),
-  //  GST_QUERY_DURATION     = GST_QUERY_MAKE_TYPE (20, _FLAG(BOTH)),
-  //  GST_QUERY_LATENCY      = GST_QUERY_MAKE_TYPE (30, _FLAG(BOTH)),
-  //  GST_QUERY_JITTER       = GST_QUERY_MAKE_TYPE (40, _FLAG(BOTH)),
-  //  GST_QUERY_RATE         = GST_QUERY_MAKE_TYPE (50, _FLAG(BOTH)),
-  //  GST_QUERY_SEEKING      = GST_QUERY_MAKE_TYPE (60, _FLAG(BOTH)),
-  //  GST_QUERY_SEGMENT      = GST_QUERY_MAKE_TYPE (70, _FLAG(BOTH)),
-  //  GST_QUERY_CONVERT      = GST_QUERY_MAKE_TYPE (80, _FLAG(BOTH)),
-  //  GST_QUERY_FORMATS      = GST_QUERY_MAKE_TYPE (90, _FLAG(BOTH)),
-  //  GST_QUERY_BUFFERING    = GST_QUERY_MAKE_TYPE (110, _FLAG(BOTH)),
-  //  GST_QUERY_CUSTOM       = GST_QUERY_MAKE_TYPE (120, _FLAG(BOTH)),
-  //  GST_QUERY_URI          = GST_QUERY_MAKE_TYPE (130, _FLAG(BOTH)),
-  //  GST_QUERY_ALLOCATION   = GST_QUERY_MAKE_TYPE (140, _FLAG(DOWNSTREAM) | _FLAG(SERIALIZED)),
-  //  GST_QUERY_SCHEDULING   = GST_QUERY_MAKE_TYPE (150, _FLAG(UPSTREAM)),
-  //  GST_QUERY_ACCEPT_CAPS  = GST_QUERY_MAKE_TYPE (160, _FLAG(BOTH)),
-  //  GST_QUERY_CAPS         = GST_QUERY_MAKE_TYPE (170, _FLAG(BOTH)),
-  //  GST_QUERY_DRAIN        = GST_QUERY_MAKE_TYPE (180, _FLAG(DOWNSTREAM) | _FLAG(SERIALIZED)),
-  //  GST_QUERY_CONTEXT      = GST_QUERY_MAKE_TYPE (190, _FLAG(BOTH)),
-  //  GST_QUERY_BITRATE      = GST_QUERY_MAKE_TYPE (200, _FLAG(DOWNSTREAM)),
-
-const
-  GST_QUERY_UNKNOWN = ((0 shl GST_QUERY_NUM_SHIFT) or 0);
-  GST_QUERY_POSITION = ((10 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_DURATION = ((20 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_LATENCY = ((30 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_JITTER = ((40 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_RATE = ((50 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_SEEKING = ((60 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_SEGMENT = ((70 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_CONVERT = ((80 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_FORMATS = ((90 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_BUFFERING = ((110 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_CUSTOM = ((120 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_URI = ((130 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_ALLOCATION = ((140 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_DOWNSTREAM or GST_QUERY_TYPE_SERIALIZED);
-  GST_QUERY_SCHEDULING = ((150 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM);
-  GST_QUERY_ACCEPT_CAPS = ((160 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_CAPS = ((170 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_DRAIN = ((180 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_DOWNSTREAM or GST_QUERY_TYPE_SERIALIZED);
-  GST_QUERY_CONTEXT = ((190 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_BITRATE = ((200 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_DOWNSTREAM);
-  GST_QUERY_SELECTABLE = ((210 shl GST_QUERY_NUM_SHIFT) or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
-
-
 var
   _gst_query_type: TGType; cvar;external gstreamerlib;
 
 type
-  TGstQuery = record
-    mini_object: TGstMiniObject;
-    _type: TGstQueryType;
-  end;
-  PGstQuery = ^TGstQuery;
-  PPGstQuery = ^PGstQuery;
-
   PGstBufferingMode = ^TGstBufferingMode;
   TGstBufferingMode = longint;
 
@@ -98,9 +33,6 @@ function gst_query_ref(q: PGstQuery): PGstQuery; cdecl; external gstreamerlib;
 procedure gst_query_unref(q: PGstQuery); cdecl; external gstreamerlib;
 procedure gst_clear_query(query_ptr: PPGstQuery); cdecl; external gstreamerlib;
 function gst_query_copy(q: PGstQuery): PGstQuery; cdecl; external gstreamerlib;
-
-function gst_query_is_writable(q: longint): longint;
-function gst_query_make_writable(q: longint): longint;
 
 function gst_query_replace(old_query: PPGstQuery; new_query: PGstQuery): Tgboolean; cdecl; external gstreamerlib;
 function gst_query_take(old_query: PPGstQuery; new_query: PGstQuery): Tgboolean; cdecl; external gstreamerlib;
@@ -210,15 +142,17 @@ function GST_QUERY_MAKE_TYPE(num, flags: longint): longint;
 
 function GST_TYPE_QUERY: TGType;
 
-function GST_IS_QUERY(obj: longint): longint;
-function GST_QUERY_CAST(obj: longint): PGstQuery;
-function GST_QUERY(obj: longint): longint;
-function GST_QUERY_TYPE(query: longint): longint;
-function GST_QUERY_TYPE_NAME(query: longint): longint;
-function GST_QUERY_IS_UPSTREAM(ev: longint): longint;
-function GST_QUERY_IS_DOWNSTREAM(ev: longint): longint;
-function GST_QUERY_IS_SERIALIZED(ev: longint): longint;
+function GST_IS_QUERY(obj: TGType): Tgboolean;
+function GST_QUERY_CAST(obj: Pointer): PGstQuery;
+function GST_QUERY(obj: Pointer): PGstQuery;
+function GST_QUERY_TYPE(query: Pointer): TGType;
+function GST_QUERY_TYPE_NAME(query: Pointer): Pgchar;
+function GST_QUERY_IS_UPSTREAM(ev: Pointer): Tgboolean;
+function GST_QUERY_IS_DOWNSTREAM(ev: Pointer): Tgboolean;
+function GST_QUERY_IS_SERIALIZED(ev: Pointer): Tgboolean;
 
+function gst_query_is_writable(q: Pointer): Tgboolean;
+function gst_query_make_writable(q: Pointer): PGstQuery;
 
 
 // === Konventiert am: 13-9-24 19:28:25 ===
@@ -229,16 +163,11 @@ function GST_QUERY_IS_SERIALIZED(ev: longint): longint;
 
 {$IFDEF read_implementation}
 
-
-{ was #define dname def_expr }
 function GST_QUERY_TYPE_BOTH: TGstQueryTypeFlags;
 begin
   GST_QUERY_TYPE_BOTH := TGstQueryTypeFlags(GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
 function GST_QUERY_MAKE_TYPE(num, flags: longint): longint;
 begin
   GST_QUERY_MAKE_TYPE := (num shl GST_QUERY_NUM_SHIFT) or flags;
@@ -249,81 +178,52 @@ begin
   Result := _gst_query_type;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_IS_QUERY(obj: longint): longint;
+function GST_IS_QUERY(obj: TGType): Tgboolean;
 begin
   GST_IS_QUERY := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_QUERY);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-function GST_QUERY_CAST(obj: longint): PGstQuery;
+function GST_QUERY_CAST(obj: Pointer): PGstQuery;
 begin
   GST_QUERY_CAST := PGstQuery(obj);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_QUERY(obj: longint): longint;
+function GST_QUERY(obj: Pointer): PGstQuery;
 begin
   GST_QUERY := GST_QUERY_CAST(obj);
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_QUERY_TYPE(query: longint): longint;
+function GST_QUERY_TYPE(query: Pointer): TGType;
 begin
   GST_QUERY_TYPE := (PGstQuery(query))^._type;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_QUERY_TYPE_NAME(query: longint): longint;
+function GST_QUERY_TYPE_NAME(query: Pointer): Pgchar;
 begin
   GST_QUERY_TYPE_NAME := gst_query_type_get_name(GST_QUERY_TYPE(query));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_QUERY_IS_UPSTREAM(ev: longint): longint;
+function GST_QUERY_IS_UPSTREAM(ev: Pointer): Tgboolean;
 begin
-  GST_QUERY_IS_UPSTREAM := not (not ((GST_QUERY_TYPE(ev)) and GST_QUERY_TYPE_UPSTREAM));
+  GST_QUERY_IS_UPSTREAM := not (not ((GST_QUERY_TYPE(ev)) and GST_QUERY_TYPE_UPSTREAM)) <> 0;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_QUERY_IS_DOWNSTREAM(ev: longint): longint;
+function GST_QUERY_IS_DOWNSTREAM(ev: Pointer): Tgboolean;
 begin
-  GST_QUERY_IS_DOWNSTREAM := not (not ((GST_QUERY_TYPE(ev)) and GST_QUERY_TYPE_DOWNSTREAM));
+  GST_QUERY_IS_DOWNSTREAM := not (not ((GST_QUERY_TYPE(ev)) and GST_QUERY_TYPE_DOWNSTREAM)) <> 0;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function GST_QUERY_IS_SERIALIZED(ev: longint): longint;
+function GST_QUERY_IS_SERIALIZED(ev: Pointer): Tgboolean;
 begin
-  GST_QUERY_IS_SERIALIZED := not (not ((GST_QUERY_TYPE(ev)) and GST_QUERY_TYPE_SERIALIZED));
+  GST_QUERY_IS_SERIALIZED := not (not ((GST_QUERY_TYPE(ev)) and GST_QUERY_TYPE_SERIALIZED)) <> 0;
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function gst_query_is_writable(q: longint): longint;
+function gst_query_is_writable(q: Pointer): Tgboolean;
 begin
   gst_query_is_writable := gst_mini_object_is_writable(GST_MINI_OBJECT_CAST(q));
 end;
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-{ return type might be wrong }
-function gst_query_make_writable(q: longint): longint;
+function gst_query_make_writable(q: Pointer): PGstQuery;
 begin
   gst_query_make_writable := GST_QUERY_CAST(gst_mini_object_make_writable(GST_MINI_OBJECT_CAST(q)));
 end;

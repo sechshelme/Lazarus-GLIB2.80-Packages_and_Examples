@@ -57,8 +57,6 @@ function g_string_append_uri_escaped(_string: PGString; unescaped: Pgchar; reser
 
 function g_string_down(_string: PGString): PGString; cdecl; external libglib2;
 function g_string_up(_string: PGString): PGString; cdecl; external libglib2;
-{#define  g_string_sprintf  g_string_printf _MACRO_IN_2_26_FOR(g_string_printf) }
-{#define  g_string_sprintfa g_string_append_printf _MACRO_IN_2_26_FOR(g_string_append_printf) }
 
 
 implementation

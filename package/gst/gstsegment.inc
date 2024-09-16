@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -68,6 +68,7 @@ type
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
   PGstSegment = ^TGstSegment;
+  PPGstSegment = ^PGstSegment;
 
 function gst_segment_get_type: TGType; cdecl; external gstreamerlib;
 function gst_segment_new: PGstSegment; cdecl; external gstreamerlib;

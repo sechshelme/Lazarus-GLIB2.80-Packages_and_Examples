@@ -21,9 +21,6 @@ type
 function g_slist_alloc: PGSList; cdecl; external libglib2;
 procedure g_slist_free(list: PGSList); cdecl; external libglib2;
 procedure g_slist_free_1(list: PGSList); cdecl; external libglib2;
-//const
-// g_slist_free1 = g_slist_free_1;
-
 procedure g_slist_free_full(list: PGSList; free_func: TGDestroyNotify); cdecl; external libglib2;
 function g_slist_append(list: PGSList; Data: Tgpointer): PGSList; cdecl; external libglib2;
 function g_slist_prepend(list: PGSList; Data: Tgpointer): PGSList; cdecl; external libglib2;

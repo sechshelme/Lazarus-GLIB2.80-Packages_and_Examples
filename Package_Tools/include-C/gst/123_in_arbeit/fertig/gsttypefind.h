@@ -46,12 +46,6 @@
  *
  * Since: 1.20
  */
-#define GST_TYPE_FIND_REGISTER_DEFINE_CUSTOM(type_find, register_func) \
- \
-gboolean G_PASTE (gst_type_find_register_, type_find) (GstPlugin * plugin) \
-{ \
-  return register_func (plugin); \
-} \
 
 
 /**
@@ -75,12 +69,6 @@ gboolean G_PASTE (gst_type_find_register_, type_find) (GstPlugin * plugin) \
  *
  * Since: 1.20
  */
-#define GST_TYPE_FIND_REGISTER_DEFINE(t_f, t_f_n, r, func, extensions, possible_caps, data, data_notify) \
- \
-gboolean G_PASTE (gst_type_find_register_, t_f) (GstPlugin * plugin) \
-{ \
-  return gst_type_find_register (plugin, t_f_n, r, func, extensions, possible_caps, data, data_notify); \
-} \
 
 
 /**
@@ -94,10 +82,6 @@ gboolean G_PASTE (gst_type_find_register_, t_f) (GstPlugin * plugin) \
  *
  * Since: 1.20
  */
-#define GST_TYPE_FIND_REGISTER_DECLARE(t_f) \
- \
-gboolean G_PASTE(gst_type_find_register_, t_f) (GstPlugin * plugin); \
-
 
 /**
  * GST_TYPE_FIND_REGISTER:
@@ -111,7 +95,6 @@ gboolean G_PASTE(gst_type_find_register_, t_f) (GstPlugin * plugin); \
  *
  * Since: 1.20
  */
-#define GST_TYPE_FIND_REGISTER(t_f, plugin) G_PASTE(gst_type_find_register_, t_f) (plugin)
 
 
 #define GST_TYPE_TYPE_FIND  (gst_type_find_get_type())

@@ -2,17 +2,11 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
 {$IFDEF read_interface}
-
-function G_TIME_SPAN_DAY: int64;
-function G_TIME_SPAN_HOUR: int64;
-function G_TIME_SPAN_MINUTE: int64;
-function G_TIME_SPAN_SECOND: int64;
-function G_TIME_SPAN_MILLISECOND: int64;
 
 type
   PGTimeSpan = ^TGTimeSpan;
@@ -80,6 +74,12 @@ function g_date_time_to_local(datetime: PGDateTime): PGDateTime; cdecl; external
 function g_date_time_to_utc(datetime: PGDateTime): PGDateTime; cdecl; external libglib2;
 function g_date_time_format(datetime: PGDateTime; format: Pgchar): Pgchar; cdecl; external libglib2;
 function g_date_time_format_iso8601(datetime: PGDateTime): Pgchar; cdecl; external libglib2;
+
+function G_TIME_SPAN_DAY: int64;
+function G_TIME_SPAN_HOUR: int64;
+function G_TIME_SPAN_MINUTE: int64;
+function G_TIME_SPAN_SECOND: int64;
+function G_TIME_SPAN_MILLISECOND: int64;
 
 // === Konventiert am: 7-8-24 15:48:09 ===
 

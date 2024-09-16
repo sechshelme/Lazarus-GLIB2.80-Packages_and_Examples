@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -54,8 +54,6 @@ gst_byte_array_interface_append_data (GstByteArrayInterface *self, const guint8 
     return FALSE;
   memcpy (ptr, data, size);
   return TRUE;
-
-
  }
 
 // === Konventiert am: 13-9-24 16:14:15 ===
@@ -92,8 +90,6 @@ begin
 end;
 
 { xxxxxxxxxxxxxxxxxxxxxx }
-
-
 
 function gst_byte_array_interface_append_data(self: PGstByteArrayInterface; Data: Pguint8; size: Tgsize): Tgboolean;
 var

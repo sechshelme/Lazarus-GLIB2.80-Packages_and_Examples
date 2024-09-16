@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -225,19 +225,6 @@ function g_scanner_thaw_symbol_table(scanner: Pointer): pointer;
 procedure g_scanner_add_symbol(scanner: PGScanner; symbol: Pgchar; Value: Tgpointer);
 procedure g_scanner_remove_symbol(scanner: PGScanner; symbol: Pgchar);
 procedure g_scanner_foreach_symbol(scanner: PGScanner; func: TGHFunc; Data: Tgpointer);
-
-
-(*
-#define    g_scanner_add_symbol( scanner, symbol, value )  G_STMT_START { \
-  g_scanner_scope_add_symbol ((scanner), 0, (symbol), (value)); \
-} G_STMT_END GLIB_DEPRECATED_MACRO_IN_2_26_FOR(g_scanner_scope_add_symbol)
-#define    g_scanner_remove_symbol( scanner, symbol )  G_STMT_START { \
-  g_scanner_scope_remove_symbol ((scanner), 0, (symbol)); \
-} G_STMT_END GLIB_DEPRECATED_MACRO_IN_2_26_FOR(g_scanner_scope_remove_symbol)
-#define    g_scanner_foreach_symbol( scanner, func, data )  G_STMT_START { \
-  g_scanner_scope_foreach_symbol ((scanner), 0, (func), (data)); \
-} G_STMT_END GLIB_DEPRECATED_MACRO_IN_2_26_FOR(g_scanner_scope_foreach_symbol)
-*)
 
 
 {$ENDIF read_interface}

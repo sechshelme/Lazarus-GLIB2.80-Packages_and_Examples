@@ -44,9 +44,6 @@ type
   TGNodeTraverseFunc = function(node: PGNode; Data: Tgpointer): Tgboolean; cdecl;
   TGNodeForeachFunc = procedure(node: PGNode; Data: Tgpointer); cdecl;
 
-function G_NODE_IS_ROOT(node: PGNode): boolean;
-function G_NODE_IS_LEAF(node: PGNode): boolean;
-
 function g_node_new(Data: Tgpointer): PGNode; cdecl; external libglib2;
 procedure g_node_destroy(root: PGNode); cdecl; external libglib2;
 procedure g_node_unlink(node: PGNode); cdecl; external libglib2;
@@ -74,6 +71,9 @@ function g_node_child_position(node: PGNode; child: PGNode): Tgint; cdecl; exter
 function g_node_child_index(node: PGNode; Data: Tgpointer): Tgint; cdecl; external libglib2;
 function g_node_first_sibling(node: PGNode): PGNode; cdecl; external libglib2;
 function g_node_last_sibling(node: PGNode): PGNode; cdecl; external libglib2;
+
+function G_NODE_IS_ROOT(node: PGNode): boolean;
+function G_NODE_IS_LEAF(node: PGNode): boolean;
 
 function g_node_append(parent: PGNode; node: PGNode): PGNode;
 function g_node_insert_data(parent: PGNode; position: Tgint; Data: Tgpointer): PGNode;

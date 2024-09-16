@@ -31,52 +31,11 @@ function g_freopen(filename:Pgchar; mode:Pgchar; stream:PFILE):PFILE;cdecl;exter
 function g_fsync(fd:Tgint):Tgint;cdecl;external libglib2;
 type
   Tutimbuf = record
-    end;
+  end;
   Putimbuf = ^Tutimbuf;
 
 function g_utime(filename:Pgchar; utb:Putimbuf):longint;cdecl;external libglib2;
 function g_close(fd:Tgint; error:PPGError):Tgboolean;cdecl;external libglib2;
-{
-static inline gboolean
-g_clear_fd (int     *fd_ptr,
-            GError **error)
-
-  int fd = *fd_ptr;
-
-  *fd_ptr = -1;
-
-  if (fd < 0)
-    return TRUE;
-
-  return g_close (fd, error);
-  
-
- }
-{ Not public API  }
-{
-static inline void
-_g_clear_fd_ignore_error (int *fd_ptr)
-
-  int errsv = errno;
-  
-
-  if (!g_clear_fd (fd_ptr, NULL))
-    
-    
-
-  
-
-  errno = errsv;
-
-/*
-#endif
-
-#define g_autofd _GLIB_CLEANUP(_g_clear_fd_ignore_error) GLIB_AVAILABLE_MACRO_IN_2_76
-#endif
-
-
-
-#endif /* __G_STDIO_H__  }
 
 // === Konventiert am: 10-8-24 19:22:55 ===
 

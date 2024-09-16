@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -188,7 +188,7 @@ begin
   Result._gst_reserved[3] := nil;
 end;
 
-function GST_STATIC_CAPS_NONE: TGstStaticCaps; { return type might be wrong }
+function GST_STATIC_CAPS_NONE: TGstStaticCaps;
 begin
   Result.caps := nil;
   Result._string := 'NONE';

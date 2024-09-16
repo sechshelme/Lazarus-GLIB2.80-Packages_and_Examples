@@ -2,22 +2,19 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
 {$IFDEF read_interface}
 
 type
-  PGQueue = ^TGQueue;
-
   TGQueue = record
     head: PGList;
     tail: PGList;
     length: Tguint;
   end;
-
-  {#define G_QUEUE_INIT  NULL, NULL, 0  }
+  PGQueue = ^TGQueue;
 
 function g_queue_new: PGQueue; cdecl; external libglib2;
 procedure g_queue_free(queue: PGQueue); cdecl; external libglib2;

@@ -32,10 +32,10 @@
 
 
 #define GST_TYPE_PROXY_PAD              (gst_proxy_pad_get_type ())
-#define GST_IS_PROXY_PAD(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PROXY_PAD))
-#define GST_IS_PROXY_PAD_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PROXY_PAD))
 #define GST_PROXY_PAD(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PROXY_PAD, GstProxyPad))
 #define GST_PROXY_PAD_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PROXY_PAD, GstProxyPadClass))
+#define GST_IS_PROXY_PAD(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PROXY_PAD))
+#define GST_IS_PROXY_PAD_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PROXY_PAD))
 
 typedef struct _GstProxyPad GstProxyPad;
 typedef struct _GstProxyPadPrivate GstProxyPadPrivate;
@@ -132,7 +132,6 @@ GstPad*          gst_ghost_pad_get_target        (GstGhostPad *gpad);
 extern
 gboolean         gst_ghost_pad_set_target        (GstGhostPad *gpad, GstPad *newtarget);
 
-GST_DEPRECATED
 gboolean         gst_ghost_pad_construct         (GstGhostPad *gpad);
 
 extern

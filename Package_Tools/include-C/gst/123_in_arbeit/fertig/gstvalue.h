@@ -59,7 +59,7 @@
  * ]|
  *
  */
-#define GST_STR_FOURCC(f)               ((guint32)(((f)[0])|((f)[1]<<8)|((f)[2]<<16)|((f)[3]<<24)))
+//#define GST_STR_FOURCC(f)               ((guint32)(((f)[0])|((f)[1]<<8)|((f)[2]<<16)|((f)[3]<<24)))
 
 /**
  * GST_FOURCC_FORMAT: (skip):
@@ -82,13 +82,7 @@
  * #guint32 fourcc value in a printf\()-style text message.
  */
 
-#define __GST_PRINT_CHAR(c) \
-  g_ascii_isprint(c) ? (c) : '.'
-#define GST_FOURCC_ARGS(fourcc)               \
-  __GST_PRINT_CHAR((fourcc) & 0xff),          \
-  __GST_PRINT_CHAR(((fourcc) >> 8) & 0xff),   \
-  __GST_PRINT_CHAR(((fourcc) >> 16) & 0xff),  \
-  __GST_PRINT_CHAR(((fourcc) >> 24) & 0xff)
+
 /**
  * GST_VALUE_HOLDS_INT_RANGE:
  * @x: the #GValue to check

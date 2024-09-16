@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -54,7 +54,6 @@ procedure gst_caps_features_remove_id(features: PGstCapsFeatures; feature: TGQua
 function GST_TYPE_CAPS_FEATURES: TGType;
 function GST_CAPS_FEATURES_ANY: PGstCapsFeatures;
 function GST_CAPS_FEATURES_MEMORY_SYSTEM_MEMORY: PGstCapsFeatures;
-
 
 function GST_CAPS_FEATURES_CAST(obj: Pointer): PGstCapsFeatures;
 function GST_CAPS_FEATURES(obj: Pointer): PGstCapsFeatures;

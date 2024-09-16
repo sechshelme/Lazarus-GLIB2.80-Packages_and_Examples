@@ -51,12 +51,12 @@
  *
  * Since: 1.20
  */
-#define GST_DEVICE_PROVIDER_REGISTER_DEFINE_CUSTOM(d_p, register_func) \
- \
-gboolean G_PASTE (gst_device_provider_register_, d_p) (GstPlugin * plugin) \
-{ \
-  return register_func (plugin); \
-} \
+//)#define GST_DEVICE_PROVIDER_REGISTER_DEFINE_CUSTOM(d_p, register_func) \
+ 
+//gboolean G_PASTE (gst_device_provider_register_, d_p) (GstPlugin * plugin) \
+//{ \
+//  return register_func (plugin); \
+//} \
 
 
 /**
@@ -72,12 +72,12 @@ gboolean G_PASTE (gst_device_provider_register_, d_p) (GstPlugin * plugin) \
  *
  * Since: 1.20
  */
-#define GST_DEVICE_PROVIDER_REGISTER_DEFINE(d_p, d_p_n, r, t) \
- \
-gboolean G_PASTE (gst_device_provider_register_, d_p) (GstPlugin * plugin) \
-{ \
-  return gst_device_provider_register (plugin, d_p_n, r, t); \
-} \
+//#define GST_DEVICE_PROVIDER_REGISTER_DEFINE(d_p, d_p_n, r, t) \
+// \
+//7/gboolean G_PASTE (gst_device_provider_register_, d_p) (GstPlugin * plugin) \
+//{ \
+//  return gst_device_provider_register (plugin, d_p_n, r, t); \
+//} \
 
 
 /**
@@ -91,9 +91,9 @@ gboolean G_PASTE (gst_device_provider_register_, d_p) (GstPlugin * plugin) \
  *
  * Since: 1.20
  */
-#define GST_DEVICE_PROVIDER_REGISTER_DECLARE(d_p) \
- \
-gboolean G_PASTE(gst_device_provider_register_, d_p) (GstPlugin * plugin); \
+//#define GST_DEVICE_PROVIDER_REGISTER_DECLARE(d_p) \
+// \
+//gboolean G_PASTE(gst_device_provider_register_, d_p) (GstPlugin * plugin); \
 
 
 /**
@@ -107,7 +107,6 @@ gboolean G_PASTE(gst_device_provider_register_, d_p) (GstPlugin * plugin); \
  *
  * Since: 1.20
  */
-#define GST_DEVICE_PROVIDER_REGISTER(d_p, plugin) G_PASTE(gst_device_provider_register_, d_p) (plugin)
 
 
 
@@ -118,11 +117,11 @@ typedef struct _GstDeviceProviderPrivate GstDeviceProviderPrivate;
 #include <gst/gstdeviceproviderfactory.h>
 
 #define GST_TYPE_DEVICE_PROVIDER                 (gst_device_provider_get_type())
+#define GST_DEVICE_PROVIDER(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_DEVICE_PROVIDER, GstDeviceProvider))
+#define GST_DEVICE_PROVIDER_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_DEVICE_PROVIDER, GstDeviceProviderClass))
 #define GST_IS_DEVICE_PROVIDER(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_DEVICE_PROVIDER))
 #define GST_IS_DEVICE_PROVIDER_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_DEVICE_PROVIDER))
 #define GST_DEVICE_PROVIDER_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_DEVICE_PROVIDER, GstDeviceProviderClass))
-#define GST_DEVICE_PROVIDER(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_DEVICE_PROVIDER, GstDeviceProvider))
-#define GST_DEVICE_PROVIDER_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_DEVICE_PROVIDER, GstDeviceProviderClass))
 #define GST_DEVICE_PROVIDER_CAST(obj)            ((GstDeviceProvider *)(obj))
 
 

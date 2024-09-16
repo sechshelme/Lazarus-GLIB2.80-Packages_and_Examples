@@ -6,48 +6,61 @@ uses
   ctypes,
 
   common_GST,
-  gst,                    // io.
-  gstconfig,              // io.
-  gstobject,              // io. -> gstconfig
-  gstminiobject,          // io.
-  gstmemory,              // io.
-  gstallocator,           // io. -> gstmemory
-  gstcontrolbinding,      // io. -> gstobject, gstconfig
-  gstclock,               // io.
-  gstdatetime,            // io.
-  gststructure,           // io. -> gstdatetime
-  gstcontext,             // io. -> gststructure
-  gsttaskpool,            // io.
-  gsttask,                // io. -> gsttaskpool,
-  gstbytearrayinterface,  // io.    ( move() )
-  gstmeta,                // io. -> gststructure, gstbytearrayinterface
-  gstcapsfeatures,        // io.
-  gstcaps,                // io. -> gststructure, gstcapsfeatures
-  gstdevice,              // io. -> gstcaps, gststructure
-  gstbuffer,              // io. -> gstmemory, gstallocator, gstmeta, gstcaps, gstclock
-  gststreamcollection,    // io.
-  gstiterator,            // io.
-  gstformat,              // io. -> gstiterator
-  gstsegment,             // io. -> gstformat
-  gstbufferlist,          // io.
-  gstsample,              // io. -> gstbuffer, gstcaps, gstsegment, gststructure, gstbufferlist
-  gsttaglist,             // io. -> gstdatetime, gstsample
-  gsttoc,                 // io. -> gsttaglist
-  gstplugin,              // io. -> gststructure
-  gstpluginfeature,       // io. -> gstplugin
-  gstpadtemplate,         // io. -> gstcaps          // ( PGstPad = Pointer ) wegen Kompflickt
-  gstevent,               // io. -> gststructure, gstsegment, gststreamcollection, gstcaps, gsttaglist, gsttoc, gstformat, gstclock
-  gstpad,                 // io. -> gstpadtemplate, gsttask, gstbufferlist, gstevent, gstiterator, gstcaps, gstbuffer
-  gstbufferpool,          // io. -> gstformat, gststructure, gstbuffer, gstallocator, gstcaps, gstpad
-  gstquery,               // io. -> gstformat, gststructure, gstcaps, gstallocator, gstbufferpool, gstpad, gstcontext
-  gstmessage,             // io. -> gststructure, gsttaglist, gstquery, gstformat, gstclock, gsttoc, gstcontext, gstevent, gstdevice, gststreamcollection
-  gstbus,                 // io. -> gstmessage
-  gststreams,             // io. -> gstcaps, gstevent, gsttaglist
-  gstelement,             // io. -> gststructure, gstbus, gstclock, gstmessage, gstpad, gstcontext, gstdevice, gstcaps, gstpadtemplate, gstiterator, gstconfig, gstevent, gstformat, gstsegment; Makros entfernt
-  gsturi,                 // io. -> gstelement
-  gstelementfactory,      // io. -> gstelement, gsturi, gstplugin, gstpluginfeature, gstcaps
-  gstparse,               // io. -> gstelement
-  gstbin,                 // io. -> gstelement, gstbus, gstclock, gstmessage, gstiterator
+  gst,                      // io.
+  gstconfig,                // io.
+  gstobject,                // io. -> gstconfig
+  gstminiobject,            // io.
+  gstenumtypes,             // io.
+  gsterror,                 // io.
+  gstchildproxy,            // io.
+  gstparamspecs,            // io.
+  gstmemory,                // io.
+  gstallocator,             // io. -> gstmemory
+  gstcontrolbinding,        // io. -> gstobject, gstconfig
+  gstclock,                 // io.
+  gstinfo,                  // io.         Makros entfernt
+  gstdatetime,              // io.
+  gststructure,             // io. -> gstdatetime
+  gstcontext,               // io. -> gststructure
+  gsttaskpool,              // io.
+  gsttask,                  // io. -> gsttaskpool,
+  gstbytearrayinterface,    // io.    ( move() )
+  gstmeta,                  // io. -> gststructure, gstbytearrayinterface
+  gstcapsfeatures,          // io.
+  gstcaps,                  // io. -> gststructure, gstcapsfeatures
+  gstdevice,                // io. -> gstcaps, gststructure
+  gstbuffer,                // io. -> gstmemory, gstallocator, gstmeta, gstcaps, gstclock
+  gststreamcollection,      // io.
+  gstiterator,              // io.
+  gstformat,                // io. -> gstiterator
+  gstsegment,               // io. -> gstformat
+  gstbufferlist,            // io.
+  gstsample,                // io. -> gstbuffer, gstcaps, gstsegment, gststructure, gstbufferlist
+  gsttaglist,               // io. -> gstdatetime, gstsample
+  gsttoc,                   // io. -> gsttaglist
+  gstplugin,                // io. -> gststructure
+  gstpluginfeature,         // io. -> gstplugin
+  gstpadtemplate,           // io. -> gstcaps          // ( PGstPad = Pointer ) wegen Kompflickt
+  gstevent,                 // io. -> gststructure, gstsegment, gststreamcollection, gstcaps, gsttaglist, gsttoc, gstformat, gstclock
+  gstpad,                   // io. -> gstpadtemplate, gsttask, gstbufferlist, gstevent, gstiterator, gstcaps, gstbuffer
+  gstbufferpool,            // io. -> gstformat, gststructure, gstbuffer, gstallocator, gstcaps, gstpad
+  gstquery,                 // io. -> gstformat, gststructure, gstcaps, gstallocator, gstbufferpool, gstpad, gstcontext
+  gstmessage,               // io. -> gststructure, gsttaglist, gstquery, gstformat, gstclock, gsttoc, gstcontext, gstevent, gstdevice, gststreamcollection
+  gstbus,                   // io. -> gstmessage
+  gststreams,               // io. -> gstcaps, gstevent, gsttaglist
+  gstelement,               // io. -> gststructure, gstbus, gstclock, gstmessage, gstpad, gstcontext, gstdevice, gstcaps, gstpadtemplate, gstiterator, gstconfig, gstevent, gstformat, gstsegment; Makros entfernt
+  gsturi,                   // io. -> gstelement
+  gstelementfactory,        // io. -> gstelement, gsturi, gstplugin, gstpluginfeature, gstcaps
+  gstparse,                 // io. -> gstelement
+  gstbin,                   // io. -> gstelement, gstbus, gstclock, gstmessage, gstiterator
+  gstutils,                 // io. -> gstelement, gstcaps, gstformat, gstpad, gstpadtemplate, gstsegment, gstbin, gstparse        Makros entfernt
+  gstvalue,                 // io. -> gstcaps, gstcapsfeatures, gststructure, gstbuffer, gstdatetime
+  gstdeviceprovider,        // io. -> gstbus, gstdevice
+  gstdeviceproviderfactory, // io. -> gstdeviceprovider, gstplugin, gstpluginfeature
+  gsttypefind,              // io. -> gstcaps, gstplugin
+  gstghostpad,              // io. -> gstpad, gstpadtemplate, gstiterator, gstbufferlist
+  gstregistry,              // io. -> gstplugin, gstpluginfeature
+
 
 
 

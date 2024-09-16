@@ -9,8 +9,6 @@ uses
   {$PACKRECORDS C}
   {$ENDIF}
 
-function G_THREAD_ERROR: TGQuark;
-
 function g_thread_error_quark: TGQuark; cdecl; external libglib2;
 
 
@@ -155,8 +153,9 @@ type
   PGRWLockReaderLocker = ^TGRWLockReaderLocker;
   TGRWLockReaderLocker = pointer;
 
-  // === Konventiert am: 7-8-24 17:00:47 ===
+function G_THREAD_ERROR: TGQuark;
 
+  // === Konventiert am: 7-8-24 17:00:47 ===
 
 implementation
 

@@ -2,13 +2,11 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
 {$IFDEF read_interface}
-
-function G_THREAD_ERROR: TGQuark;
 
 function g_thread_error_quark: TGQuark; cdecl; external libglib2;
 
@@ -154,8 +152,9 @@ type
   PGRWLockReaderLocker = ^TGRWLockReaderLocker;
   TGRWLockReaderLocker = pointer;
 
-  // === Konventiert am: 7-8-24 17:00:47 ===
+function G_THREAD_ERROR: TGQuark;
 
+  // === Konventiert am: 7-8-24 17:00:47 ===
 
 {$ENDIF read_interface}
 

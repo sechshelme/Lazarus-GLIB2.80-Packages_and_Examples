@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -79,8 +79,8 @@ function g_resolver_lookup_records_finish(resolver: PGResolver; Result: PGAsyncR
 procedure g_resolver_free_targets(targets: PGList); cdecl; external libgio2;
 function g_resolver_get_timeout(resolver: PGResolver): dword; cdecl; external libgio2;
 procedure g_resolver_set_timeout(resolver: PGResolver; timeout_ms: dword); cdecl; external libgio2;
-
 function g_resolver_error_quark: TGQuark; cdecl; external libgio2;
+
 function G_RESOLVER_ERROR: TGQuark;
 
 // === Konventiert am: 19-8-24 17:43:25 ===

@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -82,9 +82,9 @@ type
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
   PGstBufferPool = ^TGstBufferPool;
+  PPGstBufferPool = ^PGstBufferPool;
 
-
-  type
+type
   PGstMiniObject = ^TGstMiniObject;
   PPGstMiniObject = ^PGstMiniObject;
 
@@ -106,19 +106,111 @@ type
     priv_pointer: Tgpointer;
   end;
 
-  type
-    TGstBuffer = record
-        mini_object : TGstMiniObject;
-        pool : PGstBufferPool;
-        pts : TGstClockTime;
-        dts : TGstClockTime;
-        duration : TGstClockTime;
-        offset : Tguint64;
-        offset_end : Tguint64;
-      end;
-    PGstBuffer = ^TGstBuffer;
-    PPGstBuffer = ^PGstBuffer;
+type
+  TGstBuffer = record
+    mini_object: TGstMiniObject;
+    pool: PGstBufferPool;
+    pts: TGstClockTime;
+    dts: TGstClockTime;
+    duration: TGstClockTime;
+    offset: Tguint64;
+    offset_end: Tguint64;
+  end;
+  PGstBuffer = ^TGstBuffer;
+  PPGstBuffer = ^PGstBuffer;
 
+type
+  PGstPadDirection = ^TGstPadDirection;
+  TGstPadDirection = longint;
+
+const
+  GST_PAD_UNKNOWN = 0;
+  GST_PAD_SRC = 1;
+  GST_PAD_SINK = 2;
+
+type
+  TGstStreamPrivate = record
+  end;
+  PGstStreamPrivate = ^TGstStreamPrivate;
+
+  TGstStream = record
+    obj: TGstObject;
+    stream_id: Pgchar;
+    priv: PGstStreamPrivate;
+    _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
+  end;
+  PGstStream = ^TGstStream;
+  PPGstStream = ^PGstStream;
+
+const
+  GST_QUERY_TYPE_UPSTREAM = 1 shl 0;
+  GST_QUERY_TYPE_DOWNSTREAM = 1 shl 1;
+  GST_QUERY_TYPE_SERIALIZED = 1 shl 2;
+
+const
+  GST_QUERY_NUM_SHIFT = 8;
+
+type
+  PGstQueryType = ^TGstQueryType;
+  TGstQueryType = longint;
+
+  //typedef enum {
+  //  GST_QUERY_UNKNOWN      = GST_QUERY_MAKE_TYPE (0, 0),
+  //  GST_QUERY_POSITION     = GST_QUERY_MAKE_TYPE (10, _FLAG(BOTH)),
+  //  GST_QUERY_DURATION     = GST_QUERY_MAKE_TYPE (20, _FLAG(BOTH)),
+  //  GST_QUERY_LATENCY      = GST_QUERY_MAKE_TYPE (30, _FLAG(BOTH)),
+  //  GST_QUERY_JITTER       = GST_QUERY_MAKE_TYPE (40, _FLAG(BOTH)),
+  //  GST_QUERY_RATE         = GST_QUERY_MAKE_TYPE (50, _FLAG(BOTH)),
+  //  GST_QUERY_SEEKING      = GST_QUERY_MAKE_TYPE (60, _FLAG(BOTH)),
+  //  GST_QUERY_SEGMENT      = GST_QUERY_MAKE_TYPE (70, _FLAG(BOTH)),
+  //  GST_QUERY_CONVERT      = GST_QUERY_MAKE_TYPE (80, _FLAG(BOTH)),
+  //  GST_QUERY_FORMATS      = GST_QUERY_MAKE_TYPE (90, _FLAG(BOTH)),
+  //  GST_QUERY_BUFFERING    = GST_QUERY_MAKE_TYPE (110, _FLAG(BOTH)),
+  //  GST_QUERY_CUSTOM       = GST_QUERY_MAKE_TYPE (120, _FLAG(BOTH)),
+  //  GST_QUERY_URI          = GST_QUERY_MAKE_TYPE (130, _FLAG(BOTH)),
+  //  GST_QUERY_ALLOCATION   = GST_QUERY_MAKE_TYPE (140, _FLAG(DOWNSTREAM) | _FLAG(SERIALIZED)),
+  //  GST_QUERY_SCHEDULING   = GST_QUERY_MAKE_TYPE (150, _FLAG(UPSTREAM)),
+  //  GST_QUERY_ACCEPT_CAPS  = GST_QUERY_MAKE_TYPE (160, _FLAG(BOTH)),
+  //  GST_QUERY_CAPS         = GST_QUERY_MAKE_TYPE (170, _FLAG(BOTH)),
+  //  GST_QUERY_DRAIN        = GST_QUERY_MAKE_TYPE (180, _FLAG(DOWNSTREAM) | _FLAG(SERIALIZED)),
+  //  GST_QUERY_CONTEXT      = GST_QUERY_MAKE_TYPE (190, _FLAG(BOTH)),
+  //  GST_QUERY_BITRATE      = GST_QUERY_MAKE_TYPE (200, _FLAG(DOWNSTREAM)),
+  //  GST_QUERY_SELECTABLE   = GST_QUERY_MAKE_TYPE (210, _FLAG(BOTH)),
+
+const
+  GST_QUERY_UNKNOWN = 0 shl(GST_QUERY_NUM_SHIFT or 0);
+  GST_QUERY_POSITION = 10 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_DURATION = 20 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_LATENCY = 30 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_JITTER = 40 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_RATE = 50 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_SEEKING = 60 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_SEGMENT = 70 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_CONVERT = 80 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_FORMATS = 90 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_BUFFERING = 110 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_CUSTOM = 120 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_URI = 130 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_ALLOCATION = 140 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_DOWNSTREAM or GST_QUERY_TYPE_SERIALIZED);
+  GST_QUERY_SCHEDULING = 150 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM);
+  GST_QUERY_ACCEPT_CAPS = 160 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_CAPS = 170 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_DRAIN = 180 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_DOWNSTREAM or GST_QUERY_TYPE_SERIALIZED);
+  GST_QUERY_CONTEXT = 190 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_BITRATE = 200 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_DOWNSTREAM);
+  GST_QUERY_SELECTABLE = 210 shl(GST_QUERY_NUM_SHIFT or GST_QUERY_TYPE_UPSTREAM or GST_QUERY_TYPE_DOWNSTREAM);
+            type
+  TGstQuery = record
+    mini_object: TGstMiniObject;
+    _type: TGstQueryType;
+  end;
+  PGstQuery = ^TGstQuery;
+  PPGstQuery = ^PGstQuery;
+
+            type
+              TGstElementFactory=record
+                  end;
+              PGstElementFactory=^TGstElementFactory;
 
 
 

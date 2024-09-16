@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 13-09-2024   21:37                        //
+//   Erzeugt am: 16-09-2024   16:52                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -70,7 +70,6 @@ function GST_OBJECT_REFCOUNT_VALUE(obj: Pointer): Tgint;
 function GST_OBJECT_GET_LOCK(obj: Pointer): PGMutex;
 procedure GST_OBJECT_LOCK(obj: Pointer);
 
-{#define GST_OBJECT_AUTO_LOCK(obj, var) g_autoptr(GMutexLocker) G_GNUC_UNUSED var = g_mutex_locker_new(GST_OBJECT_GET_LOCK(obj)) }
 function GST_OBJECT_TRYLOCK(obj: Pointer): Tgboolean;
 procedure GST_OBJECT_UNLOCK(obj: Pointer);
 function GST_OBJECT_NAME(obj: Pointer): Pgchar;
@@ -146,12 +145,11 @@ end;
 function GST_OBJECT_REFCOUNT_VALUE(obj: Pointer): Tgint;
 begin
   // #define GST_OBJECT_REFCOUNT_VALUE(obj)          g_atomic_int_get ((gint *) &GST_OBJECT_REFCOUNT(obj))
-  GST_OBJECT_REFCOUNT_VALUE := g_atomic_int_get(@PGObject(obj)^.ref_count);
+  Result := g_atomic_int_get(@PGObject(obj)^.ref_count);
 end;
 
 function GST_OBJECT_GET_LOCK(obj: Pointer): PGMutex;
 begin
-  // #define GST_OBJECT_GET_LOCK(obj)               (&GST_OBJECT_CAST(obj)->lock)
   GST_OBJECT_GET_LOCK := @PGstObject(obj)^.lock;
 end;
 

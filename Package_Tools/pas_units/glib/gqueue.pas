@@ -10,15 +10,12 @@ uses
   {$ENDIF}
 
 type
-  PGQueue = ^TGQueue;
-
   TGQueue = record
     head: PGList;
     tail: PGList;
     length: Tguint;
   end;
-
-  {#define G_QUEUE_INIT  NULL, NULL, 0  }
+  PGQueue = ^TGQueue;
 
 function g_queue_new: PGQueue; cdecl; external libglib2;
 procedure g_queue_free(queue: PGQueue); cdecl; external libglib2;

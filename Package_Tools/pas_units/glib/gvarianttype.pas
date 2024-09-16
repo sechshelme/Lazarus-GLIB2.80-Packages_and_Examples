@@ -15,35 +15,6 @@ type
   PGVariantType = ^TGVariantType;
   PPGVariantType = ^PGVariantType;
 
-function G_VARIANT_TYPE_BOOLEAN: PGVariantType;
-function G_VARIANT_TYPE_BYTE: PGVariantType;
-function G_VARIANT_TYPE_INT16: PGVariantType;
-function G_VARIANT_TYPE_UINT16: PGVariantType;
-function G_VARIANT_TYPE_INT32: PGVariantType;
-function G_VARIANT_TYPE_UINT32: PGVariantType;
-function G_VARIANT_TYPE_INT64: PGVariantType;
-function G_VARIANT_TYPE_UINT64: PGVariantType;
-function G_VARIANT_TYPE_DOUBLE: PGVariantType;
-function G_VARIANT_TYPE_STRING: PGVariantType;
-function G_VARIANT_TYPE_OBJECT_PATH: PGVariantType;
-function G_VARIANT_TYPE_SIGNATURE: PGVariantType;
-function G_VARIANT_TYPE_VARIANT: PGVariantType;
-function G_VARIANT_TYPE_HANDLE: PGVariantType;
-function G_VARIANT_TYPE_UNIT: PGVariantType;
-function G_VARIANT_TYPE_ANY: PGVariantType;
-function G_VARIANT_TYPE_BASIC: PGVariantType;
-function G_VARIANT_TYPE_MAYBE: PGVariantType;
-function G_VARIANT_TYPE_ARRAY: PGVariantType;
-function G_VARIANT_TYPE_TUPLE: PGVariantType;
-function G_VARIANT_TYPE_DICT_ENTRY: PGVariantType;
-function G_VARIANT_TYPE_DICTIONARY: PGVariantType;
-function G_VARIANT_TYPE_STRING_ARRAY: PGVariantType;
-function G_VARIANT_TYPE_OBJECT_PATH_ARRAY: PGVariantType;
-function G_VARIANT_TYPE_BYTESTRING: PGVariantType;
-function G_VARIANT_TYPE_BYTESTRING_ARRAY: PGVariantType;
-function G_VARIANT_TYPE_VARDICT: PGVariantType;
-function G_VARIANT_TYPE(type_string: Pgchar): PGVariantType;
-
 function g_variant_type_string_is_valid(type_string: Pgchar): Tgboolean; cdecl; external libglib2;
 function g_variant_type_string_scan(_string: Pgchar; limit: Pgchar; endptr: PPgchar): Tgboolean; cdecl; external libglib2;
 procedure g_variant_type_free(_type: PGVariantType); cdecl; external libglib2;
@@ -75,6 +46,35 @@ function g_variant_type_new_tuple(items: PPGVariantType; length: Tgint): PGVaria
 function g_variant_type_new_dict_entry(key: PGVariantType; Value: PGVariantType): PGVariantType; cdecl; external libglib2;
 function g_variant_type_checked_(type_string: Pgchar): PGVariantType; cdecl; external libglib2;
 function g_variant_type_string_get_depth_(type_string: Pgchar): Tgsize; cdecl; external libglib2;
+
+function G_VARIANT_TYPE_BOOLEAN: PGVariantType;
+function G_VARIANT_TYPE_BYTE: PGVariantType;
+function G_VARIANT_TYPE_INT16: PGVariantType;
+function G_VARIANT_TYPE_UINT16: PGVariantType;
+function G_VARIANT_TYPE_INT32: PGVariantType;
+function G_VARIANT_TYPE_UINT32: PGVariantType;
+function G_VARIANT_TYPE_INT64: PGVariantType;
+function G_VARIANT_TYPE_UINT64: PGVariantType;
+function G_VARIANT_TYPE_DOUBLE: PGVariantType;
+function G_VARIANT_TYPE_STRING: PGVariantType;
+function G_VARIANT_TYPE_OBJECT_PATH: PGVariantType;
+function G_VARIANT_TYPE_SIGNATURE: PGVariantType;
+function G_VARIANT_TYPE_VARIANT: PGVariantType;
+function G_VARIANT_TYPE_HANDLE: PGVariantType;
+function G_VARIANT_TYPE_UNIT: PGVariantType;
+function G_VARIANT_TYPE_ANY: PGVariantType;
+function G_VARIANT_TYPE_BASIC: PGVariantType;
+function G_VARIANT_TYPE_MAYBE: PGVariantType;
+function G_VARIANT_TYPE_ARRAY: PGVariantType;
+function G_VARIANT_TYPE_TUPLE: PGVariantType;
+function G_VARIANT_TYPE_DICT_ENTRY: PGVariantType;
+function G_VARIANT_TYPE_DICTIONARY: PGVariantType;
+function G_VARIANT_TYPE_STRING_ARRAY: PGVariantType;
+function G_VARIANT_TYPE_OBJECT_PATH_ARRAY: PGVariantType;
+function G_VARIANT_TYPE_BYTESTRING: PGVariantType;
+function G_VARIANT_TYPE_BYTESTRING_ARRAY: PGVariantType;
+function G_VARIANT_TYPE_VARDICT: PGVariantType;
+function G_VARIANT_TYPE(type_string: Pgchar): PGVariantType;
 
 // === Konventiert am: 6-8-24 16:12:48 ===
 
