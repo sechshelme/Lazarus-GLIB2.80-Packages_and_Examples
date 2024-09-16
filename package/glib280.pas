@@ -21,9 +21,9 @@ const
 
   {$IFDEF Windows}
   libgtk4 = 'libgtk-4.dll';
-  libgio2 = 'libgio-2.0.dll';
-  libglib2 = 'libglib-2.0,dll';
-  libgobject2_0 = 'libgobject-2.0.dll';
+  libgio2 = 'libgio-2.0-0.dll';
+  libglib2 = 'libglib-2.0-0.dll';
+  libgobject2_0 = 'libgobject-2.0-0.dll';
   {$ENDIF}
 
   // === Externes

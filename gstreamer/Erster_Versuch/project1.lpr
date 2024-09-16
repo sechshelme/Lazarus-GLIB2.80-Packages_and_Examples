@@ -14,6 +14,7 @@ uses
   gsterror,                 // io.
   gstchildproxy,            // io.
   gstparamspecs,            // io.
+  gstcontrolsource,         // io.
   gstmemory,                // io.
   gstallocator,             // io. -> gstmemory
   gstcontrolbinding,        // io. -> gstobject, gstconfig
@@ -60,6 +61,7 @@ uses
   gsttypefind,              // io. -> gstcaps, gstplugin
   gstghostpad,              // io. -> gstpad, gstpadtemplate, gstiterator, gstbufferlist
   gstregistry,              // io. -> gstplugin, gstpluginfeature
+  gstdebugutils,            // io. -> gstbin
 
 
 

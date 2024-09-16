@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   16:52                        //
+//   Erzeugt am: 16-09-2024   19:22                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -50,7 +50,7 @@ procedure g_task_return_pointer(task: PGTask; Result: Tgpointer; result_destroy:
 procedure g_task_return_boolean(task: PGTask; Result: Tgboolean); cdecl; external libgio2;
 procedure g_task_return_int(task: PGTask; Result: Tgssize); cdecl; external libgio2;
 procedure g_task_return_error(task: PGTask; error: PGError); cdecl; external libgio2;
-procedure g_task_return_prefixed_error(task: PGTask; error: PGError; format: PChar); varargs; cdecl; external;
+procedure g_task_return_prefixed_error(task: PGTask; error: PGError; format: PChar); varargs; cdecl; external libgio2;
 procedure g_task_return_new_error(task: PGTask; domain: TGQuark; code: Tgint; format: PChar);varargs cdecl; external libgio2;
 procedure g_task_return_new_error_literal(task: PGTask; domain: TGQuark; code: Tgint; message: PChar); cdecl; external libgio2;
 procedure g_task_return_value(task: PGTask; Result: PGValue); cdecl; external libgio2;

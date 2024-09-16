@@ -114,8 +114,8 @@ void gst_debug_bin_to_dot_file_with_ts (GstBin *bin, GstDebugGraphDetails detail
 #else /* GST_DISABLE_GST_DEBUG */
 
 
-#define GST_DEBUG_BIN_TO_DOT_FILE(bin, details, file_name)
-#define GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(bin, details, file_name)
+//#define GST_DEBUG_BIN_TO_DOT_FILE(bin, details, file_name)
+//#define GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(bin, details, file_name)
 
 #endif /* GST_DISABLE_GST_DEBUG */
 
