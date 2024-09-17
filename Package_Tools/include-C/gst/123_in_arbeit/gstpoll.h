@@ -59,7 +59,6 @@ typedef struct {
  * be assigned to a variable. In that case you have to use
  * gst_poll_fd_init().
  */
-#define GST_POLL_FD_INIT  { -1, -1 }
 
 extern
 GstPoll*        gst_poll_new              (gboolean controllable) ;

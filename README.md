@@ -22,7 +22,10 @@ https://gstreamer.freedesktop.org/documentation/tutorials/basic/hello-world.html
 ### wine PATH
 Folgende Datei editieren:
 - `~/.bashrc`
-Ind folgendes an Ende einfügen:
+Folgendes an Ende einfügen:
 - `export WINEPATH="$WINEPATH;C:\users\tux\mingw64\bin;C:\gstreamer\1.0\msvc_x86_64\bin"`
+Aktualisieren:
+- `source ~/.bashrc`
+
 
 

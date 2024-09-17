@@ -66,9 +66,11 @@ uses
   gstregistry,              // io. -> gstplugin, gstpluginfeature
   gstdebugutils,            // io. -> gstbin
   gstpipeline,              // io. -> gstbin, gstclock, gstelement, gstbus
-
-  gstdynamictypefactory,
-  gstpromise,
+  gstdynamictypefactory,    // io. -> gstplugin
+  gstpromise,               // io. -> gststructure
+  gstcompat,
+  gstdevicemonitor,         // io. -> gstbus, gstcaps
+  gstpoll,                  // io.
 
 
 
@@ -95,6 +97,7 @@ uses
     quit: boolean = False;
   begin
     gst_init(@argc, @argv);
+    GST_BUFFER_PTS
 
     //  pipeline := gst_parse_launch('playbin uri=file:/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! volume', nil);
   //    pipeline := gst_parse_launch('filesrc location=test.wav ! wavparse ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
