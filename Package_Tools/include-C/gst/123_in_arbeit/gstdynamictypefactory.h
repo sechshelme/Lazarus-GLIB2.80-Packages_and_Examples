@@ -33,12 +33,6 @@
  *
  * Since: 1.20
  */
-#define GST_DYNAMIC_TYPE_REGISTER_DEFINE(t_n, t) \
- \
-gboolean G_PASTE (gst_dynamic_type_register_, t_n) (GstPlugin * plugin) \
-{ \
-  return gst_dynamic_type_register (plugin, t); \
-} \
 
 
 /**
@@ -52,10 +46,6 @@ gboolean G_PASTE (gst_dynamic_type_register_, t_n) (GstPlugin * plugin) \
  *
  * Since: 1.20
  */
-#define GST_DYNAMIC_TYPE_REGISTER_DECLARE(t_n) \
- \
-gboolean G_PASTE(gst_dynamic_type_register_, t_n) (GstPlugin * plugin); \
-
 
 /**
  * GST_DYNAMIC_TYPE_REGISTER:
@@ -68,7 +58,7 @@ gboolean G_PASTE(gst_dynamic_type_register_, t_n) (GstPlugin * plugin); \
  *
  * Since: 1.20
  */
-#define GST_DYNAMIC_TYPE_REGISTER(t_n, plugin) G_PASTE(gst_dynamic_type_register_, t_n) (plugin)
+//#define GST_DYNAMIC_TYPE_REGISTER(t_n, plugin) G_PASTE(gst_dynamic_type_register_, t_n) (plugin)
 
 /**
  * GstDynamicTypeFactory:
@@ -89,11 +79,16 @@ typedef struct _GstDynamicTypeFactoryClass GstDynamicTypeFactoryClass;
 #define GST_TYPE_DYNAMIC_TYPE_FACTORY           (gst_dynamic_type_factory_get_type())
 #define GST_DYNAMIC_TYPE_FACTORY(obj)           (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_DYNAMIC_TYPE_FACTORY,\
                                                  GstDynamicTypeFactory))
-#define GST_DYNAMIC_TYPE_CLASS(klass)           (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_DYNAMIC_TYPE_FACTORY,\
+#define GST_DYNAMIC_TYPE_FACTORY_CLASS(klass)           (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_DYNAMIC_TYPE_FACTORY,\
                                                  GstDynamicTypeFactoryClass))
 #define GST_IS_DYNAMIC_TYPE_FACTORY(obj)        (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_DYNAMIC_TYPE_FACTORY))
 #define GST_IS_DYNAMIC_TYPE_FACTORY_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_DYNAMIC_TYPE_FACTORY))
 #define GST_DYNAMIC_TYPE_FACTORY_CAST(obj)      ((GstDynamicTypeFactory *)(obj))
+
+
+//#define GST_DYNAMIC_TYPE_CLASS(klass)           (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_DYNAMIC_TYPE_FACTORY,\
+//                                                 GstDynamicTypeFactoryClass))
+
 
 extern
 GType  gst_dynamic_type_factory_get_type        (void);

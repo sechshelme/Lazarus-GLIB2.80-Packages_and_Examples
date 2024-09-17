@@ -15,6 +15,8 @@ uses
   gstchildproxy,            // io.
   gstparamspecs,            // io.
   gstcontrolsource,         // io.
+  gstpreset,                // io.
+  gsttracerrecord,          // io.
   gstmemory,                // io.
   gstallocator,             // io. -> gstmemory
   gstcontrolbinding,        // io. -> gstobject, gstconfig
@@ -38,6 +40,7 @@ uses
   gstbufferlist,            // io.
   gstsample,                // io. -> gstbuffer, gstcaps, gstsegment, gststructure, gstbufferlist
   gsttaglist,               // io. -> gstdatetime, gstsample
+  gsttagsetter,             // io. -> gsttaglist
   gsttoc,                   // io. -> gsttaglist
   gstplugin,                // io. -> gststructure
   gstpluginfeature,         // io. -> gstplugin
@@ -62,6 +65,10 @@ uses
   gstghostpad,              // io. -> gstpad, gstpadtemplate, gstiterator, gstbufferlist
   gstregistry,              // io. -> gstplugin, gstpluginfeature
   gstdebugutils,            // io. -> gstbin
+  gstpipeline,              // io. -> gstbin, gstclock, gstelement, gstbus
+
+  gstdynamictypefactory,
+  gstpromise,
 
 
 
@@ -75,7 +82,7 @@ uses
   //const
   //  GST_CLOCK_TIME_NONE = TGstClockTime(-1);
 
-  function gst_stream_volume_get_type(): TGType; cdecl; external 'gstaudio-1.0';
+//  function gst_stream_volume_get_type(): TGType; cdecl; external 'gstaudio-1.0';
 
 
 
@@ -83,38 +90,48 @@ uses
   var
     pipeline, filesrc, volume: PGstElement;
     ch: ansichar;
-    vol: single = 1.0;
+
+    vol: single = 0.1;
     quit: boolean = False;
   begin
     gst_init(@argc, @argv);
 
     //  pipeline := gst_parse_launch('playbin uri=file:/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! volume', nil);
-
-    pipeline := gst_parse_launch('filesrc location=/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! wavparse ! audioconvert ! volume ! autoaudiosink', nil);
+  //    pipeline := gst_parse_launch('filesrc location=test.wav ! wavparse ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
+  //pipeline := gst_parse_launch('filesrc location=/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! wavparse ! audioconvert ! volume name=volume ! autoaudiosink', nil);
+pipeline := gst_parse_launch('filesrc location=test.mp3 ! decodebin ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
     if pipeline = nil then begin
       WriteLn('pipeline error');
     end else begin
       WriteLn('pipeline io.');
     end;
 
-    filesrc := gst_bin_get_by_name(GST_BIN(pipeline), 'filesrc0');
-    if filesrc = nil then begin
-      WriteLn('filesrc error');
-    end else begin
-      WriteLn('filesrc io.');
-    end;
-    //    g_object_set(filesrc, 'location', 'test.wav');
+    //filesrc := gst_bin_get_by_name(GST_BIN(pipeline), 'filesrc0');
+    //if filesrc = nil then begin
+    //  WriteLn('filesrc error');
+    //end else begin
+    //  WriteLn('filesrc io.');
+    //end;
+//        g_object_set(filesrc, 'location', 'test.wav');
 
-    //  volume := gst_bin_get_by_name(GST_BIN(pipeline), 'volume0');
+        volume := gst_bin_get_by_name(GST_BIN( pipeline), 'volume');
+//      volume := gst_bin_get_by_name(Pointer(pipeline), 'volume');
     //volume := gst_bin_get_by_interface(GST_BIN( pipeline), GST_TYPE_STREAM_VOLUME);
-    volume := gst_bin_get_by_interface(GST_BIN(pipeline), gst_stream_volume_get_type());
+   // volume := gst_bin_get_by_interface(GST_BIN(pipeline), gst_stream_volume_get_type());
     if volume = nil then begin
       WriteLn('volume error');
     end else begin
       WriteLn('volume io.');
     end;
 
+    vol:=0.1;
+    g_object_set(volume, 'volume', vol, nil);
+    WriteLn('volume');
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
+    WriteLn('PLAY');
+
+    ReadLn;
+    halt;
 
     repeat
       g_object_set(volume, 'volume', vol, nil);

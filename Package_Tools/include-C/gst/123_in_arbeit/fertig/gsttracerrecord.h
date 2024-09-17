@@ -98,7 +98,7 @@ GstTracerRecord * gst_tracer_record_new (const gchar * name, const gchar * first
 extern
 void              gst_tracer_record_log (GstTracerRecord *self, ...);
 #else
-#define gst_tracer_record_log(...) G_STMT_START {} G_STMT_END
+//#define gst_tracer_record_log(...) G_STMT_START {} G_STMT_END
 #endif
 
 

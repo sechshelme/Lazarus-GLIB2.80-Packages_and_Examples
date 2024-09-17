@@ -27,8 +27,8 @@
 extern
 GType gst_promise_get_type(void);
 #define GST_TYPE_PROMISE            (gst_promise_get_type())
-#define GST_IS_PROMISE(obj)         (GST_IS_MINI_OBJECT_TYPE (obj, GST_TYPE_PROMISE))
 #define GST_PROMISE(obj)            ((GstPromise *) obj)
+#define GST_IS_PROMISE(obj)         (GST_IS_MINI_OBJECT_TYPE (obj, GST_TYPE_PROMISE))
 
 typedef struct _GstPromise GstPromise;
 
@@ -94,25 +94,6 @@ void                    gst_promise_expire                  (GstPromise * promis
 extern
 const GstStructure *    gst_promise_get_reply               (GstPromise * promise);
 
-#ifndef GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS
-static inline GstPromise *
-gst_promise_ref (GstPromise * promise)
-{
-  return (GstPromise *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (promise));
-}
-
-static inline void
-gst_promise_unref (GstPromise * promise)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (promise));
-}
-
-static inline void
-gst_clear_promise (GstPromise ** promise_ptr)
-{
-  gst_clear_mini_object ((GstMiniObject **) promise_ptr);
-}
-#else /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
 extern
 GstPromise *  gst_promise_ref (GstPromise * promise);
 
@@ -121,10 +102,6 @@ void          gst_promise_unref (GstPromise * promise);
 
 extern
 void          gst_clear_promise (GstPromise ** promise_ptr);
-#endif /* GST_DISABLE_MINIOBJECT_INLINE_FUNCTIONS */
-
-
-
 
 
 #endif /* __GST_PROMISE_H__ */
