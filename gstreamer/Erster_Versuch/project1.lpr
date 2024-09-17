@@ -94,8 +94,12 @@ uses
     pipeline, filesrc, volume: PGstElement;
     ch: ansichar;
 
-        vol: single = 0.1;
+        vol: single = 1.1;
     quit: boolean = False;
+    vclass: PGObjectClass;
+    prolist: PPGParamSpec;
+    count: Tguint;
+    i: Integer;
   begin
     gst_init(@argc, @argv);
 
@@ -118,6 +122,12 @@ pipeline := gst_parse_launch('filesrc location=test.mp3 ! decodebin ! audioconve
 //        g_object_set(filesrc, 'location', 'test.wav');
 
         volume := gst_bin_get_by_name(GST_BIN( pipeline), 'volume');
+        vclass:= G_OBJECT_GET_CLASS(volume);
+        prolist:= g_object_class_list_properties(vclass, @count);
+
+        WriteLn('count:', count);
+        for i:=0 to count-1 do WriteLn(i:3, ' ' ,prolist[i]^.name);
+
 //      volume := gst_bin_get_by_name(Pointer(pipeline), 'volume');
     //volume := gst_bin_get_by_interface(GST_BIN( pipeline), GST_TYPE_STREAM_VOLUME);
    // volume := gst_bin_get_by_interface(GST_BIN(pipeline), gst_stream_volume_get_type());
