@@ -35,11 +35,12 @@ begin
     d1, d2, d3: PTDouble;
     v1, v3: Tgdouble;
   begin
-
+    WriteLn('fsdfdsafsdafdasf');
     d1 := t_double_new_with_value(10.0);
     d2 := t_double_new_with_value(20.0);
     g_object_set(d1, 'value', 11.1, nil);
     g_object_set(d2, 'value', 22.2, nil);
+
 
     t_double_set_value(d1,  123.456);
 

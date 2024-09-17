@@ -17,6 +17,8 @@ uses
   gstcontrolsource,         // io.
   gstpreset,                // io.
   gsttracerrecord,          // io.
+  gstpoll,                  // io.
+  gstelementmetadata,       // io.
   gstmemory,                // io.
   gstallocator,             // io. -> gstmemory
   gstcontrolbinding,        // io. -> gstobject, gstconfig
@@ -68,9 +70,8 @@ uses
   gstpipeline,              // io. -> gstbin, gstclock, gstelement, gstbus
   gstdynamictypefactory,    // io. -> gstplugin
   gstpromise,               // io. -> gststructure
-  gstcompat,
+  gstcompat,                // io. -> gstmessage, gstpad, gstevent, gstcaps, gstbuffer
   gstdevicemonitor,         // io. -> gstbus, gstcaps
-  gstpoll,                  // io.
 
 
 
@@ -93,11 +94,10 @@ uses
     pipeline, filesrc, volume: PGstElement;
     ch: ansichar;
 
-    vol: single = 0.1;
+        vol: single = 0.1;
     quit: boolean = False;
   begin
     gst_init(@argc, @argv);
-    GST_BUFFER_PTS
 
     //  pipeline := gst_parse_launch('playbin uri=file:/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! volume', nil);
   //    pipeline := gst_parse_launch('filesrc location=test.wav ! wavparse ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
