@@ -12,6 +12,7 @@ uses
   gstminiobject,            // io.
   gstenumtypes,             // io.
   gsterror,                 // io.
+  gstversion,               // io.
   gstchildproxy,            // io.
   gstparamspecs,            // io.
   gstcontrolsource,         // io.
@@ -23,6 +24,7 @@ uses
   gstallocator,             // io. -> gstmemory
   gstcontrolbinding,        // io. -> gstobject, gstconfig
   gstclock,                 // io.
+  gstsystemclock,           // io. -> gstclock
   gstinfo,                  // io.         Makros entfernt
   gstdatetime,              // io.
   gststructure,             // io. -> gstdatetime
@@ -73,6 +75,7 @@ uses
   gstcompat,                // io. -> gstmessage, gstpad, gstevent, gstcaps, gstbuffer
   gstdevicemonitor,         // io. -> gstbus, gstcaps
 
+  gstprotection,            // io. -> gstmeta, gststructure, gstbuffer
 
 
 
@@ -85,7 +88,7 @@ uses
   //const
   //  GST_CLOCK_TIME_NONE = TGstClockTime(-1);
 
-//  function gst_stream_volume_get_type(): TGType; cdecl; external 'gstaudio-1.0';
+  //  function gst_stream_volume_get_type(): TGType; cdecl; external 'gstaudio-1.0';
 
 
 
@@ -94,19 +97,18 @@ uses
     pipeline, filesrc, volume: PGstElement;
     ch: ansichar;
 
-        vol: single = 1.1;
+    vol: single = 1.1;
     quit: boolean = False;
-    vclass: PGObjectClass;
     prolist: PPGParamSpec;
-    count: Tguint;
-    i: Integer;
+    Count: Tguint;
+    i: integer;
   begin
     gst_init(@argc, @argv);
 
     //  pipeline := gst_parse_launch('playbin uri=file:/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! volume', nil);
-  //    pipeline := gst_parse_launch('filesrc location=test.wav ! wavparse ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
-  //pipeline := gst_parse_launch('filesrc location=/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! wavparse ! audioconvert ! volume name=volume ! autoaudiosink', nil);
-pipeline := gst_parse_launch('filesrc location=test.mp3 ! decodebin ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
+    //    pipeline := gst_parse_launch('filesrc location=test.wav ! wavparse ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
+    //pipeline := gst_parse_launch('filesrc location=/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! wavparse ! audioconvert ! volume name=volume ! autoaudiosink', nil);
+    pipeline := gst_parse_launch('filesrc location=test.mp3 ! decodebin ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
     if pipeline = nil then begin
       WriteLn('pipeline error');
     end else begin
@@ -119,25 +121,27 @@ pipeline := gst_parse_launch('filesrc location=test.mp3 ! decodebin ! audioconve
     //end else begin
     //  WriteLn('filesrc io.');
     //end;
-//        g_object_set(filesrc, 'location', 'test.wav');
+    //        g_object_set(filesrc, 'location', 'test.wav');
 
-        volume := gst_bin_get_by_name(GST_BIN( pipeline), 'volume');
-        vclass:= G_OBJECT_GET_CLASS(volume);
-        prolist:= g_object_class_list_properties(vclass, @count);
+    volume := gst_bin_get_by_name(GST_BIN(pipeline), 'volume');
+    prolist := g_object_class_list_properties(G_OBJECT_GET_CLASS(volume), @Count);
 
-        WriteLn('count:', count);
-        for i:=0 to count-1 do WriteLn(i:3, ' ' ,prolist[i]^.name);
+    WriteLn('count:', Count);
+    for i := 0 to Count - 1 do begin
+      WriteLn(i: 3, ' ', prolist[i]^.Name);
+    end;
+    g_free(prolist);
 
-//      volume := gst_bin_get_by_name(Pointer(pipeline), 'volume');
+    //      volume := gst_bin_get_by_name(Pointer(pipeline), 'volume');
     //volume := gst_bin_get_by_interface(GST_BIN( pipeline), GST_TYPE_STREAM_VOLUME);
-   // volume := gst_bin_get_by_interface(GST_BIN(pipeline), gst_stream_volume_get_type());
+    // volume := gst_bin_get_by_interface(GST_BIN(pipeline), gst_stream_volume_get_type());
     if volume = nil then begin
       WriteLn('volume error');
     end else begin
       WriteLn('volume io.');
     end;
 
-    vol:=0.1;
+    vol := 0.3;
     g_object_set(volume, 'volume', vol, nil);
     WriteLn('volume');
     gst_element_set_state(pipeline, GST_STATE_PLAYING);

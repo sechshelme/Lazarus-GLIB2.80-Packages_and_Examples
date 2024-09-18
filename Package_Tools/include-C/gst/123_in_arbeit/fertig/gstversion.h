@@ -84,9 +84,9 @@
  * will expand to `FALSE`.
  */
 #define	GST_CHECK_VERSION(major,minor,micro)	\
-    (GST_VERSION_MAJOR > (major) || \
-     (GST_VERSION_MAJOR == (major) && GST_VERSION_MINOR > (minor)) || \
-     (GST_VERSION_MAJOR == (major) && GST_VERSION_MINOR == (minor) && \
+    (GST_VERSION_MAJOR > (major) | \
+     (GST_VERSION_MAJOR == (major) & GST_VERSION_MINOR > (minor)) | \
+     (GST_VERSION_MAJOR == (major) & GST_VERSION_MINOR == (minor) & \
       GST_VERSION_MICRO >= (micro)))
 
 
