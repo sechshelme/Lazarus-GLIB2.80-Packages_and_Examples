@@ -18,18 +18,18 @@ type
   end;
   PCustomData = ^TCustomData;
 
-  function GST_TIME_ARGS(t:TGstClockTime):String;
+  function GST_TIME_ARGS(t: TGstClockTime): string;
   var
     ms, s, min: TGstClockTime;
   begin
-    t:=t div 1000000;
+    t := t div 1000000;
 
-    min:=t div  60000;
-    s:=(t mod 60000) div 1000;
-    ms:=t mod 1000;
+    min := t div 60000;
+    s := (t mod 60000) div 1000;
+    ms := t mod 1000;
 
 
-    WriteStr(Result,min,':', s:2,':', ms:3);
+    WriteStr(Result, min, ':', s: 2, ':', ms: 3);
   end;
 
   procedure handle_message(Data: PCustomData; msg: PGstMessage);
@@ -142,13 +142,12 @@ type
 
           if not GST_CLOCK_TIME_IS_VALID(Data.duration) then begin
             if not gst_element_query_duration(Data.playbin, GST_FORMAT_TIME, @Data.duration) then begin
-//              g_error('Could not query current duration'#10);
-              g_log(nil, G_LOG_LEVEL_ERROR,'Could not query current duration'#10);
+              g_printerr('Could not query current duration'#10);
             end;
           end;
 
- //         WriteLn('Position: ', current, ' - ', Data.duration);
-          Write('Position: ', GST_TIME_ARGS(current), ' - ',GST_TIME_ARGS( Data.duration),#13);
+          //         WriteLn('Position: ', current, ' - ', Data.duration);
+          Write('Position: ', GST_TIME_ARGS(current), ' - ', GST_TIME_ARGS(Data.duration), #13);
 
           if (Data.seek_enabled) and (not Data.seek_done) and (current > 10 * GST_SECOND) then begin
             g_print(#10'nReached 10s, performing seek...'#10);
@@ -161,7 +160,7 @@ type
     until Data.terminate;
 
     g_object_unref(bus);
-    gst_element_set_state(Data.playbin,GST_STATE_NULL);
+    gst_element_set_state(Data.playbin, GST_STATE_NULL);
     g_object_unref(Data.playbin);
 
     WriteLn('ende');

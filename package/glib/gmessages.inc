@@ -88,8 +88,8 @@ procedure g_log_structured_standard(log_domain: Pgchar; log_level: TGLogLevelFla
 const
   G_LOG_DOMAIN: PChar = nil;
 
-procedure g_error(format: Pgchar); varargs; cdecl; external libglib2;
-procedure g_critical(format: Pgchar); varargs; cdecl; external libglib2;
+//procedure g_error(format: Pgchar); varargs; cdecl; external libglib2;
+//procedure g_critical(format: Pgchar); varargs; cdecl; external libglib2;
 
 type
   TGPrintFunc = procedure(_string: Pgchar); cdecl;

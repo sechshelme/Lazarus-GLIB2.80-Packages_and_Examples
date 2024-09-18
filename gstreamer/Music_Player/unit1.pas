@@ -11,6 +11,9 @@ uses
   Streamer;
 
 type
+
+  { TForm1 }
+
   TForm1 = class(TForm)
     Label1: TLabel;
     Label2: TLabel;
@@ -21,10 +24,15 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
+    procedure TrackBar1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: integer);
+    procedure TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: integer);
   private
     MainMenu: TMenuBar;
     EditBox: TEditBox;
     PlayBox: TPlayBox;
+    IsTrackBarMDown: boolean;
     SekStream,
     PriStream: TStreamer;
     IsChange: boolean;
@@ -170,7 +178,7 @@ begin
   ListBoxSongs.Items.AddStrings(sl);
   sl.Free;
 
-    sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
+  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
   ListBoxSongs.Items.AddStrings(sl);
   sl.Free;
 
@@ -191,6 +199,8 @@ begin
   Timer1.Interval := 200;
   TrackBar1.TickStyle := tsNone;
   TrackBar1.Max := 1000;
+  IsTrackBarMDown := False;
+
   Width := 1024;
 end;
 
@@ -221,6 +231,18 @@ begin
   IsChange := True;
 end;
 
+procedure TForm1.TrackBar1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+begin
+  WriteLn('down');
+  IsTrackBarMDown := True;
+end;
+
+procedure TForm1.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+begin
+  WriteLn('up');
+  IsTrackBarMDown := False;
+end;
+
 procedure TForm1.Timer1Timer(Sender: TObject);
 var
   SDur, SPos: integer;
@@ -231,7 +253,7 @@ begin
     if IsChange then begin
       PriStream.Position := TrackBar1.Position;
       IsChange := False;
-    end else begin
+    end else if not IsTrackBarMDown then begin
       OldChangeProc := TrackBar1.OnChange;
       TrackBar1.OnChange := nil;
       SPos := PriStream.Position;

@@ -43,6 +43,8 @@ object Form1: TForm1
     OnChange = TrackBar1Change
     Anchors = [akTop, akLeft, akRight]
     TabOrder = 0
+    OnMouseDown = TrackBar1MouseDown
+    OnMouseUp = TrackBar1MouseUp
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
