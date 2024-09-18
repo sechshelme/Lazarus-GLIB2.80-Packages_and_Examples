@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -73,49 +73,10 @@ function GST_TASK_GET_LOCK(task : Pointer) : PGRecMutex;
 
 // === Konventiert am: 14-9-24 14:54:15 ===
 
-function GST_TYPE_SHARED_TASK_POOL : TGType;
-function GST_SHARED_TASK_POOL(obj : Pointer) : PGstSharedTaskPool;
-function GST_SHARED_TASK_POOL_CLASS(klass : Pointer) : PGstSharedTaskPoolClass;
-function GST_IS_SHARED_TASK_POOL(obj : Pointer) : Tgboolean;
-function GST_IS_SHARED_TASK_POOL_CLASS(klass : Pointer) : Tgboolean;
-function GST_SHARED_TASK_POOL_GET_CLASS(obj : Pointer) : PGstSharedTaskPoolClass;
-
 {$ENDIF read_interface}
 
 
 {$IFDEF read_implementation}
-
-function GST_TYPE_SHARED_TASK_POOL : TGType;
-  begin
-    GST_TYPE_SHARED_TASK_POOL:=gst_shared_task_pool_get_type;
-  end;
-
-function GST_SHARED_TASK_POOL(obj : Pointer) : PGstSharedTaskPool;
-begin
-  Result := PGstSharedTaskPool(g_type_check_instance_cast(obj, GST_TYPE_SHARED_TASK_POOL));
-end;
-
-function GST_SHARED_TASK_POOL_CLASS(klass : Pointer) : PGstSharedTaskPoolClass;
-begin
-  Result := PGstSharedTaskPoolClass(g_type_check_class_cast(klass, GST_TYPE_SHARED_TASK_POOL));
-end;
-
-function GST_IS_SHARED_TASK_POOL(obj : Pointer) : Tgboolean;
-begin
-  Result := g_type_check_instance_is_a(obj,  GST_TYPE_SHARED_TASK_POOL);
-end;
-
-function GST_IS_SHARED_TASK_POOL_CLASS(klass : Pointer) : Tgboolean;
-begin
-  Result := g_type_check_class_is_a(klass,  GST_TYPE_SHARED_TASK_POOL);
-end;
-
-function GST_SHARED_TASK_POOL_GET_CLASS(obj : Pointer) : PGstSharedTaskPoolClass;
-begin
-  Result := PGstSharedTaskPoolClass(PGTypeInstance(obj)^.g_class);
-end;
-
-// ====
 
 function GST_TASK_CAST(task: Pointer): PGstTask;
 begin

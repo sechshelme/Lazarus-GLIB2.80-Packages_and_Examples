@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -35,11 +35,9 @@ type
 function gst_structure_get_type: TGType; cdecl; external gstreamerlib;
 function gst_structure_new_empty(Name: Pgchar): PGstStructure; cdecl; external gstreamerlib;
 function gst_structure_new_id_empty(quark: TGQuark): PGstStructure; cdecl; external gstreamerlib;
-function gst_structure_new(Name: Pgchar; firstfield: Pgchar; args: array of const): PGstStructure; cdecl; external gstreamerlib;
-function gst_structure_new(Name: Pgchar; firstfield: Pgchar): PGstStructure; cdecl; external gstreamerlib;
+function gst_structure_new(Name: Pgchar; firstfield: Pgchar): PGstStructure; varargs cdecl; external gstreamerlib;
 function gst_structure_new_valist(Name: Pgchar; firstfield: Pgchar; varargs: Tva_list): PGstStructure; cdecl; external gstreamerlib;
-function gst_structure_new_id(name_quark: TGQuark; field_quark: TGQuark; args: array of const): PGstStructure; cdecl; external gstreamerlib;
-function gst_structure_new_id(name_quark: TGQuark; field_quark: TGQuark): PGstStructure; cdecl; external gstreamerlib;
+function gst_structure_new_id(name_quark: TGQuark; field_quark: TGQuark): PGstStructure; varargs cdecl; external gstreamerlib;
 function gst_structure_new_from_string(_string: Pgchar): PGstStructure; cdecl; external gstreamerlib;
 function gst_structure_copy(structure: PGstStructure): PGstStructure; cdecl; external gstreamerlib;
 function gst_structure_set_parent_refcount(structure: PGstStructure; refcount: Pgint): Tgboolean; cdecl; external gstreamerlib;
@@ -57,23 +55,18 @@ procedure gst_structure_set_array(structure: PGstStructure; fieldname: Pgchar; a
 procedure gst_structure_set_list(structure: PGstStructure; fieldname: Pgchar; arr: PGValueArray); cdecl; external gstreamerlib;
 procedure gst_structure_id_take_value(structure: PGstStructure; field: TGQuark; Value: PGValue); cdecl; external gstreamerlib;
 procedure gst_structure_take_value(structure: PGstStructure; fieldname: Pgchar; Value: PGValue); cdecl; external gstreamerlib;
-procedure gst_structure_set(structure: PGstStructure; fieldname: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_structure_set(structure: PGstStructure; fieldname: Pgchar); cdecl; external gstreamerlib;
+procedure gst_structure_set(structure: PGstStructure; fieldname: Pgchar); varargs cdecl; external gstreamerlib;
 procedure gst_structure_set_valist(structure: PGstStructure; fieldname: Pgchar; varargs: Tva_list); cdecl; external gstreamerlib;
-procedure gst_structure_id_set(structure: PGstStructure; fieldname: TGQuark; args: array of const); cdecl; external gstreamerlib;
-procedure gst_structure_id_set(structure: PGstStructure; fieldname: TGQuark); cdecl; external gstreamerlib;
+procedure gst_structure_id_set(structure: PGstStructure; fieldname: TGQuark); varargs cdecl; external gstreamerlib;
 procedure gst_structure_id_set_valist(structure: PGstStructure; fieldname: TGQuark; varargs: Tva_list); cdecl; external gstreamerlib;
 function gst_structure_get_valist(structure: PGstStructure; first_fieldname: PChar; args: Tva_list): Tgboolean; cdecl; external gstreamerlib;
-function gst_structure_get(structure: PGstStructure; first_fieldname: PChar; args: array of const): Tgboolean; cdecl; external gstreamerlib;
-function gst_structure_get(structure: PGstStructure; first_fieldname: PChar): Tgboolean; cdecl; external gstreamerlib;
+function gst_structure_get(structure: PGstStructure; first_fieldname: PChar): Tgboolean; varargs cdecl; external gstreamerlib;
 function gst_structure_id_get_valist(structure: PGstStructure; first_field_id: TGQuark; args: Tva_list): Tgboolean; cdecl; external gstreamerlib;
-function gst_structure_id_get(structure: PGstStructure; first_field_id: TGQuark; args: array of const): Tgboolean; cdecl; external gstreamerlib;
-function gst_structure_id_get(structure: PGstStructure; first_field_id: TGQuark): Tgboolean; cdecl; external gstreamerlib;
+function gst_structure_id_get(structure: PGstStructure; first_field_id: TGQuark): Tgboolean; varargs cdecl; external gstreamerlib;
 function gst_structure_id_get_value(structure: PGstStructure; field: TGQuark): PGValue; cdecl; external gstreamerlib;
 function gst_structure_get_value(structure: PGstStructure; fieldname: Pgchar): PGValue; cdecl; external gstreamerlib;
 procedure gst_structure_remove_field(structure: PGstStructure; fieldname: Pgchar); cdecl; external gstreamerlib;
-procedure gst_structure_remove_fields(structure: PGstStructure; fieldname: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_structure_remove_fields(structure: PGstStructure; fieldname: Pgchar); cdecl; external gstreamerlib;
+procedure gst_structure_remove_fields(structure: PGstStructure; fieldname: Pgchar); varargs cdecl; external gstreamerlib;
 procedure gst_structure_remove_fields_valist(structure: PGstStructure; fieldname: Pgchar; varargs: Tva_list); cdecl; external gstreamerlib;
 procedure gst_structure_remove_all_fields(structure: PGstStructure); cdecl; external gstreamerlib;
 function gst_structure_get_field_type(structure: PGstStructure; fieldname: Pgchar): TGType; cdecl; external gstreamerlib;

@@ -59,8 +59,7 @@ const
   GST_ELEMENT_FLAG_INDEXABLE = GST_OBJECT_FLAG_LAST shl 5;
   GST_ELEMENT_FLAG_LAST = GST_OBJECT_FLAG_LAST shl 10;
 
-function gst_make_element_message_details(Name: PChar; args: array of const): PGstStructure; cdecl; external gstreamerlib;
-function gst_make_element_message_details(Name: PChar): PGstStructure; cdecl; external gstreamerlib;
+function gst_make_element_message_details(Name: PChar): PGstStructure; varargs cdecl; external gstreamerlib;
 
 type
   TGstElement = record
@@ -194,8 +193,7 @@ function gst_element_seek(element: PGstElement; rate: Tgdouble; format: TGstForm
 function gst_element_query(element: PGstElement; query: PGstQuery): Tgboolean; cdecl; external gstreamerlib;
 function gst_element_post_message(element: PGstElement; message: PGstMessage): Tgboolean; cdecl; external gstreamerlib;
 
-function _gst_element_error_printf(format: Pgchar; args: array of const): Pgchar; cdecl; external gstreamerlib;
-function _gst_element_error_printf(format: Pgchar): Pgchar; cdecl; external gstreamerlib;
+function _gst_element_error_printf(format: Pgchar): Pgchar; varargs cdecl; external gstreamerlib;
 
 procedure gst_element_message_full(element: PGstElement; _type: TGstMessageType; domain: TGQuark; code: Tgint; Text: Pgchar;
   debug: Pgchar; file_: Pgchar; _function: Pgchar; line: Tgint); cdecl; external gstreamerlib;

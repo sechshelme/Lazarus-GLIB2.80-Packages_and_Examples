@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -70,8 +70,7 @@ const
   GST_TAG_SCOPE_GLOBAL = 1;
 
 function gst_tag_list_new_empty: PGstTagList; cdecl; external gstreamerlib;
-function gst_tag_list_new(tag: Pgchar; args: array of const): PGstTagList; cdecl; external gstreamerlib;
-function gst_tag_list_new(tag: Pgchar): PGstTagList; cdecl; external gstreamerlib;
+function gst_tag_list_new(tag: Pgchar): PGstTagList; varargs cdecl; external gstreamerlib;
 function gst_tag_list_new_valist(var_args: Tva_list): PGstTagList; cdecl; external gstreamerlib;
 procedure gst_tag_list_set_scope(list: PGstTagList; scope: TGstTagScope); cdecl; external gstreamerlib;
 function gst_tag_list_get_scope(list: PGstTagList): TGstTagScope; cdecl; external gstreamerlib;
@@ -84,10 +83,8 @@ function gst_tag_list_is_equal(list1: PGstTagList; list2: PGstTagList): Tgboolea
 procedure gst_tag_list_insert(into: PGstTagList; from: PGstTagList; mode: TGstTagMergeMode); cdecl; external gstreamerlib;
 function gst_tag_list_merge(list1: PGstTagList; list2: PGstTagList; mode: TGstTagMergeMode): PGstTagList; cdecl; external gstreamerlib;
 function gst_tag_list_get_tag_size(list: PGstTagList; tag: Pgchar): Tguint; cdecl; external gstreamerlib;
-procedure gst_tag_list_add(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_tag_list_add(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar); cdecl; external gstreamerlib;
-procedure gst_tag_list_add_values(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_tag_list_add_values(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar); cdecl; external gstreamerlib;
+procedure gst_tag_list_add(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external gstreamerlib;
+procedure gst_tag_list_add_values(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external gstreamerlib;
 procedure gst_tag_list_add_valist(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
 procedure gst_tag_list_add_valist_values(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
 procedure gst_tag_list_add_value(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; Value: PGValue); cdecl; external gstreamerlib;

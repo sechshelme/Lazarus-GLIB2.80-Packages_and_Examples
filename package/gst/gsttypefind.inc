@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -37,8 +37,7 @@ function gst_type_find_get_type: TGType; cdecl; external gstreamerlib;
 function gst_type_find_peek(find: PGstTypeFind; offset: Tgint64; size: Tguint): Pguint8; cdecl; external gstreamerlib;
 procedure gst_type_find_suggest(find: PGstTypeFind; probability: Tguint; caps: PGstCaps); cdecl; external gstreamerlib;
 procedure gst_type_find_suggest_empty_simple(find: PGstTypeFind; probability: Tguint; media_type: PChar); cdecl; external gstreamerlib;
-procedure gst_type_find_suggest_simple(find: PGstTypeFind; probability: Tguint; media_type: PChar; fieldname: PChar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_type_find_suggest_simple(find: PGstTypeFind; probability: Tguint; media_type: PChar; fieldname: PChar); cdecl; external gstreamerlib;
+procedure gst_type_find_suggest_simple(find: PGstTypeFind; probability: Tguint; media_type: PChar; fieldname: PChar); varargs cdecl; external gstreamerlib;
 function gst_type_find_get_length(find: PGstTypeFind): Tguint64; cdecl; external gstreamerlib;
 function gst_type_find_register(plugin: PGstPlugin; Name: Pgchar; rank: Tguint; func: TGstTypeFindFunction; extensions: Pgchar;
   possible_caps: PGstCaps; Data: Tgpointer; data_notify: TGDestroyNotify): Tgboolean; cdecl; external gstreamerlib;

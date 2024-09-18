@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -24,13 +24,11 @@ function gst_element_factory_get_uri_type(factory: PGstElementFactory): TGstURIT
 function gst_element_factory_get_uri_protocols(factory: PGstElementFactory): PPgchar; cdecl; external gstreamerlib;
 function gst_element_factory_has_interface(factory: PGstElementFactory; interfacename: Pgchar): Tgboolean; cdecl; external gstreamerlib;
 function gst_element_factory_create(factory: PGstElementFactory; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_create_full(factory: PGstElementFactory; First: Pgchar; args: array of const): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_create_full(factory: PGstElementFactory; First: Pgchar): PGstElement; cdecl; external gstreamerlib;
+function gst_element_factory_create_full(factory: PGstElementFactory; First: Pgchar): PGstElement; varargs cdecl; external gstreamerlib;
 function gst_element_factory_create_valist(factory: PGstElementFactory; First: Pgchar; properties: Tva_list): PGstElement; cdecl; external gstreamerlib;
 function gst_element_factory_create_with_properties(factory: PGstElementFactory; n: Tguint; names: PPgchar; values: PGValue): PGstElement; cdecl; external gstreamerlib;
 function gst_element_factory_make(factoryname: Pgchar; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_make_full(factoryname: Pgchar; First: Pgchar; args: array of const): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_make_full(factoryname: Pgchar; First: Pgchar): PGstElement; cdecl; external gstreamerlib;
+function gst_element_factory_make_full(factoryname: Pgchar; First: Pgchar): PGstElement; varargs cdecl; external gstreamerlib;
 function gst_element_factory_make_valist(factoryname: Pgchar; First: Pgchar; properties: Tva_list): PGstElement; cdecl; external gstreamerlib;
 function gst_element_factory_make_with_properties(factoryname: Pgchar; n: Tguint; names: PPgchar; values: PGValue): PGstElement; cdecl; external gstreamerlib;
 function gst_element_register(plugin: PGstPlugin; Name: Pgchar; rank: Tguint; _type: TGType): Tgboolean; cdecl; external gstreamerlib;

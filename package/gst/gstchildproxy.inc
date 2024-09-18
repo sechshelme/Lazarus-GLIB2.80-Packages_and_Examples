@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -34,12 +34,10 @@ function gst_child_proxy_get_child_by_index(parent: PGstChildProxy; index: Tguin
 function gst_child_proxy_lookup(obj: PGstChildProxy; Name: Pgchar; target: PPGObject; pspec: PPGParamSpec): Tgboolean; cdecl; external gstreamerlib;
 procedure gst_child_proxy_get_property(obj: PGstChildProxy; Name: Pgchar; Value: PGValue); cdecl; external gstreamerlib;
 procedure gst_child_proxy_get_valist(obj: PGstChildProxy; first_property_name: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
-procedure gst_child_proxy_get(obj: PGstChildProxy; first_property_name: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_child_proxy_get(obj: PGstChildProxy; first_property_name: Pgchar); cdecl; external gstreamerlib;
+procedure gst_child_proxy_get(obj: PGstChildProxy; first_property_name: Pgchar); varargs cdecl; external gstreamerlib;
 procedure gst_child_proxy_set_property(obj: PGstChildProxy; Name: Pgchar; Value: PGValue); cdecl; external gstreamerlib;
 procedure gst_child_proxy_set_valist(obj: PGstChildProxy; first_property_name: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
-procedure gst_child_proxy_set(obj: PGstChildProxy; first_property_name: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_child_proxy_set(obj: PGstChildProxy; first_property_name: Pgchar); cdecl; external gstreamerlib;
+procedure gst_child_proxy_set(obj: PGstChildProxy; first_property_name: Pgchar); varargs cdecl; external gstreamerlib;
 procedure gst_child_proxy_child_added(parent: PGstChildProxy; child: PGObject; Name: Pgchar); cdecl; external gstreamerlib;
 procedure gst_child_proxy_child_removed(parent: PGstChildProxy; child: PGObject; Name: Pgchar); cdecl; external gstreamerlib;
 

@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -100,17 +100,13 @@ type
     obj: PGObject; message: PGstDebugMessage; user_data: Tgpointer); cdecl;
 
 procedure gst_debug_log(category: PGstDebugCategory; level: TGstDebugLevel; file_: Pgchar; _function: Pgchar; line: Tgint;
-  obj: PGObject; format: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_debug_log(category: PGstDebugCategory; level: TGstDebugLevel; file_: Pgchar; _function: Pgchar; line: Tgint;
-  obj: PGObject; format: Pgchar); cdecl; external gstreamerlib;
+  obj: PGObject; format: Pgchar); varargs cdecl; external gstreamerlib;
 procedure gst_debug_log_valist(category: PGstDebugCategory; level: TGstDebugLevel; file_: Pgchar; _function: Pgchar; line: Tgint;
   obj: PGObject; format: Pgchar; args: Tva_list); cdecl; external gstreamerlib;
 procedure gst_debug_log_literal(category: PGstDebugCategory; level: TGstDebugLevel; file_: Pgchar; _function: Pgchar; line: Tgint;
   obj: PGObject; message_string: Pgchar); cdecl; external gstreamerlib;
 procedure gst_debug_log_id(category: PGstDebugCategory; level: TGstDebugLevel; file_: Pgchar; _function: Pgchar; line: Tgint;
-  id: Pgchar; format: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_debug_log_id(category: PGstDebugCategory; level: TGstDebugLevel; file_: Pgchar; _function: Pgchar; line: Tgint;
-  id: Pgchar; format: Pgchar); cdecl; external gstreamerlib;
+  id: Pgchar; format: Pgchar); varargs cdecl; external gstreamerlib;
 procedure gst_debug_log_id_valist(category: PGstDebugCategory; level: TGstDebugLevel; file_: Pgchar; _function: Pgchar; line: Tgint;
   id: Pgchar; format: Pgchar; args: Tva_list); cdecl; external gstreamerlib;
 procedure gst_debug_log_id_literal(category: PGstDebugCategory; level: TGstDebugLevel; file_: Pgchar; _function: Pgchar; line: Tgint;
@@ -161,16 +157,11 @@ function gst_debug_construct_term_color(colorinfo: Tguint): Pgchar; cdecl; exter
 function gst_debug_construct_win_color(colorinfo: Tguint): Tgint; cdecl; external gstreamerlib;
 function gst_info_vasprintf(Result: PPgchar; format: Pgchar; args: Tva_list): Tgint; cdecl; external gstreamerlib;
 function gst_info_strdup_vprintf(format: Pgchar; args: Tva_list): Pgchar; cdecl; external gstreamerlib;
-function gst_info_strdup_printf(format: Pgchar; args: array of const): Pgchar; cdecl; external gstreamerlib;
-function gst_info_strdup_printf(format: Pgchar): Pgchar; cdecl; external gstreamerlib;
-procedure gst_print(format: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_print(format: Pgchar); cdecl; external gstreamerlib;
-procedure gst_println(format: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_println(format: Pgchar); cdecl; external gstreamerlib;
-procedure gst_printerr(format: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_printerr(format: Pgchar); cdecl; external gstreamerlib;
-procedure gst_printerrln(format: Pgchar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_printerrln(format: Pgchar); cdecl; external gstreamerlib;
+function gst_info_strdup_printf(format: Pgchar): Pgchar; varargs cdecl; external gstreamerlib;
+procedure gst_print(format: Pgchar); varargs cdecl; external gstreamerlib;
+procedure gst_println(format: Pgchar); varargs cdecl; external gstreamerlib;
+procedure gst_printerr(format: Pgchar); varargs cdecl; external gstreamerlib;
+procedure gst_printerrln(format: Pgchar); varargs cdecl; external gstreamerlib;
 
 var
   GST_CAT_DEFAULT: PGstDebugCategory; cvar;external gstreamerlib;

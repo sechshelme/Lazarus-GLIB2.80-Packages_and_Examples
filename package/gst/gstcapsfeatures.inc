@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -28,11 +28,9 @@ function gst_is_caps_features(obj: Tgconstpointer): Tgboolean; cdecl; external g
 function gst_caps_features_new_empty: PGstCapsFeatures; cdecl; external gstreamerlib;
 function gst_caps_features_new_any: PGstCapsFeatures; cdecl; external gstreamerlib;
 function gst_caps_features_new_single(feature: Pgchar): PGstCapsFeatures; cdecl; external gstreamerlib;
-function gst_caps_features_new(feature1: Pgchar; args: array of const): PGstCapsFeatures; cdecl; external gstreamerlib;
-function gst_caps_features_new(feature1: Pgchar): PGstCapsFeatures; cdecl; external gstreamerlib;
+function gst_caps_features_new(feature1: Pgchar): PGstCapsFeatures; varargs cdecl; external gstreamerlib;
 function gst_caps_features_new_valist(feature1: Pgchar; varargs: Tva_list): PGstCapsFeatures; cdecl; external gstreamerlib;
-function gst_caps_features_new_id(feature1: TGQuark; args: array of const): PGstCapsFeatures; cdecl; external gstreamerlib;
-function gst_caps_features_new_id(feature1: TGQuark): PGstCapsFeatures; cdecl; external gstreamerlib;
+function gst_caps_features_new_id(feature1: TGQuark): PGstCapsFeatures; varargs cdecl; external gstreamerlib;
 function gst_caps_features_new_id_valist(feature1: TGQuark; varargs: Tva_list): PGstCapsFeatures; cdecl; external gstreamerlib;
 function gst_caps_features_set_parent_refcount(features: PGstCapsFeatures; refcount: Pgint): Tgboolean; cdecl; external gstreamerlib;
 function gst_caps_features_copy(features: PGstCapsFeatures): PGstCapsFeatures; cdecl; external gstreamerlib;

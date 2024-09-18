@@ -1,12 +1,16 @@
-/////////////////////////////////////////////////////////////
-//                                                         //
-//   WARNUNG, dies Datei wird automatisch durch            //
-//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
-//                                                         //
-/////////////////////////////////////////////////////////////
+unit gst124;
 
-{$IFDEF read_interface}
+interface
+
+uses
+  glib280,
+  Strings,
+  ctypes;
+
+
+  {$IFDEF FPC}
+  {$PACKRECORDS C}
+  {$ENDIF}
 
 const
   {$ifdef Linux}
@@ -217,12 +221,15 @@ type
   end;
   PGstDeviceProviderFactory = ^TGstDeviceProviderFactory;
 
+  {$DEFINE read_interface}
+  {$include gst124_includes.inc}
+  {$UNDEF read_interface}
 
 
+implementation
 
-{$ENDIF read_interface}
+{$DEFINE read_implementation}
+{$include gst124_includes.inc}
+{$UNDEF read_implementation}
 
-
-{$IFDEF read_implementation}
-
-{$ENDIF read_implementation}
+end.

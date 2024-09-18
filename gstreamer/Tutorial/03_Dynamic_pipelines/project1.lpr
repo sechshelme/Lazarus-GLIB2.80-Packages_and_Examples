@@ -1,17 +1,11 @@
 program project1;
 
 uses
-  glib2,
   ctypes,
-  gst;
+  glib280,
+  gst124;
 
   // https://gstreamer.freedesktop.org/documentation/tutorials/basic/dynamic-pipelines.html?gi-language=c
-
-  procedure gst_caps_unref(object_: Tgpointer); cdecl; external gstreamerlib;
-
-
-const
-  GST_CLOCK_TIME_NONE = TGstClockTime(-1);
 
 type
   TCustomData = record
@@ -23,26 +17,6 @@ type
   end;
   PCustomData = ^TCustomData;
 
-  function GST_PAD_LINK_FAILED(ret: TGstPadLinkReturn): boolean;
-  begin
-    Result := longint(ret) < longint(GST_PAD_LINK_OK);
-  end;
-
-  function GST_OBJECT(obj: Pointer): PGstObject;
-  begin
-    Result := PGstObject(g_type_check_instance_cast(obj, gst_object_get_type));
-  end;
-
-  function GST_MESSAGE_SRC(msg: PGstMessage): PGstObject;
-  begin
-    Result := msg^.src;
-  end;
-
-  function GST_OBJECT_NAME(obj: PGstObject): Pgchar;
-  begin
-    Result := obj^.Name;
-  end;
-
   procedure pad_added_handler(src: PGstElement; new_pad: PGstPad; Data: PCustomData);
   var
     sink_pad: PGstPad;
@@ -52,7 +26,7 @@ type
     ret: TGstPadLinkReturn;
   begin
     sink_pad := gst_element_get_static_pad(Data^.convert, 'sink');
-    g_print('Received new pad "%s" from "%s" '#10, GST_OBJECT_NAME(GST_OBJECT(new_pad)), GST_OBJECT_NAME(GST_OBJECT(src)));
+    g_print('Received new pad "%s" from "%s" '#10, GST_OBJECT_NAME(new_pad), GST_OBJECT_NAME(src));
 
     if gst_pad_is_linked(sink_pad) then begin
       g_print('Ist schon gelinkt'#10);
@@ -86,7 +60,7 @@ type
     terminate: boolean = False;
     msg: PGstMessage;
     err: PGError;
-    debug_info: Pgchar;
+    debug_info, db: Pgchar;
     old_state, new_state, pending_state: TGstState;
   begin
     gst_init(@argc, @argv);
@@ -99,13 +73,13 @@ type
     Data.pipeline := gst_pipeline_new('test-pipeline');
 
     if (Data.pipeline = nil) or (Data.Source = nil) or (Data.convert = nil) or (Data.resample = nil) or (Data.sink = nil) then begin
-      g_printerr('Create Fehler'#10);
+      g_printerr('Not all elements could be created.'#10);
       Exit(-1);
     end;
 
-    gst_bin_add_many(GST_BIN(Data.pipeline), Data.Source, [Data.convert, Data.resample, Data.sink, nil]);
-    if not gst_element_link_many(Data.convert, Data.resample, [Data.sink, nil]) then begin
-      g_printerr('Kann nicht linken'#10);
+    gst_bin_add_many(GST_BIN(Data.pipeline), Data.Source, Data.convert, Data.resample, Data.sink, nil);
+    if not gst_element_link_many(Data.convert, Data.resample, Data.sink, nil) then begin
+      g_printerr('Elements could not be linked'#10);
       g_object_unref(Data.pipeline);
       Exit(-1);
     end;
@@ -123,17 +97,18 @@ type
 
     bus := gst_element_get_bus(Data.pipeline);
     repeat
-      msg := gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE, TGstMessageType(uint64(GST_MESSAGE_STATE_CHANGED) or uint64(GST_MESSAGE_ERROR) or uint64(GST_MESSAGE_EOS)));
+      msg := gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE, GST_MESSAGE_STATE_CHANGED or GST_MESSAGE_ERROR or GST_MESSAGE_EOS);
       if msg <> nil then begin
         case GST_MESSAGE_TYPE(msg) of
           GST_MESSAGE_ERROR: begin
             gst_message_parse_error(msg, @err, @debug_info);
-            g_printerr('Error received from elemment %s: %s'#10, GST_OBJECT_NAME(GST_MESSAGE_SRC(msg)), err^.message);
+            g_printerr('Error received from elemment %s: %s'#10, GST_OBJECT_NAME(msg^.src), err^.message);
             if debug_info = nil then begin
-              g_printerr('Debug Info: none'#10);
+              db := 'none';
             end else begin
-              g_printerr('Debug Info: %s'#10, debug_info);
+              db := debug_info;
             end;
+            g_printerr('Debugging information: %s'#10, db);
             g_clear_error(@err);
             g_free(debug_info);
             terminate := True;
@@ -145,7 +120,6 @@ type
           GST_MESSAGE_STATE_CHANGED: begin
             if GST_MESSAGE_SRC(msg) = GST_OBJECT(Data.pipeline) then begin
               gst_message_parse_state_changed(msg, @old_state, @new_state, @pending_state);
-
               g_print('Pipeline state changed from %s to %s '#10, gst_element_state_get_name(old_state), gst_element_state_get_name(new_state));
             end;
           end;
@@ -153,16 +127,13 @@ type
             g_print('Pipeline state unbekannt'#10);
           end;
         end;
-
       end;
-
       gst_message_unref(msg)
     until terminate;
 
     gst_object_unref(bus);
     gst_element_set_state(Data.pipeline, GST_STATE_NULL);
     gst_object_unref(Data.pipeline);
-
 
     WriteLn('ende');
     Result := 0;

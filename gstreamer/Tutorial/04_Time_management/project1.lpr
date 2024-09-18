@@ -1,19 +1,11 @@
 program project1;
 
 uses
-  glib2,
   ctypes,
-  gst;
+  glib280,
+  gst124;
 
-  // https://gstreamer.freedesktop.org/documentation/tutorials/basic/dynamic-pipelines.html?gi-language=c
-
-  procedure gst_caps_unref(object_: Tgpointer); cdecl; external gstreamerlib;
-  procedure gst_query_parse_seeking(query: PGstQuery; format: PGstFormat; seekable: Pgboolean; segment_start: Pgint64; segment_end: Pgint64); cdecl; external gstreamerlib;
-
-
-const
-  GST_CLOCK_TIME_NONE = TGstClockTime(-1);
-  GST_TIME_FORMAT = 'u:%02u:%02u.%09u';
+  // https://gstreamer.freedesktop.org/documentation/tutorials/basic/time-management.html?gi-language=c
 
 type
   TCustomData = record
@@ -21,49 +13,10 @@ type
     playing,
     terminate,
     seek_enabled,
-    seek_done: gboolean;
-    duration: gint64;
+    seek_done: Tgboolean;
+    duration: Tgint64;
   end;
   PCustomData = ^TCustomData;
-
-  function GST_PAD_LINK_FAILED(ret: TGstPadLinkReturn): boolean;
-  begin
-    Result := longint(ret) < longint(GST_PAD_LINK_OK);
-  end;
-
-  function GST_OBJECT(obj: Pointer): PGstObject;
-  begin
-    Result := PGstObject(g_type_check_instance_cast(obj, gst_object_get_type));
-  end;
-
-  function GST_MESSAGE_SRC(msg: PGstMessage): PGstObject;
-  begin
-    Result := msg^.src;
-  end;
-
-  function GST_OBJECT_NAME(obj: PGstObject): Pgchar;
-  begin
-    Result := obj^.Name;
-  end;
-
-const
-  G_USEC_PER_SEC = 1000000;
-
-  function GST_SECOND: TGstClockTimeDiff;
-  begin
-    Result := TGstClockTimeDiff(G_USEC_PER_SEC * 1000);
-    ;
-  end;
-
-  function GST_MSECOND: TGstClockTimeDiff;
-  begin
-    Result := TGstClockTimeDiff(GST_SECOND div 1000);
-  end;
-
-  function GST_CLOCK_TIME_IS_VALID(time: gint64): TGboolean;
-  begin
-    Result := TGstClockTime(time) <> GST_CLOCK_TIME_NONE;
-  end;
 
   function GST_TIME_ARGS(t:TGstClockTime):String;
   var
@@ -189,7 +142,8 @@ const
 
           if not GST_CLOCK_TIME_IS_VALID(Data.duration) then begin
             if not gst_element_query_duration(Data.playbin, GST_FORMAT_TIME, @Data.duration) then begin
-              g_error('Could not query current duration'#10);
+//              g_error('Could not query current duration'#10);
+              g_log(nil, G_LOG_LEVEL_ERROR,'Could not query current duration'#10);
             end;
           end;
 
@@ -198,7 +152,7 @@ const
 
           if (Data.seek_enabled) and (not Data.seek_done) and (current > 10 * GST_SECOND) then begin
             g_print(#10'nReached 10s, performing seek...'#10);
-            gst_element_seek_simple(Data.playbin, GST_FORMAT_TIME, TGstSeekFlags(uint64(GST_SEEK_FLAG_FLUSH) or uint64(GST_SEEK_FLAG_KEY_UNIT)), 30 * GST_SECOND);
+            gst_element_seek_simple(Data.playbin, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH or GST_SEEK_FLAG_KEY_UNIT, 30 * GST_SECOND);
             Data.seek_done := True;
           end;
         end;

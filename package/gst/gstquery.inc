@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -58,8 +58,7 @@ function gst_query_new_seeking(format: TGstFormat): PGstQuery; cdecl; external g
 procedure gst_query_set_seeking(query: PGstQuery; format: TGstFormat; seekable: Tgboolean; segment_start: Tgint64; segment_end: Tgint64); cdecl; external gstreamerlib;
 procedure gst_query_parse_seeking(query: PGstQuery; format: PGstFormat; seekable: Pgboolean; segment_start: Pgint64; segment_end: Pgint64); cdecl; external gstreamerlib;
 function gst_query_new_formats: PGstQuery; cdecl; external gstreamerlib;
-procedure gst_query_set_formats(query: PGstQuery; n_formats: Tgint; args: array of const); cdecl; external gstreamerlib;
-procedure gst_query_set_formats(query: PGstQuery; n_formats: Tgint); cdecl; external gstreamerlib;
+procedure gst_query_set_formats(query: PGstQuery; n_formats: Tgint); varargs cdecl; external gstreamerlib;
 procedure gst_query_set_formatsv(query: PGstQuery; n_formats: Tgint; formats: PGstFormat); cdecl; external gstreamerlib;
 procedure gst_query_parse_n_formats(query: PGstQuery; n_formats: Pguint); cdecl; external gstreamerlib;
 procedure gst_query_parse_nth_format(query: PGstQuery; nth: Tguint; format: PGstFormat); cdecl; external gstreamerlib;

@@ -4,9 +4,9 @@ program project1;
 uses
   gl,
   oglGLFW3,
-  glib2,
+  glib280,
   ctypes,
-  gst;
+  gst124;
 
 var
   pipeline, sink: PGstElement;

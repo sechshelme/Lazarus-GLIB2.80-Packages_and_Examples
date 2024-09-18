@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -55,10 +55,8 @@ function gst_caps_get_type: TGType; cdecl; external gstreamerlib;
 function gst_caps_new_empty: PGstCaps; cdecl; external gstreamerlib;
 function gst_caps_new_any: PGstCaps; cdecl; external gstreamerlib;
 function gst_caps_new_empty_simple(media_type: PChar): PGstCaps; cdecl; external gstreamerlib;
-function gst_caps_new_simple(media_type: PChar; fieldname: PChar; args: array of const): PGstCaps; cdecl; external gstreamerlib;
-function gst_caps_new_simple(media_type: PChar; fieldname: PChar): PGstCaps; cdecl; external gstreamerlib;
-function gst_caps_new_full(struct1: PGstStructure; args: array of const): PGstCaps; cdecl; external gstreamerlib;
-function gst_caps_new_full(struct1: PGstStructure): PGstCaps; cdecl; external gstreamerlib;
+function gst_caps_new_simple(media_type: PChar; fieldname: PChar): PGstCaps; varargs cdecl; external gstreamerlib;
+function gst_caps_new_full(struct1: PGstStructure): PGstCaps; varargs cdecl; external gstreamerlib;
 function gst_caps_new_full_valist(structure: PGstStructure; var_args: Tva_list): PGstCaps; cdecl; external gstreamerlib;
 function gst_static_caps_get_type: TGType; cdecl; external gstreamerlib;
 function gst_static_caps_get(static_caps: PGstStaticCaps): PGstCaps; cdecl; external gstreamerlib;
@@ -79,8 +77,7 @@ function gst_caps_get_features(caps: PGstCaps; index: Tguint): PGstCapsFeatures;
 function gst_caps_copy_nth(caps: PGstCaps; nth: Tguint): PGstCaps; cdecl; external gstreamerlib;
 function gst_caps_truncate(caps: PGstCaps): PGstCaps; cdecl; external gstreamerlib;
 procedure gst_caps_set_value(caps: PGstCaps; field: PChar; Value: PGValue); cdecl; external gstreamerlib;
-procedure gst_caps_set_simple(caps: PGstCaps; field: PChar; args: array of const); cdecl; external gstreamerlib;
-procedure gst_caps_set_simple(caps: PGstCaps; field: PChar); cdecl; external gstreamerlib;
+procedure gst_caps_set_simple(caps: PGstCaps; field: PChar); varargs cdecl; external gstreamerlib;
 procedure gst_caps_set_simple_valist(caps: PGstCaps; field: PChar; varargs: Tva_list); cdecl; external gstreamerlib;
 function gst_caps_foreach(caps: PGstCaps; func: TGstCapsForeachFunc; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
 function gst_caps_map_in_place(caps: PGstCaps; func: TGstCapsMapFunc; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;

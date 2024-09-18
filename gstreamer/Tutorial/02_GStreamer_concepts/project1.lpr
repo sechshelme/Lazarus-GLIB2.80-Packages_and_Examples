@@ -1,16 +1,11 @@
 program project1;
 
 uses
-  //  Crt,
-  glib2,
   ctypes,
-  gst;
+  glib280,
+  gst124;
 
-  // https://forums.developer.nvidia.com/t/pipeline-ends-after-4-seconds-with-gst-message-eos/253486
-
-const
-  GST_CLOCK_TIME_NONE = TGstClockTime(-1);
-
+  // https://gstreamer.freedesktop.org/documentation/tutorials/basic/concepts.html?gi-language=c
 
   function tutorial_main(argc: cint; argv: PPChar): cint;
   var
@@ -19,12 +14,9 @@ const
     bus: PGstBus;
     msg: PGstMessage;
     err: PGError;
-    debug_info: Pgchar;
+    debug_info, db: Pgchar;
   begin
     gst_init(@argc, @argv);
-
-    //       pipeline := gst_parse_launch('playbin uri=file:/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GTK2/gstreamer/test.mp3', nil);
-    //    pipeline := gst_parse_launch('playbin uri=file:/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GTK2/gstreamer/Tutorial/Boing_1.wav', nil);
 
     Source := gst_element_factory_make('videotestsrc', 'source');
     sink := gst_element_factory_make('autovideosink', 'sink');
@@ -35,7 +27,7 @@ const
       Exit(-1);
     end;
 
-    gst_bin_add_many(GST_BIN(pipeline), Source, [sink, nil]);
+    gst_bin_add_many(GST_BIN(pipeline), Source, sink, nil);
     if not gst_element_link(Source, sink) then begin
       g_printerr('Elements could not be linked.'#10);
       gst_object_unref(pipeline);
@@ -53,15 +45,18 @@ const
 
     bus := gst_element_get_bus(pipeline);
     msg := gst_bus_timed_pop_filtered(
-      bus, GST_CLOCK_TIME_NONE, TGstMessageType(TGstMessageType(uint64(GST_MESSAGE_ERROR) or uint64(GST_MESSAGE_EOS))));
+      bus, GST_CLOCK_TIME_NONE, GST_MESSAGE_ERROR or GST_MESSAGE_EOS);
     if msg <> nil then  begin
       case GST_MESSAGE_TYPE(msg) of
         GST_MESSAGE_ERROR: begin
           gst_message_parse_error(msg, @err, @debug_info);
-          //        g_printerr ('Error received from element %s: %s'#10,              GST_OBJECT_NAME (msg^.src), err^.message);
-          //      g_printerr ('Debugging information: %s'#10,              debug_info ? debug_info : "none");
-          g_printerr('Error received from element  %s'#10, msg^.src^.name);
-          g_printerr('Debugging information'#10);
+          g_printerr('Error received from element %s: %s'#10, GST_OBJECT_NAME(msg^.src), err^.message);
+          if debug_info = nil then begin
+            db := 'none';
+          end else begin
+            db := debug_info;
+          end;
+          g_printerr('Debugging information: %s'#10, db);
           g_clear_error(@err);
           g_free(debug_info);
         end;

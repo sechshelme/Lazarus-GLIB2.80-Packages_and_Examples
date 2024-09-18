@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 16-09-2024   19:22                        //
+//   Erzeugt am: 18-09-2024   17:42                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -46,12 +46,10 @@ function gst_element_state_get_name(state: TGstState): Pgchar; cdecl; external g
 function gst_element_state_change_return_get_name(state_ret: TGstStateChangeReturn): Pgchar; cdecl; external gstreamerlib;
 function gst_state_change_get_name(transition: TGstStateChange): Pgchar; cdecl; external gstreamerlib;
 function gst_element_link(src: PGstElement; dest: PGstElement): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_link_many(element_1: PGstElement; element_2: PGstElement; args: array of const): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_link_many(element_1: PGstElement; element_2: PGstElement): Tgboolean; cdecl; external gstreamerlib;
+function gst_element_link_many(element_1: PGstElement; element_2: PGstElement): Tgboolean; varargs cdecl; external gstreamerlib;
 function gst_element_link_filtered(src: PGstElement; dest: PGstElement; filter: PGstCaps): Tgboolean; cdecl; external gstreamerlib;
 procedure gst_element_unlink(src: PGstElement; dest: PGstElement); cdecl; external gstreamerlib;
-procedure gst_element_unlink_many(element_1: PGstElement; element_2: PGstElement; args: array of const); cdecl; external gstreamerlib;
-procedure gst_element_unlink_many(element_1: PGstElement; element_2: PGstElement); cdecl; external gstreamerlib;
+procedure gst_element_unlink_many(element_1: PGstElement; element_2: PGstElement); varargs cdecl; external gstreamerlib;
 function gst_element_link_pads(src: PGstElement; srcpadname: Pgchar; dest: PGstElement; destpadname: Pgchar): Tgboolean; cdecl; external gstreamerlib;
 function gst_element_link_pads_full(src: PGstElement; srcpadname: Pgchar; dest: PGstElement; destpadname: Pgchar; flags: TGstPadLinkCheck): Tgboolean; cdecl; external gstreamerlib;
 procedure gst_element_unlink_pads(src: PGstElement; srcpadname: Pgchar; dest: PGstElement; destpadname: Pgchar); cdecl; external gstreamerlib;
@@ -59,8 +57,7 @@ function gst_element_link_pads_filtered(src: PGstElement; srcpadname: Pgchar; de
 function gst_element_seek_simple(element: PGstElement; format: TGstFormat; seek_flags: TGstSeekFlags; seek_pos: Tgint64): Tgboolean; cdecl; external gstreamerlib;
 function gst_element_decorate_stream_id(element: PGstElement; stream_id: Pgchar): Pgchar; cdecl; external gstreamerlib;
 function gst_element_decorate_stream_id_printf_valist(element: PGstElement; format: Pgchar; var_args: Tva_list): Pgchar; cdecl; external gstreamerlib;
-function gst_element_decorate_stream_id_printf(element: PGstElement; format: Pgchar; args: array of const): Pgchar; cdecl; external gstreamerlib;
-function gst_element_decorate_stream_id_printf(element: PGstElement; format: Pgchar): Pgchar; cdecl; external gstreamerlib;
+function gst_element_decorate_stream_id_printf(element: PGstElement; format: Pgchar): Pgchar; varargs cdecl; external gstreamerlib;
 function gst_element_factory_can_sink_all_caps(factory: PGstElementFactory; caps: PGstCaps): Tgboolean; cdecl; external gstreamerlib;
 function gst_element_factory_can_src_all_caps(factory: PGstElementFactory; caps: PGstCaps): Tgboolean; cdecl; external gstreamerlib;
 function gst_element_factory_can_sink_any_caps(factory: PGstElementFactory; caps: PGstCaps): Tgboolean; cdecl; external gstreamerlib;
@@ -85,15 +82,12 @@ function gst_pad_peer_query_convert(pad: PGstPad; src_format: TGstFormat; src_va
 function gst_pad_peer_query_caps(pad: PGstPad; filter: PGstCaps): PGstCaps; cdecl; external gstreamerlib;
 function gst_pad_peer_query_accept_caps(pad: PGstPad; caps: PGstCaps): Tgboolean; cdecl; external gstreamerlib;
 function gst_pad_create_stream_id(pad: PGstPad; parent: PGstElement; stream_id: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_pad_create_stream_id_printf(pad: PGstPad; parent: PGstElement; stream_id: Pgchar; args: array of const): Pgchar; cdecl; external gstreamerlib;
-function gst_pad_create_stream_id_printf(pad: PGstPad; parent: PGstElement; stream_id: Pgchar): Pgchar; cdecl; external gstreamerlib;
+function gst_pad_create_stream_id_printf(pad: PGstPad; parent: PGstElement; stream_id: Pgchar): Pgchar; varargs cdecl; external gstreamerlib;
 function gst_pad_create_stream_id_printf_valist(pad: PGstPad; parent: PGstElement; stream_id: Pgchar; var_args: Tva_list): Pgchar; cdecl; external gstreamerlib;
 function gst_pad_get_stream_id(pad: PGstPad): Pgchar; cdecl; external gstreamerlib;
 function gst_pad_get_stream(pad: PGstPad): PGstStream; cdecl; external gstreamerlib;
-procedure gst_bin_add_many(bin: PGstBin; element_1: PGstElement; args: array of const); cdecl; external gstreamerlib;
-procedure gst_bin_add_many(bin: PGstBin; element_1: PGstElement); cdecl; external gstreamerlib;
-procedure gst_bin_remove_many(bin: PGstBin; element_1: PGstElement; args: array of const); cdecl; external gstreamerlib;
-procedure gst_bin_remove_many(bin: PGstBin; element_1: PGstElement); cdecl; external gstreamerlib;
+procedure gst_bin_add_many(bin: PGstBin; element_1: PGstElement); varargs cdecl; external gstreamerlib;
+procedure gst_bin_remove_many(bin: PGstBin; element_1: PGstElement); varargs cdecl; external gstreamerlib;
 function gst_bin_find_unlinked_pad(bin: PGstBin; direction: TGstPadDirection): PGstPad; cdecl; external gstreamerlib;
 function gst_bin_sync_children_states(bin: PGstBin): Tgboolean; cdecl; external gstreamerlib;
 function gst_parse_bin_from_description(bin_description: Pgchar; ghost_unlinked_pads: Tgboolean; err: PPGError): PGstElement; cdecl; external gstreamerlib;
