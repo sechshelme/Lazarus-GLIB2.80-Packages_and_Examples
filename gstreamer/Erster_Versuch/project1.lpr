@@ -20,6 +20,8 @@ uses
   gsttracerrecord,          // io.
   gstpoll,                  // io.
   gstelementmetadata,       // io.
+  gsttracerfactory,         // io.
+  gstatomicqueue,           // io.
   gstmemory,                // io.
   gstallocator,             // io. -> gstmemory
   gstcontrolbinding,        // io. -> gstobject, gstconfig
@@ -46,7 +48,9 @@ uses
   gsttaglist,               // io. -> gstdatetime, gstsample
   gsttagsetter,             // io. -> gsttaglist
   gsttoc,                   // io. -> gsttaglist
+  gsttocsetter,             // io. -> gsttoc
   gstplugin,                // io. -> gststructure
+  gsttracer,                // io. -> gstplugin
   gstpluginfeature,         // io. -> gstplugin
   gstpadtemplate,           // io. -> gstcaps          // ( PGstPad = Pointer ) wegen Kompflickt
   gstevent,                 // io. -> gststructure, gstsegment, gststreamcollection, gstcaps, gsttaglist, gsttoc, gstformat, gstclock
@@ -74,22 +78,15 @@ uses
   gstpromise,               // io. -> gststructure
   gstcompat,                // io. -> gstmessage, gstpad, gstevent, gstcaps, gstbuffer
   gstdevicemonitor,         // io. -> gstbus, gstcaps
-
   gstprotection,            // io. -> gstmeta, gststructure, gstbuffer
-
-
-
+  gsttypefindfactory,       // io. -> gsttypefind, gstcaps
 
   crt;
 
 
   // https://forums.developer.nvidia.com/t/pipeline-ends-after-4-seconds-with-gst-message-eos/253486
 
-  //const
-  //  GST_CLOCK_TIME_NONE = TGstClockTime(-1);
-
   //  function gst_stream_volume_get_type(): TGType; cdecl; external 'gstaudio-1.0';
-
 
 
   procedure tutorial_main(argc: cint; argv: PPChar);
@@ -146,9 +143,6 @@ uses
     WriteLn('volume');
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
     WriteLn('PLAY');
-
-    ReadLn;
-    halt;
 
     repeat
       g_object_set(volume, 'volume', vol, nil);

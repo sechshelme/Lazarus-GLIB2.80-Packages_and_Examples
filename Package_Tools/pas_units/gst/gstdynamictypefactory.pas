@@ -22,7 +22,7 @@ function gst_dynamic_type_factory_get_type: TGType; cdecl; external gstreamerlib
 function gst_dynamic_type_factory_load(factoryname: Pgchar): TGType; cdecl; external gstreamerlib;
 function gst_dynamic_type_register(plugin: PGstPlugin; _type: TGType): Tgboolean; cdecl; external gstreamerlib;
 
-function GST_DYNAMIC_TYPE_FACTORY_CAST(obj: longint): PGstDynamicTypeFactory;
+function GST_DYNAMIC_TYPE_FACTORY_CAST(obj: Pointer): PGstDynamicTypeFactory;
 
 // === Konventiert am: 17-9-24 16:00:47 ===
 
@@ -60,7 +60,7 @@ begin
 end;
 
 
-function GST_DYNAMIC_TYPE_FACTORY_CAST(obj: longint): PGstDynamicTypeFactory;
+function GST_DYNAMIC_TYPE_FACTORY_CAST(obj: Pointer): PGstDynamicTypeFactory;
 begin
   GST_DYNAMIC_TYPE_FACTORY_CAST := PGstDynamicTypeFactory(obj);
 end;
