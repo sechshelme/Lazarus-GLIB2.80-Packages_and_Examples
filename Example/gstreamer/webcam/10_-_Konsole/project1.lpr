@@ -3,9 +3,9 @@ program project1;
 
 uses
   Crt,
-  glib2,
   ctypes,
-  gst;
+  glib280,
+  gst124;
 
   var
     pipeline: PGstElement;

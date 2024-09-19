@@ -90,24 +90,37 @@ uses
 
   //  function gst_stream_volume_get_type(): TGType; cdecl; external 'gstaudio-1.0';
 
+  procedure showProperty(e: PGstElement);
+  var
+    prolist: PPGParamSpec;
+    Count: Tguint;
+    i: integer;
+  begin
+    prolist := g_object_class_list_properties(G_OBJECT_GET_CLASS(e), @Count);
+
+    WriteLn('count:', Count);
+    for i := 0 to Count - 1 do begin
+      WriteLn(i: 3, ' ', prolist[i]^.Name);
+    end;
+    g_free(prolist);
+  end;
+
 
   procedure tutorial_main(argc: cint; argv: PPChar);
   var
-    pipeline, filesrc, volume: PGstElement;
+    pipeline, filesrc, volume, decodebin: PGstElement;
     ch: ansichar;
 
     vol: single = 1.1;
     quit: boolean = False;
-    prolist: PPGParamSpec;
-    Count: Tguint;
-    i: integer;
+
   begin
     gst_init(@argc, @argv);
 
     //  pipeline := gst_parse_launch('playbin uri=file:/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! volume', nil);
     //    pipeline := gst_parse_launch('filesrc location=test.wav ! wavparse ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
     //pipeline := gst_parse_launch('filesrc location=/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/test.wav ! wavparse ! audioconvert ! volume name=volume ! autoaudiosink', nil);
-    pipeline := gst_parse_launch('filesrc location=test.mp3 ! decodebin ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
+    pipeline := gst_parse_launch('filesrc location=test.mp3 ! decodebin name=decodebin ! audioconvert ! audioresample ! volume name=volume ! autoaudiosink', nil);
     if pipeline = nil then begin
       WriteLn('pipeline error');
     end else begin
@@ -123,13 +136,9 @@ uses
     //        g_object_set(filesrc, 'location', 'test.wav');
 
     volume := gst_bin_get_by_name(GST_BIN(pipeline), 'volume');
-    prolist := g_object_class_list_properties(G_OBJECT_GET_CLASS(volume), @Count);
-
-    WriteLn('count:', Count);
-    for i := 0 to Count - 1 do begin
-      WriteLn(i: 3, ' ', prolist[i]^.Name);
-    end;
-    g_free(prolist);
+    showProperty(volume);
+    decodebin := gst_bin_get_by_name(GST_BIN(pipeline), 'decodebin');
+    showProperty(decodebin);
 
     //      volume := gst_bin_get_by_name(Pointer(pipeline), 'volume');
     //volume := gst_bin_get_by_interface(GST_BIN( pipeline), GST_TYPE_STREAM_VOLUME);

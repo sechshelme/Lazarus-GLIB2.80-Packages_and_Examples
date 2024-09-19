@@ -253,7 +253,7 @@ begin
     if IsChange then begin
       PriStream.Position := TrackBar1.Position;
       IsChange := False;
-    end else if not IsTrackBarMDown then begin
+    end else begin
       OldChangeProc := TrackBar1.OnChange;
       TrackBar1.OnChange := nil;
       SPos := PriStream.Position;
