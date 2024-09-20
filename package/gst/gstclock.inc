@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 18-09-2024   17:42                        //
+//   Erzeugt am: 20-09-2024   15:33                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -87,8 +87,6 @@ const
   GST_CLOCK_FLAG_LAST = GST_OBJECT_FLAG_LAST shl 8;
 
 type
-  PGstClockClass = ^TGstClockClass;
-
   TGstClockClass = record
     parent_class: TGstObjectClass;
     change_resolution: function(clock: PGstClock; old_resolution: TGstClockTime; new_resolution: TGstClockTime): TGstClockTime; cdecl;
@@ -99,6 +97,7 @@ type
     unschedule: procedure(clock: PGstClock; entry: PGstClockEntry); cdecl;
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
+  PGstClockClass = ^TGstClockClass;
 
 
 function gst_clock_get_type: TGType; cdecl; external gstreamerlib;
@@ -159,7 +158,8 @@ procedure GST_TIME_TO_TIMESPEC(t: TGstClockTime; var ts: Ttimespec);
 function GST_CLOCK_FLAGS(obj: Pointer): Tguint32;
 function GST_CLOCK_CAST(obj: Pointer): PGstClock;
 
-function GST_TYPE_CLOCK_TIME: TGType;
+const 
+  GST_TYPE_CLOCK_TIME = G_TYPE_UINT64;
 
 function GST_CLOCK_ENTRY(entry: PGstClockEntry): PGstClockEntry;
 function GST_CLOCK_ENTRY_CLOCK(entry: PGstClockEntry): PGstClock;
@@ -214,11 +214,6 @@ begin
 end;
 
 // ====
-
-function GST_TYPE_CLOCK_TIME: TGType;
-begin
-  Result := G_TYPE_MAKE_FUNDAMENTAL(11);
-end;
 
 function GST_CLOCK_CAST(obj: Pointer): PGstClock;
 begin

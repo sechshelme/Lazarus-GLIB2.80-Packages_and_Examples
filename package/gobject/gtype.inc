@@ -13,11 +13,35 @@ const
   G_TYPE_FUNDAMENTAL_SHIFT = 2;
   G_TYPE_FUNDAMENTAL_MAX = 255 shl G_TYPE_FUNDAMENTAL_SHIFT;
 
+  G_TYPE_INVALID = 0  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_NONE =  1  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_INTERFACE =  2  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_CHAR =  3  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_UCHAR =  4  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_BOOLEAN =  5  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_INT =  6  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_UINT =  7  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_LONG =  8  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_ULONG =  9  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_INT64 =  10  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_UINT64 =  11  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_ENUM =  12  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_FLAGS =  13  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_FLOAT =  14  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_DOUBLE =  15  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_STRING =  16  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_POINTER =  17  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_BOXED =  18  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_PARAM =  19  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_OBJECT =  20  shl G_TYPE_FUNDAMENTAL_SHIFT;
+  G_TYPE_VARIANT =  21  shl G_TYPE_FUNDAMENTAL_SHIFT;
+
   G_TYPE_RESERVED_GLIB_FIRST = 22;
   G_TYPE_RESERVED_GLIB_LAST = 31;
   G_TYPE_RESERVED_BSE_FIRST = 32;
   G_TYPE_RESERVED_BSE_LAST = 48;
   G_TYPE_RESERVED_USER_FIRST = 49;
+
 
 type
   TGTypePlugin = record
@@ -28,26 +52,21 @@ type
   end;
   PGTypeCValue = ^TGTypeCValue;
 
-  PGTypeClass = ^TGTypeClass;
-
   TGTypeClass = record
     g_type: TGType;
   end;
-
-  PGTypeInstance = ^TGTypeInstance;
+  PGTypeClass = ^TGTypeClass;
 
   TGTypeInstance = record
     g_class: PGTypeClass;
   end;
-
-  PGTypeInterface = ^TGTypeInterface;
+  PGTypeInstance = ^TGTypeInstance;
 
   TGTypeInterface = record
     g_type: TGType;
     g_instance_type: TGType;
   end;
-
-  PGTypeQuery = ^TGTypeQuery;
+  PGTypeInterface = ^TGTypeInterface;
 
   TGTypeQuery = record
     _type: TGType;
@@ -55,7 +74,7 @@ type
     class_size: Tguint;
     instance_size: Tguint;
   end;
-
+  PGTypeQuery = ^TGTypeQuery;
 
 type
   PGTypeDebugFlags = ^TGTypeDebugFlags;
@@ -226,28 +245,6 @@ function g_type_name_from_class(g_class: PGTypeClass): Pgchar; cdecl; external l
 const
   G_TYPE_FLAG_RESERVED_ID_BIT = 1 shl 0;
 
-function G_TYPE_INVALID: TGType;
-function G_TYPE_NONE: TGType;
-function G_TYPE_INTERFACE: TGType;
-function G_TYPE_CHAR: TGType;
-function G_TYPE_UCHAR: TGType;
-function G_TYPE_BOOLEAN: TGType;
-function G_TYPE_INT: TGType;
-function G_TYPE_UINT: TGType;
-function G_TYPE_LONG: TGType;
-function G_TYPE_ULONG: TGType;
-function G_TYPE_INT64: TGType;
-function G_TYPE_UINT64: TGType;
-function G_TYPE_ENUM: TGType;
-function G_TYPE_FLAGS: TGType;
-function G_TYPE_FLOAT: TGType;
-function G_TYPE_DOUBLE: TGType;
-function G_TYPE_STRING: TGType;
-function G_TYPE_POINTER: TGType;
-function G_TYPE_BOXED: TGType;
-function G_TYPE_PARAM: TGType;
-function G_TYPE_OBJECT: TGType;
-function G_TYPE_VARIANT: TGType;
 function G_TYPE_MAKE_FUNDAMENTAL(x: longint): TGType;
 
 function G_TYPE_IS_FUNDAMENTAL(_type: TGType): Tgboolean;
@@ -289,140 +286,6 @@ function GTYPE_TO_POINTER(t: TGType): Tgpointer;
 
 
 {$IFDEF read_implementation}
-
-
-function G_TYPE_INVALID: TGType;
-begin
-  G_TYPE_INVALID := G_TYPE_MAKE_FUNDAMENTAL(0);
-end;
-
-
-function G_TYPE_NONE: TGType;
-begin
-  G_TYPE_NONE := G_TYPE_MAKE_FUNDAMENTAL(1);
-end;
-
-
-function G_TYPE_INTERFACE: TGType;
-begin
-  G_TYPE_INTERFACE := G_TYPE_MAKE_FUNDAMENTAL(2);
-end;
-
-
-function G_TYPE_CHAR: TGType;
-begin
-  G_TYPE_CHAR := G_TYPE_MAKE_FUNDAMENTAL(3);
-end;
-
-
-function G_TYPE_UCHAR: TGType;
-begin
-  G_TYPE_UCHAR := G_TYPE_MAKE_FUNDAMENTAL(4);
-end;
-
-
-function G_TYPE_BOOLEAN: TGType;
-begin
-  G_TYPE_BOOLEAN := G_TYPE_MAKE_FUNDAMENTAL(5);
-end;
-
-
-function G_TYPE_INT: TGType;
-begin
-  G_TYPE_INT := G_TYPE_MAKE_FUNDAMENTAL(6);
-end;
-
-
-function G_TYPE_UINT: TGType;
-begin
-  G_TYPE_UINT := G_TYPE_MAKE_FUNDAMENTAL(7);
-end;
-
-
-function G_TYPE_LONG: TGType;
-begin
-  G_TYPE_LONG := G_TYPE_MAKE_FUNDAMENTAL(8);
-end;
-
-
-function G_TYPE_ULONG: TGType;
-begin
-  G_TYPE_ULONG := G_TYPE_MAKE_FUNDAMENTAL(9);
-end;
-
-
-function G_TYPE_INT64: TGType;
-begin
-  G_TYPE_INT64 := G_TYPE_MAKE_FUNDAMENTAL(10);
-end;
-
-
-function G_TYPE_UINT64: TGType;
-begin
-  G_TYPE_UINT64 := G_TYPE_MAKE_FUNDAMENTAL(11);
-end;
-
-
-function G_TYPE_ENUM: TGType;
-begin
-  G_TYPE_ENUM := G_TYPE_MAKE_FUNDAMENTAL(12);
-end;
-
-
-function G_TYPE_FLAGS: TGType;
-begin
-  G_TYPE_FLAGS := G_TYPE_MAKE_FUNDAMENTAL(13);
-end;
-
-
-function G_TYPE_FLOAT: TGType;
-begin
-  G_TYPE_FLOAT := G_TYPE_MAKE_FUNDAMENTAL(14);
-end;
-
-
-function G_TYPE_DOUBLE: TGType;
-begin
-  G_TYPE_DOUBLE := G_TYPE_MAKE_FUNDAMENTAL(15);
-end;
-
-
-function G_TYPE_STRING: TGType;
-begin
-  G_TYPE_STRING := G_TYPE_MAKE_FUNDAMENTAL(16);
-end;
-
-
-function G_TYPE_POINTER: TGType;
-begin
-  G_TYPE_POINTER := G_TYPE_MAKE_FUNDAMENTAL(17);
-end;
-
-
-function G_TYPE_BOXED: TGType;
-begin
-  G_TYPE_BOXED := G_TYPE_MAKE_FUNDAMENTAL(18);
-end;
-
-
-function G_TYPE_PARAM: TGType;
-begin
-  G_TYPE_PARAM := G_TYPE_MAKE_FUNDAMENTAL(19);
-end;
-
-
-function G_TYPE_OBJECT: TGType;
-begin
-  G_TYPE_OBJECT := G_TYPE_MAKE_FUNDAMENTAL(20);
-end;
-
-
-function G_TYPE_VARIANT: TGType;
-begin
-  G_TYPE_VARIANT := G_TYPE_MAKE_FUNDAMENTAL(21);
-end;
-
-
 
 function G_TYPE_MAKE_FUNDAMENTAL(x: longint): TGType;
 begin
