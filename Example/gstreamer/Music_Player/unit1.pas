@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLType,
   Buttons, ExtCtrls, ComCtrls, Menus, Types, FileUtil,
-  Common, MenuBar, SoundListBox, PlayBox, AddSongs,
+  Common, MenuBar, SoundListBox, PlayBox, AddSongs, SongEditBox,
   Streamer;
 
 type
@@ -163,13 +163,13 @@ begin
   PlayBox.Parent := Self;
   PlayBox.Left := 5;
   PlayBox.Top := 70;
-  PlayBox.Height := 50;
+//  PlayBox.Height := 50;
   PlayBox.OnPlayBoxEvent := @BoxEventProc;
 
   EditBox := TEditBox.Create(Self);
   EditBox.Top := 70;
   EditBox.Left := ClientWidth - EditBox.Width - 5;
-  EditBox.Height := 50;
+//  EditBox.Height := 50;
   EditBox.Parent := Self;
   EditBox.OnPlayBoxEvent := @BoxEventProc;
 
@@ -181,6 +181,12 @@ begin
   sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
   ListBoxSongs.Items.AddStrings(sl);
   sl.Free;
+
+  sl := FindAllFiles('/home/tux/Schreibtisch/sound', '*.mp3');
+  ListBoxSongs.Items.AddStrings(sl);
+  sl.Free;
+
+
 
 
 

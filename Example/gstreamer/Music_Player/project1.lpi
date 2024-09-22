@@ -69,6 +69,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="AddSongs"/>
       </Unit>
+      <Unit>
+        <Filename Value="songeditbox.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SongEditBox"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

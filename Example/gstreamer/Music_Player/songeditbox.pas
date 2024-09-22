@@ -1,4 +1,4 @@
-unit PlayBox;
+unit SongEditBox;
 
 {$mode ObjFPC}{$H+}
 
@@ -9,7 +9,7 @@ uses
   Common;
 
 type
-  TPlayBox = class(TPanel)
+  TEditBox = class(TPanel)
   private
     FOnPlayBoxEvent: TPlayBoxEvent;
     procedure BtnClick(Sender: TObject);
@@ -20,52 +20,43 @@ type
     procedure LoadButtons(const props: TcmdProps);
   end;
 
+
 implementation
 
-{ TPlayBox }
-
-procedure TPlayBox.BtnClick(Sender: TObject);
+procedure TEditBox.BtnClick(Sender: TObject);
 begin
   if OnPlayBoxEvent <> nil then  begin
     OnPlayBoxEvent(Tcommand(TBitBtn(Sender).Tag));
   end;
 end;
 
-constructor TPlayBox.Create(AOwner: TComponent);
+constructor TEditBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  Anchors := [akLeft, akTop];
-  LoadButtons(PlayCmdProp);
+  Anchors := [akTop, akRight];
+  LoadButtons(EditCmdProb);
 end;
 
-procedure TPlayBox.LoadButtons(const props: TcmdProps);
-const
-  BT_WIDTH = 28;
-  BT_HEIGHT = 28;
-  BORDER = 5;
+procedure TEditBox.LoadButtons(const props: TcmdProps);
 var
   i: integer;
-  Btn: TSpeedButton;
+  Btn: TBitBtn;
   propsCount: SizeInt;
   pic: TPicture;
   path: string;
 begin
   propsCount := Length(props);
 
-  Width := propsCount * (BT_WIDTH + BORDER) + BORDER;
-  Height := BT_HEIGHT + 2 * BORDER;
+  Width := propsCount * 100;
 
   pic := TPicture.Create;
   for i := 0 to propsCount - 1 do begin
-    Btn := TSpeedButton.Create(Self);
-    //    Btn.Caption := props[i].Caption;
-    Btn.Caption := '';
+    Btn := TBitBtn.Create(Self);
+    Btn.Caption := props[i].Caption;
     Btn.Tag := PtrInt(props[i].cmd);
     Btn.OnClick := @BtnClick;
-    btn.Width := BT_WIDTH;
-    btn.Height := BT_HEIGHT;
-    Btn.Top := BORDER;
-    Btn.Left := i * (BT_WIDTH + BORDER) + BORDER;
+    Btn.Top := 10;
+    Btn.Left := i * 100 + 10;
     Btn.Parent := Self;
     path := 'png/' + props[i].IconPath + '.png';
     if FileExists(path) then  begin
