@@ -38,6 +38,10 @@ begin
 end;
 
 procedure TEditBox.LoadButtons(const props: TcmdProps);
+const
+  BT_WIDTH = 80;
+  BT_HEIGHT = 28;
+  BORDER = 5;
 var
   i: integer;
   Btn: TBitBtn;
@@ -47,7 +51,8 @@ var
 begin
   propsCount := Length(props);
 
-  Width := propsCount * 100;
+    Height := propsCount * (BT_HEIGHT + BORDER) + BORDER;
+  Width := BT_WIDTH + 2 * BORDER;
 
   pic := TPicture.Create;
   for i := 0 to propsCount - 1 do begin
@@ -55,14 +60,16 @@ begin
     Btn.Caption := props[i].Caption;
     Btn.Tag := PtrInt(props[i].cmd);
     Btn.OnClick := @BtnClick;
-    Btn.Top := 10;
-    Btn.Left := i * 100 + 10;
+    Btn.Width := BT_WIDTH;
+    Btn.Height := BT_HEIGHT;
+    Btn.Left := BORDER;
+    Btn.Top := i * (BT_HEIGHT + BORDER) + BORDER;
     Btn.Parent := Self;
     path := 'png/' + props[i].IconPath + '.png';
     if FileExists(path) then  begin
       pic.LoadFromFile('png/' + props[i].IconPath + '.png');
     end;
-    btn.Glyph := pic.Bitmap;
+    Btn.Glyph := pic.Bitmap;
   end;
   pic.Free;
 end;

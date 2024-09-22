@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLType,
   Buttons, ExtCtrls, ComCtrls, Menus, Types, FileUtil,
-  Common, MenuBar, SoundListBox, PlayBox, AddSongs, SongEditBox,
+  Common, MenuBar, SoundListBox, PlayBtnBox, AddSongs, SongEditBox,
   Streamer;
 
 type
@@ -31,7 +31,7 @@ type
   private
     MainMenu: TMenuBar;
     EditBox: TEditBox;
-    PlayBox: TPlayBox;
+    PlayBox: TPlayPanel;
     IsTrackBarMDown: boolean;
     SekStream,
     PriStream: TStreamer;
@@ -159,17 +159,15 @@ begin
   ListBoxSongs.Height := ClientHeight - 170;
   ListBoxSongs.Parent := self;
 
-  PlayBox := TPlayBox.Create(Self);
+  PlayBox := TPlayPanel.Create(Self);
   PlayBox.Parent := Self;
   PlayBox.Left := 5;
   PlayBox.Top := 70;
-//  PlayBox.Height := 50;
-  PlayBox.OnPlayBoxEvent := @BoxEventProc;
+  PlayBox.PlayBtnPanel.OnPlayBoxEvent := @BoxEventProc;
 
   EditBox := TEditBox.Create(Self);
   EditBox.Top := 70;
   EditBox.Left := ClientWidth - EditBox.Width - 5;
-//  EditBox.Height := 50;
   EditBox.Parent := Self;
   EditBox.OnPlayBoxEvent := @BoxEventProc;
 
@@ -185,10 +183,6 @@ begin
   sl := FindAllFiles('/home/tux/Schreibtisch/sound', '*.mp3');
   ListBoxSongs.Items.AddStrings(sl);
   sl.Free;
-
-
-
-
 
   ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
   ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
