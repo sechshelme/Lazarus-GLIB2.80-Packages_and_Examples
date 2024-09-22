@@ -18,26 +18,23 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    Timer1: TTimer;
-    TrackBar1: TTrackBar;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
-    procedure TrackBar1Change(Sender: TObject);
-    procedure TrackBar1MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: integer);
-    procedure TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: integer);
   private
     MainMenu: TMenuBar;
     EditBox: TEditBox;
     PlayBox: TPlayPanel;
+    Timer: TTimer;
     IsTrackBarMDown: boolean;
     SekStream,
     PriStream: TStreamer;
     IsChange: boolean;
     procedure LoadNewMusic(const titel: string; freeed: boolean);
     procedure BoxEventProc(cmd: Tcommand);
+    procedure PlayBoxTrackBarChange(Sender: TObject);
+    procedure PlayBoxTrackBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+    procedure PlayBoxTrackBarMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+    procedure TimerTimer(Sender: TObject);
   public
     ListBoxSongs: TSoundListBox;
   end;
@@ -113,8 +110,8 @@ begin
       if PriStream <> nil then begin
         PriStream.Stop;
         FreeAndNil(PriStream);
-        TrackBar1.Position := 0;
-        TrackBar1.Max := 1000;
+        PlayBox.TrackBar.Position := 0;
+        PlayBox.TrackBar.Max := 1000;
       end;
     end;
     cmNext: begin
@@ -136,6 +133,77 @@ begin
           end;
         end;
       end;
+    end;
+  end;
+end;
+
+procedure TForm1.PlayBoxTrackBarChange(Sender: TObject);
+begin
+  IsChange := True;
+end;
+
+procedure TForm1.PlayBoxTrackBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+begin
+  WriteLn('down');
+  IsTrackBarMDown := True;
+end;
+
+procedure TForm1.PlayBoxTrackBarMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+begin
+  WriteLn('up');
+  IsTrackBarMDown := False;
+end;
+
+procedure TForm1.TimerTimer(Sender: TObject);
+var
+  SDur, SPos: integer;
+  OldChangeProc: TNotifyEvent;
+  volume: extended;
+begin
+  if (*(ListBoxSongs.Count > 0) and*) (PriStream <> nil) then begin
+    if IsChange then begin
+      PriStream.Position := PlayBox.TrackBar.Position;
+      IsChange := False;
+    end else begin
+      OldChangeProc := PlayBox.TrackBar.OnChange;
+      PlayBox.TrackBar.OnChange := nil;
+      SPos := PriStream.Position;
+      SDur := PriStream.Duration;
+      PlayBox.TrackBar.Max := SDur;
+      PlayBox.TrackBar.Position := SPos;
+      PlayBox.TrackBar.OnChange := OldChangeProc;
+      Label1.Caption := GstClockToStr(SDur);
+      Label3.Caption := GstClockToStr(SPos);
+      volume := PriStream.Position / FITime;
+      if volume > 1.0 then begin
+        volume := 1.0;
+      end;
+      PriStream.Volume := volume;
+      if PriStream.Duration > 0 then begin
+        if PriStream.isEnd or (PriStream.Duration - PriStream.Position < CFTime) then begin
+          if SekStream <> nil then begin
+            FreeAndNil(SekStream);
+          end;
+          SekStream := PriStream;
+          if ListBoxSongs.Next then  begin
+            LoadNewMusic(ListBoxSongs.GetTitle, False);
+          end;
+        end;
+      end;
+    end;
+  end;
+  if SekStream <> nil then begin
+    if SekStream.Duration > 0 then begin
+      volume := (SekStream.Duration - SekStream.Position) / FITime;
+      if volume > 1.0 then begin
+        volume := 1.0;
+      end;
+      SekStream.Volume := volume;
+      WriteLn(SekStream.Volume: 4: 2);
+    end;
+
+    if SekStream.isEnd then begin
+      FreeAndNil(SekStream);
     end;
   end;
 end;
@@ -162,11 +230,13 @@ begin
   PlayBox := TPlayPanel.Create(Self);
   PlayBox.Parent := Self;
   PlayBox.Left := 5;
-  PlayBox.Top := 70;
+  PlayBox.Top := 0;
   PlayBox.PlayBtnPanel.OnPlayBoxEvent := @BoxEventProc;
+  PlayBox.Width:=Width;
+  PlayBox.Anchors := [akTop, akLeft, akRight];
 
   EditBox := TEditBox.Create(Self);
-  EditBox.Top := 70;
+  EditBox.Top := PlayBox.Height;
   EditBox.Left := ClientWidth - EditBox.Width - 5;
   EditBox.Parent := Self;
   EditBox.OnPlayBoxEvent := @BoxEventProc;
@@ -196,9 +266,14 @@ begin
   ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
   ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
 
-  Timer1.Interval := 200;
-  TrackBar1.TickStyle := tsNone;
-  TrackBar1.Max := 1000;
+  Timer := TTimer.Create(self);
+  Timer.OnTimer := @TimerTimer;
+  Timer.Interval := 200;
+  PlayBox.TrackBar.TickStyle := tsNone;
+  PlayBox.TrackBar.Max := 1000;
+  PlayBox.TrackBar.OnChange := @PlayBoxTrackBarChange;
+  PlayBox.TrackBar.OnMouseDown := @PlayBoxTrackBarMouseDown;
+  PlayBox.TrackBar.OnMouseUp := @PlayBoxTrackBarMouseUp;
   IsTrackBarMDown := False;
 
   Width := 1024;
@@ -221,81 +296,9 @@ begin
   end;
   PriStream := TStreamer.Create(titel);
 
-  TrackBar1.Max := 0;
-  TrackBar1.Position := 0;
+  PlayBox.TrackBar.Max := 0;
+  PlayBox.TrackBar.Position := 0;
   PriStream.Play;
-end;
-
-procedure TForm1.TrackBar1Change(Sender: TObject);
-begin
-  IsChange := True;
-end;
-
-procedure TForm1.TrackBar1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
-begin
-  WriteLn('down');
-  IsTrackBarMDown := True;
-end;
-
-procedure TForm1.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
-begin
-  WriteLn('up');
-  IsTrackBarMDown := False;
-end;
-
-procedure TForm1.Timer1Timer(Sender: TObject);
-var
-  SDur, SPos: integer;
-  OldChangeProc: TNotifyEvent;
-  volume: extended;
-begin
-  if (*(ListBoxSongs.Count > 0) and*) (PriStream <> nil) then begin
-    if IsChange then begin
-      PriStream.Position := TrackBar1.Position;
-      IsChange := False;
-    end else begin
-      OldChangeProc := TrackBar1.OnChange;
-      TrackBar1.OnChange := nil;
-      SPos := PriStream.Position;
-      SDur := PriStream.Duration;
-      TrackBar1.Max := SDur;
-      TrackBar1.Position := SPos;
-      TrackBar1.OnChange := OldChangeProc;
-      Label1.Caption := GstClockToStr(SDur);
-      Label3.Caption := GstClockToStr(SPos);
-      volume := PriStream.Position / FITime;
-      if volume > 1.0 then begin
-        volume := 1.0;
-      end;
-      PriStream.Volume := volume;
-      if PriStream.Duration > 0 then begin
-        if PriStream.isEnd or (PriStream.Duration - PriStream.Position < CFTime) then begin
-          if SekStream <> nil then begin
-            FreeAndNil(SekStream);
-          end;
-          SekStream := PriStream;
-          if ListBoxSongs.Next then  begin
-            LoadNewMusic(ListBoxSongs.GetTitle, False);
-          end;
-        end;
-      end;
-    end;
-  end;
-  if SekStream <> nil then begin
-    if SekStream.Duration > 0 then begin
-      volume := (SekStream.Duration - SekStream.Position) / FITime;
-      if volume > 1.0 then begin
-        volume := 1.0;
-      end;
-      ;
-      SekStream.Volume := volume;
-      WriteLn(SekStream.Volume: 4: 2);
-    end;
-
-    if SekStream.isEnd then begin
-      FreeAndNil(SekStream);
-    end;
-  end;
 end;
 
 end.

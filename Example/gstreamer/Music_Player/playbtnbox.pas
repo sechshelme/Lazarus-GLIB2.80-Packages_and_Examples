@@ -5,11 +5,11 @@ unit PlayBtnBox;
 interface
 
 uses
-  Classes, SysUtils, Controls, StdCtrls, ExtCtrls, Buttons, Graphics,ComCtrls,
+  Classes, SysUtils, Controls, StdCtrls, ExtCtrls, Buttons, Graphics, ComCtrls,
   Common;
 
 type
-  TPlayBtnBox = class(TPanel)
+  TPlayBtnPanel = class(TPanel)
   private
     FOnPlayBoxEvent: TPlayBoxEvent;
     procedure BtnClick(Sender: TObject);
@@ -19,34 +19,35 @@ type
     property OnPlayBoxEvent: TPlayBoxEvent read FOnPlayBoxEvent write FOnPlayBoxEvent;
   end;
 
-  Type
-    TPlayPanel=class(TPanel)
-    public
-      PlayBtnPanel:TPlayBtnBox;
-      TrackBar: TTrackBar;
-
-      constructor Create(AOwner: TComponent); override;
-    end;
+type
+  TPlayPanel = class(TPanel)
+  public
+    PlayBtnPanel: TPlayBtnPanel;
+    TrackBar: TTrackBar;
+    PositionLabel,
+    DurationLabel: TLabel;
+    constructor Create(AOwner: TComponent); override;
+  end;
 
 implementation
 
-{ TPlayBtnBox }
+{ TPlayBtnPanel }
 
-procedure TPlayBtnBox.BtnClick(Sender: TObject);
+procedure TPlayBtnPanel.BtnClick(Sender: TObject);
 begin
   if OnPlayBoxEvent <> nil then  begin
     OnPlayBoxEvent(Tcommand(TBitBtn(Sender).Tag));
   end;
 end;
 
-constructor TPlayBtnBox.Create(AOwner: TComponent);
+constructor TPlayBtnPanel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Anchors := [akLeft, akTop];
   LoadButtons(PlayCmdProp);
 end;
 
-procedure TPlayBtnBox.LoadButtons(const props: TcmdProps);
+procedure TPlayBtnPanel.LoadButtons(const props: TcmdProps);
 const
   BT_WIDTH = 28;
   BT_HEIGHT = 28;
@@ -87,18 +88,33 @@ end;
 { TPlayPanel }
 
 constructor TPlayPanel.Create(AOwner: TComponent);
+var
+  h: integer;
 begin
   inherited Create(AOwner);
-  Height:=200;
-  width:=500;
+  TrackBar := TTrackBar.Create(Self);
+  TrackBar.Parent := Self;
+  TrackBar.Width := Width;
+  TrackBar.Anchors := [akTop, akLeft, akRight];
+  h := TrackBar.Height + 10;
 
-  TrackBar:=TTrackBar.Create(Self);
-  TrackBar.Parent:=Self;
-  TrackBar.Width:=Width;
+  PlayBtnPanel := TPlayBtnPanel.Create(Self);
+  PlayBtnPanel.Parent := Self;
+  PlayBtnPanel.Top := h;
 
-  PlayBtnPanel:=TPlayBtnBox.Create(Self);
-  PlayBtnPanel.Parent:=Self;
-  PlayBtnPanel.Top:=TrackBar.Height+50;
+  DurationLabel := TLabel.Create(Self);
+  DurationLabel.Parent := Self;
+  DurationLabel.Top := h;
+  DurationLabel.Left := 200;
+  DurationLabel.Caption := 'Duration';
+
+  PositionLabel := TLabel.Create(Self);
+  PositionLabel.Parent := Self;
+  PositionLabel.Top := h;
+  PositionLabel.Left := 400;
+  PositionLabel.Caption := 'Position';
+
+  Height := h + PlayBtnPanel.Height;
 end;
 
 end.
