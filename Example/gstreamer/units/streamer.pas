@@ -23,17 +23,22 @@ type
   PPipelineElement = ^TPipelineElement;
 
 type
+
+  { TStreamer }
+
   TStreamer = class(TObject)
   private
     fsongPath: string;
     pipelineElement: TPipelineElement;
     FPosition: integer;
-    Level_watch_id: TGUINT;
     function GetDuration: integer;
+    function GetLevelL: Tguint32;
+    function GetLevelR: Tguint32;
     procedure SetVolume(vol: gdouble);
     function GetVolume: gdouble;
     procedure SetPosition(AValue: integer);
     function GetPosition: integer;
+    function dB_to_Prozent(db: gdouble): Tguint32;
   public
     constructor Create(const AsongPath: string);
     destructor Destroy; override;
@@ -49,6 +54,8 @@ type
     property Position: integer read GetPosition write SetPosition;
     property Duration: integer read GetDuration;
     property Volume: gdouble read GetVolume write SetVolume;
+    property LevelL:Tguint32 read GetLevelL;
+    property LevelR:Tguint32 read GetLevelR;
     function isPlayed: boolean;
     function isEnd: boolean;
   end;
@@ -136,6 +143,8 @@ end;
 
 function message_cb(bus: PGstBus; msg: PGstMessage; user_data: Tgpointer): Tgboolean; cdecl;
 var
+  pE: PPipelineElement absolute user_data;
+var
   s: PGstStructure;
   Name: Pgchar;
   endtime: TGstClockTime;
@@ -162,12 +171,22 @@ begin
 
       channels := rms_arr^.n_values;
 
-      WriteLn('channels: ', channels);
-      for i := 0 to channels - 1 do begin
-        Value := g_value_array_get_nth(rms_arr, i);
-        rms_dB := g_value_get_double(Value);
-        WriteLn('pegel: ', rms_dB: 8: 4);
+//      WriteLn('channels: ', channels);
+      if channels>=2 then begin
+        Value:=g_value_array_get_nth(rms_arr, 0);
+        pE^.Level.L:=g_value_get_double(Value);
+        Value:=g_value_array_get_nth(rms_arr, 1);
+        pE^.Level.R:=g_value_get_double(Value);
+
+//        WriteLn('channels: ', pE^.Level.R:10:5);
+
       end;
+
+      //for i := 0 to channels - 1 do begin
+      //  Value := g_value_array_get_nth(rms_arr, i);
+      //  rms_dB := g_value_get_double(Value);
+      //  WriteLn('pegel: ', rms_dB: 8: 4);
+      //end;
     end;
   end;
 end;
@@ -181,6 +200,8 @@ begin
   fsongPath := AsongPath;
   pipelineElement.FisEnd := False;
   pipelineElement.Duration := 0;
+  pipelineElement.Level.L:=0.0;
+  pipelineElement.Level.R:=0.0;
   pipelineElement.pipeline := gst_parse_launch(PChar('filesrc location="' + fsongPath + '" ! decodebin3 ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! level name=level ! autoaudiosink'), nil);
 
   pipelineElement.volume := gst_bin_get_by_name(GST_BIN(pipelineElement.pipeline), 'vol');
@@ -214,7 +235,6 @@ end;
 destructor TStreamer.Destroy;
 begin
   Stop;
-  //  g_source_remove(Level_watch_id);
   gst_object_unref(pipelineElement.pipeline);
   inherited Destroy;
 end;
@@ -259,6 +279,21 @@ begin
     WriteLn(current);
   end;
   Result := pipelineElement.Duration div G_USEC_PER_SEC;
+end;
+
+function TStreamer.dB_to_Prozent(db:gdouble): Tguint32;
+begin
+  Result:=300- abs( Round( db)* 10);
+end;
+
+function TStreamer.GetLevelL: Tguint32;
+begin
+  Result:=dB_to_Prozent(pipelineElement.Level.L);
+end;
+
+function TStreamer.GetLevelR: Tguint32;
+begin
+  Result:=dB_to_Prozent(pipelineElement.Level.R);
 end;
 
 function TStreamer.GetVolume: gdouble;

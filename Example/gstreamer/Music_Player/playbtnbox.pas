@@ -26,6 +26,7 @@ type
     TrackBar: TTrackBar;
     PositionLabel,
     DurationLabel: TLabel;
+    LevelLShape, LevelRShape: TShape;
     constructor Create(AOwner: TComponent); override;
   end;
 
@@ -113,6 +114,20 @@ begin
   PositionLabel.Top := h;
   PositionLabel.Left := 400;
   PositionLabel.Caption := 'Position';
+
+  LevelLShape := TShape.Create(Self);
+  LevelLShape.Parent := Self;
+  LevelLShape.Top := h;
+  LevelLShape.Height := 10;
+  LevelLShape.Left := 600;
+  LevelLShape.Brush.Color := clRed;
+
+  LevelRShape := TShape.Create(Self);
+  LevelRShape.Parent := Self;
+  LevelRShape.Top := h + 15;
+  LevelRShape.Height := 10;
+  LevelRShape.Left := 600;
+  LevelRShape.Brush.Color := clRed;
 
   Height := h + PlayBtnPanel.Height;
 end;

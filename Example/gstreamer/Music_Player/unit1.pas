@@ -171,6 +171,8 @@ begin
       PlayPanel.TrackBar.OnChange := OldChangeProc;
       PlayPanel.DurationLabel.Caption := GstClockToStr(SDur);
       PlayPanel.PositionLabel.Caption := GstClockToStr(SPos);
+      PlayPanel.LevelLShape.Width:=PriStream.LevelL;
+      PlayPanel.LevelRShape.Width:=PriStream.LevelR;
       volume := PriStream.Position / FITime;
       if volume > 1.0 then begin
         volume := 1.0;
