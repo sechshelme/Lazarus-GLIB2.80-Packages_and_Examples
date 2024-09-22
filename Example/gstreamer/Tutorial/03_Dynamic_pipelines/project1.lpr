@@ -17,7 +17,7 @@ type
   end;
   PCustomData = ^TCustomData;
 
-  procedure pad_added_handler(src: PGstElement; new_pad: PGstPad; Data: PCustomData);
+  procedure pad_added_handler(src: PGstElement; new_pad: PGstPad; Data: PCustomData); cdecl;
   var
     sink_pad: PGstPad;
     new_pad_caps: PGstCaps;

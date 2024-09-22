@@ -11,22 +11,24 @@ type
   TPipelineElement = record
     pipeline,
     equalizer,
+    LevelEl,
     volume: PGstElement;
     state: TGstState;
     Duration: Tgint64;
     FIsEnd: boolean;
+    Level: record
+      L, R: gdouble;
+      end;
   end;
   PPipelineElement = ^TPipelineElement;
 
 type
-
-  { TStreamer }
-
   TStreamer = class(TObject)
   private
     fsongPath: string;
     pipelineElement: TPipelineElement;
     FPosition: integer;
+    Level_watch_id: TGUINT;
     function GetDuration: integer;
     procedure SetVolume(vol: gdouble);
     function GetVolume: gdouble;
@@ -46,7 +48,7 @@ type
     function getState: string;
     property Position: integer read GetPosition write SetPosition;
     property Duration: integer read GetDuration;
-    property Volume:gdouble read GetVolume write SetVolume;
+    property Volume: gdouble read GetVolume write SetVolume;
     function isPlayed: boolean;
     function isEnd: boolean;
   end;
@@ -91,7 +93,7 @@ begin
   end;
 end;
 
-procedure test_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer);
+procedure test_cb(bus: PGstBus; msg: PGstMessage; user_data: TGpointer);
 begin
   case GST_MESSAGE_TYPE(msg) of
     GST_MESSAGE_ERROR: begin
@@ -115,20 +117,59 @@ end;
 //  until stat or (ct > 100);
 //end;
 
-procedure state_changed_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer);
+procedure state_changed_cb(bus: PGstBus; msg: PGstMessage; user_data: TGpointer);
 var
-  pE: PPipelineElement absolute Data;
+  pE: PPipelineElement absolute user_data;
   old_state, new_state, pending_state: TGstState;
 begin
   gst_message_parse_state_changed(msg, @old_state, @new_state, @pending_state);
   pE^.state := new_state;
 end;
 
-procedure eos_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer);
+procedure eos_cb(bus: PGstBus; msg: PGstMessage; user_data: TGpointer);
 var
-  pE: PPipelineElement absolute Data;
+  pE: PPipelineElement absolute user_data;
 begin
   pe^.FIsEnd := True;
+  WriteLn('ende !!!!!!!!!!!!!!!!!!!!!!!');
+end;
+
+function message_cb(bus: PGstBus; msg: PGstMessage; user_data: Tgpointer): Tgboolean; cdecl;
+var
+  s: PGstStructure;
+  Name: Pgchar;
+  endtime: TGstClockTime;
+  array_val: PGValue;
+  rms_arr: PGValueArray;
+  channels: guint;
+  i: integer;
+  Value: glib2.PGValue;
+  rms_dB: gdouble;
+begin
+  if msg^._type = GST_MESSAGE_ELEMENT then begin
+    s := gst_message_get_structure(msg);
+    Name := gst_structure_get_name(s);
+    if strcomp(Name, 'level') = 0 then begin
+      if not gst_structure_get_clock_time(s, 'endtime', @endtime) then begin
+        WriteLn('endtime warning');
+      end;
+
+      array_val := gst_structure_get_value(s, 'decay');
+      if array_val = nil then begin
+        WriteLn('rms error');
+      end;
+      rms_arr := PGValueArray(g_value_get_boxed(array_val));
+
+      channels := rms_arr^.n_values;
+
+      WriteLn('channels: ', channels);
+      for i := 0 to channels - 1 do begin
+        Value := g_value_array_get_nth(rms_arr, i);
+        rms_dB := g_value_get_double(Value);
+        WriteLn('pegel: ', rms_dB: 8: 4);
+      end;
+    end;
+  end;
 end;
 
 // =========================
@@ -140,7 +181,7 @@ begin
   fsongPath := AsongPath;
   pipelineElement.FisEnd := False;
   pipelineElement.Duration := 0;
-  pipelineElement.pipeline := gst_parse_launch(PChar('filesrc location="' + fsongPath + '" ! decodebin3 ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! autoaudiosink'), nil);
+  pipelineElement.pipeline := gst_parse_launch(PChar('filesrc location="' + fsongPath + '" ! decodebin3 ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! level name=level ! autoaudiosink'), nil);
 
   pipelineElement.volume := gst_bin_get_by_name(GST_BIN(pipelineElement.pipeline), 'vol');
   if pipelineElement.volume = nil then begin
@@ -152,8 +193,17 @@ begin
     WriteLn('Equalizer Error');
   end;
 
+  pipelineElement.LevelEl := gst_bin_get_by_name(GST_BIN(pipelineElement.pipeline), 'level');
+  if pipelineElement.LevelEl = nil then begin
+    WriteLn('Level Error');
+  end else begin
+    g_object_set(G_OBJECT(pipelineElement.LevelEl), 'post-messages', True, nil);
+  end;
+
   bus := gst_element_get_bus(pipelineElement.pipeline);
   gst_bus_add_signal_watch(bus);
+  //  Level_watch_id := gst_bus_add_watch(bus, @message_cb, @pipelineElement);
+  g_signal_connect(G_OBJECT(bus), 'message::element', TGCallback(@message_cb), @pipelineElement);
   g_signal_connect(G_OBJECT(bus), 'message::state-changed', TGCallback(@state_changed_cb), @pipelineElement);
   g_signal_connect(G_OBJECT(bus), 'message::eos', TGCallback(@eos_cb), @pipelineElement);
   g_signal_connect(G_OBJECT(bus), 'message', TGCallback(@test_cb), @pipelineElement);
@@ -164,6 +214,7 @@ end;
 destructor TStreamer.Destroy;
 begin
   Stop;
+  //  g_source_remove(Level_watch_id);
   gst_object_unref(pipelineElement.pipeline);
   inherited Destroy;
 end;

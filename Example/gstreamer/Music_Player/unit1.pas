@@ -15,15 +15,12 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
     MainMenu: TMenuBar;
     EditBox: TEditBox;
-    PlayBox: TPlayPanel;
+    PlayPanel: TPlayPanel;
     Timer: TTimer;
     IsTrackBarMDown: boolean;
     SekStream,
@@ -110,8 +107,8 @@ begin
       if PriStream <> nil then begin
         PriStream.Stop;
         FreeAndNil(PriStream);
-        PlayBox.TrackBar.Position := 0;
-        PlayBox.TrackBar.Max := 1000;
+        PlayPanel.TrackBar.Position := 0;
+        PlayPanel.TrackBar.Max := 1000;
       end;
     end;
     cmNext: begin
@@ -162,18 +159,18 @@ var
 begin
   if (*(ListBoxSongs.Count > 0) and*) (PriStream <> nil) then begin
     if IsChange then begin
-      PriStream.Position := PlayBox.TrackBar.Position;
+      PriStream.Position := PlayPanel.TrackBar.Position;
       IsChange := False;
     end else begin
-      OldChangeProc := PlayBox.TrackBar.OnChange;
-      PlayBox.TrackBar.OnChange := nil;
+      OldChangeProc := PlayPanel.TrackBar.OnChange;
+      PlayPanel.TrackBar.OnChange := nil;
       SPos := PriStream.Position;
       SDur := PriStream.Duration;
-      PlayBox.TrackBar.Max := SDur;
-      PlayBox.TrackBar.Position := SPos;
-      PlayBox.TrackBar.OnChange := OldChangeProc;
-      Label1.Caption := GstClockToStr(SDur);
-      Label3.Caption := GstClockToStr(SPos);
+      PlayPanel.TrackBar.Max := SDur;
+      PlayPanel.TrackBar.Position := SPos;
+      PlayPanel.TrackBar.OnChange := OldChangeProc;
+      PlayPanel.DurationLabel.Caption := GstClockToStr(SDur);
+      PlayPanel.PositionLabel.Caption := GstClockToStr(SPos);
       volume := PriStream.Position / FITime;
       if volume > 1.0 then begin
         volume := 1.0;
@@ -219,27 +216,27 @@ begin
   MainMenu.OnMenuBarEvent := @BoxEventProc;
   Menu := MainMenu;
 
-  ListBoxSongs := TSoundListBox.Create(self);
-  ListBoxSongs.Anchors := [akTop, akLeft, akBottom, akRight];
-  ListBoxSongs.Top := 140;
-  ListBoxSongs.Left := 5;
-  ListBoxSongs.Width := ClientWidth - 10;
-  ListBoxSongs.Height := ClientHeight - 170;
-  ListBoxSongs.Parent := self;
-
-  PlayBox := TPlayPanel.Create(Self);
-  PlayBox.Parent := Self;
-  PlayBox.Left := 5;
-  PlayBox.Top := 0;
-  PlayBox.PlayBtnPanel.OnPlayBoxEvent := @BoxEventProc;
-  PlayBox.Width:=Width;
-  PlayBox.Anchors := [akTop, akLeft, akRight];
+  PlayPanel := TPlayPanel.Create(Self);
+  PlayPanel.Parent := Self;
+  PlayPanel.Left := 5;
+  PlayPanel.Top := 0;
+  PlayPanel.PlayBtnPanel.OnPlayBoxEvent := @BoxEventProc;
+  PlayPanel.Width:=ClientWidth;
+  PlayPanel.Anchors := [akTop, akLeft, akRight];
 
   EditBox := TEditBox.Create(Self);
-  EditBox.Top := PlayBox.Height;
+  EditBox.Top := PlayPanel.Height;
   EditBox.Left := ClientWidth - EditBox.Width - 5;
   EditBox.Parent := Self;
   EditBox.OnPlayBoxEvent := @BoxEventProc;
+
+  ListBoxSongs := TSoundListBox.Create(self);
+  ListBoxSongs.Anchors := [akTop, akLeft, akBottom, akRight];
+  ListBoxSongs.Top :=  PlayPanel.Height;
+  ListBoxSongs.Left := 5;
+  ListBoxSongs.Width := ClientWidth - EditBox.Width -10;
+  ListBoxSongs.Height := ClientHeight - PlayPanel.Height;
+  ListBoxSongs.Parent := self;
 
 
   sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
@@ -254,6 +251,7 @@ begin
   ListBoxSongs.Items.AddStrings(sl);
   sl.Free;
 
+  ListBoxSongs.Items.Add('/n4800/Multimedia/Videos/WNDSURF1.AVI');
   ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
   ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
   ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
@@ -269,11 +267,11 @@ begin
   Timer := TTimer.Create(self);
   Timer.OnTimer := @TimerTimer;
   Timer.Interval := 200;
-  PlayBox.TrackBar.TickStyle := tsNone;
-  PlayBox.TrackBar.Max := 1000;
-  PlayBox.TrackBar.OnChange := @PlayBoxTrackBarChange;
-  PlayBox.TrackBar.OnMouseDown := @PlayBoxTrackBarMouseDown;
-  PlayBox.TrackBar.OnMouseUp := @PlayBoxTrackBarMouseUp;
+  PlayPanel.TrackBar.TickStyle := tsNone;
+  PlayPanel.TrackBar.Max := 1000;
+  PlayPanel.TrackBar.OnChange := @PlayBoxTrackBarChange;
+  PlayPanel.TrackBar.OnMouseDown := @PlayBoxTrackBarMouseDown;
+  PlayPanel.TrackBar.OnMouseUp := @PlayBoxTrackBarMouseUp;
   IsTrackBarMDown := False;
 
   Width := 1024;
@@ -296,8 +294,8 @@ begin
   end;
   PriStream := TStreamer.Create(titel);
 
-  PlayBox.TrackBar.Max := 0;
-  PlayBox.TrackBar.Position := 0;
+  PlayPanel.TrackBar.Max := 0;
+  PlayPanel.TrackBar.Position := 0;
   PriStream.Play;
 end;
 

@@ -44,8 +44,7 @@ uses
     end;
 
     bus := gst_element_get_bus(pipeline);
-    msg := gst_bus_timed_pop_filtered(
-      bus, GST_CLOCK_TIME_NONE, GST_MESSAGE_ERROR or GST_MESSAGE_EOS);
+    msg := gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE, GST_MESSAGE_ERROR or GST_MESSAGE_EOS);
     if msg <> nil then  begin
       case GST_MESSAGE_TYPE(msg) of
         GST_MESSAGE_ERROR: begin
