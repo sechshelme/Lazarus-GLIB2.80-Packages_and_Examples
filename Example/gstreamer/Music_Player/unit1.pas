@@ -31,6 +31,7 @@ type
     procedure PlayBoxTrackBarChange(Sender: TObject);
     procedure PlayBoxTrackBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure PlayBoxTrackBarMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+    procedure PriStreamLevelChange(level: TLevel);
     procedure TimerTimer(Sender: TObject);
   public
     ListBoxSongs: TSoundListBox;
@@ -171,11 +172,14 @@ begin
       PlayPanel.TrackBar.OnChange := OldChangeProc;
       PlayPanel.DurationLabel.Caption := GstClockToStr(SDur);
       PlayPanel.PositionLabel.Caption := GstClockToStr(SPos);
-      PlayPanel.LevelLShape.Width:=PriStream.LevelL;
-      PlayPanel.LevelRShape.Width:=PriStream.LevelR;
+      //      PlayPanel.LevelLShape.Width:=PriStream.LevelL;
+      //      PlayPanel.LevelRShape.Width:=PriStream.LevelR;
       volume := PriStream.Position / FITime;
       if volume > 1.0 then begin
         volume := 1.0;
+      end;
+      if volume < 0.0 then begin
+        volume := 0.0;
       end;
       PriStream.Volume := volume;
       if PriStream.Duration > 0 then begin
@@ -196,6 +200,9 @@ begin
       volume := (SekStream.Duration - SekStream.Position) / FITime;
       if volume > 1.0 then begin
         volume := 1.0;
+      end;
+      if volume < 0.0 then begin
+        volume := 0.0;
       end;
       SekStream.Volume := volume;
       WriteLn(SekStream.Volume: 4: 2);
@@ -223,7 +230,7 @@ begin
   PlayPanel.Left := 5;
   PlayPanel.Top := 0;
   PlayPanel.PlayBtnPanel.OnPlayBoxEvent := @BoxEventProc;
-  PlayPanel.Width:=ClientWidth;
+  PlayPanel.Width := ClientWidth;
   PlayPanel.Anchors := [akTop, akLeft, akRight];
 
   EditBox := TEditBox.Create(Self);
@@ -234,9 +241,9 @@ begin
 
   ListBoxSongs := TSoundListBox.Create(self);
   ListBoxSongs.Anchors := [akTop, akLeft, akBottom, akRight];
-  ListBoxSongs.Top :=  PlayPanel.Height;
+  ListBoxSongs.Top := PlayPanel.Height;
   ListBoxSongs.Left := 5;
-  ListBoxSongs.Width := ClientWidth - EditBox.Width -10;
+  ListBoxSongs.Width := ClientWidth - EditBox.Width - 10;
   ListBoxSongs.Height := ClientHeight - PlayPanel.Height;
   ListBoxSongs.Parent := self;
 
@@ -245,7 +252,8 @@ begin
   ListBoxSongs.Items.AddStrings(sl);
   sl.Free;
 
-  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
+//  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
+  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16', '*.mp3');
   ListBoxSongs.Items.AddStrings(sl);
   sl.Free;
 
@@ -266,15 +274,16 @@ begin
   ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
   ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
 
-  Timer := TTimer.Create(self);
-  Timer.OnTimer := @TimerTimer;
-  Timer.Interval := 200;
   PlayPanel.TrackBar.TickStyle := tsNone;
   PlayPanel.TrackBar.Max := 1000;
   PlayPanel.TrackBar.OnChange := @PlayBoxTrackBarChange;
   PlayPanel.TrackBar.OnMouseDown := @PlayBoxTrackBarMouseDown;
   PlayPanel.TrackBar.OnMouseUp := @PlayBoxTrackBarMouseUp;
   IsTrackBarMDown := False;
+
+  Timer := TTimer.Create(self);
+  Timer.OnTimer := @TimerTimer;
+  Timer.Interval := 100;
 
   Width := 1024;
 end;
@@ -295,10 +304,20 @@ begin
     FreeAndNil(PriStream);
   end;
   PriStream := TStreamer.Create(titel);
+  PriStream.Volume:=0.0;
+  PriStream.OnLevelChange := @PriStreamLevelChange;
 
   PlayPanel.TrackBar.Max := 0;
   PlayPanel.TrackBar.Position := 0;
   PriStream.Play;
 end;
+
+procedure TForm1.PriStreamLevelChange(level: TLevel);
+begin
+  PlayPanel.LevelLShape.Width := PriStream.LevelL;
+  PlayPanel.LevelRShape.Width := PriStream.LevelR;
+end;
+
+
 
 end.

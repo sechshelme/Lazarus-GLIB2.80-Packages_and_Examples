@@ -8,32 +8,32 @@ uses
   Classes, SysUtils, glib2, gst;
 
 type
-  TPipelineElement = record
-    pipeline,
-    equalizer,
-    LevelEl,
-    volume: PGstElement;
-    state: TGstState;
-    Duration: Tgint64;
-    FIsEnd: boolean;
-    Level: record
-      L, R: gdouble;
-      end;
+  TLevel = record
+    L, R: gdouble;
   end;
-  PPipelineElement = ^TPipelineElement;
 
-type
+  TStreamerLevel = procedure(level: TLevel) of object;
 
   { TStreamer }
 
   TStreamer = class(TObject)
   private
+    FOnLevelChange: TStreamerLevel;
     fsongPath: string;
-    pipelineElement: TPipelineElement;
-    FPosition: integer;
+    pipelineElement: record
+      pipeline,
+      equalizer,
+      LevelEl,
+      volume: PGstElement;
+      state: TGstState;
+      Duration: Tgint64;
+      FIsEnd: boolean;
+      Level: TLevel;
+      end;
     function GetDuration: integer;
     function GetLevelL: Tguint32;
     function GetLevelR: Tguint32;
+    procedure SetOnLevelChange(AValue: TStreamerLevel);
     procedure SetVolume(vol: gdouble);
     function GetVolume: gdouble;
     procedure SetPosition(AValue: integer);
@@ -54,10 +54,11 @@ type
     property Position: integer read GetPosition write SetPosition;
     property Duration: integer read GetDuration;
     property Volume: gdouble read GetVolume write SetVolume;
-    property LevelL:Tguint32 read GetLevelL;
-    property LevelR:Tguint32 read GetLevelR;
+    property LevelL: Tguint32 read GetLevelL;
+    property LevelR: Tguint32 read GetLevelR;
     function isPlayed: boolean;
     function isEnd: boolean;
+    property OnLevelChange: TStreamerLevel read FOnLevelChange write SetOnLevelChange;
   end;
 
 const
@@ -126,34 +127,33 @@ end;
 
 procedure state_changed_cb(bus: PGstBus; msg: PGstMessage; user_data: TGpointer);
 var
-  pE: PPipelineElement absolute user_data;
+  //  pE: PPipelineElement absolute user_data;
+  streamer: TStreamer absolute user_data;
   old_state, new_state, pending_state: TGstState;
 begin
   gst_message_parse_state_changed(msg, @old_state, @new_state, @pending_state);
-  pE^.state := new_state;
+  //  pE^.state := new_state;
+  streamer.pipelineElement.state := new_state;
 end;
 
 procedure eos_cb(bus: PGstBus; msg: PGstMessage; user_data: TGpointer);
 var
-  pE: PPipelineElement absolute user_data;
+  streamer: TStreamer absolute user_data;
 begin
-  pe^.FIsEnd := True;
-  WriteLn('ende !!!!!!!!!!!!!!!!!!!!!!!');
+  streamer.pipelineElement.FIsEnd := True;
 end;
 
 function message_cb(bus: PGstBus; msg: PGstMessage; user_data: Tgpointer): Tgboolean; cdecl;
 var
-  pE: PPipelineElement absolute user_data;
-var
+  //   pE: PPipelineElement absolute user_data;
+  streamer: TStreamer absolute user_data;
   s: PGstStructure;
   Name: Pgchar;
   endtime: TGstClockTime;
   array_val: PGValue;
   rms_arr: PGValueArray;
   channels: guint;
-  i: integer;
   Value: glib2.PGValue;
-  rms_dB: gdouble;
 begin
   if msg^._type = GST_MESSAGE_ELEMENT then begin
     s := gst_message_get_structure(msg);
@@ -170,24 +170,16 @@ begin
       rms_arr := PGValueArray(g_value_get_boxed(array_val));
 
       channels := rms_arr^.n_values;
-
-//      WriteLn('channels: ', channels);
-      if channels>=2 then begin
-        Value:=g_value_array_get_nth(rms_arr, 0);
-        pE^.Level.L:=g_value_get_double(Value);
-        Value:=g_value_array_get_nth(rms_arr, 1);
-        pE^.Level.R:=g_value_get_double(Value);
-
-//        WriteLn('channels: ', pE^.Level.R:10:5);
-
+      if channels >= 2 then begin
+        Value := g_value_array_get_nth(rms_arr, 0);
+        streamer.pipelineElement.Level.L := g_value_get_double(Value);
+        Value := g_value_array_get_nth(rms_arr, 1);
+        streamer.pipelineElement.Level.R := g_value_get_double(Value);
       end;
-
-      //for i := 0 to channels - 1 do begin
-      //  Value := g_value_array_get_nth(rms_arr, i);
-      //  rms_dB := g_value_get_double(Value);
-      //  WriteLn('pegel: ', rms_dB: 8: 4);
-      //end;
     end;
+  end;
+  if streamer.OnLevelChange <> nil then begin
+    streamer.OnLevelChange(streamer.pipelineElement.Level);
   end;
 end;
 
@@ -200,8 +192,8 @@ begin
   fsongPath := AsongPath;
   pipelineElement.FisEnd := False;
   pipelineElement.Duration := 0;
-  pipelineElement.Level.L:=0.0;
-  pipelineElement.Level.R:=0.0;
+  pipelineElement.Level.L := 0.0;
+  pipelineElement.Level.R := 0.0;
   pipelineElement.pipeline := gst_parse_launch(PChar('filesrc location="' + fsongPath + '" ! decodebin3 ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! level name=level ! autoaudiosink'), nil);
 
   pipelineElement.volume := gst_bin_get_by_name(GST_BIN(pipelineElement.pipeline), 'vol');
@@ -224,9 +216,9 @@ begin
   bus := gst_element_get_bus(pipelineElement.pipeline);
   gst_bus_add_signal_watch(bus);
   //  Level_watch_id := gst_bus_add_watch(bus, @message_cb, @pipelineElement);
-  g_signal_connect(G_OBJECT(bus), 'message::element', TGCallback(@message_cb), @pipelineElement);
-  g_signal_connect(G_OBJECT(bus), 'message::state-changed', TGCallback(@state_changed_cb), @pipelineElement);
-  g_signal_connect(G_OBJECT(bus), 'message::eos', TGCallback(@eos_cb), @pipelineElement);
+  g_signal_connect(G_OBJECT(bus), 'message::element', TGCallback(@message_cb), Self);
+  g_signal_connect(G_OBJECT(bus), 'message::state-changed', TGCallback(@state_changed_cb), Self);
+  g_signal_connect(G_OBJECT(bus), 'message::eos', TGCallback(@eos_cb), Self);
   g_signal_connect(G_OBJECT(bus), 'message', TGCallback(@test_cb), @pipelineElement);
   //  g_signal_connect(G_OBJECT(bus), 'message::duration-changed', TGCallback(@duration_cb), @pipelineElement);
   gst_object_unref(bus);
@@ -281,19 +273,19 @@ begin
   Result := pipelineElement.Duration div G_USEC_PER_SEC;
 end;
 
-function TStreamer.dB_to_Prozent(db:gdouble): Tguint32;
+function TStreamer.dB_to_Prozent(db: gdouble): Tguint32;
 begin
-  Result:=300- abs( Round( db)* 10);
+  Result := 300 - abs(Round(db) * 10);
 end;
 
 function TStreamer.GetLevelL: Tguint32;
 begin
-  Result:=dB_to_Prozent(pipelineElement.Level.L);
+  Result := dB_to_Prozent(pipelineElement.Level.L);
 end;
 
 function TStreamer.GetLevelR: Tguint32;
 begin
-  Result:=dB_to_Prozent(pipelineElement.Level.R);
+  Result := dB_to_Prozent(pipelineElement.Level.R);
 end;
 
 function TStreamer.GetVolume: gdouble;
@@ -350,6 +342,18 @@ function TStreamer.isEnd: boolean;
 begin
   Result := pipelineElement.FIsEnd;
 end;
+
+// ==== Events
+
+procedure TStreamer.SetOnLevelChange(AValue: TStreamerLevel);
+begin
+  if FOnLevelChange = AValue then begin
+    Exit;
+  end;
+  FOnLevelChange := AValue;
+end;
+
+// ==== Inizialisierung
 
 begin
   gst_init(@argc, @argv);

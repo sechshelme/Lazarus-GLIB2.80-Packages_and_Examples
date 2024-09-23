@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  ComCtrls, gst, Streamer;
+  ComCtrls,
+  gst124, Streamer;
 
 const
   cmPlay = 1001;

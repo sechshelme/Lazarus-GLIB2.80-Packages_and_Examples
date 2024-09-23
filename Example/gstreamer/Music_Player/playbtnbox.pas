@@ -119,6 +119,7 @@ begin
   LevelLShape.Parent := Self;
   LevelLShape.Top := h;
   LevelLShape.Height := 10;
+  LevelLShape.Width := 0;
   LevelLShape.Left := 600;
   LevelLShape.Brush.Color := clRed;
 
@@ -126,6 +127,7 @@ begin
   LevelRShape.Parent := Self;
   LevelRShape.Top := h + 15;
   LevelRShape.Height := 10;
+  LevelRShape.Width := 0;
   LevelRShape.Left := 600;
   LevelRShape.Brush.Color := clRed;
 
