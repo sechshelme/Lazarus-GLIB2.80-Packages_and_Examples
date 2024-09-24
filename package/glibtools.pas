@@ -12,7 +12,7 @@ implementation
 
 procedure GObjectShowProperty(obj: Pointer);
 var
-  prolist: PPGParamSpec;
+  paramspec: PPGParamSpec;
   Count: Tguint;
   i: integer;
   valueType, Value: string;
@@ -20,14 +20,14 @@ var
   p: Tgpointer;
 begin
   if (obj <> nil) and G_IS_OBJECT(obj) then begin
-    prolist := g_object_class_list_properties(G_OBJECT_GET_CLASS(obj), @Count);
+    paramspec := g_object_class_list_properties(G_OBJECT_GET_CLASS(obj), @Count);
 
     WriteLn('count:', Count);
     for i := 0 to Count - 1 do begin
       Value := '<unknow>';
-      Name := prolist[i]^.Name;
+      Name := paramspec[i]^.Name;
       g_object_get(G_OBJECT(obj), Name, @p, nil);
-      case prolist[i]^.value_type of
+      case paramspec[i]^.value_type of
         G_TYPE_INVALID: begin
           valueType := 'G_TYPE_INVALID';
         end;
@@ -117,13 +117,13 @@ begin
           valueType := 'G_TYPE_RESERVED_USER_FIRST';
         end;
         else begin
-          WriteStr(valueType, '<unknow> (', prolist[i]^.value_type, ')');
+          WriteStr(valueType, '<unknow> (', paramspec[i]^.value_type, ')');
         end;
       end;
 
-      WriteLn(i: 3, '. Name: ', Name: 20, '  Valuetype: ', valueType: 15, '  Value: ', Value);
+      WriteLn(i: 3, '. Name: ', Name: 20, '  Valuetype: ', valueType: 15, '  Value: ', Value, '  Flag: ', paramspec[i]^.flags);
     end;
-    g_free(prolist);
+    g_free(paramspec);
   end;
 end;
 
