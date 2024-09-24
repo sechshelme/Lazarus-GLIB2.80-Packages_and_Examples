@@ -23,6 +23,10 @@
         <Filename Value="glibtools.pas"/>
         <UnitName Value="GLIBTools"/>
       </Item>
+      <Item>
+        <Filename Value="gsttools.pas"/>
+        <UnitName Value="gsttools"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

@@ -30,7 +30,6 @@ const
   G_PARAM_USER_SHIFT = 8;
 
 type
-type
   TGParamSpecPool=record
         end;
   PGParamSpecPool=^TGParamSpecPool;

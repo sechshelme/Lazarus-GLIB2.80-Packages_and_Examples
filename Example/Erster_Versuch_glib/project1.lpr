@@ -2,8 +2,6 @@ program project1;
 
 uses
   glib280,
-  gobject280,
-  gio280,
 
 
   // --- glib
