@@ -13,9 +13,6 @@ type
   end;
 
   TStreamerLevel = procedure(level: TLevel) of object;
-
-  { TStreamer }
-
   TStreamer = class(TObject)
   private
     FOnLevelChange: TStreamerLevel;
@@ -31,14 +28,14 @@ type
       Level: TLevel;
       end;
     function GetDuration: integer;
-    function GetLevelL: Tguint32;
-    function GetLevelR: Tguint32;
+//    function GetLevelL: Tguint32;
+//    function GetLevelR: Tguint32;
     procedure SetOnLevelChange(AValue: TStreamerLevel);
     procedure SetVolume(vol: gdouble);
     function GetVolume: gdouble;
     procedure SetPosition(AValue: integer);
     function GetPosition: integer;
-    function dB_to_Prozent(db: gdouble): Tguint32;
+//    function dB_to_Prozent(db: gdouble): Tguint32;
   public
     constructor Create(const AsongPath: string);
     destructor Destroy; override;
@@ -54,8 +51,8 @@ type
     property Position: integer read GetPosition write SetPosition;
     property Duration: integer read GetDuration;
     property Volume: gdouble read GetVolume write SetVolume;
-    property LevelL: Tguint32 read GetLevelL;
-    property LevelR: Tguint32 read GetLevelR;
+//    property LevelL: Tguint32 read GetLevelL;
+//    property LevelR: Tguint32 read GetLevelR;
     function isPlayed: boolean;
     function isEnd: boolean;
     property OnLevelChange: TStreamerLevel read FOnLevelChange write SetOnLevelChange;
@@ -268,25 +265,25 @@ begin
     if current > 0 then  begin
       pipelineElement.Duration := current;
     end;
-    WriteLn(current);
+//    WriteLn(current);
   end;
   Result := pipelineElement.Duration div G_USEC_PER_SEC;
 end;
 
-function TStreamer.dB_to_Prozent(db: gdouble): Tguint32;
-begin
-  Result := 300 - abs(Round(db) * 10);
-end;
-
-function TStreamer.GetLevelL: Tguint32;
-begin
-  Result := dB_to_Prozent(pipelineElement.Level.L);
-end;
-
-function TStreamer.GetLevelR: Tguint32;
-begin
-  Result := dB_to_Prozent(pipelineElement.Level.R);
-end;
+//function TStreamer.dB_to_Prozent(db: gdouble): Tguint32;
+//begin
+//  Result := 300 - abs(Round(db) * 10);
+//end;
+//
+//function TStreamer.GetLevelL: Tguint32;
+//begin
+//  Result := dB_to_Prozent(pipelineElement.Level.L);
+//end;
+//
+//function TStreamer.GetLevelR: Tguint32;
+//begin
+//  Result := dB_to_Prozent(pipelineElement.Level.R);
+//end;
 
 function TStreamer.GetVolume: gdouble;
 begin

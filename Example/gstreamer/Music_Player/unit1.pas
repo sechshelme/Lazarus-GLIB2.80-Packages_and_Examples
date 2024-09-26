@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLType,
   Buttons, ExtCtrls, ComCtrls, Menus, Types, FileUtil,
   Common, MenuBar, SoundListBox, PlayBtnBox, AddSongs, SongEditBox,
-  Streamer;
+  gst, Streamer;
 
 type
 
@@ -34,7 +34,7 @@ type
     procedure PriStreamLevelChange(level: TLevel);
     procedure TimerTimer(Sender: TObject);
   public
-    ListBoxSongs: TSoundListBox;
+    SongListPanel: TSongsListPanel;
   end;
 
 var
@@ -53,46 +53,46 @@ begin
     cmNone: begin
     end;
     cmNew: begin
-      //      ListBoxSongs.Add;
+      //      SongListPanel.Add;
     end;
     cmSave: begin
-      ListBoxSongs.SaveToXML;
+      SongListPanel.SaveToXML;
     end;
     cmOpen: begin
-      ListBoxSongs.LoadToXML;
+      SongListPanel.LoadToXML;
     end;
     cmClose: begin
       Close;
     end;
 
     cmAdd: begin
-      SoundAddForm.SongListBox := ListBoxSongs;
+      SoundAddForm.SongListBox := SongListPanel;
       SoundAddForm.ShowModal;
     end;
     cmRemove: begin
-      ListBoxSongs.Remove;
+      SongListPanel.Remove;
     end;
     cmRemoveAll: begin
       if MessageDlg('Songs Löschen', 'Alle Einträge entfernen ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then begin
-        ListBoxSongs.RemoveAll;
+        SongListPanel.RemoveAll;
       end;
     end;
     cmUp: begin
-      ListBoxSongs.Up;
+      SongListPanel.Up;
     end;
     cmDown: begin
-      ListBoxSongs.Down;
+      SongListPanel.Down;
     end;
 
     cmPlay: begin
       if PriStream = nil then begin
-        index := ListBoxSongs.ItemIndex;
-        if ListBoxSongs.Count > 0 then begin
+        index := SongListPanel.ItemIndex;
+        if SongListPanel.Count > 0 then begin
           if index < 0 then begin
             index := 0;
-            ListBoxSongs.ItemIndex := index;
+            SongListPanel.ItemIndex := index;
           end;
-          s := ListBoxSongs.Items[index];
+          s := SongListPanel.GetTitle;
           LoadNewMusic(s, True);
         end;
       end else begin
@@ -114,9 +114,9 @@ begin
     end;
     cmNext: begin
       if (PriStream <> nil) and (PriStream.Duration > 0) then begin
-        if ListBoxSongs.Next then  begin
+        if SongListPanel.Next then  begin
           if (PriStream <> nil) and (PriStream.isPlayed) then begin
-            LoadNewMusic(ListBoxSongs.GetTitle, True);
+            LoadNewMusic(SongListPanel.GetTitle, True);
           end;
         end;
       end;
@@ -126,8 +126,8 @@ begin
         if PriStream.Position > 2000 then begin
           PriStream.Position := 0;
         end else begin
-          if ListBoxSongs.Prev then begin
-            LoadNewMusic(ListBoxSongs.GetTitle, True);
+          if SongListPanel.Prev then begin
+            LoadNewMusic(SongListPanel.GetTitle, True);
           end;
         end;
       end;
@@ -158,7 +158,7 @@ var
   OldChangeProc: TNotifyEvent;
   volume: extended;
 begin
-  if (*(ListBoxSongs.Count > 0) and*) (PriStream <> nil) then begin
+  if (PriStream <> nil) then begin
     if IsChange then begin
       PriStream.Position := PlayPanel.TrackBar.Position;
       IsChange := False;
@@ -172,8 +172,6 @@ begin
       PlayPanel.TrackBar.OnChange := OldChangeProc;
       PlayPanel.DurationLabel.Caption := GstClockToStr(SDur);
       PlayPanel.PositionLabel.Caption := GstClockToStr(SPos);
-      //      PlayPanel.LevelLShape.Width:=PriStream.LevelL;
-      //      PlayPanel.LevelRShape.Width:=PriStream.LevelR;
       volume := PriStream.Position / FITime;
       if volume > 1.0 then begin
         volume := 1.0;
@@ -188,8 +186,9 @@ begin
             FreeAndNil(SekStream);
           end;
           SekStream := PriStream;
-          if ListBoxSongs.Next then  begin
-            LoadNewMusic(ListBoxSongs.GetTitle, False);
+          SekStream.OnLevelChange := nil;
+          if SongListPanel.Next then  begin
+            LoadNewMusic(SongListPanel.GetTitle, False);
           end;
         end;
       end;
@@ -205,7 +204,8 @@ begin
         volume := 0.0;
       end;
       SekStream.Volume := volume;
-      WriteLn(SekStream.Volume: 4: 2);
+      //      WriteLn(SekStream.Volume: 4: 2);
+      //if volume<=0 then ;
     end;
 
     if SekStream.isEnd then begin
@@ -218,6 +218,8 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   sl: TStringList;
 begin
+  Width := 1024;
+
   PriStream := nil;
   SekStream := nil;
 
@@ -239,40 +241,39 @@ begin
   EditBox.Parent := Self;
   EditBox.OnPlayBoxEvent := @BoxEventProc;
 
-  ListBoxSongs := TSoundListBox.Create(self);
-  ListBoxSongs.Anchors := [akTop, akLeft, akBottom, akRight];
-  ListBoxSongs.Top := PlayPanel.Height;
-  ListBoxSongs.Left := 5;
-  ListBoxSongs.Width := ClientWidth - EditBox.Width - 10;
-  ListBoxSongs.Height := ClientHeight - PlayPanel.Height;
-  ListBoxSongs.Parent := self;
-
+  SongListPanel := TSongsListPanel.Create(self);
+  SongListPanel.Anchors := [akTop, akLeft, akBottom, akRight];
+  SongListPanel.Top := PlayPanel.Height;
+  SongListPanel.Left := 5;
+  SongListPanel.Width := ClientWidth - EditBox.Width - 10;
+  SongListPanel.Height := ClientHeight - PlayPanel.Height;
+  SongListPanel.Parent := self;
 
   sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
-  ListBoxSongs.Items.AddStrings(sl);
+  SongListPanel.Add(sl);
   sl.Free;
 
-//  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
+  //  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
   sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16', '*.mp3');
-  ListBoxSongs.Items.AddStrings(sl);
+  SongListPanel.Add(sl);
   sl.Free;
 
   sl := FindAllFiles('/home/tux/Schreibtisch/sound', '*.mp3');
-  ListBoxSongs.Items.AddStrings(sl);
+  SongListPanel.Add(sl);
   sl.Free;
 
-  ListBoxSongs.Items.Add('/n4800/Multimedia/Videos/WNDSURF1.AVI');
-  ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  ListBoxSongs.Items.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_1.wav');
-  ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_2.wav');
-  ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_3.wav');
-  ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_4.wav');
-  ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
-  ListBoxSongs.Items.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
+  SongListPanel.Add('/n4800/Multimedia/Videos/WNDSURF1.AVI');
+  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_1.wav');
+  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_2.wav');
+  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_3.wav');
+  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_4.wav');
+  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
+  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
 
   PlayPanel.TrackBar.TickStyle := tsNone;
   PlayPanel.TrackBar.Max := 1000;
@@ -284,8 +285,6 @@ begin
   Timer := TTimer.Create(self);
   Timer.OnTimer := @TimerTimer;
   Timer.Interval := 100;
-
-  Width := 1024;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -304,7 +303,7 @@ begin
     FreeAndNil(PriStream);
   end;
   PriStream := TStreamer.Create(titel);
-  PriStream.Volume:=0.0;
+  PriStream.Volume := 0.0;
   PriStream.OnLevelChange := @PriStreamLevelChange;
 
   PlayPanel.TrackBar.Max := 0;
@@ -313,9 +312,15 @@ begin
 end;
 
 procedure TForm1.PriStreamLevelChange(level: TLevel);
+
+  function dB_to_Prozent(db: Tgdouble): Tguint32;
+  begin
+    Result := 300 - abs(Round(db) * 10);
+  end;
+
 begin
-  PlayPanel.LevelLShape.Width := PriStream.LevelL;
-  PlayPanel.LevelRShape.Width := PriStream.LevelR;
+  PlayPanel.LevelLShape.Width := dB_to_Prozent(level.L);
+  PlayPanel.LevelRShape.Width := dB_to_Prozent(level.R);
 end;
 
 

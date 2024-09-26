@@ -16,7 +16,7 @@ type
     procedure FormCreate(Sender: TObject);
   private
     TitelLabel: TLabel;
-    FSongListBox: TSoundListBox;
+    FSongListBox: TSongsListPanel;
     ListBoxDirectory, ListBoxMusic: TListBox;
     procedure AddSongsProc(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -24,7 +24,7 @@ type
     procedure OpenDirProc(Sender: TObject);
     procedure SelectAllProc(Sender: TObject);
   public
-    property SongListBox: TSoundListBox write FSongListBox;
+    property SongListBox: TSongsListPanel write FSongListBox;
     procedure FindNewFile(const path: string);
   end;
 

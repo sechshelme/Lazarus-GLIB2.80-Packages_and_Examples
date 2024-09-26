@@ -3,18 +3,21 @@ unit SoundListBox;
 interface
 
 uses
-  Classes, SysUtils, StdCtrls, Controls, Dialogs,
+  Classes, SysUtils, StdCtrls, Controls, Dialogs, ExtCtrls, ComCtrls,
   Laz2_XMLCfg,
   Streamer;
 
 type
-
-  { TSoundListBox }
-
-  TSoundListBox = class(TListBox)
+  TSongsListPanel = class(TPanel)
+  private
+    ListView: TListView;
+    function GetCount: integer;
+    function GetItemIndex: integer;
+    procedure SetItemIndex(AValue: integer);
   public
     constructor Create(TheOwner: TComponent); override;
-    procedure Add(const song: string);
+    procedure Add(const song: string); overload;
+    procedure Add(const song: TStringList); overload;
     procedure Remove;
     procedure RemoveAll;
     procedure Down;
@@ -24,110 +27,164 @@ type
     function GetTitle: string;
     procedure SaveToXML;
     procedure LoadToXML;
+
+    property ItemIndex: integer read GetItemIndex write SetItemIndex;
+    property Count: integer read GetCount;
   end;
 
 implementation
 
-constructor TSoundListBox.Create(TheOwner: TComponent);
+function TSongsListPanel.GetItemIndex: integer;
+begin
+  Result := ListView.ItemIndex;
+end;
+
+procedure TSongsListPanel.SetItemIndex(AValue: integer);
+begin
+  ListView.ItemIndex := AValue;
+end;
+
+function TSongsListPanel.GetCount: integer;
+begin
+  Result := ListView.Items.Count;
+end;
+
+constructor TSongsListPanel.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
   Anchors := [akTop, akLeft, akBottom, akRight];
+
+  ListView := TListView.Create(Self);
+  ListView.Parent := Self;
+  ListView.Align := alClient;
+  ListView.ReadOnly:=True;
+
+  ListView.ViewStyle := vsReport;
+  ListView.Columns.Add.Caption := 'Song Titel';
+ // ListView.Columns[0].Width := Width- 100;
+//  WriteLn(Width);
+  ListView.Columns[0].Width := 800;
+  ListView.Columns.Add.Caption := 'Dauer';
+  ListView.Columns[1].Width := 100;
 end;
 
-procedure TSoundListBox.Add(const song: string);
-begin
-  Items.AddStrings(song);
-end;
-
-procedure TSoundListBox.Remove;
+procedure TSongsListPanel.Add(const song: string);
 var
-  index: integer;
+  ad: TListItem;
 begin
-  index := ItemIndex;
-  if (index > 0) and (index < Count) then  begin
-    Items.Delete(index);
+  ad := ListView.Items.Add;
+  ad.Caption := song;
+  ad.SubItems.Add('123');
+end;
+
+procedure TSongsListPanel.Add(const song: TStringList);
+var
+  ad: TListItem;
+  i: integer;
+begin
+  for i := 0 to song.Count - 1 do begin
+    ad := ListView.Items.Add;
+    ad.Caption := song[i];
+    ad.SubItems.Add('123');
   end;
 end;
 
-procedure TSoundListBox.RemoveAll;
-begin
-  Clear;
-end;
-
-procedure TSoundListBox.Down;
+procedure TSongsListPanel.Remove;
 var
   index: integer;
 begin
-  index := ItemIndex;
+  index := ListView.ItemIndex;
+  if (index >= 0) and (index < ListView.Items.Count) then  begin
+    ListView.Items.Delete(index);
+    if index < ListView.Items.Count then  begin
+      ListView.ItemIndex := index;
+    end else if index > 0 then  begin
+      ListView.ItemIndex := index - 1;
+    end;
+  end;
+end;
+
+procedure TSongsListPanel.RemoveAll;
+begin
+  ListView.Clear;
+end;
+
+procedure TSongsListPanel.Down;
+var
+  index: integer;
+begin
+  index := ListView.ItemIndex;
   if index = -1 then begin
     Exit;
   end;
-  if index < Count - 1 then  begin
-    Items.Move(index, index + 1);
-    ItemIndex := index + 1;
+  if index < ListView.Items.Count - 1 then  begin
+    ListView.Items.Move(index, index + 1);
+    ListView.ItemIndex := index + 1;
   end;
 end;
 
-procedure TSoundListBox.Up;
+procedure TSongsListPanel.Up;
 var
   index: integer;
 begin
-  index := ItemIndex;
+  index := ListView.ItemIndex;
   if index = -1 then begin
     Exit;
   end;
   if index > 0 then  begin
-    Items.Move(index, index - 1);
-    ItemIndex := index - 1;
+    ListView.Items.Move(index, index - 1);
+    ListView.ItemIndex := index - 1;
   end;
 end;
 
-function TSoundListBox.Next: boolean;
+function TSongsListPanel.Next: boolean;
 var
   index: integer;
 begin
-  if Count <= 0 then begin
+  if ListView.Items.Count <= 0 then begin
     Result := False;
     Exit;
   end else begin
     Result := True;
   end;
-  index := ItemIndex;
+  index := ListView.ItemIndex;
   Inc(index);
-  if index >= Items.Count then begin
+  if index >= ListView.Items.Count then begin
     index := 0;
   end;
-  ItemIndex := index;
+  ListView.ItemIndex := index;
 end;
 
-function TSoundListBox.Prev: boolean;
-var
-  musicPos: Integer;
+function TSongsListPanel.Prev: boolean;
 begin
-  if Count <= 0 then begin
+  if ListView.Items.Count <= 0 then begin
     Result := False;
     Exit;
   end;
   Result := True;
   begin
-    if ItemIndex = 0 then begin
-      ItemIndex := Count - 1;
+    if ListView.ItemIndex = 0 then begin
+      ListView.ItemIndex := ListView.Items.Count - 1;
     end else begin
-      ItemIndex := ItemIndex - 1;
+      ListView.ItemIndex := ListView.ItemIndex - 1;
     end;
   end;
 end;
 
-function TSoundListBox.GetTitle: string;
+function TSongsListPanel.GetTitle: string;
+var
+  si: TListItem;
 begin
-  if ItemIndex >= 0 then begin
-    Result := Items[ItemIndex];
+  if ListView.ItemIndex >= 0 then begin
+    si:=ListView.Items[ListView.ItemIndex];
+    Result:=si.Caption;
+    WriteLn(Result);
   end else begin
     Result := '';
   end;
 end;
 
-procedure TSoundListBox.SaveToXML;
+procedure TSongsListPanel.SaveToXML;
 var
   xml: TXMLConfig;
   i: integer;
@@ -135,13 +192,13 @@ begin
   xml := TXMLConfig.Create(nil);
   xml.Filename := 'test.xml';
   xml.Clear;
-  for i := 1 to Count do begin
-    xml.SetValue('songs/items[' + IntToStr(i) + ']/song', Items[i - 1]);
+  for i := 1 to ListView.Items.Count do begin
+//    xml.SetValue('songs/items[' + IntToStr(i) + ']/song', ListView.Items[i - 1]);
   end;
   xml.Free;
 end;
 
-procedure TSoundListBox.LoadToXML;
+procedure TSongsListPanel.LoadToXML;
 var
   i, cnt: integer;
   xml: TXMLConfig;
@@ -152,8 +209,8 @@ begin
 
   cnt := xml.GetChildCount('songs');
   for i := 1 to cnt do begin
-    s := xml.GetValue('songs/items[' + IntToStr(i) + ']/song', '');
-    WriteLn(s);
+//    s := xml.GetValue('songs/items[' + IntToStr(i) + ']/song', '');
+//    WriteLn(s);
   end;
   xml.Free;
 end;

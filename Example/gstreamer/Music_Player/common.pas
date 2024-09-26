@@ -3,7 +3,7 @@ unit Common;
 interface
 
 const
-  MusicDir: string = '';
+  MusicDir: string = '/n4800/Multimedia/Music';
   CFTime = 13 * 1000; // 3s
   FITime = CFTime;
   FATime = FITime;
@@ -37,7 +37,6 @@ const
     (cmd: cmRemoveAll; Caption: 'Remove All'; IconPath: ''),
     (cmd: cmUp; Caption: 'Up'; IconPath: ''),
     (cmd: cmDown; Caption: 'Down'; IconPath: ''));
-  //▶️⏸⏯⏹⏺⏭⏮⏩⏪
 
   PlayCmdProp: TcmdProps = (
     (cmd: cmPlay; Caption: 'Play️'; IconPath: 'Play_01_24'),
