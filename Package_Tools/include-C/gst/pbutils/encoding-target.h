@@ -100,7 +100,7 @@
 typedef struct _GstEncodingTarget GstEncodingTarget;
 typedef GObjectClass GstEncodingTargetClass;
 
-GST_PBUTILS_API
+extern
 GType gst_encoding_target_get_type (void);
 
 /**
@@ -121,57 +121,57 @@ GType gst_encoding_target_get_type (void);
 #define gst_encoding_target_ref(target) \
   (g_object_ref ((GObject*) target))
 
-GST_PBUTILS_API
+extern
 GstEncodingTarget *     gst_encoding_target_new                 (const gchar *name,
                                                                  const gchar *category,
                                                                  const gchar *description,
                                                                  const GList *profiles);
 
-GST_PBUTILS_API
+extern
 const gchar *           gst_encoding_target_get_name            (GstEncodingTarget *target);
 
-GST_PBUTILS_API
+extern
 const gchar *           gst_encoding_target_get_category        (GstEncodingTarget *target);
 
-GST_PBUTILS_API
+extern
 const gchar *           gst_encoding_target_get_description     (GstEncodingTarget *target);
 
-GST_PBUTILS_API
+extern
 const gchar *           gst_encoding_target_get_path            (GstEncodingTarget *target);
 
-GST_PBUTILS_API
+extern
 const GList *           gst_encoding_target_get_profiles        (GstEncodingTarget *target);
 
-GST_PBUTILS_API
+extern
 GstEncodingProfile *    gst_encoding_target_get_profile         (GstEncodingTarget *target,
                                                                  const gchar *name);
 
-GST_PBUTILS_API
+extern
 gboolean                gst_encoding_target_add_profile         (GstEncodingTarget *target,
                                                                  GstEncodingProfile *profile);
 
-GST_PBUTILS_API
+extern
 gboolean                gst_encoding_target_save                (GstEncodingTarget *target,
                                                                  GError **error);
 
-GST_PBUTILS_API
+extern
 gboolean                gst_encoding_target_save_to_file        (GstEncodingTarget *target,
                                                                  const gchar *filepath,
                                                                  GError **error);
 
-GST_PBUTILS_API
+extern
 GstEncodingTarget *     gst_encoding_target_load                (const gchar *name,
                                                                  const gchar *category,
                                                                  GError **error);
 
-GST_PBUTILS_API
+extern
 GstEncodingTarget *     gst_encoding_target_load_from_file      (const gchar *filepath,
                                                                  GError **error);
 
-GST_PBUTILS_API
+extern
 GList *                 gst_encoding_list_available_categories  (void);
 
-GST_PBUTILS_API
+extern
 GList *                 gst_encoding_list_all_targets           (const gchar * categoryname);
 
 

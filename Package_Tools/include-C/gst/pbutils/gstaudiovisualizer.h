@@ -103,7 +103,7 @@ struct _GstAudioVisualizerClass
   gboolean (*decide_allocation)   (GstAudioVisualizer * scope, GstQuery *query);
 };
 
-GST_PBUTILS_API
+extern
 GType gst_audio_visualizer_get_type (void);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GstAudioVisualizer, gst_object_unref)

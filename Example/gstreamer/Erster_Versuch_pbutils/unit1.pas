@@ -7,12 +7,11 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
   FileUtil,
-  glib280, gst124, gstTools;
+  glib280, gst124, gstTools,
+
+  gstdiscoverer  ;
 
 type
-
-  { TForm1 }
-
   TForm1 = class(TForm)
     Button1: TButton;
     Memo1: TMemo;
@@ -34,61 +33,6 @@ implementation
 
 {$R *.lfm}
 
-function get_duration1(s: string): Tguint64;
-var
-  pipeline: PGstElement;
-  bus: PGstBus;
-  msg: PGstMessage;
-  duration: int64;
-  Count: integer;
-begin
-  pipeline := gst_element_factory_make('playbin', 'playbin');
-  if pipeline = nil then begin
-    WriteLn('pipeline error !');
-  end;
-  g_object_set(pipeline, 'uri', PChar('file:' + s), nil);
-
-  gst_element_set_state(pipeline, GST_STATE_PLAYING);
-  // gst_element_set_state(pipeline, GST_STATE_PAUSED);
-  //    WriteLn('io 11');
-  //
-  //
-  //  bus := gst_element_get_bus(pipeline);
-  //  if bus = nil then begin
-  //    WriteLn('bus error !');
-  //  end;
-  //  WriteLn(s);
-  ////  msg := gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE, GST_MESSAGE_DURATION_CHANGED or GST_MESSAGE_ERROR);
-  //  msg := gst_bus_timed_pop_filtered(bus, 10000, GST_MESSAGE_DURATION_CHANGED or GST_MESSAGE_ERROR);
-  //  if msg = nil then begin
-  //    WriteLn('msg error !');
-  //  end;
-  //  count:=0;
-  //  repeat
-  //    gst_element_query_duration(pipeline, GST_FORMAT_TIME, @duration);
-  //    inc(count);
-  ////    WriteLn(count);
-  ////      Application.ProcessMessages;
-  //
-  //  until duration <> GST_CLOCK_TIME_NONE;
-  WriteLn(s);
-  repeat
-    gst_element_query_duration(pipeline, GST_FORMAT_TIME, @duration);
-    if duration <> -1 then  begin
-      WriteLn(duration);
-    end;
-  until duration > 0;
-
-
-  Result := duration div G_USEC_PER_SEC;
-  //  WriteLn(GstClockToStr(duration div G_USEC_PER_SEC));
-  //  WriteLn(duration: 4);
-
-  gst_element_set_state(pipeline, GST_STATE_NULL);
-  //gst_message_unref(msg);
-  //g_object_unref(bus);
-  g_object_unref(pipeline);
-end;
 
 const
   libpbutils = 'gstpbutils-1.0';

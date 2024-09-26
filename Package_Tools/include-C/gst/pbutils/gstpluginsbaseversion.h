@@ -68,10 +68,10 @@
      (GST_PLUGINS_BASE_VERSION_MAJOR == (major) && GST_PLUGINS_BASE_VERSION_MINOR == (minor) && \
       GST_PLUGINS_BASE_VERSION_MICRO + 1 == (micro) && GST_PLUGINS_BASE_VERSION_NANO > 0))
 
-GST_PBUTILS_API
+extern
 void     gst_plugins_base_version (guint *major, guint *minor, guint *micro, guint *nano);
 
-GST_PBUTILS_API
+extern
 gchar *  gst_plugins_base_version_string (void);
 
 

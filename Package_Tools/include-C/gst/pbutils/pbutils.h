@@ -35,7 +35,7 @@
 
 
 
-GST_PBUTILS_API
+extern
 void    gst_pb_utils_init (void);
 
 

@@ -29,23 +29,23 @@
  * functions to create missing-plugin messages, for use by plugins primarily
  */
 
-GST_PBUTILS_API
+extern
 GstMessage * gst_missing_uri_source_message_new (GstElement    * element,
                                                  const gchar   * protocol);
 
-GST_PBUTILS_API
+extern
 GstMessage * gst_missing_uri_sink_message_new   (GstElement    * element,
                                                  const gchar   * protocol);
 
-GST_PBUTILS_API
+extern
 GstMessage * gst_missing_element_message_new    (GstElement    * element,
                                                  const gchar   * factory_name);
 
-GST_PBUTILS_API
+extern
 GstMessage * gst_missing_decoder_message_new    (GstElement    * element,
                                                  const GstCaps * decode_caps);
 
-GST_PBUTILS_API
+extern
 GstMessage * gst_missing_encoder_message_new    (GstElement    * element,
                                                  const GstCaps * encode_caps);
 
@@ -53,13 +53,13 @@ GstMessage * gst_missing_encoder_message_new    (GstElement    * element,
  * functions for use by applications when dealing with missing-plugin messages
  */
 
-GST_PBUTILS_API
+extern
 gchar       * gst_missing_plugin_message_get_installer_detail (GstMessage * msg);
 
-GST_PBUTILS_API
+extern
 gchar       * gst_missing_plugin_message_get_description (GstMessage * msg);
 
-GST_PBUTILS_API
+extern
 gboolean      gst_is_missing_plugin_message (GstMessage * msg);
 
 
@@ -69,19 +69,19 @@ gboolean      gst_is_missing_plugin_message (GstMessage * msg);
  * missing-plugin messages posted by elements such as playbin or decodebin
  */
 
-GST_PBUTILS_API
+extern
 gchar * gst_missing_uri_source_installer_detail_new (const gchar * protocol);
 
-GST_PBUTILS_API
+extern
 gchar * gst_missing_uri_sink_installer_detail_new (const gchar * protocol);
 
-GST_PBUTILS_API
+extern
 gchar * gst_missing_element_installer_detail_new (const gchar * factory_name);
 
-GST_PBUTILS_API
+extern
 gchar * gst_missing_decoder_installer_detail_new (const GstCaps * decode_caps);
 
-GST_PBUTILS_API
+extern
 gchar * gst_missing_encoder_installer_detail_new (const GstCaps * encode_caps);
 
 

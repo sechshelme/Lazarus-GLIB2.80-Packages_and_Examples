@@ -10,29 +10,29 @@
 
 /* enumerations from "descriptions.h" */
 
-GST_PBUTILS_API
+extern
 GType gst_pb_utils_caps_description_flags_get_type (void);
 #define GST_TYPE_PB_UTILS_CAPS_DESCRIPTION_FLAGS (gst_pb_utils_caps_description_flags_get_type())
 
 /* enumerations from "gstaudiovisualizer.h" */
 
-GST_PBUTILS_API
+extern
 GType gst_audio_visualizer_shader_get_type (void);
 #define GST_TYPE_AUDIO_VISUALIZER_SHADER (gst_audio_visualizer_shader_get_type())
 
 /* enumerations from "gstdiscoverer.h" */
 
-GST_PBUTILS_API
+extern
 GType gst_discoverer_result_get_type (void);
 #define GST_TYPE_DISCOVERER_RESULT (gst_discoverer_result_get_type())
 
-GST_PBUTILS_API
+extern
 GType gst_discoverer_serialize_flags_get_type (void);
 #define GST_TYPE_DISCOVERER_SERIALIZE_FLAGS (gst_discoverer_serialize_flags_get_type())
 
 /* enumerations from "install-plugins.h" */
 
-GST_PBUTILS_API
+extern
 GType gst_install_plugins_return_get_type (void);
 #define GST_TYPE_INSTALL_PLUGINS_RETURN (gst_install_plugins_return_get_type())
 

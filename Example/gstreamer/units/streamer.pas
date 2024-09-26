@@ -13,6 +13,9 @@ type
   end;
 
   TStreamerLevel = procedure(level: TLevel) of object;
+
+  { TStreamer }
+
   TStreamer = class(TObject)
   private
     FOnLevelChange: TStreamerLevel;
@@ -27,14 +30,14 @@ type
       FIsEnd: boolean;
       Level: TLevel;
       end;
-    function GetDuration: integer;
+    function GetDuration: TGstClockTime;
 //    function GetLevelL: Tguint32;
 //    function GetLevelR: Tguint32;
     procedure SetOnLevelChange(AValue: TStreamerLevel);
     procedure SetVolume(vol: gdouble);
     function GetVolume: gdouble;
-    procedure SetPosition(AValue: integer);
-    function GetPosition: integer;
+    procedure SetPosition(AValue: TGstClockTime);
+    function GetPosition: TGstClockTime;
 //    function dB_to_Prozent(db: gdouble): Tguint32;
   public
     constructor Create(const AsongPath: string);
@@ -48,8 +51,8 @@ type
     procedure SetMute(mute: boolean);
     procedure printInfo;
     function getState: string;
-    property Position: integer read GetPosition write SetPosition;
-    property Duration: integer read GetDuration;
+    property Position: TGstClockTime read GetPosition write SetPosition;
+    property Duration: TGstClockTime read GetDuration;
     property Volume: gdouble read GetVolume write SetVolume;
 //    property LevelL: Tguint32 read GetLevelL;
 //    property LevelR: Tguint32 read GetLevelR;
@@ -243,12 +246,12 @@ begin
   gst_element_set_state(pipelineElement.pipeline, GST_STATE_NULL);
 end;
 
-procedure TStreamer.SetPosition(AValue: integer);
+procedure TStreamer.SetPosition(AValue: TGstClockTime);
 begin
   gst_element_seek_simple(pipelineElement.pipeline, GST_FORMAT_TIME, TGstSeekFlags(int64(GST_SEEK_FLAG_FLUSH) or int64(GST_SEEK_FLAG_KEY_UNIT)), AValue * G_USEC_PER_SEC);
 end;
 
-function TStreamer.GetPosition: integer;
+function TStreamer.GetPosition: TGstClockTime;
 var
   current: Tgint64;
 begin
@@ -256,7 +259,7 @@ begin
   Result := current div G_USEC_PER_SEC;
 end;
 
-function TStreamer.GetDuration: integer;
+function TStreamer.GetDuration: TGstClockTime;
 var
   current: Tgint64 = 0;
 begin

@@ -25,17 +25,17 @@
 #include <gst/gst.h>
 
 #ifdef BUILDING_GST_PBUTILS
-#define GST_PBUTILS_API extern_EXPORT         /* from config.h */
+#define extern extern_EXPORT         /* from config.h */
 #else
-#define GST_PBUTILS_API extern_IMPORT
+#define extern extern_IMPORT
 #endif
 
 #ifndef GST_DISABLE_DEPRECATED
-#define GST_PBUTILS_DEPRECATED GST_PBUTILS_API
-#define GST_PBUTILS_DEPRECATED_FOR(f) GST_PBUTILS_API
+#define GST_PBUTILS_DEPRECATED extern
+#define GST_PBUTILS_DEPRECATED_FOR(f) extern
 #else
-#define GST_PBUTILS_DEPRECATED G_DEPRECATED GST_PBUTILS_API
-#define GST_PBUTILS_DEPRECATED_FOR(f) G_DEPRECATED_FOR(f) GST_PBUTILS_API
+#define GST_PBUTILS_DEPRECATED G_DEPRECATED extern
+#define GST_PBUTILS_DEPRECATED_FOR(f) G_DEPRECATED_FOR(f) extern
 #endif
 
 #endif /* __GST_PBUTILS_PRELUDE_H__ */
