@@ -121,66 +121,66 @@ typedef enum {
  */
 #define GST_VIDEO_OVERLAY_COMPOSITION_BLEND_FORMATS GST_VIDEO_FORMATS_ALL
 
-GST_VIDEO_API
+extern
 GType                        gst_video_overlay_rectangle_get_type (void);
 
-GST_VIDEO_API
+extern
 GstVideoOverlayRectangle *   gst_video_overlay_rectangle_new_raw  (GstBuffer * pixels,
                                                                    gint render_x, gint render_y,
                                                                    guint render_width, guint render_height,
                                                                    GstVideoOverlayFormatFlags flags);
 
-GST_VIDEO_API
+extern
 GstVideoOverlayRectangle *   gst_video_overlay_rectangle_copy     (GstVideoOverlayRectangle * rectangle);
 
-GST_VIDEO_API
+extern
 guint                        gst_video_overlay_rectangle_get_seqnum (GstVideoOverlayRectangle  * rectangle);
 
-GST_VIDEO_API
+extern
 void                         gst_video_overlay_rectangle_set_render_rectangle     (GstVideoOverlayRectangle  * rectangle,
                                                                                    gint                        render_x,
                                                                                    gint                        render_y,
                                                                                    guint                       render_width,
                                                                                    guint                       render_height);
 
-GST_VIDEO_API
+extern
 gboolean                     gst_video_overlay_rectangle_get_render_rectangle     (GstVideoOverlayRectangle  * rectangle,
                                                                                    gint                      * render_x,
                                                                                    gint                      * render_y,
                                                                                    guint                     * render_width,
                                                                                    guint                     * render_height);
 
-GST_VIDEO_API
+extern
 GstBuffer *                  gst_video_overlay_rectangle_get_pixels_raw           (GstVideoOverlayRectangle  * rectangle,
                                                                                    GstVideoOverlayFormatFlags  flags);
 
-GST_VIDEO_API
+extern
 GstBuffer *                  gst_video_overlay_rectangle_get_pixels_argb          (GstVideoOverlayRectangle  * rectangle,
                                                                                    GstVideoOverlayFormatFlags  flags);
 
-GST_VIDEO_API
+extern
 GstBuffer *                  gst_video_overlay_rectangle_get_pixels_ayuv          (GstVideoOverlayRectangle  * rectangle,
                                                                                    GstVideoOverlayFormatFlags  flags);
 
-GST_VIDEO_API
+extern
 GstBuffer *                  gst_video_overlay_rectangle_get_pixels_unscaled_raw  (GstVideoOverlayRectangle  * rectangle,
                                                                                    GstVideoOverlayFormatFlags  flags);
 
-GST_VIDEO_API
+extern
 GstBuffer *                  gst_video_overlay_rectangle_get_pixels_unscaled_argb (GstVideoOverlayRectangle  * rectangle,
                                                                                    GstVideoOverlayFormatFlags  flags);
 
-GST_VIDEO_API
+extern
 GstBuffer *                  gst_video_overlay_rectangle_get_pixels_unscaled_ayuv (GstVideoOverlayRectangle  * rectangle,
                                                                                    GstVideoOverlayFormatFlags  flags);
 
-GST_VIDEO_API
+extern
 GstVideoOverlayFormatFlags   gst_video_overlay_rectangle_get_flags                (GstVideoOverlayRectangle  * rectangle);
 
-GST_VIDEO_API
+extern
 gfloat                       gst_video_overlay_rectangle_get_global_alpha         (GstVideoOverlayRectangle  * rectangle);
 
-GST_VIDEO_API
+extern
 void                         gst_video_overlay_rectangle_set_global_alpha         (GstVideoOverlayRectangle  * rectangle,
                                                                                    gfloat                      global_alpha);
 
@@ -232,34 +232,34 @@ gst_video_overlay_composition_unref (GstVideoOverlayComposition * comp)
   gst_mini_object_unref (GST_MINI_OBJECT_CAST (comp));
 }
 
-GST_VIDEO_API
+extern
 GType                        gst_video_overlay_composition_get_type (void);
 
-GST_VIDEO_API
+extern
 GstVideoOverlayComposition * gst_video_overlay_composition_copy          (GstVideoOverlayComposition * comp);
 
-GST_VIDEO_API
+extern
 GstVideoOverlayComposition * gst_video_overlay_composition_make_writable (GstVideoOverlayComposition * comp);
 
-GST_VIDEO_API
+extern
 GstVideoOverlayComposition * gst_video_overlay_composition_new           (GstVideoOverlayRectangle * rectangle);
 
-GST_VIDEO_API
+extern
 void                         gst_video_overlay_composition_add_rectangle (GstVideoOverlayComposition * comp,
                                                                           GstVideoOverlayRectangle   * rectangle);
 
-GST_VIDEO_API
+extern
 guint                        gst_video_overlay_composition_n_rectangles  (GstVideoOverlayComposition * comp);
 
-GST_VIDEO_API
+extern
 GstVideoOverlayRectangle *   gst_video_overlay_composition_get_rectangle (GstVideoOverlayComposition * comp, guint n);
 
-GST_VIDEO_API
+extern
 guint                        gst_video_overlay_composition_get_seqnum    (GstVideoOverlayComposition * comp);
 
 /* blend composition onto raw video buffer */
 
-GST_VIDEO_API
+extern
 gboolean                     gst_video_overlay_composition_blend         (GstVideoOverlayComposition * comp,
                                                                           GstVideoFrame              * video_buf);
 
@@ -286,13 +286,13 @@ struct _GstVideoOverlayCompositionMeta
   GstVideoOverlayComposition *overlay;
 };
 
-GST_VIDEO_API
+extern
 GType gst_video_overlay_composition_meta_api_get_type (void);
 
-GST_VIDEO_API
+extern
 const GstMetaInfo *gst_video_overlay_composition_meta_get_info (void);
 
-GST_VIDEO_API
+extern
 GstVideoOverlayCompositionMeta * gst_buffer_add_video_overlay_composition_meta (GstBuffer                  * buf,
                                                                                 GstVideoOverlayComposition * comp);
 

@@ -67,7 +67,7 @@ typedef enum {
   GST_VIDEO_COLOR_MATRIX_BT2020
 } GstVideoColorMatrix;
 
-GST_VIDEO_API
+extern
 gboolean gst_video_color_matrix_get_Kr_Kb (GstVideoColorMatrix matrix, gdouble * Kr, gdouble * Kb);
 
 /**
@@ -140,12 +140,12 @@ typedef enum {
 
 GST_VIDEO_DEPRECATED_FOR(gst_video_transfer_function_encode)
 gdouble      gst_video_color_transfer_encode    (GstVideoTransferFunction func, gdouble val);
-GST_VIDEO_API
+extern
 gdouble      gst_video_transfer_function_encode (GstVideoTransferFunction func, gdouble val);
 
 GST_VIDEO_DEPRECATED_FOR(gst_video_transfer_function_decode)
 gdouble      gst_video_color_transfer_decode    (GstVideoTransferFunction func, gdouble val);
-GST_VIDEO_API
+extern
 gdouble      gst_video_transfer_function_decode (GstVideoTransferFunction func, gdouble val);
 
 /**
@@ -218,11 +218,11 @@ typedef struct {
   gdouble Bx, By;
 } GstVideoColorPrimariesInfo;
 
-GST_VIDEO_API
+extern
 const GstVideoColorPrimariesInfo *
                 gst_video_color_primaries_get_info     (GstVideoColorPrimaries primaries);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_color_primaries_is_equivalent       (GstVideoColorPrimaries primaries,
                                                         GstVideoColorPrimaries other);
 
@@ -254,19 +254,19 @@ typedef struct {
 #define GST_VIDEO_COLORIMETRY_BT2100_PQ   "bt2100-pq"
 #define GST_VIDEO_COLORIMETRY_BT2100_HLG  "bt2100-hlg"
 
-GST_VIDEO_API
+extern
 gboolean     gst_video_colorimetry_matches     (const GstVideoColorimetry *cinfo, const gchar *color);
 
-GST_VIDEO_API
+extern
 gboolean     gst_video_colorimetry_from_string (GstVideoColorimetry *cinfo, const gchar *color);
 
-GST_VIDEO_API
+extern
 gchar *      gst_video_colorimetry_to_string   (const GstVideoColorimetry *cinfo);
 
-GST_VIDEO_API
+extern
 gboolean     gst_video_colorimetry_is_equal    (const GstVideoColorimetry *cinfo, const GstVideoColorimetry *other);
 
-GST_VIDEO_API
+extern
 gboolean     gst_video_colorimetry_is_equivalent (const GstVideoColorimetry *cinfo,
                                                   guint bitdepth,
                                                   const GstVideoColorimetry *other,
@@ -274,7 +274,7 @@ gboolean     gst_video_colorimetry_is_equivalent (const GstVideoColorimetry *cin
 
 /* compute offset and scale */
 
-GST_VIDEO_API
+extern
 void         gst_video_color_range_offsets     (GstVideoColorRange range,
                                                 const GstVideoFormatInfo *info,
                                                 gint offset[GST_VIDEO_MAX_COMPONENTS],
@@ -285,25 +285,25 @@ void         gst_video_color_range_offsets     (GstVideoColorRange range,
  * Also H264 and H265 specifications follow the color{matrix,transfer,primaries}
  * values */
 
-GST_VIDEO_API
+extern
 guint                     gst_video_color_matrix_to_iso      (GstVideoColorMatrix matrix);
 
-GST_VIDEO_API
+extern
 guint                     gst_video_transfer_function_to_iso    (GstVideoTransferFunction func);
 
-GST_VIDEO_API
+extern
 guint                     gst_video_color_primaries_to_iso   (GstVideoColorPrimaries primaries);
 
-GST_VIDEO_API
+extern
 GstVideoColorMatrix       gst_video_color_matrix_from_iso    (guint value);
 
-GST_VIDEO_API
+extern
 GstVideoTransferFunction  gst_video_transfer_function_from_iso  (guint value);
 
-GST_VIDEO_API
+extern
 GstVideoColorPrimaries    gst_video_color_primaries_from_iso (guint value);
 
-GST_VIDEO_API
+extern
 gboolean                  gst_video_transfer_function_is_equivalent (GstVideoTransferFunction from_func,
                                                                     guint from_bpp,
                                                                     GstVideoTransferFunction to_func,

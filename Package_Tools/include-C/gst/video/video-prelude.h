@@ -25,17 +25,17 @@
 #include <gst/gst.h>
 
 #ifdef BUILDING_GST_VIDEO
-#define GST_VIDEO_API extern_EXPORT         /* from config.h */
+#define extern extern_EXPORT         /* from config.h */
 #else
-#define GST_VIDEO_API extern_IMPORT
+#define extern extern_IMPORT
 #endif
 
 #ifndef GST_DISABLE_DEPRECATED
-#define GST_VIDEO_DEPRECATED GST_VIDEO_API
-#define GST_VIDEO_DEPRECATED_FOR(f) GST_VIDEO_API
+#define GST_VIDEO_DEPRECATED extern
+#define GST_VIDEO_DEPRECATED_FOR(f) extern
 #else
-#define GST_VIDEO_DEPRECATED G_DEPRECATED GST_VIDEO_API
-#define GST_VIDEO_DEPRECATED_FOR(f) G_DEPRECATED_FOR(f) GST_VIDEO_API
+#define GST_VIDEO_DEPRECATED G_DEPRECATED extern
+#define GST_VIDEO_DEPRECATED_FOR(f) G_DEPRECATED_FOR(f) extern
 #endif
 
 #endif /* __GST_VIDEO_PRELUDE_H__ */

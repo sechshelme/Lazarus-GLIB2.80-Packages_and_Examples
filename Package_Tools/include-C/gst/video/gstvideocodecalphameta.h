@@ -60,10 +60,10 @@ struct _GstVideoCodecAlphaMeta
   GstBuffer *buffer;
 };
 
-GST_VIDEO_API
+extern
 GType gst_video_codec_alpha_meta_api_get_type          (void);
 
-GST_VIDEO_API
+extern
 const GstMetaInfo *gst_video_codec_alpha_meta_get_info (void);
 
 /**
@@ -79,7 +79,7 @@ const GstMetaInfo *gst_video_codec_alpha_meta_get_info (void);
 #define gst_buffer_get_video_codec_alpha_meta(b) \
     ((GstVideoCodecAlphaMeta *)gst_buffer_get_meta((b),GST_VIDEO_CODEC_ALPHA_META_API_TYPE))
 
-GST_VIDEO_API
+extern
 GstVideoCodecAlphaMeta *gst_buffer_add_video_codec_alpha_meta (GstBuffer * buffer,
                                                                GstBuffer * alpha_buffer);
 

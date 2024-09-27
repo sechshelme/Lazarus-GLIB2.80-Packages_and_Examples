@@ -92,10 +92,10 @@ struct _GstAudioFilterClass {
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_AUDIO_API
+extern
 GType   gst_audio_filter_get_type (void);
 
-GST_AUDIO_API
+extern
 void    gst_audio_filter_class_add_pad_templates (GstAudioFilterClass * klass,
                                                   GstCaps             * allowed_caps);
 

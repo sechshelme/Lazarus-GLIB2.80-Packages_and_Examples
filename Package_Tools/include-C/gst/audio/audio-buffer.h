@@ -65,11 +65,11 @@ typedef struct {
 } GstAudioBuffer;
 
 
-GST_AUDIO_API
+extern
 gboolean gst_audio_buffer_map (GstAudioBuffer *buffer, const GstAudioInfo *info,
                                GstBuffer *gstbuffer, GstMapFlags flags);
 
-GST_AUDIO_API
+extern
 void gst_audio_buffer_unmap (GstAudioBuffer *buffer);
 
 

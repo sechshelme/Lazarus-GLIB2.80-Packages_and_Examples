@@ -9,7 +9,34 @@ uses
   glib280,
   gst124,
 
+  // audio
+
+  audio_channels,
+  audio_format,
+  audio_info,
+  gstnonstreamaudiodecoder,
+
+  // video
+
+  // pbutils
+
+  codec_utils,
+  install_plugins,
+  gstaudiovisualizer,
   gstdiscoverer,
+  encoding_target,
+  encoding_profile,
+  descriptions,
+  gstpluginsbaseversion,    // version makro !
+  missing_plugins,
+  pbutils,
+  pbutils_enumtypes,
+
+  // base
+
+  gstadapter,                    // io.
+  gstbytereader,                 // viele Makros entfernt
+
 
 
 

@@ -73,13 +73,13 @@ typedef enum {
  */
 #define GST_DSD_FORMATS_ALL "{ DSDU32BE, DSDU16BE, DSDU8, DSDU32LE, DSDU16LE }"
 
-GST_AUDIO_API
+extern
 GstDsdFormat  gst_dsd_format_from_string (const gchar *str);
 
-GST_AUDIO_API
+extern
 const gchar * gst_dsd_format_to_string   (GstDsdFormat format);
 
-GST_AUDIO_API
+extern
 guint         gst_dsd_format_get_width   (GstDsdFormat format);
 
 

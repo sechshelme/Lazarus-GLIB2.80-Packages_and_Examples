@@ -82,10 +82,10 @@ typedef enum {
   GST_VIDEO_INTERLACE_MODE_ALTERNATE,
 } GstVideoInterlaceMode;
 
-GST_VIDEO_API
+extern
 const gchar *          gst_video_interlace_mode_to_string    (GstVideoInterlaceMode mode);
 
-GST_VIDEO_API
+extern
 GstVideoInterlaceMode  gst_video_interlace_mode_from_string  (const gchar * mode);
 
 /**
@@ -277,10 +277,10 @@ typedef enum {
   GST_VIDEO_FIELD_ORDER_BOTTOM_FIELD_FIRST = 2,
 } GstVideoFieldOrder;
 
-GST_VIDEO_API
+extern
 const gchar *      gst_video_field_order_to_string    (GstVideoFieldOrder order);
 
-GST_VIDEO_API
+extern
 GstVideoFieldOrder gst_video_field_order_from_string  (const gchar * order);
 
 /**
@@ -345,7 +345,7 @@ struct _GstVideoInfo {
 };
 
 #define GST_TYPE_VIDEO_INFO              (gst_video_info_get_type ())
-GST_VIDEO_API
+extern
 GType gst_video_info_get_type            (void);
 
 /* general info */
@@ -424,26 +424,26 @@ GType gst_video_info_get_type            (void);
 #define GST_VIDEO_INFO_COMP_PSTRIDE(i,c) GST_VIDEO_FORMAT_INFO_PSTRIDE((i)->finfo,(c))
 #define GST_VIDEO_INFO_COMP_POFFSET(i,c) GST_VIDEO_FORMAT_INFO_POFFSET((i)->finfo,(c))
 
-GST_VIDEO_API
+extern
 GstVideoInfo * gst_video_info_new         (void);
 
-GST_VIDEO_API
+extern
 void           gst_video_info_init        (GstVideoInfo *info);
 
-GST_VIDEO_API
+extern
 GstVideoInfo * gst_video_info_copy        (const GstVideoInfo *info);
 
-GST_VIDEO_API
+extern
 void           gst_video_info_free        (GstVideoInfo *info);
 
-GST_VIDEO_API
+extern
 GstVideoInfo * gst_video_info_new_from_caps (const GstCaps * caps);
 
-GST_VIDEO_API
+extern
 gboolean       gst_video_info_set_format  (GstVideoInfo *info, GstVideoFormat format,
                                            guint width, guint height);
 
-GST_VIDEO_API
+extern
 gboolean       gst_video_info_set_interlaced_format
                                           (GstVideoInfo         *info,
                                            GstVideoFormat        format,
@@ -451,29 +451,29 @@ gboolean       gst_video_info_set_interlaced_format
                                            guint                 width,
                                            guint                 height);
 
-GST_VIDEO_API
+extern
 gboolean       gst_video_info_from_caps   (GstVideoInfo *info, const GstCaps  * caps);
 
-GST_VIDEO_API
+extern
 GstCaps *      gst_video_info_to_caps     (const GstVideoInfo *info);
 
-GST_VIDEO_API
+extern
 gboolean       gst_video_info_convert     (const GstVideoInfo *info,
                                            GstFormat     src_format,
                                            gint64        src_value,
                                            GstFormat     dest_format,
                                            gint64       *dest_value);
 
-GST_VIDEO_API
+extern
 gboolean       gst_video_info_is_equal    (const GstVideoInfo *info,
                                            const GstVideoInfo *other);
 
 #include <gst/video/video.h>
 
-GST_VIDEO_API
+extern
 gboolean       gst_video_info_align       (GstVideoInfo * info, GstVideoAlignment * align);
 
-GST_VIDEO_API
+extern
 gboolean       gst_video_info_align_full  (GstVideoInfo * info, GstVideoAlignment * align, gsize plane_size[GST_VIDEO_MAX_PLANES]);
 
 

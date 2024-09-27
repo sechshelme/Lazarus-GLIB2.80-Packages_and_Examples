@@ -99,29 +99,29 @@ struct _GstAggregatorPadClass
   gpointer      _gst_reserved[GST_PADDING_LARGE];
 };
 
-GST_BASE_API
+extern
 GType gst_aggregator_pad_get_type           (void);
 
 /****************************
  * GstAggregatorPad methods *
  ***************************/
 
-GST_BASE_API
+extern
 GstBuffer * gst_aggregator_pad_pop_buffer   (GstAggregatorPad *  pad);
 
-GST_BASE_API
+extern
 GstBuffer * gst_aggregator_pad_peek_buffer  (GstAggregatorPad *  pad);
 
-GST_BASE_API
+extern
 gboolean    gst_aggregator_pad_drop_buffer  (GstAggregatorPad *  pad);
 
-GST_BASE_API
+extern
 gboolean    gst_aggregator_pad_has_buffer   (GstAggregatorPad * pad);
 
-GST_BASE_API
+extern
 gboolean    gst_aggregator_pad_is_eos       (GstAggregatorPad *  pad);
 
-GST_BASE_API
+extern
 gboolean    gst_aggregator_pad_is_inactive  (GstAggregatorPad * pad);
 
 /*********************
@@ -375,69 +375,69 @@ struct _GstAggregatorClass {
  * GstAggregator methods *
  ************************/
 
-GST_BASE_API
+extern
 GstFlowReturn  gst_aggregator_finish_buffer         (GstAggregator                *  aggregator,
                                                      GstBuffer                    *  buffer);
 
-GST_BASE_API
+extern
 GstFlowReturn  gst_aggregator_finish_buffer_list    (GstAggregator                *  aggregator,
                                                      GstBufferList                *  bufferlist);
 
-GST_BASE_API
+extern
 void           gst_aggregator_set_src_caps          (GstAggregator                *  self,
                                                      GstCaps                      *  caps);
 
-GST_BASE_API
+extern
 gboolean        gst_aggregator_negotiate            (GstAggregator                * self);
 
-GST_BASE_API
+extern
 void           gst_aggregator_set_latency           (GstAggregator                *  self,
                                                      GstClockTime                    min_latency,
                                                      GstClockTime                    max_latency);
 
-GST_BASE_API
+extern
 GType gst_aggregator_get_type(void);
 
-GST_BASE_API
+extern
 GstClockTime  gst_aggregator_get_latency           (GstAggregator                 *  self);
 
-GST_BASE_API
+extern
 GstBufferPool * gst_aggregator_get_buffer_pool     (GstAggregator                 * self);
 
-GST_BASE_API
+extern
 void            gst_aggregator_get_allocator       (GstAggregator                 * self,
                                                     GstAllocator                 ** allocator,
                                                     GstAllocationParams           * params);
 
-GST_BASE_API
+extern
 GstClockTime    gst_aggregator_simple_get_next_time (GstAggregator                * self);
 
-GST_BASE_API
+extern
 void            gst_aggregator_update_segment       (GstAggregator                * self,
                                                      const GstSegment             * segment);
 
-GST_BASE_API
+extern
 GstSample     * gst_aggregator_peek_next_sample     (GstAggregator *self,
                                                      GstAggregatorPad * pad);
 
-GST_BASE_API
+extern
 void            gst_aggregator_selected_samples     (GstAggregator                * self,
                                                      GstClockTime                   pts,
                                                      GstClockTime                   dts,
                                                      GstClockTime                   duration,
                                                      GstStructure                 * info);
 
-GST_BASE_API
+extern
 void            gst_aggregator_set_ignore_inactive_pads (GstAggregator * self,
                                                          gboolean ignore);
 
-GST_BASE_API
+extern
 gboolean        gst_aggregator_get_ignore_inactive_pads (GstAggregator * self);
 
-GST_BASE_API
+extern
 gboolean        gst_aggregator_get_force_live       (GstAggregator *self);
 
-GST_BASE_API
+extern
 void            gst_aggregator_set_force_live       (GstAggregator *self,
                                                      gboolean force_live);
 
@@ -458,7 +458,7 @@ typedef enum
   GST_AGGREGATOR_START_TIME_SELECTION_SET
 } GstAggregatorStartTimeSelection;
 
-GST_BASE_API
+extern
 GType           gst_aggregator_start_time_selection_get_type (void);
 
 

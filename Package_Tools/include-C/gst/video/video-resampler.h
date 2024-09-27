@@ -161,7 +161,7 @@ struct _GstVideoResampler
 };
 
 
-GST_VIDEO_API
+extern
 gboolean    gst_video_resampler_init      (GstVideoResampler *resampler,
                                            GstVideoResamplerMethod method,
                                            GstVideoResamplerFlags flags,
@@ -170,7 +170,7 @@ gboolean    gst_video_resampler_init      (GstVideoResampler *resampler,
                                            guint in_size, guint out_size,
                                            GstStructure *options);
 
-GST_VIDEO_API
+extern
 void        gst_video_resampler_clear     (GstVideoResampler *resampler);
 
 

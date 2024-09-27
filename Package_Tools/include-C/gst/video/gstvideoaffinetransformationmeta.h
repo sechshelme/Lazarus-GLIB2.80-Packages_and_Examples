@@ -61,18 +61,18 @@ struct _GstVideoAffineTransformationMeta
   gfloat matrix[16];
 };
 
-GST_VIDEO_API
+extern
 GType gst_video_affine_transformation_meta_api_get_type          (void);
 
-GST_VIDEO_API
+extern
 const GstMetaInfo *gst_video_affine_transformation_meta_get_info (void);
 
 #define gst_buffer_get_video_affine_transformation_meta(b) \
     ((GstVideoAffineTransformationMeta *)gst_buffer_get_meta((b),GST_VIDEO_AFFINE_TRANSFORMATION_META_API_TYPE))
-GST_VIDEO_API
+extern
 GstVideoAffineTransformationMeta *gst_buffer_add_video_affine_transformation_meta (GstBuffer * buffer);
 
-GST_VIDEO_API
+extern
 void gst_video_affine_transformation_meta_apply_matrix                           (GstVideoAffineTransformationMeta * meta,
                                                                                   const gfloat matrix[16]);
 

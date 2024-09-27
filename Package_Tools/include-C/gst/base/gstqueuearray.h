@@ -33,90 +33,90 @@
  */
 typedef struct _GstQueueArray GstQueueArray;
 
-GST_BASE_API
+extern
 GstQueueArray * gst_queue_array_new       (guint initial_size);
 
-GST_BASE_API
+extern
 void            gst_queue_array_free      (GstQueueArray * array);
 
-GST_BASE_API
+extern
 void            gst_queue_array_set_clear_func (GstQueueArray *array,
                                                 GDestroyNotify clear_func);
 
-GST_BASE_API
+extern
 void            gst_queue_array_clear     (GstQueueArray * array);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_pop_head  (GstQueueArray * array);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_peek_head (GstQueueArray * array);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_peek_nth  (GstQueueArray * array, guint idx);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_pop_tail  (GstQueueArray * array);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_peek_tail (GstQueueArray * array);
 
-GST_BASE_API
+extern
 void            gst_queue_array_push_tail (GstQueueArray * array,
                                            gpointer        data);
-GST_BASE_API
+extern
 gboolean        gst_queue_array_is_empty  (GstQueueArray * array);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_drop_element (GstQueueArray * array,
                                               guint           idx);
-GST_BASE_API
+extern
 guint           gst_queue_array_find (GstQueueArray * array,
                                       GCompareFunc    func,
                                       gpointer        data);
-GST_BASE_API
+extern
 guint           gst_queue_array_get_length (GstQueueArray * array);
 
 /* Functions for use with structures */
 
-GST_BASE_API
+extern
 GstQueueArray * gst_queue_array_new_for_struct (gsize struct_size,
                                                 guint initial_size);
-GST_BASE_API
+extern
 void            gst_queue_array_push_tail_struct (GstQueueArray * array,
                                                   gpointer        p_struct);
-GST_BASE_API
+extern
 gpointer        gst_queue_array_pop_head_struct  (GstQueueArray * array);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_peek_head_struct (GstQueueArray * array);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_peek_nth_struct  (GstQueueArray * array, guint idx);
 
-GST_BASE_API
+extern
 gboolean        gst_queue_array_drop_struct      (GstQueueArray * array,
                                                   guint           idx,
                                                   gpointer        p_struct);
-GST_BASE_API
+extern
 gpointer        gst_queue_array_pop_tail_struct  (GstQueueArray * array);
 
-GST_BASE_API
+extern
 gpointer        gst_queue_array_peek_tail_struct (GstQueueArray * array);
 
-GST_BASE_API
+extern
 void            gst_queue_array_push_sorted (GstQueueArray * array, 
                                              gpointer data,
                                              GCompareDataFunc func, 
                                              gpointer user_data);
 
-GST_BASE_API
+extern
 void            gst_queue_array_push_sorted_struct (GstQueueArray * array, 
                                                     gpointer p_struct,
                                                     GCompareDataFunc func, 
                                                     gpointer user_data);
 
-GST_BASE_API
+extern
 void            gst_queue_array_sort (GstQueueArray *array,
                                       GCompareDataFunc compare_func,
                                       gpointer user_data);

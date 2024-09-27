@@ -102,7 +102,7 @@ struct _GstAudioSrcClass {
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_AUDIO_API
+extern
 GType gst_audio_src_get_type(void);
 
 

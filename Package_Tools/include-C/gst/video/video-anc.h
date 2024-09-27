@@ -202,13 +202,13 @@ typedef struct {
   
 } GstAncillaryMeta;
 
-GST_VIDEO_API GType gst_ancillary_meta_api_get_type(void);
+extern GType gst_ancillary_meta_api_get_type(void);
 #define GST_ANCILLARY_META_API_TYPE (gst_ancillary_meta_api_get_type())
 
-GST_VIDEO_API const GstMetaInfo *gst_ancillary_meta_get_info(void);
+extern const GstMetaInfo *gst_ancillary_meta_get_info(void);
 #define GST_ANCILLARY_META_INFO (gst_ancillary_meta_get_info())
 
-GST_VIDEO_API GstAncillaryMeta *
+extern GstAncillaryMeta *
 gst_buffer_add_ancillary_meta(GstBuffer *buffer);
 
 /**
@@ -384,10 +384,10 @@ typedef struct {
   GstVideoAFDValue afd;
 } GstVideoAFDMeta;
 
-GST_VIDEO_API GType gst_video_afd_meta_api_get_type (void);
+extern GType gst_video_afd_meta_api_get_type (void);
 #define GST_VIDEO_AFD_META_API_TYPE (gst_video_afd_meta_api_get_type())
 
-GST_VIDEO_API const GstMetaInfo *gst_video_afd_meta_get_info (void);
+extern const GstMetaInfo *gst_video_afd_meta_get_info (void);
 #define GST_VIDEO_AFD_META_INFO (gst_video_afd_meta_get_info())
 
 /**
@@ -406,7 +406,7 @@ GST_VIDEO_API const GstMetaInfo *gst_video_afd_meta_get_info (void);
 #define gst_buffer_get_video_afd_meta(b) \
         ((GstVideoAFDMeta*)gst_buffer_get_meta((b),GST_VIDEO_AFD_META_API_TYPE))
 
-GST_VIDEO_API
+extern
 GstVideoAFDMeta *gst_buffer_add_video_afd_meta (GstBuffer * buffer, guint8 field,
 						GstVideoAFDSpec spec,
 						GstVideoAFDValue afd);
@@ -448,10 +448,10 @@ typedef struct {
   guint bar_data2;
 } GstVideoBarMeta;
 
-GST_VIDEO_API GType gst_video_bar_meta_api_get_type (void);
+extern GType gst_video_bar_meta_api_get_type (void);
 #define GST_VIDEO_BAR_META_API_TYPE (gst_video_bar_meta_api_get_type())
 
-GST_VIDEO_API const GstMetaInfo *gst_video_bar_meta_get_info (void);
+extern const GstMetaInfo *gst_video_bar_meta_get_info (void);
 #define GST_VIDEO_BAR_META_INFO (gst_video_bar_meta_get_info())
 /**
  * gst_buffer_get_video_bar_meta:
@@ -467,7 +467,7 @@ GST_VIDEO_API const GstMetaInfo *gst_video_bar_meta_get_info (void);
 #define gst_buffer_get_video_bar_meta(b) \
         ((GstVideoBarMeta*)gst_buffer_get_meta((b),GST_VIDEO_BAR_META_API_TYPE))
 
-GST_VIDEO_API
+extern
 GstVideoBarMeta *gst_buffer_add_video_bar_meta (GstBuffer * buffer, guint8 field,
     gboolean is_letterbox, guint bar_data1, guint bar_data2);
 
@@ -509,11 +509,11 @@ typedef enum {
   GST_VIDEO_CAPTION_TYPE_CEA708_CDP		= 4
 } GstVideoCaptionType;
 
-GST_VIDEO_API
+extern
 GstVideoCaptionType
 gst_video_caption_type_from_caps (const GstCaps *caps);
 
-GST_VIDEO_API
+extern
 GstCaps *
 gst_video_caption_type_to_caps (GstVideoCaptionType type);
 
@@ -536,11 +536,11 @@ typedef struct {
   gsize size;
 } GstVideoCaptionMeta;
 
-GST_VIDEO_API
+extern
 GType	gst_video_caption_meta_api_get_type (void);
 #define GST_VIDEO_CAPTION_META_API_TYPE (gst_video_caption_meta_api_get_type())
 
-GST_VIDEO_API
+extern
 const GstMetaInfo *gst_video_caption_meta_get_info (void);
 #define GST_VIDEO_CAPTION_META_INFO (gst_video_caption_meta_get_info())
 
@@ -558,7 +558,7 @@ const GstMetaInfo *gst_video_caption_meta_get_info (void);
 #define gst_buffer_get_video_caption_meta(b) \
         ((GstVideoCaptionMeta*)gst_buffer_get_meta((b),GST_VIDEO_CAPTION_META_API_TYPE))
 
-GST_VIDEO_API
+extern
 GstVideoCaptionMeta *gst_buffer_add_video_caption_meta    (GstBuffer   * buffer,
 							   GstVideoCaptionType caption_type,
 							   const guint8 *data,
@@ -575,7 +575,7 @@ GstVideoCaptionMeta *gst_buffer_add_video_caption_meta    (GstBuffer   * buffer,
 
 typedef struct _GstVideoVBIParser GstVideoVBIParser;
 
-GST_VIDEO_API
+extern
 GType gst_video_vbi_parser_get_type (void);
 
 /**
@@ -594,20 +594,20 @@ typedef enum {
   GST_VIDEO_VBI_PARSER_RESULT_ERROR = 2
 } GstVideoVBIParserResult;
 
-GST_VIDEO_API
+extern
 GstVideoVBIParserResult gst_video_vbi_parser_get_ancillary(GstVideoVBIParser *parser,
 							   GstVideoAncillary *anc);
 
-GST_VIDEO_API
+extern
 GstVideoVBIParser *gst_video_vbi_parser_new (GstVideoFormat format, guint32 pixel_width);
 
-GST_VIDEO_API
+extern
 GstVideoVBIParser *gst_video_vbi_parser_copy (const GstVideoVBIParser *parser);
 
-GST_VIDEO_API
+extern
 void               gst_video_vbi_parser_free (GstVideoVBIParser *parser);
 
-GST_VIDEO_API
+extern
 void		   gst_video_vbi_parser_add_line (GstVideoVBIParser *parser, const guint8 *data);
 
 /**
@@ -621,19 +621,19 @@ void		   gst_video_vbi_parser_add_line (GstVideoVBIParser *parser, const guint8 
 
 typedef struct _GstVideoVBIEncoder GstVideoVBIEncoder;
 
-GST_VIDEO_API
+extern
 GType gst_video_vbi_encoder_get_type (void);
 
-GST_VIDEO_API
+extern
 GstVideoVBIEncoder *gst_video_vbi_encoder_new  (GstVideoFormat format, guint32 pixel_width);
 
-GST_VIDEO_API
+extern
 GstVideoVBIEncoder *gst_video_vbi_encoder_copy (const GstVideoVBIEncoder *encoder);
 
-GST_VIDEO_API
+extern
 void               gst_video_vbi_encoder_free  (GstVideoVBIEncoder *encoder);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_vbi_encoder_add_ancillary   (GstVideoVBIEncoder *encoder,
                                                 gboolean            composite,
                                                 guint8              DID,
@@ -641,7 +641,7 @@ gboolean gst_video_vbi_encoder_add_ancillary   (GstVideoVBIEncoder *encoder,
                                                 const guint8       *data,
                                                 guint               data_count);
 
-GST_VIDEO_API
+extern
 void gst_video_vbi_encoder_write_line (GstVideoVBIEncoder *encoder, guint8 *data);
 
 

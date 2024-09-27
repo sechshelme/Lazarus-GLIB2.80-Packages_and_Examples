@@ -133,19 +133,19 @@ struct _GstVideoAggregatorPadClass
   gpointer          _gst_reserved[GST_PADDING_LARGE-2];
 };
 
-GST_VIDEO_API
+extern
 GType gst_video_aggregator_pad_get_type   (void);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_aggregator_pad_has_current_buffer (GstVideoAggregatorPad *pad);
 
-GST_VIDEO_API
+extern
 GstBuffer * gst_video_aggregator_pad_get_current_buffer (GstVideoAggregatorPad *pad);
 
-GST_VIDEO_API
+extern
 GstVideoFrame * gst_video_aggregator_pad_get_prepared_frame (GstVideoAggregatorPad *pad);
 
-GST_VIDEO_API
+extern
 void gst_video_aggregator_pad_set_needs_alpha (GstVideoAggregatorPad *pad, gboolean needs_alpha);
 
 /********************************
@@ -197,10 +197,10 @@ struct _GstVideoAggregatorConvertPadClass
   gpointer      _gst_reserved[GST_PADDING];
 };
 
-GST_VIDEO_API
+extern
 GType gst_video_aggregator_convert_pad_get_type           (void);
 
-GST_VIDEO_API
+extern
 void gst_video_aggregator_convert_pad_update_conversion_info (GstVideoAggregatorConvertPad * pad);
 
 
@@ -210,7 +210,7 @@ void gst_video_aggregator_convert_pad_update_conversion_info (GstVideoAggregator
  ****************************************/
 
 #define GST_TYPE_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD           (gst_video_aggregator_parallel_convert_pad_get_type())
-GST_VIDEO_API
+extern
 G_DECLARE_DERIVABLE_TYPE (GstVideoAggregatorParallelConvertPad, gst_video_aggregator_parallel_convert_pad, GST, VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD, GstVideoAggregatorConvertPad)
 
 #define GST_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD, GstVideoAggregatorParallelConvertPad))
@@ -323,10 +323,10 @@ struct _GstVideoAggregatorClass
   gpointer            _gst_reserved[GST_PADDING_LARGE];
 };
 
-GST_VIDEO_API
+extern
 GType gst_video_aggregator_get_type       (void);
 
-GST_VIDEO_API
+extern
 GstTaskPool * gst_video_aggregator_get_execution_task_pool (GstVideoAggregator * vagg);
 
 

@@ -38,51 +38,51 @@ GstTypeFindProbability gst_type_find_data_get_probability (GstTypeFindData * dat
 GstTypeFind * gst_type_find_data_get_typefind (GstTypeFindData * data);
 void gst_type_find_data_free (GstTypeFindData * data);
 
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper (GstPad *src, guint64 size);
 
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper_for_data   (GstObject              *obj,
                                            const guint8           *data,
                                            gsize                   size,
                                            GstTypeFindProbability *prob);
 
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper_for_data_with_extension (GstObject              *obj,
                                                         const guint8           *data,
                                                         gsize                   size,
                                                         const gchar            *extension,
                                                         GstTypeFindProbability *prob);
 
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper_for_data_with_caps (GstObject              *obj,
                                                    const guint8           *data,
                                                    gsize                   size,
                                                    GstCaps                *caps,
                                                    GstTypeFindProbability *prob);
 
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper_for_buffer (GstObject              *obj,
                                            GstBuffer              *buf,
                                            GstTypeFindProbability *prob);
 
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper_for_buffer_with_extension (GstObject              *obj,
                                                           GstBuffer              *buf,
                                                           const gchar            *extension,
                                                           GstTypeFindProbability *prob);
 
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper_for_buffer_with_caps (GstObject              *obj,
                                                      GstBuffer              *buf,
                                                      GstCaps                *caps,
                                                      GstTypeFindProbability *prob);
 
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper_for_extension (GstObject * obj,
                                               const gchar * extension);
 
-GST_BASE_API
+extern
 GList * gst_type_find_list_factories_for_caps (GstObject * obj,
                                                GstCaps * caps);
 
@@ -109,7 +109,7 @@ typedef GstFlowReturn (*GstTypeFindHelperGetRangeFunction) (GstObject  *obj,
                                                             guint64     offset,
                                                             guint       length,
                                                             GstBuffer **buffer);
-GST_BASE_API
+extern
 GstCaps * gst_type_find_helper_get_range (GstObject                         *obj,
                                           GstObject                         *parent,
                                           GstTypeFindHelperGetRangeFunction  func,
@@ -117,7 +117,7 @@ GstCaps * gst_type_find_helper_get_range (GstObject                         *obj
                                           const gchar                       *extension,
                                           GstTypeFindProbability            *prob);
 
-GST_BASE_API
+extern
 GstFlowReturn gst_type_find_helper_get_range_full (GstObject                         *obj,
                                                    GstObject                         *parent,
                                                    GstTypeFindHelperGetRangeFunction  func,

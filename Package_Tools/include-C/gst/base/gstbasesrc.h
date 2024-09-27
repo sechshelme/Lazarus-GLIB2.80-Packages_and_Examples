@@ -273,81 +273,81 @@ struct _GstBaseSrcClass {
   gpointer       _gst_reserved[GST_PADDING_LARGE];
 };
 
-GST_BASE_API
+extern
 GType           gst_base_src_get_type (void);
 
-GST_BASE_API
+extern
 GstFlowReturn   gst_base_src_wait_playing     (GstBaseSrc *src);
 
-GST_BASE_API
+extern
 void            gst_base_src_set_live         (GstBaseSrc *src, gboolean live);
 
-GST_BASE_API
+extern
 gboolean        gst_base_src_is_live          (GstBaseSrc *src);
 
-GST_BASE_API
+extern
 void            gst_base_src_set_format       (GstBaseSrc *src, GstFormat format);
 
-GST_BASE_API
+extern
 void            gst_base_src_set_dynamic_size (GstBaseSrc * src, gboolean dynamic);
 
-GST_BASE_API
+extern
 void            gst_base_src_set_automatic_eos (GstBaseSrc * src, gboolean automatic_eos);
 
-GST_BASE_API
+extern
 void            gst_base_src_set_async        (GstBaseSrc *src, gboolean async);
 
-GST_BASE_API
+extern
 gboolean        gst_base_src_is_async         (GstBaseSrc *src);
 
-GST_BASE_API
+extern
 gboolean        gst_base_src_negotiate        (GstBaseSrc *src);
 
-GST_BASE_API
+extern
 void            gst_base_src_start_complete   (GstBaseSrc * basesrc, GstFlowReturn ret);
 
-GST_BASE_API
+extern
 GstFlowReturn   gst_base_src_start_wait       (GstBaseSrc * basesrc);
 
-GST_BASE_API
+extern
 gboolean        gst_base_src_query_latency    (GstBaseSrc *src, gboolean * live,
                                                GstClockTime * min_latency,
                                                GstClockTime * max_latency);
-GST_BASE_API
+extern
 void            gst_base_src_set_blocksize    (GstBaseSrc *src, guint blocksize);
 
-GST_BASE_API
+extern
 guint           gst_base_src_get_blocksize    (GstBaseSrc *src);
 
-GST_BASE_API
+extern
 void            gst_base_src_set_do_timestamp (GstBaseSrc *src, gboolean timestamp);
 
-GST_BASE_API
+extern
 gboolean        gst_base_src_get_do_timestamp (GstBaseSrc *src);
 
-GST_BASE_API
+extern
 gboolean        gst_base_src_new_seamless_segment (GstBaseSrc *src, gint64 start, gint64 stop, gint64 time);
 
-GST_BASE_API
+extern
 gboolean        gst_base_src_new_segment      (GstBaseSrc *src,
                                                const GstSegment * segment);
 
-GST_BASE_API
+extern
 gboolean        gst_base_src_set_caps         (GstBaseSrc *src, GstCaps *caps);
 
-GST_BASE_API
+extern
 GstBufferPool * gst_base_src_get_buffer_pool  (GstBaseSrc *src);
 
-GST_BASE_API
+extern
 void            gst_base_src_get_allocator    (GstBaseSrc *src,
                                                GstAllocator **allocator,
                                                GstAllocationParams *params);
 
-GST_BASE_API
+extern
 void            gst_base_src_submit_buffer_list (GstBaseSrc    * src,
                                                  GstBufferList * buffer_list);
 
-GST_BASE_API
+extern
 gboolean gst_base_src_push_segment              (GstBaseSrc * src,
                                                  const GstSegment * segment);
 

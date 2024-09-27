@@ -55,6 +55,9 @@ begin
     for j := 0 to slHeader.Count - 1 do begin
       slHeader[j] := StringReplace(slHeader[j], 'GST_API', 'extern', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'GST_PBUTILS_API', 'extern', [rfReplaceAll]);
+      slHeader[j] := StringReplace(slHeader[j], 'GST_AUDIO_API', 'extern', [rfReplaceAll]);
+      slHeader[j] := StringReplace(slHeader[j], 'GST_VIDEO_API', 'extern', [rfReplaceAll]);
+      slHeader[j] := StringReplace(slHeader[j], 'GST_BASE_API', 'extern', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'G_BEGIN_DECLS', '', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'G_END_DECLS', '', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'G_GNUC_CONST', '', [rfReplaceAll]);

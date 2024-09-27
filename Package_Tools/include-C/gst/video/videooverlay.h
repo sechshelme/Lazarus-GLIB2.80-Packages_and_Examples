@@ -69,46 +69,46 @@ struct _GstVideoOverlayInterface {
   void (*set_window_handle)    (GstVideoOverlay *overlay, guintptr handle);
 };
 
-GST_VIDEO_API
+extern
 GType   gst_video_overlay_get_type (void);
 
 /* virtual function wrappers */
 
-GST_VIDEO_API
+extern
 gboolean        gst_video_overlay_set_render_rectangle  (GstVideoOverlay * overlay,
                                                          gint              x,
                                                          gint              y,
                                                          gint              width,
                                                          gint              height);
 
-GST_VIDEO_API
+extern
 void            gst_video_overlay_expose                (GstVideoOverlay * overlay);
 
-GST_VIDEO_API
+extern
 void            gst_video_overlay_handle_events         (GstVideoOverlay * overlay,
                                                          gboolean          handle_events);
 
-GST_VIDEO_API
+extern
 void            gst_video_overlay_set_window_handle     (GstVideoOverlay * overlay,
                                                          guintptr handle);
 
 /* public methods to dispatch bus messages */
 
-GST_VIDEO_API
+extern
 void            gst_video_overlay_got_window_handle     (GstVideoOverlay * overlay,
                                                          guintptr          handle);
 
-GST_VIDEO_API
+extern
 void            gst_video_overlay_prepare_window_handle (GstVideoOverlay * overlay);
 
-GST_VIDEO_API
+extern
 gboolean        gst_is_video_overlay_prepare_window_handle_message (GstMessage * msg);
 
-GST_VIDEO_API
+extern
 void            gst_video_overlay_install_properties    (GObjectClass    * oclass,
                                                          gint              last_prop_id);
 
-GST_VIDEO_API
+extern
 gboolean        gst_video_overlay_set_property          (GObject         * object,
                                                          gint              last_prop_id,
                                                          guint             property_id,

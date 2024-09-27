@@ -118,7 +118,7 @@ typedef struct _GstVideoDecoderPrivate GstVideoDecoderPrivate;
 
 /* do not use this one, use macro below */
 
-GST_VIDEO_API
+extern
 GstFlowReturn _gst_video_decoder_error (GstVideoDecoder *dec, gint weight,
                                              GQuark domain, gint code,
                                              gchar *txt, gchar *debug,
@@ -379,174 +379,174 @@ typedef enum {
   GST_VIDEO_DECODER_REQUEST_SYNC_POINT_CORRUPT_OUTPUT = (1<<1),
 } GstVideoDecoderRequestSyncPointFlags;
 
-GST_VIDEO_API
+extern
 GType    gst_video_decoder_get_type (void);
 
 /* Context parameters */
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_set_packetized (GstVideoDecoder * decoder,
 					   gboolean packetized);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_decoder_get_packetized (GstVideoDecoder * decoder);
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_set_subframe_mode (GstVideoDecoder * decoder,
                                               gboolean subframe_mode);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_decoder_get_subframe_mode (GstVideoDecoder * decoder);
 
-GST_VIDEO_API
+extern
 guint gst_video_decoder_get_input_subframe_index (GstVideoDecoder * decoder, GstVideoCodecFrame * frame);
 
-GST_VIDEO_API
+extern
 guint gst_video_decoder_get_processed_subframe_index (GstVideoDecoder * decoder, GstVideoCodecFrame * frame);
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_set_estimate_rate (GstVideoDecoder * dec,
 					      gboolean          enabled);
 
-GST_VIDEO_API
+extern
 gint     gst_video_decoder_get_estimate_rate (GstVideoDecoder * dec);
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_set_max_errors (GstVideoDecoder * dec,
 					   gint              num);
 
-GST_VIDEO_API
+extern
 gint     gst_video_decoder_get_max_errors (GstVideoDecoder * dec);
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_set_needs_format (GstVideoDecoder * dec,
                                              gboolean enabled);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_decoder_get_needs_format (GstVideoDecoder * dec);
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_set_needs_sync_point (GstVideoDecoder * dec,
                                                  gboolean enabled);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_decoder_get_needs_sync_point (GstVideoDecoder * dec);
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_set_latency (GstVideoDecoder *decoder,
 					GstClockTime min_latency,
 					GstClockTime max_latency);
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_get_latency (GstVideoDecoder *decoder,
 					GstClockTime *min_latency,
 					GstClockTime *max_latency);
 
-GST_VIDEO_API
+extern
 void     gst_video_decoder_get_allocator (GstVideoDecoder *decoder,
                                           GstAllocator **allocator,
                                           GstAllocationParams *params);
 
-GST_VIDEO_API
+extern
 GstBufferPool *gst_video_decoder_get_buffer_pool (GstVideoDecoder *decoder);
 
 /* Object methods */
 
-GST_VIDEO_API
+extern
 GstVideoCodecFrame *gst_video_decoder_get_frame        (GstVideoDecoder *decoder,
 						        int frame_number);
 
-GST_VIDEO_API
+extern
 GstVideoCodecFrame *gst_video_decoder_get_oldest_frame (GstVideoDecoder *decoder);
 
-GST_VIDEO_API
+extern
 GList *             gst_video_decoder_get_frames       (GstVideoDecoder *decoder);
 
 /* Parsing related methods */
 
-GST_VIDEO_API
+extern
 void           gst_video_decoder_add_to_frame     (GstVideoDecoder *decoder,
 						   int n_bytes);
 
-GST_VIDEO_API
+extern
 GstFlowReturn  gst_video_decoder_have_frame       (GstVideoDecoder *decoder);
 
-GST_VIDEO_API
+extern
 GstFlowReturn  gst_video_decoder_have_last_subframe (GstVideoDecoder *decoder,
                                                      GstVideoCodecFrame * frame);
 
-GST_VIDEO_API
+extern
 gsize          gst_video_decoder_get_pending_frame_size (GstVideoDecoder *decoder);
 
-GST_VIDEO_API
+extern
 GstBuffer     *gst_video_decoder_allocate_output_buffer (GstVideoDecoder * decoder);
 
-GST_VIDEO_API
+extern
 GstFlowReturn  gst_video_decoder_allocate_output_frame_with_params (GstVideoDecoder *decoder,
                                                                     GstVideoCodecFrame * frame,
                                                                     GstBufferPoolAcquireParams *params);
 
-GST_VIDEO_API
+extern
 GstFlowReturn  gst_video_decoder_allocate_output_frame  (GstVideoDecoder *decoder,
 						         GstVideoCodecFrame *frame);
 
-GST_VIDEO_API
+extern
 GstVideoCodecState *gst_video_decoder_set_output_state (GstVideoDecoder *decoder,
 							GstVideoFormat fmt, guint width, guint height,
 							GstVideoCodecState *reference);
 
-GST_VIDEO_API
+extern
 GstVideoCodecState *gst_video_decoder_set_interlaced_output_state (GstVideoDecoder *decoder,
                                                                    GstVideoFormat fmt, GstVideoInterlaceMode interlace_mode,
                                                                    guint width, guint height, GstVideoCodecState *reference);
 
-GST_VIDEO_API
+extern
 GstVideoCodecState *gst_video_decoder_get_output_state (GstVideoDecoder *decoder);
 
-GST_VIDEO_API
+extern
 gboolean         gst_video_decoder_negotiate           (GstVideoDecoder * decoder);
 
-GST_VIDEO_API
+extern
 GstClockTimeDiff gst_video_decoder_get_max_decode_time (GstVideoDecoder *decoder,
 							GstVideoCodecFrame *frame);
 
-GST_VIDEO_API
+extern
 gdouble          gst_video_decoder_get_qos_proportion (GstVideoDecoder * decoder);
 
-GST_VIDEO_API
+extern
 GstFlowReturn    gst_video_decoder_finish_frame (GstVideoDecoder *decoder,
 						 GstVideoCodecFrame *frame);
-GST_VIDEO_API
+extern
 GstFlowReturn    gst_video_decoder_finish_subframe (GstVideoDecoder *decoder,
                                                  GstVideoCodecFrame *frame);
 
-GST_VIDEO_API
+extern
 GstFlowReturn    gst_video_decoder_drop_frame (GstVideoDecoder *dec,
 					       GstVideoCodecFrame *frame);
-GST_VIDEO_API
+extern
 GstFlowReturn    gst_video_decoder_drop_subframe (GstVideoDecoder *dec,
                                                GstVideoCodecFrame *frame);
 
-GST_VIDEO_API
+extern
 void             gst_video_decoder_request_sync_point (GstVideoDecoder *dec,
                                                        GstVideoCodecFrame *frame,
                                                        GstVideoDecoderRequestSyncPointFlags flags);
 
-GST_VIDEO_API
+extern
 void             gst_video_decoder_release_frame (GstVideoDecoder * dec,
 						  GstVideoCodecFrame * frame);
 
-GST_VIDEO_API
+extern
 void             gst_video_decoder_merge_tags (GstVideoDecoder *decoder,
                                                const GstTagList *tags,
                                                GstTagMergeMode mode);
 
-GST_VIDEO_API
+extern
 GstCaps *        gst_video_decoder_proxy_getcaps (GstVideoDecoder * decoder,
 						  GstCaps         * caps,
                                                   GstCaps         * filter);
 
-GST_VIDEO_API
+extern
 void             gst_video_decoder_set_use_default_pad_acceptcaps (GstVideoDecoder * decoder,
                                                                    gboolean use);
 

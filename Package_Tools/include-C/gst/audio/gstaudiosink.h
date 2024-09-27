@@ -131,7 +131,7 @@ struct _GstAudioSinkClassExtension
   /* no padding needed  */
 };
 
-GST_AUDIO_API
+extern
 GType gst_audio_sink_get_type(void);
 
 

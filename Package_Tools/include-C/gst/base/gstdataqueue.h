@@ -136,45 +136,45 @@ struct _GstDataQueueClass
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_BASE_API
+extern
 GType          gst_data_queue_get_type (void);
 
-GST_BASE_API
+extern
 GstDataQueue * gst_data_queue_new            (GstDataQueueCheckFullFunction checkfull,
 					      GstDataQueueFullCallback fullcallback,
 					      GstDataQueueEmptyCallback emptycallback,
 					      gpointer checkdata) ;
-GST_BASE_API
+extern
 gboolean       gst_data_queue_push           (GstDataQueue * queue, GstDataQueueItem * item);
 
-GST_BASE_API
+extern
 gboolean       gst_data_queue_push_force     (GstDataQueue * queue, GstDataQueueItem * item);
 
-GST_BASE_API
+extern
 gboolean       gst_data_queue_pop            (GstDataQueue * queue, GstDataQueueItem ** item);
 
-GST_BASE_API
+extern
 gboolean       gst_data_queue_peek           (GstDataQueue * queue, GstDataQueueItem ** item);
 
-GST_BASE_API
+extern
 void           gst_data_queue_flush          (GstDataQueue * queue);
 
-GST_BASE_API
+extern
 void           gst_data_queue_set_flushing   (GstDataQueue * queue, gboolean flushing);
 
-GST_BASE_API
+extern
 gboolean       gst_data_queue_drop_head      (GstDataQueue * queue, GType type);
 
-GST_BASE_API
+extern
 gboolean       gst_data_queue_is_full        (GstDataQueue * queue);
 
-GST_BASE_API
+extern
 gboolean       gst_data_queue_is_empty       (GstDataQueue * queue);
 
-GST_BASE_API
+extern
 void           gst_data_queue_get_level      (GstDataQueue * queue, GstDataQueueSize *level);
 
-GST_BASE_API
+extern
 void           gst_data_queue_limits_changed (GstDataQueue * queue);
 
 

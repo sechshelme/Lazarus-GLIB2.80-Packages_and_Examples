@@ -146,7 +146,7 @@ struct _GstNavigationInterface {
   void (*send_event_simple) (GstNavigation *navigation, GstEvent *event);
 };
 
-GST_VIDEO_API
+extern
 GType           gst_navigation_get_type (void);
 
 /* Navigation commands */
@@ -242,35 +242,35 @@ typedef enum
   GST_NAVIGATION_QUERY_ANGLES      = 2
 } GstNavigationQueryType;
 
-GST_VIDEO_API
+extern
 GstNavigationQueryType gst_navigation_query_get_type (GstQuery *query);
 
-GST_VIDEO_API
+extern
 GstQuery *      gst_navigation_query_new_commands       (void);
 
-GST_VIDEO_API
+extern
 void            gst_navigation_query_set_commands       (GstQuery *query, gint n_cmds, ...);
 
-GST_VIDEO_API
+extern
 void            gst_navigation_query_set_commandsv      (GstQuery *query, gint n_cmds,
                                                          GstNavigationCommand *cmds);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_query_parse_commands_length     (GstQuery *query,
                                                                 guint *n_cmds);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_query_parse_commands_nth        (GstQuery *query, guint nth,
                                                                 GstNavigationCommand *cmd);
 
-GST_VIDEO_API
+extern
 GstQuery *      gst_navigation_query_new_angles         (void);
 
-GST_VIDEO_API
+extern
 void            gst_navigation_query_set_angles         (GstQuery *query, guint cur_angle,
                                                          guint n_angles);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_query_parse_angles       (GstQuery *query, guint *cur_angle,
                                                          guint *n_angles);
 
@@ -301,35 +301,35 @@ typedef enum {
   GST_NAVIGATION_MESSAGE_EVENT
 } GstNavigationMessageType;
 
-GST_VIDEO_API
+extern
 GstNavigationMessageType gst_navigation_message_get_type (GstMessage *message);
 
-GST_VIDEO_API
+extern
 GstMessage *    gst_navigation_message_new_mouse_over       (GstObject *src,
                                                              gboolean active);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_message_parse_mouse_over     (GstMessage *message,
                                                              gboolean *active);
 
-GST_VIDEO_API
+extern
 GstMessage *    gst_navigation_message_new_commands_changed (GstObject *src);
 
-GST_VIDEO_API
+extern
 GstMessage *    gst_navigation_message_new_angles_changed   (GstObject *src,
                                                              guint cur_angle,
                                                              guint n_angles);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_message_parse_angles_changed (GstMessage *message,
                                                              guint *cur_angle,
                                                              guint *n_angles);
 
-GST_VIDEO_API
+extern
 GstMessage *    gst_navigation_message_new_event            (GstObject *src,
 							     GstEvent *event);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_message_parse_event          (GstMessage *message,
 							     GstEvent ** event);
 /* event parsing functions */
@@ -449,100 +449,100 @@ typedef enum {
   GST_NAVIGATION_EVENT_TOUCH_CANCEL               = 12,
 } GstNavigationEventType;
 
-GST_VIDEO_API
+extern
 GstNavigationEventType gst_navigation_event_get_type          (GstEvent *event);
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_key_press            (const gchar * key,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_key_release          (const gchar * key,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_mouse_button_press   (gint button, gdouble x,
                                                                gdouble y,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_mouse_button_release (gint button, gdouble x,
                                                                gdouble y,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_mouse_move           (gdouble x,
                                                                gdouble y,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_mouse_scroll         (gdouble x, gdouble y,
                                                                gdouble delta_x, gdouble delta_y,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_command              (GstNavigationCommand command) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_touch_down           (guint identifier,
                                                                gdouble x, gdouble y,
                                                                gdouble pressure,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_touch_motion         (guint identifier,
                                                                gdouble x, gdouble y,
                                                                gdouble pressure,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_touch_up             (guint identifier,
                                                                gdouble x, gdouble y,
                                                                GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_touch_frame          (GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 GstEvent*       gst_navigation_event_new_touch_cancel         (GstNavigationModifierType state) ;
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_event_parse_key_event          (GstEvent *event,
                                                                const gchar **key);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_event_parse_mouse_button_event (GstEvent *event,
                                                                gint *button, gdouble *x, gdouble *y);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_event_parse_mouse_move_event   (GstEvent *event,
                                                                gdouble *x, gdouble *y);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_event_parse_mouse_scroll_event (GstEvent *event,
                                                                gdouble *x, gdouble *y,
                                                                gdouble *delta_x, gdouble *delta_y);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_event_parse_command            (GstEvent *event,
                                                                GstNavigationCommand *command);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_event_parse_touch_event        (GstEvent * event,
                                                                guint * identifier,
                                                                gdouble * x, gdouble * y,
                                                                gdouble * pressure);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_event_parse_touch_up_event     (GstEvent * event,
                                                                guint * identifier,
                                                                gdouble * x, gdouble * y);
 
-GST_VIDEO_API
+extern
 gboolean  gst_navigation_event_get_coordinates (GstEvent * event,
                                                 gdouble * x, gdouble * y);
 
-GST_VIDEO_API
+extern
 gboolean  gst_navigation_event_set_coordinates (GstEvent * event,
                                                 gdouble x, gdouble y);
 
@@ -568,11 +568,11 @@ GST_VIDEO_DEPRECATED_FOR(gst_navigation_send_event_simple)
 void    gst_navigation_send_command      (GstNavigation *navigation,
                                           GstNavigationCommand command);
 
-GST_VIDEO_API
+extern
 void    gst_navigation_send_event_simple (GstNavigation *navigation,
                                           GstEvent *event);
 
-GST_VIDEO_API
+extern
 gboolean        gst_navigation_event_parse_modifier_state (GstEvent *event,
                                                            GstNavigationModifierType *state);
 

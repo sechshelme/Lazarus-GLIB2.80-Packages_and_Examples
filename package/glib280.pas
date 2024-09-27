@@ -81,16 +81,19 @@ type
   Tguint8 = uint8;
   Pgint8 = ^int8;
   Pguint8 = ^uint8;
+  PPguint8 = ^PUInt8;
 
   Tgint16 = int16;
   Tguint16 = uint16;
   Pgint16 = ^int16;
   Pguint16 = ^uint16;
+  PPguint16 = ^PUInt16;
 
   Tgint32 = int32;
   Tguint32 = uint32;
   Pgint32 = ^int32;
   Pguint32 = ^uint32;
+  PPguint32 = ^PUInt32;
 
   Tgint64 = int64;
   Tguint64 = uint64;

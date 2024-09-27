@@ -287,36 +287,36 @@ typedef enum {
 
 typedef struct _GstVideoConverter GstVideoConverter;
 
-GST_VIDEO_API
+extern
 GstVideoConverter *  gst_video_converter_new            (const GstVideoInfo *in_info,
                                                          const GstVideoInfo *out_info,
                                                          GstStructure *config);
 
-GST_VIDEO_API
+extern
 GstVideoConverter * gst_video_converter_new_with_pool   (const GstVideoInfo * in_info,
                                                          const GstVideoInfo * out_info,
                                                          GstStructure * config,
                                                          GstTaskPool  * pool);
 
-GST_VIDEO_API
+extern
 void                 gst_video_converter_free           (GstVideoConverter * convert);
 
-GST_VIDEO_API
+extern
 gboolean             gst_video_converter_set_config     (GstVideoConverter * convert, GstStructure *config);
 
-GST_VIDEO_API
+extern
 const GstStructure * gst_video_converter_get_config     (GstVideoConverter * convert);
 
-GST_VIDEO_API
+extern
 void                 gst_video_converter_frame          (GstVideoConverter * convert,
                                                          const GstVideoFrame *src, GstVideoFrame *dest);
-GST_VIDEO_API
+extern
 void                 gst_video_converter_frame_finish   (GstVideoConverter * convert);
 
-GST_VIDEO_API
+extern
 const GstVideoInfo * gst_video_converter_get_in_info    (GstVideoConverter * convert);
 
-GST_VIDEO_API
+extern
 const GstVideoInfo * gst_video_converter_get_out_info   (GstVideoConverter * convert);
 
 

@@ -79,7 +79,7 @@ struct _GstVideoFilterClass {
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_VIDEO_API
+extern
 GType gst_video_filter_get_type (void);
 
 

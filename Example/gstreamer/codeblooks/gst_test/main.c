@@ -1,4 +1,10 @@
 #include <gst/gst.h>
+#include <gst/pbutils/gstdiscoverer.h>
+#include <gst/pbutils/gstaudiovisualizer.h>
+#include <gst/pbutils/install-plugins.h>
+#include <gst/pbutils/encoding-target.h>
+#include <gst/audio/gstnonstreamaudiodecoder.h>
+#include <gst/base/gstbytereader.h>
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
@@ -56,4 +62,10 @@ main (int argc, char *argv[])
 
 GST_PAD_TEMPLATE_IS_FIXED(0);
 }
+
+
+
+GST_NONSTREAM_AUDIO_DECODER_LOCK_MUTEX
+
+__GST_BYTE_READER_GET_PEEK_BITS_UNCHECKED
 

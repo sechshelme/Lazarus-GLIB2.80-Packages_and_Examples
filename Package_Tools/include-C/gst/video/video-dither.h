@@ -62,17 +62,17 @@ typedef struct _GstVideoDither GstVideoDither;
 /* circular dependency, need to include this after defining the enums */
 #include <gst/video/video-format.h>
 
-GST_VIDEO_API
+extern
 GstVideoDither    * gst_video_dither_new      (GstVideoDitherMethod method,
                                                GstVideoDitherFlags flags,
                                                GstVideoFormat format,
                                                guint quantizer[GST_VIDEO_MAX_COMPONENTS],
                                                guint width);
 
-GST_VIDEO_API
+extern
 void                gst_video_dither_free     (GstVideoDither *dither);
 
-GST_VIDEO_API
+extern
 void                gst_video_dither_line     (GstVideoDither *dither,
                                                gpointer line, guint x, guint y, guint width);
 

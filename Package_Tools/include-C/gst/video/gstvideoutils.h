@@ -303,33 +303,33 @@ struct _GstVideoCodecFrame
 
 /* GstVideoCodecState */
 
-GST_VIDEO_API
+extern
 GType           gst_video_codec_state_get_type (void);
 
-GST_VIDEO_API
+extern
 GstVideoCodecState *gst_video_codec_state_ref (GstVideoCodecState * state);
 
-GST_VIDEO_API
+extern
 void                gst_video_codec_state_unref (GstVideoCodecState * state);
 
 
 /* GstVideoCodecFrame */
 
-GST_VIDEO_API
+extern
 GType                gst_video_codec_frame_get_type (void);
 
-GST_VIDEO_API
+extern
 GstVideoCodecFrame  *gst_video_codec_frame_ref (GstVideoCodecFrame * frame);
 
-GST_VIDEO_API
+extern
 void                 gst_video_codec_frame_unref (GstVideoCodecFrame * frame);
 
-GST_VIDEO_API
+extern
 void                 gst_video_codec_frame_set_user_data (GstVideoCodecFrame *frame,
 						          gpointer user_data,
 				                          GDestroyNotify notify);
 
-GST_VIDEO_API
+extern
 gpointer             gst_video_codec_frame_get_user_data (GstVideoCodecFrame *frame);
 
 

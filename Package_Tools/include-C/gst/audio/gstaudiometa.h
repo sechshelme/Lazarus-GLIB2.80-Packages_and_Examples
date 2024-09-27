@@ -56,19 +56,19 @@ struct _GstAudioDownmixMeta {
   gfloat       **matrix;
 };
 
-GST_AUDIO_API
+extern
 GType gst_audio_downmix_meta_api_get_type (void);
 
-GST_AUDIO_API
+extern
 const GstMetaInfo * gst_audio_downmix_meta_get_info (void);
 
 #define gst_buffer_get_audio_downmix_meta(b) ((GstAudioDownmixMeta*)gst_buffer_get_meta((b), GST_AUDIO_DOWNMIX_META_API_TYPE))
-GST_AUDIO_API
+extern
 GstAudioDownmixMeta * gst_buffer_get_audio_downmix_meta_for_channels    (GstBuffer *buffer,
                                                                          const GstAudioChannelPosition *to_position,
                                                                          gint                           to_channels);
 
-GST_AUDIO_API
+extern
 GstAudioDownmixMeta * gst_buffer_add_audio_downmix_meta (GstBuffer    *buffer,
                                                          const GstAudioChannelPosition *from_position,
                                                          gint                           from_channels,
@@ -111,15 +111,15 @@ struct _GstAudioClippingMeta {
   guint64   end;
 };
 
-GST_AUDIO_API
+extern
 GType gst_audio_clipping_meta_api_get_type (void);
 
-GST_AUDIO_API
+extern
 const GstMetaInfo * gst_audio_clipping_meta_get_info (void);
 
 #define gst_buffer_get_audio_clipping_meta(b) ((GstAudioClippingMeta*)gst_buffer_get_meta((b), GST_AUDIO_CLIPPING_META_API_TYPE))
 
-GST_AUDIO_API
+extern
 GstAudioClippingMeta * gst_buffer_add_audio_clipping_meta (GstBuffer *buffer,
                                                            GstFormat  format,
                                                            guint64    start,
@@ -187,16 +187,16 @@ struct _GstAudioMeta {
   gpointer     _gst_reserved[GST_PADDING];
 };
 
-GST_AUDIO_API
+extern
 GType gst_audio_meta_api_get_type (void);
 
-GST_AUDIO_API
+extern
 const GstMetaInfo * gst_audio_meta_get_info (void);
 
 #define gst_buffer_get_audio_meta(b) \
     ((GstAudioMeta*)gst_buffer_get_meta((b), GST_AUDIO_META_API_TYPE))
 
-GST_AUDIO_API
+extern
 GstAudioMeta * gst_buffer_add_audio_meta (GstBuffer *buffer,
                                           const GstAudioInfo *info,
                                           gsize samples, gsize offsets[]);
@@ -237,17 +237,17 @@ struct _GstAudioLevelMeta
   gboolean voice_activity;
 };
 
-GST_AUDIO_API
+extern
 GType                  gst_audio_level_meta_api_get_type                (void);
 
-GST_AUDIO_API
+extern
 const GstMetaInfo *    gst_audio_level_meta_get_info                    (void);
 
-GST_AUDIO_API
+extern
 GstAudioLevelMeta * gst_buffer_add_audio_level_meta                     (GstBuffer * buffer,
                                                                          guint8 level,
                                                                          gboolean voice_activity);
-GST_AUDIO_API
+extern
 GstAudioLevelMeta * gst_buffer_get_audio_level_meta                     (GstBuffer * buffer);
 
 

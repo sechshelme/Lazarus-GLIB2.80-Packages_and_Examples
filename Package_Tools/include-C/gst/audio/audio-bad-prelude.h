@@ -24,11 +24,11 @@
 
 #include <gst/gst.h>
 
-#ifndef GST_AUDIO_BAD_API
+#ifndef extern
 # ifdef BUILDING_GST_AUDIO_BAD
-#  define GST_AUDIO_BAD_API extern_EXPORT         /* from config.h */
+#  define extern extern_EXPORT         /* from config.h */
 # else
-#  define GST_AUDIO_BAD_API extern_IMPORT
+#  define extern extern_IMPORT
 # endif
 #endif
 

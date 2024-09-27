@@ -26,7 +26,7 @@
 
 
 #define GST_TYPE_STREAM_VOLUME (gst_stream_volume_get_type ())
-GST_AUDIO_API
+extern
 G_DECLARE_INTERFACE (GstStreamVolume, gst_stream_volume, GST, STREAM_VOLUME,
     GObject)
 
@@ -54,23 +54,23 @@ typedef enum {
   GST_STREAM_VOLUME_FORMAT_DB
 } GstStreamVolumeFormat;
 
-GST_AUDIO_API
+extern
 void            gst_stream_volume_set_volume      (GstStreamVolume *volume,
                                                    GstStreamVolumeFormat format,
                                                    gdouble val);
 
-GST_AUDIO_API
+extern
 gdouble         gst_stream_volume_get_volume      (GstStreamVolume *volume,
                                                    GstStreamVolumeFormat format);
 
-GST_AUDIO_API
+extern
 void            gst_stream_volume_set_mute        (GstStreamVolume *volume,
                                                    gboolean mute);
 
-GST_AUDIO_API
+extern
 gboolean        gst_stream_volume_get_mute        (GstStreamVolume *volume);
 
-GST_AUDIO_API
+extern
 gdouble         gst_stream_volume_convert_volume  (GstStreamVolumeFormat from,
                                                    GstStreamVolumeFormat to,
                                                    gdouble val) ;

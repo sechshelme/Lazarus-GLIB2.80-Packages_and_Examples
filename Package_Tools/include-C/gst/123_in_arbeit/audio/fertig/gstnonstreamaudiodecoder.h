@@ -67,11 +67,11 @@ typedef enum
 
 #define GST_TYPE_NONSTREAM_AUDIO_DECODER             (gst_nonstream_audio_decoder_get_type())
 #define GST_NONSTREAM_AUDIO_DECODER(obj)             (G_TYPE_CHECK_INSTANCE_CAST((obj), GST_TYPE_NONSTREAM_AUDIO_DECODER, GstNonstreamAudioDecoder))
-#define GST_NONSTREAM_AUDIO_DECODER_CAST(obj)        ((GstNonstreamAudioDecoder *)(obj))
 #define GST_NONSTREAM_AUDIO_DECODER_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), GST_TYPE_NONSTREAM_AUDIO_DECODER, GstNonstreamAudioDecoderClass))
-#define GST_NONSTREAM_AUDIO_DECODER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS((obj), GST_TYPE_NONSTREAM_AUDIO_DECODER, GstNonstreamAudioDecoderClass))
 #define GST_IS_NONSTREAM_AUDIO_DECODER(obj)          (G_TYPE_CHECK_INSTANCE_TYPE((obj), GST_TYPE_NONSTREAM_AUDIO_DECODER))
 #define GST_IS_NONSTREAM_AUDIO_DECODER_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE((klass), GST_TYPE_NONSTREAM_AUDIO_DECODER))
+#define GST_NONSTREAM_AUDIO_DECODER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS((obj), GST_TYPE_NONSTREAM_AUDIO_DECODER, GstNonstreamAudioDecoderClass))
+#define GST_NONSTREAM_AUDIO_DECODER_CAST(obj)        ((GstNonstreamAudioDecoder *)(obj))
 
 /**
  * GST_NONSTREAM_AUDIO_DECODER_SINK_NAME:
@@ -377,31 +377,31 @@ struct _GstNonstreamAudioDecoderClass
 };
 
 
-GST_AUDIO_BAD_API
+extern
 GType gst_nonstream_audio_decoder_get_type (void);
 
 
-GST_AUDIO_BAD_API
+extern
 void gst_nonstream_audio_decoder_handle_loop (GstNonstreamAudioDecoder * dec,
                                               GstClockTime new_position);
 
-GST_AUDIO_BAD_API
+extern
 gboolean gst_nonstream_audio_decoder_set_output_format (GstNonstreamAudioDecoder * dec,
                                                         GstAudioInfo const *audio_info);
 
-GST_AUDIO_BAD_API
+extern
 gboolean gst_nonstream_audio_decoder_set_output_format_simple (GstNonstreamAudioDecoder * dec,
                                                                guint sample_rate,
                                                                GstAudioFormat sample_format,
                                                                guint num_channels);
 
-GST_AUDIO_BAD_API
+extern
 void gst_nonstream_audio_decoder_get_downstream_info (GstNonstreamAudioDecoder * dec,
                                                       GstAudioFormat * format,
                                                       gint * sample_rate,
                                                       gint * num_channels);
 
-GST_AUDIO_BAD_API
+extern
 GstBuffer *gst_nonstream_audio_decoder_allocate_output_buffer (GstNonstreamAudioDecoder * dec,
                                                                gsize size);
 

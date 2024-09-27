@@ -60,7 +60,7 @@ typedef struct {
   gsize size;
 } GstVideoSEIUserDataUnregisteredMeta;
 
-GST_VIDEO_API
+extern
 GType gst_video_sei_user_data_unregistered_meta_api_get_type (void);
 /**
  * GST_VIDEO_SEI_USER_DATA_UNREGISTERED_META_API_TYPE:
@@ -70,7 +70,7 @@ GType gst_video_sei_user_data_unregistered_meta_api_get_type (void);
 #define GST_VIDEO_SEI_USER_DATA_UNREGISTERED_META_API_TYPE (\
     gst_video_sei_user_data_unregistered_meta_api_get_type())
 
-GST_VIDEO_API
+extern
 const GstMetaInfo *gst_video_sei_user_data_unregistered_meta_get_info (void);
 /**
  * GST_VIDEO_SEI_USER_DATA_UNREGISTERED_META_INFO:
@@ -94,13 +94,13 @@ const GstMetaInfo *gst_video_sei_user_data_unregistered_meta_get_info (void);
 #define gst_buffer_get_video_sei_user_data_unregistered_meta(b) \
         ((GstVideoSEIUserDataUnregisteredMeta*)gst_buffer_get_meta((b),GST_VIDEO_SEI_USER_DATA_UNREGISTERED_META_API_TYPE))
 
-GST_VIDEO_API
+extern
 GstVideoSEIUserDataUnregisteredMeta *gst_buffer_add_video_sei_user_data_unregistered_meta (GstBuffer * buffer,
                                                                                            guint8 uuid[16],
                                                                                            guint8 * data,
                                                                                            gsize size);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_sei_user_data_unregistered_parse_precision_time_stamp (GstVideoSEIUserDataUnregisteredMeta * user_data,
                                                                           guint8 * status,
                                                                           guint64 * precision_time_stamp);

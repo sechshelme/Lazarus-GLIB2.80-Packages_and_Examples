@@ -191,7 +191,7 @@ struct _GstVideoTileInfo
   guint32 padding[GST_PADDING];
 };
 
-GST_VIDEO_API
+extern
 guint           gst_video_tile_get_index                (GstVideoTileMode mode, gint x, gint y,
                                                          gint x_tiles, gint y_tiles);
 

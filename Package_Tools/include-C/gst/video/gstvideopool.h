@@ -47,10 +47,10 @@
 
 /* setting a bufferpool config */
 
-GST_VIDEO_API
+extern
 void             gst_buffer_pool_config_set_video_alignment  (GstStructure *config, const GstVideoAlignment *align);
 
-GST_VIDEO_API
+extern
 gboolean         gst_buffer_pool_config_get_video_alignment  (GstStructure *config, GstVideoAlignment *align);
 
 /* video bufferpool */
@@ -75,10 +75,10 @@ struct _GstVideoBufferPoolClass
   GstBufferPoolClass parent_class;
 };
 
-GST_VIDEO_API
+extern
 GType             gst_video_buffer_pool_get_type      (void);
 
-GST_VIDEO_API
+extern
 GstBufferPool *   gst_video_buffer_pool_new           (void);
 
 

@@ -29,12 +29,12 @@
 
 
 
-GST_VIDEO_API
+extern
 void       gst_video_blend_scale_linear_RGBA  (GstVideoInfo * src, GstBuffer * src_buffer,
                                                gint dest_height, gint dest_width,
                                                GstVideoInfo * dest, GstBuffer ** dest_buffer);
 
-GST_VIDEO_API
+extern
 gboolean   gst_video_blend                    (GstVideoFrame * dest,
                                                GstVideoFrame * src,
                                                gint x, gint y,

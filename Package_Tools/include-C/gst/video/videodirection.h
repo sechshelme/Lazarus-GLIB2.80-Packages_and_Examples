@@ -57,7 +57,7 @@ struct _GstVideoDirectionInterface
   GTypeInterface iface;
 };
 
-GST_VIDEO_API
+extern
 GType gst_video_direction_get_type (void);
 
 

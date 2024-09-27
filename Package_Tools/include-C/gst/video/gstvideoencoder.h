@@ -299,92 +299,92 @@ struct _GstVideoEncoderClass
   gpointer       _gst_reserved[GST_PADDING_LARGE-4];
 };
 
-GST_VIDEO_API
+extern
 GType                gst_video_encoder_get_type (void);
 
-GST_VIDEO_API
+extern
 GstVideoCodecState*  gst_video_encoder_get_output_state (GstVideoEncoder *encoder);
 
-GST_VIDEO_API
+extern
 GstVideoCodecState*  gst_video_encoder_set_output_state (GstVideoEncoder * encoder,
 							 GstCaps * caps,
 							 GstVideoCodecState * reference);
 
-GST_VIDEO_API
+extern
 gboolean             gst_video_encoder_negotiate        (GstVideoEncoder * encoder);
 
-GST_VIDEO_API
+extern
 GstVideoCodecFrame*  gst_video_encoder_get_frame        (GstVideoEncoder *encoder,
 						         int frame_number);
 
-GST_VIDEO_API
+extern
 GstVideoCodecFrame*  gst_video_encoder_get_oldest_frame (GstVideoEncoder *encoder);
 
-GST_VIDEO_API
+extern
 GList *              gst_video_encoder_get_frames       (GstVideoEncoder *encoder);
 
-GST_VIDEO_API
+extern
 GstBuffer *          gst_video_encoder_allocate_output_buffer (GstVideoEncoder * encoder,
                                                                gsize size);
 
-GST_VIDEO_API
+extern
 GstFlowReturn        gst_video_encoder_allocate_output_frame  (GstVideoEncoder *encoder,
 						               GstVideoCodecFrame *frame,
                                                                gsize size);
 
-GST_VIDEO_API
+extern
 GstFlowReturn        gst_video_encoder_finish_frame (GstVideoEncoder *encoder,
 						     GstVideoCodecFrame *frame);
 
-GST_VIDEO_API
+extern
 GstFlowReturn        gst_video_encoder_finish_subframe (GstVideoEncoder * encoder,
 						     GstVideoCodecFrame * frame);
 
-GST_VIDEO_API
+extern
 GstCaps *            gst_video_encoder_proxy_getcaps (GstVideoEncoder * enc,
 						      GstCaps         * caps,
                                                       GstCaps         * filter);
 
-GST_VIDEO_API
+extern
 void                 gst_video_encoder_set_latency (GstVideoEncoder *encoder,
 						    GstClockTime min_latency,
 						    GstClockTime max_latency);
 
-GST_VIDEO_API
+extern
 void		     gst_video_encoder_get_latency (GstVideoEncoder *encoder,
 						    GstClockTime *min_latency,
 						    GstClockTime *max_latency);
 
-GST_VIDEO_API
+extern
 void                 gst_video_encoder_set_headers (GstVideoEncoder *encoder,
 						    GList *headers);
 
-GST_VIDEO_API
+extern
 void                 gst_video_encoder_merge_tags  (GstVideoEncoder *encoder,
                                                     const GstTagList *tags,
                                                     GstTagMergeMode mode);
 
-GST_VIDEO_API
+extern
 void                 gst_video_encoder_get_allocator (GstVideoEncoder *encoder,
                                                       GstAllocator **allocator,
                                                       GstAllocationParams *params);
 
-GST_VIDEO_API
+extern
 void                 gst_video_encoder_set_min_pts(GstVideoEncoder *encoder, GstClockTime min_pts);
 
-GST_VIDEO_API
+extern
 void                 gst_video_encoder_set_qos_enabled (GstVideoEncoder * encoder, gboolean enabled);
 
-GST_VIDEO_API
+extern
 gboolean             gst_video_encoder_is_qos_enabled (GstVideoEncoder * encoder);
 
-GST_VIDEO_API
+extern
 GstClockTimeDiff     gst_video_encoder_get_max_encode_time (GstVideoEncoder *encoder, GstVideoCodecFrame * frame);
 
-GST_VIDEO_API
+extern
 void                 gst_video_encoder_set_min_force_key_unit_interval (GstVideoEncoder * encoder,
                                                                         GstClockTime      interval);
-GST_VIDEO_API
+extern
 GstClockTime         gst_video_encoder_get_min_force_key_unit_interval (GstVideoEncoder * encoder);
 
 

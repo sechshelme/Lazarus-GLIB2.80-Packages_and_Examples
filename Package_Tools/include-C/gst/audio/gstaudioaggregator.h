@@ -102,7 +102,7 @@ struct _GstAudioAggregatorPadClass
   gpointer      _gst_reserved[GST_PADDING_LARGE];
 };
 
-GST_AUDIO_API
+extern
 GType gst_audio_aggregator_pad_get_type           (void);
 
 #define GST_TYPE_AUDIO_AGGREGATOR_CONVERT_PAD            (gst_audio_aggregator_convert_pad_get_type())
@@ -152,7 +152,7 @@ struct _GstAudioAggregatorConvertPadClass
   gpointer      _gst_reserved[GST_PADDING];
 };
 
-GST_AUDIO_API
+extern
 GType gst_audio_aggregator_convert_pad_get_type           (void);
 
 /**************************
@@ -215,10 +215,10 @@ struct _GstAudioAggregatorClass {
  * GstAggregator methods *
  ************************/
 
-GST_AUDIO_API
+extern
 GType gst_audio_aggregator_get_type(void);
 
-GST_AUDIO_API
+extern
 void  gst_audio_aggregator_set_sink_caps (GstAudioAggregator    * aagg,
                                           GstAudioAggregatorPad * pad,
                                           GstCaps               * caps);

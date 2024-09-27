@@ -57,78 +57,78 @@ struct _GstBitWriter
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_BASE_API
+extern
 GstBitWriter *  gst_bit_writer_new              (void) ;
 
-GST_BASE_API
+extern
 GstBitWriter *  gst_bit_writer_new_with_size    (guint32 size, gboolean fixed) ;
 
-GST_BASE_API
+extern
 GstBitWriter *  gst_bit_writer_new_with_data    (guint8 *data, guint size,
 						 gboolean initialized) ;
 
-GST_BASE_API
+extern
 void            gst_bit_writer_free             (GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 guint8 *        gst_bit_writer_free_and_get_data (GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 GstBuffer *     gst_bit_writer_free_and_get_buffer (GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 void            gst_bit_writer_init             (GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 void            gst_bit_writer_init_with_size   (GstBitWriter *bitwriter,
 						 guint32 size, gboolean fixed);
 
-GST_BASE_API
+extern
 void            gst_bit_writer_init_with_data   (GstBitWriter *bitwriter,  guint8 *data,
 						 guint size, gboolean initialized);
 
-GST_BASE_API
+extern
 void            gst_bit_writer_reset            (GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 guint8 *        gst_bit_writer_reset_and_get_data (GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 GstBuffer *     gst_bit_writer_reset_and_get_buffer (GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 guint           gst_bit_writer_get_size         (const GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 guint8 *        gst_bit_writer_get_data         (const GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 gboolean        gst_bit_writer_set_pos          (GstBitWriter *bitwriter, guint pos);
 
-GST_BASE_API
+extern
 guint           gst_bit_writer_get_remaining    (const GstBitWriter *bitwriter);
 
-GST_BASE_API
+extern
 gboolean        gst_bit_writer_put_bits_uint8   (GstBitWriter *bitwriter, guint8 value,
 						 guint nbits);
 
-GST_BASE_API
+extern
 gboolean        gst_bit_writer_put_bits_uint16  (GstBitWriter *bitwriter, guint16 value,
 						 guint nbits);
 
-GST_BASE_API
+extern
 gboolean        gst_bit_writer_put_bits_uint32  (GstBitWriter *bitwriter, guint32 value,
 						 guint nbits);
 
-GST_BASE_API
+extern
 gboolean        gst_bit_writer_put_bits_uint64  (GstBitWriter *bitwriter, guint64 value,
 						 guint nbits);
 
-GST_BASE_API
+extern
 gboolean        gst_bit_writer_put_bytes        (GstBitWriter *bitwriter, const guint8 *data,
 						 guint nbytes);
 
-GST_BASE_API
+extern
 gboolean        gst_bit_writer_align_bytes      (GstBitWriter *bitwriter, guint8 trailing_bit);
 
 static const guint8 _gst_bit_writer_bit_filling_mask[9] = {

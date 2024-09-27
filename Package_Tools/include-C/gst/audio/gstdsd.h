@@ -172,7 +172,7 @@ struct _GstDsdInfo {
 };
 
 #define GST_TYPE_DSD_INFO                  (gst_dsd_info_get_type ())
-GST_AUDIO_API
+extern
 GType gst_dsd_info_get_type                (void);
 
 #define GST_DSD_INFO_IS_VALID(i)           ((i)->format < GST_NUM_DSD_FORMATS && (i)->rate > 0 && (i)->channels > 0)
@@ -252,55 +252,55 @@ struct _GstDsdPlaneOffsetMeta {
   gpointer     _gst_reserved[GST_PADDING];
 };
 
-GST_AUDIO_API
+extern
 GType gst_dsd_plane_offset_meta_api_get_type (void);
 
-GST_AUDIO_API
+extern
 const GstMetaInfo * gst_dsd_plane_offset_meta_get_info (void);
 
 #define gst_buffer_get_dsd_plane_offset_meta(b) \
     ((GstDsdPlaneOffsetMeta*)gst_buffer_get_meta((b), GST_DSD_PLANE_OFFSET_META_API_TYPE))
 
-GST_AUDIO_API
+extern
 GstDsdPlaneOffsetMeta * gst_buffer_add_dsd_plane_offset_meta (GstBuffer *buffer,
                                                               gint num_channels,
                                                               gsize num_bytes_per_channel,
                                                               gsize offsets[]);
 
-GST_AUDIO_API
+extern
 GstDsdInfo *  gst_dsd_info_new           (void);
 
-GST_AUDIO_API
+extern
 GstDsdInfo *  gst_dsd_info_new_from_caps (const GstCaps * caps);
 
-GST_AUDIO_API
+extern
 void          gst_dsd_info_init          (GstDsdInfo * info);
 
-GST_AUDIO_API
+extern
 void          gst_dsd_info_set_format    (GstDsdInfo * info, 
                                           GstDsdFormat format,
                                           gint rate, 
                                           gint channels,
                                           const GstAudioChannelPosition * positions);
 
-GST_AUDIO_API
+extern
 GstDsdInfo *  gst_dsd_info_copy          (const GstDsdInfo * info);
 
-GST_AUDIO_API
+extern
 void          gst_dsd_info_free          (GstDsdInfo * info);
 
-GST_AUDIO_API
+extern
 gboolean      gst_dsd_info_from_caps     (GstDsdInfo *info, 
                                           const GstCaps *caps);
 
-GST_AUDIO_API
+extern
 GstCaps *     gst_dsd_info_to_caps       (const GstDsdInfo *info);
 
-GST_AUDIO_API
+extern
 gboolean      gst_dsd_info_is_equal      (const GstDsdInfo *info,
                                           const GstDsdInfo *other);
 
-GST_AUDIO_API
+extern
 void          gst_dsd_convert            (const guint8 *input_data, 
                                           guint8 *output_data,
                                           GstDsdFormat input_format, 

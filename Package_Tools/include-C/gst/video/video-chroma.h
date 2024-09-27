@@ -58,10 +58,10 @@ GstVideoChromaSite    gst_video_chroma_from_string   (const gchar * s);
 GST_VIDEO_DEPRECATED_FOR(gst_video_chroma_site_to_string)
 const gchar *         gst_video_chroma_to_string     (GstVideoChromaSite site);
 
-GST_VIDEO_API
+extern
 GstVideoChromaSite    gst_video_chroma_site_from_string (const gchar * s);
 
-GST_VIDEO_API
+extern
 gchar *               gst_video_chroma_site_to_string   (GstVideoChromaSite site);
 
 /**
@@ -95,21 +95,21 @@ typedef struct _GstVideoChromaResample GstVideoChromaResample;
 /* circular dependency, need to include this after defining the enums */
 #include <gst/video/video-format.h>
 
-GST_VIDEO_API
+extern
 GstVideoChromaResample * gst_video_chroma_resample_new   (GstVideoChromaMethod method,
                                                           GstVideoChromaSite site,
                                                           GstVideoChromaFlags flags,
                                                           GstVideoFormat format,
                                                           gint h_factor, gint v_factor);
 
-GST_VIDEO_API
+extern
 void                     gst_video_chroma_resample_free  (GstVideoChromaResample *resample);
 
-GST_VIDEO_API
+extern
 void                     gst_video_chroma_resample_get_info (GstVideoChromaResample *resample,
                                                              guint * n_lines, gint *offset);
 
-GST_VIDEO_API
+extern
 void                     gst_video_chroma_resample       (GstVideoChromaResample *resample,
                                                           gpointer lines[], gint width);
 

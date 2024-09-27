@@ -67,53 +67,53 @@ struct _GstVideoInfoDmaDrm
 
 #define GST_TYPE_VIDEO_INFO_DMA_DRM  (gst_video_info_dma_drm_get_type ())
 
-GST_VIDEO_API
+extern
 GType                gst_video_info_dma_drm_get_type      (void);
 
-GST_VIDEO_API
+extern
 void                 gst_video_info_dma_drm_free          (GstVideoInfoDmaDrm * drm_info);
 
-GST_VIDEO_API
+extern
 void                 gst_video_info_dma_drm_init          (GstVideoInfoDmaDrm * drm_info);
 
-GST_VIDEO_API
+extern
 GstVideoInfoDmaDrm * gst_video_info_dma_drm_new           (void);
 
-GST_VIDEO_API
+extern
 GstCaps *            gst_video_info_dma_drm_to_caps       (const GstVideoInfoDmaDrm * drm_info);
 
-GST_VIDEO_API
+extern
 gboolean             gst_video_info_dma_drm_from_caps     (GstVideoInfoDmaDrm * drm_info,
                                                            const GstCaps * caps);
 
-GST_VIDEO_API
+extern
 gboolean             gst_video_info_dma_drm_from_video_info
                                                           (GstVideoInfoDmaDrm * drm_info,
                                                            const GstVideoInfo * info,
                                                            guint64 modifier);
 
-GST_VIDEO_API
+extern
 gboolean             gst_video_info_dma_drm_to_video_info (const GstVideoInfoDmaDrm * drm_info,
                                                            GstVideoInfo * info);
 
-GST_VIDEO_API
+extern
 GstVideoInfoDmaDrm * gst_video_info_dma_drm_new_from_caps (const GstCaps * caps);
 
-GST_VIDEO_API
+extern
 gboolean             gst_video_is_dma_drm_caps            (const GstCaps * caps);
 
-GST_VIDEO_API
+extern
 guint32              gst_video_dma_drm_fourcc_from_string (const gchar * format_str,
                                                            guint64 * modifier);
 
-GST_VIDEO_API
+extern
 gchar *              gst_video_dma_drm_fourcc_to_string   (guint32 fourcc,
                                                            guint64 modifier);
 
-GST_VIDEO_API
+extern
 guint32              gst_video_dma_drm_fourcc_from_format (GstVideoFormat format);
 
-GST_VIDEO_API
+extern
 GstVideoFormat       gst_video_dma_drm_fourcc_to_format   (guint32 fourcc);
 
 

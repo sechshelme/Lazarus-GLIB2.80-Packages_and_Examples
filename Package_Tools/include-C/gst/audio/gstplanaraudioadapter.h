@@ -53,59 +53,59 @@
 typedef struct _GstPlanarAudioAdapter GstPlanarAudioAdapter;
 typedef struct _GstPlanarAudioAdapterClass GstPlanarAudioAdapterClass;
 
-GST_AUDIO_BAD_API
+extern
 GType gst_planar_audio_adapter_get_type (void);
 
-GST_AUDIO_BAD_API
+extern
 GstPlanarAudioAdapter * gst_planar_audio_adapter_new (void) ;
 
-GST_AUDIO_BAD_API
+extern
 void gst_planar_audio_adapter_configure (GstPlanarAudioAdapter * adapter,
     const GstAudioInfo * info);
 
-GST_AUDIO_BAD_API
+extern
 void gst_planar_audio_adapter_clear (GstPlanarAudioAdapter * adapter);
 
-GST_AUDIO_BAD_API
+extern
 void gst_planar_audio_adapter_push (GstPlanarAudioAdapter * adapter,
     GstBuffer * buf);
 
-GST_AUDIO_BAD_API
+extern
 void gst_planar_audio_adapter_flush (GstPlanarAudioAdapter * adapter,
     gsize to_flush);
 
-GST_AUDIO_BAD_API
+extern
 GstBuffer * gst_planar_audio_adapter_get_buffer (GstPlanarAudioAdapter * adapter,
     gsize nsamples, GstMapFlags flags);
 
-GST_AUDIO_BAD_API
+extern
 GstBuffer * gst_planar_audio_adapter_take_buffer (GstPlanarAudioAdapter * adapter,
     gsize nsamples, GstMapFlags flags);
 
-GST_AUDIO_BAD_API
+extern
 gsize gst_planar_audio_adapter_available (GstPlanarAudioAdapter * adapter);
 
-GST_AUDIO_BAD_API
+extern
 guint64 gst_planar_audio_adapter_distance_from_discont (GstPlanarAudioAdapter * adapter);
 
-GST_AUDIO_BAD_API
+extern
 guint64 gst_planar_audio_adapter_offset_at_discont (GstPlanarAudioAdapter * adapter);
 
-GST_AUDIO_BAD_API
+extern
 GstClockTime gst_planar_audio_adapter_pts_at_discont (GstPlanarAudioAdapter * adapter);
 
-GST_AUDIO_BAD_API
+extern
 GstClockTime gst_planar_audio_adapter_dts_at_discont (GstPlanarAudioAdapter * adapter);
 
-GST_AUDIO_BAD_API
+extern
 guint64 gst_planar_audio_adapter_prev_offset (GstPlanarAudioAdapter * adapter,
     guint64 * distance);
 
-GST_AUDIO_BAD_API
+extern
 GstClockTime gst_planar_audio_adapter_prev_pts (GstPlanarAudioAdapter * adapter,
     guint64 * distance);
 
-GST_AUDIO_BAD_API
+extern
 GstClockTime gst_planar_audio_adapter_prev_dts (GstPlanarAudioAdapter * adapter,
     guint64 * distance);
 

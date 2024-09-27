@@ -124,10 +124,10 @@ struct _GstVideoTimeCodeInterval {
 #define GST_VIDEO_TIME_CODE_INIT { {0, 0, 0, NULL}, 0, 0, 0, 0, 0 }
 
 #define GST_TYPE_VIDEO_TIME_CODE (gst_video_time_code_get_type())
-GST_VIDEO_API
+extern
 GType gst_video_time_code_get_type (void);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCode * gst_video_time_code_new          (guint                    fps_n,
                                                      guint                    fps_d,
                                                      GDateTime              * latest_daily_jam,
@@ -138,10 +138,10 @@ GstVideoTimeCode * gst_video_time_code_new          (guint                    fp
                                                      guint                    frames,
                                                      guint                    field_count);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCode * gst_video_time_code_new_empty    (void);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCode * gst_video_time_code_new_from_string    (const gchar * tc_str);
 
 GST_VIDEO_DEPRECATED_FOR(gst_video_time_code_new_from_date_time_full)
@@ -151,20 +151,20 @@ GstVideoTimeCode * gst_video_time_code_new_from_date_time (guint                
                                                            GstVideoTimeCodeFlags    flags,
                                                            guint                    field_count);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCode * gst_video_time_code_new_from_date_time_full (guint                    fps_n,
                                                                 guint                    fps_d,
                                                                 GDateTime              * dt,
                                                                 GstVideoTimeCodeFlags    flags,
                                                                 guint                    field_count);
 
-GST_VIDEO_API
+extern
 void gst_video_time_code_free                       (GstVideoTimeCode       * tc);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCode * gst_video_time_code_copy         (const GstVideoTimeCode * tc);
 
-GST_VIDEO_API
+extern
 void gst_video_time_code_init                       (GstVideoTimeCode       * tc,
                                                      guint                    fps_n,
                                                      guint                    fps_d,
@@ -183,7 +183,7 @@ void gst_video_time_code_init_from_date_time        (GstVideoTimeCode       * tc
                                                      GDateTime              * dt,
                                                      GstVideoTimeCodeFlags    flags,
                                                      guint                    field_count);
-GST_VIDEO_API
+extern
 gboolean gst_video_time_code_init_from_date_time_full (GstVideoTimeCode       * tc,
                                                        guint                    fps_n,
                                                        guint                    fps_d,
@@ -191,65 +191,65 @@ gboolean gst_video_time_code_init_from_date_time_full (GstVideoTimeCode       * 
                                                        GstVideoTimeCodeFlags    flags,
                                                        guint                    field_count);
 
-GST_VIDEO_API
+extern
 void gst_video_time_code_clear                      (GstVideoTimeCode       * tc);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_time_code_is_valid               (const GstVideoTimeCode * tc);
 
-GST_VIDEO_API
+extern
 gint gst_video_time_code_compare                    (const GstVideoTimeCode * tc1,
                                                      const GstVideoTimeCode * tc2);
 
-GST_VIDEO_API
+extern
 void gst_video_time_code_increment_frame            (GstVideoTimeCode       * tc);
 
-GST_VIDEO_API
+extern
 void gst_video_time_code_add_frames                 (GstVideoTimeCode       * tc,
                                                      gint64                   frames);
 
-GST_VIDEO_API
+extern
 gchar *gst_video_time_code_to_string                (const GstVideoTimeCode * tc);
 
-GST_VIDEO_API
+extern
 GDateTime *gst_video_time_code_to_date_time         (const GstVideoTimeCode * tc);
 
-GST_VIDEO_API
+extern
 guint64 gst_video_time_code_nsec_since_daily_jam    (const GstVideoTimeCode * tc);
 
-GST_VIDEO_API
+extern
 guint64 gst_video_time_code_frames_since_daily_jam  (const GstVideoTimeCode * tc);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCode * gst_video_time_code_add_interval (const GstVideoTimeCode * tc, const GstVideoTimeCodeInterval * tc_inter);
 
 #define GST_TYPE_VIDEO_TIME_CODE_INTERVAL (gst_video_time_code_interval_get_type())
-GST_VIDEO_API
+extern
 GType gst_video_time_code_interval_get_type (void);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCodeInterval * gst_video_time_code_interval_new  (guint                    hours,
                                                      guint                    minutes,
                                                      guint                    seconds,
                                                      guint                    frames);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCodeInterval * gst_video_time_code_interval_new_from_string    (const gchar * tc_inter_str);
 
-GST_VIDEO_API
+extern
 void gst_video_time_code_interval_free                   (GstVideoTimeCodeInterval       * tc);
 
-GST_VIDEO_API
+extern
 GstVideoTimeCodeInterval * gst_video_time_code_interval_copy (const GstVideoTimeCodeInterval * tc);
 
-GST_VIDEO_API
+extern
 void gst_video_time_code_interval_init                   (GstVideoTimeCodeInterval       * tc,
                                                      guint                    hours,
                                                      guint                    minutes,
                                                      guint                    seconds,
                                                      guint                    frames);
 
-GST_VIDEO_API
+extern
 void gst_video_time_code_interval_clear                  (GstVideoTimeCodeInterval       * tc);
 
 

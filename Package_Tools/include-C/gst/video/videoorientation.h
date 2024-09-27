@@ -77,33 +77,33 @@ struct _GstVideoOrientationInterface {
   gboolean (* set_vcenter) (GstVideoOrientation *video_orientation, gint center);
 };
 
-GST_VIDEO_API
+extern
 GType           gst_video_orientation_get_type              (void);
 
 /* virtual class function wrappers */
 
-GST_VIDEO_API
+extern
 gboolean gst_video_orientation_get_hflip (GstVideoOrientation *video_orientation, gboolean *flip);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_orientation_get_vflip (GstVideoOrientation *video_orientation, gboolean *flip);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_orientation_get_hcenter (GstVideoOrientation *video_orientation, gint *center);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_orientation_get_vcenter (GstVideoOrientation *video_orientation, gint *center);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_orientation_set_hflip (GstVideoOrientation *video_orientation, gboolean flip);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_orientation_set_vflip (GstVideoOrientation *video_orientation, gboolean flip);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_orientation_set_hcenter (GstVideoOrientation *video_orientation, gint center);
 
-GST_VIDEO_API
+extern
 gboolean gst_video_orientation_set_vcenter (GstVideoOrientation *video_orientation, gint center);
 
 

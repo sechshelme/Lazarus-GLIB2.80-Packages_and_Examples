@@ -1021,37 +1021,37 @@ struct _GstVideoFormatInfo {
 #define GST_VIDEO_FORMAT_INFO_TILE_STRIDE(info,plane) ((info)->tile_info[plane].stride)
 
 
-GST_VIDEO_API
+extern
 void gst_video_format_info_component                  (const GstVideoFormatInfo *info, guint plane, gint components[GST_VIDEO_MAX_COMPONENTS]);
 
-GST_VIDEO_API
+extern
 gint gst_video_format_info_extrapolate_stride        (const GstVideoFormatInfo * finfo,
                                                       gint plane, gint stride);
 
 /* format properties */
 
-GST_VIDEO_API
+extern
 GstVideoFormat gst_video_format_from_masks           (gint depth, gint bpp, gint endianness,
                                                       guint red_mask, guint green_mask,
                                                       guint blue_mask, guint alpha_mask) ;
 
-GST_VIDEO_API
+extern
 GstVideoFormat gst_video_format_from_fourcc          (guint32 fourcc) ;
 
-GST_VIDEO_API
+extern
 GstVideoFormat gst_video_format_from_string          (const gchar *format) ;
 
-GST_VIDEO_API
+extern
 guint32        gst_video_format_to_fourcc            (GstVideoFormat format) ;
 
-GST_VIDEO_API
+extern
 const gchar *  gst_video_format_to_string            (GstVideoFormat format) ;
 
-GST_VIDEO_API
+extern
 const GstVideoFormatInfo *
                gst_video_format_get_info             (GstVideoFormat format) ;
 
-GST_VIDEO_API
+extern
 gconstpointer  gst_video_format_get_palette          (GstVideoFormat format, gsize *size);
 
 #define GST_VIDEO_SIZE_RANGE "(int) [ 1, max ]"
@@ -1169,10 +1169,10 @@ gconstpointer  gst_video_format_get_palette          (GstVideoFormat format, gsi
  */
 #define GST_VIDEO_FORMATS_ANY "{ " GST_VIDEO_FORMATS_ANY_STR " }"
 
-GST_VIDEO_API
+extern
 const GstVideoFormat * gst_video_formats_raw (guint * len);
 
-GST_VIDEO_API
+extern
 const GstVideoFormat * gst_video_formats_any (guint * len);
 
 /**
@@ -1207,10 +1207,10 @@ const GstVideoFormat * gst_video_formats_any (guint * len);
     "height = " GST_VIDEO_SIZE_RANGE ", "                               \
     "framerate = " GST_VIDEO_FPS_RANGE
 
-GST_VIDEO_API
+extern
 GstCaps * gst_video_make_raw_caps (const GstVideoFormat formats[], guint len);
 
-GST_VIDEO_API
+extern
 GstCaps * gst_video_make_raw_caps_with_features (const GstVideoFormat formats[], guint len,
                                                  GstCapsFeatures * features);
 

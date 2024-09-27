@@ -60,6 +60,9 @@
  * Check whether a GStreamer's gst-plugins-base libraries' version equal to
  * or greater than major.minor.micro is present.
  */
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+/*
 #define	GST_CHECK_PLUGINS_BASE_VERSION(major,minor,micro)	\
     (GST_PLUGINS_BASE_VERSION_MAJOR > (major) || \
      (GST_PLUGINS_BASE_VERSION_MAJOR == (major) && GST_PLUGINS_BASE_VERSION_MINOR > (minor)) || \
@@ -67,6 +70,7 @@
       GST_PLUGINS_BASE_VERSION_MICRO >= (micro)) || \
      (GST_PLUGINS_BASE_VERSION_MAJOR == (major) && GST_PLUGINS_BASE_VERSION_MINOR == (minor) && \
       GST_PLUGINS_BASE_VERSION_MICRO + 1 == (micro) && GST_PLUGINS_BASE_VERSION_NANO > 0))
+*/
 
 extern
 void     gst_plugins_base_version (guint *major, guint *minor, guint *micro, guint *nano);

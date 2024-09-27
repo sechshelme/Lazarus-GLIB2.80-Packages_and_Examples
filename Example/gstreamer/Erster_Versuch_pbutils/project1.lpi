@@ -45,7 +45,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GLIB2.80/Package_Tools/pas_units/gst/pbutils/"/>
+      <OtherUnitFiles Value="/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/GLIB2.80/Package_Tools/pas_units/gst/pbutils/;../../../Package_Tools/pas_units/gst/audio;../../../Package_Tools/pas_units/gst/base"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

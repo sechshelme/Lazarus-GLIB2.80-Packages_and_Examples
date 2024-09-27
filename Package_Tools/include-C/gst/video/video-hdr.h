@@ -73,25 +73,25 @@ struct _GstVideoMasteringDisplayInfo
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_VIDEO_API
+extern
 void      gst_video_mastering_display_info_init         (GstVideoMasteringDisplayInfo * minfo);
 
-GST_VIDEO_API
+extern
 gboolean  gst_video_mastering_display_info_from_string  (GstVideoMasteringDisplayInfo * minfo,
                                                          const gchar * mastering);
 
-GST_VIDEO_API
+extern
 gchar *   gst_video_mastering_display_info_to_string    (const GstVideoMasteringDisplayInfo * minfo);
 
-GST_VIDEO_API
+extern
 gboolean  gst_video_mastering_display_info_is_equal     (const GstVideoMasteringDisplayInfo * minfo,
                                                          const GstVideoMasteringDisplayInfo * other);
 
-GST_VIDEO_API
+extern
 gboolean  gst_video_mastering_display_info_from_caps    (GstVideoMasteringDisplayInfo * minfo,
                                                          const GstCaps * caps);
 
-GST_VIDEO_API
+extern
 gboolean  gst_video_mastering_display_info_add_to_caps  (const GstVideoMasteringDisplayInfo * minfo,
                                                          GstCaps * caps);
 
@@ -115,25 +115,25 @@ struct _GstVideoContentLightLevel
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_VIDEO_API
+extern
 void      gst_video_content_light_level_init         (GstVideoContentLightLevel * linfo);
 
-GST_VIDEO_API
+extern
 gboolean  gst_video_content_light_level_from_string  (GstVideoContentLightLevel * linfo,
                                                       const gchar * level);
 
-GST_VIDEO_API
+extern
 gchar *   gst_video_content_light_level_to_string    (const GstVideoContentLightLevel * linfo);
 
-GST_VIDEO_API
+extern
 gboolean  gst_video_content_light_level_is_equal     (const GstVideoContentLightLevel * linfo,
                                                       const GstVideoContentLightLevel * other);
 
-GST_VIDEO_API
+extern
 gboolean  gst_video_content_light_level_from_caps    (GstVideoContentLightLevel * linfo,
                                                       const GstCaps * caps);
 
-GST_VIDEO_API
+extern
 gboolean  gst_video_content_light_level_add_to_caps  (const GstVideoContentLightLevel * linfo,
                                                       GstCaps * caps);
 
