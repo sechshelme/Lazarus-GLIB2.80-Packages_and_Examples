@@ -178,7 +178,6 @@ begin
   if ListView.ItemIndex >= 0 then begin
     si:=ListView.Items[ListView.ItemIndex];
     Result:=si.Caption;
-    WriteLn(Result);
   end else begin
     Result := '';
   end;

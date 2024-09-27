@@ -15,9 +15,11 @@ uses
 const
   {$ifdef Linux}
   gstreamerlib = 'libgstreamer-1.0';
+  libgstpbutils = 'libgstpbutils-1.0 ';
   {$endif}
   {$ifdef Windows}
   gstreamerlib = 'gstreamer-1.0-0.dll';
+  libgstpbutils = 'gstpbutils-1.0.dll';
   {$endif}
 
   // ==== Externes;
