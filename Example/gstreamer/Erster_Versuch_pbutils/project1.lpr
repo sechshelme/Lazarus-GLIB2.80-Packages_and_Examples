@@ -34,6 +34,8 @@ uses
 
   // base
 
+  gstaggregator,                 // io.
+  gstcollectpads,                // io.
   gstadapter,                    // io.
   gstbytereader,                 // viele Makros entfernt
 
