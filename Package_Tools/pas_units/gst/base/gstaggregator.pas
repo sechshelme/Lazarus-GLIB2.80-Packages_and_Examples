@@ -14,20 +14,17 @@ type
   end;
   PGstAggregatorPrivate = ^TGstAggregatorPrivate;
 
-  PGstAggregator = ^TGstAggregator;
-
   TGstAggregator = record
     parent: TGstElement;
     srcpad: PGstPad;
     priv: PGstAggregatorPrivate;
     _gst_reserved: array[0..(GST_PADDING_LARGE) - 1] of Tgpointer;
   end;
+  PGstAggregator = ^TGstAggregator;
 
   TGstAggregatorPadPrivate = record
   end;
   PGstAggregatorPadPrivate = ^TGstAggregatorPadPrivate;
-
-  PGstAggregatorPad = ^TGstAggregatorPad;
 
   TGstAggregatorPad = record
     parent: TGstPad;
@@ -35,9 +32,7 @@ type
     priv: PGstAggregatorPadPrivate;
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
-
-
-  PGstAggregatorClass = ^TGstAggregatorClass;
+  PGstAggregatorPad = ^TGstAggregatorPad;
 
   TGstAggregatorClass = record
     parent_class: TGstElementClass;
@@ -66,7 +61,7 @@ type
     peek_next_sample: function(aggregator: PGstAggregator; aggregator_pad: PGstAggregatorPad): PGstSample; cdecl;
     _gst_reserved: array[0..(GST_PADDING_LARGE - 5) - 1] of Tgpointer;
   end;
-  PGstAggregatorPadClass = ^TGstAggregatorPadClass;
+  PGstAggregatorClass = ^TGstAggregatorClass;
 
   TGstAggregatorPadClass = record
     parent_class: TGstPadClass;
@@ -74,7 +69,7 @@ type
     skip_buffer: function(aggpad: PGstAggregatorPad; aggregator: PGstAggregator; buffer: PGstBuffer): Tgboolean; cdecl;
     _gst_reserved: array[0..(GST_PADDING_LARGE) - 1] of Tgpointer;
   end;
-
+  PGstAggregatorPadClass = ^TGstAggregatorPadClass;
 
 function gst_aggregator_pad_get_type: TGType; cdecl; external libgstbase;
 function gst_aggregator_pad_pop_buffer(pad: PGstAggregatorPad): PGstBuffer; cdecl; external libgstbase;

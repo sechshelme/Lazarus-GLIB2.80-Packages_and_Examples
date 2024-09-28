@@ -47,8 +47,6 @@ type
   end;
   PGstCollectDataPrivate = ^TGstCollectDataPrivate;
 
-  PGstCollectData = ^TGstCollectData;
-
   TGstCollectData = record
     collect: PGstCollectPads;
     pad: PGstPad;
@@ -65,9 +63,9 @@ type
         1: (_gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer);
       end;
   end;
+  PGstCollectData = ^TGstCollectData;
 
   TGstCollectDataDestroyNotify = procedure(Data: PGstCollectData); cdecl;
-
   TGstCollectPadsFunction = function(pads: PGstCollectPads; user_data: Tgpointer): TGstFlowReturn; cdecl;
   TGstCollectPadsBufferFunction = function(pads: PGstCollectPads; Data: PGstCollectData; buffer: PGstBuffer; user_data: Tgpointer): TGstFlowReturn; cdecl;
   TGstCollectPadsCompareFunction = function(pads: PGstCollectPads; data1: PGstCollectData; timestamp1: TGstClockTime; data2: PGstCollectData; timestamp2: TGstClockTime;

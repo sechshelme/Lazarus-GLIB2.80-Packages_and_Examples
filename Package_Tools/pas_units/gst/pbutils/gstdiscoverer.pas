@@ -18,7 +18,6 @@ type
   TGstDiscovererStreamInfoClass = TGObjectClass;
 
 function gst_discoverer_stream_info_get_type: TGType; cdecl; external gstreamerlib;
-
 function gst_discoverer_stream_info_get_previous(info: PGstDiscovererStreamInfo): PGstDiscovererStreamInfo; cdecl; external libgstpbutils;
 function gst_discoverer_stream_info_get_next(info: PGstDiscovererStreamInfo): PGstDiscovererStreamInfo; cdecl; external libgstpbutils;
 function gst_discoverer_stream_info_get_caps(info: PGstDiscovererStreamInfo): PGstCaps; cdecl; external libgstpbutils;

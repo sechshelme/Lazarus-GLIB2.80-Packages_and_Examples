@@ -30,7 +30,6 @@ function gst_encoding_profile_get_type: TGType; cdecl; external libgstpbutils;
 function gst_encoding_container_profile_get_type: TGType; cdecl; external libgstpbutils;
 function gst_encoding_video_profile_get_type: TGType; cdecl; external libgstpbutils;
 function gst_encoding_audio_profile_get_type: TGType; cdecl; external libgstpbutils;
-
 function gst_encoding_profile_get_name(profile: PGstEncodingProfile): Pgchar; cdecl; external libgstpbutils;
 procedure gst_encoding_profile_set_name(profile: PGstEncodingProfile; Name: Pgchar); cdecl; external libgstpbutils;
 function gst_encoding_profile_get_description(profile: PGstEncodingProfile): Pgchar; cdecl; external libgstpbutils;

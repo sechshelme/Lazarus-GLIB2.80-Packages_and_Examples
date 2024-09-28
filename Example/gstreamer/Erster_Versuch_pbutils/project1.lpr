@@ -38,6 +38,10 @@ uses
   gstcollectpads,                // io.
   gstadapter,                    // io.
   gstbytereader,                 // viele Makros entfernt
+  gstbaseparse,                  // io.
+  gstbasetransform,              // io.
+  gstbasesrc,
+  gstbytewriter,                 // viele Makros entfernt
 
 
 

@@ -25,7 +25,6 @@ type
   TGstEncodingTargetClass = TGObjectClass;
 
 function gst_encoding_target_get_type: TGType; cdecl; external libgstpbutils;
-
 function gst_encoding_target_new(Name: Pgchar; category: Pgchar; description: Pgchar; profiles: PGList): PGstEncodingTarget; cdecl; external libgstpbutils;
 function gst_encoding_target_get_name(target: PGstEncodingTarget): Pgchar; cdecl; external libgstpbutils;
 function gst_encoding_target_get_category(target: PGstEncodingTarget): Pgchar; cdecl; external libgstpbutils;
