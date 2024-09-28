@@ -3,7 +3,7 @@ unit gstaudiovisualizer;
 interface
 
 uses
-  glib280, gst124;
+  glib280, gst124, audio_info;
 
 {$IFDEF FPC}
 {$PACKRECORDS C}

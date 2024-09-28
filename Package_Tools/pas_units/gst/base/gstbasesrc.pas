@@ -23,8 +23,6 @@ type
   end;
   PGstBaseSrcPrivate = ^TGstBaseSrcPrivate;
 
-  PGstBaseSrc = ^TGstBaseSrc;
-
   TGstBaseSrc = record
     element: TGstElement;
     srcpad: PGstPad;
@@ -46,8 +44,7 @@ type
     priv: PGstBaseSrcPrivate;
     _gst_reserved: array[0..(GST_PADDING_LARGE) - 1] of Tgpointer;
   end;
-
-  PGstBaseSrcClass = ^TGstBaseSrcClass;
+  PGstBaseSrc = ^TGstBaseSrc;
 
   TGstBaseSrcClass = record
     parent_class: TGstElementClass;
@@ -72,7 +69,7 @@ type
     fill: function(src: PGstBaseSrc; offset: Tguint64; size: Tguint; buf: PGstBuffer): TGstFlowReturn; cdecl;
     _gst_reserved: array[0..(GST_PADDING_LARGE) - 1] of Tgpointer;
   end;
-
+  PGstBaseSrcClass = ^TGstBaseSrcClass;
 
 function gst_base_src_get_type: TGType; cdecl; external libgstbase;
 function gst_base_src_wait_playing(src: PGstBaseSrc): TGstFlowReturn; cdecl; external libgstbase;

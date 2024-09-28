@@ -32,9 +32,9 @@
 #define GST_TYPE_BASE_SINK              (gst_base_sink_get_type())
 #define GST_BASE_SINK(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_BASE_SINK,GstBaseSink))
 #define GST_BASE_SINK_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_BASE_SINK,GstBaseSinkClass))
-#define GST_BASE_SINK_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_BASE_SINK, GstBaseSinkClass))
 #define GST_IS_BASE_SINK(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_BASE_SINK))
 #define GST_IS_BASE_SINK_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_BASE_SINK))
+#define GST_BASE_SINK_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_BASE_SINK, GstBaseSinkClass))
 #define GST_BASE_SINK_CAST(obj)         ((GstBaseSink *) (obj))
 
 /**
@@ -55,8 +55,8 @@
       g_cond_wait (GST_BASE_SINK_GET_PREROLL_COND (obj), GST_BASE_SINK_GET_PREROLL_LOCK (obj))
 #define GST_BASE_SINK_PREROLL_WAIT_UNTIL(obj, end_time) \
       g_cond_wait_until (GST_BASE_SINK_GET_PREROLL_COND (obj), GST_BASE_SINK_GET_PREROLL_LOCK (obj), end_time)
-#define GST_BASE_SINK_PREROLL_SIGNAL(obj)     g_cond_signal (GST_BASE_SINK_GET_PREROLL_COND (obj));
-#define GST_BASE_SINK_PREROLL_BROADCAST(obj)  g_cond_broadcast (GST_BASE_SINK_GET_PREROLL_COND (obj));
+#define GST_BASE_SINK_PREROLL_SIGNAL(obj)     g_cond_signal (GST_BASE_SINK_GET_PREROLL_COND (obj))
+#define GST_BASE_SINK_PREROLL_BROADCAST(obj)  g_cond_broadcast (GST_BASE_SINK_GET_PREROLL_COND (obj))
 
 /**
  * GST_BASE_SINK_FLOW_DROPPED:

@@ -64,3 +64,4 @@ main (int argc, char *argv[])
 GST_PAD_TEMPLATE_IS_FIXED(0);
 }
 
+GstTypeFindData

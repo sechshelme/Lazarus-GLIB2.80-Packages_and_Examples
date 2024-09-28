@@ -39,12 +39,12 @@
   (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_AUDIO_DECODER,GstAudioDecoder))
 #define GST_AUDIO_DECODER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_AUDIO_DECODER,GstAudioDecoderClass))
-#define GST_AUDIO_DECODER_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS((obj),GST_TYPE_AUDIO_DECODER,GstAudioDecoderClass))
 #define GST_IS_AUDIO_DECODER(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_AUDIO_DECODER))
-#define GST_IS_AUDIO_DECODER_CLASS(obj) \
+#define GST_IS_AUDIO_DECODER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_AUDIO_DECODER))
+#define GST_AUDIO_DECODER_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS((obj),GST_TYPE_AUDIO_DECODER,GstAudioDecoderClass))
 #define GST_AUDIO_DECODER_CAST(obj) \
   ((GstAudioDecoder *)(obj))
 
@@ -131,15 +131,6 @@ GstFlowReturn _gst_audio_decoder_error (GstAudioDecoder *dec, gint weight,
  * is logged. In either case, @ret is set to the proper value to
  * return to upstream/caller (indicating either GST_FLOW_ERROR or GST_FLOW_OK).
  */
-#define GST_AUDIO_DECODER_ERROR(el, weight, domain, code, text, debug, ret) \
-G_STMT_START {                                                              \
-  gchar *__txt = _gst_element_error_printf text;                            \
-  gchar *__dbg = _gst_element_error_printf debug;                           \
-  GstAudioDecoder *__dec = GST_AUDIO_DECODER (el);                   \
-  ret = _gst_audio_decoder_error (__dec, weight, GST_ ## domain ## _ERROR,    \
-      GST_ ## domain ## _ERROR_ ## code, __txt, __dbg, __FILE__,            \
-      GST_FUNCTION, __LINE__);                                              \
-} G_STMT_END
 
 
 /**

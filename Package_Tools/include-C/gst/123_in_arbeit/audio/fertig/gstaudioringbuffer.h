@@ -34,10 +34,10 @@
 #define GST_TYPE_AUDIO_RING_BUFFER             (gst_audio_ring_buffer_get_type())
 #define GST_AUDIO_RING_BUFFER(obj)             (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_AUDIO_RING_BUFFER,GstAudioRingBuffer))
 #define GST_AUDIO_RING_BUFFER_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_AUDIO_RING_BUFFER,GstAudioRingBufferClass))
-#define GST_AUDIO_RING_BUFFER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_AUDIO_RING_BUFFER, GstAudioRingBufferClass))
-#define GST_AUDIO_RING_BUFFER_CAST(obj)        ((GstAudioRingBuffer *)obj)
 #define GST_IS_AUDIO_RING_BUFFER(obj)          (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_AUDIO_RING_BUFFER))
 #define GST_IS_AUDIO_RING_BUFFER_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_AUDIO_RING_BUFFER))
+#define GST_AUDIO_RING_BUFFER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_AUDIO_RING_BUFFER, GstAudioRingBufferClass))
+#define GST_AUDIO_RING_BUFFER_CAST(obj)        ((GstAudioRingBuffer *)obj)
 
 typedef struct _GstAudioRingBuffer GstAudioRingBuffer;
 typedef struct _GstAudioRingBufferClass GstAudioRingBufferClass;

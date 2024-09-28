@@ -9,13 +9,6 @@ uses
   glib280,
   gst124,
 
-  // audio
-
-  audio_channels,
-  audio_format,
-  audio_info,
-  gstnonstreamaudiodecoder,
-
   // video
 
   // pbutils
@@ -37,11 +30,29 @@ uses
   gstaggregator,                 // io.
   gstcollectpads,                // io.
   gstadapter,                    // io.
-  gstbytereader,                 // viele Makros entfernt
   gstbaseparse,                  // io.
   gstbasetransform,              // io.
-  gstbasesrc,
+  gstbasesrc,                    // io.
+  gstpushsrc,                    // io. -> gstbasesrc
+  gstbasesink,                   // io.
+  gstdataqueue,                  // io.
+  gstqueuearray,                 // io.
+  gsttypefindhelper,             // io.
+  gstflowcombiner,               // io.
+  gstbitreader,                  // viele Makros entfernt
+  gstbitwriter,                  // viele Makros entfernt
   gstbytewriter,                 // viele Makros entfernt
+  gstbytereader,                 // viele Makros entfernt
+
+    // audio
+  audio_channels,
+  audio_format,
+  audio_info,
+  gstnonstreamaudiodecoder,
+  gstdsdformat,                  // io.
+  gstaudiodecoder,
+  gstaudioencoder,
+  gstaudioringbuffer,
 
 
 

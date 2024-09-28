@@ -24,10 +24,8 @@
 
 
 
-#if G_BYTE_ORDER == G_BIG_ENDIAN
-#define _GST_DSD_FORMAT_NE(fmt) GST_DSD_FORMAT_ ## fmt ## BE
 #elif G_BYTE_ORDER == G_LITTLE_ENDIAN
-#define _GST_DSD_FORMAT_NE(fmt) GST_DSD_FORMAT_ ## fmt ## LE
+//#define _GST_DSD_FORMAT_NE(fmt) GST_DSD_FORMAT_ ## fmt ## LE
 #endif
 
 /**
@@ -57,8 +55,10 @@ typedef enum {
   GST_NUM_DSD_FORMATS,
 
   /* native endianness equivalents */
-  GST_DSD_FORMAT_U16 = _GST_DSD_FORMAT_NE(U16),
-  GST_DSD_FORMAT_U32 = _GST_DSD_FORMAT_NE(U32)
+  GST_DSD_FORMAT_U16 = GST_DSD_FORMAT_U16LE,
+  GST_DSD_FORMAT_U32 = GST_DSD_FORMAT_U32LE
+//  GST_DSD_FORMAT_U16 = _GST_DSD_FORMAT_NE(U16),
+//  GST_DSD_FORMAT_U32 = _GST_DSD_FORMAT_NE(U32)
 } GstDsdFormat;
 
 /**
