@@ -45,9 +45,9 @@ typedef struct _GstAudioAggregatorClass GstAudioAggregatorClass;
 #define GST_TYPE_AUDIO_AGGREGATOR_PAD            (gst_audio_aggregator_pad_get_type())
 #define GST_AUDIO_AGGREGATOR_PAD(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_AUDIO_AGGREGATOR_PAD, GstAudioAggregatorPad))
 #define GST_AUDIO_AGGREGATOR_PAD_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_AUDIO_AGGREGATOR_PAD, GstAudioAggregatorPadClass))
-#define GST_AUDIO_AGGREGATOR_PAD_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj),GST_TYPE_AUDIO_AGGREGATOR_PAD, GstAudioAggregatorPadClass))
 #define GST_IS_AUDIO_AGGREGATOR_PAD(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_AUDIO_AGGREGATOR_PAD))
 #define GST_IS_AUDIO_AGGREGATOR_PAD_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_AUDIO_AGGREGATOR_PAD))
+#define GST_AUDIO_AGGREGATOR_PAD_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj),GST_TYPE_AUDIO_AGGREGATOR_PAD, GstAudioAggregatorPadClass))
 
 /****************************
  * GstAudioAggregatorPad Structs *

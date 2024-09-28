@@ -42,6 +42,7 @@ type
   Tguint = cuint;
 
   Pgfloat = ^Tgfloat;
+  PPgfloat = ^Pgfloat;
   Tgfloat = single;
 
   Pgdouble = ^Tgdouble;

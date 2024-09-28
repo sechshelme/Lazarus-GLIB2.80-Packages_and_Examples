@@ -43,13 +43,7 @@
  *
  * Since: 1.24
  */
-#define GST_DSD_CAPS_MAKE(format)                          \
-  GST_DSD_MEDIA_TYPE ", "                                  \
-  "format = (string) " format ", "                         \
-  "rate = " GST_AUDIO_RATE_RANGE ", "                      \
-  "layout = (string) { interleaved, non-interleaved }, "   \
-  "reversed-bytes = (gboolean) { false, true }, "          \
-  "channels = " GST_AUDIO_CHANNELS_RANGE
+
 
 /**
  * GST_DSD_MAKE_DSD_RATE_44x:
@@ -323,6 +317,8 @@ void          gst_dsd_convert            (const guint8 *input_data,
  *
  * Returns: TRUE if the format is a little-endian one.
  */
+// xxxxxxxxxxxxxxxxx
+/*
 static inline gboolean 
 gst_dsd_format_is_le (GstDsdFormat format)
 {
@@ -335,4 +331,4 @@ gst_dsd_format_is_le (GstDsdFormat format)
   }
 }
 
-
+*/

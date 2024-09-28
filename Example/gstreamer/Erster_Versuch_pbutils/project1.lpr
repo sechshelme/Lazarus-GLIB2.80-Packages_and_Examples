@@ -44,15 +44,22 @@ uses
   gstbytewriter,                 // viele Makros entfernt
   gstbytereader,                 // viele Makros entfernt
 
-    // audio
-  audio_channels,
-  audio_format,
-  audio_info,
-  gstnonstreamaudiodecoder,
+  // audio
+
+  audio_format,                  // io.
+  audio_channels,                // io. -> audio_format
+  audio_info,                    // io. -> audio_format, audio_channels
+  gstnonstreamaudiodecoder,      // io. -> audio_info, audio_format
+  gstaudiodecoder,               // io. -> audio_info
+  gstaudioencoder,               // io. -> audio_info
+  audio_converter,               // io. -> audio_info
+  gstaudioaggregator,            // io. -> audio_info
   gstdsdformat,                  // io.
-  gstaudiodecoder,
-  gstaudioencoder,
-  gstaudioringbuffer,
+  gstaudioringbuffer,            // io. -> audio_info, gstdsdformat, audio_channels
+  gstdsd,                        // io. -> gstdsdformat, audio_format, audio_info, audio_channels
+  gstaudiobasesink,              // io. -> gstaudioringbuffer
+  audio_resampler,               // io. -> audio_format         (  provided_clock <-> clock ???? )
+  gstaudiometa,                  // io. -> audio_channels, audio_info
 
 
 

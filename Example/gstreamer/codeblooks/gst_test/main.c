@@ -4,8 +4,7 @@
 #include <gst/pbutils/install-plugins.h>
 #include <gst/pbutils/encoding-target.h>
 #include <gst/audio/gstnonstreamaudiodecoder.h>
-#include <gst/base/gstbytereader.h>
-#include <gst/base/gstbytewriter.h>
+#include <gst/base/base.h>
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
@@ -61,7 +60,7 @@ main (int argc, char *argv[])
   return tutorial_main (argc, argv);
 #endif
 
-GST_PAD_TEMPLATE_IS_FIXED(0);
-}
+//GST_PAD_TEMPLATE_IS_FIXED(0);
 
-GstTypeFindData
+GST_AUDIO_BASE_SINK_CLOCK(NULL);
+}
