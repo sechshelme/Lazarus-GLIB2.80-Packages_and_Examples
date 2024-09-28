@@ -47,21 +47,34 @@ uses
   // audio
 
   audio_format,                  // io.
+  gstaudiocdsrc,                 // io.
+  gstaudiostreamalign,           // io.
+  audio_enumtypes,               // io.
+  audio,                         // io.
+  gstaudiosrc,                   // io.
+  gstaudioclock,                 // io.
+  streamvolume,                  // io.
   audio_channels,                // io. -> audio_format
+  audio_quantize,                // io. -> audio_format
   audio_info,                    // io. -> audio_format, audio_channels
+  audio_channel_mixer,           // io. -> audio_format, audio_channels
   gstnonstreamaudiodecoder,      // io. -> audio_info, audio_format
+  gstaudiofilter,                // io. -> audio_info, audio_format
+  audio_buffer,                  // io. -> audio_info, audio_format
   gstaudiodecoder,               // io. -> audio_info
   gstaudioencoder,               // io. -> audio_info
   audio_converter,               // io. -> audio_info
   gstaudioaggregator,            // io. -> audio_info
+  gstplanaraudioadapter,         // io. -> audio_info
   gstdsdformat,                  // io.
   gstaudioringbuffer,            // io. -> audio_info, gstdsdformat, audio_channels
-  gstdsd,                        // io. -> gstdsdformat, audio_format, audio_info, audio_channels
+  gstaudiobasesrc,               // io. -> gstaudioringbuffer
+  gstaudioiec61937,              // io. -> gstaudioringbuffer
   gstaudiobasesink,              // io. -> gstaudioringbuffer
+  gstdsd,                        // io. -> gstdsdformat, audio_format, audio_info, audio_channels
   audio_resampler,               // io. -> audio_format         (  provided_clock <-> clock ???? )
   gstaudiometa,                  // io. -> audio_channels, audio_info
-
-
+  gstaudiosink,                  // io. -> gstaudiobasesink, gstaudioringbuffer
 
 
   gstTools;

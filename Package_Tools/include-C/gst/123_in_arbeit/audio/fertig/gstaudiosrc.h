@@ -35,9 +35,9 @@
 #define GST_TYPE_AUDIO_SRC              (gst_audio_src_get_type())
 #define GST_AUDIO_SRC(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_AUDIO_SRC,GstAudioSrc))
 #define GST_AUDIO_SRC_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_AUDIO_SRC,GstAudioSrcClass))
-#define GST_AUDIO_SRC_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj),GST_TYPE_AUDIO_SRC,GstAudioSrcClass))
 #define GST_IS_AUDIO_SRC(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_AUDIO_SRC))
 #define GST_IS_AUDIO_SRC_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_AUDIO_SRC))
+#define GST_AUDIO_SRC_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj),GST_TYPE_AUDIO_SRC,GstAudioSrcClass))
 
 typedef struct _GstAudioSrc GstAudioSrc;
 typedef struct _GstAudioSrcClass GstAudioSrcClass;

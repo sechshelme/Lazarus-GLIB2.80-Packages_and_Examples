@@ -26,9 +26,8 @@
 
 
 #define GST_TYPE_STREAM_VOLUME (gst_stream_volume_get_type ())
-extern
-G_DECLARE_INTERFACE (GstStreamVolume, gst_stream_volume, GST, STREAM_VOLUME,
-    GObject)
+//extern
+//G_DECLARE_INTERFACE (GstStreamVolume, gst_stream_volume, GST, STREAM_VOLUME, GObject)
 
 #define GST_STREAM_VOLUME_GET_INTERFACE(obj) GST_STREAM_VOLUME_GET_IFACE(obj)
 

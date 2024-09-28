@@ -22,8 +22,8 @@
 #define __GST_PLANAR_AUDIO_ADAPTER_H__
 
 #ifndef GST_USE_UNSTABLE_API
-#warning "The Base library from gst-plugins-bad is unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#warning "The Base library from gst-plugins-bad is unstable API and may change in future."
+//#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
 #endif
 
 #include <gst/gst.h>
@@ -38,12 +38,12 @@
   (G_TYPE_CHECK_INSTANCE_CAST((obj), GST_TYPE_PLANAR_AUDIO_ADAPTER, GstPlanarAudioAdapter))
 #define GST_PLANAR_AUDIO_ADAPTER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST((klass), GST_TYPE_PLANAR_AUDIO_ADAPTER, GstPlanarAudioAdapterClass))
-#define GST_PLANAR_AUDIO_ADAPTER_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_PLANAR_AUDIO_ADAPTER, GstPlanarAudioAdapterClass))
 #define GST_IS_PLANAR_AUDIO_ADAPTER(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE((obj), GST_TYPE_PLANAR_AUDIO_ADAPTER))
 #define GST_IS_PLANAR_AUDIO_ADAPTER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE((klass), GST_TYPE_PLANAR_AUDIO_ADAPTER))
+#define GST_PLANAR_AUDIO_ADAPTER_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_PLANAR_AUDIO_ADAPTER, GstPlanarAudioAdapterClass))
 
 /**
  * GstPlanarAudioAdapter:
