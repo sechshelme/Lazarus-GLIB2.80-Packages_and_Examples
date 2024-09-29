@@ -63,7 +63,10 @@ uses
   // video
 
   video,                         // io.
-  gstvideotimecode,              // io.
+  navigation,                    // io.
+  video_hdr,                     // io.
+  gstvideoutils,                 // io. -> video_info, video_hdr
+  gstvideoencoder,               // io. -> gstvideoutils
   video_tile,                    // io.
   video_format,                  // io. -> video_tile, video     viele Makros entfernt
   video_anc,                     // io. -> video_format          Fehler im Makro C-seitig
@@ -71,13 +74,12 @@ uses
   video_color,                   // io. -> video_format, video
   video_info,                    // io. -> video_format, video_color, video       makro and / not
   video_frame,                   // io. -> video_info, video
+  gstvideoaggregator,            // io. -> video_info, video_frame
+  gstvideodecoder,               // io. -> gstvideoutils, video_format, video_info
+  gstvideotimecode,              // io.
+  gstvideometa,                  // io. -> video, video_frame, video_format, video_info, gstvideotimecode
 
-  video_hdr,                     // io.
 
-  gstvideoutils,           // and not
-  gstvideodecoder,
-  gstvideometa,
-  navigation,
 
   // pbutils
 

@@ -37,7 +37,6 @@ typedef struct _GstVideoAggregatorPrivate GstVideoAggregatorPrivate;
 #define GST_TYPE_VIDEO_AGGREGATOR_PAD (gst_video_aggregator_pad_get_type())
 #define GST_VIDEO_AGGREGATOR_PAD(obj) \
         (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_VIDEO_AGGREGATOR_PAD, GstVideoAggregatorPad))
-#define GST_VIDEO_AGGREGATOR_PAD_CAST(obj) ((GstVideoAggregatorPad *)(obj))
 #define GST_VIDEO_AGGREGATOR_PAD_CLASS(klass) \
         (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_VIDEO_AGGREGATOR_PAD, GstVideoAggregatorPadClass))
 #define GST_IS_VIDEO_AGGREGATOR_PAD(obj) \
@@ -46,6 +45,7 @@ typedef struct _GstVideoAggregatorPrivate GstVideoAggregatorPrivate;
         (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_VIDEO_AGGREGATOR_PAD))
 #define GST_VIDEO_AGGREGATOR_PAD_GET_CLASS(obj) \
         (G_TYPE_INSTANCE_GET_CLASS((obj),GST_TYPE_VIDEO_AGGREGATOR_PAD,GstVideoAggregatorPadClass))
+#define GST_VIDEO_AGGREGATOR_PAD_CAST(obj) ((GstVideoAggregatorPad *)(obj))
 
 typedef struct _GstVideoAggregatorPad GstVideoAggregatorPad;
 typedef struct _GstVideoAggregatorPadClass GstVideoAggregatorPadClass;
@@ -210,8 +210,8 @@ void gst_video_aggregator_convert_pad_update_conversion_info (GstVideoAggregator
  ****************************************/
 
 #define GST_TYPE_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD           (gst_video_aggregator_parallel_convert_pad_get_type())
-extern
-G_DECLARE_DERIVABLE_TYPE (GstVideoAggregatorParallelConvertPad, gst_video_aggregator_parallel_convert_pad, GST, VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD, GstVideoAggregatorConvertPad)
+//extern
+//G_DECLARE_DERIVABLE_TYPE (GstVideoAggregatorParallelConvertPad, gst_video_aggregator_parallel_convert_pad, GST, VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD, GstVideoAggregatorConvertPad)
 
 #define GST_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD, GstVideoAggregatorParallelConvertPad))
 #define GST_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_VIDEO_AGGREGATOR_PARALLEL_CONVERT_PAD, GstVideoAggregatorConvertPadClass))
