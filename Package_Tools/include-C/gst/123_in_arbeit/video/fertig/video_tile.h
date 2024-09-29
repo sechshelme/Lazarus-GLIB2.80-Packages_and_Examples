@@ -52,8 +52,6 @@ typedef enum
  *
  * use this macro to create new tile modes.
  */
-#define GST_VIDEO_TILE_MAKE_MODE(num, type) \
-    (((num) << GST_VIDEO_TILE_TYPE_SHIFT) | (GST_VIDEO_TILE_TYPE_ ##type))
 
 /**
  * GST_VIDEO_TILE_MODE_TYPE:

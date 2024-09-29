@@ -9,22 +9,6 @@ uses
   glib280,
   gst124,
 
-  // video
-
-  // pbutils
-
-  codec_utils,
-  install_plugins,
-  gstaudiovisualizer,
-  gstdiscoverer,
-  encoding_target,
-  encoding_profile,
-  descriptions,
-  gstpluginsbaseversion,    // version makro !
-  missing_plugins,
-  pbutils,
-  pbutils_enumtypes,
-
   // base
 
   gstaggregator,                 // io.
@@ -58,14 +42,14 @@ uses
   audio_quantize,                // io. -> audio_format
   audio_info,                    // io. -> audio_format, audio_channels
   audio_channel_mixer,           // io. -> audio_format, audio_channels
-  gstnonstreamaudiodecoder,      // io. -> audio_info, audio_format
+  gstnonstreamaudiodecoder,      // ??????? io. -> audio_info, audio_format
   gstaudiofilter,                // io. -> audio_info, audio_format
   audio_buffer,                  // io. -> audio_info, audio_format
   gstaudiodecoder,               // io. -> audio_info
   gstaudioencoder,               // io. -> audio_info
   audio_converter,               // io. -> audio_info
   gstaudioaggregator,            // io. -> audio_info
-  gstplanaraudioadapter,         // io. -> audio_info
+  gstplanaraudioadapter,         // ????? io. -> audio_info
   gstdsdformat,                  // io.
   gstaudioringbuffer,            // io. -> audio_info, gstdsdformat, audio_channels
   gstaudiobasesrc,               // io. -> gstaudioringbuffer
@@ -75,6 +59,39 @@ uses
   audio_resampler,               // io. -> audio_format         (  provided_clock <-> clock ???? )
   gstaudiometa,                  // io. -> audio_channels, audio_info
   gstaudiosink,                  // io. -> gstaudiobasesink, gstaudioringbuffer
+
+  // video
+
+  video,                         // io.
+  gstvideotimecode,              // io.
+  video_tile,                    // io.
+  video_format,                  // io. -> video_tile, video     viele Makros entfernt
+  video_anc,                     // io. -> video_format          Fehler im Makro C-seitig
+  video_chroma,                  // io. -> video_format
+  video_color,                   // io. -> video_format, video
+  video_info,                    // io. -> video_format, video_color, video       makro and / not
+  video_frame,                   // io. -> video_info, video
+
+  video_hdr,                     // io.
+
+  gstvideoutils,           // and not
+  gstvideodecoder,
+  gstvideometa,
+  navigation,
+
+  // pbutils
+
+  pbutils,                       // io.
+  missing_plugins,               // io.
+  pbutils_enumtypes,             // io.
+  codec_utils,                   // io.
+  install_plugins,               // io.
+  gstaudiovisualizer,            // io.
+  gstdiscoverer,                 // io.
+  encoding_profile,              // io. -> gstdiscoverer
+  encoding_target,               // io. -> encoding_profile
+  descriptions,                  // io.
+  gstpluginsbaseversion,         //  version makro !
 
 
   gstTools;

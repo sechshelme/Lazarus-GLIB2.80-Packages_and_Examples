@@ -87,7 +87,10 @@ type
   end;
 
 
-function gst_nonstream_audio_decoder_get_type: TGType; cdecl; external libgstaudio;
+function gst_nonstream_audio_decoder_get_type: TGType; cdecl; external 'libgstbadaudio-1.0';
+//libgstbadaudio-1.0.so
+//function gst_nonstream_audio_decoder_get_type: TGType; cdecl; external libgstaudio;
+
 procedure gst_nonstream_audio_decoder_handle_loop(Dec: PGstNonstreamAudioDecoder; new_position: TGstClockTime); cdecl; external libgstaudio;
 function gst_nonstream_audio_decoder_set_output_format(Dec: PGstNonstreamAudioDecoder; audio_info: PGstAudioInfo): Tgboolean; cdecl; external libgstaudio;
 function gst_nonstream_audio_decoder_set_output_format_simple(Dec: PGstNonstreamAudioDecoder; sample_rate: Tguint; sample_format: TGstAudioFormat; num_channels: Tguint): Tgboolean; cdecl; external libgstaudio;

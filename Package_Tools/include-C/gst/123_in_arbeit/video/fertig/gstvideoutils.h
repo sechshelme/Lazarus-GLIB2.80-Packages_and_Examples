@@ -148,7 +148,8 @@ typedef enum
  *
  * This macro sets the given bits
  */
-#define GST_VIDEO_CODEC_FRAME_FLAG_SET(frame,flag)     (GST_VIDEO_CODEC_FRAME_FLAGS(frame) |= (flag))
+// xxxxxxxxxxxxxxx
+//#define GST_VIDEO_CODEC_FRAME_FLAG_SET(frame,flag)     (GST_VIDEO_CODEC_FRAME_FLAGS(frame) |= (flag))
 
 /**
  * GST_VIDEO_CODEC_FRAME_FLAG_UNSET:
@@ -157,7 +158,8 @@ typedef enum
  *
  * This macro usets the given bits.
  */
-#define GST_VIDEO_CODEC_FRAME_FLAG_UNSET(frame,flag)   (GST_VIDEO_CODEC_FRAME_FLAGS(frame) &= ~(flag))
+// xxxxxxxxxxxxxxx
+//#define GST_VIDEO_CODEC_FRAME_FLAG_UNSET(frame,flag)   (GST_VIDEO_CODEC_FRAME_FLAGS(frame) &= ~(flag))
 
 /**
  * GST_VIDEO_CODEC_FRAME_IS_DECODE_ONLY:

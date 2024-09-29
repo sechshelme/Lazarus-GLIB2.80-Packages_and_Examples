@@ -121,7 +121,7 @@ struct _GstVideoTimeCodeInterval {
   guint frames;
 };
 
-#define GST_VIDEO_TIME_CODE_INIT { {0, 0, 0, NULL}, 0, 0, 0, 0, 0 }
+//#define GST_VIDEO_TIME_CODE_INIT { {0, 0, 0, NULL}, 0, 0, 0, 0, 0 }
 
 #define GST_TYPE_VIDEO_TIME_CODE (gst_video_time_code_get_type())
 extern
@@ -144,7 +144,6 @@ GstVideoTimeCode * gst_video_time_code_new_empty    (void);
 extern
 GstVideoTimeCode * gst_video_time_code_new_from_string    (const gchar * tc_str);
 
-GST_VIDEO_DEPRECATED_FOR(gst_video_time_code_new_from_date_time_full)
 GstVideoTimeCode * gst_video_time_code_new_from_date_time (guint                    fps_n,
                                                            guint                    fps_d,
                                                            GDateTime              * dt,
@@ -176,7 +175,6 @@ void gst_video_time_code_init                       (GstVideoTimeCode       * tc
                                                      guint                    frames,
                                                      guint                    field_count);
 
-GST_VIDEO_DEPRECATED_FOR(gst_video_time_code_init_from_date_time_full)
 void gst_video_time_code_init_from_date_time        (GstVideoTimeCode       * tc,
                                                      guint                    fps_n,
                                                      guint                    fps_d,

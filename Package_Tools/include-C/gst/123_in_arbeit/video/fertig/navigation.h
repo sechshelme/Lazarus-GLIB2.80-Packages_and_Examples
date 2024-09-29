@@ -548,23 +548,18 @@ gboolean  gst_navigation_event_set_coordinates (GstEvent * event,
 
 /* interface virtual function wrappers */
 
-GST_VIDEO_DEPRECATED_FOR(gst_navigation_send_event_simple)
 void    gst_navigation_send_event        (GstNavigation *navigation,
                                           GstStructure *structure);
 
-GST_VIDEO_DEPRECATED_FOR(gst_navigation_send_event_simple)
 void    gst_navigation_send_key_event    (GstNavigation *navigation,
                                           const char *event, const char *key);
 
-GST_VIDEO_DEPRECATED_FOR(gst_navigation_send_event_simple)
 void    gst_navigation_send_mouse_event  (GstNavigation *navigation,
                                           const char *event, int button, double x, double y);
 
-GST_VIDEO_DEPRECATED_FOR(gst_navigation_send_event_simple)
 void    gst_navigation_send_mouse_scroll_event (GstNavigation *navigation,
                                                 double x, double y, double delta_x, double delta_y);
 
-GST_VIDEO_DEPRECATED_FOR(gst_navigation_send_event_simple)
 void    gst_navigation_send_command      (GstNavigation *navigation,
                                           GstNavigationCommand command);
 

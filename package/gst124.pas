@@ -17,12 +17,14 @@ const
   gstreamerlib = 'libgstreamer-1.0';
   libgstpbutils = 'libgstpbutils-1.0';
   libgstaudio = 'libgstaudio-1.0';
+  libgstvideo = 'libgstvideo-1.0';
   libgstbase = 'libgstbase-1.0';
   {$endif}
   {$ifdef Windows}
   gstreamerlib = 'gstreamer-1.0-0.dll';
   libgstpbutils = 'gstpbutils-1.0.dll';
   libgstaudio = 'gstaudio-1.0.dll';
+  libgstvideo = 'gstvideo-1.0.dll';
   libgstbase = 'gstbase-1.0.dll';
   {$endif}
 
@@ -231,6 +233,22 @@ type
   TGstDeviceProviderFactory = record
   end;
   PGstDeviceProviderFactory = ^TGstDeviceProviderFactory;
+
+// video/video_chroma
+type
+  PGstVideoChromaSite = ^TGstVideoChromaSite;
+  TGstVideoChromaSite =  Longint;
+  Const
+    GST_VIDEO_CHROMA_SITE_UNKNOWN = 0;
+    GST_VIDEO_CHROMA_SITE_NONE = 1 shl 0;
+    GST_VIDEO_CHROMA_SITE_H_COSITED = 1 shl 1;
+    GST_VIDEO_CHROMA_SITE_V_COSITED = 1 shl 2;
+    GST_VIDEO_CHROMA_SITE_ALT_LINE = 1 shl 3;
+    GST_VIDEO_CHROMA_SITE_COSITED = GST_VIDEO_CHROMA_SITE_H_COSITED or GST_VIDEO_CHROMA_SITE_V_COSITED;
+    GST_VIDEO_CHROMA_SITE_JPEG = GST_VIDEO_CHROMA_SITE_NONE;
+    GST_VIDEO_CHROMA_SITE_MPEG2 = GST_VIDEO_CHROMA_SITE_H_COSITED;
+    GST_VIDEO_CHROMA_SITE_DV = GST_VIDEO_CHROMA_SITE_COSITED or GST_VIDEO_CHROMA_SITE_ALT_LINE;
+
 
   {$DEFINE read_interface}
   {$include gst124_includes.inc}

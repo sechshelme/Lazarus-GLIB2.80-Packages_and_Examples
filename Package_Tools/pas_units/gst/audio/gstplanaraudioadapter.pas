@@ -17,8 +17,9 @@ type
   TGstPlanarAudioAdapterClass = record
   end;
   PGstPlanarAudioAdapterClass = ^TGstPlanarAudioAdapterClass;
-
-function gst_planar_audio_adapter_get_type: TGType; cdecl; external libgstaudio;
+  //                                                 'libgstbadaudio-1.0';
+                                                   function gst_planar_audio_adapter_get_type: TGType; cdecl; external 'libgstbadaudio-1.0';
+//                                                   function gst_planar_audio_adapter_get_type: TGType; cdecl; external libgstaudio;
 function gst_planar_audio_adapter_new: PGstPlanarAudioAdapter; cdecl; external libgstaudio;
 procedure gst_planar_audio_adapter_configure(adapter: PGstPlanarAudioAdapter; info: PGstAudioInfo); cdecl; external libgstaudio;
 procedure gst_planar_audio_adapter_clear(adapter: PGstPlanarAudioAdapter); cdecl; external libgstaudio;

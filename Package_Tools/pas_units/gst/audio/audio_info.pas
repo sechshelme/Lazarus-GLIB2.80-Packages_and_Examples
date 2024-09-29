@@ -18,8 +18,6 @@ const
   GST_AUDIO_FLAG_UNPOSITIONED = 1 shl 0;
 
 type
-  PGstAudioInfo = ^TGstAudioInfo;
-
   TGstAudioInfo = record
     finfo: PGstAudioFormatInfo;
     flags: TGstAudioFlags;
@@ -30,10 +28,9 @@ type
     position: array[0..63] of TGstAudioChannelPosition;
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
+  PGstAudioInfo = ^TGstAudioInfo;
 
 function gst_audio_info_get_type: TGType; cdecl; external libgstaudio;
-
-
 function gst_audio_info_new: PGstAudioInfo; cdecl; external libgstaudio;
 function gst_audio_info_new_from_caps(caps: PGstCaps): PGstAudioInfo; cdecl; external libgstaudio;
 procedure gst_audio_info_init(info: PGstAudioInfo); cdecl; external libgstaudio;

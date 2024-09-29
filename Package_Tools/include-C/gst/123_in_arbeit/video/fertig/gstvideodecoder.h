@@ -36,12 +36,12 @@
   (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_VIDEO_DECODER,GstVideoDecoder))
 #define GST_VIDEO_DECODER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_VIDEO_DECODER,GstVideoDecoderClass))
-#define GST_VIDEO_DECODER_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS((obj),GST_TYPE_VIDEO_DECODER,GstVideoDecoderClass))
 #define GST_IS_VIDEO_DECODER(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_VIDEO_DECODER))
 #define GST_IS_VIDEO_DECODER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_VIDEO_DECODER))
+#define GST_VIDEO_DECODER_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS((obj),GST_TYPE_VIDEO_DECODER,GstVideoDecoderClass))
 #define GST_VIDEO_DECODER_CAST(obj) ((GstVideoDecoder *)(obj))
 
 /**
@@ -146,15 +146,6 @@ GstFlowReturn _gst_video_decoder_error (GstVideoDecoder *dec, gint weight,
  * is logged. In either case, @ret is set to the proper value to
  * return to upstream/caller (indicating either GST_FLOW_ERROR or GST_FLOW_OK).
  */
-#define GST_VIDEO_DECODER_ERROR(el, w, domain, code, text, debug, ret) \
-G_STMT_START {                                                              \
-  gchar *__txt = _gst_element_error_printf text;                            \
-  gchar *__dbg = _gst_element_error_printf debug;                           \
-  GstVideoDecoder *__dec = GST_VIDEO_DECODER (el);                   \
-  ret = _gst_video_decoder_error (__dec, w, GST_ ## domain ## _ERROR,    \
-      GST_ ## domain ## _ERROR_ ## code, __txt, __dbg, __FILE__,            \
-      GST_FUNCTION, __LINE__);                                              \
-} G_STMT_END
 
 /**
  * GST_VIDEO_DECODER_MAX_ERRORS:

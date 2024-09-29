@@ -100,7 +100,7 @@ struct _GstVideoFrame {
  *
  * Since: 1.22
  */
-#define GST_VIDEO_FRAME_INIT { { NULL, }, }
+//#define GST_VIDEO_FRAME_INIT { { NULL, }, }
 
 
 extern
@@ -259,7 +259,6 @@ typedef enum {
   /* 8 more flags possible afterwards */
 } GstVideoFrameMapFlags;
 
-G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(GstVideoFrame, gst_video_frame_unmap)
 
 
 

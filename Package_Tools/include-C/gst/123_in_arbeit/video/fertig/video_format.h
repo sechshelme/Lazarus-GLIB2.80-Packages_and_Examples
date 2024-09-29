@@ -845,8 +845,8 @@ struct _GstVideoFormatInfo {
   GstVideoFormatPack pack_func;
 
   GstVideoTileMode tile_mode;
-  G_DEPRECATED_FOR(tile_info) guint tile_ws;
-  G_DEPRECATED_FOR(tile_info) guint tile_hs;
+//  G_DEPRECATED_FOR(tile_info) guint tile_ws;
+//  G_DEPRECATED_FOR(tile_info) guint tile_hs;
 
   /**
    * GstVideoFormatInfo.tile_info:
@@ -946,8 +946,7 @@ struct _GstVideoFormatInfo {
 #define GST_VIDEO_FORMAT_INFO_SCALE_WIDTH(info,c,w)  GST_VIDEO_SUB_SCALE ((info)->w_sub[c],(w))
 #define GST_VIDEO_FORMAT_INFO_SCALE_HEIGHT(info,c,h) GST_VIDEO_SUB_SCALE ((info)->h_sub[c],(h))
 
-#define GST_VIDEO_FORMAT_INFO_DATA(info,planes,comp) \
-  (((guint8*)(planes)[(info)->plane[comp]]) + (info)->poffset[comp])
+//#define GST_VIDEO_FORMAT_INFO_DATA(info,planes,comp) (((guint8*)(planes)[(info)->plane[comp]]) + (info)->poffset[comp])
 /**
  * GST_VIDEO_FORMAT_INFO_STRIDE:
  * @info: a #GstVideoFormatInfo
@@ -959,9 +958,9 @@ struct _GstVideoFormatInfo {
  * some row padding (memory not actually used for anything, to make sure the
  * beginning of the next row is aligned in a particular way).
  */
-#define GST_VIDEO_FORMAT_INFO_STRIDE(info,strides,comp) ((strides)[(info)->plane[comp]])
-#define GST_VIDEO_FORMAT_INFO_OFFSET(info,offsets,comp) \
-  (((offsets)[(info)->plane[comp]]) + (info)->poffset[comp])
+//#define GST_VIDEO_FORMAT_INFO_STRIDE(info,strides,comp) ((strides)[(info)->plane[comp]])
+//#define GST_VIDEO_FORMAT_INFO_OFFSET(info,offsets,comp) \
+//  (((offsets)[(info)->plane[comp]]) + (info)->poffset[comp])
 
 #define GST_VIDEO_FORMAT_INFO_TILE_MODE(info) ((info)->tile_mode)
 #define GST_VIDEO_FORMAT_INFO_TILE_WS(info) ((info)->tile_ws)
@@ -1057,13 +1056,13 @@ gconstpointer  gst_video_format_get_palette          (GstVideoFormat format, gsi
 #define GST_VIDEO_SIZE_RANGE "(int) [ 1, max ]"
 #define GST_VIDEO_FPS_RANGE "(fraction) [ 0, max ]"
 
-#if G_BYTE_ORDER == G_LITTLE_ENDIAN
-# define GST_VIDEO_NE(s) G_STRINGIFY(s)"_LE"
-# define GST_VIDEO_OE(s) G_STRINGIFY(s)"_BE"
-#else
-# define GST_VIDEO_NE(s) G_STRINGIFY(s)"_BE"
-# define GST_VIDEO_OE(s) G_STRINGIFY(s)"_LE"
-#endif
+//#if G_BYTE_ORDER == G_LITTLE_ENDIAN
+//# define GST_VIDEO_NE(s) G_STRINGIFY(s)"_LE"
+//# define GST_VIDEO_OE(s) G_STRINGIFY(s)"_BE"
+//#else
+//# define GST_VIDEO_NE(s) G_STRINGIFY(s)"_BE"
+//# define GST_VIDEO_OE(s) G_STRINGIFY(s)"_LE"
+//#endif
 
 /**
  * GST_VIDEO_FORMATS_ALL_STR:
@@ -1086,45 +1085,9 @@ gconstpointer  gst_video_format_get_palette          (GstVideoFormat format, gsi
  *
  * Since: 1.24
  */
-#if G_BYTE_ORDER == G_BIG_ENDIAN
-#define GST_VIDEO_FORMATS_ALL_STR "A444_16BE, A444_16LE, AYUV64, ARGB64, " \
-    "RGBA64_BE, ARGB64_BE, BGRA64_BE, ABGR64_BE, RGBA64_LE, ARGB64_LE, " \
-    "BGRA64_LE, ABGR64_LE, A422_16BE, A422_16LE, A420_16BE, A420_16LE, " \
-    "A444_12BE, GBRA_12BE, A444_12LE, GBRA_12LE, Y412_BE, Y412_LE, A422_12BE, " \
-    "A422_12LE, A420_12BE, A420_12LE, A444_10BE, GBRA_10BE, A444_10LE, " \
-    "GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, Y410, BGR10A2_LE, " \
-    "RGB10A2_LE, A444, GBRA, AYUV, VUYA, RGBA, RBGA, ARGB, BGRA, ABGR, A422, " \
-    "A420, AV12, Y444_16BE, GBR_16BE, Y444_16LE, GBR_16LE, v216, P016_BE, " \
-    "P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, " \
-    "Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, " \
-    "GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, " \
-    "Y210, UYVP, v210, I420_10BE, I420_10LE, P010_10BE, MT2110R, MT2110T, " \
-    "NV12_10BE_8L128, NV12_10LE40_4L4, P010_10LE, NV12_10LE40, NV12_10LE32, " \
-    "Y444, BGRP, GBR, RGBP, NV24, v308, IYU2, RGBx, xRGB, BGRx, xBGR, RGB, " \
-    "BGR, Y42B, NV16, NV61, YUY2, YVYU, UYVY, VYUY, I420, YV12, NV12, NV21, " \
-    "NV12_16L32S, NV12_32L32, NV12_4L4, NV12_64Z32, NV12_8L128, Y41B, IYU1, " \
-    "YUV9, YVU9, BGR16, RGB16, BGR15, RGB15, RGB8P, GRAY16_BE, GRAY16_LE, " \
-    "GRAY10_LE32, GRAY8"
-#elif G_BYTE_ORDER == G_LITTLE_ENDIAN
-#define GST_VIDEO_FORMATS_ALL_STR "A444_16LE, A444_16BE, AYUV64, RGBA64_LE, " \
-    "ARGB64, ARGB64_LE, BGRA64_LE, ABGR64_LE, RGBA64_BE, ARGB64_BE, BGRA64_BE, " \
-    "ABGR64_BE, A422_16LE, A422_16BE, A420_16LE, A420_16BE, A444_12LE, " \
-    "GBRA_12LE, A444_12BE, GBRA_12BE, Y412_LE, Y412_BE, A422_12LE, A422_12BE, " \
-    "A420_12LE, A420_12BE, A444_10LE, GBRA_10LE, A444_10BE, GBRA_10BE, " \
-    "A422_10LE, A422_10BE, A420_10LE, A420_10BE, BGR10A2_LE, RGB10A2_LE, Y410, " \
-    "A444, GBRA, AYUV, VUYA, RGBA, RBGA, ARGB, BGRA, ABGR, A422, A420, AV12, " \
-    "Y444_16LE, GBR_16LE, Y444_16BE, GBR_16BE, v216, P016_LE, P016_BE, " \
-    "Y444_12LE, GBR_12LE, Y444_12BE, GBR_12BE, I422_12LE, I422_12BE, Y212_LE, " \
-    "Y212_BE, I420_12LE, I420_12BE, P012_LE, P012_BE, Y444_10LE, GBR_10LE, " \
-    "Y444_10BE, GBR_10BE, r210, I422_10LE, I422_10BE, NV16_10LE32, Y210, UYVP, " \
-    "v210, I420_10LE, I420_10BE, P010_10LE, NV12_10LE40, NV12_10LE32, " \
-    "P010_10BE, MT2110R, MT2110T, NV12_10BE_8L128, NV12_10LE40_4L4, Y444, " \
-    "BGRP, GBR, RGBP, NV24, v308, IYU2, RGBx, xRGB, BGRx, xBGR, RGB, BGR, " \
-    "Y42B, NV16, NV61, YUY2, YVYU, UYVY, VYUY, I420, YV12, NV12, NV21, " \
-    "NV12_16L32S, NV12_32L32, NV12_4L4, NV12_64Z32, NV12_8L128, Y41B, IYU1, " \
-    "YUV9, YVU9, BGR16, RGB16, BGR15, RGB15, RGB8P, GRAY16_LE, GRAY16_BE, " \
-    "GRAY10_LE32, GRAY8"
-#endif
+//#if G_BYTE_ORDER == G_LITTLE_ENDIAN
+//#define GST_VIDEO_FORMATS_ALL_STR "A444_16LE, A444_16BE, AYUV64, RGBA64_LE, ARGB64, ARGB64_LE, BGRA64_LE, ABGR64_LE, RGBA64_BE, ARGB64_BE, BGRA64_BE, ABGR64_BE, A422_16LE, A422_16BE, A420_16LE, A420_16BE, A444_12LE, GBRA_12LE, A444_12BE, GBRA_12BE, Y412_LE, Y412_BE, A422_12LE, A422_12BE, A420_12LE, A420_12BE, A444_10LE, GBRA_10LE, A444_10BE, GBRA_10BE, A422_10LE, A422_10BE, A420_10LE, A420_10BE, BGR10A2_LE, RGB10A2_LE, Y410, A444, GBRA, AYUV, VUYA, RGBA, RBGA, ARGB, BGRA, ABGR, A422, A420, AV12, Y444_16LE, GBR_16LE, Y444_16BE, GBR_16BE, v216, P016_LE, P016_BE, Y444_12LE, GBR_12LE, Y444_12BE, GBR_12BE, I422_12LE, I422_12BE, Y212_LE, Y212_BE, I420_12LE, I420_12BE, P012_LE, P012_BE, Y444_10LE, GBR_10LE, Y444_10BE, GBR_10BE, r210, I422_10LE, I422_10BE, NV16_10LE32, Y210, UYVP, v210, I420_10LE, I420_10BE, P010_10LE, NV12_10LE40, NV12_10LE32, P010_10BE, MT2110R, MT2110T, NV12_10BE_8L128, NV12_10LE40_4L4, Y444, BGRP, GBR, RGBP, NV24, v308, IYU2, RGBx, xRGB, BGRx, xBGR, RGB, BGR, Y42B, NV16, NV61, YUY2, YVYU, UYVY, VYUY, I420, YV12, NV12, NV21, NV12_16L32S, NV12_32L32, NV12_4L4, NV12_64Z32, NV12_8L128, Y41B, IYU1, YUV9, YVU9, BGR16, RGB16, BGR15, RGB15, RGB8P, GRAY16_LE, GRAY16_BE, GRAY10_LE32, GRAY8"
+//#endif
 
 /**
  * GST_VIDEO_FORMATS_ANY_STR:
@@ -1135,7 +1098,8 @@ gconstpointer  gst_video_format_get_palette          (GstVideoFormat format, gsi
  *
  * Since: 1.24
  */
-#define GST_VIDEO_FORMATS_ANY_STR "DMA_DRM, " GST_VIDEO_FORMATS_ALL_STR
+//#define GST_VIDEO_FORMATS_ANY_STR "DMA_DRM, A444_16LE, A444_16BE, AYUV64, RGBA64_LE, ARGB64, ARGB64_LE, BGRA64_LE, ABGR64_LE, RGBA64_BE, ARGB64_BE, BGRA64_BE, ABGR64_BE, A422_16LE, A422_16BE, A420_16LE, A420_16BE, A444_12LE, GBRA_12LE, A444_12BE, GBRA_12BE, Y412_LE, Y412_BE, A422_12LE, A422_12BE, A420_12LE, A420_12BE, A444_10LE, GBRA_10LE, A444_10BE, GBRA_10BE, A422_10LE, A422_10BE, A420_10LE, A420_10BE, BGR10A2_LE, RGB10A2_LE, Y410, A444, GBRA, AYUV, VUYA, RGBA, RBGA, ARGB, BGRA, ABGR, A422, A420, AV12, Y444_16LE, GBR_16LE, Y444_16BE, GBR_16BE, v216, P016_LE, P016_BE, Y444_12LE, GBR_12LE, Y444_12BE, GBR_12BE, I422_12LE, I422_12BE, Y212_LE, Y212_BE, I420_12LE, I420_12BE, P012_LE, P012_BE, Y444_10LE, GBR_10LE, Y444_10BE, GBR_10BE, r210, I422_10LE, I422_10BE, NV16_10LE32, Y210, UYVP, v210, I420_10LE, I420_10BE, P010_10LE, NV12_10LE40, NV12_10LE32, P010_10BE, MT2110R, MT2110T, NV12_10BE_8L128, NV12_10LE40_4L4, Y444, BGRP, GBR, RGBP, NV24, v308, IYU2, RGBx, xRGB, BGRx, xBGR, RGB, BGR, Y42B, NV16, NV61, YUY2, YVYU, UYVY, VYUY, I420, YV12, NV12, NV21, NV12_16L32S, NV12_32L32, NV12_4L4, NV12_64Z32, NV12_8L128, Y41B, IYU1, YUV9, YVU9, BGR16, RGB16, BGR15, RGB15, RGB8P, GRAY16_LE, GRAY16_BE, GRAY10_LE32, GRAY8"
+//#define GST_VIDEO_FORMATS_ANY_STR "DMA_DRM, " GST_VIDEO_FORMATS_ALL_STR
 
 /**
  * GST_VIDEO_FORMATS_ALL:
@@ -1156,7 +1120,7 @@ gconstpointer  gst_video_format_get_palette          (GstVideoFormat format, gsi
  *   - prefer I420 over YV12
  *   - format name
  */
-#define GST_VIDEO_FORMATS_ALL "{ " GST_VIDEO_FORMATS_ALL_STR " }"
+//#define GST_VIDEO_FORMATS_ALL "{ " GST_VIDEO_FORMATS_ALL_STR " }"
 
 /**
  * GST_VIDEO_FORMATS_ANY:
@@ -1167,7 +1131,7 @@ gconstpointer  gst_video_format_get_palette          (GstVideoFormat format, gsi
  *
  * Since: 1.24
  */
-#define GST_VIDEO_FORMATS_ANY "{ " GST_VIDEO_FORMATS_ANY_STR " }"
+//#define GST_VIDEO_FORMATS_ANY "{ " GST_VIDEO_FORMATS_ANY_STR " }"
 
 extern
 const GstVideoFormat * gst_video_formats_raw (guint * len);
@@ -1182,30 +1146,6 @@ const GstVideoFormat * gst_video_formats_any (guint * len);
  *
  * Generic caps string for video, for use in pad templates.
  */
-#define GST_VIDEO_CAPS_MAKE(format)                                     \
-    "video/x-raw, "                                                     \
-    "format = (string) " format ", "                                    \
-    "width = " GST_VIDEO_SIZE_RANGE ", "                                \
-    "height = " GST_VIDEO_SIZE_RANGE ", "                               \
-    "framerate = " GST_VIDEO_FPS_RANGE
-
-/**
- * GST_VIDEO_CAPS_MAKE_WITH_FEATURES:
- * @format: string format that describes the pixel layout, as string
- *     (e.g. "I420", "RGB", "YV12", "YUY2", "AYUV", etc.)
- * @features: Requires caps features as a string, e.g.
- *     "memory:SystemMemory".
- *
- * Generic caps string for video, for use in pad templates.
- *
- * Since: 1.2
- */
-#define GST_VIDEO_CAPS_MAKE_WITH_FEATURES(features,format)              \
-    "video/x-raw(" features "), "                                       \
-    "format = (string) " format ", "                                    \
-    "width = " GST_VIDEO_SIZE_RANGE ", "                                \
-    "height = " GST_VIDEO_SIZE_RANGE ", "                               \
-    "framerate = " GST_VIDEO_FPS_RANGE
 
 extern
 GstCaps * gst_video_make_raw_caps (const GstVideoFormat formats[], guint len);

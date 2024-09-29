@@ -62,5 +62,11 @@ main (int argc, char *argv[])
 
 //GST_PAD_TEMPLATE_IS_FIXED(0);
 
+GstVideoFormatInfo * info;
+
+GST_VIDEO_FORMAT_INFO_DATA(info,0,0);
+gst_buffer_get_ancillary_meta(0);
 GST_AUDIO_BASE_SINK_CLOCK(NULL);
 }
+
+

@@ -226,7 +226,7 @@ gst_buffer_add_ancillary_meta(GstBuffer *buffer);
  * present.
  */
 #define gst_buffer_get_ancillary_meta(b) \
-  ((GstAncillaryMeta*)gst_buffer_get_meta((b), GST_ANCILLARY_META_API_TYPE)
+  ((GstAncillaryMeta*)gst_buffer_get_meta((b), GST_ANCILLARY_META_API_TYPE))
 
 
 /**
