@@ -13,18 +13,19 @@ uses
   {$ENDIF}
 
   // === GST_base
-  const
-    GST_VIDEO_MAX_PLANES = 4;
-    GST_VIDEO_MAX_COMPONENTS = 4;
+const
+  GST_VIDEO_MAX_PLANES = 4;
+  GST_VIDEO_MAX_COMPONENTS = 4;
 
-  type
-    Tguintarr4=   array[0..3] of Tguint;
+type
+  Tguintarr4 = array[0..3] of Tguint;
+  Tguintarr16 = array[0..15] of Tguint;
 
-    Tplanes_Pointer_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tgpointer;
-    Tplanes_int_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tgint;
-    Tplanes_uint_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tguint;
-    Tcomp_int_arr = array[0..(GST_VIDEO_MAX_COMPONENTS) - 1] of Tgint;
-    Tplanes_size_arr=array[0..(GST_VIDEO_MAX_PLANES)-1] of Tgsize;
+  Tplanes_Pointer_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tgpointer;
+  Tplanes_int_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tgint;
+  Tplanes_uint_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tguint;
+  Tcomp_int_arr = array[0..(GST_VIDEO_MAX_COMPONENTS) - 1] of Tgint;
+  Tplanes_size_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tgsize;
 
 
   {$DEFINE read_interface}

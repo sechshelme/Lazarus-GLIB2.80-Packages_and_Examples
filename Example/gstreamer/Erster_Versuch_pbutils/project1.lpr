@@ -70,6 +70,9 @@ uses
   navigation,                    // io.
   videoorientation,              // io.
   videooverlay,                  // io.
+  video_sei,                     // io.
+  colorbalancechannel,           // io.
+  colorbalance,                  // io. -> colorbalancechannel
   video_hdr,                     // io.
   gstvideoutils,                 // io. -> video_info, video_hdr
   gstvideoencoder,               // io. -> gstvideoutils
@@ -77,8 +80,10 @@ uses
   video_format,                  // io. -> video_tile, video     viele Makros entfernt
   video_anc,                     // io. -> video_format          Fehler im Makro C-seitig
   video_chroma,                  // io. -> video_format
+  video_scaler,                  // io. -> video_resampler, video_format
   video_color,                   // io. -> video_format, video
   video_info,                    // io. -> video_format, video_color, video
+  video_multiview,               // io. -> video_info
   gstvideosink,                  // io. -> video_info
   video_info_dma,                // io. -> video_info, video_format
   video_frame,                   // io. -> video_info, video
@@ -88,6 +93,7 @@ uses
   gstvideodecoder,               // io. -> gstvideoutils, video_format, video_info
   gstvideotimecode,              // io.
   gstvideometa,                  // io. -> video, video_frame, video_format, video_info, gstvideotimecode
+
 
 
 

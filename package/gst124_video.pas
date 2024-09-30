@@ -1,4 +1,4 @@
-unit gst124_audio;
+unit gst124_video;
 
 interface
 
@@ -13,15 +13,19 @@ uses
   {$PACKRECORDS C}
   {$ENDIF}
 
+  // === GST_video
+
+
+
   {$DEFINE read_interface}
-  {$include gst124_audio_includes.inc}
+//  {$include gst124_video_includes.inc}
   {$UNDEF read_interface}
 
 
 implementation
 
 {$DEFINE read_implementation}
-{$include gst124_audio_includes.inc}
+//{$include gst124_video_includes.inc}
 {$UNDEF read_implementation}
 
 end.
