@@ -27,10 +27,10 @@ type
   PGstTracerClass = ^TGstTracerClass;
 
 
-function gst_tracer_get_type: TGType; cdecl; external gstreamerlib;
-procedure gst_tracing_register_hook(tracer: PGstTracer; detail: Pgchar; func: TGCallback); cdecl; external gstreamerlib;
-function gst_tracer_register(plugin: PGstPlugin; Name: Pgchar; _type: TGType): Tgboolean; cdecl; external gstreamerlib;
-function gst_tracing_get_active_tracers: PGList; cdecl; external gstreamerlib;
+function gst_tracer_get_type: TGType; cdecl; external libgstreamer;
+procedure gst_tracing_register_hook(tracer: PGstTracer; detail: Pgchar; func: TGCallback); cdecl; external libgstreamer;
+function gst_tracer_register(plugin: PGstPlugin; Name: Pgchar; _type: TGType): Tgboolean; cdecl; external libgstreamer;
+function gst_tracing_get_active_tracers: PGList; cdecl; external libgstreamer;
 
 function GST_TRACER_CAST(obj: Pointer): PGstTracer;
 

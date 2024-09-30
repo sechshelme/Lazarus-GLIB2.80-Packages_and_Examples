@@ -33,14 +33,14 @@ type
 
   TGstTypeFindFunction = procedure(find: PGstTypeFind; user_data: Tgpointer); cdecl;
 
-function gst_type_find_get_type: TGType; cdecl; external gstreamerlib;
-function gst_type_find_peek(find: PGstTypeFind; offset: Tgint64; size: Tguint): Pguint8; cdecl; external gstreamerlib;
-procedure gst_type_find_suggest(find: PGstTypeFind; probability: Tguint; caps: PGstCaps); cdecl; external gstreamerlib;
-procedure gst_type_find_suggest_empty_simple(find: PGstTypeFind; probability: Tguint; media_type: PChar); cdecl; external gstreamerlib;
-procedure gst_type_find_suggest_simple(find: PGstTypeFind; probability: Tguint; media_type: PChar; fieldname: PChar); varargs cdecl; external gstreamerlib;
-function gst_type_find_get_length(find: PGstTypeFind): Tguint64; cdecl; external gstreamerlib;
+function gst_type_find_get_type: TGType; cdecl; external libgstreamer;
+function gst_type_find_peek(find: PGstTypeFind; offset: Tgint64; size: Tguint): Pguint8; cdecl; external libgstreamer;
+procedure gst_type_find_suggest(find: PGstTypeFind; probability: Tguint; caps: PGstCaps); cdecl; external libgstreamer;
+procedure gst_type_find_suggest_empty_simple(find: PGstTypeFind; probability: Tguint; media_type: PChar); cdecl; external libgstreamer;
+procedure gst_type_find_suggest_simple(find: PGstTypeFind; probability: Tguint; media_type: PChar; fieldname: PChar); varargs cdecl; external libgstreamer;
+function gst_type_find_get_length(find: PGstTypeFind): Tguint64; cdecl; external libgstreamer;
 function gst_type_find_register(plugin: PGstPlugin; Name: Pgchar; rank: Tguint; func: TGstTypeFindFunction; extensions: Pgchar;
-  possible_caps: PGstCaps; Data: Tgpointer; data_notify: TGDestroyNotify): Tgboolean; cdecl; external gstreamerlib;
+  possible_caps: PGstCaps; Data: Tgpointer; data_notify: TGDestroyNotify): Tgboolean; cdecl; external libgstreamer;
 
 function GST_TYPE_TYPE_FIND: TGType;
 

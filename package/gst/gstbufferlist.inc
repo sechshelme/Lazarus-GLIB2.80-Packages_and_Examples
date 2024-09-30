@@ -9,7 +9,7 @@
 {$IFDEF read_interface}
 
 var
-  _gst_buffer_list_type: TGType; cvar;external gstreamerlib;
+  _gst_buffer_list_type: TGType; cvar;external libgstreamer;
 
 type
   TGstBufferList = record
@@ -19,24 +19,24 @@ type
 
   TGstBufferListFunc = function(buffer: PPGstBuffer; idx: Tguint; user_data: Tgpointer): Tgboolean; cdecl;
 
-function gst_buffer_list_ref(list: PGstBufferList): PGstBufferList; cdecl; external gstreamerlib;
-procedure gst_buffer_list_unref(list: PGstBufferList); cdecl; external gstreamerlib;
-procedure gst_clear_buffer_list(list_ptr: PPGstBufferList); cdecl; external gstreamerlib;
-function gst_buffer_list_copy(list: PGstBufferList): PGstBufferList; cdecl; external gstreamerlib;
-function gst_buffer_list_replace(old_list: PPGstBufferList; new_list: PGstBufferList): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_list_take(old_list: PPGstBufferList; new_list: PGstBufferList): Tgboolean; cdecl; external gstreamerlib;
+function gst_buffer_list_ref(list: PGstBufferList): PGstBufferList; cdecl; external libgstreamer;
+procedure gst_buffer_list_unref(list: PGstBufferList); cdecl; external libgstreamer;
+procedure gst_clear_buffer_list(list_ptr: PPGstBufferList); cdecl; external libgstreamer;
+function gst_buffer_list_copy(list: PGstBufferList): PGstBufferList; cdecl; external libgstreamer;
+function gst_buffer_list_replace(old_list: PPGstBufferList; new_list: PGstBufferList): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_list_take(old_list: PPGstBufferList; new_list: PGstBufferList): Tgboolean; cdecl; external libgstreamer;
 
-function gst_buffer_list_get_type: TGType; cdecl; external gstreamerlib;
-function gst_buffer_list_new: PGstBufferList; cdecl; external gstreamerlib;
-function gst_buffer_list_new_sized(size: Tguint): PGstBufferList; cdecl; external gstreamerlib;
-function gst_buffer_list_length(list: PGstBufferList): Tguint; cdecl; external gstreamerlib;
-function gst_buffer_list_get(list: PGstBufferList; idx: Tguint): PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_list_get_writable(list: PGstBufferList; idx: Tguint): PGstBuffer; cdecl; external gstreamerlib;
-procedure gst_buffer_list_insert(list: PGstBufferList; idx: Tgint; buffer: PGstBuffer); cdecl; external gstreamerlib;
-procedure gst_buffer_list_remove(list: PGstBufferList; idx: Tguint; length: Tguint); cdecl; external gstreamerlib;
-function gst_buffer_list_foreach(list: PGstBufferList; func: TGstBufferListFunc; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_list_copy_deep(list: PGstBufferList): PGstBufferList; cdecl; external gstreamerlib;
-function gst_buffer_list_calculate_size(list: PGstBufferList): Tgsize; cdecl; external gstreamerlib;
+function gst_buffer_list_get_type: TGType; cdecl; external libgstreamer;
+function gst_buffer_list_new: PGstBufferList; cdecl; external libgstreamer;
+function gst_buffer_list_new_sized(size: Tguint): PGstBufferList; cdecl; external libgstreamer;
+function gst_buffer_list_length(list: PGstBufferList): Tguint; cdecl; external libgstreamer;
+function gst_buffer_list_get(list: PGstBufferList; idx: Tguint): PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_list_get_writable(list: PGstBufferList; idx: Tguint): PGstBuffer; cdecl; external libgstreamer;
+procedure gst_buffer_list_insert(list: PGstBufferList; idx: Tgint; buffer: PGstBuffer); cdecl; external libgstreamer;
+procedure gst_buffer_list_remove(list: PGstBufferList; idx: Tguint; length: Tguint); cdecl; external libgstreamer;
+function gst_buffer_list_foreach(list: PGstBufferList; func: TGstBufferListFunc; user_data: Tgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_list_copy_deep(list: PGstBufferList): PGstBufferList; cdecl; external libgstreamer;
+function gst_buffer_list_calculate_size(list: PGstBufferList): Tgsize; cdecl; external libgstreamer;
 
 function GST_TYPE_BUFFER_LIST: TGType;
 function GST_IS_BUFFER_LIST(obj: Pointer): Tgboolean;

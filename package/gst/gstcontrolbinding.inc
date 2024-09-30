@@ -21,13 +21,13 @@ type
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
 
-function gst_control_binding_get_type: TGType; cdecl; external gstreamerlib;
-function gst_control_binding_sync_values(binding: PGstControlBinding; obj: PGstObject; timestamp: TGstClockTime; last_sync: TGstClockTime): Tgboolean; cdecl; external gstreamerlib;
-function gst_control_binding_get_value(binding: PGstControlBinding; timestamp: TGstClockTime): PGValue; cdecl; external gstreamerlib;
-function gst_control_binding_get_value_array(binding: PGstControlBinding; timestamp: TGstClockTime; interval: TGstClockTime; n_values: Tguint; values: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_control_binding_get_g_value_array(binding: PGstControlBinding; timestamp: TGstClockTime; interval: TGstClockTime; n_values: Tguint; values: PGValue): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_control_binding_set_disabled(binding: PGstControlBinding; disabled: Tgboolean); cdecl; external gstreamerlib;
-function gst_control_binding_is_disabled(binding: PGstControlBinding): Tgboolean; cdecl; external gstreamerlib;
+function gst_control_binding_get_type: TGType; cdecl; external libgstreamer;
+function gst_control_binding_sync_values(binding: PGstControlBinding; obj: PGstObject; timestamp: TGstClockTime; last_sync: TGstClockTime): Tgboolean; cdecl; external libgstreamer;
+function gst_control_binding_get_value(binding: PGstControlBinding; timestamp: TGstClockTime): PGValue; cdecl; external libgstreamer;
+function gst_control_binding_get_value_array(binding: PGstControlBinding; timestamp: TGstClockTime; interval: TGstClockTime; n_values: Tguint; values: Tgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_control_binding_get_g_value_array(binding: PGstControlBinding; timestamp: TGstClockTime; interval: TGstClockTime; n_values: Tguint; values: PGValue): Tgboolean; cdecl; external libgstreamer;
+procedure gst_control_binding_set_disabled(binding: PGstControlBinding; disabled: Tgboolean); cdecl; external libgstreamer;
+function gst_control_binding_is_disabled(binding: PGstControlBinding): Tgboolean; cdecl; external libgstreamer;
 
 function GST_CONTROL_BINDING_PSPEC(cb: Pointer): PGParamSpec;
 

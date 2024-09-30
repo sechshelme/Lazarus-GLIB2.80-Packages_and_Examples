@@ -32,9 +32,9 @@ type
   end;
   PGstControlSourceClass = ^TGstControlSourceClass;
 
-function gst_control_source_get_type: TGType; cdecl; external gstreamerlib;
-function gst_control_source_get_value(self: PGstControlSource; timestamp: TGstClockTime; Value: Pgdouble): Tgboolean; cdecl; external gstreamerlib;
-function gst_control_source_get_value_array(self: PGstControlSource; timestamp: TGstClockTime; interval: TGstClockTime; n_values: Tguint; values: Pgdouble): Tgboolean; cdecl; external gstreamerlib;
+function gst_control_source_get_type: TGType; cdecl; external libgstreamer;
+function gst_control_source_get_value(self: PGstControlSource; timestamp: TGstClockTime; Value: Pgdouble): Tgboolean; cdecl; external libgstreamer;
+function gst_control_source_get_value_array(self: PGstControlSource; timestamp: TGstClockTime; interval: TGstClockTime; n_values: Tguint; values: Pgdouble): Tgboolean; cdecl; external libgstreamer;
 
 // === Konventiert am: 16-9-24 19:34:19 ===
 

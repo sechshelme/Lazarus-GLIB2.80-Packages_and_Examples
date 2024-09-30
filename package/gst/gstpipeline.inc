@@ -37,22 +37,22 @@ type
   end;
   PGstPipelineClass = ^TGstPipelineClass;
 
-function gst_pipeline_get_type: TGType; cdecl; external gstreamerlib;
-function gst_pipeline_new(Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_pipeline_get_bus(pipeline: PGstPipeline): PGstBus; cdecl; external gstreamerlib;
-procedure gst_pipeline_use_clock(pipeline: PGstPipeline; clock: PGstClock); cdecl; external gstreamerlib;
-function gst_pipeline_set_clock(pipeline: PGstPipeline; clock: PGstClock): Tgboolean; cdecl; external gstreamerlib;
-function gst_pipeline_get_clock(pipeline: PGstPipeline): PGstClock; cdecl; external gstreamerlib;
-function gst_pipeline_get_pipeline_clock(pipeline: PGstPipeline): PGstClock; cdecl; external gstreamerlib;
-procedure gst_pipeline_auto_clock(pipeline: PGstPipeline); cdecl; external gstreamerlib;
-procedure gst_pipeline_set_delay(pipeline: PGstPipeline; delay: TGstClockTime); cdecl; external gstreamerlib;
-function gst_pipeline_get_delay(pipeline: PGstPipeline): TGstClockTime; cdecl; external gstreamerlib;
-procedure gst_pipeline_set_latency(pipeline: PGstPipeline; latency: TGstClockTime); cdecl; external gstreamerlib;
-function gst_pipeline_get_latency(pipeline: PGstPipeline): TGstClockTime; cdecl; external gstreamerlib;
-procedure gst_pipeline_set_auto_flush_bus(pipeline: PGstPipeline; auto_flush: Tgboolean); cdecl; external gstreamerlib;
-function gst_pipeline_get_auto_flush_bus(pipeline: PGstPipeline): Tgboolean; cdecl; external gstreamerlib;
-function gst_pipeline_is_live(pipeline: PGstPipeline): Tgboolean; cdecl; external gstreamerlib;
-function gst_pipeline_get_configured_latency(pipeline: PGstPipeline): TGstClockTime; cdecl; external gstreamerlib;
+function gst_pipeline_get_type: TGType; cdecl; external libgstreamer;
+function gst_pipeline_new(Name: Pgchar): PGstElement; cdecl; external libgstreamer;
+function gst_pipeline_get_bus(pipeline: PGstPipeline): PGstBus; cdecl; external libgstreamer;
+procedure gst_pipeline_use_clock(pipeline: PGstPipeline; clock: PGstClock); cdecl; external libgstreamer;
+function gst_pipeline_set_clock(pipeline: PGstPipeline; clock: PGstClock): Tgboolean; cdecl; external libgstreamer;
+function gst_pipeline_get_clock(pipeline: PGstPipeline): PGstClock; cdecl; external libgstreamer;
+function gst_pipeline_get_pipeline_clock(pipeline: PGstPipeline): PGstClock; cdecl; external libgstreamer;
+procedure gst_pipeline_auto_clock(pipeline: PGstPipeline); cdecl; external libgstreamer;
+procedure gst_pipeline_set_delay(pipeline: PGstPipeline; delay: TGstClockTime); cdecl; external libgstreamer;
+function gst_pipeline_get_delay(pipeline: PGstPipeline): TGstClockTime; cdecl; external libgstreamer;
+procedure gst_pipeline_set_latency(pipeline: PGstPipeline; latency: TGstClockTime); cdecl; external libgstreamer;
+function gst_pipeline_get_latency(pipeline: PGstPipeline): TGstClockTime; cdecl; external libgstreamer;
+procedure gst_pipeline_set_auto_flush_bus(pipeline: PGstPipeline; auto_flush: Tgboolean); cdecl; external libgstreamer;
+function gst_pipeline_get_auto_flush_bus(pipeline: PGstPipeline): Tgboolean; cdecl; external libgstreamer;
+function gst_pipeline_is_live(pipeline: PGstPipeline): Tgboolean; cdecl; external libgstreamer;
+function gst_pipeline_get_configured_latency(pipeline: PGstPipeline): TGstClockTime; cdecl; external libgstreamer;
 
 function GST_PIPELINE_CAST(obj: longint): PGstPipeline;
 

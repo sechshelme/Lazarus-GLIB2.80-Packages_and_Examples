@@ -17,12 +17,12 @@ type
   end;
   PGstTypeFindFactoryClass = ^TGstTypeFindFactoryClass;
 
-function gst_type_find_factory_get_type: TGType; cdecl; external gstreamerlib;
-function gst_type_find_factory_get_list: PGList; cdecl; external gstreamerlib;
-function gst_type_find_factory_get_extensions(factory: PGstTypeFindFactory): PPgchar; cdecl; external gstreamerlib;
-function gst_type_find_factory_get_caps(factory: PGstTypeFindFactory): PGstCaps; cdecl; external gstreamerlib;
-function gst_type_find_factory_has_function(factory: PGstTypeFindFactory): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_type_find_factory_call_function(factory: PGstTypeFindFactory; find: PGstTypeFind); cdecl; external gstreamerlib;
+function gst_type_find_factory_get_type: TGType; cdecl; external libgstreamer;
+function gst_type_find_factory_get_list: PGList; cdecl; external libgstreamer;
+function gst_type_find_factory_get_extensions(factory: PGstTypeFindFactory): PPgchar; cdecl; external libgstreamer;
+function gst_type_find_factory_get_caps(factory: PGstTypeFindFactory): PGstCaps; cdecl; external libgstreamer;
+function gst_type_find_factory_has_function(factory: PGstTypeFindFactory): Tgboolean; cdecl; external libgstreamer;
+procedure gst_type_find_factory_call_function(factory: PGstTypeFindFactory; find: PGstTypeFind); cdecl; external libgstreamer;
 
 // === Konventiert am: 18-9-24 15:44:01 ===
 

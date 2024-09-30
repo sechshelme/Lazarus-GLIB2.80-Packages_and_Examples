@@ -13,17 +13,17 @@ type
   end;
   PGstDeviceProviderFactoryClass = ^TGstDeviceProviderFactoryClass;
 
-function gst_device_provider_factory_get_type: TGType; cdecl; external gstreamerlib;
-function gst_device_provider_factory_find(Name: Pgchar): PGstDeviceProviderFactory; cdecl; external gstreamerlib;
-function gst_device_provider_factory_get_device_provider_type(factory: PGstDeviceProviderFactory): TGType; cdecl; external gstreamerlib;
-function gst_device_provider_factory_get_metadata(factory: PGstDeviceProviderFactory; key: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_device_provider_factory_get_metadata_keys(factory: PGstDeviceProviderFactory): PPgchar; cdecl; external gstreamerlib;
-function gst_device_provider_factory_get(factory: PGstDeviceProviderFactory): PGstDeviceProvider; cdecl; external gstreamerlib;
-function gst_device_provider_factory_get_by_name(factoryname: Pgchar): PGstDeviceProvider; cdecl; external gstreamerlib;
-function gst_device_provider_register(plugin: PGstPlugin; Name: Pgchar; rank: Tguint; _type: TGType): Tgboolean; cdecl; external gstreamerlib;
-function gst_device_provider_factory_has_classesv(factory: PGstDeviceProviderFactory; Classes: PPgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_device_provider_factory_has_classes(factory: PGstDeviceProviderFactory; Classes: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_device_provider_factory_list_get_device_providers(minrank: TGstRank): PGList; cdecl; external gstreamerlib;
+function gst_device_provider_factory_get_type: TGType; cdecl; external libgstreamer;
+function gst_device_provider_factory_find(Name: Pgchar): PGstDeviceProviderFactory; cdecl; external libgstreamer;
+function gst_device_provider_factory_get_device_provider_type(factory: PGstDeviceProviderFactory): TGType; cdecl; external libgstreamer;
+function gst_device_provider_factory_get_metadata(factory: PGstDeviceProviderFactory; key: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_device_provider_factory_get_metadata_keys(factory: PGstDeviceProviderFactory): PPgchar; cdecl; external libgstreamer;
+function gst_device_provider_factory_get(factory: PGstDeviceProviderFactory): PGstDeviceProvider; cdecl; external libgstreamer;
+function gst_device_provider_factory_get_by_name(factoryname: Pgchar): PGstDeviceProvider; cdecl; external libgstreamer;
+function gst_device_provider_register(plugin: PGstPlugin; Name: Pgchar; rank: Tguint; _type: TGType): Tgboolean; cdecl; external libgstreamer;
+function gst_device_provider_factory_has_classesv(factory: PGstDeviceProviderFactory; Classes: PPgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_device_provider_factory_has_classes(factory: PGstDeviceProviderFactory; Classes: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_device_provider_factory_list_get_device_providers(minrank: TGstRank): PGList; cdecl; external libgstreamer;
 
 function GST_DEVICE_PROVIDER_FACTORY_CAST(obj: Pointer): PGstDeviceProviderFactory;
 

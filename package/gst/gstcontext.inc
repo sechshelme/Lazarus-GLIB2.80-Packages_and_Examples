@@ -9,7 +9,7 @@
 {$IFDEF read_interface}
 
 var
-  _gst_context_type: TGType; cvar;external gstreamerlib;
+  _gst_context_type: TGType; cvar;external libgstreamer;
 
 type
   TGstContext = record
@@ -17,19 +17,19 @@ type
   PGstContext = ^TGstContext;
   PPGstContext = ^PGstContext;
 
-function gst_context_get_type: TGType; cdecl; external gstreamerlib;
-function gst_context_ref(context: PGstContext): PGstContext; cdecl; external gstreamerlib;
-procedure gst_context_unref(context: PGstContext); cdecl; external gstreamerlib;
-procedure gst_clear_context(context_ptr: PPGstContext); cdecl; external gstreamerlib;
-function gst_context_copy(context: PGstContext): PGstContext; cdecl; external gstreamerlib;
+function gst_context_get_type: TGType; cdecl; external libgstreamer;
+function gst_context_ref(context: PGstContext): PGstContext; cdecl; external libgstreamer;
+procedure gst_context_unref(context: PGstContext); cdecl; external libgstreamer;
+procedure gst_clear_context(context_ptr: PPGstContext); cdecl; external libgstreamer;
+function gst_context_copy(context: PGstContext): PGstContext; cdecl; external libgstreamer;
 
-function gst_context_replace(old_context: PPGstContext; new_context: PGstContext): Tgboolean; cdecl; external gstreamerlib;
-function gst_context_new(context_type: Pgchar; persistent: Tgboolean): PGstContext; cdecl; external gstreamerlib;
-function gst_context_get_context_type(context: PGstContext): Pgchar; cdecl; external gstreamerlib;
-function gst_context_has_context_type(context: PGstContext; context_type: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_context_get_structure(context: PGstContext): PGstStructure; cdecl; external gstreamerlib;
-function gst_context_writable_structure(context: PGstContext): PGstStructure; cdecl; external gstreamerlib;
-function gst_context_is_persistent(context: PGstContext): Tgboolean; cdecl; external gstreamerlib;
+function gst_context_replace(old_context: PPGstContext; new_context: PGstContext): Tgboolean; cdecl; external libgstreamer;
+function gst_context_new(context_type: Pgchar; persistent: Tgboolean): PGstContext; cdecl; external libgstreamer;
+function gst_context_get_context_type(context: PGstContext): Pgchar; cdecl; external libgstreamer;
+function gst_context_has_context_type(context: PGstContext; context_type: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_context_get_structure(context: PGstContext): PGstStructure; cdecl; external libgstreamer;
+function gst_context_writable_structure(context: PGstContext): PGstStructure; cdecl; external libgstreamer;
+function gst_context_is_persistent(context: PGstContext): Tgboolean; cdecl; external libgstreamer;
 
 function GST_TYPE_CONTEXT: TGType;
 

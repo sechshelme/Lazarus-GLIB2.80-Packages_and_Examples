@@ -17,7 +17,7 @@ const
   GST_PAD_MODE_PUSH = 1;
   GST_PAD_MODE_PULL = 2;
 
-function gst_pad_mode_get_name(mode: TGstPadMode): Pgchar; cdecl; external gstreamerlib;
+function gst_pad_mode_get_name(mode: TGstPadMode): Pgchar; cdecl; external libgstreamer;
 
 type
   PGstPadLinkReturn = ^TGstPadLinkReturn;
@@ -51,9 +51,9 @@ const
   GST_FLOW_CUSTOM_ERROR_1 = -(101);
   GST_FLOW_CUSTOM_ERROR_2 = -(102);
 
-function gst_flow_get_name(ret: TGstFlowReturn): Pgchar; cdecl; external gstreamerlib;
-function gst_flow_to_quark(ret: TGstFlowReturn): TGQuark; cdecl; external gstreamerlib;
-function gst_pad_link_get_name(ret: TGstPadLinkReturn): Pgchar; cdecl; external gstreamerlib;
+function gst_flow_get_name(ret: TGstFlowReturn): Pgchar; cdecl; external libgstreamer;
+function gst_flow_to_quark(ret: TGstFlowReturn): TGQuark; cdecl; external libgstreamer;
+function gst_pad_link_get_name(ret: TGstPadLinkReturn): Pgchar; cdecl; external libgstreamer;
 
 type
   PGstPadLinkCheck = ^TGstPadLinkCheck;
@@ -205,10 +205,10 @@ type
   end;
 
 
-function gst_pad_probe_info_get_event(info: PGstPadProbeInfo): PGstEvent; cdecl; external gstreamerlib;
-function gst_pad_probe_info_get_query(info: PGstPadProbeInfo): PGstQuery; cdecl; external gstreamerlib;
-function gst_pad_probe_info_get_buffer(info: PGstPadProbeInfo): PGstBuffer; cdecl; external gstreamerlib;
-function gst_pad_probe_info_get_buffer_list(info: PGstPadProbeInfo): PGstBufferList; cdecl; external gstreamerlib;
+function gst_pad_probe_info_get_event(info: PGstPadProbeInfo): PGstEvent; cdecl; external libgstreamer;
+function gst_pad_probe_info_get_query(info: PGstPadProbeInfo): PGstQuery; cdecl; external libgstreamer;
+function gst_pad_probe_info_get_buffer(info: PGstPadProbeInfo): PGstBuffer; cdecl; external libgstreamer;
+function gst_pad_probe_info_get_buffer_list(info: PGstPadProbeInfo): PGstBufferList; cdecl; external libgstreamer;
 
 type
   TGstPadProbeCallback = function(pad: PGstPad; info: PGstPadProbeInfo; user_data: Tgpointer): TGstPadProbeReturn; cdecl;
@@ -243,75 +243,75 @@ type
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
 
-function gst_pad_get_type: TGType; cdecl; external gstreamerlib;
-function gst_pad_new(Name: Pgchar; direction: TGstPadDirection): PGstPad; cdecl; external gstreamerlib;
-function gst_pad_new_from_template(templ: PGstPadTemplate; Name: Pgchar): PGstPad; cdecl; external gstreamerlib;
-function gst_pad_new_from_static_template(templ: PGstStaticPadTemplate; Name: Pgchar): PGstPad; cdecl; external gstreamerlib;
+function gst_pad_get_type: TGType; cdecl; external libgstreamer;
+function gst_pad_new(Name: Pgchar; direction: TGstPadDirection): PGstPad; cdecl; external libgstreamer;
+function gst_pad_new_from_template(templ: PGstPadTemplate; Name: Pgchar): PGstPad; cdecl; external libgstreamer;
+function gst_pad_new_from_static_template(templ: PGstStaticPadTemplate; Name: Pgchar): PGstPad; cdecl; external libgstreamer;
 
-function gst_pad_get_direction(pad: PGstPad): TGstPadDirection; cdecl; external gstreamerlib;
-function gst_pad_set_active(pad: PGstPad; active: Tgboolean): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_is_active(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_activate_mode(pad: PGstPad; mode: TGstPadMode; active: Tgboolean): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_add_probe(pad: PGstPad; mask: TGstPadProbeType; callback: TGstPadProbeCallback; user_data: Tgpointer; destroy_data: TGDestroyNotify): Tgulong; cdecl; external gstreamerlib;
-procedure gst_pad_remove_probe(pad: PGstPad; id: Tgulong); cdecl; external gstreamerlib;
-function gst_pad_is_blocked(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_is_blocking(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_pad_mark_reconfigure(pad: PGstPad); cdecl; external gstreamerlib;
-function gst_pad_needs_reconfigure(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_check_reconfigure(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_pad_set_element_private(pad: PGstPad; priv: Tgpointer); cdecl; external gstreamerlib;
-function gst_pad_get_element_private(pad: PGstPad): Tgpointer; cdecl; external gstreamerlib;
-function gst_pad_get_pad_template(pad: PGstPad): PGstPadTemplate; cdecl; external gstreamerlib;
-function gst_pad_store_sticky_event(pad: PGstPad; event: PGstEvent): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_pad_get_sticky_event(pad: PGstPad; event_type: TGstEventType; idx: Tguint): PGstEvent; cdecl; external gstreamerlib;
-procedure gst_pad_sticky_events_foreach(pad: PGstPad; foreach_func: TGstPadStickyEventsForeachFunction; user_data: Tgpointer); cdecl; external gstreamerlib;
-procedure gst_pad_set_activate_function_full(pad: PGstPad; activate: TGstPadActivateFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-procedure gst_pad_set_activatemode_function_full(pad: PGstPad; activatemode: TGstPadActivateModeFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-procedure gst_pad_set_chain_function_full(pad: PGstPad; chain: TGstPadChainFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-procedure gst_pad_set_chain_list_function_full(pad: PGstPad; chainlist: TGstPadChainListFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-procedure gst_pad_set_getrange_function_full(pad: PGstPad; get: TGstPadGetRangeFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-procedure gst_pad_set_event_function_full(pad: PGstPad; event: TGstPadEventFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-procedure gst_pad_set_event_full_function_full(pad: PGstPad; event: TGstPadEventFullFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
+function gst_pad_get_direction(pad: PGstPad): TGstPadDirection; cdecl; external libgstreamer;
+function gst_pad_set_active(pad: PGstPad; active: Tgboolean): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_is_active(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_activate_mode(pad: PGstPad; mode: TGstPadMode; active: Tgboolean): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_add_probe(pad: PGstPad; mask: TGstPadProbeType; callback: TGstPadProbeCallback; user_data: Tgpointer; destroy_data: TGDestroyNotify): Tgulong; cdecl; external libgstreamer;
+procedure gst_pad_remove_probe(pad: PGstPad; id: Tgulong); cdecl; external libgstreamer;
+function gst_pad_is_blocked(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_is_blocking(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+procedure gst_pad_mark_reconfigure(pad: PGstPad); cdecl; external libgstreamer;
+function gst_pad_needs_reconfigure(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_check_reconfigure(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+procedure gst_pad_set_element_private(pad: PGstPad; priv: Tgpointer); cdecl; external libgstreamer;
+function gst_pad_get_element_private(pad: PGstPad): Tgpointer; cdecl; external libgstreamer;
+function gst_pad_get_pad_template(pad: PGstPad): PGstPadTemplate; cdecl; external libgstreamer;
+function gst_pad_store_sticky_event(pad: PGstPad; event: PGstEvent): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_pad_get_sticky_event(pad: PGstPad; event_type: TGstEventType; idx: Tguint): PGstEvent; cdecl; external libgstreamer;
+procedure gst_pad_sticky_events_foreach(pad: PGstPad; foreach_func: TGstPadStickyEventsForeachFunction; user_data: Tgpointer); cdecl; external libgstreamer;
+procedure gst_pad_set_activate_function_full(pad: PGstPad; activate: TGstPadActivateFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+procedure gst_pad_set_activatemode_function_full(pad: PGstPad; activatemode: TGstPadActivateModeFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+procedure gst_pad_set_chain_function_full(pad: PGstPad; chain: TGstPadChainFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+procedure gst_pad_set_chain_list_function_full(pad: PGstPad; chainlist: TGstPadChainListFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+procedure gst_pad_set_getrange_function_full(pad: PGstPad; get: TGstPadGetRangeFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+procedure gst_pad_set_event_function_full(pad: PGstPad; event: TGstPadEventFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+procedure gst_pad_set_event_full_function_full(pad: PGstPad; event: TGstPadEventFullFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
 
-procedure gst_pad_set_link_function_full(pad: PGstPad; link: TGstPadLinkFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-procedure gst_pad_set_unlink_function_full(pad: PGstPad; unlink: TGstPadUnlinkFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
+procedure gst_pad_set_link_function_full(pad: PGstPad; link: TGstPadLinkFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+procedure gst_pad_set_unlink_function_full(pad: PGstPad; unlink: TGstPadUnlinkFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
 
-function gst_pad_can_link(srcpad: PGstPad; sinkpad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_link(srcpad: PGstPad; sinkpad: PGstPad): TGstPadLinkReturn; cdecl; external gstreamerlib;
-function gst_pad_link_full(srcpad: PGstPad; sinkpad: PGstPad; flags: TGstPadLinkCheck): TGstPadLinkReturn; cdecl; external gstreamerlib;
-function gst_pad_unlink(srcpad: PGstPad; sinkpad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_is_linked(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_get_peer(pad: PGstPad): PGstPad; cdecl; external gstreamerlib;
-function gst_pad_get_pad_template_caps(pad: PGstPad): PGstCaps; cdecl; external gstreamerlib;
-function gst_pad_get_current_caps(pad: PGstPad): PGstCaps; cdecl; external gstreamerlib;
-function gst_pad_has_current_caps(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_get_allowed_caps(pad: PGstPad): PGstCaps; cdecl; external gstreamerlib;
-function gst_pad_get_offset(pad: PGstPad): Tgint64; cdecl; external gstreamerlib;
-procedure gst_pad_set_offset(pad: PGstPad; offset: Tgint64); cdecl; external gstreamerlib;
-function gst_pad_push(pad: PGstPad; buffer: PGstBuffer): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_pad_push_list(pad: PGstPad; list: PGstBufferList): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_pad_pull_range(pad: PGstPad; offset: Tguint64; size: Tguint; buffer: PPGstBuffer): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_pad_push_event(pad: PGstPad; event: PGstEvent): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_event_default(pad: PGstPad; parent: PGstObject; event: PGstEvent): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_get_last_flow_return(pad: PGstPad): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_pad_chain(pad: PGstPad; buffer: PGstBuffer): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_pad_chain_list(pad: PGstPad; list: PGstBufferList): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_pad_get_range(pad: PGstPad; offset: Tguint64; size: Tguint; buffer: PPGstBuffer): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_pad_send_event(pad: PGstPad; event: PGstEvent): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_start_task(pad: PGstPad; func: TGstTaskFunction; user_data: Tgpointer; notify: TGDestroyNotify): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_pause_task(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_stop_task(pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_get_task_state(pad: PGstPad): TGstTaskState; cdecl; external gstreamerlib;
-procedure gst_pad_set_iterate_internal_links_function_full(pad: PGstPad; iterintlink: TGstPadIterIntLinkFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-function gst_pad_iterate_internal_links(pad: PGstPad): PGstIterator; cdecl; external gstreamerlib;
-function gst_pad_iterate_internal_links_default(pad: PGstPad; parent: PGstObject): PGstIterator; cdecl; external gstreamerlib;
+function gst_pad_can_link(srcpad: PGstPad; sinkpad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_link(srcpad: PGstPad; sinkpad: PGstPad): TGstPadLinkReturn; cdecl; external libgstreamer;
+function gst_pad_link_full(srcpad: PGstPad; sinkpad: PGstPad; flags: TGstPadLinkCheck): TGstPadLinkReturn; cdecl; external libgstreamer;
+function gst_pad_unlink(srcpad: PGstPad; sinkpad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_is_linked(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_get_peer(pad: PGstPad): PGstPad; cdecl; external libgstreamer;
+function gst_pad_get_pad_template_caps(pad: PGstPad): PGstCaps; cdecl; external libgstreamer;
+function gst_pad_get_current_caps(pad: PGstPad): PGstCaps; cdecl; external libgstreamer;
+function gst_pad_has_current_caps(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_get_allowed_caps(pad: PGstPad): PGstCaps; cdecl; external libgstreamer;
+function gst_pad_get_offset(pad: PGstPad): Tgint64; cdecl; external libgstreamer;
+procedure gst_pad_set_offset(pad: PGstPad; offset: Tgint64); cdecl; external libgstreamer;
+function gst_pad_push(pad: PGstPad; buffer: PGstBuffer): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_pad_push_list(pad: PGstPad; list: PGstBufferList): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_pad_pull_range(pad: PGstPad; offset: Tguint64; size: Tguint; buffer: PPGstBuffer): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_pad_push_event(pad: PGstPad; event: PGstEvent): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_event_default(pad: PGstPad; parent: PGstObject; event: PGstEvent): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_get_last_flow_return(pad: PGstPad): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_pad_chain(pad: PGstPad; buffer: PGstBuffer): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_pad_chain_list(pad: PGstPad; list: PGstBufferList): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_pad_get_range(pad: PGstPad; offset: Tguint64; size: Tguint; buffer: PPGstBuffer): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_pad_send_event(pad: PGstPad; event: PGstEvent): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_start_task(pad: PGstPad; func: TGstTaskFunction; user_data: Tgpointer; notify: TGDestroyNotify): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_pause_task(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_stop_task(pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_get_task_state(pad: PGstPad): TGstTaskState; cdecl; external libgstreamer;
+procedure gst_pad_set_iterate_internal_links_function_full(pad: PGstPad; iterintlink: TGstPadIterIntLinkFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+function gst_pad_iterate_internal_links(pad: PGstPad): PGstIterator; cdecl; external libgstreamer;
+function gst_pad_iterate_internal_links_default(pad: PGstPad; parent: PGstObject): PGstIterator; cdecl; external libgstreamer;
 
-function gst_pad_get_single_internal_link(pad: PGstPad): PGstPad; cdecl; external gstreamerlib;
-function gst_pad_query(pad: PGstPad; query: PGstQuery): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_peer_query(pad: PGstPad; query: PGstQuery): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_pad_set_query_function_full(pad: PGstPad; query: TGstPadQueryFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external gstreamerlib;
-function gst_pad_query_default(pad: PGstPad; parent: PGstObject; query: PGstQuery): Tgboolean; cdecl; external gstreamerlib;
-function gst_pad_forward(pad: PGstPad; forward: TGstPadForwardFunction; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
+function gst_pad_get_single_internal_link(pad: PGstPad): PGstPad; cdecl; external libgstreamer;
+function gst_pad_query(pad: PGstPad; query: PGstQuery): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_peer_query(pad: PGstPad; query: PGstQuery): Tgboolean; cdecl; external libgstreamer;
+procedure gst_pad_set_query_function_full(pad: PGstPad; query: TGstPadQueryFunction; user_data: Tgpointer; notify: TGDestroyNotify); cdecl; external libgstreamer;
+function gst_pad_query_default(pad: PGstPad; parent: PGstObject; query: PGstQuery): Tgboolean; cdecl; external libgstreamer;
+function gst_pad_forward(pad: PGstPad; forward: TGstPadForwardFunction; user_data: Tgpointer): Tgboolean; cdecl; external libgstreamer;
 
 
 function GST_PAD_LINK_FAILED(ret: longint): Tgboolean;

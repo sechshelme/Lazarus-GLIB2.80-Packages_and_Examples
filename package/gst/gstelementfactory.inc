@@ -13,27 +13,27 @@ type
   end;
   PGstElementFactoryClass = ^TGstElementFactoryClass;
 
-function gst_element_factory_get_type: TGType; cdecl; external gstreamerlib;
-function gst_element_factory_find(Name: Pgchar): PGstElementFactory; cdecl; external gstreamerlib;
-function gst_element_factory_get_element_type(factory: PGstElementFactory): TGType; cdecl; external gstreamerlib;
-function gst_element_factory_get_metadata(factory: PGstElementFactory; key: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_element_factory_get_metadata_keys(factory: PGstElementFactory): PPgchar; cdecl; external gstreamerlib;
-function gst_element_factory_get_num_pad_templates(factory: PGstElementFactory): Tguint; cdecl; external gstreamerlib;
-function gst_element_factory_get_static_pad_templates(factory: PGstElementFactory): PGList; cdecl; external gstreamerlib;
-function gst_element_factory_get_uri_type(factory: PGstElementFactory): TGstURIType; cdecl; external gstreamerlib;
-function gst_element_factory_get_uri_protocols(factory: PGstElementFactory): PPgchar; cdecl; external gstreamerlib;
-function gst_element_factory_has_interface(factory: PGstElementFactory; interfacename: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_factory_create(factory: PGstElementFactory; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_create_full(factory: PGstElementFactory; First: Pgchar): PGstElement; varargs cdecl; external gstreamerlib;
-function gst_element_factory_create_valist(factory: PGstElementFactory; First: Pgchar; properties: Tva_list): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_create_with_properties(factory: PGstElementFactory; n: Tguint; names: PPgchar; values: PGValue): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_make(factoryname: Pgchar; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_make_full(factoryname: Pgchar; First: Pgchar): PGstElement; varargs cdecl; external gstreamerlib;
-function gst_element_factory_make_valist(factoryname: Pgchar; First: Pgchar; properties: Tva_list): PGstElement; cdecl; external gstreamerlib;
-function gst_element_factory_make_with_properties(factoryname: Pgchar; n: Tguint; names: PPgchar; values: PGValue): PGstElement; cdecl; external gstreamerlib;
-function gst_element_register(plugin: PGstPlugin; Name: Pgchar; rank: Tguint; _type: TGType): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_element_type_set_skip_documentation(_type: TGType); cdecl; external gstreamerlib;
-function gst_element_factory_get_skip_documentation(factory: PGstElementFactory): Tgboolean; cdecl; external gstreamerlib;
+function gst_element_factory_get_type: TGType; cdecl; external libgstreamer;
+function gst_element_factory_find(Name: Pgchar): PGstElementFactory; cdecl; external libgstreamer;
+function gst_element_factory_get_element_type(factory: PGstElementFactory): TGType; cdecl; external libgstreamer;
+function gst_element_factory_get_metadata(factory: PGstElementFactory; key: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_element_factory_get_metadata_keys(factory: PGstElementFactory): PPgchar; cdecl; external libgstreamer;
+function gst_element_factory_get_num_pad_templates(factory: PGstElementFactory): Tguint; cdecl; external libgstreamer;
+function gst_element_factory_get_static_pad_templates(factory: PGstElementFactory): PGList; cdecl; external libgstreamer;
+function gst_element_factory_get_uri_type(factory: PGstElementFactory): TGstURIType; cdecl; external libgstreamer;
+function gst_element_factory_get_uri_protocols(factory: PGstElementFactory): PPgchar; cdecl; external libgstreamer;
+function gst_element_factory_has_interface(factory: PGstElementFactory; interfacename: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_element_factory_create(factory: PGstElementFactory; Name: Pgchar): PGstElement; cdecl; external libgstreamer;
+function gst_element_factory_create_full(factory: PGstElementFactory; First: Pgchar): PGstElement; varargs cdecl; external libgstreamer;
+function gst_element_factory_create_valist(factory: PGstElementFactory; First: Pgchar; properties: Tva_list): PGstElement; cdecl; external libgstreamer;
+function gst_element_factory_create_with_properties(factory: PGstElementFactory; n: Tguint; names: PPgchar; values: PGValue): PGstElement; cdecl; external libgstreamer;
+function gst_element_factory_make(factoryname: Pgchar; Name: Pgchar): PGstElement; cdecl; external libgstreamer;
+function gst_element_factory_make_full(factoryname: Pgchar; First: Pgchar): PGstElement; varargs cdecl; external libgstreamer;
+function gst_element_factory_make_valist(factoryname: Pgchar; First: Pgchar; properties: Tva_list): PGstElement; cdecl; external libgstreamer;
+function gst_element_factory_make_with_properties(factoryname: Pgchar; n: Tguint; names: PPgchar; values: PGValue): PGstElement; cdecl; external libgstreamer;
+function gst_element_register(plugin: PGstPlugin; Name: Pgchar; rank: Tguint; _type: TGType): Tgboolean; cdecl; external libgstreamer;
+procedure gst_element_type_set_skip_documentation(_type: TGType); cdecl; external libgstreamer;
+function gst_element_factory_get_skip_documentation(factory: PGstElementFactory): Tgboolean; cdecl; external libgstreamer;
 
 type
   PGstElementFactoryListType = ^TGstElementFactoryListType;
@@ -86,9 +86,9 @@ const
   GST_ELEMENT_FACTORY_KLASS_MEDIA_METADATA = 'Metadata';
   GST_ELEMENT_FACTORY_KLASS_HARDWARE = 'Hardware';
 
-function gst_element_factory_list_is_type(factory: PGstElementFactory; _type: TGstElementFactoryListType): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_factory_list_get_elements(_type: TGstElementFactoryListType; minrank: TGstRank): PGList; cdecl; external gstreamerlib;
-function gst_element_factory_list_filter(list: PGList; caps: PGstCaps; direction: TGstPadDirection; subsetonly: Tgboolean): PGList; cdecl; external gstreamerlib;
+function gst_element_factory_list_is_type(factory: PGstElementFactory; _type: TGstElementFactoryListType): Tgboolean; cdecl; external libgstreamer;
+function gst_element_factory_list_get_elements(_type: TGstElementFactoryListType; minrank: TGstRank): PGList; cdecl; external libgstreamer;
+function gst_element_factory_list_filter(list: PGList; caps: PGstCaps; direction: TGstPadDirection; subsetonly: Tgboolean): PGList; cdecl; external libgstreamer;
 
 function GST_ELEMENT_FACTORY_CAST(obj: Pointer): PGstElementFactory;
 

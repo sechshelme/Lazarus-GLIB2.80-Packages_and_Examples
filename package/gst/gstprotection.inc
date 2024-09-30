@@ -20,12 +20,12 @@ type
   PGstProtectionMeta = ^TGstProtectionMeta;
 
 
-function gst_protection_meta_get_info: PGstMetaInfo; cdecl; external gstreamerlib;
-function gst_buffer_add_protection_meta(buffer: PGstBuffer; info: PGstStructure): PGstProtectionMeta; cdecl; external gstreamerlib;
-function gst_protection_select_system(system_identifiers: PPgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_protection_filter_systems_by_available_decryptors(system_identifiers: PPgchar): PPgchar; cdecl; external gstreamerlib;
+function gst_protection_meta_get_info: PGstMetaInfo; cdecl; external libgstreamer;
+function gst_buffer_add_protection_meta(buffer: PGstBuffer; info: PGstStructure): PGstProtectionMeta; cdecl; external libgstreamer;
+function gst_protection_select_system(system_identifiers: PPgchar): Pgchar; cdecl; external libgstreamer;
+function gst_protection_filter_systems_by_available_decryptors(system_identifiers: PPgchar): PPgchar; cdecl; external libgstreamer;
 
-function gst_protection_meta_api_get_type: TGType; cdecl; external gstreamerlib;
+function gst_protection_meta_api_get_type: TGType; cdecl; external libgstreamer;
 function gst_buffer_get_protection_meta(b: PGstBuffer): PGstProtectionMeta;
 
 function GST_PROTECTION_META_INFO: PGstMetaInfo;

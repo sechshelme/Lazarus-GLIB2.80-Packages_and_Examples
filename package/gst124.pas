@@ -14,7 +14,7 @@ uses
 
 const
   {$ifdef Linux}
-  gstreamerlib = 'libgstreamer-1.0';
+  libgstreamer = 'libgstreamer-1.0';
   libgstpbutils = 'libgstpbutils-1.0';
   libgstaudio = 'libgstaudio-1.0';
   libgstbadaudio = 'libgstbadaudio-1.0';

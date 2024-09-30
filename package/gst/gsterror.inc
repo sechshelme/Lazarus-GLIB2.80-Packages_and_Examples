@@ -84,11 +84,11 @@ const
   GST_STREAM_ERROR_DECRYPT_NOKEY = 13;
   GST_STREAM_ERROR_NUM_ERRORS = 14;
 
-function gst_error_get_message(domain: TGQuark; code: Tgint): Pgchar; cdecl; external gstreamerlib;
-function gst_stream_error_quark: TGQuark; cdecl; external gstreamerlib;
-function gst_core_error_quark: TGQuark; cdecl; external gstreamerlib;
-function gst_resource_error_quark: TGQuark; cdecl; external gstreamerlib;
-function gst_library_error_quark: TGQuark; cdecl; external gstreamerlib;
+function gst_error_get_message(domain: TGQuark; code: Tgint): Pgchar; cdecl; external libgstreamer;
+function gst_stream_error_quark: TGQuark; cdecl; external libgstreamer;
+function gst_core_error_quark: TGQuark; cdecl; external libgstreamer;
+function gst_resource_error_quark: TGQuark; cdecl; external libgstreamer;
+function gst_library_error_quark: TGQuark; cdecl; external libgstreamer;
 
 function GST_LIBRARY_ERROR: TGQuark;
 function GST_RESOURCE_ERROR: TGQuark;

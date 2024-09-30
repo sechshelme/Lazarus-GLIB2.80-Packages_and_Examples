@@ -9,7 +9,7 @@
 {$IFDEF read_interface}
 
 
-function gst_uri_error_quark: TGQuark; cdecl; external gstreamerlib;
+function gst_uri_error_quark: TGQuark; cdecl; external libgstreamer;
 
 type
   PGstURIError = ^TGstURIError;
@@ -45,20 +45,20 @@ type
     set_uri: function(handler: PGstURIHandler; uri: Pgchar; error: PPGError): Tgboolean; cdecl;
   end;
 
-function gst_uri_protocol_is_valid(protocol: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_protocol_is_supported(_type: TGstURIType; protocol: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_is_valid(uri: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_protocol(uri: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_has_protocol(uri: Pgchar; protocol: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_location(uri: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_construct(protocol: Pgchar; location: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_filename_to_uri(filename: Pgchar; error: PPGError): Pgchar; cdecl; external gstreamerlib;
-function gst_element_make_from_uri(_type: TGstURIType; uri: Pgchar; elementname: Pgchar; error: PPGError): PGstElement; cdecl; external gstreamerlib;
-function gst_uri_handler_get_type: TGType; cdecl; external gstreamerlib;
-function gst_uri_handler_get_uri_type(handler: PGstURIHandler): TGstURIType; cdecl; external gstreamerlib;
-function gst_uri_handler_get_protocols(handler: PGstURIHandler): PPgchar; cdecl; external gstreamerlib;
-function gst_uri_handler_get_uri(handler: PGstURIHandler): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_handler_set_uri(handler: PGstURIHandler; uri: Pgchar; error: PPGError): Tgboolean; cdecl; external gstreamerlib;
+function gst_uri_protocol_is_valid(protocol: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_protocol_is_supported(_type: TGstURIType; protocol: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_is_valid(uri: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_protocol(uri: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_uri_has_protocol(uri: Pgchar; protocol: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_location(uri: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_uri_construct(protocol: Pgchar; location: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_filename_to_uri(filename: Pgchar; error: PPGError): Pgchar; cdecl; external libgstreamer;
+function gst_element_make_from_uri(_type: TGstURIType; uri: Pgchar; elementname: Pgchar; error: PPGError): PGstElement; cdecl; external libgstreamer;
+function gst_uri_handler_get_type: TGType; cdecl; external libgstreamer;
+function gst_uri_handler_get_uri_type(handler: PGstURIHandler): TGstURIType; cdecl; external libgstreamer;
+function gst_uri_handler_get_protocols(handler: PGstURIHandler): PPgchar; cdecl; external libgstreamer;
+function gst_uri_handler_get_uri(handler: PGstURIHandler): Pgchar; cdecl; external libgstreamer;
+function gst_uri_handler_set_uri(handler: PGstURIHandler; uri: Pgchar; error: PPGError): Tgboolean; cdecl; external libgstreamer;
 
 type
   TGstUri = record
@@ -69,56 +69,56 @@ type
 const
   GST_URI_NO_PORT = 0;
 
-function gst_uri_get_type: TGType; cdecl; external gstreamerlib;
+function gst_uri_get_type: TGType; cdecl; external libgstreamer;
 function gst_uri_new(scheme: Pgchar; userinfo: Pgchar; host: Pgchar; port: Tguint; path: Pgchar;
-  query: Pgchar; fragment: Pgchar): PGstUri; cdecl; external gstreamerlib;
+  query: Pgchar; fragment: Pgchar): PGstUri; cdecl; external libgstreamer;
 function gst_uri_new_with_base(base: PGstUri; scheme: Pgchar; userinfo: Pgchar; host: Pgchar; port: Tguint;
-  path: Pgchar; query: Pgchar; fragment: Pgchar): PGstUri; cdecl; external gstreamerlib;
-function gst_uri_from_string(uri: Pgchar): PGstUri; cdecl; external gstreamerlib;
-function gst_uri_from_string_escaped(uri: Pgchar): PGstUri; cdecl; external gstreamerlib;
-function gst_uri_from_string_with_base(base: PGstUri; uri: Pgchar): PGstUri; cdecl; external gstreamerlib;
-function gst_uri_equal(First: PGstUri; second: PGstUri): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_join(base_uri: PGstUri; ref_uri: PGstUri): PGstUri; cdecl; external gstreamerlib;
-function gst_uri_join_strings(base_uri: Pgchar; ref_uri: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_is_writable(uri: PGstUri): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_make_writable(uri: PGstUri): PGstUri; cdecl; external gstreamerlib;
-function gst_uri_to_string(uri: PGstUri): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_to_string_with_keys(uri: PGstUri; keys: PGList): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_is_normalized(uri: PGstUri): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_normalize(uri: PGstUri): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_scheme(uri: PGstUri): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_set_scheme(uri: PGstUri; scheme: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_userinfo(uri: PGstUri): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_set_userinfo(uri: PGstUri; userinfo: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_host(uri: PGstUri): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_set_host(uri: PGstUri; host: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_port(uri: PGstUri): Tguint; cdecl; external gstreamerlib;
-function gst_uri_set_port(uri: PGstUri; port: Tguint): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_path(uri: PGstUri): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_set_path(uri: PGstUri; path: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_path_string(uri: PGstUri): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_set_path_string(uri: PGstUri; path: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_path_segments(uri: PGstUri): PGList; cdecl; external gstreamerlib;
-function gst_uri_set_path_segments(uri: PGstUri; path_segments: PGList): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_append_path(uri: PGstUri; relative_path: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_append_path_segment(uri: PGstUri; path_segment: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_query_string(uri: PGstUri): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_get_query_string_ordered(uri: PGstUri; keys: PGList): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_set_query_string(uri: PGstUri; query: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_query_table(uri: PGstUri): PGHashTable; cdecl; external gstreamerlib;
-function gst_uri_set_query_table(uri: PGstUri; query_table: PGHashTable): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_set_query_value(uri: PGstUri; query_key: Pgchar; query_value: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_remove_query_key(uri: PGstUri; query_key: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_query_has_key(uri: PGstUri; query_key: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_query_value(uri: PGstUri; query_key: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_get_query_keys(uri: PGstUri): PGList; cdecl; external gstreamerlib;
-function gst_uri_get_fragment(uri: PGstUri): Pgchar; cdecl; external gstreamerlib;
-function gst_uri_set_fragment(uri: PGstUri; fragment: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_uri_get_media_fragment_table(uri: PGstUri): PGHashTable; cdecl; external gstreamerlib;
-function gst_uri_copy(uri: PGstUri): PGstUri; cdecl; external gstreamerlib;
-function gst_uri_ref(uri: PGstUri): PGstUri; cdecl; external gstreamerlib;
-procedure gst_uri_unref(uri: PGstUri); cdecl; external gstreamerlib;
-procedure gst_clear_uri(uri_ptr: PPGstUri); cdecl; external gstreamerlib;
+  path: Pgchar; query: Pgchar; fragment: Pgchar): PGstUri; cdecl; external libgstreamer;
+function gst_uri_from_string(uri: Pgchar): PGstUri; cdecl; external libgstreamer;
+function gst_uri_from_string_escaped(uri: Pgchar): PGstUri; cdecl; external libgstreamer;
+function gst_uri_from_string_with_base(base: PGstUri; uri: Pgchar): PGstUri; cdecl; external libgstreamer;
+function gst_uri_equal(First: PGstUri; second: PGstUri): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_join(base_uri: PGstUri; ref_uri: PGstUri): PGstUri; cdecl; external libgstreamer;
+function gst_uri_join_strings(base_uri: Pgchar; ref_uri: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_uri_is_writable(uri: PGstUri): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_make_writable(uri: PGstUri): PGstUri; cdecl; external libgstreamer;
+function gst_uri_to_string(uri: PGstUri): Pgchar; cdecl; external libgstreamer;
+function gst_uri_to_string_with_keys(uri: PGstUri; keys: PGList): Pgchar; cdecl; external libgstreamer;
+function gst_uri_is_normalized(uri: PGstUri): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_normalize(uri: PGstUri): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_scheme(uri: PGstUri): Pgchar; cdecl; external libgstreamer;
+function gst_uri_set_scheme(uri: PGstUri; scheme: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_userinfo(uri: PGstUri): Pgchar; cdecl; external libgstreamer;
+function gst_uri_set_userinfo(uri: PGstUri; userinfo: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_host(uri: PGstUri): Pgchar; cdecl; external libgstreamer;
+function gst_uri_set_host(uri: PGstUri; host: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_port(uri: PGstUri): Tguint; cdecl; external libgstreamer;
+function gst_uri_set_port(uri: PGstUri; port: Tguint): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_path(uri: PGstUri): Pgchar; cdecl; external libgstreamer;
+function gst_uri_set_path(uri: PGstUri; path: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_path_string(uri: PGstUri): Pgchar; cdecl; external libgstreamer;
+function gst_uri_set_path_string(uri: PGstUri; path: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_path_segments(uri: PGstUri): PGList; cdecl; external libgstreamer;
+function gst_uri_set_path_segments(uri: PGstUri; path_segments: PGList): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_append_path(uri: PGstUri; relative_path: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_append_path_segment(uri: PGstUri; path_segment: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_query_string(uri: PGstUri): Pgchar; cdecl; external libgstreamer;
+function gst_uri_get_query_string_ordered(uri: PGstUri; keys: PGList): Pgchar; cdecl; external libgstreamer;
+function gst_uri_set_query_string(uri: PGstUri; query: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_query_table(uri: PGstUri): PGHashTable; cdecl; external libgstreamer;
+function gst_uri_set_query_table(uri: PGstUri; query_table: PGHashTable): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_set_query_value(uri: PGstUri; query_key: Pgchar; query_value: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_remove_query_key(uri: PGstUri; query_key: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_query_has_key(uri: PGstUri; query_key: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_query_value(uri: PGstUri; query_key: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_uri_get_query_keys(uri: PGstUri): PGList; cdecl; external libgstreamer;
+function gst_uri_get_fragment(uri: PGstUri): Pgchar; cdecl; external libgstreamer;
+function gst_uri_set_fragment(uri: PGstUri; fragment: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_uri_get_media_fragment_table(uri: PGstUri): PGHashTable; cdecl; external libgstreamer;
+function gst_uri_copy(uri: PGstUri): PGstUri; cdecl; external libgstreamer;
+function gst_uri_ref(uri: PGstUri): PGstUri; cdecl; external libgstreamer;
+procedure gst_uri_unref(uri: PGstUri); cdecl; external libgstreamer;
+procedure gst_clear_uri(uri_ptr: PPGstUri); cdecl; external libgstreamer;
 
 function GST_TYPE_URI_HANDLER: TGType;
 function GST_URI_HANDLER(obj: Pointer): PGstURIHandler;

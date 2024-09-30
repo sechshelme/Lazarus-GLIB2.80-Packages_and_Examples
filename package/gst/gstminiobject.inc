@@ -10,9 +10,9 @@
 
 
 var
-  _gst_mini_object_type: TGType; cvar;external gstreamerlib;
+  _gst_mini_object_type: TGType; cvar;external libgstreamer;
 
-function gst_mini_object_get_type: TGType; cdecl; external gstreamerlib;
+function gst_mini_object_get_type: TGType; cdecl; external libgstreamer;
 
 type
   PGstMiniObjectFlags = ^TGstMiniObjectFlags;
@@ -35,26 +35,26 @@ const
   GST_LOCK_FLAG_LAST = 1 shl 8;
 
 procedure gst_mini_object_init(mini_object: PGstMiniObject; flags: Tguint; _type: TGType; copy_func: TGstMiniObjectCopyFunction; dispose_func: TGstMiniObjectDisposeFunction;
-  free_func: TGstMiniObjectFreeFunction); cdecl; external gstreamerlib;
-function gst_mini_object_ref(mini_object: PGstMiniObject): PGstMiniObject; cdecl; external gstreamerlib;
-procedure gst_mini_object_unref(mini_object: PGstMiniObject); cdecl; external gstreamerlib;
-procedure gst_clear_mini_object(object_ptr: PPGstMiniObject); cdecl; external gstreamerlib;
+  free_func: TGstMiniObjectFreeFunction); cdecl; external libgstreamer;
+function gst_mini_object_ref(mini_object: PGstMiniObject): PGstMiniObject; cdecl; external libgstreamer;
+procedure gst_mini_object_unref(mini_object: PGstMiniObject); cdecl; external libgstreamer;
+procedure gst_clear_mini_object(object_ptr: PPGstMiniObject); cdecl; external libgstreamer;
 
-procedure gst_mini_object_weak_ref(obj: PGstMiniObject; notify: TGstMiniObjectNotify; Data: Tgpointer); cdecl; external gstreamerlib;
-procedure gst_mini_object_weak_unref(obj: PGstMiniObject; notify: TGstMiniObjectNotify; Data: Tgpointer); cdecl; external gstreamerlib;
-function gst_mini_object_lock(obj: PGstMiniObject; flags: TGstLockFlags): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_mini_object_unlock(obj: PGstMiniObject; flags: TGstLockFlags); cdecl; external gstreamerlib;
-function gst_mini_object_is_writable(mini_object: PGstMiniObject): Tgboolean; cdecl; external gstreamerlib;
-function gst_mini_object_make_writable(mini_object: PGstMiniObject): PGstMiniObject; cdecl; external gstreamerlib;
-function gst_mini_object_copy(mini_object: PGstMiniObject): PGstMiniObject; cdecl; external gstreamerlib;
-procedure gst_mini_object_set_qdata(obj: PGstMiniObject; quark: TGQuark; Data: Tgpointer; Destroy: TGDestroyNotify); cdecl; external gstreamerlib;
-function gst_mini_object_get_qdata(obj: PGstMiniObject; quark: TGQuark): Tgpointer; cdecl; external gstreamerlib;
-function gst_mini_object_steal_qdata(obj: PGstMiniObject; quark: TGQuark): Tgpointer; cdecl; external gstreamerlib;
-procedure gst_mini_object_add_parent(obj: PGstMiniObject; parent: PGstMiniObject); cdecl; external gstreamerlib;
-procedure gst_mini_object_remove_parent(obj: PGstMiniObject; parent: PGstMiniObject); cdecl; external gstreamerlib;
-function gst_mini_object_replace(olddata: PPGstMiniObject; newdata: PGstMiniObject): Tgboolean; cdecl; external gstreamerlib;
-function gst_mini_object_take(olddata: PPGstMiniObject; newdata: PGstMiniObject): Tgboolean; cdecl; external gstreamerlib;
-function gst_mini_object_steal(olddata: PPGstMiniObject): PGstMiniObject; cdecl; external gstreamerlib;
+procedure gst_mini_object_weak_ref(obj: PGstMiniObject; notify: TGstMiniObjectNotify; Data: Tgpointer); cdecl; external libgstreamer;
+procedure gst_mini_object_weak_unref(obj: PGstMiniObject; notify: TGstMiniObjectNotify; Data: Tgpointer); cdecl; external libgstreamer;
+function gst_mini_object_lock(obj: PGstMiniObject; flags: TGstLockFlags): Tgboolean; cdecl; external libgstreamer;
+procedure gst_mini_object_unlock(obj: PGstMiniObject; flags: TGstLockFlags); cdecl; external libgstreamer;
+function gst_mini_object_is_writable(mini_object: PGstMiniObject): Tgboolean; cdecl; external libgstreamer;
+function gst_mini_object_make_writable(mini_object: PGstMiniObject): PGstMiniObject; cdecl; external libgstreamer;
+function gst_mini_object_copy(mini_object: PGstMiniObject): PGstMiniObject; cdecl; external libgstreamer;
+procedure gst_mini_object_set_qdata(obj: PGstMiniObject; quark: TGQuark; Data: Tgpointer; Destroy: TGDestroyNotify); cdecl; external libgstreamer;
+function gst_mini_object_get_qdata(obj: PGstMiniObject; quark: TGQuark): Tgpointer; cdecl; external libgstreamer;
+function gst_mini_object_steal_qdata(obj: PGstMiniObject; quark: TGQuark): Tgpointer; cdecl; external libgstreamer;
+procedure gst_mini_object_add_parent(obj: PGstMiniObject; parent: PGstMiniObject); cdecl; external libgstreamer;
+procedure gst_mini_object_remove_parent(obj: PGstMiniObject; parent: PGstMiniObject); cdecl; external libgstreamer;
+function gst_mini_object_replace(olddata: PPGstMiniObject; newdata: PGstMiniObject): Tgboolean; cdecl; external libgstreamer;
+function gst_mini_object_take(olddata: PPGstMiniObject; newdata: PGstMiniObject): Tgboolean; cdecl; external libgstreamer;
+function gst_mini_object_steal(olddata: PPGstMiniObject): PGstMiniObject; cdecl; external libgstreamer;
 
 
 function GST_TYPE_MINI_OBJECT: TGType;

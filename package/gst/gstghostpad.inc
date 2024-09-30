@@ -26,12 +26,12 @@ type
   PGstProxyPadClass = ^TGstProxyPadClass;
 
 
-function gst_proxy_pad_get_type: TGType; cdecl; external gstreamerlib;
-function gst_proxy_pad_get_internal(pad: PGstProxyPad): PGstProxyPad; cdecl; external gstreamerlib;
-function gst_proxy_pad_iterate_internal_links_default(pad: PGstPad; parent: PGstObject): PGstIterator; cdecl; external gstreamerlib;
-function gst_proxy_pad_chain_default(pad: PGstPad; parent: PGstObject; buffer: PGstBuffer): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_proxy_pad_chain_list_default(pad: PGstPad; parent: PGstObject; list: PGstBufferList): TGstFlowReturn; cdecl; external gstreamerlib;
-function gst_proxy_pad_getrange_default(pad: PGstPad; parent: PGstObject; offset: Tguint64; size: Tguint; buffer: PPGstBuffer): TGstFlowReturn; cdecl; external gstreamerlib;
+function gst_proxy_pad_get_type: TGType; cdecl; external libgstreamer;
+function gst_proxy_pad_get_internal(pad: PGstProxyPad): PGstProxyPad; cdecl; external libgstreamer;
+function gst_proxy_pad_iterate_internal_links_default(pad: PGstPad; parent: PGstObject): PGstIterator; cdecl; external libgstreamer;
+function gst_proxy_pad_chain_default(pad: PGstPad; parent: PGstObject; buffer: PGstBuffer): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_proxy_pad_chain_list_default(pad: PGstPad; parent: PGstObject; list: PGstBufferList): TGstFlowReturn; cdecl; external libgstreamer;
+function gst_proxy_pad_getrange_default(pad: PGstPad; parent: PGstObject; offset: Tguint64; size: Tguint; buffer: PPGstBuffer): TGstFlowReturn; cdecl; external libgstreamer;
 
 type
   TGstGhostPadPrivate = record
@@ -50,16 +50,16 @@ type
   end;
   PGstGhostPadClass = ^TGstGhostPadClass;
 
-function gst_ghost_pad_get_type: TGType; cdecl; external gstreamerlib;
-function gst_ghost_pad_new(Name: Pgchar; target: PGstPad): PGstPad; cdecl; external gstreamerlib;
-function gst_ghost_pad_new_no_target(Name: Pgchar; dir: TGstPadDirection): PGstPad; cdecl; external gstreamerlib;
-function gst_ghost_pad_new_from_template(Name: Pgchar; target: PGstPad; templ: PGstPadTemplate): PGstPad; cdecl; external gstreamerlib;
-function gst_ghost_pad_new_no_target_from_template(Name: Pgchar; templ: PGstPadTemplate): PGstPad; cdecl; external gstreamerlib;
-function gst_ghost_pad_get_target(gpad: PGstGhostPad): PGstPad; cdecl; external gstreamerlib;
-function gst_ghost_pad_set_target(gpad: PGstGhostPad; newtarget: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_ghost_pad_construct(gpad: PGstGhostPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_ghost_pad_activate_mode_default(pad: PGstPad; parent: PGstObject; mode: TGstPadMode; active: Tgboolean): Tgboolean; cdecl; external gstreamerlib;
-function gst_ghost_pad_internal_activate_mode_default(pad: PGstPad; parent: PGstObject; mode: TGstPadMode; active: Tgboolean): Tgboolean; cdecl; external gstreamerlib;
+function gst_ghost_pad_get_type: TGType; cdecl; external libgstreamer;
+function gst_ghost_pad_new(Name: Pgchar; target: PGstPad): PGstPad; cdecl; external libgstreamer;
+function gst_ghost_pad_new_no_target(Name: Pgchar; dir: TGstPadDirection): PGstPad; cdecl; external libgstreamer;
+function gst_ghost_pad_new_from_template(Name: Pgchar; target: PGstPad; templ: PGstPadTemplate): PGstPad; cdecl; external libgstreamer;
+function gst_ghost_pad_new_no_target_from_template(Name: Pgchar; templ: PGstPadTemplate): PGstPad; cdecl; external libgstreamer;
+function gst_ghost_pad_get_target(gpad: PGstGhostPad): PGstPad; cdecl; external libgstreamer;
+function gst_ghost_pad_set_target(gpad: PGstGhostPad; newtarget: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_ghost_pad_construct(gpad: PGstGhostPad): Tgboolean; cdecl; external libgstreamer;
+function gst_ghost_pad_activate_mode_default(pad: PGstPad; parent: PGstObject; mode: TGstPadMode; active: Tgboolean): Tgboolean; cdecl; external libgstreamer;
+function gst_ghost_pad_internal_activate_mode_default(pad: PGstPad; parent: PGstObject; mode: TGstPadMode; active: Tgboolean): Tgboolean; cdecl; external libgstreamer;
 
 function GST_GHOST_PAD_CAST(obj: Pointer): PGstGhostPad;
 

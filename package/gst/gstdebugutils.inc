@@ -21,9 +21,9 @@ const
   GST_DEBUG_GRAPH_SHOW_ALL = (1 shl 4) - 1;
   GST_DEBUG_GRAPH_SHOW_VERBOSE = Tgint($ffffffff);
 
-function gst_debug_bin_to_dot_data(bin: PGstBin; details: TGstDebugGraphDetails): Pgchar; cdecl; external gstreamerlib;
-procedure gst_debug_bin_to_dot_file(bin: PGstBin; details: TGstDebugGraphDetails; file_name: Pgchar); cdecl; external gstreamerlib;
-procedure gst_debug_bin_to_dot_file_with_ts(bin: PGstBin; details: TGstDebugGraphDetails; file_name: Pgchar); cdecl; external gstreamerlib;
+function gst_debug_bin_to_dot_data(bin: PGstBin; details: TGstDebugGraphDetails): Pgchar; cdecl; external libgstreamer;
+procedure gst_debug_bin_to_dot_file(bin: PGstBin; details: TGstDebugGraphDetails; file_name: Pgchar); cdecl; external libgstreamer;
+procedure gst_debug_bin_to_dot_file_with_ts(bin: PGstBin; details: TGstDebugGraphDetails; file_name: Pgchar); cdecl; external libgstreamer;
 
 // === Konventiert am: 16-9-24 19:34:10 ===
 

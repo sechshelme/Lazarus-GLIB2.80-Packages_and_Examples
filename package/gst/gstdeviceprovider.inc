@@ -32,26 +32,26 @@ type
   end;
   PGstDeviceProviderClass = ^TGstDeviceProviderClass;
 
-function gst_device_provider_get_type: TGType; cdecl; external gstreamerlib;
-function gst_device_provider_get_devices(provider: PGstDeviceProvider): PGList; cdecl; external gstreamerlib;
-function gst_device_provider_start(provider: PGstDeviceProvider): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_device_provider_stop(provider: PGstDeviceProvider); cdecl; external gstreamerlib;
-function gst_device_provider_can_monitor(provider: PGstDeviceProvider): Tgboolean; cdecl; external gstreamerlib;
-function gst_device_provider_get_bus(provider: PGstDeviceProvider): PGstBus; cdecl; external gstreamerlib;
-procedure gst_device_provider_device_add(provider: PGstDeviceProvider; device: PGstDevice); cdecl; external gstreamerlib;
-procedure gst_device_provider_device_remove(provider: PGstDeviceProvider; device: PGstDevice); cdecl; external gstreamerlib;
-function gst_device_provider_get_hidden_providers(provider: PGstDeviceProvider): PPgchar; cdecl; external gstreamerlib;
-procedure gst_device_provider_hide_provider(provider: PGstDeviceProvider; Name: Pgchar); cdecl; external gstreamerlib;
-procedure gst_device_provider_unhide_provider(provider: PGstDeviceProvider; Name: Pgchar); cdecl; external gstreamerlib;
-function gst_device_provider_get_metadata(provider: PGstDeviceProvider; key: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_device_provider_is_started(provider: PGstDeviceProvider): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_device_provider_class_set_metadata(klass: PGstDeviceProviderClass; longname: Pgchar; classification: Pgchar; description: Pgchar; author: Pgchar); cdecl; external gstreamerlib;
-procedure gst_device_provider_class_set_static_metadata(klass: PGstDeviceProviderClass; longname: Pgchar; classification: Pgchar; description: Pgchar; author: Pgchar); cdecl; external gstreamerlib;
-procedure gst_device_provider_class_add_metadata(klass: PGstDeviceProviderClass; key: Pgchar; Value: Pgchar); cdecl; external gstreamerlib;
-procedure gst_device_provider_class_add_static_metadata(klass: PGstDeviceProviderClass; key: Pgchar; Value: Pgchar); cdecl; external gstreamerlib;
-function gst_device_provider_class_get_metadata(klass: PGstDeviceProviderClass; key: Pgchar): Pgchar; cdecl; external gstreamerlib;
-procedure gst_device_provider_device_changed(provider: PGstDeviceProvider; device: PGstDevice; changed_device: PGstDevice); cdecl; external gstreamerlib;
-function gst_device_provider_get_factory(provider: PGstDeviceProvider): PGstDeviceProviderFactory; cdecl; external gstreamerlib;
+function gst_device_provider_get_type: TGType; cdecl; external libgstreamer;
+function gst_device_provider_get_devices(provider: PGstDeviceProvider): PGList; cdecl; external libgstreamer;
+function gst_device_provider_start(provider: PGstDeviceProvider): Tgboolean; cdecl; external libgstreamer;
+procedure gst_device_provider_stop(provider: PGstDeviceProvider); cdecl; external libgstreamer;
+function gst_device_provider_can_monitor(provider: PGstDeviceProvider): Tgboolean; cdecl; external libgstreamer;
+function gst_device_provider_get_bus(provider: PGstDeviceProvider): PGstBus; cdecl; external libgstreamer;
+procedure gst_device_provider_device_add(provider: PGstDeviceProvider; device: PGstDevice); cdecl; external libgstreamer;
+procedure gst_device_provider_device_remove(provider: PGstDeviceProvider; device: PGstDevice); cdecl; external libgstreamer;
+function gst_device_provider_get_hidden_providers(provider: PGstDeviceProvider): PPgchar; cdecl; external libgstreamer;
+procedure gst_device_provider_hide_provider(provider: PGstDeviceProvider; Name: Pgchar); cdecl; external libgstreamer;
+procedure gst_device_provider_unhide_provider(provider: PGstDeviceProvider; Name: Pgchar); cdecl; external libgstreamer;
+function gst_device_provider_get_metadata(provider: PGstDeviceProvider; key: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_device_provider_is_started(provider: PGstDeviceProvider): Tgboolean; cdecl; external libgstreamer;
+procedure gst_device_provider_class_set_metadata(klass: PGstDeviceProviderClass; longname: Pgchar; classification: Pgchar; description: Pgchar; author: Pgchar); cdecl; external libgstreamer;
+procedure gst_device_provider_class_set_static_metadata(klass: PGstDeviceProviderClass; longname: Pgchar; classification: Pgchar; description: Pgchar; author: Pgchar); cdecl; external libgstreamer;
+procedure gst_device_provider_class_add_metadata(klass: PGstDeviceProviderClass; key: Pgchar; Value: Pgchar); cdecl; external libgstreamer;
+procedure gst_device_provider_class_add_static_metadata(klass: PGstDeviceProviderClass; key: Pgchar; Value: Pgchar); cdecl; external libgstreamer;
+function gst_device_provider_class_get_metadata(klass: PGstDeviceProviderClass; key: Pgchar): Pgchar; cdecl; external libgstreamer;
+procedure gst_device_provider_device_changed(provider: PGstDeviceProvider; device: PGstDevice; changed_device: PGstDevice); cdecl; external libgstreamer;
+function gst_device_provider_get_factory(provider: PGstDeviceProvider): PGstDeviceProviderFactory; cdecl; external libgstreamer;
 
 function GST_DEVICE_PROVIDER_CAST(obj: Pointer): PGstDeviceProvider;
 

@@ -47,21 +47,21 @@ type
     end;
 
 
-procedure gst_task_cleanup_all;cdecl;external gstreamerlib;
-function gst_task_get_type:TGType;cdecl;external gstreamerlib;
-function gst_task_new(func:TGstTaskFunction; user_data:Tgpointer; notify:TGDestroyNotify):PGstTask;cdecl;external gstreamerlib;
-procedure gst_task_set_lock(task:PGstTask; mutex:PGRecMutex);cdecl;external gstreamerlib;
-function gst_task_get_pool(task:PGstTask):PGstTaskPool;cdecl;external gstreamerlib;
-procedure gst_task_set_pool(task:PGstTask; pool:PGstTaskPool);cdecl;external gstreamerlib;
-procedure gst_task_set_enter_callback(task:PGstTask; enter_func:TGstTaskThreadFunc; user_data:Tgpointer; notify:TGDestroyNotify);cdecl;external gstreamerlib;
-procedure gst_task_set_leave_callback(task:PGstTask; leave_func:TGstTaskThreadFunc; user_data:Tgpointer; notify:TGDestroyNotify);cdecl;external gstreamerlib;
-function gst_task_get_state(task:PGstTask):TGstTaskState;cdecl;external gstreamerlib;
-function gst_task_set_state(task:PGstTask; state:TGstTaskState):Tgboolean;cdecl;external gstreamerlib;
-function gst_task_start(task:PGstTask):Tgboolean;cdecl;external gstreamerlib;
-function gst_task_stop(task:PGstTask):Tgboolean;cdecl;external gstreamerlib;
-function gst_task_pause(task:PGstTask):Tgboolean;cdecl;external gstreamerlib;
-function gst_task_resume(task:PGstTask):Tgboolean;cdecl;external gstreamerlib;
-function gst_task_join(task:PGstTask):Tgboolean;cdecl;external gstreamerlib;
+procedure gst_task_cleanup_all;cdecl;external libgstreamer;
+function gst_task_get_type:TGType;cdecl;external libgstreamer;
+function gst_task_new(func:TGstTaskFunction; user_data:Tgpointer; notify:TGDestroyNotify):PGstTask;cdecl;external libgstreamer;
+procedure gst_task_set_lock(task:PGstTask; mutex:PGRecMutex);cdecl;external libgstreamer;
+function gst_task_get_pool(task:PGstTask):PGstTaskPool;cdecl;external libgstreamer;
+procedure gst_task_set_pool(task:PGstTask; pool:PGstTaskPool);cdecl;external libgstreamer;
+procedure gst_task_set_enter_callback(task:PGstTask; enter_func:TGstTaskThreadFunc; user_data:Tgpointer; notify:TGDestroyNotify);cdecl;external libgstreamer;
+procedure gst_task_set_leave_callback(task:PGstTask; leave_func:TGstTaskThreadFunc; user_data:Tgpointer; notify:TGDestroyNotify);cdecl;external libgstreamer;
+function gst_task_get_state(task:PGstTask):TGstTaskState;cdecl;external libgstreamer;
+function gst_task_set_state(task:PGstTask; state:TGstTaskState):Tgboolean;cdecl;external libgstreamer;
+function gst_task_start(task:PGstTask):Tgboolean;cdecl;external libgstreamer;
+function gst_task_stop(task:PGstTask):Tgboolean;cdecl;external libgstreamer;
+function gst_task_pause(task:PGstTask):Tgboolean;cdecl;external libgstreamer;
+function gst_task_resume(task:PGstTask):Tgboolean;cdecl;external libgstreamer;
+function gst_task_join(task:PGstTask):Tgboolean;cdecl;external libgstreamer;
 
 function GST_TASK_CAST(task : Pointer) : PGstTask;
 function GST_TASK_STATE(task : Pointer) : TGstTaskState;

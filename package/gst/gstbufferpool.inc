@@ -48,26 +48,26 @@ type
   PGstBufferPoolClass = ^TGstBufferPoolClass;
 
 
-function gst_buffer_pool_get_type: TGType; cdecl; external gstreamerlib;
-function gst_buffer_pool_new: PGstBufferPool; cdecl; external gstreamerlib;
-function gst_buffer_pool_set_active(pool: PGstBufferPool; active: Tgboolean): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_pool_is_active(pool: PGstBufferPool): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_pool_set_config(pool: PGstBufferPool; config: PGstStructure): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_pool_get_config(pool: PGstBufferPool): PGstStructure; cdecl; external gstreamerlib;
-function gst_buffer_pool_get_options(pool: PGstBufferPool): PPgchar; cdecl; external gstreamerlib;
-function gst_buffer_pool_has_option(pool: PGstBufferPool; option: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_buffer_pool_set_flushing(pool: PGstBufferPool; flushing: Tgboolean); cdecl; external gstreamerlib;
-procedure gst_buffer_pool_config_set_params(config: PGstStructure; caps: PGstCaps; size: Tguint; min_buffers: Tguint; max_buffers: Tguint); cdecl; external gstreamerlib;
-function gst_buffer_pool_config_get_params(config: PGstStructure; caps: PPGstCaps; size: Pguint; min_buffers: Pguint; max_buffers: Pguint): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_buffer_pool_config_set_allocator(config: PGstStructure; allocator: PGstAllocator; params: PGstAllocationParams); cdecl; external gstreamerlib;
-function gst_buffer_pool_config_get_allocator(config: PGstStructure; allocator: PPGstAllocator; params: PGstAllocationParams): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_pool_config_n_options(config: PGstStructure): Tguint; cdecl; external gstreamerlib;
-procedure gst_buffer_pool_config_add_option(config: PGstStructure; option: Pgchar); cdecl; external gstreamerlib;
-function gst_buffer_pool_config_get_option(config: PGstStructure; index: Tguint): Pgchar; cdecl; external gstreamerlib;
-function gst_buffer_pool_config_has_option(config: PGstStructure; option: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_pool_config_validate_params(config: PGstStructure; caps: PGstCaps; size: Tguint; min_buffers: Tguint; max_buffers: Tguint): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_pool_acquire_buffer(pool: PGstBufferPool; buffer: PPGstBuffer; params: PGstBufferPoolAcquireParams): TGstFlowReturn; cdecl; external gstreamerlib;
-procedure gst_buffer_pool_release_buffer(pool: PGstBufferPool; buffer: PGstBuffer); cdecl; external gstreamerlib;
+function gst_buffer_pool_get_type: TGType; cdecl; external libgstreamer;
+function gst_buffer_pool_new: PGstBufferPool; cdecl; external libgstreamer;
+function gst_buffer_pool_set_active(pool: PGstBufferPool; active: Tgboolean): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_pool_is_active(pool: PGstBufferPool): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_pool_set_config(pool: PGstBufferPool; config: PGstStructure): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_pool_get_config(pool: PGstBufferPool): PGstStructure; cdecl; external libgstreamer;
+function gst_buffer_pool_get_options(pool: PGstBufferPool): PPgchar; cdecl; external libgstreamer;
+function gst_buffer_pool_has_option(pool: PGstBufferPool; option: Pgchar): Tgboolean; cdecl; external libgstreamer;
+procedure gst_buffer_pool_set_flushing(pool: PGstBufferPool; flushing: Tgboolean); cdecl; external libgstreamer;
+procedure gst_buffer_pool_config_set_params(config: PGstStructure; caps: PGstCaps; size: Tguint; min_buffers: Tguint; max_buffers: Tguint); cdecl; external libgstreamer;
+function gst_buffer_pool_config_get_params(config: PGstStructure; caps: PPGstCaps; size: Pguint; min_buffers: Pguint; max_buffers: Pguint): Tgboolean; cdecl; external libgstreamer;
+procedure gst_buffer_pool_config_set_allocator(config: PGstStructure; allocator: PGstAllocator; params: PGstAllocationParams); cdecl; external libgstreamer;
+function gst_buffer_pool_config_get_allocator(config: PGstStructure; allocator: PPGstAllocator; params: PGstAllocationParams): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_pool_config_n_options(config: PGstStructure): Tguint; cdecl; external libgstreamer;
+procedure gst_buffer_pool_config_add_option(config: PGstStructure; option: Pgchar); cdecl; external libgstreamer;
+function gst_buffer_pool_config_get_option(config: PGstStructure; index: Tguint): Pgchar; cdecl; external libgstreamer;
+function gst_buffer_pool_config_has_option(config: PGstStructure; option: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_pool_config_validate_params(config: PGstStructure; caps: PGstCaps; size: Tguint; min_buffers: Tguint; max_buffers: Tguint): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_pool_acquire_buffer(pool: PGstBufferPool; buffer: PPGstBuffer; params: PGstBufferPoolAcquireParams): TGstFlowReturn; cdecl; external libgstreamer;
+procedure gst_buffer_pool_release_buffer(pool: PGstBufferPool; buffer: PGstBuffer); cdecl; external libgstreamer;
 
 function GST_BUFFER_POOL_CAST(obj: Pointer): PGstBufferPool;
 

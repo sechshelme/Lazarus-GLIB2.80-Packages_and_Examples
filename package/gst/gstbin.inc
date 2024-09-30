@@ -55,23 +55,23 @@ type
   PGstBinClass = ^TGstBinClass;
 
 
-function gst_bin_get_type: TGType; cdecl; external gstreamerlib;
-function gst_bin_new(Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_bin_add(bin: PGstBin; element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
-function gst_bin_remove(bin: PGstBin; element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
-function gst_bin_get_by_name(bin: PGstBin; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_bin_get_by_name_recurse_up(bin: PGstBin; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_bin_get_by_interface(bin: PGstBin; iface: TGType): PGstElement; cdecl; external gstreamerlib;
-function gst_bin_iterate_elements(bin: PGstBin): PGstIterator; cdecl; external gstreamerlib;
-function gst_bin_iterate_sorted(bin: PGstBin): PGstIterator; cdecl; external gstreamerlib;
-function gst_bin_iterate_recurse(bin: PGstBin): PGstIterator; cdecl; external gstreamerlib;
-function gst_bin_iterate_sinks(bin: PGstBin): PGstIterator; cdecl; external gstreamerlib;
-function gst_bin_iterate_sources(bin: PGstBin): PGstIterator; cdecl; external gstreamerlib;
-function gst_bin_iterate_all_by_interface(bin: PGstBin; iface: TGType): PGstIterator; cdecl; external gstreamerlib;
-function gst_bin_iterate_all_by_element_factory_name(bin: PGstBin; factory_name: Pgchar): PGstIterator; cdecl; external gstreamerlib;
-function gst_bin_recalculate_latency(bin: PGstBin): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_bin_set_suppressed_flags(bin: PGstBin; flags: TGstElementFlags); cdecl; external gstreamerlib;
-function gst_bin_get_suppressed_flags(bin: PGstBin): TGstElementFlags; cdecl; external gstreamerlib;
+function gst_bin_get_type: TGType; cdecl; external libgstreamer;
+function gst_bin_new(Name: Pgchar): PGstElement; cdecl; external libgstreamer;
+function gst_bin_add(bin: PGstBin; element: PGstElement): Tgboolean; cdecl; external libgstreamer;
+function gst_bin_remove(bin: PGstBin; element: PGstElement): Tgboolean; cdecl; external libgstreamer;
+function gst_bin_get_by_name(bin: PGstBin; Name: Pgchar): PGstElement; cdecl; external libgstreamer;
+function gst_bin_get_by_name_recurse_up(bin: PGstBin; Name: Pgchar): PGstElement; cdecl; external libgstreamer;
+function gst_bin_get_by_interface(bin: PGstBin; iface: TGType): PGstElement; cdecl; external libgstreamer;
+function gst_bin_iterate_elements(bin: PGstBin): PGstIterator; cdecl; external libgstreamer;
+function gst_bin_iterate_sorted(bin: PGstBin): PGstIterator; cdecl; external libgstreamer;
+function gst_bin_iterate_recurse(bin: PGstBin): PGstIterator; cdecl; external libgstreamer;
+function gst_bin_iterate_sinks(bin: PGstBin): PGstIterator; cdecl; external libgstreamer;
+function gst_bin_iterate_sources(bin: PGstBin): PGstIterator; cdecl; external libgstreamer;
+function gst_bin_iterate_all_by_interface(bin: PGstBin; iface: TGType): PGstIterator; cdecl; external libgstreamer;
+function gst_bin_iterate_all_by_element_factory_name(bin: PGstBin; factory_name: Pgchar): PGstIterator; cdecl; external libgstreamer;
+function gst_bin_recalculate_latency(bin: PGstBin): Tgboolean; cdecl; external libgstreamer;
+procedure gst_bin_set_suppressed_flags(bin: PGstBin; flags: TGstElementFlags); cdecl; external libgstreamer;
+function gst_bin_get_suppressed_flags(bin: PGstBin): TGstElementFlags; cdecl; external libgstreamer;
 
 function GST_BIN_IS_NO_RESYNC(bin: Pointer): Tgboolean;
 function GST_BIN_NUMCHILDREN(bin: Pointer): Tgint;

@@ -9,7 +9,7 @@
 {$IFDEF read_interface}
 
 
-function gst_parse_error_quark: TGQuark; cdecl; external gstreamerlib;
+function gst_parse_error_quark: TGQuark; cdecl; external libgstreamer;
 
 type
   PGstParseError = ^TGstParseError;
@@ -40,15 +40,15 @@ type
   end;
   PGstParseContext = ^TGstParseContext;
 
-function gst_parse_context_get_type: TGType; cdecl; external gstreamerlib;
-function gst_parse_context_new: PGstParseContext; cdecl; external gstreamerlib;
-function gst_parse_context_get_missing_elements(context: PGstParseContext): PPgchar; cdecl; external gstreamerlib;
-procedure gst_parse_context_free(context: PGstParseContext); cdecl; external gstreamerlib;
-function gst_parse_context_copy(context: PGstParseContext): PGstParseContext; cdecl; external gstreamerlib;
-function gst_parse_launch(pipeline_description: Pgchar; error: PPGError): PGstElement; cdecl; external gstreamerlib;
-function gst_parse_launchv(argv: PPgchar; error: PPGError): PGstElement; cdecl; external gstreamerlib;
-function gst_parse_launch_full(pipeline_description: Pgchar; context: PGstParseContext; flags: TGstParseFlags; error: PPGError): PGstElement; cdecl; external gstreamerlib;
-function gst_parse_launchv_full(argv: PPgchar; context: PGstParseContext; flags: TGstParseFlags; error: PPGError): PGstElement; cdecl; external gstreamerlib;
+function gst_parse_context_get_type: TGType; cdecl; external libgstreamer;
+function gst_parse_context_new: PGstParseContext; cdecl; external libgstreamer;
+function gst_parse_context_get_missing_elements(context: PGstParseContext): PPgchar; cdecl; external libgstreamer;
+procedure gst_parse_context_free(context: PGstParseContext); cdecl; external libgstreamer;
+function gst_parse_context_copy(context: PGstParseContext): PGstParseContext; cdecl; external libgstreamer;
+function gst_parse_launch(pipeline_description: Pgchar; error: PPGError): PGstElement; cdecl; external libgstreamer;
+function gst_parse_launchv(argv: PPgchar; error: PPGError): PGstElement; cdecl; external libgstreamer;
+function gst_parse_launch_full(pipeline_description: Pgchar; context: PGstParseContext; flags: TGstParseFlags; error: PPGError): PGstElement; cdecl; external libgstreamer;
+function gst_parse_launchv_full(argv: PPgchar; context: PGstParseContext; flags: TGstParseFlags; error: PPGError): PGstElement; cdecl; external libgstreamer;
 
 function GST_PARSE_ERROR: TGQuark;
 function GST_TYPE_PARSE_CONTEXT: TGType;

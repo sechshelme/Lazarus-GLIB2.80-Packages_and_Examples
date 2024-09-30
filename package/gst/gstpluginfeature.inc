@@ -29,18 +29,18 @@ type
 
   TGstPluginFeatureFilter = function(feature: PGstPluginFeature; user_data: Tgpointer): Tgboolean; cdecl;
 
-function gst_plugin_feature_get_type: TGType; cdecl; external gstreamerlib;
-function gst_plugin_feature_load(feature: PGstPluginFeature): PGstPluginFeature; cdecl; external gstreamerlib;
-procedure gst_plugin_feature_set_rank(feature: PGstPluginFeature; rank: Tguint); cdecl; external gstreamerlib;
-function gst_plugin_feature_get_rank(feature: PGstPluginFeature): Tguint; cdecl; external gstreamerlib;
-function gst_plugin_feature_get_plugin(feature: PGstPluginFeature): PGstPlugin; cdecl; external gstreamerlib;
-function gst_plugin_feature_get_plugin_name(feature: PGstPluginFeature): Pgchar; cdecl; external gstreamerlib;
-procedure gst_plugin_feature_list_free(list: PGList); cdecl; external gstreamerlib;
-function gst_plugin_feature_list_copy(list: PGList): PGList; cdecl; external gstreamerlib;
-procedure gst_plugin_feature_list_debug(list: PGList); cdecl; external gstreamerlib;
+function gst_plugin_feature_get_type: TGType; cdecl; external libgstreamer;
+function gst_plugin_feature_load(feature: PGstPluginFeature): PGstPluginFeature; cdecl; external libgstreamer;
+procedure gst_plugin_feature_set_rank(feature: PGstPluginFeature; rank: Tguint); cdecl; external libgstreamer;
+function gst_plugin_feature_get_rank(feature: PGstPluginFeature): Tguint; cdecl; external libgstreamer;
+function gst_plugin_feature_get_plugin(feature: PGstPluginFeature): PGstPlugin; cdecl; external libgstreamer;
+function gst_plugin_feature_get_plugin_name(feature: PGstPluginFeature): Pgchar; cdecl; external libgstreamer;
+procedure gst_plugin_feature_list_free(list: PGList); cdecl; external libgstreamer;
+function gst_plugin_feature_list_copy(list: PGList): PGList; cdecl; external libgstreamer;
+procedure gst_plugin_feature_list_debug(list: PGList); cdecl; external libgstreamer;
 
-function gst_plugin_feature_check_version(feature: PGstPluginFeature; min_major: Tguint; min_minor: Tguint; min_micro: Tguint): Tgboolean; cdecl; external gstreamerlib;
-function gst_plugin_feature_rank_compare_func(p1: Tgconstpointer; p2: Tgconstpointer): Tgint; cdecl; external gstreamerlib;
+function gst_plugin_feature_check_version(feature: PGstPluginFeature; min_major: Tguint; min_minor: Tguint; min_micro: Tguint): Tgboolean; cdecl; external libgstreamer;
+function gst_plugin_feature_rank_compare_func(p1: Tgconstpointer; p2: Tgconstpointer): Tgint; cdecl; external libgstreamer;
 
 function GST_PLUGIN_FEATURE_CAST(obj: Pointer): PGstPluginFeature;
 function gst_plugin_feature_get_name(feature: Pointer): Pgchar;

@@ -9,8 +9,8 @@
 {$IFDEF read_interface}
 
 var
-  _gst_toc_type: TGType; cvar;external gstreamerlib;
-  _gst_toc_entry_type: TGType; cvar;external gstreamerlib;
+  _gst_toc_type: TGType; cvar;external libgstreamer;
+  _gst_toc_entry_type: TGType; cvar;external libgstreamer;
 
 type
   PGstTocScope = ^TGstTocScope;
@@ -54,35 +54,35 @@ type
   end;
   PGstTocEntry = ^TGstTocEntry;
 
-function gst_toc_get_type: TGType; cdecl; external gstreamerlib;
-function gst_toc_entry_get_type: TGType; cdecl; external gstreamerlib;
-function gst_toc_new(scope: TGstTocScope): PGstToc; cdecl; external gstreamerlib;
-function gst_toc_get_scope(toc: PGstToc): TGstTocScope; cdecl; external gstreamerlib;
-procedure gst_toc_set_tags(toc: PGstToc; tags: PGstTagList); cdecl; external gstreamerlib;
-procedure gst_toc_merge_tags(toc: PGstToc; tags: PGstTagList; mode: TGstTagMergeMode); cdecl; external gstreamerlib;
-function gst_toc_get_tags(toc: PGstToc): PGstTagList; cdecl; external gstreamerlib;
-procedure gst_toc_append_entry(toc: PGstToc; entry: PGstTocEntry); cdecl; external gstreamerlib;
-function gst_toc_get_entries(toc: PGstToc): PGList; cdecl; external gstreamerlib;
-procedure gst_toc_dump(toc: PGstToc); cdecl; external gstreamerlib;
+function gst_toc_get_type: TGType; cdecl; external libgstreamer;
+function gst_toc_entry_get_type: TGType; cdecl; external libgstreamer;
+function gst_toc_new(scope: TGstTocScope): PGstToc; cdecl; external libgstreamer;
+function gst_toc_get_scope(toc: PGstToc): TGstTocScope; cdecl; external libgstreamer;
+procedure gst_toc_set_tags(toc: PGstToc; tags: PGstTagList); cdecl; external libgstreamer;
+procedure gst_toc_merge_tags(toc: PGstToc; tags: PGstTagList; mode: TGstTagMergeMode); cdecl; external libgstreamer;
+function gst_toc_get_tags(toc: PGstToc): PGstTagList; cdecl; external libgstreamer;
+procedure gst_toc_append_entry(toc: PGstToc; entry: PGstTocEntry); cdecl; external libgstreamer;
+function gst_toc_get_entries(toc: PGstToc): PGList; cdecl; external libgstreamer;
+procedure gst_toc_dump(toc: PGstToc); cdecl; external libgstreamer;
 
-function gst_toc_find_entry(toc: PGstToc; uid: Pgchar): PGstTocEntry; cdecl; external gstreamerlib;
-function gst_toc_entry_get_entry_type(entry: PGstTocEntry): TGstTocEntryType; cdecl; external gstreamerlib;
-function gst_toc_entry_get_uid(entry: PGstTocEntry): Pgchar; cdecl; external gstreamerlib;
-procedure gst_toc_entry_append_sub_entry(entry: PGstTocEntry; subentry: PGstTocEntry); cdecl; external gstreamerlib;
-function gst_toc_entry_get_sub_entries(entry: PGstTocEntry): PGList; cdecl; external gstreamerlib;
-procedure gst_toc_entry_set_tags(entry: PGstTocEntry; tags: PGstTagList); cdecl; external gstreamerlib;
-procedure gst_toc_entry_merge_tags(entry: PGstTocEntry; tags: PGstTagList; mode: TGstTagMergeMode); cdecl; external gstreamerlib;
-function gst_toc_entry_get_tags(entry: PGstTocEntry): PGstTagList; cdecl; external gstreamerlib;
-function gst_toc_entry_is_alternative(entry: PGstTocEntry): Tgboolean; cdecl; external gstreamerlib;
-function gst_toc_entry_is_sequence(entry: PGstTocEntry): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_toc_entry_set_start_stop_times(entry: PGstTocEntry; start: Tgint64; stop: Tgint64); cdecl; external gstreamerlib;
-function gst_toc_entry_get_start_stop_times(entry: PGstTocEntry; start: Pgint64; stop: Pgint64): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_toc_entry_set_loop(entry: PGstTocEntry; loop_type: TGstTocLoopType; repeat_count: Tgint); cdecl; external gstreamerlib;
-function gst_toc_entry_get_loop(entry: PGstTocEntry; loop_type: PGstTocLoopType; repeat_count: Pgint): Tgboolean; cdecl; external gstreamerlib;
-function gst_toc_entry_get_toc(entry: PGstTocEntry): PGstToc; cdecl; external gstreamerlib;
-function gst_toc_entry_get_parent(entry: PGstTocEntry): PGstTocEntry; cdecl; external gstreamerlib;
-function gst_toc_entry_type_get_nick(_type: TGstTocEntryType): Pgchar; cdecl; external gstreamerlib;
-function gst_toc_entry_new(_type: TGstTocEntryType; uid: Pgchar): PGstTocEntry; cdecl; external gstreamerlib;
+function gst_toc_find_entry(toc: PGstToc; uid: Pgchar): PGstTocEntry; cdecl; external libgstreamer;
+function gst_toc_entry_get_entry_type(entry: PGstTocEntry): TGstTocEntryType; cdecl; external libgstreamer;
+function gst_toc_entry_get_uid(entry: PGstTocEntry): Pgchar; cdecl; external libgstreamer;
+procedure gst_toc_entry_append_sub_entry(entry: PGstTocEntry; subentry: PGstTocEntry); cdecl; external libgstreamer;
+function gst_toc_entry_get_sub_entries(entry: PGstTocEntry): PGList; cdecl; external libgstreamer;
+procedure gst_toc_entry_set_tags(entry: PGstTocEntry; tags: PGstTagList); cdecl; external libgstreamer;
+procedure gst_toc_entry_merge_tags(entry: PGstTocEntry; tags: PGstTagList; mode: TGstTagMergeMode); cdecl; external libgstreamer;
+function gst_toc_entry_get_tags(entry: PGstTocEntry): PGstTagList; cdecl; external libgstreamer;
+function gst_toc_entry_is_alternative(entry: PGstTocEntry): Tgboolean; cdecl; external libgstreamer;
+function gst_toc_entry_is_sequence(entry: PGstTocEntry): Tgboolean; cdecl; external libgstreamer;
+procedure gst_toc_entry_set_start_stop_times(entry: PGstTocEntry; start: Tgint64; stop: Tgint64); cdecl; external libgstreamer;
+function gst_toc_entry_get_start_stop_times(entry: PGstTocEntry; start: Pgint64; stop: Pgint64): Tgboolean; cdecl; external libgstreamer;
+procedure gst_toc_entry_set_loop(entry: PGstTocEntry; loop_type: TGstTocLoopType; repeat_count: Tgint); cdecl; external libgstreamer;
+function gst_toc_entry_get_loop(entry: PGstTocEntry; loop_type: PGstTocLoopType; repeat_count: Pgint): Tgboolean; cdecl; external libgstreamer;
+function gst_toc_entry_get_toc(entry: PGstTocEntry): PGstToc; cdecl; external libgstreamer;
+function gst_toc_entry_get_parent(entry: PGstTocEntry): PGstTocEntry; cdecl; external libgstreamer;
+function gst_toc_entry_type_get_nick(_type: TGstTocEntryType): Pgchar; cdecl; external libgstreamer;
+function gst_toc_entry_new(_type: TGstTocEntryType; uid: Pgchar): PGstTocEntry; cdecl; external libgstreamer;
 
 procedure _gst_autoptr_toc_unref(toc: PGstToc);
 procedure _gst_autoptr_toc_entry_unref(entry: PGstTocEntry);

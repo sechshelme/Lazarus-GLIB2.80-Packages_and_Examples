@@ -36,9 +36,9 @@ type
   end;
   PGstSystemClockClass = ^TGstSystemClockClass;
 
-function gst_system_clock_get_type: TGType; cdecl; external gstreamerlib;
-function gst_system_clock_obtain: PGstClock; cdecl; external gstreamerlib;
-procedure gst_system_clock_set_default(new_clock: PGstClock); cdecl; external gstreamerlib;
+function gst_system_clock_get_type: TGType; cdecl; external libgstreamer;
+function gst_system_clock_obtain: PGstClock; cdecl; external libgstreamer;
+procedure gst_system_clock_set_default(new_clock: PGstClock); cdecl; external libgstreamer;
 
 function GST_SYSTEM_CLOCK_CAST(obj: Pointer): PGstSystemClock;
 

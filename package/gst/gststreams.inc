@@ -27,18 +27,18 @@ type
   end;
   PGstStreamClass = ^TGstStreamClass;
 
-function gst_stream_get_type: TGType; cdecl; external gstreamerlib;
-function gst_stream_new(stream_id: Pgchar; caps: PGstCaps; _type: TGstStreamType; flags: TGstStreamFlags): PGstStream; cdecl; external gstreamerlib;
-function gst_stream_get_stream_id(stream: PGstStream): Pgchar; cdecl; external gstreamerlib;
-procedure gst_stream_set_stream_flags(stream: PGstStream; flags: TGstStreamFlags); cdecl; external gstreamerlib;
-function gst_stream_get_stream_flags(stream: PGstStream): TGstStreamFlags; cdecl; external gstreamerlib;
-procedure gst_stream_set_stream_type(stream: PGstStream; stream_type: TGstStreamType); cdecl; external gstreamerlib;
-function gst_stream_get_stream_type(stream: PGstStream): TGstStreamType; cdecl; external gstreamerlib;
-procedure gst_stream_set_tags(stream: PGstStream; tags: PGstTagList); cdecl; external gstreamerlib;
-function gst_stream_get_tags(stream: PGstStream): PGstTagList; cdecl; external gstreamerlib;
-procedure gst_stream_set_caps(stream: PGstStream; caps: PGstCaps); cdecl; external gstreamerlib;
-function gst_stream_get_caps(stream: PGstStream): PGstCaps; cdecl; external gstreamerlib;
-function gst_stream_type_get_name(stype: TGstStreamType): Pgchar; cdecl; external gstreamerlib;
+function gst_stream_get_type: TGType; cdecl; external libgstreamer;
+function gst_stream_new(stream_id: Pgchar; caps: PGstCaps; _type: TGstStreamType; flags: TGstStreamFlags): PGstStream; cdecl; external libgstreamer;
+function gst_stream_get_stream_id(stream: PGstStream): Pgchar; cdecl; external libgstreamer;
+procedure gst_stream_set_stream_flags(stream: PGstStream; flags: TGstStreamFlags); cdecl; external libgstreamer;
+function gst_stream_get_stream_flags(stream: PGstStream): TGstStreamFlags; cdecl; external libgstreamer;
+procedure gst_stream_set_stream_type(stream: PGstStream; stream_type: TGstStreamType); cdecl; external libgstreamer;
+function gst_stream_get_stream_type(stream: PGstStream): TGstStreamType; cdecl; external libgstreamer;
+procedure gst_stream_set_tags(stream: PGstStream; tags: PGstTagList); cdecl; external libgstreamer;
+function gst_stream_get_tags(stream: PGstStream): PGstTagList; cdecl; external libgstreamer;
+procedure gst_stream_set_caps(stream: PGstStream; caps: PGstCaps); cdecl; external libgstreamer;
+function gst_stream_get_caps(stream: PGstStream): PGstCaps; cdecl; external libgstreamer;
+function gst_stream_type_get_name(stype: TGstStreamType): Pgchar; cdecl; external libgstreamer;
 
 function GST_STREAM_CAST(obj: Pointer): PGstStream;
 

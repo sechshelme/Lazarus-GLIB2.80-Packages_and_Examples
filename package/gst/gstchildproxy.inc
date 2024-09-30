@@ -26,20 +26,20 @@ type
     _gst_reserved: array[0..(GST_PADDING) - 1] of Tgpointer;
   end;
 
-function gst_child_proxy_get_type: TGType; cdecl; external gstreamerlib;
-function gst_child_proxy_get_child_by_name(parent: PGstChildProxy; Name: Pgchar): PGObject; cdecl; external gstreamerlib;
-function gst_child_proxy_get_child_by_name_recurse(child_proxy: PGstChildProxy; Name: Pgchar): PGObject; cdecl; external gstreamerlib;
-function gst_child_proxy_get_children_count(parent: PGstChildProxy): Tguint; cdecl; external gstreamerlib;
-function gst_child_proxy_get_child_by_index(parent: PGstChildProxy; index: Tguint): PGObject; cdecl; external gstreamerlib;
-function gst_child_proxy_lookup(obj: PGstChildProxy; Name: Pgchar; target: PPGObject; pspec: PPGParamSpec): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_child_proxy_get_property(obj: PGstChildProxy; Name: Pgchar; Value: PGValue); cdecl; external gstreamerlib;
-procedure gst_child_proxy_get_valist(obj: PGstChildProxy; first_property_name: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
-procedure gst_child_proxy_get(obj: PGstChildProxy; first_property_name: Pgchar); varargs cdecl; external gstreamerlib;
-procedure gst_child_proxy_set_property(obj: PGstChildProxy; Name: Pgchar; Value: PGValue); cdecl; external gstreamerlib;
-procedure gst_child_proxy_set_valist(obj: PGstChildProxy; first_property_name: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
-procedure gst_child_proxy_set(obj: PGstChildProxy; first_property_name: Pgchar); varargs cdecl; external gstreamerlib;
-procedure gst_child_proxy_child_added(parent: PGstChildProxy; child: PGObject; Name: Pgchar); cdecl; external gstreamerlib;
-procedure gst_child_proxy_child_removed(parent: PGstChildProxy; child: PGObject; Name: Pgchar); cdecl; external gstreamerlib;
+function gst_child_proxy_get_type: TGType; cdecl; external libgstreamer;
+function gst_child_proxy_get_child_by_name(parent: PGstChildProxy; Name: Pgchar): PGObject; cdecl; external libgstreamer;
+function gst_child_proxy_get_child_by_name_recurse(child_proxy: PGstChildProxy; Name: Pgchar): PGObject; cdecl; external libgstreamer;
+function gst_child_proxy_get_children_count(parent: PGstChildProxy): Tguint; cdecl; external libgstreamer;
+function gst_child_proxy_get_child_by_index(parent: PGstChildProxy; index: Tguint): PGObject; cdecl; external libgstreamer;
+function gst_child_proxy_lookup(obj: PGstChildProxy; Name: Pgchar; target: PPGObject; pspec: PPGParamSpec): Tgboolean; cdecl; external libgstreamer;
+procedure gst_child_proxy_get_property(obj: PGstChildProxy; Name: Pgchar; Value: PGValue); cdecl; external libgstreamer;
+procedure gst_child_proxy_get_valist(obj: PGstChildProxy; first_property_name: Pgchar; var_args: Tva_list); cdecl; external libgstreamer;
+procedure gst_child_proxy_get(obj: PGstChildProxy; first_property_name: Pgchar); varargs cdecl; external libgstreamer;
+procedure gst_child_proxy_set_property(obj: PGstChildProxy; Name: Pgchar; Value: PGValue); cdecl; external libgstreamer;
+procedure gst_child_proxy_set_valist(obj: PGstChildProxy; first_property_name: Pgchar; var_args: Tva_list); cdecl; external libgstreamer;
+procedure gst_child_proxy_set(obj: PGstChildProxy; first_property_name: Pgchar); varargs cdecl; external libgstreamer;
+procedure gst_child_proxy_child_added(parent: PGstChildProxy; child: PGObject; Name: Pgchar); cdecl; external libgstreamer;
+procedure gst_child_proxy_child_removed(parent: PGstChildProxy; child: PGObject; Name: Pgchar); cdecl; external libgstreamer;
 
 // === Konventiert am: 16-9-24 17:56:25 ===
 

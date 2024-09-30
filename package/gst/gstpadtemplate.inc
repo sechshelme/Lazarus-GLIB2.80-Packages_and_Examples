@@ -59,18 +59,18 @@ type
   end;
   PGstStaticPadTemplate = ^TGstStaticPadTemplate;
 
-function gst_pad_template_get_type: TGType; cdecl; external gstreamerlib;
-function gst_static_pad_template_get_type: TGType; cdecl; external gstreamerlib;
-function gst_pad_template_new(name_template: Pgchar; direction: TGstPadDirection; presence: TGstPadPresence; caps: PGstCaps): PGstPadTemplate; cdecl; external gstreamerlib;
-function gst_pad_template_new_with_gtype(name_template: Pgchar; direction: TGstPadDirection; presence: TGstPadPresence; caps: PGstCaps; pad_type: TGType): PGstPadTemplate; cdecl; external gstreamerlib;
-function gst_static_pad_template_get(pad_template: PGstStaticPadTemplate): PGstPadTemplate; cdecl; external gstreamerlib;
-function gst_pad_template_new_from_static_pad_template_with_gtype(pad_template: PGstStaticPadTemplate; pad_type: TGType): PGstPadTemplate; cdecl; external gstreamerlib;
-function gst_static_pad_template_get_caps(templ: PGstStaticPadTemplate): PGstCaps; cdecl; external gstreamerlib;
-function gst_pad_template_get_caps(templ: PGstPadTemplate): PGstCaps; cdecl; external gstreamerlib;
-procedure gst_pad_template_set_documentation_caps(templ: PGstPadTemplate; caps: PGstCaps); cdecl; external gstreamerlib;
-function gst_pad_template_get_documentation_caps(templ: PGstPadTemplate): PGstCaps; cdecl; external gstreamerlib;
+function gst_pad_template_get_type: TGType; cdecl; external libgstreamer;
+function gst_static_pad_template_get_type: TGType; cdecl; external libgstreamer;
+function gst_pad_template_new(name_template: Pgchar; direction: TGstPadDirection; presence: TGstPadPresence; caps: PGstCaps): PGstPadTemplate; cdecl; external libgstreamer;
+function gst_pad_template_new_with_gtype(name_template: Pgchar; direction: TGstPadDirection; presence: TGstPadPresence; caps: PGstCaps; pad_type: TGType): PGstPadTemplate; cdecl; external libgstreamer;
+function gst_static_pad_template_get(pad_template: PGstStaticPadTemplate): PGstPadTemplate; cdecl; external libgstreamer;
+function gst_pad_template_new_from_static_pad_template_with_gtype(pad_template: PGstStaticPadTemplate; pad_type: TGType): PGstPadTemplate; cdecl; external libgstreamer;
+function gst_static_pad_template_get_caps(templ: PGstStaticPadTemplate): PGstCaps; cdecl; external libgstreamer;
+function gst_pad_template_get_caps(templ: PGstPadTemplate): PGstCaps; cdecl; external libgstreamer;
+procedure gst_pad_template_set_documentation_caps(templ: PGstPadTemplate; caps: PGstCaps); cdecl; external libgstreamer;
+function gst_pad_template_get_documentation_caps(templ: PGstPadTemplate): PGstCaps; cdecl; external libgstreamer;
 // procedure gst_pad_template_pad_created(templ:PGstPadTemplate; pad:PGstPad);cdecl;external gstreamerlib;
-procedure gst_pad_template_pad_created(templ: PGstPadTemplate; pad: Pointer); cdecl; external gstreamerlib;
+procedure gst_pad_template_pad_created(templ: PGstPadTemplate; pad: Pointer); cdecl; external libgstreamer;
 
 function GST_TYPE_STATIC_PAD_TEMPLATE: TGType;
 

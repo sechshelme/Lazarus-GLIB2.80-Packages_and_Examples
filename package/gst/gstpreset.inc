@@ -28,18 +28,18 @@ type
   PGstPresetInterface = ^TGstPresetInterface;
 
 
-function gst_preset_get_type: TGType; cdecl; external gstreamerlib;
-function gst_preset_get_preset_names(preset: PGstPreset): PPgchar; cdecl; external gstreamerlib;
-function gst_preset_get_property_names(preset: PGstPreset): PPgchar; cdecl; external gstreamerlib;
-function gst_preset_load_preset(preset: PGstPreset; Name: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_preset_save_preset(preset: PGstPreset; Name: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_preset_rename_preset(preset: PGstPreset; old_name: Pgchar; new_name: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_preset_delete_preset(preset: PGstPreset; Name: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_preset_set_meta(preset: PGstPreset; Name: Pgchar; tag: Pgchar; Value: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_preset_get_meta(preset: PGstPreset; Name: Pgchar; tag: Pgchar; Value: PPgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_preset_set_app_dir(app_dir: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_preset_get_app_dir: Pgchar; cdecl; external gstreamerlib;
-function gst_preset_is_editable(preset: PGstPreset): Tgboolean; cdecl; external gstreamerlib;
+function gst_preset_get_type: TGType; cdecl; external libgstreamer;
+function gst_preset_get_preset_names(preset: PGstPreset): PPgchar; cdecl; external libgstreamer;
+function gst_preset_get_property_names(preset: PGstPreset): PPgchar; cdecl; external libgstreamer;
+function gst_preset_load_preset(preset: PGstPreset; Name: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_preset_save_preset(preset: PGstPreset; Name: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_preset_rename_preset(preset: PGstPreset; old_name: Pgchar; new_name: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_preset_delete_preset(preset: PGstPreset; Name: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_preset_set_meta(preset: PGstPreset; Name: Pgchar; tag: Pgchar; Value: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_preset_get_meta(preset: PGstPreset; Name: Pgchar; tag: Pgchar; Value: PPgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_preset_set_app_dir(app_dir: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_preset_get_app_dir: Pgchar; cdecl; external libgstreamer;
+function gst_preset_is_editable(preset: PGstPreset): Tgboolean; cdecl; external libgstreamer;
 
 // === Konventiert am: 17-9-24 15:42:59 ===
 

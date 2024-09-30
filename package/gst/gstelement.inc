@@ -58,7 +58,7 @@ const
   GST_ELEMENT_FLAG_INDEXABLE = GST_OBJECT_FLAG_LAST shl 5;
   GST_ELEMENT_FLAG_LAST = GST_OBJECT_FLAG_LAST shl 10;
 
-function gst_make_element_message_details(Name: PChar): PGstStructure; varargs cdecl; external gstreamerlib;
+function gst_make_element_message_details(Name: PChar): PGstStructure; varargs cdecl; external libgstreamer;
 
 type
   TGstElement = record
@@ -124,101 +124,101 @@ type
   end;
   PGstDeviceClass = ^TGstDeviceClass;
 
-function gst_device_create_element(device: PGstDevice; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
-function gst_device_reconfigure_element(device: PGstDevice; element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
+function gst_device_create_element(device: PGstDevice; Name: Pgchar): PGstElement; cdecl; external libgstreamer;
+function gst_device_reconfigure_element(device: PGstDevice; element: PGstElement): Tgboolean; cdecl; external libgstreamer;
 // ----
 
 // ausgelagert      gstmessage.h
-function gst_message_new_state_changed(src: PGstObject; oldstate: TGstState; newstate: TGstState; pending: TGstState): PGstMessage; cdecl; external gstreamerlib;
-procedure gst_message_parse_state_changed(message: PGstMessage; oldstate: PGstState; newstate: PGstState; pending: PGstState); cdecl; external gstreamerlib;
+function gst_message_new_state_changed(src: PGstObject; oldstate: TGstState; newstate: TGstState; pending: TGstState): PGstMessage; cdecl; external libgstreamer;
+procedure gst_message_parse_state_changed(message: PGstMessage; oldstate: PGstState; newstate: PGstState; pending: PGstState); cdecl; external libgstreamer;
 
-function gst_message_new_structure_change(src: PGstObject; _type: TGstStructureChangeType; owner: PGstElement; busy: Tgboolean): PGstMessage; cdecl; external gstreamerlib;
-procedure gst_message_parse_structure_change(message: PGstMessage; _type: PGstStructureChangeType; owner: PPGstElement; busy: Pgboolean); cdecl; external gstreamerlib;
-function gst_message_new_stream_status(src: PGstObject; _type: TGstStreamStatusType; owner: PGstElement): PGstMessage; cdecl; external gstreamerlib;
-procedure gst_message_parse_stream_status(message: PGstMessage; _type: PGstStreamStatusType; owner: PPGstElement); cdecl; external gstreamerlib;
+function gst_message_new_structure_change(src: PGstObject; _type: TGstStructureChangeType; owner: PGstElement; busy: Tgboolean): PGstMessage; cdecl; external libgstreamer;
+procedure gst_message_parse_structure_change(message: PGstMessage; _type: PGstStructureChangeType; owner: PPGstElement; busy: Pgboolean); cdecl; external libgstreamer;
+function gst_message_new_stream_status(src: PGstObject; _type: TGstStreamStatusType; owner: PGstElement): PGstMessage; cdecl; external libgstreamer;
+procedure gst_message_parse_stream_status(message: PGstMessage; _type: PGstStreamStatusType; owner: PPGstElement); cdecl; external libgstreamer;
 
-function gst_message_new_request_state(src: PGstObject; state: TGstState): PGstMessage; cdecl; external gstreamerlib;
-procedure gst_message_parse_request_state(message: PGstMessage; state: PGstState); cdecl; external gstreamerlib;
+function gst_message_new_request_state(src: PGstObject; state: TGstState): PGstMessage; cdecl; external libgstreamer;
+procedure gst_message_parse_request_state(message: PGstMessage; state: PGstState); cdecl; external libgstreamer;
 // ---
 
-procedure gst_element_class_add_pad_template(klass: PGstElementClass; templ: PGstPadTemplate); cdecl; external gstreamerlib;
-procedure gst_element_class_add_static_pad_template(klass: PGstElementClass; static_templ: PGstStaticPadTemplate); cdecl; external gstreamerlib;
-procedure gst_element_class_add_static_pad_template_with_gtype(klass: PGstElementClass; static_templ: PGstStaticPadTemplate; pad_type: TGType); cdecl; external gstreamerlib;
-function gst_element_class_get_pad_template(element_class: PGstElementClass; Name: Pgchar): PGstPadTemplate; cdecl; external gstreamerlib;
-function gst_element_class_get_pad_template_list(element_class: PGstElementClass): PGList; cdecl; external gstreamerlib;
-procedure gst_element_class_set_metadata(klass: PGstElementClass; longname: Pgchar; classification: Pgchar; description: Pgchar; author: Pgchar); cdecl; external gstreamerlib;
-procedure gst_element_class_set_static_metadata(klass: PGstElementClass; longname: Pgchar; classification: Pgchar; description: Pgchar; author: Pgchar); cdecl; external gstreamerlib;
-procedure gst_element_class_add_metadata(klass: PGstElementClass; key: Pgchar; Value: Pgchar); cdecl; external gstreamerlib;
-procedure gst_element_class_add_static_metadata(klass: PGstElementClass; key: Pgchar; Value: Pgchar); cdecl; external gstreamerlib;
-function gst_element_class_get_metadata(klass: PGstElementClass; key: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_element_get_type: TGType; cdecl; external gstreamerlib;
+procedure gst_element_class_add_pad_template(klass: PGstElementClass; templ: PGstPadTemplate); cdecl; external libgstreamer;
+procedure gst_element_class_add_static_pad_template(klass: PGstElementClass; static_templ: PGstStaticPadTemplate); cdecl; external libgstreamer;
+procedure gst_element_class_add_static_pad_template_with_gtype(klass: PGstElementClass; static_templ: PGstStaticPadTemplate; pad_type: TGType); cdecl; external libgstreamer;
+function gst_element_class_get_pad_template(element_class: PGstElementClass; Name: Pgchar): PGstPadTemplate; cdecl; external libgstreamer;
+function gst_element_class_get_pad_template_list(element_class: PGstElementClass): PGList; cdecl; external libgstreamer;
+procedure gst_element_class_set_metadata(klass: PGstElementClass; longname: Pgchar; classification: Pgchar; description: Pgchar; author: Pgchar); cdecl; external libgstreamer;
+procedure gst_element_class_set_static_metadata(klass: PGstElementClass; longname: Pgchar; classification: Pgchar; description: Pgchar; author: Pgchar); cdecl; external libgstreamer;
+procedure gst_element_class_add_metadata(klass: PGstElementClass; key: Pgchar; Value: Pgchar); cdecl; external libgstreamer;
+procedure gst_element_class_add_static_metadata(klass: PGstElementClass; key: Pgchar; Value: Pgchar); cdecl; external libgstreamer;
+function gst_element_class_get_metadata(klass: PGstElementClass; key: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_element_get_type: TGType; cdecl; external libgstreamer;
 
-function gst_element_provide_clock(element: PGstElement): PGstClock; cdecl; external gstreamerlib;
-function gst_element_get_clock(element: PGstElement): PGstClock; cdecl; external gstreamerlib;
-function gst_element_set_clock(element: PGstElement; clock: PGstClock): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_element_set_base_time(element: PGstElement; time: TGstClockTime); cdecl; external gstreamerlib;
-function gst_element_get_base_time(element: PGstElement): TGstClockTime; cdecl; external gstreamerlib;
-procedure gst_element_set_start_time(element: PGstElement; time: TGstClockTime); cdecl; external gstreamerlib;
-function gst_element_get_start_time(element: PGstElement): TGstClockTime; cdecl; external gstreamerlib;
-function gst_element_get_current_running_time(element: PGstElement): TGstClockTime; cdecl; external gstreamerlib;
-function gst_element_get_current_clock_time(element: PGstElement): TGstClockTime; cdecl; external gstreamerlib;
-procedure gst_element_set_bus(element: PGstElement; bus: PGstBus); cdecl; external gstreamerlib;
-function gst_element_get_bus(element: PGstElement): PGstBus; cdecl; external gstreamerlib;
-procedure gst_element_set_context(element: PGstElement; context: PGstContext); cdecl; external gstreamerlib;
-function gst_element_get_contexts(element: PGstElement): PGList; cdecl; external gstreamerlib;
-function gst_element_get_context(element: PGstElement; context_type: Pgchar): PGstContext; cdecl; external gstreamerlib;
-function gst_element_get_context_unlocked(element: PGstElement; context_type: Pgchar): PGstContext; cdecl; external gstreamerlib;
-function gst_element_add_pad(element: PGstElement; pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_remove_pad(element: PGstElement; pad: PGstPad): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_element_no_more_pads(element: PGstElement); cdecl; external gstreamerlib;
-function gst_element_get_static_pad(element: PGstElement; Name: Pgchar): PGstPad; cdecl; external gstreamerlib;
-function gst_element_get_request_pad(element: PGstElement; Name: Pgchar): PGstPad; cdecl; external gstreamerlib;
-function gst_element_request_pad_simple(element: PGstElement; Name: Pgchar): PGstPad; cdecl; external gstreamerlib;
-function gst_element_request_pad(element: PGstElement; templ: PGstPadTemplate; Name: Pgchar; caps: PGstCaps): PGstPad; cdecl; external gstreamerlib;
-procedure gst_element_release_request_pad(element: PGstElement; pad: PGstPad); cdecl; external gstreamerlib;
-function gst_element_iterate_pads(element: PGstElement): PGstIterator; cdecl; external gstreamerlib;
-function gst_element_iterate_src_pads(element: PGstElement): PGstIterator; cdecl; external gstreamerlib;
-function gst_element_iterate_sink_pads(element: PGstElement): PGstIterator; cdecl; external gstreamerlib;
+function gst_element_provide_clock(element: PGstElement): PGstClock; cdecl; external libgstreamer;
+function gst_element_get_clock(element: PGstElement): PGstClock; cdecl; external libgstreamer;
+function gst_element_set_clock(element: PGstElement; clock: PGstClock): Tgboolean; cdecl; external libgstreamer;
+procedure gst_element_set_base_time(element: PGstElement; time: TGstClockTime); cdecl; external libgstreamer;
+function gst_element_get_base_time(element: PGstElement): TGstClockTime; cdecl; external libgstreamer;
+procedure gst_element_set_start_time(element: PGstElement; time: TGstClockTime); cdecl; external libgstreamer;
+function gst_element_get_start_time(element: PGstElement): TGstClockTime; cdecl; external libgstreamer;
+function gst_element_get_current_running_time(element: PGstElement): TGstClockTime; cdecl; external libgstreamer;
+function gst_element_get_current_clock_time(element: PGstElement): TGstClockTime; cdecl; external libgstreamer;
+procedure gst_element_set_bus(element: PGstElement; bus: PGstBus); cdecl; external libgstreamer;
+function gst_element_get_bus(element: PGstElement): PGstBus; cdecl; external libgstreamer;
+procedure gst_element_set_context(element: PGstElement; context: PGstContext); cdecl; external libgstreamer;
+function gst_element_get_contexts(element: PGstElement): PGList; cdecl; external libgstreamer;
+function gst_element_get_context(element: PGstElement; context_type: Pgchar): PGstContext; cdecl; external libgstreamer;
+function gst_element_get_context_unlocked(element: PGstElement; context_type: Pgchar): PGstContext; cdecl; external libgstreamer;
+function gst_element_add_pad(element: PGstElement; pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+function gst_element_remove_pad(element: PGstElement; pad: PGstPad): Tgboolean; cdecl; external libgstreamer;
+procedure gst_element_no_more_pads(element: PGstElement); cdecl; external libgstreamer;
+function gst_element_get_static_pad(element: PGstElement; Name: Pgchar): PGstPad; cdecl; external libgstreamer;
+function gst_element_get_request_pad(element: PGstElement; Name: Pgchar): PGstPad; cdecl; external libgstreamer;
+function gst_element_request_pad_simple(element: PGstElement; Name: Pgchar): PGstPad; cdecl; external libgstreamer;
+function gst_element_request_pad(element: PGstElement; templ: PGstPadTemplate; Name: Pgchar; caps: PGstCaps): PGstPad; cdecl; external libgstreamer;
+procedure gst_element_release_request_pad(element: PGstElement; pad: PGstPad); cdecl; external libgstreamer;
+function gst_element_iterate_pads(element: PGstElement): PGstIterator; cdecl; external libgstreamer;
+function gst_element_iterate_src_pads(element: PGstElement): PGstIterator; cdecl; external libgstreamer;
+function gst_element_iterate_sink_pads(element: PGstElement): PGstIterator; cdecl; external libgstreamer;
 
 type
   TGstElementForeachPadFunc = function(element: PGstElement; pad: PGstPad; user_data: Tgpointer): Tgboolean; cdecl;
 
-function gst_element_foreach_sink_pad(element: PGstElement; func: TGstElementForeachPadFunc; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_foreach_src_pad(element: PGstElement; func: TGstElementForeachPadFunc; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_foreach_pad(element: PGstElement; func: TGstElementForeachPadFunc; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_send_event(element: PGstElement; event: PGstEvent): Tgboolean; cdecl; external gstreamerlib;
+function gst_element_foreach_sink_pad(element: PGstElement; func: TGstElementForeachPadFunc; user_data: Tgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_element_foreach_src_pad(element: PGstElement; func: TGstElementForeachPadFunc; user_data: Tgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_element_foreach_pad(element: PGstElement; func: TGstElementForeachPadFunc; user_data: Tgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_element_send_event(element: PGstElement; event: PGstEvent): Tgboolean; cdecl; external libgstreamer;
 function gst_element_seek(element: PGstElement; rate: Tgdouble; format: TGstFormat; flags: TGstSeekFlags; start_type: TGstSeekType;
-  start: Tgint64; stop_type: TGstSeekType; stop: Tgint64): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_query(element: PGstElement; query: PGstQuery): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_post_message(element: PGstElement; message: PGstMessage): Tgboolean; cdecl; external gstreamerlib;
+  start: Tgint64; stop_type: TGstSeekType; stop: Tgint64): Tgboolean; cdecl; external libgstreamer;
+function gst_element_query(element: PGstElement; query: PGstQuery): Tgboolean; cdecl; external libgstreamer;
+function gst_element_post_message(element: PGstElement; message: PGstMessage): Tgboolean; cdecl; external libgstreamer;
 
-function _gst_element_error_printf(format: Pgchar): Pgchar; varargs cdecl; external gstreamerlib;
+function _gst_element_error_printf(format: Pgchar): Pgchar; varargs cdecl; external libgstreamer;
 
 procedure gst_element_message_full(element: PGstElement; _type: TGstMessageType; domain: TGQuark; code: Tgint; Text: Pgchar;
-  debug: Pgchar; file_: Pgchar; _function: Pgchar; line: Tgint); cdecl; external gstreamerlib;
+  debug: Pgchar; file_: Pgchar; _function: Pgchar; line: Tgint); cdecl; external libgstreamer;
 procedure gst_element_message_full_with_details(element: PGstElement; _type: TGstMessageType; domain: TGQuark; code: Tgint; Text: Pgchar;
-  debug: Pgchar; file_: Pgchar; _function: Pgchar; line: Tgint; structure: PGstStructure); cdecl; external gstreamerlib;
-function gst_element_is_locked_state(element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_set_locked_state(element: PGstElement; locked_state: Tgboolean): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_sync_state_with_parent(element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
-function gst_element_get_state(element: PGstElement; state: PGstState; pending: PGstState; timeout: TGstClockTime): TGstStateChangeReturn; cdecl; external gstreamerlib;
-function gst_element_set_state(element: PGstElement; state: TGstState): TGstStateChangeReturn; cdecl; external gstreamerlib;
-procedure gst_element_abort_state(element: PGstElement); cdecl; external gstreamerlib;
-function gst_element_change_state(element: PGstElement; transition: TGstStateChange): TGstStateChangeReturn; cdecl; external gstreamerlib;
-function gst_element_continue_state(element: PGstElement; ret: TGstStateChangeReturn): TGstStateChangeReturn; cdecl; external gstreamerlib;
-procedure gst_element_lost_state(element: PGstElement); cdecl; external gstreamerlib;
+  debug: Pgchar; file_: Pgchar; _function: Pgchar; line: Tgint; structure: PGstStructure); cdecl; external libgstreamer;
+function gst_element_is_locked_state(element: PGstElement): Tgboolean; cdecl; external libgstreamer;
+function gst_element_set_locked_state(element: PGstElement; locked_state: Tgboolean): Tgboolean; cdecl; external libgstreamer;
+function gst_element_sync_state_with_parent(element: PGstElement): Tgboolean; cdecl; external libgstreamer;
+function gst_element_get_state(element: PGstElement; state: PGstState; pending: PGstState; timeout: TGstClockTime): TGstStateChangeReturn; cdecl; external libgstreamer;
+function gst_element_set_state(element: PGstElement; state: TGstState): TGstStateChangeReturn; cdecl; external libgstreamer;
+procedure gst_element_abort_state(element: PGstElement); cdecl; external libgstreamer;
+function gst_element_change_state(element: PGstElement; transition: TGstStateChange): TGstStateChangeReturn; cdecl; external libgstreamer;
+function gst_element_continue_state(element: PGstElement; ret: TGstStateChangeReturn): TGstStateChangeReturn; cdecl; external libgstreamer;
+procedure gst_element_lost_state(element: PGstElement); cdecl; external libgstreamer;
 
 type
   TGstElementCallAsyncFunc = procedure(element: PGstElement; user_data: Tgpointer); cdecl;
 
-procedure gst_element_call_async(element: PGstElement; func: TGstElementCallAsyncFunc; user_data: Tgpointer; destroy_notify: TGDestroyNotify); cdecl; external gstreamerlib;
-function gst_element_get_factory(element: PGstElement): PGstElementFactory; cdecl; external gstreamerlib;
-function gst_element_add_property_notify_watch(element: PGstElement; property_name: Pgchar; include_value: Tgboolean): Tgulong; cdecl; external gstreamerlib;
-function gst_element_add_property_deep_notify_watch(element: PGstElement; property_name: Pgchar; include_value: Tgboolean): Tgulong; cdecl; external gstreamerlib;
-procedure gst_element_remove_property_notify_watch(element: PGstElement; watch_id: Tgulong); cdecl; external gstreamerlib;
-function gst_element_get_pad_template(element: PGstElement; Name: Pgchar): PGstPadTemplate; cdecl; external gstreamerlib;
-function gst_element_get_pad_template_list(element: PGstElement): PGList; cdecl; external gstreamerlib;
-function gst_element_get_metadata(element: PGstElement; key: Pgchar): Pgchar; cdecl; external gstreamerlib;
+procedure gst_element_call_async(element: PGstElement; func: TGstElementCallAsyncFunc; user_data: Tgpointer; destroy_notify: TGDestroyNotify); cdecl; external libgstreamer;
+function gst_element_get_factory(element: PGstElement): PGstElementFactory; cdecl; external libgstreamer;
+function gst_element_add_property_notify_watch(element: PGstElement; property_name: Pgchar; include_value: Tgboolean): Tgulong; cdecl; external libgstreamer;
+function gst_element_add_property_deep_notify_watch(element: PGstElement; property_name: Pgchar; include_value: Tgboolean): Tgulong; cdecl; external libgstreamer;
+procedure gst_element_remove_property_notify_watch(element: PGstElement; watch_id: Tgulong); cdecl; external libgstreamer;
+function gst_element_get_pad_template(element: PGstElement; Name: Pgchar): PGstPadTemplate; cdecl; external libgstreamer;
+function gst_element_get_pad_template_list(element: PGstElement): PGList; cdecl; external libgstreamer;
+function gst_element_get_metadata(element: PGstElement; key: Pgchar): Pgchar; cdecl; external libgstreamer;
 
 function GST_ELEMENT_CAST(obj: Pointer): PGstElement;
 

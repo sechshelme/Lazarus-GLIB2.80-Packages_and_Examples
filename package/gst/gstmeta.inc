@@ -12,7 +12,7 @@ const
   GST_META_TAG_MEMORY_STR = 'memory';
 
 var
-  _gst_meta_transform_copy: TGQuark; cvar;external gstreamerlib;
+  _gst_meta_transform_copy: TGQuark; cvar;external libgstreamer;
 
 
 type
@@ -75,28 +75,28 @@ type
   end;
 
 
-function gst_meta_api_type_register(api: Pgchar; tags: PPgchar): TGType; cdecl; external gstreamerlib;
-function gst_meta_api_type_has_tag(api: TGType; tag: TGQuark): Tgboolean; cdecl; external gstreamerlib;
+function gst_meta_api_type_register(api: Pgchar; tags: PPgchar): TGType; cdecl; external libgstreamer;
+function gst_meta_api_type_has_tag(api: TGType; tag: TGQuark): Tgboolean; cdecl; external libgstreamer;
 function gst_meta_register(api: TGType; impl: Pgchar; size: Tgsize; init_func: TGstMetaInitFunction; free_func: TGstMetaFreeFunction;
-  transform_func: TGstMetaTransformFunction): PGstMetaInfo; cdecl; external gstreamerlib;
-function gst_meta_info_new(api: TGType; impl: Pgchar; size: Tgsize): PGstMetaInfo; cdecl; external gstreamerlib;
-function gst_meta_info_register(info: PGstMetaInfo): PGstMetaInfo; cdecl; external gstreamerlib;
-function gst_meta_register_custom(Name: Pgchar; tags: PPgchar; transform_func: TGstCustomMetaTransformFunction; user_data: Tgpointer; destroy_data: TGDestroyNotify): PGstMetaInfo; cdecl; external gstreamerlib;
-function gst_meta_register_custom_simple(Name: Pgchar): PGstMetaInfo; cdecl; external gstreamerlib;
-function gst_meta_info_is_custom(info: PGstMetaInfo): Tgboolean; cdecl; external gstreamerlib;
-function gst_custom_meta_get_structure(meta: PGstCustomMeta): PGstStructure; cdecl; external gstreamerlib;
-function gst_custom_meta_has_name(meta: PGstCustomMeta; Name: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_meta_get_info(impl: Pgchar): PGstMetaInfo; cdecl; external gstreamerlib;
-function gst_meta_api_type_get_tags(api: TGType): PPgchar; cdecl; external gstreamerlib;
-function gst_meta_get_seqnum(meta: PGstMeta): Tguint64; cdecl; external gstreamerlib;
-function gst_meta_compare_seqnum(meta1: PGstMeta; meta2: PGstMeta): Tgint; cdecl; external gstreamerlib;
-function gst_meta_serialize(meta: PGstMeta; Data: PGstByteArrayInterface): Tgboolean; cdecl; external gstreamerlib;
-function gst_meta_serialize_simple(meta: PGstMeta; Data: PGByteArray): Tgboolean; cdecl; external gstreamerlib;
-function gst_meta_deserialize(buffer: PGstBuffer; Data: Pguint8; size: Tgsize; consumed: Pguint32): PGstMeta; cdecl; external gstreamerlib;
+  transform_func: TGstMetaTransformFunction): PGstMetaInfo; cdecl; external libgstreamer;
+function gst_meta_info_new(api: TGType; impl: Pgchar; size: Tgsize): PGstMetaInfo; cdecl; external libgstreamer;
+function gst_meta_info_register(info: PGstMetaInfo): PGstMetaInfo; cdecl; external libgstreamer;
+function gst_meta_register_custom(Name: Pgchar; tags: PPgchar; transform_func: TGstCustomMetaTransformFunction; user_data: Tgpointer; destroy_data: TGDestroyNotify): PGstMetaInfo; cdecl; external libgstreamer;
+function gst_meta_register_custom_simple(Name: Pgchar): PGstMetaInfo; cdecl; external libgstreamer;
+function gst_meta_info_is_custom(info: PGstMetaInfo): Tgboolean; cdecl; external libgstreamer;
+function gst_custom_meta_get_structure(meta: PGstCustomMeta): PGstStructure; cdecl; external libgstreamer;
+function gst_custom_meta_has_name(meta: PGstCustomMeta; Name: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_meta_get_info(impl: Pgchar): PGstMetaInfo; cdecl; external libgstreamer;
+function gst_meta_api_type_get_tags(api: TGType): PPgchar; cdecl; external libgstreamer;
+function gst_meta_get_seqnum(meta: PGstMeta): Tguint64; cdecl; external libgstreamer;
+function gst_meta_compare_seqnum(meta1: PGstMeta; meta2: PGstMeta): Tgint; cdecl; external libgstreamer;
+function gst_meta_serialize(meta: PGstMeta; Data: PGstByteArrayInterface): Tgboolean; cdecl; external libgstreamer;
+function gst_meta_serialize_simple(meta: PGstMeta; Data: PGByteArray): Tgboolean; cdecl; external libgstreamer;
+function gst_meta_deserialize(buffer: PGstBuffer; Data: Pguint8; size: Tgsize; consumed: Pguint32): PGstMeta; cdecl; external libgstreamer;
 
 var
-  _gst_meta_tag_memory: TGQuark; cvar;external gstreamerlib;
-  _gst_meta_tag_memory_reference: TGQuark; cvar;external gstreamerlib;
+  _gst_meta_tag_memory: TGQuark; cvar;external libgstreamer;
+  _gst_meta_tag_memory_reference: TGQuark; cvar;external libgstreamer;
 
 function GST_META_TAG_MEMORY: TGQuark;
 

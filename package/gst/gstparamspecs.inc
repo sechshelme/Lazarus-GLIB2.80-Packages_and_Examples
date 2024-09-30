@@ -17,8 +17,8 @@ const
   GST_PARAM_CONDITIONALLY_AVAILABLE = 1 shl (G_PARAM_USER_SHIFT + 6);
   GST_PARAM_USER_SHIFT = 1 shl (G_PARAM_USER_SHIFT + 8);
 
-function gst_param_spec_fraction_get_type: TGType; cdecl; external gstreamerlib;
-function gst_param_spec_array_get_type: TGType; cdecl; external gstreamerlib;
+function gst_param_spec_fraction_get_type: TGType; cdecl; external libgstreamer;
+function gst_param_spec_array_get_type: TGType; cdecl; external libgstreamer;
 
 type
   TGstParamSpecFraction = record
@@ -39,8 +39,8 @@ type
   PGstParamSpecArray = ^TGstParamSpecArray;
 
 function gst_param_specfraction_(Name: Pgchar; nick: Pgchar; blurb: Pgchar; min_num: Tgint; min_denom: Tgint;
-  max_num: Tgint; max_denom: Tgint; default_num: Tgint; default_denom: Tgint; flags: TGParamFlags): PGParamSpec; cdecl; external gstreamerlib;
-function gst_param_spec_array(Name: Pgchar; nick: Pgchar; blurb: Pgchar; element_spec: PGParamSpec; flags: TGParamFlags): PGParamSpec; cdecl; external gstreamerlib;
+  max_num: Tgint; max_denom: Tgint; default_num: Tgint; default_denom: Tgint; flags: TGParamFlags): PGParamSpec; cdecl; external libgstreamer;
+function gst_param_spec_array(Name: Pgchar; nick: Pgchar; blurb: Pgchar; element_spec: PGParamSpec; flags: TGParamFlags): PGParamSpec; cdecl; external libgstreamer;
 
 function GST_TYPE_PARAM_ARRAY_LIST: TGType;
 function GST_PARAM_SPEC_ARRAY_LIST(pspec: Pointer): PGstParamSpecArray;

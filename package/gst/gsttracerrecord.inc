@@ -17,7 +17,7 @@ type
   end;
   PGstTracerRecordClass = ^TGstTracerRecordClass;
 
-function gst_tracer_record_get_type: TGType; cdecl; external gstreamerlib;
+function gst_tracer_record_get_type: TGType; cdecl; external libgstreamer;
 
 type
   PGstTracerValueScope = ^TGstTracerValueScope;
@@ -38,8 +38,8 @@ const
   GST_TRACER_VALUE_FLAGS_OPTIONAL = 1 shl 0;
   GST_TRACER_VALUE_FLAGS_AGGREGATED = 1 shl 1;
 
-function gst_tracer_record_new(Name: Pgchar; firstfield: Pgchar): PGstTracerRecord; varargs cdecl; external gstreamerlib;
-procedure gst_tracer_record_log(self: PGstTracerRecord); varargs cdecl; external gstreamerlib;
+function gst_tracer_record_new(Name: Pgchar; firstfield: Pgchar): PGstTracerRecord; varargs cdecl; external libgstreamer;
+procedure gst_tracer_record_log(self: PGstTracerRecord); varargs cdecl; external libgstreamer;
 
 function GST_TRACER_RECORD_CAST(obj: Pointer): PGstTracerRecord;
 

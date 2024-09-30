@@ -17,9 +17,9 @@ type
   end;
   PGstTracerFactory = ^TGstTracerFactory;
 
-function gst_tracer_factory_get_type: TGType; cdecl; external gstreamerlib;
-function gst_tracer_factory_get_list: PGList; cdecl; external gstreamerlib;
-function gst_tracer_factory_get_tracer_type(factory: PGstTracerFactory): TGType; cdecl; external gstreamerlib;
+function gst_tracer_factory_get_type: TGType; cdecl; external libgstreamer;
+function gst_tracer_factory_get_list: PGList; cdecl; external libgstreamer;
+function gst_tracer_factory_get_tracer_type(factory: PGstTracerFactory): TGType; cdecl; external libgstreamer;
 
 function GST_TRACER_FACTORY_CAST(obj: Pointer): PGstTracerFactory;
 

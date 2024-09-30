@@ -54,21 +54,21 @@ type
   end;
 
 
-function gst_iterator_get_type: TGType; cdecl; external gstreamerlib;
+function gst_iterator_get_type: TGType; cdecl; external libgstreamer;
 function gst_iterator_new(size: Tguint; _type: TGType; lock: PGMutex; master_cookie: Pguint32; copy: TGstIteratorCopyFunction;
-  Next: TGstIteratorNextFunction; item: TGstIteratorItemFunction; resync: TGstIteratorResyncFunction; Free: TGstIteratorFreeFunction): PGstIterator; cdecl; external gstreamerlib;
+  Next: TGstIteratorNextFunction; item: TGstIteratorItemFunction; resync: TGstIteratorResyncFunction; Free: TGstIteratorFreeFunction): PGstIterator; cdecl; external libgstreamer;
 function gst_iterator_new_list(_type: TGType; lock: PGMutex; master_cookie: Pguint32; list: PPGList; owner: PGObject;
-  item: TGstIteratorItemFunction): PGstIterator; cdecl; external gstreamerlib;
-function gst_iterator_new_single(_type: TGType; obj: PGValue): PGstIterator; cdecl; external gstreamerlib;
-function gst_iterator_copy(it: PGstIterator): PGstIterator; cdecl; external gstreamerlib;
-function gst_iterator_next(it: PGstIterator; elem: PGValue): TGstIteratorResult; cdecl; external gstreamerlib;
-procedure gst_iterator_resync(it: PGstIterator); cdecl; external gstreamerlib;
-procedure gst_iterator_free(it: PGstIterator); cdecl; external gstreamerlib;
-procedure gst_iterator_push(it: PGstIterator; other: PGstIterator); cdecl; external gstreamerlib;
-function gst_iterator_filter(it: PGstIterator; func: TGCompareFunc; user_data: PGValue): PGstIterator; cdecl; external gstreamerlib;
-function gst_iterator_fold(it: PGstIterator; func: TGstIteratorFoldFunction; ret: PGValue; user_data: Tgpointer): TGstIteratorResult; cdecl; external gstreamerlib;
-function gst_iterator_foreach(it: PGstIterator; func: TGstIteratorForeachFunction; user_data: Tgpointer): TGstIteratorResult; cdecl; external gstreamerlib;
-function gst_iterator_find_custom(it: PGstIterator; func: TGCompareFunc; elem: PGValue; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
+  item: TGstIteratorItemFunction): PGstIterator; cdecl; external libgstreamer;
+function gst_iterator_new_single(_type: TGType; obj: PGValue): PGstIterator; cdecl; external libgstreamer;
+function gst_iterator_copy(it: PGstIterator): PGstIterator; cdecl; external libgstreamer;
+function gst_iterator_next(it: PGstIterator; elem: PGValue): TGstIteratorResult; cdecl; external libgstreamer;
+procedure gst_iterator_resync(it: PGstIterator); cdecl; external libgstreamer;
+procedure gst_iterator_free(it: PGstIterator); cdecl; external libgstreamer;
+procedure gst_iterator_push(it: PGstIterator; other: PGstIterator); cdecl; external libgstreamer;
+function gst_iterator_filter(it: PGstIterator; func: TGCompareFunc; user_data: PGValue): PGstIterator; cdecl; external libgstreamer;
+function gst_iterator_fold(it: PGstIterator; func: TGstIteratorFoldFunction; ret: PGValue; user_data: Tgpointer): TGstIteratorResult; cdecl; external libgstreamer;
+function gst_iterator_foreach(it: PGstIterator; func: TGstIteratorForeachFunction; user_data: Tgpointer): TGstIteratorResult; cdecl; external libgstreamer;
+function gst_iterator_find_custom(it: PGstIterator; func: TGCompareFunc; elem: PGValue; user_data: Tgpointer): Tgboolean; cdecl; external libgstreamer;
 
 function GST_TYPE_ITERATOR: TGType;
 

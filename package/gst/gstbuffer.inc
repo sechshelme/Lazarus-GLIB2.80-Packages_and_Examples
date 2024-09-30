@@ -9,7 +9,7 @@
 {$IFDEF read_interface}
 
 var
-  _gst_buffer_type: TGType; cvar;external gstreamerlib;
+  _gst_buffer_type: TGType; cvar;external libgstreamer;
 
 type
   PGstBufferFlags = ^TGstBufferFlags;
@@ -31,56 +31,56 @@ const
   GST_BUFFER_FLAG_NON_DROPPABLE = GST_MINI_OBJECT_FLAG_LAST shl 12;
   GST_BUFFER_FLAG_LAST = GST_MINI_OBJECT_FLAG_LAST shl 16;
 
-function gst_buffer_get_type: TGType; cdecl; external gstreamerlib;
-function gst_buffer_get_max_memory: Tguint; cdecl; external gstreamerlib;
-function gst_buffer_new: PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_new_allocate(allocator: PGstAllocator; size: Tgsize; params: PGstAllocationParams): PGstBuffer; cdecl; external gstreamerlib;
+function gst_buffer_get_type: TGType; cdecl; external libgstreamer;
+function gst_buffer_get_max_memory: Tguint; cdecl; external libgstreamer;
+function gst_buffer_new: PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_new_allocate(allocator: PGstAllocator; size: Tgsize; params: PGstAllocationParams): PGstBuffer; cdecl; external libgstreamer;
 function gst_buffer_new_wrapped_full(flags: TGstMemoryFlags; Data: Tgpointer; maxsize: Tgsize; offset: Tgsize; size: Tgsize;
-  user_data: Tgpointer; notify: TGDestroyNotify): PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_new_wrapped(Data: Tgpointer; size: Tgsize): PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_new_wrapped_bytes(bytes: PGBytes): PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_new_memdup(Data: Tgconstpointer; size: Tgsize): PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_n_memory(buffer: PGstBuffer): Tguint; cdecl; external gstreamerlib;
-procedure gst_buffer_insert_memory(buffer: PGstBuffer; idx: Tgint; mem: PGstMemory); cdecl; external gstreamerlib;
-procedure gst_buffer_replace_memory_range(buffer: PGstBuffer; idx: Tguint; length: Tgint; mem: PGstMemory); cdecl; external gstreamerlib;
-function gst_buffer_peek_memory(buffer: PGstBuffer; idx: Tguint): PGstMemory; cdecl; external gstreamerlib;
-function gst_buffer_get_memory_range(buffer: PGstBuffer; idx: Tguint; length: Tgint): PGstMemory; cdecl; external gstreamerlib;
-procedure gst_buffer_remove_memory_range(buffer: PGstBuffer; idx: Tguint; length: Tgint); cdecl; external gstreamerlib;
-procedure gst_buffer_prepend_memory(buffer: PGstBuffer; mem: PGstMemory); cdecl; external gstreamerlib;
-procedure gst_buffer_append_memory(buffer: PGstBuffer; mem: PGstMemory); cdecl; external gstreamerlib;
-procedure gst_buffer_replace_memory(buffer: PGstBuffer; idx: Tguint; mem: PGstMemory); cdecl; external gstreamerlib;
-procedure gst_buffer_replace_all_memory(buffer: PGstBuffer; mem: PGstMemory); cdecl; external gstreamerlib;
-function gst_buffer_get_memory(buffer: PGstBuffer; idx: Tguint): PGstMemory; cdecl; external gstreamerlib;
-function gst_buffer_get_all_memory(buffer: PGstBuffer): PGstMemory; cdecl; external gstreamerlib;
-procedure gst_buffer_remove_memory(buffer: PGstBuffer; idx: Tguint); cdecl; external gstreamerlib;
-procedure gst_buffer_remove_all_memory(buffer: PGstBuffer); cdecl; external gstreamerlib;
+  user_data: Tgpointer; notify: TGDestroyNotify): PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_new_wrapped(Data: Tgpointer; size: Tgsize): PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_new_wrapped_bytes(bytes: PGBytes): PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_new_memdup(Data: Tgconstpointer; size: Tgsize): PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_n_memory(buffer: PGstBuffer): Tguint; cdecl; external libgstreamer;
+procedure gst_buffer_insert_memory(buffer: PGstBuffer; idx: Tgint; mem: PGstMemory); cdecl; external libgstreamer;
+procedure gst_buffer_replace_memory_range(buffer: PGstBuffer; idx: Tguint; length: Tgint; mem: PGstMemory); cdecl; external libgstreamer;
+function gst_buffer_peek_memory(buffer: PGstBuffer; idx: Tguint): PGstMemory; cdecl; external libgstreamer;
+function gst_buffer_get_memory_range(buffer: PGstBuffer; idx: Tguint; length: Tgint): PGstMemory; cdecl; external libgstreamer;
+procedure gst_buffer_remove_memory_range(buffer: PGstBuffer; idx: Tguint; length: Tgint); cdecl; external libgstreamer;
+procedure gst_buffer_prepend_memory(buffer: PGstBuffer; mem: PGstMemory); cdecl; external libgstreamer;
+procedure gst_buffer_append_memory(buffer: PGstBuffer; mem: PGstMemory); cdecl; external libgstreamer;
+procedure gst_buffer_replace_memory(buffer: PGstBuffer; idx: Tguint; mem: PGstMemory); cdecl; external libgstreamer;
+procedure gst_buffer_replace_all_memory(buffer: PGstBuffer; mem: PGstMemory); cdecl; external libgstreamer;
+function gst_buffer_get_memory(buffer: PGstBuffer; idx: Tguint): PGstMemory; cdecl; external libgstreamer;
+function gst_buffer_get_all_memory(buffer: PGstBuffer): PGstMemory; cdecl; external libgstreamer;
+procedure gst_buffer_remove_memory(buffer: PGstBuffer; idx: Tguint); cdecl; external libgstreamer;
+procedure gst_buffer_remove_all_memory(buffer: PGstBuffer); cdecl; external libgstreamer;
 function gst_buffer_find_memory(buffer: PGstBuffer; offset: Tgsize; size: Tgsize; idx: Pguint; length: Pguint;
-  skip: Pgsize): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_is_memory_range_writable(buffer: PGstBuffer; idx: Tguint; length: Tgint): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_is_all_memory_writable(buffer: PGstBuffer): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_fill(buffer: PGstBuffer; offset: Tgsize; src: Tgconstpointer; size: Tgsize): Tgsize; cdecl; external gstreamerlib;
-function gst_buffer_extract(buffer: PGstBuffer; offset: Tgsize; dest: Tgpointer; size: Tgsize): Tgsize; cdecl; external gstreamerlib;
-function gst_buffer_memcmp(buffer: PGstBuffer; offset: Tgsize; mem: Tgconstpointer; size: Tgsize): Tgint; cdecl; external gstreamerlib;
-function gst_buffer_memset(buffer: PGstBuffer; offset: Tgsize; val: Tguint8; size: Tgsize): Tgsize; cdecl; external gstreamerlib;
-function gst_buffer_get_sizes_range(buffer: PGstBuffer; idx: Tguint; length: Tgint; offset: Pgsize; maxsize: Pgsize): Tgsize; cdecl; external gstreamerlib;
-function gst_buffer_resize_range(buffer: PGstBuffer; idx: Tguint; length: Tgint; offset: Tgssize; size: Tgssize): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_get_sizes(buffer: PGstBuffer; offset: Pgsize; maxsize: Pgsize): Tgsize; cdecl; external gstreamerlib;
-function gst_buffer_get_size(buffer: PGstBuffer): Tgsize; cdecl; external gstreamerlib;
-procedure gst_buffer_resize(buffer: PGstBuffer; offset: Tgssize; size: Tgssize); cdecl; external gstreamerlib;
-procedure gst_buffer_set_size(buffer: PGstBuffer; size: Tgssize); cdecl; external gstreamerlib;
-function gst_buffer_map_range(buffer: PGstBuffer; idx: Tguint; length: Tgint; info: PGstMapInfo; flags: TGstMapFlags): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_map(buffer: PGstBuffer; info: PGstMapInfo; flags: TGstMapFlags): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_buffer_unmap(buffer: PGstBuffer; info: PGstMapInfo); cdecl; external gstreamerlib;
-procedure gst_buffer_extract_dup(buffer: PGstBuffer; offset: Tgsize; size: Tgsize; dest: Pgpointer; dest_size: Pgsize); cdecl; external gstreamerlib;
-function gst_buffer_get_flags(buffer: PGstBuffer): TGstBufferFlags; cdecl; external gstreamerlib;
-function gst_buffer_has_flags(buffer: PGstBuffer; flags: TGstBufferFlags): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_set_flags(buffer: PGstBuffer; flags: TGstBufferFlags): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_unset_flags(buffer: PGstBuffer; flags: TGstBufferFlags): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_ref(buf: PGstBuffer): PGstBuffer; cdecl; external gstreamerlib;
-procedure gst_buffer_unref(buf: PGstBuffer); cdecl; external gstreamerlib;
-procedure gst_clear_buffer(buf_ptr: PPGstBuffer); cdecl; external gstreamerlib;
-function gst_buffer_copy(buf: PGstBuffer): PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_copy_deep(buf: PGstBuffer): PGstBuffer; cdecl; external gstreamerlib;
+  skip: Pgsize): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_is_memory_range_writable(buffer: PGstBuffer; idx: Tguint; length: Tgint): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_is_all_memory_writable(buffer: PGstBuffer): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_fill(buffer: PGstBuffer; offset: Tgsize; src: Tgconstpointer; size: Tgsize): Tgsize; cdecl; external libgstreamer;
+function gst_buffer_extract(buffer: PGstBuffer; offset: Tgsize; dest: Tgpointer; size: Tgsize): Tgsize; cdecl; external libgstreamer;
+function gst_buffer_memcmp(buffer: PGstBuffer; offset: Tgsize; mem: Tgconstpointer; size: Tgsize): Tgint; cdecl; external libgstreamer;
+function gst_buffer_memset(buffer: PGstBuffer; offset: Tgsize; val: Tguint8; size: Tgsize): Tgsize; cdecl; external libgstreamer;
+function gst_buffer_get_sizes_range(buffer: PGstBuffer; idx: Tguint; length: Tgint; offset: Pgsize; maxsize: Pgsize): Tgsize; cdecl; external libgstreamer;
+function gst_buffer_resize_range(buffer: PGstBuffer; idx: Tguint; length: Tgint; offset: Tgssize; size: Tgssize): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_get_sizes(buffer: PGstBuffer; offset: Pgsize; maxsize: Pgsize): Tgsize; cdecl; external libgstreamer;
+function gst_buffer_get_size(buffer: PGstBuffer): Tgsize; cdecl; external libgstreamer;
+procedure gst_buffer_resize(buffer: PGstBuffer; offset: Tgssize; size: Tgssize); cdecl; external libgstreamer;
+procedure gst_buffer_set_size(buffer: PGstBuffer; size: Tgssize); cdecl; external libgstreamer;
+function gst_buffer_map_range(buffer: PGstBuffer; idx: Tguint; length: Tgint; info: PGstMapInfo; flags: TGstMapFlags): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_map(buffer: PGstBuffer; info: PGstMapInfo; flags: TGstMapFlags): Tgboolean; cdecl; external libgstreamer;
+procedure gst_buffer_unmap(buffer: PGstBuffer; info: PGstMapInfo); cdecl; external libgstreamer;
+procedure gst_buffer_extract_dup(buffer: PGstBuffer; offset: Tgsize; size: Tgsize; dest: Pgpointer; dest_size: Pgsize); cdecl; external libgstreamer;
+function gst_buffer_get_flags(buffer: PGstBuffer): TGstBufferFlags; cdecl; external libgstreamer;
+function gst_buffer_has_flags(buffer: PGstBuffer; flags: TGstBufferFlags): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_set_flags(buffer: PGstBuffer; flags: TGstBufferFlags): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_unset_flags(buffer: PGstBuffer; flags: TGstBufferFlags): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_ref(buf: PGstBuffer): PGstBuffer; cdecl; external libgstreamer;
+procedure gst_buffer_unref(buf: PGstBuffer); cdecl; external libgstreamer;
+procedure gst_clear_buffer(buf_ptr: PPGstBuffer); cdecl; external libgstreamer;
+function gst_buffer_copy(buf: PGstBuffer): PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_copy_deep(buf: PGstBuffer): PGstBuffer; cdecl; external libgstreamer;
 
 type
   PGstBufferCopyFlags = ^TGstBufferCopyFlags;
@@ -95,25 +95,25 @@ const
   GST_BUFFER_COPY_MERGE = 1 shl 4;
   GST_BUFFER_COPY_DEEP_ = 1 shl 5;
 
-function gst_buffer_copy_into(dest: PGstBuffer; src: PGstBuffer; flags: TGstBufferCopyFlags; offset: Tgsize; size: Tgsize): Tgboolean; cdecl; external gstreamerlib;
+function gst_buffer_copy_into(dest: PGstBuffer; src: PGstBuffer; flags: TGstBufferCopyFlags; offset: Tgsize; size: Tgsize): Tgboolean; cdecl; external libgstreamer;
 
-function gst_buffer_replace(obuf: PPGstBuffer; nbuf: PGstBuffer): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_copy_region(parent: PGstBuffer; flags: TGstBufferCopyFlags; offset: Tgsize; size: Tgsize): PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_append_region(buf1: PGstBuffer; buf2: PGstBuffer; offset: Tgssize; size: Tgssize): PGstBuffer; cdecl; external gstreamerlib;
-function gst_buffer_append(buf1: PGstBuffer; buf2: PGstBuffer): PGstBuffer; cdecl; external gstreamerlib;
+function gst_buffer_replace(obuf: PPGstBuffer; nbuf: PGstBuffer): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_copy_region(parent: PGstBuffer; flags: TGstBufferCopyFlags; offset: Tgsize; size: Tgsize): PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_append_region(buf1: PGstBuffer; buf2: PGstBuffer; offset: Tgssize; size: Tgssize): PGstBuffer; cdecl; external libgstreamer;
+function gst_buffer_append(buf1: PGstBuffer; buf2: PGstBuffer): PGstBuffer; cdecl; external libgstreamer;
 
 type
   TGstBufferForeachMetaFunc = function(buffer: PGstBuffer; meta: PPGstMeta; user_data: Tgpointer): Tgboolean; cdecl;
 
-function gst_buffer_get_meta(buffer: PGstBuffer; api: TGType): PGstMeta; cdecl; external gstreamerlib;
-function gst_buffer_get_n_meta(buffer: PGstBuffer; api_type: TGType): Tguint; cdecl; external gstreamerlib;
-function gst_buffer_add_meta(buffer: PGstBuffer; info: PGstMetaInfo; params: Tgpointer): PGstMeta; cdecl; external gstreamerlib;
-function gst_buffer_remove_meta(buffer: PGstBuffer; meta: PGstMeta): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_iterate_meta(buffer: PGstBuffer; state: Pgpointer): PGstMeta; cdecl; external gstreamerlib;
-function gst_buffer_iterate_meta_filtered(buffer: PGstBuffer; state: Pgpointer; meta_api_type: TGType): PGstMeta; cdecl; external gstreamerlib;
-function gst_buffer_foreach_meta(buffer: PGstBuffer; func: TGstBufferForeachMetaFunc; user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_buffer_add_custom_meta(buffer: PGstBuffer; Name: Pgchar): PGstCustomMeta; cdecl; external gstreamerlib;
-function gst_buffer_get_custom_meta(buffer: PGstBuffer; Name: Pgchar): PGstCustomMeta; cdecl; external gstreamerlib;
+function gst_buffer_get_meta(buffer: PGstBuffer; api: TGType): PGstMeta; cdecl; external libgstreamer;
+function gst_buffer_get_n_meta(buffer: PGstBuffer; api_type: TGType): Tguint; cdecl; external libgstreamer;
+function gst_buffer_add_meta(buffer: PGstBuffer; info: PGstMetaInfo; params: Tgpointer): PGstMeta; cdecl; external libgstreamer;
+function gst_buffer_remove_meta(buffer: PGstBuffer; meta: PGstMeta): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_iterate_meta(buffer: PGstBuffer; state: Pgpointer): PGstMeta; cdecl; external libgstreamer;
+function gst_buffer_iterate_meta_filtered(buffer: PGstBuffer; state: Pgpointer; meta_api_type: TGType): PGstMeta; cdecl; external libgstreamer;
+function gst_buffer_foreach_meta(buffer: PGstBuffer; func: TGstBufferForeachMetaFunc; user_data: Tgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_buffer_add_custom_meta(buffer: PGstBuffer; Name: Pgchar): PGstCustomMeta; cdecl; external libgstreamer;
+function gst_buffer_get_custom_meta(buffer: PGstBuffer; Name: Pgchar): PGstCustomMeta; cdecl; external libgstreamer;
 
 type
   PGstParentBufferMeta = ^TGstParentBufferMeta;
@@ -123,9 +123,9 @@ type
     buffer: PGstBuffer;
   end;
 
-function gst_parent_buffer_meta_api_get_type: TGType; cdecl; external gstreamerlib;
+function gst_parent_buffer_meta_api_get_type: TGType; cdecl; external libgstreamer;
 
-function gst_buffer_add_parent_buffer_meta(buffer: PGstBuffer; ref: PGstBuffer): PGstParentBufferMeta; cdecl; external gstreamerlib;
+function gst_buffer_add_parent_buffer_meta(buffer: PGstBuffer; ref: PGstBuffer): PGstParentBufferMeta; cdecl; external libgstreamer;
 
 type
   PGstReferenceTimestampMeta = ^TGstReferenceTimestampMeta;
@@ -137,17 +137,17 @@ type
     duration: TGstClockTime;
   end;
 
-function gst_buffer_add_reference_timestamp_meta(buffer: PGstBuffer; reference: PGstCaps; timestamp: TGstClockTime; duration: TGstClockTime): PGstReferenceTimestampMeta; cdecl; external gstreamerlib;
-function gst_buffer_get_reference_timestamp_meta(buffer: PGstBuffer; reference: PGstCaps): PGstReferenceTimestampMeta; cdecl; external gstreamerlib;
+function gst_buffer_add_reference_timestamp_meta(buffer: PGstBuffer; reference: PGstCaps; timestamp: TGstClockTime; duration: TGstClockTime): PGstReferenceTimestampMeta; cdecl; external libgstreamer;
+function gst_buffer_get_reference_timestamp_meta(buffer: PGstBuffer; reference: PGstCaps): PGstReferenceTimestampMeta; cdecl; external libgstreamer;
 
 type
   PGstBufferMapInfo = ^TGstBufferMapInfo;
   TGstBufferMapInfo = TGstMapInfo;
 
 
-function gst_parent_buffer_meta_get_info: PGstMetaInfo; cdecl; external gstreamerlib;
-function gst_reference_timestamp_meta_api_get_type: TGType; cdecl; external gstreamerlib;
-function gst_reference_timestamp_meta_get_info: PGstMetaInfo; cdecl; external gstreamerlib;
+function gst_parent_buffer_meta_get_info: PGstMetaInfo; cdecl; external libgstreamer;
+function gst_reference_timestamp_meta_api_get_type: TGType; cdecl; external libgstreamer;
+function gst_reference_timestamp_meta_get_info: PGstMetaInfo; cdecl; external libgstreamer;
 
 procedure _gst_buffer_map_info_clear(info: PGstBufferMapInfo);
 

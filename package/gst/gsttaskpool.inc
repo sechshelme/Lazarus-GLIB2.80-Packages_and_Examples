@@ -31,13 +31,13 @@ type
   PGstTaskPoolClass = ^TGstTaskPoolClass;
 
 
-function gst_task_pool_get_type: TGType; cdecl; external gstreamerlib;
-function gst_task_pool_new: PGstTaskPool; cdecl; external gstreamerlib;
-procedure gst_task_pool_prepare(pool: PGstTaskPool; error: PPGError); cdecl; external gstreamerlib;
-function gst_task_pool_push(pool: PGstTaskPool; func: TGstTaskPoolFunction; user_data: Tgpointer; error: PPGError): Tgpointer; cdecl; external gstreamerlib;
-procedure gst_task_pool_join(pool: PGstTaskPool; id: Tgpointer); cdecl; external gstreamerlib;
-procedure gst_task_pool_dispose_handle(pool: PGstTaskPool; id: Tgpointer); cdecl; external gstreamerlib;
-procedure gst_task_pool_cleanup(pool: PGstTaskPool); cdecl; external gstreamerlib;
+function gst_task_pool_get_type: TGType; cdecl; external libgstreamer;
+function gst_task_pool_new: PGstTaskPool; cdecl; external libgstreamer;
+procedure gst_task_pool_prepare(pool: PGstTaskPool; error: PPGError); cdecl; external libgstreamer;
+function gst_task_pool_push(pool: PGstTaskPool; func: TGstTaskPoolFunction; user_data: Tgpointer; error: PPGError): Tgpointer; cdecl; external libgstreamer;
+procedure gst_task_pool_join(pool: PGstTaskPool; id: Tgpointer); cdecl; external libgstreamer;
+procedure gst_task_pool_dispose_handle(pool: PGstTaskPool; id: Tgpointer); cdecl; external libgstreamer;
+procedure gst_task_pool_cleanup(pool: PGstTaskPool); cdecl; external libgstreamer;
 
 type
   TGstSharedTaskPoolPrivate = record
@@ -57,10 +57,10 @@ type
   end;
   PGstSharedTaskPoolClass = ^TGstSharedTaskPoolClass;
 
-function gst_shared_task_pool_get_type: TGType; cdecl; external gstreamerlib;
-procedure gst_shared_task_pool_set_max_threads(pool: PGstSharedTaskPool; max_threads: Tguint); cdecl; external gstreamerlib;
-function gst_shared_task_pool_get_max_threads(pool: PGstSharedTaskPool): Tguint; cdecl; external gstreamerlib;
-function gst_shared_task_pool_new: PGstTaskPool; cdecl; external gstreamerlib;
+function gst_shared_task_pool_get_type: TGType; cdecl; external libgstreamer;
+procedure gst_shared_task_pool_set_max_threads(pool: PGstSharedTaskPool; max_threads: Tguint); cdecl; external libgstreamer;
+function gst_shared_task_pool_get_max_threads(pool: PGstSharedTaskPool): Tguint; cdecl; external libgstreamer;
+function gst_shared_task_pool_new: PGstTaskPool; cdecl; external libgstreamer;
 
 function GST_TASK_POOL_CAST(obj: Pointer): PGstTaskPool;
 

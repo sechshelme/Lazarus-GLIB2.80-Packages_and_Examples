@@ -27,17 +27,17 @@ type
   PGstDeviceMonitorClass = ^TGstDeviceMonitorClass;
 
 
-function gst_device_monitor_get_type: TGType; cdecl; external gstreamerlib;
-function gst_device_monitor_new: PGstDeviceMonitor; cdecl; external gstreamerlib;
-function gst_device_monitor_get_bus(monitor: PGstDeviceMonitor): PGstBus; cdecl; external gstreamerlib;
-function gst_device_monitor_get_devices(monitor: PGstDeviceMonitor): PGList; cdecl; external gstreamerlib;
-function gst_device_monitor_start(monitor: PGstDeviceMonitor): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_device_monitor_stop(monitor: PGstDeviceMonitor); cdecl; external gstreamerlib;
-function gst_device_monitor_add_filter(monitor: PGstDeviceMonitor; Classes: Pgchar; caps: PGstCaps): Tguint; cdecl; external gstreamerlib;
-function gst_device_monitor_remove_filter(monitor: PGstDeviceMonitor; filter_id: Tguint): Tgboolean; cdecl; external gstreamerlib;
-function gst_device_monitor_get_providers(monitor: PGstDeviceMonitor): PPgchar; cdecl; external gstreamerlib;
-procedure gst_device_monitor_set_show_all_devices(monitor: PGstDeviceMonitor; show_all: Tgboolean); cdecl; external gstreamerlib;
-function gst_device_monitor_get_show_all_devices(monitor: PGstDeviceMonitor): Tgboolean; cdecl; external gstreamerlib;
+function gst_device_monitor_get_type: TGType; cdecl; external libgstreamer;
+function gst_device_monitor_new: PGstDeviceMonitor; cdecl; external libgstreamer;
+function gst_device_monitor_get_bus(monitor: PGstDeviceMonitor): PGstBus; cdecl; external libgstreamer;
+function gst_device_monitor_get_devices(monitor: PGstDeviceMonitor): PGList; cdecl; external libgstreamer;
+function gst_device_monitor_start(monitor: PGstDeviceMonitor): Tgboolean; cdecl; external libgstreamer;
+procedure gst_device_monitor_stop(monitor: PGstDeviceMonitor); cdecl; external libgstreamer;
+function gst_device_monitor_add_filter(monitor: PGstDeviceMonitor; Classes: Pgchar; caps: PGstCaps): Tguint; cdecl; external libgstreamer;
+function gst_device_monitor_remove_filter(monitor: PGstDeviceMonitor; filter_id: Tguint): Tgboolean; cdecl; external libgstreamer;
+function gst_device_monitor_get_providers(monitor: PGstDeviceMonitor): PPgchar; cdecl; external libgstreamer;
+procedure gst_device_monitor_set_show_all_devices(monitor: PGstDeviceMonitor; show_all: Tgboolean); cdecl; external libgstreamer;
+function gst_device_monitor_get_show_all_devices(monitor: PGstDeviceMonitor): Tgboolean; cdecl; external libgstreamer;
 
 function GST_DEVICE_MONITOR_CAST(obj: Pointer): PGstDeviceMonitor;
 

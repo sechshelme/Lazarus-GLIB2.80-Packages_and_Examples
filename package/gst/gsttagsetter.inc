@@ -18,17 +18,17 @@ type
   end;
   PGstTagSetterInterface = ^TGstTagSetterInterface;
 
-function gst_tag_setter_get_type: TGType; cdecl; external gstreamerlib;
-procedure gst_tag_setter_reset_tags(setter: PGstTagSetter); cdecl; external gstreamerlib;
-procedure gst_tag_setter_merge_tags(setter: PGstTagSetter; list: PGstTagList; mode: TGstTagMergeMode); cdecl; external gstreamerlib;
-procedure gst_tag_setter_add_tags(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external gstreamerlib;
-procedure gst_tag_setter_add_tag_values(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external gstreamerlib;
-procedure gst_tag_setter_add_tag_valist(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
-procedure gst_tag_setter_add_tag_valist_values(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
-procedure gst_tag_setter_add_tag_value(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar; Value: PGValue); cdecl; external gstreamerlib;
-function gst_tag_setter_get_tag_list(setter: PGstTagSetter): PGstTagList; cdecl; external gstreamerlib;
-procedure gst_tag_setter_set_tag_merge_mode(setter: PGstTagSetter; mode: TGstTagMergeMode); cdecl; external gstreamerlib;
-function gst_tag_setter_get_tag_merge_mode(setter: PGstTagSetter): TGstTagMergeMode; cdecl; external gstreamerlib;
+function gst_tag_setter_get_type: TGType; cdecl; external libgstreamer;
+procedure gst_tag_setter_reset_tags(setter: PGstTagSetter); cdecl; external libgstreamer;
+procedure gst_tag_setter_merge_tags(setter: PGstTagSetter; list: PGstTagList; mode: TGstTagMergeMode); cdecl; external libgstreamer;
+procedure gst_tag_setter_add_tags(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external libgstreamer;
+procedure gst_tag_setter_add_tag_values(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external libgstreamer;
+procedure gst_tag_setter_add_tag_valist(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external libgstreamer;
+procedure gst_tag_setter_add_tag_valist_values(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external libgstreamer;
+procedure gst_tag_setter_add_tag_value(setter: PGstTagSetter; mode: TGstTagMergeMode; tag: Pgchar; Value: PGValue); cdecl; external libgstreamer;
+function gst_tag_setter_get_tag_list(setter: PGstTagSetter): PGstTagList; cdecl; external libgstreamer;
+procedure gst_tag_setter_set_tag_merge_mode(setter: PGstTagSetter; mode: TGstTagMergeMode); cdecl; external libgstreamer;
+function gst_tag_setter_get_tag_merge_mode(setter: PGstTagSetter): TGstTagMergeMode; cdecl; external libgstreamer;
 
 // === Konventiert am: 17-9-24 15:43:11 ===
 

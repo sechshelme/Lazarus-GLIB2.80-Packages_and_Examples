@@ -41,25 +41,25 @@ type
   PPGstTagList = ^PGstTagList;
 
 var
-  _gst_tag_list_type: TGType; cvar;external gstreamerlib;
+  _gst_tag_list_type: TGType; cvar;external libgstreamer;
 
 type
   TGstTagForeachFunc = procedure(list: PGstTagList; tag: Pgchar; user_data: Tgpointer); cdecl;
   TGstTagMergeFunc = procedure(dest: PGValue; src: PGValue); cdecl;
 
-function gst_tag_list_get_type: TGType; cdecl; external gstreamerlib;
+function gst_tag_list_get_type: TGType; cdecl; external libgstreamer;
 procedure gst_tag_register(Name: Pgchar; flag: TGstTagFlag; _type: TGType; nick: Pgchar; blurb: Pgchar;
-  func: TGstTagMergeFunc); cdecl; external gstreamerlib;
+  func: TGstTagMergeFunc); cdecl; external libgstreamer;
 procedure gst_tag_register_static(Name: Pgchar; flag: TGstTagFlag; _type: TGType; nick: Pgchar; blurb: Pgchar;
-  func: TGstTagMergeFunc); cdecl; external gstreamerlib;
-procedure gst_tag_merge_use_first(dest: PGValue; src: PGValue); cdecl; external gstreamerlib;
-procedure gst_tag_merge_strings_with_comma(dest: PGValue; src: PGValue); cdecl; external gstreamerlib;
-function gst_tag_exists(tag: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_get_type(tag: Pgchar): TGType; cdecl; external gstreamerlib;
-function gst_tag_get_nick(tag: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_tag_get_description(tag: Pgchar): Pgchar; cdecl; external gstreamerlib;
-function gst_tag_get_flag(tag: Pgchar): TGstTagFlag; cdecl; external gstreamerlib;
-function gst_tag_is_fixed(tag: Pgchar): Tgboolean; cdecl; external gstreamerlib;
+  func: TGstTagMergeFunc); cdecl; external libgstreamer;
+procedure gst_tag_merge_use_first(dest: PGValue; src: PGValue); cdecl; external libgstreamer;
+procedure gst_tag_merge_strings_with_comma(dest: PGValue; src: PGValue); cdecl; external libgstreamer;
+function gst_tag_exists(tag: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_get_type(tag: Pgchar): TGType; cdecl; external libgstreamer;
+function gst_tag_get_nick(tag: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_tag_get_description(tag: Pgchar): Pgchar; cdecl; external libgstreamer;
+function gst_tag_get_flag(tag: Pgchar): TGstTagFlag; cdecl; external libgstreamer;
+function gst_tag_is_fixed(tag: Pgchar): Tgboolean; cdecl; external libgstreamer;
 
 type
   PGstTagScope = ^TGstTagScope;
@@ -69,63 +69,63 @@ const
   GST_TAG_SCOPE_STREAM = 0;
   GST_TAG_SCOPE_GLOBAL = 1;
 
-function gst_tag_list_new_empty: PGstTagList; cdecl; external gstreamerlib;
-function gst_tag_list_new(tag: Pgchar): PGstTagList; varargs cdecl; external gstreamerlib;
-function gst_tag_list_new_valist(var_args: Tva_list): PGstTagList; cdecl; external gstreamerlib;
-procedure gst_tag_list_set_scope(list: PGstTagList; scope: TGstTagScope); cdecl; external gstreamerlib;
-function gst_tag_list_get_scope(list: PGstTagList): TGstTagScope; cdecl; external gstreamerlib;
-function gst_tag_list_to_string(list: PGstTagList): Pgchar; cdecl; external gstreamerlib;
-function gst_tag_list_new_from_string(str: Pgchar): PGstTagList; cdecl; external gstreamerlib;
-function gst_tag_list_n_tags(list: PGstTagList): Tgint; cdecl; external gstreamerlib;
-function gst_tag_list_nth_tag_name(list: PGstTagList; index: Tguint): Pgchar; cdecl; external gstreamerlib;
-function gst_tag_list_is_empty(list: PGstTagList): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_is_equal(list1: PGstTagList; list2: PGstTagList): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_tag_list_insert(into: PGstTagList; from: PGstTagList; mode: TGstTagMergeMode); cdecl; external gstreamerlib;
-function gst_tag_list_merge(list1: PGstTagList; list2: PGstTagList; mode: TGstTagMergeMode): PGstTagList; cdecl; external gstreamerlib;
-function gst_tag_list_get_tag_size(list: PGstTagList; tag: Pgchar): Tguint; cdecl; external gstreamerlib;
-procedure gst_tag_list_add(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external gstreamerlib;
-procedure gst_tag_list_add_values(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external gstreamerlib;
-procedure gst_tag_list_add_valist(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
-procedure gst_tag_list_add_valist_values(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external gstreamerlib;
-procedure gst_tag_list_add_value(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; Value: PGValue); cdecl; external gstreamerlib;
-procedure gst_tag_list_remove_tag(list: PGstTagList; tag: Pgchar); cdecl; external gstreamerlib;
-procedure gst_tag_list_foreach(list: PGstTagList; func: TGstTagForeachFunc; user_data: Tgpointer); cdecl; external gstreamerlib;
-function gst_tag_list_get_value_index(list: PGstTagList; tag: Pgchar; index: Tguint): PGValue; cdecl; external gstreamerlib;
-function gst_tag_list_copy_value(dest: PGValue; list: PGstTagList; tag: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_boolean(list: PGstTagList; tag: Pgchar; Value: Pgboolean): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_boolean_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgboolean): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_int(list: PGstTagList; tag: Pgchar; Value: Pgint): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_int_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgint): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_uint(list: PGstTagList; tag: Pgchar; Value: Pguint): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_uint_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pguint): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_int64(list: PGstTagList; tag: Pgchar; Value: Pgint64): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_int64_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgint64): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_uint64(list: PGstTagList; tag: Pgchar; Value: Pguint64): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_uint64_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pguint64): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_float(list: PGstTagList; tag: Pgchar; Value: Pgfloat): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_float_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgfloat): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_double(list: PGstTagList; tag: Pgchar; Value: Pgdouble): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_double_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgdouble): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_string(list: PGstTagList; tag: Pgchar; Value: PPgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_string_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: PPgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_peek_string_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: PPgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_pointer(list: PGstTagList; tag: Pgchar; Value: Pgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_pointer_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_date(list: PGstTagList; tag: Pgchar; Value: PPGDate): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_date_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: PPGDate): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_date_time(list: PGstTagList; tag: Pgchar; Value: PPGstDateTime): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_date_time_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: PPGstDateTime): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_sample(list: PGstTagList; tag: Pgchar; sample: PPGstSample): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_get_sample_index(list: PGstTagList; tag: Pgchar; index: Tguint; sample: PPGstSample): Tgboolean; cdecl; external gstreamerlib;
+function gst_tag_list_new_empty: PGstTagList; cdecl; external libgstreamer;
+function gst_tag_list_new(tag: Pgchar): PGstTagList; varargs cdecl; external libgstreamer;
+function gst_tag_list_new_valist(var_args: Tva_list): PGstTagList; cdecl; external libgstreamer;
+procedure gst_tag_list_set_scope(list: PGstTagList; scope: TGstTagScope); cdecl; external libgstreamer;
+function gst_tag_list_get_scope(list: PGstTagList): TGstTagScope; cdecl; external libgstreamer;
+function gst_tag_list_to_string(list: PGstTagList): Pgchar; cdecl; external libgstreamer;
+function gst_tag_list_new_from_string(str: Pgchar): PGstTagList; cdecl; external libgstreamer;
+function gst_tag_list_n_tags(list: PGstTagList): Tgint; cdecl; external libgstreamer;
+function gst_tag_list_nth_tag_name(list: PGstTagList; index: Tguint): Pgchar; cdecl; external libgstreamer;
+function gst_tag_list_is_empty(list: PGstTagList): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_is_equal(list1: PGstTagList; list2: PGstTagList): Tgboolean; cdecl; external libgstreamer;
+procedure gst_tag_list_insert(into: PGstTagList; from: PGstTagList; mode: TGstTagMergeMode); cdecl; external libgstreamer;
+function gst_tag_list_merge(list1: PGstTagList; list2: PGstTagList; mode: TGstTagMergeMode): PGstTagList; cdecl; external libgstreamer;
+function gst_tag_list_get_tag_size(list: PGstTagList; tag: Pgchar): Tguint; cdecl; external libgstreamer;
+procedure gst_tag_list_add(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external libgstreamer;
+procedure gst_tag_list_add_values(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar); varargs cdecl; external libgstreamer;
+procedure gst_tag_list_add_valist(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external libgstreamer;
+procedure gst_tag_list_add_valist_values(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; var_args: Tva_list); cdecl; external libgstreamer;
+procedure gst_tag_list_add_value(list: PGstTagList; mode: TGstTagMergeMode; tag: Pgchar; Value: PGValue); cdecl; external libgstreamer;
+procedure gst_tag_list_remove_tag(list: PGstTagList; tag: Pgchar); cdecl; external libgstreamer;
+procedure gst_tag_list_foreach(list: PGstTagList; func: TGstTagForeachFunc; user_data: Tgpointer); cdecl; external libgstreamer;
+function gst_tag_list_get_value_index(list: PGstTagList; tag: Pgchar; index: Tguint): PGValue; cdecl; external libgstreamer;
+function gst_tag_list_copy_value(dest: PGValue; list: PGstTagList; tag: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_boolean(list: PGstTagList; tag: Pgchar; Value: Pgboolean): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_boolean_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgboolean): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_int(list: PGstTagList; tag: Pgchar; Value: Pgint): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_int_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgint): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_uint(list: PGstTagList; tag: Pgchar; Value: Pguint): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_uint_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pguint): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_int64(list: PGstTagList; tag: Pgchar; Value: Pgint64): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_int64_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgint64): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_uint64(list: PGstTagList; tag: Pgchar; Value: Pguint64): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_uint64_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pguint64): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_float(list: PGstTagList; tag: Pgchar; Value: Pgfloat): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_float_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgfloat): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_double(list: PGstTagList; tag: Pgchar; Value: Pgdouble): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_double_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgdouble): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_string(list: PGstTagList; tag: Pgchar; Value: PPgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_string_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: PPgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_peek_string_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: PPgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_pointer(list: PGstTagList; tag: Pgchar; Value: Pgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_pointer_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: Pgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_date(list: PGstTagList; tag: Pgchar; Value: PPGDate): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_date_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: PPGDate): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_date_time(list: PGstTagList; tag: Pgchar; Value: PPGstDateTime): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_date_time_index(list: PGstTagList; tag: Pgchar; index: Tguint; Value: PPGstDateTime): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_sample(list: PGstTagList; tag: Pgchar; sample: PPGstSample): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_get_sample_index(list: PGstTagList; tag: Pgchar; index: Tguint; sample: PPGstSample): Tgboolean; cdecl; external libgstreamer;
 
-function gst_tag_list_ref(taglist: PGstTagList): PGstTagList; cdecl; external gstreamerlib;
-procedure gst_tag_list_unref(taglist: PGstTagList); cdecl; external gstreamerlib;
-procedure gst_clear_tag_list(taglist_ptr: PPGstTagList); cdecl; external gstreamerlib;
+function gst_tag_list_ref(taglist: PGstTagList): PGstTagList; cdecl; external libgstreamer;
+procedure gst_tag_list_unref(taglist: PGstTagList); cdecl; external libgstreamer;
+procedure gst_clear_tag_list(taglist_ptr: PPGstTagList); cdecl; external libgstreamer;
 
-function gst_tag_list_copy(taglist: PGstTagList): PGstTagList; cdecl; external gstreamerlib;
+function gst_tag_list_copy(taglist: PGstTagList): PGstTagList; cdecl; external libgstreamer;
 
-function gst_tag_list_replace(old_taglist: PPGstTagList; new_taglist: PGstTagList): Tgboolean; cdecl; external gstreamerlib;
-function gst_tag_list_take(old_taglist: PPGstTagList; new_taglist: PGstTagList): Tgboolean; cdecl; external gstreamerlib;
+function gst_tag_list_replace(old_taglist: PPGstTagList; new_taglist: PGstTagList): Tgboolean; cdecl; external libgstreamer;
+function gst_tag_list_take(old_taglist: PPGstTagList; new_taglist: PGstTagList): Tgboolean; cdecl; external libgstreamer;
 
 const
   GST_TAG_TITLE = 'title';

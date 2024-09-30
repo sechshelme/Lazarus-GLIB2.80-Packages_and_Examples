@@ -30,12 +30,12 @@ type
   end;
   PGstStreamCollectionClass = ^TGstStreamCollectionClass;
 
-function gst_stream_collection_get_type: TGType; cdecl; external gstreamerlib;
-function gst_stream_collection_new(upstream_id: Pgchar): PGstStreamCollection; cdecl; external gstreamerlib;
-function gst_stream_collection_get_upstream_id(collection: PGstStreamCollection): Pgchar; cdecl; external gstreamerlib;
-function gst_stream_collection_get_size(collection: PGstStreamCollection): Tguint; cdecl; external gstreamerlib;
-function gst_stream_collection_get_stream(collection: PGstStreamCollection; index: Tguint): PGstStream; cdecl; external gstreamerlib;
-function gst_stream_collection_add_stream(collection: PGstStreamCollection; stream: PGstStream): Tgboolean; cdecl; external gstreamerlib;
+function gst_stream_collection_get_type: TGType; cdecl; external libgstreamer;
+function gst_stream_collection_new(upstream_id: Pgchar): PGstStreamCollection; cdecl; external libgstreamer;
+function gst_stream_collection_get_upstream_id(collection: PGstStreamCollection): Pgchar; cdecl; external libgstreamer;
+function gst_stream_collection_get_size(collection: PGstStreamCollection): Tguint; cdecl; external libgstreamer;
+function gst_stream_collection_get_stream(collection: PGstStreamCollection; index: Tguint): PGstStream; cdecl; external libgstreamer;
+function gst_stream_collection_add_stream(collection: PGstStreamCollection; stream: PGstStream): Tgboolean; cdecl; external libgstreamer;
 
 function GST_STREAM_COLLECTION_CAST(obj: Pointer): PGstStreamCollection;
 

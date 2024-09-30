@@ -29,13 +29,13 @@ type
   end;
   PGstFormatDefinition = ^TGstFormatDefinition;
 
-function gst_format_get_name(format: TGstFormat): Pgchar; cdecl; external gstreamerlib;
-function gst_format_to_quark(format: TGstFormat): TGQuark; cdecl; external gstreamerlib;
-function gst_format_register(nick: Pgchar; description: Pgchar): TGstFormat; cdecl; external gstreamerlib;
-function gst_format_get_by_nick(nick: Pgchar): TGstFormat; cdecl; external gstreamerlib;
-function gst_formats_contains(formats: PGstFormat; format: TGstFormat): Tgboolean; cdecl; external gstreamerlib;
-function gst_format_get_details(format: TGstFormat): PGstFormatDefinition; cdecl; external gstreamerlib;
-function gst_format_iterate_definitions: PGstIterator; cdecl; external gstreamerlib;
+function gst_format_get_name(format: TGstFormat): Pgchar; cdecl; external libgstreamer;
+function gst_format_to_quark(format: TGstFormat): TGQuark; cdecl; external libgstreamer;
+function gst_format_register(nick: Pgchar; description: Pgchar): TGstFormat; cdecl; external libgstreamer;
+function gst_format_get_by_nick(nick: Pgchar): TGstFormat; cdecl; external libgstreamer;
+function gst_formats_contains(formats: PGstFormat; format: TGstFormat): Tgboolean; cdecl; external libgstreamer;
+function gst_format_get_details(format: TGstFormat): PGstFormatDefinition; cdecl; external libgstreamer;
+function gst_format_iterate_definitions: PGstIterator; cdecl; external libgstreamer;
 
 const
   GST_FORMAT_PERCENT_MAX = 1000000;

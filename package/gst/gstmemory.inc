@@ -9,10 +9,9 @@
 {$IFDEF read_interface}
 
 var
-  _gst_memory_type: TGType; cvar;external gstreamerlib;
+  _gst_memory_type: TGType; cvar;external libgstreamer;
 
-
-function gst_memory_get_type: TGType; cdecl; external gstreamerlib;
+function gst_memory_get_type: TGType; cdecl; external libgstreamer;
 
 type
   PGstMemoryFlags = ^TGstMemoryFlags;
@@ -74,17 +73,17 @@ type
 
 // ausgelagert
 // procedure gst_memory_init(mem: PGstMemory; flags: TGstMemoryFlags; allocator: PGstAllocator; parent: PGstMemory; maxsize: Tgsize; align: Tgsize; offset: Tgsize; size: Tgsize); cdecl; external gstreamerlib;
-function gst_memory_is_type(mem: PGstMemory; mem_type: Pgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_memory_ref(memory: PGstMemory): PGstMemory; cdecl; external gstreamerlib;
-procedure gst_memory_unref(memory: PGstMemory); cdecl; external gstreamerlib;
-function gst_memory_get_sizes(mem: PGstMemory; offset: Pgsize; maxsize: Pgsize): Tgsize; cdecl; external gstreamerlib;
-procedure gst_memory_resize(mem: PGstMemory; offset: Tgssize; size: Tgsize); cdecl; external gstreamerlib;
-function gst_memory_make_mapped(mem: PGstMemory; info: PGstMapInfo; flags: TGstMapFlags): PGstMemory; cdecl; external gstreamerlib;
-function gst_memory_map(mem: PGstMemory; info: PGstMapInfo; flags: TGstMapFlags): Tgboolean; cdecl; external gstreamerlib;
-procedure gst_memory_unmap(mem: PGstMemory; info: PGstMapInfo); cdecl; external gstreamerlib;
-function gst_memory_copy(mem: PGstMemory; offset: Tgssize; size: Tgssize): PGstMemory; cdecl; external gstreamerlib;
-function gst_memory_share(mem: PGstMemory; offset: Tgssize; size: Tgssize): PGstMemory; cdecl; external gstreamerlib;
-function gst_memory_is_span(mem1: PGstMemory; mem2: PGstMemory; offset: Pgsize): Tgboolean; cdecl; external gstreamerlib;
+function gst_memory_is_type(mem: PGstMemory; mem_type: Pgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_memory_ref(memory: PGstMemory): PGstMemory; cdecl; external libgstreamer;
+procedure gst_memory_unref(memory: PGstMemory); cdecl; external libgstreamer;
+function gst_memory_get_sizes(mem: PGstMemory; offset: Pgsize; maxsize: Pgsize): Tgsize; cdecl; external libgstreamer;
+procedure gst_memory_resize(mem: PGstMemory; offset: Tgssize; size: Tgsize); cdecl; external libgstreamer;
+function gst_memory_make_mapped(mem: PGstMemory; info: PGstMapInfo; flags: TGstMapFlags): PGstMemory; cdecl; external libgstreamer;
+function gst_memory_map(mem: PGstMemory; info: PGstMapInfo; flags: TGstMapFlags): Tgboolean; cdecl; external libgstreamer;
+procedure gst_memory_unmap(mem: PGstMemory; info: PGstMapInfo); cdecl; external libgstreamer;
+function gst_memory_copy(mem: PGstMemory; offset: Tgssize; size: Tgssize): PGstMemory; cdecl; external libgstreamer;
+function gst_memory_share(mem: PGstMemory; offset: Tgssize; size: Tgssize): PGstMemory; cdecl; external libgstreamer;
+function gst_memory_is_span(mem1: PGstMemory; mem2: PGstMemory; offset: Pgsize): Tgboolean; cdecl; external libgstreamer;
 
 type
   PGstMemoryMapInfo = ^TGstMemoryMapInfo;

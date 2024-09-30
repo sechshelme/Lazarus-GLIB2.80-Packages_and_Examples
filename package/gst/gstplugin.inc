@@ -9,7 +9,7 @@
 {$IFDEF read_interface}
 
 
-function gst_plugin_error_quark: TGQuark; cdecl; external gstreamerlib;
+function gst_plugin_error_quark: TGQuark; cdecl; external libgstreamer;
 
 type
   PGstPluginError = ^TGstPluginError;
@@ -75,36 +75,36 @@ const
 type
   TGstPluginFilter = function(plugin: PGstPlugin; user_data: Tgpointer): Tgboolean; cdecl;
 
-function gst_plugin_get_type: TGType; cdecl; external gstreamerlib;
+function gst_plugin_get_type: TGType; cdecl; external libgstreamer;
 function gst_plugin_register_static(major_version: Tgint; minor_version: Tgint; Name: Pgchar; description: Pgchar; init_func: TGstPluginInitFunc;
-  version: Pgchar; license: Pgchar; Source: Pgchar; package: Pgchar; origin: Pgchar): Tgboolean; cdecl; external gstreamerlib;
+  version: Pgchar; license: Pgchar; Source: Pgchar; package: Pgchar; origin: Pgchar): Tgboolean; cdecl; external libgstreamer;
 function gst_plugin_register_static_full(major_version: Tgint; minor_version: Tgint; Name: Pgchar; description: Pgchar; init_full_func: TGstPluginInitFullFunc;
   version: Pgchar; license: Pgchar; Source: Pgchar; package: Pgchar; origin: Pgchar;
-  user_data: Tgpointer): Tgboolean; cdecl; external gstreamerlib;
-function gst_plugin_get_name(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_description(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_filename(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_version(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_license(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_source(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_package(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_origin(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_release_date_string(plugin: PGstPlugin): Pgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_cache_data(plugin: PGstPlugin): PGstStructure; cdecl; external gstreamerlib;
-procedure gst_plugin_set_cache_data(plugin: PGstPlugin; cache_data: PGstStructure); cdecl; external gstreamerlib;
-function gst_plugin_is_loaded(plugin: PGstPlugin): Tgboolean; cdecl; external gstreamerlib;
-function gst_plugin_load_file(filename: Pgchar; error: PPGError): PGstPlugin; cdecl; external gstreamerlib;
-function gst_plugin_load(plugin: PGstPlugin): PGstPlugin; cdecl; external gstreamerlib;
-function gst_plugin_load_by_name(Name: Pgchar): PGstPlugin; cdecl; external gstreamerlib;
-procedure gst_plugin_add_dependency(plugin: PGstPlugin; env_vars: PPgchar; paths: PPgchar; names: PPgchar; flags: TGstPluginDependencyFlags); cdecl; external gstreamerlib;
-procedure gst_plugin_add_dependency_simple(plugin: PGstPlugin; env_vars: Pgchar; paths: Pgchar; names: Pgchar; flags: TGstPluginDependencyFlags); cdecl; external gstreamerlib;
-procedure gst_plugin_add_status_error(plugin: PGstPlugin; message: Pgchar); cdecl; external gstreamerlib;
-procedure gst_plugin_add_status_warning(plugin: PGstPlugin; message: Pgchar); cdecl; external gstreamerlib;
-procedure gst_plugin_add_status_info(plugin: PGstPlugin; message: Pgchar); cdecl; external gstreamerlib;
-function gst_plugin_get_status_errors(plugin: PGstPlugin): PPgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_status_warnings(plugin: PGstPlugin): PPgchar; cdecl; external gstreamerlib;
-function gst_plugin_get_status_infos(plugin: PGstPlugin): PPgchar; cdecl; external gstreamerlib;
-procedure gst_plugin_list_free(list: PGList); cdecl; external gstreamerlib;
+  user_data: Tgpointer): Tgboolean; cdecl; external libgstreamer;
+function gst_plugin_get_name(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_description(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_filename(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_version(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_license(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_source(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_package(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_origin(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_release_date_string(plugin: PGstPlugin): Pgchar; cdecl; external libgstreamer;
+function gst_plugin_get_cache_data(plugin: PGstPlugin): PGstStructure; cdecl; external libgstreamer;
+procedure gst_plugin_set_cache_data(plugin: PGstPlugin; cache_data: PGstStructure); cdecl; external libgstreamer;
+function gst_plugin_is_loaded(plugin: PGstPlugin): Tgboolean; cdecl; external libgstreamer;
+function gst_plugin_load_file(filename: Pgchar; error: PPGError): PGstPlugin; cdecl; external libgstreamer;
+function gst_plugin_load(plugin: PGstPlugin): PGstPlugin; cdecl; external libgstreamer;
+function gst_plugin_load_by_name(Name: Pgchar): PGstPlugin; cdecl; external libgstreamer;
+procedure gst_plugin_add_dependency(plugin: PGstPlugin; env_vars: PPgchar; paths: PPgchar; names: PPgchar; flags: TGstPluginDependencyFlags); cdecl; external libgstreamer;
+procedure gst_plugin_add_dependency_simple(plugin: PGstPlugin; env_vars: Pgchar; paths: Pgchar; names: Pgchar; flags: TGstPluginDependencyFlags); cdecl; external libgstreamer;
+procedure gst_plugin_add_status_error(plugin: PGstPlugin; message: Pgchar); cdecl; external libgstreamer;
+procedure gst_plugin_add_status_warning(plugin: PGstPlugin; message: Pgchar); cdecl; external libgstreamer;
+procedure gst_plugin_add_status_info(plugin: PGstPlugin; message: Pgchar); cdecl; external libgstreamer;
+function gst_plugin_get_status_errors(plugin: PGstPlugin): PPgchar; cdecl; external libgstreamer;
+function gst_plugin_get_status_warnings(plugin: PGstPlugin): PPgchar; cdecl; external libgstreamer;
+function gst_plugin_get_status_infos(plugin: PGstPlugin): PPgchar; cdecl; external libgstreamer;
+procedure gst_plugin_list_free(list: PGList); cdecl; external libgstreamer;
 
 function GST_PLUGIN_CAST(obj: Pointer): PGstPlugin;
 function GST_PLUGIN_ERROR: TGQuark;

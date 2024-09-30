@@ -8,259 +8,259 @@
 
 {$IFDEF read_interface}
 
-function gst_allocator_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_allocator_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_ALLOCATOR_FLAGS: TGType;
 
-function gst_bin_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_bin_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_BIN_FLAGS: TGType;
 
-function gst_buffer_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_buffer_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_BUFFER_FLAGS: TGType;
 
-function gst_buffer_copy_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_buffer_copy_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_BUFFER_COPY_FLAGS: TGType;
 
-function gst_buffer_pool_acquire_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_buffer_pool_acquire_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_BUFFER_POOL_ACQUIRE_FLAGS: TGType;
 
-function gst_bus_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_bus_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_BUS_FLAGS: TGType;
 
-function gst_bus_sync_reply_get_type: TGType; cdecl; external gstreamerlib;
+function gst_bus_sync_reply_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_BUS_SYNC_REPLY: TGType;
 
-function gst_caps_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_caps_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_CAPS_FLAGS: TGType;
 
-function gst_caps_intersect_mode_get_type: TGType; cdecl; external gstreamerlib;
+function gst_caps_intersect_mode_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_CAPS_INTERSECT_MODE: TGType;
 
-function gst_clock_return_get_type: TGType; cdecl; external gstreamerlib;
+function gst_clock_return_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_CLOCK_RETURN: TGType;
 
-function gst_clock_entry_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_clock_entry_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_CLOCK_ENTRY_TYPE: TGType;
 
-function gst_clock_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_clock_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_CLOCK_FLAGS: TGType;
 
-function gst_debug_graph_details_get_type: TGType; cdecl; external gstreamerlib;
+function gst_debug_graph_details_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_DEBUG_GRAPH_DETAILS: TGType;
 
-function gst_state_get_type: TGType; cdecl; external gstreamerlib;
+function gst_state_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STATE: TGType;
 
-function gst_state_change_return_get_type: TGType; cdecl; external gstreamerlib;
+function gst_state_change_return_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STATE_CHANGE_RETURN: TGType;
 
-function gst_state_change_get_type: TGType; cdecl; external gstreamerlib;
+function gst_state_change_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STATE_CHANGE: TGType;
 
-function gst_element_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_element_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_ELEMENT_FLAGS: TGType;
 
-function gst_core_error_get_type: TGType; cdecl; external gstreamerlib;
+function gst_core_error_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_CORE_ERROR: TGType;
 
-function gst_library_error_get_type: TGType; cdecl; external gstreamerlib;
+function gst_library_error_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_LIBRARY_ERROR: TGType;
 
-function gst_resource_error_get_type: TGType; cdecl; external gstreamerlib;
+function gst_resource_error_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_RESOURCE_ERROR: TGType;
 
-function gst_stream_error_get_type: TGType; cdecl; external gstreamerlib;
+function gst_stream_error_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STREAM_ERROR: TGType;
 
-function gst_event_type_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_event_type_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_EVENT_TYPE_FLAGS: TGType;
 
-function gst_event_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_event_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_EVENT_TYPE: TGType;
 
-function gst_stream_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_stream_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STREAM_FLAGS: TGType;
 
-function gst_qos_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_qos_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_QOS_TYPE: TGType;
 
-function gst_gap_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_gap_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_GAP_FLAGS: TGType;
 
-function gst_format_get_type: TGType; cdecl; external gstreamerlib;
+function gst_format_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_FORMAT: TGType;
 
-function gst_debug_level_get_type: TGType; cdecl; external gstreamerlib;
+function gst_debug_level_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_DEBUG_LEVEL: TGType;
 
-function gst_debug_color_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_debug_color_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_DEBUG_COLOR_FLAGS: TGType;
 
-function gst_stack_trace_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_stack_trace_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STACK_TRACE_FLAGS: TGType;
 
-function gst_debug_color_mode_get_type: TGType; cdecl; external gstreamerlib;
+function gst_debug_color_mode_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_DEBUG_COLOR_MODE: TGType;
 
-function gst_iterator_result_get_type: TGType; cdecl; external gstreamerlib;
+function gst_iterator_result_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_ITERATOR_RESULT: TGType;
 
-function gst_iterator_item_get_type: TGType; cdecl; external gstreamerlib;
+function gst_iterator_item_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_ITERATOR_ITEM: TGType;
 
-function gst_memory_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_memory_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_MEMORY_FLAGS: TGType;
 
-function gst_map_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_map_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_MAP_FLAGS: TGType;
 
-function gst_message_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_message_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_MESSAGE_TYPE: TGType;
 
-function gst_structure_change_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_structure_change_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STRUCTURE_CHANGE_TYPE: TGType;
 
-function gst_stream_status_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_stream_status_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STREAM_STATUS_TYPE: TGType;
 
-function gst_progress_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_progress_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PROGRESS_TYPE: TGType;
 
-function gst_meta_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_meta_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_META_FLAGS: TGType;
 
-function gst_mini_object_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_mini_object_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_MINI_OBJECT_FLAGS: TGType;
 
-function gst_lock_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_lock_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_LOCK_FLAGS: TGType;
 
-function gst_object_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_object_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_OBJECT_FLAGS: TGType;
 
-function gst_pad_direction_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_direction_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_DIRECTION: TGType;
 
-function gst_pad_mode_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_mode_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_MODE: TGType;
 
-function gst_pad_link_return_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_link_return_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_LINK_RETURN: TGType;
 
-function gst_flow_return_get_type: TGType; cdecl; external gstreamerlib;
+function gst_flow_return_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_FLOW_RETURN: TGType;
 
-function gst_pad_link_check_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_link_check_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_LINK_CHECK: TGType;
 
-function gst_pad_probe_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_probe_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_PROBE_TYPE: TGType;
 
-function gst_pad_probe_return_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_probe_return_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_PROBE_RETURN: TGType;
 
-function gst_pad_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_FLAGS: TGType;
 
-function gst_pad_presence_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_presence_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_PRESENCE: TGType;
 
-function gst_pad_template_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pad_template_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PAD_TEMPLATE_FLAGS: TGType;
 
-function gst_parse_error_get_type: TGType; cdecl; external gstreamerlib;
+function gst_parse_error_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PARSE_ERROR: TGType;
 
-function gst_parse_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_parse_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PARSE_FLAGS: TGType;
 
-function gst_pipeline_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_pipeline_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PIPELINE_FLAGS: TGType;
 
-function gst_plugin_error_get_type: TGType; cdecl; external gstreamerlib;
+function gst_plugin_error_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PLUGIN_ERROR: TGType;
 
-function gst_plugin_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_plugin_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PLUGIN_FLAGS: TGType;
 
-function gst_plugin_dependency_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_plugin_dependency_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PLUGIN_DEPENDENCY_FLAGS: TGType;
 
-function gst_rank_get_type: TGType; cdecl; external gstreamerlib;
+function gst_rank_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_RANK: TGType;
 
-function gst_promise_result_get_type: TGType; cdecl; external gstreamerlib;
+function gst_promise_result_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PROMISE_RESULT: TGType;
 
-function gst_query_type_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_query_type_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_QUERY_TYPE_FLAGS: TGType;
 
-function gst_query_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_query_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_QUERY_TYPE: TGType;
 
-function gst_buffering_mode_get_type: TGType; cdecl; external gstreamerlib;
+function gst_buffering_mode_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_BUFFERING_MODE: TGType;
 
-function gst_scheduling_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_scheduling_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_SCHEDULING_FLAGS: TGType;
 
-function gst_seek_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_seek_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_SEEK_TYPE: TGType;
 
-function gst_seek_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_seek_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_SEEK_FLAGS: TGType;
 
-function gst_segment_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_segment_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_SEGMENT_FLAGS: TGType;
 
-function gst_stream_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_stream_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_STREAM_TYPE: TGType;
 
-function gst_serialize_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_serialize_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_SERIALIZE_FLAGS: TGType;
 
-function gst_clock_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_clock_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_CLOCK_TYPE: TGType;
 
-function gst_tag_merge_mode_get_type: TGType; cdecl; external gstreamerlib;
+function gst_tag_merge_mode_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TAG_MERGE_MODE: TGType;
 
-function gst_tag_flag_get_type: TGType; cdecl; external gstreamerlib;
+function gst_tag_flag_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TAG_FLAG: TGType;
 
-function gst_tag_scope_get_type: TGType; cdecl; external gstreamerlib;
+function gst_tag_scope_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TAG_SCOPE: TGType;
 
-function gst_task_state_get_type: TGType; cdecl; external gstreamerlib;
+function gst_task_state_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TASK_STATE: TGType;
 
-function gst_toc_scope_get_type: TGType; cdecl; external gstreamerlib;
+function gst_toc_scope_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TOC_SCOPE: TGType;
 
-function gst_toc_entry_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_toc_entry_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TOC_ENTRY_TYPE: TGType;
 
-function gst_toc_loop_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_toc_loop_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TOC_LOOP_TYPE: TGType;
 
-function gst_tracer_value_scope_get_type: TGType; cdecl; external gstreamerlib;
+function gst_tracer_value_scope_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TRACER_VALUE_SCOPE: TGType;
 
-function gst_tracer_value_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_tracer_value_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TRACER_VALUE_FLAGS: TGType;
 
-function gst_type_find_probability_get_type: TGType; cdecl; external gstreamerlib;
+function gst_type_find_probability_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_TYPE_FIND_PROBABILITY: TGType;
 
-function gst_uri_error_get_type: TGType; cdecl; external gstreamerlib;
+function gst_uri_error_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_URI_ERROR: TGType;
 
-function gst_uri_type_get_type: TGType; cdecl; external gstreamerlib;
+function gst_uri_type_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_URI_TYPE: TGType;
 
-function gst_search_mode_get_type: TGType; cdecl; external gstreamerlib;
+function gst_search_mode_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_SEARCH_MODE: TGType;
 
-function gst_plugin_api_flags_get_type: TGType; cdecl; external gstreamerlib;
+function gst_plugin_api_flags_get_type: TGType; cdecl; external libgstreamer;
 function GST_TYPE_PLUGIN_API_FLAGS: TGType;
 
 // === Konventiert am: 16-9-24 17:25:32 ===

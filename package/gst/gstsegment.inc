@@ -70,28 +70,28 @@ type
   PGstSegment = ^TGstSegment;
   PPGstSegment = ^PGstSegment;
 
-function gst_segment_get_type: TGType; cdecl; external gstreamerlib;
-function gst_segment_new: PGstSegment; cdecl; external gstreamerlib;
-function gst_segment_copy(segment: PGstSegment): PGstSegment; cdecl; external gstreamerlib;
-procedure gst_segment_copy_into(src: PGstSegment; dest: PGstSegment); cdecl; external gstreamerlib;
-procedure gst_segment_free(segment: PGstSegment); cdecl; external gstreamerlib;
-procedure gst_segment_init(segment: PGstSegment; format: TGstFormat); cdecl; external gstreamerlib;
-function gst_segment_to_stream_time_full(segment: PGstSegment; format: TGstFormat; position: Tguint64; stream_time: Pguint64): Tgint; cdecl; external gstreamerlib;
-function gst_segment_to_stream_time(segment: PGstSegment; format: TGstFormat; position: Tguint64): Tguint64; cdecl; external gstreamerlib;
-function gst_segment_position_from_stream_time_full(segment: PGstSegment; format: TGstFormat; stream_time: Tguint64; position: Pguint64): Tgint; cdecl; external gstreamerlib;
-function gst_segment_position_from_stream_time(segment: PGstSegment; format: TGstFormat; stream_time: Tguint64): Tguint64; cdecl; external gstreamerlib;
-function gst_segment_to_running_time(segment: PGstSegment; format: TGstFormat; position: Tguint64): Tguint64; cdecl; external gstreamerlib;
-function gst_segment_to_running_time_full(segment: PGstSegment; format: TGstFormat; position: Tguint64; running_time: Pguint64): Tgint; cdecl; external gstreamerlib;
-function gst_segment_to_position(segment: PGstSegment; format: TGstFormat; running_time: Tguint64): Tguint64; cdecl; external gstreamerlib;
-function gst_segment_position_from_running_time_full(segment: PGstSegment; format: TGstFormat; running_time: Tguint64; position: Pguint64): Tgint; cdecl; external gstreamerlib;
-function gst_segment_position_from_running_time(segment: PGstSegment; format: TGstFormat; running_time: Tguint64): Tguint64; cdecl; external gstreamerlib;
-function gst_segment_set_running_time(segment: PGstSegment; format: TGstFormat; running_time: Tguint64): Tgboolean; cdecl; external gstreamerlib;
-function gst_segment_offset_running_time(segment: PGstSegment; format: TGstFormat; offset: Tgint64): Tgboolean; cdecl; external gstreamerlib;
+function gst_segment_get_type: TGType; cdecl; external libgstreamer;
+function gst_segment_new: PGstSegment; cdecl; external libgstreamer;
+function gst_segment_copy(segment: PGstSegment): PGstSegment; cdecl; external libgstreamer;
+procedure gst_segment_copy_into(src: PGstSegment; dest: PGstSegment); cdecl; external libgstreamer;
+procedure gst_segment_free(segment: PGstSegment); cdecl; external libgstreamer;
+procedure gst_segment_init(segment: PGstSegment; format: TGstFormat); cdecl; external libgstreamer;
+function gst_segment_to_stream_time_full(segment: PGstSegment; format: TGstFormat; position: Tguint64; stream_time: Pguint64): Tgint; cdecl; external libgstreamer;
+function gst_segment_to_stream_time(segment: PGstSegment; format: TGstFormat; position: Tguint64): Tguint64; cdecl; external libgstreamer;
+function gst_segment_position_from_stream_time_full(segment: PGstSegment; format: TGstFormat; stream_time: Tguint64; position: Pguint64): Tgint; cdecl; external libgstreamer;
+function gst_segment_position_from_stream_time(segment: PGstSegment; format: TGstFormat; stream_time: Tguint64): Tguint64; cdecl; external libgstreamer;
+function gst_segment_to_running_time(segment: PGstSegment; format: TGstFormat; position: Tguint64): Tguint64; cdecl; external libgstreamer;
+function gst_segment_to_running_time_full(segment: PGstSegment; format: TGstFormat; position: Tguint64; running_time: Pguint64): Tgint; cdecl; external libgstreamer;
+function gst_segment_to_position(segment: PGstSegment; format: TGstFormat; running_time: Tguint64): Tguint64; cdecl; external libgstreamer;
+function gst_segment_position_from_running_time_full(segment: PGstSegment; format: TGstFormat; running_time: Tguint64; position: Pguint64): Tgint; cdecl; external libgstreamer;
+function gst_segment_position_from_running_time(segment: PGstSegment; format: TGstFormat; running_time: Tguint64): Tguint64; cdecl; external libgstreamer;
+function gst_segment_set_running_time(segment: PGstSegment; format: TGstFormat; running_time: Tguint64): Tgboolean; cdecl; external libgstreamer;
+function gst_segment_offset_running_time(segment: PGstSegment; format: TGstFormat; offset: Tgint64): Tgboolean; cdecl; external libgstreamer;
 function gst_segment_clip(segment: PGstSegment; format: TGstFormat; start: Tguint64; stop: Tguint64; clip_start: Pguint64;
-  clip_stop: Pguint64): Tgboolean; cdecl; external gstreamerlib;
+  clip_stop: Pguint64): Tgboolean; cdecl; external libgstreamer;
 function gst_segment_do_seek(segment: PGstSegment; rate: Tgdouble; format: TGstFormat; flags: TGstSeekFlags; start_type: TGstSeekType;
-  start: Tguint64; stop_type: TGstSeekType; stop: Tguint64; update: Pgboolean): Tgboolean; cdecl; external gstreamerlib;
-function gst_segment_is_equal(s0: PGstSegment; s1: PGstSegment): Tgboolean; cdecl; external gstreamerlib;
+  start: Tguint64; stop_type: TGstSeekType; stop: Tguint64; update: Pgboolean): Tgboolean; cdecl; external libgstreamer;
+function gst_segment_is_equal(s0: PGstSegment; s1: PGstSegment): Tgboolean; cdecl; external libgstreamer;
 
 function GST_TYPE_SEGMENT: TGType;
 

@@ -8,10 +8,10 @@
 
 {$IFDEF read_interface}
 
-function gst_allocation_params_get_type: TGType; cdecl; external gstreamerlib;
+function gst_allocation_params_get_type: TGType; cdecl; external libgstreamer;
 
 var
-  gst_memory_alignment: Tgsize; cvar;external gstreamerlib;
+  gst_memory_alignment: Tgsize; cvar;external libgstreamer;
 
 const
   GST_ALLOCATOR_SYSMEM = 'SystemMemory';
@@ -66,21 +66,21 @@ type
   end;
 
 
-function gst_allocator_get_type: TGType; cdecl; external gstreamerlib;
-procedure gst_allocator_register(Name: Pgchar; allocator: PGstAllocator); cdecl; external gstreamerlib;
-function gst_allocator_find(Name: Pgchar): PGstAllocator; cdecl; external gstreamerlib;
-procedure gst_allocator_set_default(allocator: PGstAllocator); cdecl; external gstreamerlib;
-function gst_allocation_params_new: PGstAllocationParams; cdecl; external gstreamerlib;
-procedure gst_allocation_params_init(params: PGstAllocationParams); cdecl; external gstreamerlib;
-function gst_allocation_params_copy(params: PGstAllocationParams): PGstAllocationParams; cdecl; external gstreamerlib;
-procedure gst_allocation_params_free(params: PGstAllocationParams); cdecl; external gstreamerlib;
-function gst_allocator_alloc(allocator: PGstAllocator; size: Tgsize; params: PGstAllocationParams): PGstMemory; cdecl; external gstreamerlib;
-procedure gst_allocator_free(allocator: PGstAllocator; memory: PGstMemory); cdecl; external gstreamerlib;
+function gst_allocator_get_type: TGType; cdecl; external libgstreamer;
+procedure gst_allocator_register(Name: Pgchar; allocator: PGstAllocator); cdecl; external libgstreamer;
+function gst_allocator_find(Name: Pgchar): PGstAllocator; cdecl; external libgstreamer;
+procedure gst_allocator_set_default(allocator: PGstAllocator); cdecl; external libgstreamer;
+function gst_allocation_params_new: PGstAllocationParams; cdecl; external libgstreamer;
+procedure gst_allocation_params_init(params: PGstAllocationParams); cdecl; external libgstreamer;
+function gst_allocation_params_copy(params: PGstAllocationParams): PGstAllocationParams; cdecl; external libgstreamer;
+procedure gst_allocation_params_free(params: PGstAllocationParams); cdecl; external libgstreamer;
+function gst_allocator_alloc(allocator: PGstAllocator; size: Tgsize; params: PGstAllocationParams): PGstMemory; cdecl; external libgstreamer;
+procedure gst_allocator_free(allocator: PGstAllocator; memory: PGstMemory); cdecl; external libgstreamer;
 function gst_memory_new_wrapped(flags: TGstMemoryFlags; Data: Tgpointer; maxsize: Tgsize; offset: Tgsize; size: Tgsize;
-  user_data: Tgpointer; notify: TGDestroyNotify): PGstMemory; cdecl; external gstreamerlib;
+  user_data: Tgpointer; notify: TGDestroyNotify): PGstMemory; cdecl; external libgstreamer;
 
 // ausgelagert
-procedure gst_memory_init(mem: PGstMemory; flags: TGstMemoryFlags; allocator: PGstAllocator; parent: PGstMemory; maxsize: Tgsize; align: Tgsize; offset: Tgsize; size: Tgsize); cdecl; external gstreamerlib;
+procedure gst_memory_init(mem: PGstMemory; flags: TGstMemoryFlags; allocator: PGstAllocator; parent: PGstMemory; maxsize: Tgsize; align: Tgsize; offset: Tgsize; size: Tgsize); cdecl; external libgstreamer;
 // ----
 
 function GST_ALLOCATOR_CAST(obj: Pointer): PGstAllocator;

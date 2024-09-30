@@ -32,13 +32,13 @@ type
   // function gst_device_create_element(device: PGstDevice; Name: Pgchar): PGstElement; cdecl; external gstreamerlib;
   // function gst_device_reconfigure_element(device: PGstDevice; element: PGstElement): Tgboolean; cdecl; external gstreamerlib;
 
-function gst_device_get_type: TGType; cdecl; external gstreamerlib;
-function gst_device_get_caps(device: PGstDevice): PGstCaps; cdecl; external gstreamerlib;
-function gst_device_get_display_name(device: PGstDevice): Pgchar; cdecl; external gstreamerlib;
-function gst_device_get_device_class(device: PGstDevice): Pgchar; cdecl; external gstreamerlib;
-function gst_device_get_properties(device: PGstDevice): PGstStructure; cdecl; external gstreamerlib;
-function gst_device_has_classesv(device: PGstDevice; Classes: PPgchar): Tgboolean; cdecl; external gstreamerlib;
-function gst_device_has_classes(device: PGstDevice; Classes: Pgchar): Tgboolean; cdecl; external gstreamerlib;
+function gst_device_get_type: TGType; cdecl; external libgstreamer;
+function gst_device_get_caps(device: PGstDevice): PGstCaps; cdecl; external libgstreamer;
+function gst_device_get_display_name(device: PGstDevice): Pgchar; cdecl; external libgstreamer;
+function gst_device_get_device_class(device: PGstDevice): Pgchar; cdecl; external libgstreamer;
+function gst_device_get_properties(device: PGstDevice): PGstStructure; cdecl; external libgstreamer;
+function gst_device_has_classesv(device: PGstDevice; Classes: PPgchar): Tgboolean; cdecl; external libgstreamer;
+function gst_device_has_classes(device: PGstDevice; Classes: Pgchar): Tgboolean; cdecl; external libgstreamer;
 
 function GST_DEVICE_CAST(obj: Pointer): PGstDevice;
 

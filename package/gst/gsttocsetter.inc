@@ -18,10 +18,10 @@ type
   end;
   PGstTocSetterInterface = ^TGstTocSetterInterface;
 
-function gst_toc_setter_get_type: TGType; cdecl; external gstreamerlib;
-procedure gst_toc_setter_reset(setter: PGstTocSetter); cdecl; external gstreamerlib;
-function gst_toc_setter_get_toc(setter: PGstTocSetter): PGstToc; cdecl; external gstreamerlib;
-procedure gst_toc_setter_set_toc(setter: PGstTocSetter; toc: PGstToc); cdecl; external gstreamerlib;
+function gst_toc_setter_get_type: TGType; cdecl; external libgstreamer;
+procedure gst_toc_setter_reset(setter: PGstTocSetter); cdecl; external libgstreamer;
+function gst_toc_setter_get_toc(setter: PGstTocSetter): PGstToc; cdecl; external libgstreamer;
+procedure gst_toc_setter_set_toc(setter: PGstTocSetter; toc: PGstToc); cdecl; external libgstreamer;
 
 // === Konventiert am: 18-9-24 15:52:13 ===
 
