@@ -1,13 +1,12 @@
-unit gstvideometa;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 30-09-2024   15:21                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gst124_base, video, video_frame, video_format, video_info, gstvideotimecode;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 const
   GST_CAPS_FEATURE_META_GST_VIDEO_META = 'meta:GstVideoMeta';
@@ -186,7 +185,10 @@ function gst_buffer_get_video_time_code_meta(b: PGstBuffer): PGstVideoTimeCodeMe
 // === Konventiert am: 29-9-24 17:23:14 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 function GST_VIDEO_META_API_TYPE: TGType;
@@ -270,4 +272,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

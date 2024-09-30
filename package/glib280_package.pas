@@ -8,7 +8,7 @@ unit GLIB280_package;
 interface
 
 uses
-  glib280, gst124, GLIBTools, gstTools, LazarusPackageIntf;
+  glib280, gst124, GLIBTools, gstTools, gst124_base, LazarusPackageIntf;
 
 implementation
 

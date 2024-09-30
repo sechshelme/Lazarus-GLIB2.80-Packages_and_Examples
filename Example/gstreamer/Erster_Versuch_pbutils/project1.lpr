@@ -8,25 +8,26 @@ uses
 
   glib280,
   gst124,
+  gst124_base,
 
   // base
 
-  gstaggregator,                 // io.
-  gstcollectpads,                // io.
-  gstadapter,                    // io.
-  gstbaseparse,                  // io.
-  gstbasetransform,              // io.
-  gstbasesrc,                    // io.
-  gstpushsrc,                    // io. -> gstbasesrc
-  gstbasesink,                   // io.
-  gstdataqueue,                  // io.
-  gstqueuearray,                 // io.
-  gsttypefindhelper,             // io.
-  gstflowcombiner,               // io.
-  gstbitreader,                  // viele Makros entfernt
-  gstbitwriter,                  // viele Makros entfernt
-  gstbytewriter,                 // viele Makros entfernt
-  gstbytereader,                 // viele Makros entfernt
+  //gstaggregator,                 // io.
+  //gstcollectpads,                // io.
+  //gstadapter,                    // io.
+  //gstbaseparse,                  // io.
+  //gstbasetransform,              // io.
+  //gstbasesrc,                    // io.
+  //gstpushsrc,                    // io. -> gstbasesrc
+  //gstbasesink,                   // io.
+  //gstdataqueue,                  // io.
+  //gstqueuearray,                 // io.
+  //gsttypefindhelper,             // io.
+  //gstflowcombiner,               // io.
+  //gstbitreader,                  // io.   viele Makros entfernt
+  //gstbitwriter,                  // io.   viele Makros entfernt
+  //gstbytereader,                 // io.   viele Makros entfernt
+  //gstbytewriter,                 // io. -> gstbytereader    viele Makros entfernt
 
   // audio
 
@@ -104,7 +105,7 @@ uses
   begin
     discoverer := gst_discoverer_new(5 * GST_SECOND, nil);
 
-    //  info := gst_discoverer_discover_uri(discoverer, 'file:/home/tux/Schreibtisch/sound/test.mp3', nil);
+
     info := gst_discoverer_discover_uri(discoverer, PChar('file:' + s), nil);
 
     if info = nil then begin

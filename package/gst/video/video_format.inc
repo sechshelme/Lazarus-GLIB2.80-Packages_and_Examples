@@ -1,13 +1,12 @@
-unit video_format;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 30-09-2024   15:21                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gst124_base, video_tile, video;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   PGstVideoFormat = ^TGstVideoFormat;
@@ -275,7 +274,10 @@ function GST_VIDEO_FORMAT_INFO_TILE_STRIDE(info: PGstVideoFormatInfo; plane: lon
 // === Konventiert am: 29-9-24 13:56:19 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_VIDEO_FORMAT_INFO_IS_VALID_RAW(info: PGstVideoFormatInfo): Tgboolean;
 begin
@@ -457,4 +459,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

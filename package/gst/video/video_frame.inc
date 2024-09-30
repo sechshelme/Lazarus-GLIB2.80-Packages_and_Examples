@@ -1,13 +1,12 @@
-unit video_frame;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 30-09-2024   15:21                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gst124_base, video_info, video;
-
-{$IFDEF FPC}
-{$PACKRECORDS C}
-{$ENDIF}
+{$IFDEF read_interface}
 
 type
   PGstVideoFrameFlags = ^TGstVideoFrameFlags;
@@ -100,7 +99,10 @@ function GST_VIDEO_BUFFER_IS_BOTTOM_FIELD(buf : Pointer) : Tgboolean;
 // === Konventiert am: 29-9-24 16:20:56 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_VIDEO_FRAME_FORMAT(f :PGstVideoFrame) : longint;
 begin
@@ -204,4 +206,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

@@ -27,6 +27,10 @@
         <Filename Value="gsttools.pas"/>
         <UnitName Value="gsttools"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_base.pas"/>
+        <UnitName Value="gst124_base"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

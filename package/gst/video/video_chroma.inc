@@ -1,13 +1,12 @@
-unit video_chroma;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 30-09-2024   15:21                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, video_format;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 function gst_video_chroma_from_string(s: Pgchar): TGstVideoChromaSite; cdecl; external libgstvideo;
 function gst_video_chroma_to_string(site: TGstVideoChromaSite): Pgchar; cdecl; external libgstvideo;
@@ -44,8 +43,11 @@ procedure gst_video_chroma_resample(resample: PGstVideoChromaResample; Lines: Pg
 // === Konventiert am: 29-9-24 14:48:42 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

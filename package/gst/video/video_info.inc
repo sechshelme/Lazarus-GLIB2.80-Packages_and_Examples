@@ -1,13 +1,12 @@
-unit video_info;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 30-09-2024   15:21                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gst124_base, video_format, video_color, video;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 const
   GST_CAPS_FEATURE_FORMAT_INTERLACED = 'format:Interlaced';
@@ -188,7 +187,10 @@ function GST_VIDEO_INFO_COMP_POFFSET(i: PGstVideoInfo; c: longint): Tguint;
 // === Konventiert am: 29-9-24 13:56:27 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 function GST_TYPE_VIDEO_INFO: longint;
@@ -395,4 +397,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}
