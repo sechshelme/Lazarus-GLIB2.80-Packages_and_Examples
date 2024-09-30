@@ -35,12 +35,12 @@
  */
 #define GST_TYPE_VIDEO_OVERLAY_RECTANGLE			\
   (gst_video_overlay_rectangle_get_type ())
-#define GST_VIDEO_OVERLAY_RECTANGLE_CAST(obj)			\
-  ((GstVideoOverlayRectangle *)(obj))
 #define GST_VIDEO_OVERLAY_RECTANGLE(obj)			\
   (GST_VIDEO_OVERLAY_RECTANGLE_CAST(obj))
 #define GST_IS_VIDEO_OVERLAY_RECTANGLE(obj)			\
   (GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_VIDEO_OVERLAY_RECTANGLE))
+#define GST_VIDEO_OVERLAY_RECTANGLE_CAST(obj)			\
+  ((GstVideoOverlayRectangle *)(obj))
 
 typedef struct _GstVideoOverlayRectangle      GstVideoOverlayRectangle;
 
@@ -58,11 +58,12 @@ typedef struct _GstVideoOverlayRectangle      GstVideoOverlayRectangle;
  *
  * Returns: (transfer full): @comp
  */
-static inline GstVideoOverlayRectangle *
-gst_video_overlay_rectangle_ref (GstVideoOverlayRectangle * comp)
-{
-  return (GstVideoOverlayRectangle *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (comp));
-}
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//static inline GstVideoOverlayRectangle *
+//gst_video_overlay_rectangle_ref (GstVideoOverlayRectangle * comp)
+//{
+//  return (GstVideoOverlayRectangle *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (comp));
+//}
 
 /**
  * gst_video_overlay_rectangle_unref:
@@ -70,12 +71,12 @@ gst_video_overlay_rectangle_ref (GstVideoOverlayRectangle * comp)
  *
  * Decreases the refcount of the rectangle. If the refcount reaches 0, the
  * rectangle will be freed.
- */
-static inline void
-gst_video_overlay_rectangle_unref (GstVideoOverlayRectangle * comp)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (comp));
-}
+ */// xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//static inline void
+//gst_video_overlay_rectangle_unref (GstVideoOverlayRectangle * comp)
+//{
+//  gst_mini_object_unref (GST_MINI_OBJECT_CAST (comp));
+//}
 
 /**
  * GstVideoOverlayFormatFlags:
@@ -192,12 +193,12 @@ void                         gst_video_overlay_rectangle_set_global_alpha       
  */
 #define GST_TYPE_VIDEO_OVERLAY_COMPOSITION			\
   (gst_video_overlay_composition_get_type ())
-#define GST_VIDEO_OVERLAY_COMPOSITION_CAST(obj)			\
-  ((GstVideoOverlayComposition *)(obj))
 #define GST_VIDEO_OVERLAY_COMPOSITION(obj)			\
   (GST_VIDEO_OVERLAY_COMPOSITION_CAST(obj))
 #define GST_IS_VIDEO_OVERLAY_COMPOSITION(obj)			\
   (GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_VIDEO_OVERLAY_COMPOSITION))
+#define GST_VIDEO_OVERLAY_COMPOSITION_CAST(obj)			\
+  ((GstVideoOverlayComposition *)(obj))
 
 typedef struct _GstVideoOverlayComposition      GstVideoOverlayComposition;
 
@@ -212,13 +213,13 @@ typedef struct _GstVideoOverlayComposition      GstVideoOverlayComposition;
  * a composition and its rectangles can be modified.
  *
  * Returns: (transfer full): @comp
- */
-static inline GstVideoOverlayComposition *
-gst_video_overlay_composition_ref (GstVideoOverlayComposition * comp)
-{
-  return (GstVideoOverlayComposition *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (comp));
-}
-
+ */// xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//static inline GstVideoOverlayComposition *
+//gst_video_overlay_composition_ref (GstVideoOverlayComposition * comp)
+//{
+//  return (GstVideoOverlayComposition *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (comp));
+//}
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 /**
  * gst_video_overlay_composition_unref:
  * @comp: (transfer full): a #GstVideoOverlayComposition.
@@ -226,11 +227,11 @@ gst_video_overlay_composition_ref (GstVideoOverlayComposition * comp)
  * Decreases the refcount of the composition. If the refcount reaches 0, the
  * composition will be freed.
  */
-static inline void
-gst_video_overlay_composition_unref (GstVideoOverlayComposition * comp)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (comp));
-}
+//static inline void
+//gst_video_overlay_composition_unref (GstVideoOverlayComposition * comp)
+//{
+//  gst_mini_object_unref (GST_MINI_OBJECT_CAST (comp));
+//}
 
 extern
 GType                        gst_video_overlay_composition_get_type (void);

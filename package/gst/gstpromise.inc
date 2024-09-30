@@ -41,7 +41,7 @@ function gst_promise_ref(promise: PGstPromise): PGstPromise; cdecl; external gst
 procedure gst_promise_unref(promise: PGstPromise); cdecl; external gstreamerlib;
 procedure gst_clear_promise(promise_ptr: PPGstPromise); cdecl; external gstreamerlib;
 
-function GST_IS_PROMISE(obj: TGType): Tgboolean;
+function GST_IS_PROMISE(obj: Pointer): Tgboolean;
 function GST_PROMISE(obj: Pointer): PGstPromise;
 
 // === Konventiert am: 17-9-24 16:01:30 ===
@@ -59,7 +59,7 @@ begin
 end;
 
 
-function GST_IS_PROMISE(obj: TGType): Tgboolean;
+function GST_IS_PROMISE(obj: Pointer): Tgboolean;
 begin
   GST_IS_PROMISE := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_PROMISE);
 end;

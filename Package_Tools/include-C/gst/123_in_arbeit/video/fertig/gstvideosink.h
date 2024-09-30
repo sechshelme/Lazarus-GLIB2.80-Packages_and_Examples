@@ -136,7 +136,6 @@ struct _GstVideoSinkClass {
 extern
 GType gst_video_sink_get_type (void);
 
-GST_VIDEO_DEPRECATED_FOR(gst_video_center_rect)
 void gst_video_sink_center_rect (GstVideoRectangle src, GstVideoRectangle dst,
                                  GstVideoRectangle *result, gboolean scaling);
 

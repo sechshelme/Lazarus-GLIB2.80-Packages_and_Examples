@@ -227,7 +227,7 @@ procedure gst_event_parse_sink_message(event: PGstEvent; msg: PPGstMessage); cde
 
 function GST_TYPE_MESSAGE: TGType;
 function GST_MESSAGE(obj: Pointer): PGstMessage;
-function GST_IS_MESSAGE(obj: TGType): Tgboolean;
+function GST_IS_MESSAGE(obj: Pointer): Tgboolean;
 function GST_MESSAGE_CAST(obj: Pointer): PGstMessage;
 function GST_MESSAGE_GET_LOCK(message: Pointer): PGMutex;
 procedure GST_MESSAGE_LOCK(message: Pointer);
@@ -263,7 +263,7 @@ begin
   GST_MESSAGE := GST_MESSAGE_CAST(obj);
 end;
 
-function GST_IS_MESSAGE(obj: TGType): Tgboolean;
+function GST_IS_MESSAGE(obj: Pointer): Tgboolean;
 begin
   GST_IS_MESSAGE := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_MESSAGE);
 end;

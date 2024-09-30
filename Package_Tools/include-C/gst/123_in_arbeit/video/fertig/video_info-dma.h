@@ -34,12 +34,6 @@
  *
  * Since: 1.24
  */
-#define GST_VIDEO_DMA_DRM_CAPS_MAKE                                     \
-    "video/x-raw(memory:DMABuf), "                                      \
-    "format = (string) DMA_DRM, "                                       \
-    "width = " GST_VIDEO_SIZE_RANGE ", "                                \
-    "height = " GST_VIDEO_SIZE_RANGE ", "                               \
-    "framerate = " GST_VIDEO_FPS_RANGE
 
 typedef struct _GstVideoInfoDmaDrm GstVideoInfoDmaDrm;
 

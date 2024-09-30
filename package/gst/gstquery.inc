@@ -141,7 +141,7 @@ function GST_QUERY_MAKE_TYPE(num, flags: longint): longint;
 
 function GST_TYPE_QUERY: TGType;
 
-function GST_IS_QUERY(obj: TGType): Tgboolean;
+function GST_IS_QUERY(obj: Pointer): Tgboolean;
 function GST_QUERY_CAST(obj: Pointer): PGstQuery;
 function GST_QUERY(obj: Pointer): PGstQuery;
 function GST_QUERY_TYPE(query: Pointer): TGType;
@@ -177,7 +177,7 @@ begin
   Result := _gst_query_type;
 end;
 
-function GST_IS_QUERY(obj: TGType): Tgboolean;
+function GST_IS_QUERY(obj: Pointer): Tgboolean;
 begin
   GST_IS_QUERY := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_QUERY);
 end;

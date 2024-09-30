@@ -39,7 +39,7 @@ function gst_buffer_list_copy_deep(list: PGstBufferList): PGstBufferList; cdecl;
 function gst_buffer_list_calculate_size(list: PGstBufferList): Tgsize; cdecl; external gstreamerlib;
 
 function GST_TYPE_BUFFER_LIST: TGType;
-function GST_IS_BUFFER_LIST(obj: TGType): Tgboolean;
+function GST_IS_BUFFER_LIST(obj: Pointer): Tgboolean;
 function GST_BUFFER_LIST_CAST(obj: Pointer): PGstBufferList;
 function GST_BUFFER_LIST(obj: Pointer): PGstBufferList;
 
@@ -61,7 +61,7 @@ begin
   Result := _gst_buffer_list_type;
 end;
 
-function GST_IS_BUFFER_LIST(obj: TGType): Tgboolean;
+function GST_IS_BUFFER_LIST(obj: Pointer): Tgboolean;
 begin
   GST_IS_BUFFER_LIST := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_BUFFER_LIST);
 end;

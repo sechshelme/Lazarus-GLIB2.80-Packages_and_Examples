@@ -224,7 +224,7 @@ function GST_TYPE_EVENT: TGType;
 
 function GST_EVENT_MAKE_TYPE(num, flags: Tguint32): Tguint32;
 
-function GST_IS_EVENT(obj: TGType): Tgboolean;
+function GST_IS_EVENT(obj: Pointer): Tgboolean;
 function GST_EVENT_CAST(obj: Pointer): PGstEvent;
 function GST_EVENT(obj: Pointer): Pointer;
 function GST_EVENT_TYPE(event: Pointer): TGstEventType;
@@ -259,7 +259,7 @@ begin
   GST_EVENT_MAKE_TYPE := (num shl GST_EVENT_NUM_SHIFT) or flags;
 end;
 
-function GST_IS_EVENT(obj: TGType): Tgboolean;
+function GST_IS_EVENT(obj: Pointer): Tgboolean;
 begin
   GST_IS_EVENT := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_EVENT);
 end;

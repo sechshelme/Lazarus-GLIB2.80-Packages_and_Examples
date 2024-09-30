@@ -33,7 +33,7 @@ function gst_context_is_persistent(context: PGstContext): Tgboolean; cdecl; exte
 
 function GST_TYPE_CONTEXT: TGType;
 
-function GST_IS_CONTEXT(obj: TGType): Tgboolean;
+function GST_IS_CONTEXT(obj: Pointer): Tgboolean;
 function GST_CONTEXT_CAST(obj: Pointer): PGstContext;
 function GST_CONTEXT(obj: Pointer): PGstContext;
 
@@ -54,7 +54,7 @@ begin
 end;
 
 
-function GST_IS_CONTEXT(obj: TGType): Tgboolean;
+function GST_IS_CONTEXT(obj: Pointer): Tgboolean;
 begin
   GST_IS_CONTEXT := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_CONTEXT);
 end;

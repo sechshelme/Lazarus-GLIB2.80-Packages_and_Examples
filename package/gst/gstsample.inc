@@ -35,7 +35,7 @@ function gst_sample_copy(sample: PGstSample): PGstSample; cdecl; external gstrea
 procedure gst_clear_sample(sample_ptr: PPGstSample); cdecl; external gstreamerlib;
 
 function GST_TYPE_SAMPLE: TGType;
-function GST_IS_SAMPLE(obj: TGType): Tgboolean;
+function GST_IS_SAMPLE(obj: Pointer): Tgboolean;
 function GST_SAMPLE_CAST(obj: Pointer): PGstSample;
 function GST_SAMPLE(obj: Pointer): PGstSample;
 
@@ -60,7 +60,7 @@ begin
   Result := _gst_sample_type;
 end;
 
-function GST_IS_SAMPLE(obj: TGType): Tgboolean;
+function GST_IS_SAMPLE(obj: Pointer): Tgboolean;
 begin
   GST_IS_SAMPLE := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_SAMPLE);
 end;

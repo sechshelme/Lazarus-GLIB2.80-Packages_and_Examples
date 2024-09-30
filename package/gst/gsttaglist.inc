@@ -219,7 +219,7 @@ function GST_TAG_MODE_IS_VALID(mode: longint): Tgboolean;
 function GST_TAG_FLAG_IS_VALID(flag: longint): Tgboolean;
 function GST_TAG_LIST(x: Pointer): PGstTagList;
 function GST_TYPE_TAG_LIST: TGType;
-function GST_IS_TAG_LIST(obj: TGType): Tgboolean;
+function GST_IS_TAG_LIST(obj: Pointer): Tgboolean;
 
 function gst_tag_list_is_writable(taglist: PGstTagList): Tgboolean;
 function gst_tag_list_make_writable(taglist: PGstTagList): PGstTagList;
@@ -254,7 +254,7 @@ begin
   GST_TAG_LIST := PGstTagList(x);
 end;
 
-function GST_IS_TAG_LIST(obj: TGType): Tgboolean;
+function GST_IS_TAG_LIST(obj: Pointer): Tgboolean;
 begin
   GST_IS_TAG_LIST := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_TAG_LIST);
 end;

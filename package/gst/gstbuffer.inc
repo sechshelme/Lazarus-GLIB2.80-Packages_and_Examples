@@ -153,7 +153,7 @@ procedure _gst_buffer_map_info_clear(info: PGstBufferMapInfo);
 
 function GST_TYPE_BUFFER: TGType;
 
-function GST_IS_BUFFER(obj: TGType): Tgboolean;
+function GST_IS_BUFFER(obj: Pointer): Tgboolean;
 function GST_BUFFER_CAST(obj: Pointer): PGstBuffer;
 function GST_BUFFER(obj: Pointer): PGstBuffer;
 function GST_BUFFER_FLAGS(buf: Pointer): Tguint32;
@@ -223,7 +223,7 @@ begin
   Result := _gst_buffer_type;
 end;
 
-function GST_IS_BUFFER(obj: TGType): Tgboolean;
+function GST_IS_BUFFER(obj: Pointer): Tgboolean;
 begin
   GST_IS_BUFFER := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_BUFFER);
 end;

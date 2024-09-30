@@ -58,7 +58,7 @@ function gst_mini_object_steal(olddata: PPGstMiniObject): PGstMiniObject; cdecl;
 
 
 function GST_TYPE_MINI_OBJECT: TGType;
-function GST_IS_MINI_OBJECT_TYPE(obj:TGType;_type : TGType) : Tgboolean;
+function GST_IS_MINI_OBJECT_TYPE(obj:Pointer;_type : TGType) : Tgboolean;
 function GST_MINI_OBJECT_CAST(obj: Pointer): PGstMiniObject;
 function GST_MINI_OBJECT_CONST_CAST(obj: Pointer): PGstMiniObject;
 function GST_MINI_OBJECT(obj: Pointer): PGstMiniObject;
@@ -74,8 +74,6 @@ function GST_MINI_OBJECT_FLAGS(obj: Pointer): Tguint;
 function GST_MINI_OBJECT_FLAG_IS_SET(obj: PGstMiniObject; flag: Tguint32): Tgboolean;
 procedure GST_MINI_OBJECT_FLAG_SET(var obj: PGstMiniObject; flag: Tguint32);
 procedure GST_MINI_OBJECT_FLAG_UNSET(var obj: PGstMiniObject; flag: Tguint32);
-
-//function GST_DEFINE_MINI_OBJECT_TYPE(TypeName,type_name : longint) : longint;
 
 procedure gst_clear_mini_object(object_ptr: Pgpointer);
 
@@ -95,9 +93,10 @@ begin
 end;
 
 // #define GST_IS_MINI_OBJECT_TYPE(obj,type)  ((obj) && GST_MINI_OBJECT_TYPE(obj) == (type))
-function GST_IS_MINI_OBJECT_TYPE(obj: TGType; _type: TGType): Tgboolean;
+function GST_IS_MINI_OBJECT_TYPE(obj: Pointer; _type: TGType): Tgboolean;
 begin
-  Result:= obj=_type;
+  Result:= (obj<>nil) and (GST_MINI_OBJECT_TYPE(obj)=_type);
+//  Result:= obj=_type;
 end;
 
 function GST_MINI_OBJECT_CAST(obj: Pointer): PGstMiniObject;

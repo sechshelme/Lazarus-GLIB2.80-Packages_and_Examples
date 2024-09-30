@@ -113,7 +113,7 @@ function GST_CAPS_ANY: PGstCaps;
 function GST_CAPS_NONE: PGstCaps;
 
 
-function GST_IS_CAPS(obj: TGType): Tgboolean;
+function GST_IS_CAPS(obj: Pointer): Tgboolean;
 function GST_CAPS_CAST(obj: Pointer): PGstCaps;
 function GST_CAPS(obj: Pointer): PGstCaps;
 function GST_TYPE_STATIC_CAPS: TGType;
@@ -155,7 +155,7 @@ begin
 end;
 
 
-function GST_IS_CAPS(obj: TGType): Tgboolean;
+function GST_IS_CAPS(obj: Pointer): Tgboolean;
 begin
   GST_IS_CAPS := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_CAPS);
 end;

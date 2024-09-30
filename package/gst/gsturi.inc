@@ -128,7 +128,7 @@ function GST_URI_HANDLER_GET_INTERFACE(obj: Pointer): PGstURIHandlerInterface;
 function GST_URI_TYPE_IS_VALID(typ: TGType): Tgboolean;
 
 function GST_TYPE_URI: TGType;
-function GST_IS_URI(obj: TGType): Tgboolean;
+function GST_IS_URI(obj: Pointer): Tgboolean;
 function GST_URI_CAST(obj: Pointer): PGstUri;
 function GST_URI_CONST_CAST(obj: Pointer): PGstUri;
 function GST_URI(obj: Pointer): PGstUri;
@@ -180,7 +180,7 @@ begin
   GST_TYPE_URI := gst_uri_get_type;
 end;
 
-function GST_IS_URI(obj: TGType): Tgboolean;
+function GST_IS_URI(obj: Pointer): Tgboolean;
 begin
   GST_IS_URI := GST_IS_MINI_OBJECT_TYPE(obj, GST_TYPE_URI);
 end;
