@@ -3,7 +3,7 @@ unit gstvideoaggregator;
 interface
 
 uses
-  glib280, gst124, video_info, gstaggregator, video_frame;
+  glib280, gst124, gst124_base, video_info, video_frame;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

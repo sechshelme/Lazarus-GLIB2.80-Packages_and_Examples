@@ -3,7 +3,7 @@ unit gstnonstreamaudiodecoder;
 interface
 
 uses
-  glib280, gst124, audio_info, gstadapter, audio_format;
+  glib280, gst124, gst124_base, audio_info, audio_format;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}
@@ -31,8 +31,6 @@ const
   GST_NONSTREAM_AUDIO_DECODER_SRC_NAME = 'src';
 
 type
-  PGstNonstreamAudioDecoder = ^TGstNonstreamAudioDecoder;
-
   TGstNonstreamAudioDecoder = record
     element: TGstElement;
     sinkpad: PGstPad;
@@ -56,8 +54,7 @@ type
     allocation_params: TGstAllocationParams;
     mutex: TGMutex;
   end;
-
-  PGstNonstreamAudioDecoderClass = ^TGstNonstreamAudioDecoderClass;
+  PGstNonstreamAudioDecoder = ^TGstNonstreamAudioDecoder;
 
   TGstNonstreamAudioDecoderClass = record
     element_class: TGstElementClass;
@@ -85,17 +82,15 @@ type
     propose_allocation: function(Dec: PGstNonstreamAudioDecoder; query: PGstQuery): Tgboolean; cdecl;
     _gst_reserved: array[0..(GST_PADDING_LARGE) - 1] of Tgpointer;
   end;
+  PGstNonstreamAudioDecoderClass = ^TGstNonstreamAudioDecoderClass;
 
 
-function gst_nonstream_audio_decoder_get_type: TGType; cdecl; external 'libgstbadaudio-1.0';
-//libgstbadaudio-1.0.so
-//function gst_nonstream_audio_decoder_get_type: TGType; cdecl; external libgstaudio;
-
-procedure gst_nonstream_audio_decoder_handle_loop(Dec: PGstNonstreamAudioDecoder; new_position: TGstClockTime); cdecl; external libgstaudio;
-function gst_nonstream_audio_decoder_set_output_format(Dec: PGstNonstreamAudioDecoder; audio_info: PGstAudioInfo): Tgboolean; cdecl; external libgstaudio;
-function gst_nonstream_audio_decoder_set_output_format_simple(Dec: PGstNonstreamAudioDecoder; sample_rate: Tguint; sample_format: TGstAudioFormat; num_channels: Tguint): Tgboolean; cdecl; external libgstaudio;
-procedure gst_nonstream_audio_decoder_get_downstream_info(Dec: PGstNonstreamAudioDecoder; format: PGstAudioFormat; sample_rate: Pgint; num_channels: Pgint); cdecl; external libgstaudio;
-function gst_nonstream_audio_decoder_allocate_output_buffer(Dec: PGstNonstreamAudioDecoder; size: Tgsize): PGstBuffer; cdecl; external libgstaudio;
+function gst_nonstream_audio_decoder_get_type: TGType; cdecl; external libgstbadaudio;
+procedure gst_nonstream_audio_decoder_handle_loop(Dec: PGstNonstreamAudioDecoder; new_position: TGstClockTime); cdecl; external libgstbadaudio;
+function gst_nonstream_audio_decoder_set_output_format(Dec: PGstNonstreamAudioDecoder; audio_info: PGstAudioInfo): Tgboolean; cdecl; external libgstbadaudio;
+function gst_nonstream_audio_decoder_set_output_format_simple(Dec: PGstNonstreamAudioDecoder; sample_rate: Tguint; sample_format: TGstAudioFormat; num_channels: Tguint): Tgboolean; cdecl; external libgstbadaudio;
+procedure gst_nonstream_audio_decoder_get_downstream_info(Dec: PGstNonstreamAudioDecoder; format: PGstAudioFormat; sample_rate: Pgint; num_channels: Pgint); cdecl; external libgstbadaudio;
+function gst_nonstream_audio_decoder_allocate_output_buffer(Dec: PGstNonstreamAudioDecoder; size: Tgsize): PGstBuffer; cdecl; external libgstbadaudio;
 
 function GST_NONSTREAM_AUDIO_DECODER_SINK_PAD(obj: Pointer): PGstPad;
 function GST_NONSTREAM_AUDIO_DECODER_SRC_PAD(obj: Pointer): PGstPad;

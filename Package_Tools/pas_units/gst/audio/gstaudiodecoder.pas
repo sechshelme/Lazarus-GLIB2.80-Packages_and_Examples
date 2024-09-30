@@ -3,7 +3,7 @@ unit gstaudiodecoder;
 interface
 
 uses
-  glib280, gst124, gstadapter, audio_info;
+  glib280, gst124, gst124_base, audio_info;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

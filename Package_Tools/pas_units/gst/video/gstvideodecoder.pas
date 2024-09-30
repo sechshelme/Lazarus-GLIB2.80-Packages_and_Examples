@@ -3,7 +3,7 @@ unit gstvideodecoder;
 interface
 
 uses
-  glib280, gst124, gstvideoutils, gstadapter, video_format, video_info;
+  glib280, gst124, gst124_base, gstvideoutils, video_format, video_info;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

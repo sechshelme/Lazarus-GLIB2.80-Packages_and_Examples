@@ -17,15 +17,17 @@ const
   gstreamerlib = 'libgstreamer-1.0';
   libgstpbutils = 'libgstpbutils-1.0';
   libgstaudio = 'libgstaudio-1.0';
+  libgstbadaudio = 'libgstbadaudio-1.0';
   libgstvideo = 'libgstvideo-1.0';
   libgstbase = 'libgstbase-1.0';
   {$endif}
   {$ifdef Windows}
   gstreamerlib = 'gstreamer-1.0-0.dll';
-  libgstpbutils = 'gstpbutils-1.0.dll';
-  libgstaudio = 'gstaudio-1.0.dll';
-  libgstvideo = 'gstvideo-1.0.dll';
-  libgstbase = 'gstbase-1.0.dll';
+  libgstpbutils = 'gstpbutils-1.0-0.dll';
+  libgstaudio = 'gstaudio-1.0-0.dll';
+  libgstbadaudio = 'gstbadaudio-1.0-0.dll';
+  libgstvideo = 'gstvideo-1.0-0.dll';
+  libgstbase = 'gstbase-1.0-0.dll';
   {$endif}
 
   // ==== Diverses

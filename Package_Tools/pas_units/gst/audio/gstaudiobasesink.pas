@@ -3,7 +3,7 @@ unit gstaudiobasesink;
 interface
 
 uses
-  glib280, gst124, gstbasesink, gstaudioringbuffer;
+  glib280, gst124, gst124_base, gstaudioringbuffer;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

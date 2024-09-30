@@ -3,7 +3,7 @@ unit pbutils;
 interface
 
 uses
-  glib280, gst124;
+  gst124;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

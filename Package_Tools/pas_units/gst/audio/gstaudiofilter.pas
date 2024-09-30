@@ -3,7 +3,7 @@ unit gstaudiofilter;
 interface
 
 uses
-  glib280, gst124, gstbasetransform, audio_info, audio_format;
+  glib280, gst124, gst124_base, audio_info, audio_format;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

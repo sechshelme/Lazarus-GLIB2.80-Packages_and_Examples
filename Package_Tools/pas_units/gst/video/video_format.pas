@@ -3,7 +3,7 @@ unit video_format;
 interface
 
 uses
-  glib280, gst124, gst124_base, video_tile, video;
+  glib280, gst124, gst124_base, video_tile;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

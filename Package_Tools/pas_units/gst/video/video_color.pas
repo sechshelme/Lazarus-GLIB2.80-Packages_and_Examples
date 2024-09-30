@@ -3,7 +3,7 @@ unit video_color;
 interface
 
 uses
-  glib280, gst124, gst124_base, video_format, video;
+  glib280, gst124, gst124_base, video_format;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

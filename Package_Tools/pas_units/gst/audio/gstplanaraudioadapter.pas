@@ -17,24 +17,23 @@ type
   TGstPlanarAudioAdapterClass = record
   end;
   PGstPlanarAudioAdapterClass = ^TGstPlanarAudioAdapterClass;
-  //                                                 'libgstbadaudio-1.0';
-                                                   function gst_planar_audio_adapter_get_type: TGType; cdecl; external 'libgstbadaudio-1.0';
-//                                                   function gst_planar_audio_adapter_get_type: TGType; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_new: PGstPlanarAudioAdapter; cdecl; external libgstaudio;
-procedure gst_planar_audio_adapter_configure(adapter: PGstPlanarAudioAdapter; info: PGstAudioInfo); cdecl; external libgstaudio;
-procedure gst_planar_audio_adapter_clear(adapter: PGstPlanarAudioAdapter); cdecl; external libgstaudio;
-procedure gst_planar_audio_adapter_push(adapter: PGstPlanarAudioAdapter; buf: PGstBuffer); cdecl; external libgstaudio;
-procedure gst_planar_audio_adapter_flush(adapter: PGstPlanarAudioAdapter; to_flush: Tgsize); cdecl; external libgstaudio;
-function gst_planar_audio_adapter_get_buffer(adapter: PGstPlanarAudioAdapter; nsamples: Tgsize; flags: TGstMapFlags): PGstBuffer; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_take_buffer(adapter: PGstPlanarAudioAdapter; nsamples: Tgsize; flags: TGstMapFlags): PGstBuffer; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_available(adapter: PGstPlanarAudioAdapter): Tgsize; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_distance_from_discont(adapter: PGstPlanarAudioAdapter): Tguint64; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_offset_at_discont(adapter: PGstPlanarAudioAdapter): Tguint64; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_pts_at_discont(adapter: PGstPlanarAudioAdapter): TGstClockTime; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_dts_at_discont(adapter: PGstPlanarAudioAdapter): TGstClockTime; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_prev_offset(adapter: PGstPlanarAudioAdapter; distance: Pguint64): Tguint64; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_prev_pts(adapter: PGstPlanarAudioAdapter; distance: Pguint64): TGstClockTime; cdecl; external libgstaudio;
-function gst_planar_audio_adapter_prev_dts(adapter: PGstPlanarAudioAdapter; distance: Pguint64): TGstClockTime; cdecl; external libgstaudio;
+
+function gst_planar_audio_adapter_get_type: TGType; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_new: PGstPlanarAudioAdapter; cdecl; external libgstbadaudio;
+procedure gst_planar_audio_adapter_configure(adapter: PGstPlanarAudioAdapter; info: PGstAudioInfo); cdecl; external libgstbadaudio;
+procedure gst_planar_audio_adapter_clear(adapter: PGstPlanarAudioAdapter); cdecl; external libgstbadaudio;
+procedure gst_planar_audio_adapter_push(adapter: PGstPlanarAudioAdapter; buf: PGstBuffer); cdecl; external libgstbadaudio;
+procedure gst_planar_audio_adapter_flush(adapter: PGstPlanarAudioAdapter; to_flush: Tgsize); cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_get_buffer(adapter: PGstPlanarAudioAdapter; nsamples: Tgsize; flags: TGstMapFlags): PGstBuffer; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_take_buffer(adapter: PGstPlanarAudioAdapter; nsamples: Tgsize; flags: TGstMapFlags): PGstBuffer; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_available(adapter: PGstPlanarAudioAdapter): Tgsize; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_distance_from_discont(adapter: PGstPlanarAudioAdapter): Tguint64; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_offset_at_discont(adapter: PGstPlanarAudioAdapter): Tguint64; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_pts_at_discont(adapter: PGstPlanarAudioAdapter): TGstClockTime; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_dts_at_discont(adapter: PGstPlanarAudioAdapter): TGstClockTime; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_prev_offset(adapter: PGstPlanarAudioAdapter; distance: Pguint64): Tguint64; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_prev_pts(adapter: PGstPlanarAudioAdapter; distance: Pguint64): TGstClockTime; cdecl; external libgstbadaudio;
+function gst_planar_audio_adapter_prev_dts(adapter: PGstPlanarAudioAdapter; distance: Pguint64): TGstClockTime; cdecl; external libgstbadaudio;
 
 // === Konventiert am: 28-9-24 19:33:41 ===
 

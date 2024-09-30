@@ -39,7 +39,7 @@ function gst_device_monitor_get_providers(monitor: PGstDeviceMonitor): PPgchar; 
 procedure gst_device_monitor_set_show_all_devices(monitor: PGstDeviceMonitor; show_all: Tgboolean); cdecl; external gstreamerlib;
 function gst_device_monitor_get_show_all_devices(monitor: PGstDeviceMonitor): Tgboolean; cdecl; external gstreamerlib;
 
-function GST_DEVICE_MONITOR_CAST(obj: longint): PGstDeviceMonitor;
+function GST_DEVICE_MONITOR_CAST(obj: Pointer): PGstDeviceMonitor;
 
 // === Konventiert am: 17-9-24 17:52:20 ===
 
@@ -85,10 +85,9 @@ begin
   Result := PGstDeviceMonitorClass(PGTypeInstance(obj)^.g_class);
 end;
 
+// ====
 
-{ was #define dname(params) para_def_expr }
-{ argument types are unknown }
-function GST_DEVICE_MONITOR_CAST(obj: longint): PGstDeviceMonitor;
+function GST_DEVICE_MONITOR_CAST(obj: Pointer): PGstDeviceMonitor;
 begin
   GST_DEVICE_MONITOR_CAST := PGstDeviceMonitor(obj);
 end;

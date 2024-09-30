@@ -3,7 +3,7 @@ unit gstaudiocdsrc;
 interface
 
 uses
-  glib280, gst124, gstpushsrc;
+  glib280, gst124, gst124_base;
 
   {$IFDEF FPC}
   {$PACKRECORDS C}

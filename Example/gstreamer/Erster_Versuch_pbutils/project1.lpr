@@ -43,14 +43,14 @@ uses
   audio_quantize,                // io. -> audio_format
   audio_info,                    // io. -> audio_format, audio_channels
   audio_channel_mixer,           // io. -> audio_format, audio_channels
-  gstnonstreamaudiodecoder,      // ??????? io. -> audio_info, audio_format
+  gstnonstreamaudiodecoder,      // io. -> audio_info, audio_format
   gstaudiofilter,                // io. -> audio_info, audio_format
   audio_buffer,                  // io. -> audio_info, audio_format
   gstaudiodecoder,               // io. -> audio_info
   gstaudioencoder,               // io. -> audio_info
   audio_converter,               // io. -> audio_info
   gstaudioaggregator,            // io. -> audio_info
-  gstplanaraudioadapter,         // ????? io. -> audio_info
+  gstplanaraudioadapter,         // io. -> audio_info
   gstdsdformat,                  // io.
   gstaudioringbuffer,            // io. -> audio_info, gstdsdformat, audio_channels
   gstaudiobasesrc,               // io. -> gstaudioringbuffer
