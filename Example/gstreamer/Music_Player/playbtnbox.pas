@@ -24,8 +24,8 @@ type
   public
     PlayBtnPanel: TPlayBtnPanel;
     TrackBar: TTrackBar;
-    PositionLabel,
-    DurationLabel: TLabel;
+    PositionLabel, DurationLabel,
+    PositionValueLabel, DurationValueLabel: TLabel;
     LevelLShape, LevelRShape: TShape;
     constructor Create(AOwner: TComponent); override;
   end;
@@ -94,14 +94,16 @@ var
 begin
   inherited Create(AOwner);
   TrackBar := TTrackBar.Create(Self);
+  TrackBar.Left := 5;
   TrackBar.Parent := Self;
-  TrackBar.Width := Width;
+  TrackBar.Width := Width - 10;
   TrackBar.Anchors := [akTop, akLeft, akRight];
   h := TrackBar.Height + 10;
 
   PlayBtnPanel := TPlayBtnPanel.Create(Self);
   PlayBtnPanel.Parent := Self;
   PlayBtnPanel.Top := h;
+  PlayBtnPanel.Left := 5;
 
   DurationLabel := TLabel.Create(Self);
   DurationLabel.Parent := Self;
@@ -114,6 +116,18 @@ begin
   PositionLabel.Top := h;
   PositionLabel.Left := 400;
   PositionLabel.Caption := 'Position';
+
+  DurationValueLabel := TLabel.Create(Self);
+  DurationValueLabel.Parent := Self;
+  DurationValueLabel.Top := h + 20;
+  DurationValueLabel.Left := 200;
+  DurationValueLabel.Caption := '00:00';
+
+  PositionValueLabel := TLabel.Create(Self);
+  PositionValueLabel.Parent := Self;
+  PositionValueLabel.Top := h + 20;
+  PositionValueLabel.Left := 400;
+  PositionValueLabel.Caption := '00:00';
 
   LevelLShape := TShape.Create(Self);
   LevelLShape.Parent := Self;
@@ -131,7 +145,7 @@ begin
   LevelRShape.Left := 600;
   LevelRShape.Brush.Color := clRed;
 
-  Height := h + PlayBtnPanel.Height;
+  Height := h + PlayBtnPanel.Height + 5;
 end;
 
 end.

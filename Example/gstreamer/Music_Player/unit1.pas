@@ -170,8 +170,8 @@ begin
       PlayPanel.TrackBar.Max := SDur;
       PlayPanel.TrackBar.Position := SPos;
       PlayPanel.TrackBar.OnChange := OldChangeProc;
-      PlayPanel.DurationLabel.Caption := GstClockToStr(SDur);
-      PlayPanel.PositionLabel.Caption := GstClockToStr(SPos);
+      PlayPanel.DurationValueLabel.Caption := GstClockToStr(SDur);
+      PlayPanel.PositionValueLabel.Caption := GstClockToStr(SPos);
       volume := PriStream.Position / FITime;
       if volume > 1.0 then begin
         volume := 1.0;
@@ -232,7 +232,7 @@ begin
   PlayPanel.Left := 5;
   PlayPanel.Top := 0;
   PlayPanel.PlayBtnPanel.OnPlayBoxEvent := @BoxEventProc;
-  PlayPanel.Width := ClientWidth;
+  PlayPanel.Width := ClientWidth - 10;
   PlayPanel.Anchors := [akTop, akLeft, akRight];
 
   EditBox := TEditBox.Create(Self);
