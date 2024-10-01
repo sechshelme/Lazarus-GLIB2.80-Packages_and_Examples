@@ -41,37 +41,37 @@
  */
 typedef struct _GstAnalyticsMtd GstAnalyticsClsMtd;
 
-GST_ANALYTICS_META_API
+
 GstAnalyticsMtdType gst_analytics_cls_mtd_get_mtd_type (void);
 
-GST_ANALYTICS_META_API
+
 gfloat gst_analytics_cls_mtd_get_level (GstAnalyticsClsMtd * handle,
     gsize index);
 
-GST_ANALYTICS_META_API
+
 gint gst_analytics_cls_mtd_get_index_by_quark (GstAnalyticsClsMtd * handle,
     GQuark quark);
 
-GST_ANALYTICS_META_API
+
 gsize gst_analytics_cls_mtd_get_length (GstAnalyticsClsMtd * handle);
 
-GST_ANALYTICS_META_API
+
 GQuark gst_analytics_cls_mtd_get_quark (GstAnalyticsClsMtd * handle,
     gsize index);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_add_cls_mtd (GstAnalyticsRelationMeta *
     instance, gsize length, gfloat * confidence_levels, GQuark * class_quarks,
     GstAnalyticsClsMtd * cls_mtd);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_add_one_cls_mtd (GstAnalyticsRelationMeta *
     instance, gfloat confidence_level, GQuark class_quark,
     GstAnalyticsClsMtd * cls_mtd);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_get_cls_mtd (GstAnalyticsRelationMeta * meta,
     guint an_meta_id, GstAnalyticsClsMtd * rlt);

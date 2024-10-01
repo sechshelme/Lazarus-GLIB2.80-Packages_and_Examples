@@ -19,6 +19,7 @@ type
     len: Tguint;
   end;
   PGArray = ^TGArray;
+  PPGArray = ^PGArray;
 
   TGByteArray = record
     Data: Pguint8;

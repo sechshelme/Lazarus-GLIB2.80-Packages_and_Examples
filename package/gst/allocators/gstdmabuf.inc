@@ -1,13 +1,12 @@
-unit gstdmabuf;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 01-10-2024   19:04                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gstfdmemory;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 const
   GST_CAPS_FEATURE_MEMORY_DMABUF = 'memory:DMABuf';
@@ -47,7 +46,10 @@ function GST_IS_DMABUF_ALLOCATOR(obj: Pointer): Tgboolean;
 function GST_IS_DMABUF_ALLOCATOR_CLASS(klass: Pointer): Tgboolean;
 function GST_DMABUF_ALLOCATOR_GET_CLASS(obj: Pointer): PGstDmaBufAllocatorClass;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_DMABUF_ALLOCATOR: TGType;
 begin
@@ -87,4 +89,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

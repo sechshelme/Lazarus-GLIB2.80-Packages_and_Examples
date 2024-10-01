@@ -43,6 +43,10 @@
         <Filename Value="gst124_pbutils.pas"/>
         <UnitName Value="gst124_pbutils"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_allocators.pas"/>
+        <UnitName Value="gst124_allocators"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

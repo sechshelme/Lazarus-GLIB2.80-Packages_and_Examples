@@ -1,13 +1,12 @@
-unit gstshmallocator;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 01-10-2024   19:04                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gstfdmemory;
-
-{$IFDEF FPC}
-{$PACKRECORDS C}
-{$ENDIF}
+{$IFDEF read_interface}
 
 const
   GST_ALLOCATOR_SHM = 'shm';
@@ -34,7 +33,10 @@ function GST_SHM_ALLOCATOR(obj: Pointer): PGstShmAllocator;
 function GST_IS_SHM_ALLOCATOR(obj: Pointer): Tgboolean;
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_SHM_ALLOCATOR: TGType;
 begin
@@ -51,4 +53,4 @@ begin
   Result := g_type_check_instance_is_a(obj, GST_TYPE_SHM_ALLOCATOR);
 end;
 
-end.
+{$ENDIF read_implementation}

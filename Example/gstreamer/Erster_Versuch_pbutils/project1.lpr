@@ -12,6 +12,7 @@ uses
   gst124_audio,
   gst124_video,
   gst124_pbutils,
+  gst124_allocators,
 
   // base
 
@@ -120,14 +121,20 @@ uses
 
   // allocators
 
-  gstdrmdumb,                      // io.
-  gstphysmemory,                   // io.
-  gstfdmemory,                     // io.
-  gstshmallocator,                 // io. -> gstfdmemory
-  gstdmabuf,                       // io. -> gstfdmemory
+  //gstdrmdumb,                      // io.
+  //gstphysmemory,                   // io.
+  //gstfdmemory,                     // io.
+  //gstshmallocator,                 // io. -> gstfdmemory
+  //gstdmabuf,                       // io. -> gstfdmemory
 
 
+  gstanalyticsmeta,                  // io.
+  gstanalyticsclassificationmtd,     // io. -> gstanalyticsmeta
+  gstanalyticsobjectdetectionmtd,    // io. -> gstanalyticsmeta
+  gstanalyticsobjecttrackingmtd,     // io. -> gstanalyticsmeta
 
+
+  GLIBTools,
   gstTools;
 
   function get_duration(s: string): Tguint64;
@@ -167,14 +174,31 @@ uses
   procedure main;
   var
     sl: TStringList;
+    obj: PGstShmAllocator;
   begin
     gst_init(nil, nil);
+
+    obj := g_object_new(GST_TYPE_DRM_DUMB_ALLOCATOR, nil);
+    WriteLn(GST_IS_SHM_ALLOCATOR(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_SHM_ALLOCATOR, nil);
+    WriteLn(GST_IS_SHM_ALLOCATOR(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_FD_ALLOCATOR, nil);
+    WriteLn('shm: ', obj <> nil);
+    WriteLn(GST_IS_FD_ALLOCATOR(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
     sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos', '*.flac;*.mp3', True);
     WriteDuration(sl);
     sl.Free;
     sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16', '*.flac;*.mp3', True);
-    WriteDuration(sl);
+    //    WriteDuration(sl);
     sl.Free;
   end;
 

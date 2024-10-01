@@ -1,13 +1,12 @@
-unit gstfdmemory;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 01-10-2024   19:04                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 const
   GST_ALLOCATOR_FD = 'fd';
@@ -50,7 +49,10 @@ function GST_IS_FD_ALLOCATOR(obj: Pointer): Tgboolean;
 function GST_IS_FD_ALLOCATOR_CLASS(klass: Pointer): Tgboolean;
 function GST_FD_ALLOCATOR_GET_CLASS(obj: Pointer): PGstFdAllocatorClass;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_FD_ALLOCATOR: TGType;
 begin
@@ -91,4 +93,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

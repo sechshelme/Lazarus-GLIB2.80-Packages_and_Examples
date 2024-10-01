@@ -123,16 +123,16 @@ typedef struct {
   gpointer _reserved[GST_PADDING_LARGE];
 } GstAnalyticsMtdImpl;
 
-GST_ANALYTICS_META_API
+
 GstAnalyticsMtdType gst_analytics_mtd_get_mtd_type (GstAnalyticsMtd * instance);
 
-GST_ANALYTICS_META_API
+
 guint gst_analytics_mtd_get_id (GstAnalyticsMtd * instance);
 
-GST_ANALYTICS_META_API
+
 gsize gst_analytics_mtd_get_size (GstAnalyticsMtd * instance);
 
-GST_ANALYTICS_META_API
+
 const gchar *gst_analytics_mtd_type_get_name (GstAnalyticsMtdType type);
 
 typedef struct _GstAnalyticsRelationMetaInitParams
@@ -195,69 +195,69 @@ struct _GstAnalyticsRelationMetaInitParams
   gsize initial_buf_size;
 };
 
-GST_ANALYTICS_META_API GType gst_analytics_relation_meta_api_get_type (void);
+ GType gst_analytics_relation_meta_api_get_type (void);
 
-GST_ANALYTICS_META_API
+
 const GstMetaInfo *gst_analytics_relation_meta_get_info (void);
 
-GST_ANALYTICS_META_API
+
 gsize
 gst_analytics_relation_get_length (GstAnalyticsRelationMeta *
     instance);
 
-GST_ANALYTICS_META_API
+
 GstAnalyticsRelTypes
 gst_analytics_relation_meta_get_relation (GstAnalyticsRelationMeta * meta,
     guint an_meta_first_id, guint an_meta_second_id);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_set_relation (GstAnalyticsRelationMeta
     * meta, GstAnalyticsRelTypes type, guint an_meta_first_id,
     guint an_meta_second_id);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_exist (GstAnalyticsRelationMeta *
     rmeta, guint an_meta_first_id, guint an_meta_second_id,
     gint max_relation_span, GstAnalyticsRelTypes cond_types,
     GArray ** relations_path);
 
-GST_ANALYTICS_META_API
+
 GstAnalyticsRelationMeta *
 gst_buffer_add_analytics_relation_meta (GstBuffer * buffer);
 
-GST_ANALYTICS_META_API
+
 GstAnalyticsRelationMeta *
 gst_buffer_add_analytics_relation_meta_full (GstBuffer * buffer,
     GstAnalyticsRelationMetaInitParams * init_params);
 
-GST_ANALYTICS_META_API
+
 GstAnalyticsRelationMeta *
 gst_buffer_get_analytics_relation_meta (GstBuffer * buffer);
 
-GST_ANALYTICS_META_API
+
 gpointer
 gst_analytics_relation_meta_add_mtd (GstAnalyticsRelationMeta * meta,
     const GstAnalyticsMtdImpl * impl, gsize size, GstAnalyticsMtd * rlt_mtd);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_get_mtd (GstAnalyticsRelationMeta *
     meta, guint an_meta_id, GstAnalyticsMtdType type, GstAnalyticsMtd * rlt);
 
-GST_ANALYTICS_META_API
+
 gpointer
 gst_analytics_relation_meta_get_mtd_data (GstAnalyticsRelationMeta * meta,
     guint an_meta_id);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_iterate (GstAnalyticsRelationMeta *
     meta, gpointer * state, GstAnalyticsMtdType type,
     GstAnalyticsMtd * rlt_mtd);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_get_direct_related (GstAnalyticsRelationMeta * meta,
     guint an_meta_id, GstAnalyticsRelTypes relation_type,

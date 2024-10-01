@@ -45,27 +45,27 @@
  */
 typedef struct _GstAnalyticsMtd GstAnalyticsTrackingMtd;
 
-GST_ANALYTICS_META_API
+
 GstAnalyticsMtdType gst_analytics_tracking_mtd_get_mtd_type (void);
 
-GST_ANALYTICS_META_API
+
 gboolean gst_analytics_tracking_mtd_update_last_seen (GstAnalyticsTrackingMtd * instance,
     GstClockTime last_seen);
 
-GST_ANALYTICS_META_API
+
 gboolean gst_analytics_tracking_mtd_set_lost (GstAnalyticsTrackingMtd * instance);
 
-GST_ANALYTICS_META_API
+
 gboolean gst_analytics_tracking_mtd_get_info (GstAnalyticsTrackingMtd * instance,
     guint64 * tracking_id, GstClockTime * tracking_first_seen, GstClockTime *
     tracking_last_seen, gboolean * tracking_lost);
 
-GST_ANALYTICS_META_API
+
 gboolean gst_analytics_relation_meta_add_tracking_mtd (
     GstAnalyticsRelationMeta * instance, guint64 tracking_id,
     GstClockTime tracking_first_seen, GstAnalyticsTrackingMtd * trk_mtd);
 
-GST_ANALYTICS_META_API
+
 gboolean
 gst_analytics_relation_meta_get_tracking_mtd (GstAnalyticsRelationMeta * meta,
     guint an_meta_id, GstAnalyticsTrackingMtd * rlt);

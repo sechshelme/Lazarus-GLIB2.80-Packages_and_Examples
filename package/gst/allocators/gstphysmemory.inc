@@ -1,13 +1,12 @@
-unit gstphysmemory;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 01-10-2024   19:04                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   TGstPhysMemoryAllocator = record
@@ -33,7 +32,10 @@ function GST_PHYS_MEMORY_ALLOCATOR(obj: Pointer): PGstPhysMemoryAllocator;
 function GST_IS_PHYS_MEMORY_ALLOCATOR(obj: Pointer): Tgboolean;
 function GST_PHYS_MEMORY_ALLOCATOR_GET_IFACE(obj: Pointer): PGstPhysMemoryAllocatorInterface;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_PHYS_MEMORY_ALLOCATOR: TGType;
 begin
@@ -63,4 +65,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}
