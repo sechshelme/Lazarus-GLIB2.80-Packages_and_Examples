@@ -18,14 +18,14 @@ uses
 
 
   {$DEFINE read_interface}
-//  {$include gst124_video_includes.inc}
+  {$include gst124_video_includes.inc}
   {$UNDEF read_interface}
 
 
 implementation
 
 {$DEFINE read_implementation}
-//{$include gst124_video_includes.inc}
+{$include gst124_video_includes.inc}
 {$UNDEF read_implementation}
 
 end.

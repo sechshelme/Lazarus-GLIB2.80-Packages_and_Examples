@@ -2,7 +2,7 @@
 //                                                         //
 //   WARNUNG, dies Datei wird automatisch durch            //
 //   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
-//   Erzeugt am: 30-09-2024   16:45                        //
+//   Erzeugt am: 01-10-2024   15:41                        //
 //                                                         //
 /////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ type
   PGstDiscovererStreamInfoClass = ^TGstDiscovererStreamInfoClass;
   TGstDiscovererStreamInfoClass = TGObjectClass;
 
-function gst_discoverer_stream_info_get_type: TGType; cdecl; external gstreamerlib;
+function gst_discoverer_stream_info_get_type: TGType; cdecl; external libgstreamer;
 function gst_discoverer_stream_info_get_previous(info: PGstDiscovererStreamInfo): PGstDiscovererStreamInfo; cdecl; external libgstpbutils;
 function gst_discoverer_stream_info_get_next(info: PGstDiscovererStreamInfo): PGstDiscovererStreamInfo; cdecl; external libgstpbutils;
 function gst_discoverer_stream_info_get_caps(info: PGstDiscovererStreamInfo): PGstCaps; cdecl; external libgstpbutils;

@@ -10,6 +10,7 @@ uses
   gst124,
   gst124_base,
   gst124_audio,
+  gst124_video,
 
   // base
 
@@ -64,43 +65,43 @@ uses
 
   // video
 
-  video,                                // io.
-  video_enumtypes,                      // io.
-  video_resampler,                      // io.
-  navigation,                           // io.
-  videoorientation,                     // io.
-  videooverlay,                         // io.
-  video_sei,                            // io.
-  gstvideoaffinetransformationmeta,     // io.
-  video_event,                          // io.
-  gstvideocodecalphameta,               // io.
-  videodirection,                       // io.
-  colorbalancechannel,                  // io.
-  colorbalance,                         // io. -> colorbalancechannel
-  video_hdr,                            // io.
-  gstvideoutils,                        // io. -> video_info, video_hdr
-  gstvideoencoder,                      // io. -> gstvideoutils
-  video_tile,                           // io.
-  video_format,                         // io. -> video_tile, video     viele Makros entfernt
-  video_anc,                            // io. -> video_format          Fehler im Makro C-seitig
-  video_chroma,                         // io. -> video_format
-  video_dither,                         // io. -> video_format
-  video_scaler,                         // io. -> video_resampler, video_format
-  video_color,                          // io. -> video_format, video
-  video_info,                           // io. -> video_format, video_color, video
-  video_multiview,                      // io. -> video_info
-  gstvideosink,                         // io. -> video_info
-  video_info_dma,                       // io. -> video_info, video_format
-  video_frame,                          // io. -> video_info, video
-  gstvideofilter,                       // io. -> video_info, video_frame
-  video_converter,                      // io. -> video_info, video_frame
-  gstvideoaggregator,                   // io. -> video_info, video_frame
-  gstvideopool,                         // io. -> video_info, video_frame
-  video_blend,                          // io. -> video_info, video_frame
-  video_overlay_composition,            // io. -> video_format, video_frame
-  gstvideodecoder,                      // io. -> gstvideoutils, video_format, video_info
-  gstvideotimecode,                     // io.
-  gstvideometa,                         // io. -> video, video_frame, video_format, video_info, gstvideotimecode
+  //video,                                // io.
+  //video_enumtypes,                      // io.
+  //video_resampler,                      // io.
+  //navigation,                           // io.
+  //videoorientation,                     // io.
+  //videooverlay,                         // io.
+  //video_sei,                            // io.
+  //gstvideoaffinetransformationmeta,     // io.
+  //video_event,                          // io.
+  //gstvideocodecalphameta,               // io.
+  //videodirection,                       // io.
+  //colorbalancechannel,                  // io.
+  //colorbalance,                         // io. -> colorbalancechannel
+  //video_tile,                           // io.
+  //video_format,                         // io. -> video_tile     viele Makros entfernt
+  //video_anc,                            // io. -> video_format          Fehler im Makro C-seitig
+  //video_chroma,                         // io. -> video_format
+  //video_dither,                         // io. -> video_format
+  //video_scaler,                         // io. -> video_resampler, video_format
+  //video_color,                          // io. -> video_format, video
+  //video_info,                           // io. -> video_format, video_color
+  //video_hdr,                            // io.
+  //gstvideoutils,                        // io. -> video_info, video_hdr
+  //gstvideoencoder,                      // io. -> gstvideoutils
+  //video_multiview,                      // io. -> video_info
+  //gstvideosink,                         // io. -> video_info
+  //video_info_dma,                       // io. -> video_info, video_format
+  //video_frame,                          // io. -> video_info, video
+  //gstvideofilter,                       // io. -> video_info, video_frame
+  //video_converter,                      // io. -> video_info, video_frame
+  //gstvideoaggregator,                   // io. -> video_info, video_frame
+  //gstvideopool,                         // io. -> video_info, video_frame
+  //video_blend,                          // io. -> video_info, video_frame
+  //video_overlay_composition,            // io. -> video_format, video_frame
+  //gstvideodecoder,                      // io. -> gstvideoutils, video_format, video_info
+  //gstvideotimecode,                     // io.
+  //gstvideometa,                         // io. -> video, video_frame, video_format, video_info, gstvideotimecode
 
   // pbutils
 

@@ -35,6 +35,10 @@
         <Filename Value="gst124_audio.pas"/>
         <UnitName Value="gst124_audio"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_video.pas"/>
+        <UnitName Value="gst124_video"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

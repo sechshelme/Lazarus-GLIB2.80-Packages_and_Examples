@@ -9,7 +9,7 @@ interface
 
 uses
   glib280, gst124, GLIBTools, gstTools, gst124_base, gst124_audio, 
-  LazarusPackageIntf;
+  gst124_video, LazarusPackageIntf;
 
 implementation
 
