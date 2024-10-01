@@ -59,8 +59,8 @@ typedef struct _GstVideoBufferPoolClass GstVideoBufferPoolClass;
 typedef struct _GstVideoBufferPoolPrivate GstVideoBufferPoolPrivate;
 
 #define GST_TYPE_VIDEO_BUFFER_POOL      (gst_video_buffer_pool_get_type())
-#define GST_IS_VIDEO_BUFFER_POOL(obj)   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_VIDEO_BUFFER_POOL))
 #define GST_VIDEO_BUFFER_POOL(obj)      (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_VIDEO_BUFFER_POOL, GstVideoBufferPool))
+#define GST_IS_VIDEO_BUFFER_POOL(obj)   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_VIDEO_BUFFER_POOL))
 #define GST_VIDEO_BUFFER_POOL_CAST(obj) ((GstVideoBufferPool*)(obj))
 
 struct _GstVideoBufferPool

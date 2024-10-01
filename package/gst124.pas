@@ -22,7 +22,7 @@ const
   libgstbase = 'libgstbase-1.0';
   {$endif}
   {$ifdef Windows}
-  gstreamerlib = 'gstreamer-1.0-0.dll';
+  libgstreamer = 'gstreamer-1.0-0.dll';
   libgstpbutils = 'gstpbutils-1.0-0.dll';
   libgstaudio = 'gstaudio-1.0-0.dll';
   libgstbadaudio = 'gstbadaudio-1.0-0.dll';

@@ -20,6 +20,7 @@ const
 type
   Tguintarr4 = array[0..3] of Tguint;
   Tguintarr16 = array[0..15] of Tguint;
+  Tgfloatarr16=array[0..15] of Tgfloat;
 
   Tplanes_Pointer_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tgpointer;
   Tplanes_int_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tgint;
