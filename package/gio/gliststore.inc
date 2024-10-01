@@ -21,7 +21,7 @@ type
   end;
   PGListStoreClass = ^TGListStoreClass;
 
-function g_list_store_get_type: TGType; cdecl; external libgtk4;
+function g_list_store_get_type: TGType; cdecl; external libgio2;
 function g_list_store_new(item_type: TGType): PGListStore; cdecl; external libgio2;
 procedure g_list_store_insert(store: PGListStore; position: Tguint; item: Tgpointer); cdecl; external libgio2;
 function g_list_store_insert_sorted(store: PGListStore; item: Tgpointer; compare_func: TGCompareDataFunc; user_data: Tgpointer): Tguint; cdecl; external libgio2;

@@ -1,7 +1,4 @@
 
-// {$include gst/base/gstaggregator.inc}                 // io.
-
-
 {$include gst/audio/audio_format.inc}                  // io.
 {$include gst/audio/gstaudiocdsrc.inc}                 // io.
 {$include gst/audio/gstaudiostreamalign.inc}           // io.

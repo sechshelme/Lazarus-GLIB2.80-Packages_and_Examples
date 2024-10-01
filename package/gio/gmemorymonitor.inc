@@ -23,7 +23,7 @@ type
   end;
   PGMemoryMonitorInterface = ^TGMemoryMonitorInterface;
 
-function g_memory_monitor_get_type: TGType; cdecl; external libgtk4;
+function g_memory_monitor_get_type: TGType; cdecl; external libgio2;
 function g_memory_monitor_dup_default: PGMemoryMonitor; cdecl; external libgio2;
 
 // === Konventiert am: 21-8-24 15:59:47 ===

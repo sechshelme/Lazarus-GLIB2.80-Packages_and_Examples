@@ -23,7 +23,7 @@ type
   end;
   PGListModelInterface = ^TGListModelInterface;
 
-function g_list_model_get_type: TGType; cdecl; external libgtk4;
+function g_list_model_get_type: TGType; cdecl; external libgio2;
 function g_list_model_get_item_type(list: PGListModel): TGType; cdecl; external libgio2;
 function g_list_model_get_n_items(list: PGListModel): Tguint; cdecl; external libgio2;
 function g_list_model_get_item(list: PGListModel; position: Tguint): Tgpointer; cdecl; external libgio2;

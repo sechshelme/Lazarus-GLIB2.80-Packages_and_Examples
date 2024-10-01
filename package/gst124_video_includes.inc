@@ -1,7 +1,4 @@
 
-// {$include gst/base/gstaggregator.inc}                 // io.
-
-
 {$include gst/video/video}                                // io.
 {$include gst/video/video_enumtypes}                      // io.
 {$include gst/video/video_resampler}                      // io.

@@ -22,7 +22,7 @@ type
   end;
   PGPowerProfileMonitor = ^TGPowerProfileMonitor;
 
-function g_power_profile_monitor_get_type: TGType; cdecl; external libgtk4;
+function g_power_profile_monitor_get_type: TGType; cdecl; external libgio2;
 function g_power_profile_monitor_dup_default: PGPowerProfileMonitor; cdecl; external libgio2;
 function g_power_profile_monitor_get_power_saver_enabled(monitor: PGPowerProfileMonitor): Tgboolean; cdecl; external libgio2;
 

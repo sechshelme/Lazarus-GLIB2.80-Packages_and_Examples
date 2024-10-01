@@ -29,7 +29,7 @@ type
   end;
   PGstStreamVolume = ^TGstStreamVolume;
 
-function gst_stream_volume_get_type: TGType; cdecl; external libgtk4;
+function gst_stream_volume_get_type: TGType; cdecl; external libgstaudio;
 procedure gst_stream_volume_set_volume(volume: PGstStreamVolume; format: TGstStreamVolumeFormat; val: Tgdouble); cdecl; external libgstaudio;
 function gst_stream_volume_get_volume(volume: PGstStreamVolume; format: TGstStreamVolumeFormat): Tgdouble; cdecl; external libgstaudio;
 procedure gst_stream_volume_set_mute(volume: PGstStreamVolume; mute: Tgboolean); cdecl; external libgstaudio;

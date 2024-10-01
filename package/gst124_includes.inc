@@ -1,7 +1,4 @@
 
-
-
-
 {$include gst/gst.inc}                      // io.
 {$include gst/gstconfig.inc}                // io.
 {$include gst/gstobject.inc}                // io. -> gstconfig

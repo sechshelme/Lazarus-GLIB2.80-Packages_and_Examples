@@ -87,7 +87,7 @@ type
   end;
   PGstVideoAggregatorParallelConvertPad = ^TGstVideoAggregatorParallelConvertPad;
 
-function gst_video_aggregator_parallel_convert_pad_get_type: TGType; cdecl; external libgtk4;
+function gst_video_aggregator_parallel_convert_pad_get_type: TGType; cdecl; external libgstvideo;
 
 function gst_video_aggregator_pad_get_type: TGType; cdecl; external libgstvideo;
 function gst_video_aggregator_pad_has_current_buffer(pad: PGstVideoAggregatorPad): Tgboolean; cdecl; external libgstvideo;

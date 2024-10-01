@@ -23,7 +23,7 @@ type
   end;
   PGDebugController = ^TGDebugController;
 
-function g_debug_controller_get_type: TGType; cdecl; external libgtk4;
+function g_debug_controller_get_type: TGType; cdecl; external libgio2;
 function g_debug_controller_get_debug_enabled(self: PGDebugController): Tgboolean; cdecl; external libgio2;
 procedure g_debug_controller_set_debug_enabled(self: PGDebugController; debug_enabled: Tgboolean); cdecl; external libgio2;
 

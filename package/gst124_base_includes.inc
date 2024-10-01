@@ -1,9 +1,4 @@
 
-
-
-
-// {$include gst/gst.inc}                      // io.
-
 {$include gst/base/gstaggregator.inc}                 // io.
 {$include gst/base/gstcollectpads.inc}                // io.
 {$include gst/base/gstadapter.inc}                    // io.

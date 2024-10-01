@@ -16,14 +16,14 @@ const
   libglib2 = 'libglib-2.0';
   libgobject2_0 = 'libgobject-2.0';
   libgio2 = 'libgio-2.0';
-  libgtk4 = 'libgtk-4';
+//  libgtk4 = 'libgtk-4';
   {$ENDIF}
 
   {$IFDEF Windows}
-  libgtk4 = 'gtk-4.dll';
   libgio2 = 'gio-2.0-0.dll';
   libglib2 = 'glib-2.0-0.dll';
   libgobject2_0 = 'gobject-2.0-0.dll';
+//  libgtk4 = 'gtk-4.dll';
   {$ENDIF}
 
   // === Externes

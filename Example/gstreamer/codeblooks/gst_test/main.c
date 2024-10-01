@@ -3,6 +3,7 @@
 #include <gst/pbutils/gstaudiovisualizer.h>
 #include <gst/pbutils/install-plugins.h>
 #include <gst/pbutils/encoding-target.h>
+#include <gst/allocators/allocators.h>
 #include <gst/audio/gstnonstreamaudiodecoder.h>
 #include <gst/base/base.h>
 

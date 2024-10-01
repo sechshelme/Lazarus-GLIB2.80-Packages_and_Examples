@@ -11,6 +11,7 @@ uses
   gst124_base,
   gst124_audio,
   gst124_video,
+  gst124_pbutils,
 
   // base
 
@@ -105,24 +106,34 @@ uses
 
   // pbutils
 
-  pbutils,                       // io.
-  missing_plugins,               // io.
-  pbutils_enumtypes,             // io.
-  codec_utils,                   // io.
-  install_plugins,               // io.
-  gstaudiovisualizer,            // io.
-  gstdiscoverer,                 // io.
-  encoding_profile,              // io. -> gstdiscoverer
-  encoding_target,               // io. -> encoding_profile
-  descriptions,                  // io.
-  gstpluginsbaseversion,         //  version makro !
+  //pbutils,                       // io.
+  //missing_plugins,               // io.
+  //pbutils_enumtypes,             // io.
+  //codec_utils,                   // io.
+  //install_plugins,               // io.
+  //gstaudiovisualizer,            // io.
+  //gstdiscoverer,                 // io.
+  //encoding_profile,              // io. -> gstdiscoverer
+  //encoding_target,               // io. -> encoding_profile
+  //descriptions,                  // io.
+  //gstpluginsbaseversion,         //  version makro !
+
+  // allocators
+
+  gstdrmdumb,                      // io.
+  gstphysmemory,                   // io.
+  gstfdmemory,                     // io.
+  gstshmallocator,                 // io. -> gstfdmemory
+  gstdmabuf,                       // io. -> gstfdmemory
+
 
 
   gstTools;
 
   function get_duration(s: string): Tguint64;
   var
-    discoverer, info: Pointer;
+    discoverer: PGstDiscoverer;
+    info: PGstDiscovererInfo;
   begin
     discoverer := gst_discoverer_new(5 * GST_SECOND, nil);
 
@@ -133,8 +144,7 @@ uses
       Result := -1;
     end else begin
       Result := gst_discoverer_info_get_duration(info) div G_USEC_PER_SEC;
-      //    gst_discoverer_info_unref(info);
-      g_object_unref(info);
+      gst_discoverer_info_unref(info);
     end;
     g_object_unref(discoverer);
   end;

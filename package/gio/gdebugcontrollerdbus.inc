@@ -23,7 +23,7 @@ type
   end;
   PGDebugControllerDBusClass = ^TGDebugControllerDBusClass;
 
-function g_debug_controller_dbus_get_type: TGType; cdecl; external libgtk4;
+function g_debug_controller_dbus_get_type: TGType; cdecl; external libgio2;
 function g_debug_controller_dbus_new(connection: PGDBusConnection; cancellable: PGCancellable; error: PPGError): PGDebugControllerDBus; cdecl; external libgio2;
 procedure g_debug_controller_dbus_stop(self: PGDebugControllerDBus); cdecl; external libgio2;
 

@@ -1,5 +1,8 @@
 # Lazarus-GLIB2.80-Packages_and_Examples
 
+## Paketinfo
+pkg-config --cflags --libs gstreamer-1.0 gstreamer-pbutils-1.0
+
 ## GLIB2 
 https://github.com/wadester/wh_test_glib/blob/master/glib_test1.c
 
@@ -26,6 +29,8 @@ Folgendes an Ende einfügen:
 - `export WINEPATH="$WINEPATH;C:\users\tux\mingw64\bin;C:\gstreamer\1.0\msvc_x86_64\bin"`
 Aktualisieren:
 - `source ~/.bashrc`
+
+
 
 
 

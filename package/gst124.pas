@@ -20,6 +20,7 @@ const
   libgstbadaudio = 'libgstbadaudio-1.0';
   libgstvideo = 'libgstvideo-1.0';
   libgstbase = 'libgstbase-1.0';
+  libgstallocators = 'libgstallocators-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -28,6 +29,7 @@ const
   libgstbadaudio = 'gstbadaudio-1.0-0.dll';
   libgstvideo = 'gstvideo-1.0-0.dll';
   libgstbase = 'gstbase-1.0-0.dll';
+  libgstallocators = 'gstallocators-1.0-1.dll';
   {$endif}
 
   // ==== Diverses
