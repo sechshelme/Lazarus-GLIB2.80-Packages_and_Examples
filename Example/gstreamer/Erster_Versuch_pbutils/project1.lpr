@@ -14,135 +14,12 @@ uses
   gst124_pbutils,
   gst124_allocators,
   gst124_analytics,
-
-  // base
-
-  //gstaggregator,                 // io.
-  //gstcollectpads,                // io.
-  //gstadapter,                    // io.
-  //gstbaseparse,                  // io.
-  //gstbasetransform,              // io.
-  //gstbasesrc,                    // io.
-  //gstpushsrc,                    // io. -> gstbasesrc
-  //gstbasesink,                   // io.
-  //gstdataqueue,                  // io.
-  //gstqueuearray,                 // io.
-  //gsttypefindhelper,             // io.
-  //gstflowcombiner,               // io.
-  //gstbitreader,                  // io.   viele Makros entfernt
-  //gstbitwriter,                  // io.   viele Makros entfernt
-  //gstbytereader,                 // io.   viele Makros entfernt
-  //gstbytewriter,                 // io. -> gstbytereader    viele Makros entfernt
-
-  // audio
-
-  //audio_format,                  // io.
-  //gstaudiocdsrc,                 // io.
-  //gstaudiostreamalign,           // io.
-  //audio_enumtypes,               // io.
-  //audio,                         // io.
-  //gstaudioclock,                 // io.
-  //streamvolume,                  // io.
-  //audio_channels,                // io. -> audio_format
-  //audio_quantize,                // io. -> audio_format
-  //audio_info,                    // io. -> audio_format, audio_channels
-  //audio_channel_mixer,           // io. -> audio_format, audio_channels
-  //gstnonstreamaudiodecoder,      // io. -> audio_info, audio_format
-  //gstaudiofilter,                // io. -> audio_info, audio_format
-  //audio_buffer,                  // io. -> audio_info, audio_format
-  //gstaudiodecoder,               // io. -> audio_info
-  //gstaudioencoder,               // io. -> audio_info
-  //audio_converter,               // io. -> audio_info
-  //gstaudioaggregator,            // io. -> audio_info
-  //gstplanaraudioadapter,         // io. -> audio_info
-  //gstdsdformat,                  // io.
-  //gstaudioringbuffer,            // io. -> audio_info, gstdsdformat, audio_channels
-  //gstaudiobasesrc,               // io. -> gstaudioringbuffer
-  //gstaudiosrc,                   // io. -> gstaudiobasesrc
-  //gstaudioiec61937,              // io. -> gstaudioringbuffer
-  //gstaudiobasesink,              // io. -> gstaudioringbuffer
-  //gstdsd,                        // io. -> gstdsdformat, audio_format, audio_info, audio_channels
-  //audio_resampler,               // io. -> audio_format         (  provided_clock <-> clock ???? )
-  //gstaudiometa,                  // io. -> audio_channels, audio_info
-  //gstaudiosink,                  // io. -> gstaudiobasesink, gstaudioringbuffer
-
-  // video
-
-  //video,                                // io.
-  //video_enumtypes,                      // io.
-  //video_resampler,                      // io.
-  //navigation,                           // io.
-  //videoorientation,                     // io.
-  //videooverlay,                         // io.
-  //video_sei,                            // io.
-  //gstvideoaffinetransformationmeta,     // io.
-  //video_event,                          // io.
-  //gstvideocodecalphameta,               // io.
-  //videodirection,                       // io.
-  //colorbalancechannel,                  // io.
-  //colorbalance,                         // io. -> colorbalancechannel
-  //video_tile,                           // io.
-  //video_format,                         // io. -> video_tile     viele Makros entfernt
-  //video_anc,                            // io. -> video_format          Fehler im Makro C-seitig
-  //video_chroma,                         // io. -> video_format
-  //video_dither,                         // io. -> video_format
-  //video_scaler,                         // io. -> video_resampler, video_format
-  //video_color,                          // io. -> video_format, video
-  //video_info,                           // io. -> video_format, video_color
-  //video_hdr,                            // io.
-  //gstvideoutils,                        // io. -> video_info, video_hdr
-  //gstvideoencoder,                      // io. -> gstvideoutils
-  //video_multiview,                      // io. -> video_info
-  //gstvideosink,                         // io. -> video_info
-  //video_info_dma,                       // io. -> video_info, video_format
-  //video_frame,                          // io. -> video_info, video
-  //gstvideofilter,                       // io. -> video_info, video_frame
-  //video_converter,                      // io. -> video_info, video_frame
-  //gstvideoaggregator,                   // io. -> video_info, video_frame
-  //gstvideopool,                         // io. -> video_info, video_frame
-  //video_blend,                          // io. -> video_info, video_frame
-  //video_overlay_composition,            // io. -> video_format, video_frame
-  //gstvideodecoder,                      // io. -> gstvideoutils, video_format, video_info
-  //gstvideotimecode,                     // io.
-  //gstvideometa,                         // io. -> video, video_frame, video_format, video_info, gstvideotimecode
-
-  // pbutils
-
-  //pbutils,                       // io.
-  //missing_plugins,               // io.
-  //pbutils_enumtypes,             // io.
-  //codec_utils,                   // io.
-  //install_plugins,               // io.
-  //gstaudiovisualizer,            // io.
-  //gstdiscoverer,                 // io.
-  //encoding_profile,              // io. -> gstdiscoverer
-  //encoding_target,               // io. -> encoding_profile
-  //descriptions,                  // io.
-  //gstpluginsbaseversion,         //  version makro !
-
-  // allocators
-
-  //gstdrmdumb,                      // io.
-  //gstphysmemory,                   // io.
-  //gstfdmemory,                     // io.
-  //gstshmallocator,                 // io. -> gstfdmemory
-  //gstdmabuf,                       // io. -> gstfdmemory
-
-//
-//  gstanalyticsmeta,                  // io.
-//  gstanalyticsclassificationmtd,     // io. -> gstanalyticsmeta
-//  gstanalyticsobjectdetectionmtd,    // io. -> gstanalyticsmeta
-//  gstanalyticsobjecttrackingmtd,     // io. -> gstanalyticsmeta
+  gst124_check,
+  gst124_interfaces,
 
 
-  // CK_DLL_EXP  internal-check.h
-
-  gstcheck,                        // viele Makros entfernt
-  gstbufferstraw,
-  gstconsistencychecker,
-  gstharness,
-  gsttestclock,
-  internal_check,                // viele Makros entfernt   lib CK_DLL_EXP  ?????
+  //photography,                           // io.
+  //photography_enumtypes,                 // io.
 
 
 
@@ -191,14 +68,15 @@ uses
   begin
     gst_init(nil, nil);
 
-    gst_check_init(nil,nil);
-    gst_check_remove_log_filter(nil);
-    WriteLn(PtrUInt(gst_harness_new_empty));
-    WriteLn(PtrUInt(suite_create('abc')));
+    //    gst_check_init(nil,nil);
+    //  gst_check_remove_log_filter(nil);
 
 
-    obj := g_object_new(GST_TYPE_DRM_DUMB_ALLOCATOR, nil);
-    WriteLn(GST_IS_SHM_ALLOCATOR(obj));
+    obj := g_object_new(GST_TYPE_PHOTOGRAPHY, nil);
+    if obj = nil then begin
+      WriteLn('fotoerror');
+    end;
+    WriteLn('foto ', GST_IS_PHOTOGRAPHY(obj));
     GObjectShowProperty(obj);
     g_object_unref(obj);
 

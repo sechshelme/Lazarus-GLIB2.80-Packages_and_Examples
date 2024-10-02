@@ -1,13 +1,12 @@
-unit gsttestclock;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 02-10-2024   19:16                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   TGstTestClockPrivate = record
@@ -55,7 +54,10 @@ function GST_IS_TEST_CLOCK(obj: Pointer): Tgboolean;
 function GST_IS_TEST_CLOCK_CLASS(klass: Pointer): Tgboolean;
 function GST_TEST_CLOCK_GET_CLASS(obj: Pointer): PGstTestClockClass;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_TEST_CLOCK: TGType;
 begin
@@ -95,4 +97,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

@@ -1,13 +1,12 @@
-unit gstharness;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 02-10-2024   19:16                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gsttestclock;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   TGstHarnessPrivate = record
@@ -147,7 +146,10 @@ function gst_harness_stress_requestpad_start(h: PGstHarness; t: PGstPadTemplate;
 // === Konventiert am: 2-10-24 16:59:50 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 function gst_harness_stress_statechange_start(h: PGstHarness): PGstHarnessThread;
@@ -196,4 +198,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

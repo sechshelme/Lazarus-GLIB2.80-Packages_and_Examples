@@ -73,4 +73,4 @@ GST_AUDIO_BASE_SINK_CLOCK(NULL);
 }
 
 
-TestResult
+

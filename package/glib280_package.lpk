@@ -51,6 +51,14 @@
         <Filename Value="gst124_analytics.pas"/>
         <UnitName Value="gst124_analytics"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_check.pas"/>
+        <UnitName Value="gst124_check"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_interfaces.pas"/>
+        <UnitName Value="gst124_interfaces"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

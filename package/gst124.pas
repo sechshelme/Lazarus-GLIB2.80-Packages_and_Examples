@@ -23,6 +23,7 @@ const
   libgstallocators = 'libgstallocators-1.0';
   libgstanalytics = 'libgstanalytics-1.0';
   libgstcheck = 'libgstcheck-1.0';
+  libgstphotography = 'libgstphotography-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -31,9 +32,10 @@ const
   libgstbadaudio = 'gstbadaudio-1.0-0.dll';
   libgstvideo = 'gstvideo-1.0-0.dll';
   libgstbase = 'gstbase-1.0-0.dll';
-  libgstallocators = 'gstallocators-1.0-1.dll';
+  libgstallocators = 'gstallocators-1.0-0.dll';
   libgstanalytics = 'gstanalytics-1.0-0.dll';
-  libgstcheck = 'libgstcheck-1.0-0.dll';
+  libgstcheck = 'gstcheck-1.0-0.dll';
+  libgstphotography = 'gstphotography-1.0-0';
   {$endif}
 
   // ==== Diverses

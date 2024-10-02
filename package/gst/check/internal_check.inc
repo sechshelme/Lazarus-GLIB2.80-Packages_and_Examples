@@ -1,13 +1,12 @@
-unit internal_check;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 02-10-2024   19:16                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 const
   CHECK_MAJOR_VERSION_ = 0;
@@ -136,7 +135,10 @@ procedure check_waitpid_and_exit(pid: Tpid_t); cdecl; external libgstcheck;
 // === Konventiert am: 2-10-24 17:00:02 ===
 
 
-implementation
+{$ENDIF read_interface}
 
 
-end.
+{$IFDEF read_implementation}
+
+
+{$ENDIF read_implementation}
