@@ -32,10 +32,10 @@
 #define GST_TYPE_TEST_CLOCK (gst_test_clock_get_type ())
 #define GST_TEST_CLOCK(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj),\
     GST_TYPE_TEST_CLOCK, GstTestClock))
-#define GST_IS_TEST_CLOCK(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj),\
-    GST_TYPE_TEST_CLOCK))
 #define GST_TEST_CLOCK_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass),\
     GST_TYPE_TEST_CLOCK, GstTestClockClass))
+#define GST_IS_TEST_CLOCK(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj),\
+    GST_TYPE_TEST_CLOCK))
 #define GST_IS_TEST_CLOCK_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE (\
     (klass), GST_TYPE_TEST_CLOCK))
 #define GST_TEST_CLOCK_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS (\
@@ -75,70 +75,69 @@ struct _GstTestClockClass
   GstClockClass parent_class;
 };
 
-GST_CHECK_API
+
 GType         gst_test_clock_get_type (void);
 
-GST_CHECK_API
+
 GstClock *    gst_test_clock_new (void);
 
-GST_CHECK_API
+
 GstClock *    gst_test_clock_new_with_start_time (GstClockTime start_time);
 
-GST_CHECK_API
+
 void          gst_test_clock_set_time (GstTestClock * test_clock,
                                       GstClockTime   new_time);
 
-GST_CHECK_API
+
 void          gst_test_clock_advance_time (GstTestClock *   test_clock,
                                           GstClockTimeDiff delta);
 
-GST_CHECK_API
+
 guint         gst_test_clock_peek_id_count (GstTestClock * test_clock);
 
-GST_CHECK_API
+
 gboolean      gst_test_clock_has_id (GstTestClock * test_clock, GstClockID id);
 
-GST_CHECK_API
+
 gboolean      gst_test_clock_peek_next_pending_id (GstTestClock * test_clock,
                                                    GstClockID   * pending_id);
 
-GST_CHECK_API
+
 void          gst_test_clock_wait_for_next_pending_id (GstTestClock * test_clock,
                                                        GstClockID   * pending_id);
 
-GST_CHECK_DEPRECATED_FOR(gst_test_clock_wait_for_multiple_pending_ids)
 void          gst_test_clock_wait_for_pending_id_count (GstTestClock * test_clock,
                                                         guint          count);
 
-GST_CHECK_API
+
 GstClockID    gst_test_clock_process_next_clock_id (GstTestClock * test_clock);
 
-GST_CHECK_API
+
 GstClockTime  gst_test_clock_get_next_entry_time   (GstTestClock * test_clock);
 
-GST_CHECK_API
+
 void          gst_test_clock_wait_for_multiple_pending_ids (GstTestClock * test_clock,
                                                             guint          count,
                                                             GList       ** pending_list);
 
-GST_CHECK_API
+
 gboolean      gst_test_clock_timed_wait_for_multiple_pending_ids (GstTestClock * test_clock,
                                                                   guint          count,
                                                                   guint          timeout_ms,
                                                                   GList       ** pending_list);
 
-GST_CHECK_API
+
 gboolean      gst_test_clock_process_id (GstTestClock * test_clock,
                                          GstClockID pending_id);
 
-GST_CHECK_API
+
 guint         gst_test_clock_process_id_list (GstTestClock * test_clock,
                                               const GList  * pending_list);
 
-GST_CHECK_API
+
 GstClockTime  gst_test_clock_id_list_get_latest_time (const GList * pending_list);
 
-GST_CHECK_API
+
 gboolean      gst_test_clock_crank (GstTestClock * test_clock);
 
 

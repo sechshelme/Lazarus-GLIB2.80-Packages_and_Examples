@@ -13,6 +13,7 @@ uses
   gst124_video,
   gst124_pbutils,
   gst124_allocators,
+  gst124_analytics,
 
   // base
 
@@ -127,11 +128,23 @@ uses
   //gstshmallocator,                 // io. -> gstfdmemory
   //gstdmabuf,                       // io. -> gstfdmemory
 
+//
+//  gstanalyticsmeta,                  // io.
+//  gstanalyticsclassificationmtd,     // io. -> gstanalyticsmeta
+//  gstanalyticsobjectdetectionmtd,    // io. -> gstanalyticsmeta
+//  gstanalyticsobjecttrackingmtd,     // io. -> gstanalyticsmeta
 
-  gstanalyticsmeta,                  // io.
-  gstanalyticsclassificationmtd,     // io. -> gstanalyticsmeta
-  gstanalyticsobjectdetectionmtd,    // io. -> gstanalyticsmeta
-  gstanalyticsobjecttrackingmtd,     // io. -> gstanalyticsmeta
+
+  // CK_DLL_EXP  internal-check.h
+
+  gstcheck,                        // viele Makros entfernt
+  gstbufferstraw,
+  gstconsistencychecker,
+  gstharness,
+  gsttestclock,
+  internal_check,                // viele Makros entfernt   lib CK_DLL_EXP  ?????
+
+
 
 
   GLIBTools,
@@ -178,7 +191,18 @@ uses
   begin
     gst_init(nil, nil);
 
+    gst_check_init(nil,nil);
+    gst_check_remove_log_filter(nil);
+    WriteLn(PtrUInt(gst_harness_new_empty));
+    WriteLn(PtrUInt(suite_create('abc')));
+
+
     obj := g_object_new(GST_TYPE_DRM_DUMB_ALLOCATOR, nil);
+    WriteLn(GST_IS_SHM_ALLOCATOR(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_TEST_CLOCK, nil);
     WriteLn(GST_IS_SHM_ALLOCATOR(obj));
     GObjectShowProperty(obj);
     g_object_unref(obj);

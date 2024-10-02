@@ -1,7 +1,18 @@
-/* GStreamer
- * Copyright (C) 2012 GStreamer developers
+unit gstbufferstraw;
+
+interface
+
+uses
+  glib280, gst124;
+
+{$IFDEF FPC}
+{$PACKRECORDS C}
+{$ENDIF}
+
+
+{ GStreamer
  *
- * check.h: single include header for gst-check library
+ * Copyright (C) 2006 Andy Wingo <wingo at pobox.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,17 +28,22 @@
  * License along with this library; if not, write to the
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA 02110-1301, USA.
- */
+  }
+{$ifndef __GST_BUFFER_STRAW_H__}
+{$define __GST_BUFFER_STRAW_H__}
+{$include <gst/check/gstcheck.h>}
 
-#ifndef __GST_CHECK__H__
-#define __GST_CHECK__H__
+procedure gst_buffer_straw_start_pipeline(bin:PGstElement; pad:PGstPad);cdecl;external libgstcheck;
+function gst_buffer_straw_get_buffer(bin:PGstElement; pad:PGstPad):PGstBuffer;cdecl;external libgstcheck;
+procedure gst_buffer_straw_stop_pipeline(bin:PGstElement; pad:PGstPad);cdecl;external libgstcheck;
+{$endif}
+{ __GST_BUFFER_STRAW_H__  }
 
-#include <gst/check/check-prelude.h>
+// === Konventiert am: 2-10-24 16:59:33 ===
 
-#include <gst/check/gstbufferstraw.h>
-#include <gst/check/gstcheck.h>
-#include <gst/check/gstconsistencychecker.h>
-#include <gst/check/gstharness.h>
-#include <gst/check/gsttestclock.h>
 
-#endif /* __GST_CHECK__H__ */
+implementation
+
+
+
+end.

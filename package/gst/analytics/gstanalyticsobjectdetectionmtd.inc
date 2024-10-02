@@ -1,13 +1,12 @@
-unit gstanalyticsobjectdetectionmtd;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 02-10-2024   16:26                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gstanalyticsmeta;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   TGstAnalyticsODMtd = TGstAnalyticsMtd;
@@ -22,8 +21,11 @@ function gst_analytics_relation_meta_add_od_mtd(instance: PGstAnalyticsRelationM
   h: Tgint; loc_conf_lvl: Tgfloat; od_mtd: PGstAnalyticsODMtd): Tgboolean; cdecl; external libgstanalytics;
 function gst_analytics_relation_meta_get_od_mtd(meta: PGstAnalyticsRelationMeta; an_meta_id: Tguint; rlt: PGstAnalyticsODMtd): Tgboolean; cdecl; external libgstanalytics;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

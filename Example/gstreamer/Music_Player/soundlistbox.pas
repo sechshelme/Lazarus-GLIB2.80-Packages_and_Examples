@@ -3,7 +3,8 @@ unit SoundListBox;
 interface
 
 uses
-  Classes, SysUtils, StdCtrls, Controls, Dialogs, ExtCtrls, ComCtrls,
+  Classes, SysUtils, gst,
+  StdCtrls, Controls, Dialogs, ExtCtrls, ComCtrls, Forms,
   Laz2_XMLCfg,
   Streamer;
 
@@ -71,21 +72,21 @@ end;
 procedure TSongsListPanel.Add(const song: string);
 var
   ad: TListItem;
+  dur: Tguint64;
 begin
+  dur:=get_duration(song);
   ad := ListView.Items.Add;
   ad.Caption := song;
-  ad.SubItems.Add('123');
+  ad.SubItems.Add(IntToStr(dur));
 end;
 
 procedure TSongsListPanel.Add(const song: TStringList);
 var
-  ad: TListItem;
   i: integer;
 begin
   for i := 0 to song.Count - 1 do begin
-    ad := ListView.Items.Add;
-    ad.Caption := song[i];
-    ad.SubItems.Add('123');
+    Add(song[i]);
+    Application.ProcessMessages;
   end;
 end;
 

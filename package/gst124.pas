@@ -22,6 +22,7 @@ const
   libgstbase = 'libgstbase-1.0';
   libgstallocators = 'libgstallocators-1.0';
   libgstanalytics = 'libgstanalytics-1.0';
+  libgstcheck = 'libgstcheck-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -32,6 +33,7 @@ const
   libgstbase = 'gstbase-1.0-0.dll';
   libgstallocators = 'gstallocators-1.0-1.dll';
   libgstanalytics = 'gstanalytics-1.0-0.dll';
+  libgstcheck = 'libgstcheck-1.0-0.dll';
   {$endif}
 
   // ==== Diverses

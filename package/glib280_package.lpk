@@ -47,6 +47,10 @@
         <Filename Value="gst124_allocators.pas"/>
         <UnitName Value="gst124_allocators"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_analytics.pas"/>
+        <UnitName Value="gst124_analytics"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

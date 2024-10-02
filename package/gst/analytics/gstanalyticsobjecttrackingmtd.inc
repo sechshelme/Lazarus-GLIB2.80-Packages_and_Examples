@@ -1,13 +1,12 @@
-unit gstanalyticsobjecttrackingmtd;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 02-10-2024   16:26                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gstanalyticsmeta;
-
-{$IFDEF FPC}
-{$PACKRECORDS C}
-{$ENDIF}
+{$IFDEF read_interface}
 
 type
   TGstAnalyticsTrackingMtd = TGstAnalyticsMtd;
@@ -23,8 +22,11 @@ function gst_analytics_relation_meta_get_tracking_mtd(meta:PGstAnalyticsRelation
 // === Konventiert am: 1-10-24 19:26:49 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

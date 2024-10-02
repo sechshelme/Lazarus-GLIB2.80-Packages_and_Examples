@@ -26,13 +26,13 @@
 
 
 
-GST_CHECK_API
+
 void        gst_buffer_straw_start_pipeline (GstElement * bin, GstPad * pad);
 
-GST_CHECK_API
+
 GstBuffer * gst_buffer_straw_get_buffer     (GstElement * bin, GstPad * pad);
 
-GST_CHECK_API
+
 void        gst_buffer_straw_stop_pipeline  (GstElement * bin, GstPad * pad);
 
 

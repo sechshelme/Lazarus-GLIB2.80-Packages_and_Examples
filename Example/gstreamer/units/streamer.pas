@@ -13,9 +13,6 @@ type
   end;
 
   TStreamerLevel = procedure(level: TLevel) of object;
-
-  { TStreamer }
-
   TStreamer = class(TObject)
   private
     FOnLevelChange: TStreamerLevel;
@@ -63,16 +60,53 @@ type
 
 const
   G_USEC_PER_SEC = 1000000;
+  GST_SECOND = G_USEC_PER_SEC * 1000;
 
   GST_SEEK_FLAG_FLUSH = 1 shl 0;
   GST_SEEK_FLAG_KEY_UNIT = 1 shl 2;
 
 
+
 function GstClockToStr(t: TGstClockTime): string;
+function get_duration(s: string): Tguint64;
+
 
 implementation
 
-function gst_stream_volume_get_type(): GType; cdecl; external 'gstaudio-1.0';
+const
+{$ifdef Linux}
+libgstpbutils = 'libgstpbutils-1.0';
+libgstaudio = 'libgstaudio-1.0';
+{$endif}
+{$ifdef Windows}
+libgstpbutils = 'gstpbutils-1.0-0.dll';
+libgstaudio = 'gstaudio-1.0-0.dll';
+{$endif}
+
+
+function gst_stream_volume_get_type(): GType; cdecl; external libgstaudio;
+
+function gst_discoverer_new(timeout: TGstClockTime; err: PPGError): Pointer; cdecl; external libgstpbutils;
+function gst_discoverer_discover_uri(discoverer: Pointer; uri: Pgchar; err: PPGError): Pointer; cdecl; external libgstpbutils;
+function gst_discoverer_info_get_duration(info: Pointer): TGstClockTime; cdecl; external libgstpbutils;
+
+function get_duration(s: string): Tguint64;
+var
+  discoverer: Pointer;
+  info: Pointer;
+begin
+  discoverer := gst_discoverer_new(5 * GST_SECOND, nil);
+  info := gst_discoverer_discover_uri(discoverer, PChar('file:' + s), nil);
+  if info = nil then begin
+    WriteLn('Info error !');
+    Result := -1;
+  end else begin
+    Result := gst_discoverer_info_get_duration(info) div G_USEC_PER_SEC;
+    g_object_unref(info);
+  end;
+  g_object_unref(discoverer);
+end;
+
 
 function GstClockToStr(t: TGstClockTime): string;
 var
