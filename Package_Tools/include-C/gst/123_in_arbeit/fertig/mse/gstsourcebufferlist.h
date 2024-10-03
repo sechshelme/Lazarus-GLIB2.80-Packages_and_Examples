@@ -31,14 +31,13 @@
 
 #define GST_TYPE_SOURCE_BUFFER_LIST (gst_source_buffer_list_get_type())
 
-GST_MSE_API
-G_DECLARE_FINAL_TYPE (GstSourceBufferList, gst_source_buffer_list, GST,
-    SOURCE_BUFFER_LIST, GstObject);
 
-GST_MSE_API
+//G_DECLARE_FINAL_TYPE (GstSourceBufferList, gst_source_buffer_list, GST, SOURCE_BUFFER_LIST, GstObject);
+
+
 GstSourceBuffer *gst_source_buffer_list_index (GstSourceBufferList * self,
                                                guint index);
-GST_MSE_API
+
 guint gst_source_buffer_list_get_length (GstSourceBufferList * self);
 
 

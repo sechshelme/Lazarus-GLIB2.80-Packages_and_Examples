@@ -119,7 +119,7 @@ typedef struct
   GstClockTime end;
 } GstMediaSourceRange;
 
-GST_MSE_API
+
 gboolean gst_media_source_is_type_supported (const gchar * type);
 
 #define GST_TYPE_MEDIA_SOURCE (gst_media_source_get_type())
@@ -132,71 +132,70 @@ gboolean gst_media_source_is_type_supported (const gchar * type);
  *
  * Since: 1.24
  */
-GST_MSE_API
+
 GQuark gst_media_source_error_quark (void);
 
-GST_MSE_API
-G_DECLARE_FINAL_TYPE (GstMediaSource, gst_media_source, GST, MEDIA_SOURCE,
-    GstObject);
 
-GST_MSE_API
+//G_DECLARE_FINAL_TYPE (GstMediaSource, gst_media_source, GST, MEDIA_SOURCE, GstObject);
+
+
 GstMediaSource *gst_media_source_new (void);
 
-GST_MSE_API
+
 void gst_media_source_attach (GstMediaSource * self, GstMseSrc * element);
 
-GST_MSE_API
+
 void gst_media_source_detach (GstMediaSource * self);
 
-GST_MSE_API
+
 GstSourceBufferList * gst_media_source_get_source_buffers (
     GstMediaSource * self);
 
-GST_MSE_API
+
 GstSourceBufferList * gst_media_source_get_active_source_buffers (
     GstMediaSource * self);
 
-GST_MSE_API
+
 GstMediaSourceReadyState gst_media_source_get_ready_state (
     GstMediaSource * self);
 
-GST_MSE_API
+
 GstClockTime gst_media_source_get_position (GstMediaSource * self);
 
-GST_MSE_API
+
 GstClockTime gst_media_source_get_duration (GstMediaSource * self);
 
-GST_MSE_API
+
 gboolean gst_media_source_set_duration (GstMediaSource * self,
                                         GstClockTime duration,
                                         GError ** error);
 
-GST_MSE_API
+
 GstSourceBuffer * gst_media_source_add_source_buffer (GstMediaSource * self,
                                                       const gchar * type,
                                                       GError ** error);
 
-GST_MSE_API
+
 gboolean gst_media_source_remove_source_buffer (GstMediaSource * self,
                                                 GstSourceBuffer * buffer,
                                                 GError ** error);
 
-GST_MSE_API
+
 gboolean gst_media_source_end_of_stream (GstMediaSource * self,
                                          GstMediaSourceEOSError eos_error,
                                          GError ** error);
 
-GST_MSE_API
+
 gboolean gst_media_source_set_live_seekable_range (GstMediaSource * self,
                                                    GstClockTime start,
                                                    GstClockTime end,
                                                    GError ** error);
 
-GST_MSE_API
+
 gboolean gst_media_source_clear_live_seekable_range (GstMediaSource * self,
                                                      GError ** error);
 
-GST_MSE_API
+
 void gst_media_source_get_live_seekable_range (GstMediaSource * self,
     GstMediaSourceRange * range);
 

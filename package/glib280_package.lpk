@@ -59,6 +59,10 @@
         <Filename Value="gst124_interfaces.pas"/>
         <UnitName Value="gst124_interfaces"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_mse.pas"/>
+        <UnitName Value="gst124_mse"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

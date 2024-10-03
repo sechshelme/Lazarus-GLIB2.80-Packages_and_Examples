@@ -1,6 +1,7 @@
 program project1;
 
 uses
+  crt,
   Classes,
   SysUtils,
   FileUtil,
@@ -16,11 +17,13 @@ uses
   gst124_analytics,
   gst124_check,
   gst124_interfaces,
+  gst124_mse,
 
-
-  //photography,                           // io.
-  //photography_enumtypes,                 // io.
-
+  //mse_enumtypes,
+  //gstmsesrc,
+  //gstsourcebuffer,
+  //gstsourcebufferlist,                     // io. -> gstsourcebuffer
+  //gstmediasource,                          // io. -> gstsourcebufferlist, gstsourcebuffer, gstmsesrc
 
 
 
@@ -62,21 +65,41 @@ uses
   end;
 
   procedure main;
+  const
+    path = '/home/tux/Schreibtisch/sound/test.wav';
   var
     sl: TStringList;
     obj: PGstShmAllocator;
+    pipeline, mse: PGstElement;
   begin
     gst_init(nil, nil);
+
+    pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! decodebin ! audioconvert  ! autoaudiosink'), nil);
+        gst_element_set_state(pipeline, GST_STATE_PLAYING);
+
+        mse:=gst_bin_get_by_interface(GST_BIN(pipeline), GST_TYPE_MSE_SRC);
+        if mse=nil then WriteLn('mse error');
 
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);
 
 
-    obj := g_object_new(GST_TYPE_PHOTOGRAPHY, nil);
+    obj := g_object_new(GST_TYPE_SOURCE_BUFFER, nil);
+    WriteLn(GST_IS_SOURCE_BUFFER(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_SOURCE_BUFFER_LIST, nil);
+    WriteLn(GST_IS_SOURCE_BUFFER_LIST(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+
+    obj := g_object_new(GST_TYPE_MSE_SRC, nil);
     if obj = nil then begin
-      WriteLn('fotoerror');
+      WriteLn('GST_TYPE_MSE_SRC error');
     end;
-    WriteLn('foto ', GST_IS_PHOTOGRAPHY(obj));
+    WriteLn('foto ', GST_IS_MSE_SRC(obj));
     GObjectShowProperty(obj);
     g_object_unref(obj);
 
@@ -102,6 +125,9 @@ uses
     sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16', '*.flac;*.mp3', True);
     //    WriteDuration(sl);
     sl.Free;
+
+    repeat until KeyPressed;
+    g_object_unref(pipeline);
   end;
 
 begin

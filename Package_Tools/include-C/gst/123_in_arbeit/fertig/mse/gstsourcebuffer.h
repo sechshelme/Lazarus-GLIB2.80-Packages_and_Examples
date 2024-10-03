@@ -62,65 +62,64 @@ typedef struct
 
 #define GST_TYPE_SOURCE_BUFFER (gst_source_buffer_get_type())
 
-GST_MSE_API
-G_DECLARE_FINAL_TYPE (GstSourceBuffer, gst_source_buffer, GST, SOURCE_BUFFER,
-    GstObject);
 
-GST_MSE_API
+//G_DECLARE_FINAL_TYPE (GstSourceBuffer, gst_source_buffer, GST, SOURCE_BUFFER, GstObject);
+
+
 GstSourceBufferAppendMode gst_source_buffer_get_append_mode (
     GstSourceBuffer * self);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_set_append_mode (GstSourceBuffer * self,
     GstSourceBufferAppendMode mode, GError ** error);
 
-GST_MSE_API
+
 gchar *gst_source_buffer_get_content_type (GstSourceBuffer * self);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_get_updating (GstSourceBuffer * self);
 
-GST_MSE_API
+
 GArray * gst_source_buffer_get_buffered (GstSourceBuffer * self,
                                          GError ** error);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_set_timestamp_offset (GstSourceBuffer * self,
                                                  GstClockTime offset,
                                                  GError ** error);
 
-GST_MSE_API
+
 GstClockTime gst_source_buffer_get_timestamp_offset (GstSourceBuffer * self);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_set_append_window_start (GstSourceBuffer * self,
                                                     GstClockTime start,
                                                     GError ** error);
 
-GST_MSE_API
+
 GstClockTime gst_source_buffer_get_append_window_start (GstSourceBuffer * self);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_set_append_window_end (GstSourceBuffer * self,
                                                   GstClockTime end,
                                                   GError ** error);
 
-GST_MSE_API
+
 GstClockTime gst_source_buffer_get_append_window_end (GstSourceBuffer * self);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_append_buffer (GstSourceBuffer * self,
     GstBuffer * buf, GError ** error);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_abort (GstSourceBuffer * self, GError ** error);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_change_content_type (GstSourceBuffer * self,
                                                 const gchar * type,
                                                 GError ** error);
 
-GST_MSE_API
+
 gboolean gst_source_buffer_remove (GstSourceBuffer * self, GstClockTime start,
                                    GstClockTime end, GError ** error);
 

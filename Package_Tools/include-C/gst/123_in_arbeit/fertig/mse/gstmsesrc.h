@@ -67,28 +67,28 @@ typedef enum
 #define GST_TYPE_MSE_SRC (gst_mse_src_get_type())
 #define GST_TYPE_MSE_SRC_PAD (gst_mse_src_pad_get_type())
 
-GST_MSE_API
-G_DECLARE_FINAL_TYPE (GstMseSrc, gst_mse_src, GST, MSE_SRC, GstElement);
 
-GST_MSE_API
-G_DECLARE_FINAL_TYPE (GstMseSrcPad, gst_mse_src_pad, GST, MSE_SRC_PAD, GstPad);
+//G_DECLARE_FINAL_TYPE (GstMseSrc, gst_mse_src, GST, MSE_SRC, GstElement);
 
-GST_MSE_API
+
+//G_DECLARE_FINAL_TYPE (GstMseSrcPad, gst_mse_src_pad, GST, MSE_SRC_PAD, GstPad);
+
+
 GstClockTime gst_mse_src_get_position (GstMseSrc * self);
 
-GST_MSE_API
+
 GstClockTime gst_mse_src_get_duration (GstMseSrc * self);
 
-GST_MSE_API
+
 GstMseSrcReadyState gst_mse_src_get_ready_state (GstMseSrc * self);
 
-GST_MSE_API
+
 guint gst_mse_src_get_n_audio (GstMseSrc * self);
 
-GST_MSE_API
+
 guint gst_mse_src_get_n_text (GstMseSrc * self);
 
-GST_MSE_API
+
 guint gst_mse_src_get_n_video (GstMseSrc * self);
 
 

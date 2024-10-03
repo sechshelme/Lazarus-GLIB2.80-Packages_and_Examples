@@ -8,6 +8,7 @@
 #include <gst/analytics/analytics.h>
 #include <gst/audio/gstnonstreamaudiodecoder.h>
 #include <gst/base/base.h>
+#include <gst/mse/mse.h>
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
@@ -71,6 +72,4 @@ GST_VIDEO_FORMAT_INFO_DATA(info,0,0);
 gst_buffer_get_ancillary_meta(0);
 GST_AUDIO_BASE_SINK_CLOCK(NULL);
 }
-
-
 
