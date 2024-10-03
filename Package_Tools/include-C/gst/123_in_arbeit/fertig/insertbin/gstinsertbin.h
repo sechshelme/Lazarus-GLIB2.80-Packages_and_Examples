@@ -26,26 +26,26 @@
 #ifndef __GST_INSERT_BIN_H__
 #define __GST_INSERT_BIN_H__
 
-#ifndef GST_USE_UNSTABLE_API
-#warning "The GStreamer insertbin library is unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
-#endif
+//#ifndef GST_USE_UNSTABLE_API
+//#warning "The GStreamer insertbin library is unstable API and may change in future."
+//#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#endif
 
 #include <gst/gst.h>
 
-#ifndef GST_INSERT_BIN_API
+#ifndef 
 # ifdef BUILDING_GST_INSERT_BIN
-#  define GST_INSERT_BIN_API extern_EXPORT         /* from config.h */
+#  define  extern_EXPORT         /* from config.h */
 # else
-#  define GST_INSERT_BIN_API extern_IMPORT
+#  define  extern_IMPORT
 # endif
 #endif
 
 
 #define GST_TYPE_INSERT_BIN            (gst_insert_bin_get_type())
 #define GST_INSERT_BIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_INSERT_BIN,GstInsertBin))
-#define GST_IS_INSERT_BIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_INSERT_BIN))
 #define GST_INSERT_BIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass) ,GST_TYPE_INSERT_BIN,GstInsertBinClass))
+#define GST_IS_INSERT_BIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_INSERT_BIN))
 #define GST_IS_INSERT_BIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass) ,GST_TYPE_INSERT_BIN))
 #define GST_INSERT_BIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj) ,GST_TYPE_INSERT_BIN,GstInsertBinClass))
 typedef struct _GstInsertBin GstInsertBin;
@@ -98,31 +98,31 @@ struct _GstInsertBinClass
   GstBinClass parent_class;
 };
 
-GST_INSERT_BIN_API
+
 GType gst_insert_bin_get_type (void);
 
-GST_INSERT_BIN_API
+
 GstElement *gst_insert_bin_new (const gchar * name);
 
-GST_INSERT_BIN_API
+
 void gst_insert_bin_prepend (GstInsertBin * self, GstElement * element,
     GstInsertBinCallback callback, gpointer user_data);
 
-GST_INSERT_BIN_API
+
 void gst_insert_bin_append (GstInsertBin * self, GstElement * element,
     GstInsertBinCallback callback, gpointer user_data);
 
-GST_INSERT_BIN_API
+
 void gst_insert_bin_insert_before (GstInsertBin * self,
     GstElement * element, GstElement * sibling,
     GstInsertBinCallback callback, gpointer user_data);
 
-GST_INSERT_BIN_API
+
 void gst_insert_bin_insert_after (GstInsertBin * self,
     GstElement * element, GstElement * sibling,
     GstInsertBinCallback callback, gpointer user_data);
 
-GST_INSERT_BIN_API
+
 void gst_insert_bin_remove (GstInsertBin * self, GstElement * element,
     GstInsertBinCallback callback, gpointer user_data);
 

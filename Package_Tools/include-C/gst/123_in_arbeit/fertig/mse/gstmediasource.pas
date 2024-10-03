@@ -158,7 +158,7 @@ function gst_media_source_set_live_seekable_range(self:PGstMediaSource; start:TG
 function gst_media_source_clear_live_seekable_range(self:PGstMediaSource; error:PPGError):Tgboolean;cdecl;external libgstmse;
 procedure gst_media_source_get_live_seekable_range(self:PGstMediaSource; range:PGstMediaSourceRange);cdecl;external libgstmse;
 
-// === Konventiert am: 3-10-24 17:28:42 ===
+// === Konventiert am: 3-10-24 19:34:52 ===
 
 function GST_TYPE_MEDIA_SOURCE: TGType;
 function GST_MEDIA_SOURCE(obj: Pointer): PGstMediaSource;

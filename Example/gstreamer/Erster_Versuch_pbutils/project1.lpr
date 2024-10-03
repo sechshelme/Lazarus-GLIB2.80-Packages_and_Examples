@@ -18,12 +18,15 @@ uses
   gst124_check,
   gst124_interfaces,
   gst124_mse,
+  gst124_insertbin,
 
   //mse_enumtypes,
   //gstmsesrc,
   //gstsourcebuffer,
   //gstsourcebufferlist,                     // io. -> gstsourcebuffer
   //gstmediasource,                          // io. -> gstsourcebufferlist, gstsourcebuffer, gstmsesrc
+
+//  gstinsertbin,
 
 
 
@@ -75,14 +78,21 @@ uses
     gst_init(nil, nil);
 
     pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! decodebin ! audioconvert  ! autoaudiosink'), nil);
-        gst_element_set_state(pipeline, GST_STATE_PLAYING);
+    gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
-        mse:=gst_bin_get_by_interface(GST_BIN(pipeline), GST_TYPE_MSE_SRC);
-        if mse=nil then WriteLn('mse error');
+    mse := gst_bin_get_by_interface(GST_BIN(pipeline), GST_TYPE_MSE_SRC);
+    if mse = nil then begin
+      WriteLn('mse error');
+    end;
 
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);
 
+
+    obj := g_object_new(GST_TYPE_INSERT_BIN, nil);
+    WriteLn(GST_IS_INSERT_BIN(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
     obj := g_object_new(GST_TYPE_SOURCE_BUFFER, nil);
     WriteLn(GST_IS_SOURCE_BUFFER(obj));
@@ -126,7 +136,8 @@ uses
     //    WriteDuration(sl);
     sl.Free;
 
-    repeat until KeyPressed;
+    repeat
+    until KeyPressed;
     g_object_unref(pipeline);
   end;
 

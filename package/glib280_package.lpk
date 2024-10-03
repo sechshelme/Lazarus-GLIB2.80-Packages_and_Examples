@@ -63,6 +63,10 @@
         <Filename Value="gst124_mse.pas"/>
         <UnitName Value="gst124_mse"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_insertbin.pas"/>
+        <UnitName Value="gst124_insertbin"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>
