@@ -29,12 +29,12 @@
 
 
 
-GST_WEBRTCNICE_API
+
 GType gst_webrtc_nice_get_type(void);
 #define GST_TYPE_WEBRTC_NICE            (gst_webrtc_nice_get_type())
 #define GST_WEBRTC_NICE(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_WEBRTC_NICE,GstWebRTCNice))
-#define GST_IS_WEBRTC_NICE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_WEBRTC_NICE))
 #define GST_WEBRTC_NICE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass) ,GST_TYPE_WEBRTC_NICE,GstWebRTCNiceClass))
+#define GST_IS_WEBRTC_NICE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_WEBRTC_NICE))
 #define GST_IS_WEBRTC_NICE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass) ,GST_TYPE_WEBRTC_NICE))
 #define GST_WEBRTC_NICE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj) ,GST_TYPE_WEBRTC_NICE,GstWebRTCNiceClass))
 
@@ -57,7 +57,7 @@ struct _GstWebRTCNiceClass
   GstWebRTCICEClass     parent_class;
 };
 
-GST_WEBRTCNICE_API
+
 GstWebRTCNice *             gst_webrtc_nice_new                      (const gchar * name);
 
 

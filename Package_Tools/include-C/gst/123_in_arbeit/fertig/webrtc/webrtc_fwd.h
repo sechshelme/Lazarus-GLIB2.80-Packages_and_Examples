@@ -21,8 +21,8 @@
 #define __GST_WEBRTC_FWD_H__
 
 #ifndef GST_USE_UNSTABLE_API
-#warning "The WebRTC library from gst-plugins-bad is unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#warning "The WebRTC library from gst-plugins-bad is unstable API and may change in future."
+//#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
 #endif
 
 #include <gst/gst.h>
@@ -32,13 +32,6 @@
  * @title: GstWebRTC Enumerations
  */
 
-#ifndef GST_WEBRTC_API
-# ifdef BUILDING_GST_WEBRTC
-#  define GST_WEBRTC_API extern_EXPORT         /* from config.h */
-# else
-#  define GST_WEBRTC_API extern_IMPORT
-# endif
-#endif
 
 /**
  * GST_WEBRTC_DEPRECATED: (attributes doc.skip=true)
@@ -46,13 +39,6 @@
 /**
  * GST_WEBRTC_DEPRECATED_FOR: (attributes doc.skip=true)
  */
-#ifndef GST_DISABLE_DEPRECATED
-#define GST_WEBRTC_DEPRECATED GST_WEBRTC_API
-#define GST_WEBRTC_DEPRECATED_FOR(f) GST_WEBRTC_API
-#else
-#define GST_WEBRTC_DEPRECATED G_DEPRECATED GST_WEBRTC_API
-#define GST_WEBRTC_DEPRECATED_FOR(f) G_DEPRECATED_FOR(f) GST_WEBRTC_API
-#endif
 
 #include <gst/webrtc/webrtc-enumtypes.h>
 
@@ -461,7 +447,7 @@ typedef enum /*<underscore_name=gst_webrtc_kind>*/
 } GstWebRTCKind;
 
 
-GST_WEBRTC_API
+
 GQuark gst_webrtc_error_quark (void);
 
 /**

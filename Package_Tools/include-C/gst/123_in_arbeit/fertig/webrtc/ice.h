@@ -24,12 +24,12 @@
 
 
 
-GST_WEBRTC_API
+
 GType gst_webrtc_ice_get_type(void);
 #define GST_TYPE_WEBRTC_ICE            (gst_webrtc_ice_get_type())
 #define GST_WEBRTC_ICE(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_WEBRTC_ICE,GstWebRTCICE))
-#define GST_IS_WEBRTC_ICE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_WEBRTC_ICE))
 #define GST_WEBRTC_ICE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass) ,GST_TYPE_WEBRTC_ICE,GstWebRTCICEClass))
+#define GST_IS_WEBRTC_ICE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_WEBRTC_ICE))
 #define GST_IS_WEBRTC_ICE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass) ,GST_TYPE_WEBRTC_ICE))
 #define GST_WEBRTC_ICE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj) ,GST_TYPE_WEBRTC_ICE,GstWebRTCICEClass))
 
@@ -152,110 +152,110 @@ struct _GstWebRTCICEClass {
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_WEBRTC_API
+
 GstWebRTCICEStream *        gst_webrtc_ice_add_stream               (GstWebRTCICE * ice,
                                                                      guint session_id);
 
-GST_WEBRTC_API
+
 GstWebRTCICETransport *     gst_webrtc_ice_find_transport           (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream,
                                                                      GstWebRTCICEComponent component);
 
 
-GST_WEBRTC_API
+
 gboolean                    gst_webrtc_ice_gather_candidates        (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream);
 
 /* FIXME: GstStructure-ize the candidate */
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_add_candidate            (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream,
                                                                      const gchar * candidate,
                                                                      GstPromise * promise);
 
-GST_WEBRTC_API
+
 gboolean                    gst_webrtc_ice_set_local_credentials    (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream,
                                                                      const gchar * ufrag,
                                                                      const gchar * pwd);
 
-GST_WEBRTC_API
+
 gboolean                    gst_webrtc_ice_set_remote_credentials   (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream,
                                                                      const gchar * ufrag,
                                                                      const gchar * pwd);
 
-GST_WEBRTC_API
+
 gboolean                    gst_webrtc_ice_add_turn_server          (GstWebRTCICE * ice,
                                                                      const gchar * uri);
 
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_set_is_controller        (GstWebRTCICE * ice,
                                                                      gboolean controller);
 
-GST_WEBRTC_API
+
 gboolean                    gst_webrtc_ice_get_is_controller        (GstWebRTCICE * ice);
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_set_force_relay          (GstWebRTCICE * ice,
                                                                      gboolean force_relay);
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_set_stun_server          (GstWebRTCICE * ice,
                                                                      const gchar * uri);
 
-GST_WEBRTC_API
+
 gchar *                     gst_webrtc_ice_get_stun_server          (GstWebRTCICE * ice);
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_set_turn_server          (GstWebRTCICE * ice,
                                                                      const gchar * uri);
 
-GST_WEBRTC_API
+
 gchar *                     gst_webrtc_ice_get_turn_server          (GstWebRTCICE * ice);
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_set_http_proxy           (GstWebRTCICE * ice,
                                                                      const gchar * uri);
 
-GST_WEBRTC_API
+
 gchar *                     gst_webrtc_ice_get_http_proxy           (GstWebRTCICE * ice);
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_set_on_ice_candidate     (GstWebRTCICE * ice,
                                                                      GstWebRTCICEOnCandidateFunc func,
                                                                      gpointer user_data,
                                                                      GDestroyNotify notify);
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_set_tos                  (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream,
                                                                      guint tos);
 
-GST_WEBRTC_API
+
 GstWebRTCICECandidateStats** gst_webrtc_ice_get_local_candidates    (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream);
 
-GST_WEBRTC_API
+
 GstWebRTCICECandidateStats** gst_webrtc_ice_get_remote_candidates   (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream);
 
-GST_WEBRTC_API
+
 gboolean                    gst_webrtc_ice_get_selected_pair        (GstWebRTCICE * ice,
                                                                      GstWebRTCICEStream * stream,
                                                                      GstWebRTCICECandidateStats ** local_stats,
                                                                      GstWebRTCICECandidateStats ** remote_stats);
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_ice_candidate_stats_free     (GstWebRTCICECandidateStats * stats);
 
-GST_WEBRTC_API
+
 GType                       gst_webrtc_ice_candidate_stats_get_type (void);
 
 
 
-GST_WEBRTC_API
+
 GstWebRTCICECandidateStats * gst_webrtc_ice_candidate_stats_copy   (GstWebRTCICECandidateStats *stats);
 
 

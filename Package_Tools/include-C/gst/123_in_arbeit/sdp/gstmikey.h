@@ -27,7 +27,7 @@
 
 
 
-GST_SDP_API
+
 GType gst_mikey_message_get_type(void);
 #define GST_TYPE_MIKEY_MESSAGE (gst_mikey_message_get_type())
 
@@ -145,7 +145,7 @@ typedef struct {
 
 typedef struct _GstMIKEYPayload GstMIKEYPayload;
 
-GST_SDP_API
+
 GType gst_mikey_payload_get_type(void);
 #define GST_TYPE_MIKEY_PAYLOAD (gst_mikey_payload_get_type())
 
@@ -165,7 +165,7 @@ struct _GstMIKEYPayload {
   guint len;
 };
 
-GST_SDP_API
+
 GstMIKEYPayload *   gst_mikey_payload_new      (GstMIKEYPayloadType type);
 
 /**
@@ -178,11 +178,12 @@ GstMIKEYPayload *   gst_mikey_payload_new      (GstMIKEYPayloadType type);
  *
  * Since: 1.4
  */
-static inline GstMIKEYPayload *
-gst_mikey_payload_ref (GstMIKEYPayload * payload)
-{
-  return (GstMIKEYPayload *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (payload));
-}
+// xxxxxxxxxxxxxxxxx
+//static inline GstMIKEYPayload *
+//gst_mikey_payload_ref (GstMIKEYPayload * payload)
+//{
+//  return (GstMIKEYPayload *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (payload));
+//}
 
 /**
  * gst_mikey_payload_unref:
@@ -192,11 +193,11 @@ gst_mikey_payload_ref (GstMIKEYPayload * payload)
  *
  * Since: 1.4
  */
-static inline void
-gst_mikey_payload_unref (GstMIKEYPayload * payload)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (payload));
-}
+//static inline void
+//gst_mikey_payload_unref (GstMIKEYPayload * payload)
+//{
+//  gst_mini_object_unref (GST_MINI_OBJECT_CAST (payload));
+//}
 
 /**
  * gst_mikey_payload_copy:
@@ -208,11 +209,11 @@ gst_mikey_payload_unref (GstMIKEYPayload * payload)
  *
  * Since: 1.4
  */
-static inline GstMIKEYPayload *
-gst_mikey_payload_copy (const GstMIKEYPayload * payload)
-{
-  return (GstMIKEYPayload *) gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (payload));
-}
+//static inline GstMIKEYPayload *
+//gst_mikey_payload_copy (const GstMIKEYPayload * payload)
+//{
+//  return (GstMIKEYPayload *) gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (payload));
+//}
 
 /**
  * GstMIKEYEncAlg:
@@ -261,21 +262,21 @@ typedef struct {
   GArray *subpayloads;
 } GstMIKEYPayloadKEMAC;
 
-GST_SDP_API
+
 gboolean                gst_mikey_payload_kemac_set        (GstMIKEYPayload *payload,
                                                             GstMIKEYEncAlg enc_alg,
                                                             GstMIKEYMacAlg mac_alg);
 
-GST_SDP_API
+
 guint                   gst_mikey_payload_kemac_get_n_sub  (const GstMIKEYPayload *payload);
 
-GST_SDP_API
+
 const GstMIKEYPayload * gst_mikey_payload_kemac_get_sub    (const GstMIKEYPayload *payload, guint idx);
 
-GST_SDP_API
+
 gboolean                gst_mikey_payload_kemac_remove_sub (GstMIKEYPayload *payload, guint idx);
 
-GST_SDP_API
+
 gboolean                gst_mikey_payload_kemac_add_sub    (GstMIKEYPayload *payload,
                                                             GstMIKEYPayload *newpay);
 
@@ -315,7 +316,7 @@ typedef struct {
   guint8           *data;
 } GstMIKEYPayloadPKE;
 
-GST_SDP_API
+
 gboolean               gst_mikey_payload_pke_set     (GstMIKEYPayload *payload,
                                                       GstMIKEYCacheType C,
                                                       guint16 data_len, const guint8 *data);
@@ -351,7 +352,7 @@ typedef struct {
   guint8         *ts_value;
 } GstMIKEYPayloadT;
 
-GST_SDP_API
+
 gboolean   gst_mikey_payload_t_set   (GstMIKEYPayload *payload,
                                       GstMIKEYTSType type, const guint8 *ts_value);
 
@@ -435,20 +436,20 @@ typedef struct {
   GArray *params;
 } GstMIKEYPayloadSP;
 
-GST_SDP_API
+
 gboolean            gst_mikey_payload_sp_set          (GstMIKEYPayload *payload,
                                                        guint policy, GstMIKEYSecProto proto);
-GST_SDP_API
+
 guint               gst_mikey_payload_sp_get_n_params (const GstMIKEYPayload *payload);
 
-GST_SDP_API
+
 const GstMIKEYPayloadSPParam *
                     gst_mikey_payload_sp_get_param    (const GstMIKEYPayload *payload, guint idx);
 
-GST_SDP_API
+
 gboolean            gst_mikey_payload_sp_remove_param (GstMIKEYPayload *payload, guint idx);
 
-GST_SDP_API
+
 gboolean            gst_mikey_payload_sp_add_param    (GstMIKEYPayload *payload,
                                                        guint8 type, guint8 len, const guint8 *val);
 
@@ -467,7 +468,7 @@ typedef struct {
   guint8 *rand;
 } GstMIKEYPayloadRAND;
 
-GST_SDP_API
+
 gboolean   gst_mikey_payload_rand_set     (GstMIKEYPayload *payload,
                                            guint8 len, const guint8 *rand);
 
@@ -527,20 +528,20 @@ typedef struct {
   guint8  *kv_data[2];
 } GstMIKEYPayloadKeyData;
 
-GST_SDP_API
+
 gboolean   gst_mikey_payload_key_data_set_key      (GstMIKEYPayload *payload,
                                                     GstMIKEYKeyDataType key_type,
                                                     guint16 key_len, const guint8 *key_data);
 
-GST_SDP_API
+
 gboolean   gst_mikey_payload_key_data_set_salt     (GstMIKEYPayload *payload,
                                                     guint16 salt_len, const guint8 *salt_data);
 
-GST_SDP_API
+
 gboolean   gst_mikey_payload_key_data_set_spi      (GstMIKEYPayload *payload,
                                                     guint8 spi_len, const guint8 *spi_data);
 
-GST_SDP_API
+
 gboolean   gst_mikey_payload_key_data_set_interval (GstMIKEYPayload *payload,
                                                     guint8 vf_len, const guint8 *vf_data,
                                                     guint8 vt_len, const guint8 *vt_data);
@@ -575,28 +576,28 @@ struct _GstMIKEYMessage
 };
 
 
-GST_SDP_API
+
 GstMIKEYMessage *           gst_mikey_message_new               (void);
 
-GST_SDP_API
+
 GstMIKEYMessage *           gst_mikey_message_new_from_data     (gconstpointer data, gsize size,
                                                                  GstMIKEYDecryptInfo *info, GError **error);
 
-GST_SDP_API
+
 GstMIKEYMessage *           gst_mikey_message_new_from_bytes    (GBytes *bytes, GstMIKEYDecryptInfo *info,
                                                                  GError **error);
 
-GST_SDP_API
+
 GBytes *                    gst_mikey_message_to_bytes          (GstMIKEYMessage *msg, GstMIKEYEncryptInfo *info,
                                                                  GError **error);
 
-GST_SDP_API
+
 GstMIKEYMessage *           gst_mikey_message_new_from_caps     (GstCaps *caps);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_to_caps           (const GstMIKEYMessage *msg, GstCaps *caps);
 
-GST_SDP_API
+
 gchar *                     gst_mikey_message_base64_encode     (GstMIKEYMessage* msg);
 
 /**
@@ -609,11 +610,12 @@ gchar *                     gst_mikey_message_base64_encode     (GstMIKEYMessage
  *
  * Since: 1.4
  */
-static inline GstMIKEYMessage *
-gst_mikey_message_ref (GstMIKEYMessage * message)
-{
-  return (GstMIKEYMessage *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (message));
-}
+// xxxxxxxxxx
+//static inline GstMIKEYMessage *
+//gst_mikey_message_ref (GstMIKEYMessage * message)
+//{
+//  return (GstMIKEYMessage *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (message));
+//}
 
 /**
  * gst_mikey_message_unref:
@@ -623,11 +625,11 @@ gst_mikey_message_ref (GstMIKEYMessage * message)
  *
  * Since: 1.4
  */
-static inline void
-gst_mikey_message_unref (GstMIKEYMessage * message)
-{
-  gst_mini_object_unref (GST_MINI_OBJECT_CAST (message));
-}
+//static inline void
+//gst_mikey_message_unref (GstMIKEYMessage * message)
+//{
+//  gst_mini_object_unref (GST_MINI_OBJECT_CAST (message));
+//}
 
 /**
  * gst_mikey_message_copy:
@@ -639,66 +641,66 @@ gst_mikey_message_unref (GstMIKEYMessage * message)
  *
  * Since: 1.4
  */
-static inline GstMIKEYMessage *
-gst_mikey_message_copy (const GstMIKEYMessage * message)
-{
-  return (GstMIKEYMessage *) gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (message));
-}
+//static inline GstMIKEYMessage *
+//gst_mikey_message_copy (const GstMIKEYMessage * message)
+//{
+//  return (GstMIKEYMessage *) gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (message));
+//}
 
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_set_info          (GstMIKEYMessage *msg,
                                                                  guint8 version, GstMIKEYType type, gboolean V,
                                                                  GstMIKEYPRFFunc prf_func, guint32 CSB_id,
                                                                  GstMIKEYMapType map_type);
 
-GST_SDP_API
+
 guint                       gst_mikey_message_get_n_cs          (const GstMIKEYMessage *msg);
 
 /* SRTP crypto sessions */
 
-GST_SDP_API
+
 const GstMIKEYMapSRTP *     gst_mikey_message_get_cs_srtp       (const GstMIKEYMessage *msg, guint idx);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_insert_cs_srtp    (GstMIKEYMessage *msg, gint idx,
                                                                  const GstMIKEYMapSRTP *map);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_replace_cs_srtp   (GstMIKEYMessage *msg, gint idx,
                                                                  const GstMIKEYMapSRTP *map);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_remove_cs_srtp    (GstMIKEYMessage *msg, gint idx);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_add_cs_srtp       (GstMIKEYMessage *msg,
                                                                  guint8 policy, guint32 ssrc, guint32 roc);
 
 /* adding/retrieving payloads */
 
-GST_SDP_API
+
 guint                       gst_mikey_message_get_n_payloads    (const GstMIKEYMessage *msg);
 
-GST_SDP_API
+
 const GstMIKEYPayload *     gst_mikey_message_get_payload       (const GstMIKEYMessage *msg, guint idx);
 
-GST_SDP_API
+
 const GstMIKEYPayload *     gst_mikey_message_find_payload      (const GstMIKEYMessage *msg,
                                                                  GstMIKEYPayloadType type, guint nth);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_remove_payload    (GstMIKEYMessage *msg, guint idx);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_insert_payload    (GstMIKEYMessage *msg, guint idx,
                                                                  GstMIKEYPayload *payload);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_add_payload       (GstMIKEYMessage *msg,
                                                                  GstMIKEYPayload *payload);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_replace_payload   (GstMIKEYMessage *msg, guint idx,
                                                                  GstMIKEYPayload *payload);
 
@@ -706,7 +708,7 @@ gboolean                    gst_mikey_message_replace_payload   (GstMIKEYMessage
 /* Key data transport payload (KEMAC) */
 /* Envelope data payload (PKE) */
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_add_pke           (GstMIKEYMessage *msg,
                                                                  GstMIKEYCacheType C,
                                                                  guint16 data_len, const guint8 *data);
@@ -715,11 +717,11 @@ gboolean                    gst_mikey_message_add_pke           (GstMIKEYMessage
 
 /* Timestamp payload (T) */
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_add_t             (GstMIKEYMessage *msg,
                                                                  GstMIKEYTSType type, const guint8 *ts_value);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_add_t_now_ntp_utc (GstMIKEYMessage *msg);
 /* ID payload (ID) */
 /* Certificate Payload (CERT) */
@@ -728,11 +730,11 @@ gboolean                    gst_mikey_message_add_t_now_ntp_utc (GstMIKEYMessage
 /* Security Policy payload (SP)*/
 /* RAND payload (RAND) */
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_add_rand          (GstMIKEYMessage *msg,
                                                                  guint8 len, const guint8 *rand);
 
-GST_SDP_API
+
 gboolean                    gst_mikey_message_add_rand_len      (GstMIKEYMessage *msg, guint8 len);
 
 /* Error payload (ERR) */

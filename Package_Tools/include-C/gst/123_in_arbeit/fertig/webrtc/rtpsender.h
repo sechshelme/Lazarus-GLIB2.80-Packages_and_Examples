@@ -26,16 +26,16 @@
 
 
 
-GST_WEBRTC_API
+
 GType gst_webrtc_rtp_sender_get_type(void);
 #define GST_TYPE_WEBRTC_RTP_SENDER            (gst_webrtc_rtp_sender_get_type())
 #define GST_WEBRTC_RTP_SENDER(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_WEBRTC_RTP_SENDER,GstWebRTCRTPSender))
-#define GST_IS_WEBRTC_RTP_SENDER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_WEBRTC_RTP_SENDER))
 #define GST_WEBRTC_RTP_SENDER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass) ,GST_TYPE_WEBRTC_RTP_SENDER,GstWebRTCRTPSenderClass))
+#define GST_IS_WEBRTC_RTP_SENDER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_WEBRTC_RTP_SENDER))
 #define GST_IS_WEBRTC_RTP_SENDER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass) ,GST_TYPE_WEBRTC_RTP_SENDER))
 #define GST_WEBRTC_RTP_SENDER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj) ,GST_TYPE_WEBRTC_RTP_SENDER,GstWebRTCRTPSenderClass))
 
-GST_WEBRTC_API
+
 void                        gst_webrtc_rtp_sender_set_priority          (GstWebRTCRTPSender *sender,
                                                                          GstWebRTCPriorityType priority);
 

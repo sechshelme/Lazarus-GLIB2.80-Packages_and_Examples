@@ -26,6 +26,8 @@ const
   libgstphotography = 'libgstphotography-1.0';
   libgstmse = 'libgstmse-1.0';
   libgstinsertbin = 'libgstinsertbin-1.0';
+  libgstwebrtc = 'libgstwebrtc-1.0';
+  libgstwebrtcnice = 'libgstwebrtcnice-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -40,6 +42,8 @@ const
   libgstphotography = 'gstphotography-1.0-0.dll';
   libgstmse = 'gstmse-1.0-0.dll';
   libgstinsertbin = 'gstinsertbin-1.0-0.dll';
+  libgstwebrtc = 'gstwebrtc-1.0-0.dll';
+  libgstwebrtcnice = 'gstwebrtcnice-1.0-0.dll';
   {$endif}
 
   // ==== Diverses

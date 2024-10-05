@@ -45,7 +45,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../../Package_Tools/pas_units/gst/insertbin"/>
+      <OtherUnitFiles Value="../../../Package_Tools/pas_units/gst/webrtc;../../../Package_Tools/pas_units/gst/webrtc/nice;../../../Package_Tools/pas_units/gst/sdp"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

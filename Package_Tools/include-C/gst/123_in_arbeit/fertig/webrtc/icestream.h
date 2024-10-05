@@ -24,12 +24,12 @@
 
 
 
-GST_WEBRTC_API
+
 GType gst_webrtc_ice_stream_get_type(void);
 #define GST_TYPE_WEBRTC_ICE_STREAM            (gst_webrtc_ice_stream_get_type())
 #define GST_WEBRTC_ICE_STREAM(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_WEBRTC_ICE_STREAM,GstWebRTCICEStream))
-#define GST_IS_WEBRTC_ICE_STREAM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_WEBRTC_ICE_STREAM))
 #define GST_WEBRTC_ICE_STREAM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass) ,GST_TYPE_WEBRTC_ICE_STREAM,GstWebRTCICEStreamClass))
+#define GST_IS_WEBRTC_ICE_STREAM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_WEBRTC_ICE_STREAM))
 #define GST_IS_WEBRTC_ICE_STREAM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass) ,GST_TYPE_WEBRTC_ICE_STREAM))
 #define GST_WEBRTC_ICE_STREAM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj) ,GST_TYPE_WEBRTC_ICE_STREAM,GstWebRTCICEStreamClass))
 
@@ -48,10 +48,10 @@ struct _GstWebRTCICEStreamClass
 };
 
 
-GST_WEBRTC_API
+
 GstWebRTCICETransport *     gst_webrtc_ice_stream_find_transport        (GstWebRTCICEStream * stream,
                                                                          GstWebRTCICEComponent component);
-GST_WEBRTC_API
+
 gboolean                    gst_webrtc_ice_stream_gather_candidates     (GstWebRTCICEStream * ice);
 
 

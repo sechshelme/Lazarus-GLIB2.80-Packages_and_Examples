@@ -26,11 +26,11 @@
 
 
 
-GST_WEBRTC_API
+
 const gchar *       gst_webrtc_sdp_type_to_string (GstWebRTCSDPType type);
 
 #define GST_TYPE_WEBRTC_SESSION_DESCRIPTION (gst_webrtc_session_description_get_type())
-GST_WEBRTC_API
+
 GType gst_webrtc_session_description_get_type (void);
 
 /**
@@ -46,11 +46,11 @@ struct _GstWebRTCSessionDescription
   GstSDPMessage         *sdp;
 };
 
-GST_WEBRTC_API
+
 GstWebRTCSessionDescription *       gst_webrtc_session_description_new      (GstWebRTCSDPType type, GstSDPMessage *sdp);
-GST_WEBRTC_API
+
 GstWebRTCSessionDescription *       gst_webrtc_session_description_copy     (const GstWebRTCSessionDescription * src);
-GST_WEBRTC_API
+
 void                                gst_webrtc_session_description_free     (GstWebRTCSessionDescription * desc);
 
 
