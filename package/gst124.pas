@@ -28,6 +28,7 @@ const
   libgstinsertbin = 'libgstinsertbin-1.0';
   libgstwebrtc = 'libgstwebrtc-1.0';
   libgstwebrtcnice = 'libgstwebrtcnice-1.0';
+  libgstsdp = 'libgstsdp-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -44,6 +45,7 @@ const
   libgstinsertbin = 'gstinsertbin-1.0-0.dll';
   libgstwebrtc = 'gstwebrtc-1.0-0.dll';
   libgstwebrtcnice = 'gstwebrtcnice-1.0-0.dll';
+  libgstsdp = 'libgstsdp-1.0-o.dll';
   {$endif}
 
   // ==== Diverses

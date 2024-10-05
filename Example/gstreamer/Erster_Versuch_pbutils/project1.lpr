@@ -19,34 +19,36 @@ uses
   gst124_interfaces,
   gst124_mse,
   gst124_insertbin,
+  gst124_sdp,
+  gst124_webrtc,
+  gst124_webrtc_nice,
 
 
-  // --- sdp
-  gstmikey,
-  gstsdp,
-  gstsdpmessage,
-
+  //// --- sdp
+  //gstmikey,                        // io.
+  //gstsdp,                          // io.
+  //gstsdpmessage,                   // io. -> gstsdp, gstmikey
 
 
   // --- webrtc
-  datachannel,
-  dtlstransport,
-  ice,
-  icestream,
-  icetransport,
-    rtcsessiondescription,
-  rtpreceiver,
-  rtpsender,
-  rtptransceiver,
-  sctptransport,
-  webrtc_enumtypes,
-  webrtc_fwd,
+  //webrtc_enumtypes,                // io.
+  //rtptransceiver,                  // io.
+  //sctptransport,                   // io.
+  //datachannel,                     // io.
+  //dtlstransport,                   // io.
+  //rtpreceiver,                     // io.
+  //webrtc_fwd,                      // io.
+  //icetransport,                    // io. -> webrtc_fwd
+  //ice,                             // io. -> webrtc_fwd, icestream, icetransport
+  //icestream,                       // io. -> webrtc_fwd, icetransport
+  //rtcsessiondescription,           // io. -> webrtc_fwd
+  //rtpsender,                       // io. -> webrtc_enumtypes, webrtc_fwd
 
 
   // --- webrtc/nice
-  nice,
-  nicestream,
-  nicetransport,
+  //nice,                            // io. -> ice
+  //nicestream,                      // io. -> icestream, webrtc_fwd, ice
+  //nicetransport,                   // io. -> icetransport, nicestream, webrtc_fwd
 
 
 
@@ -109,9 +111,8 @@ uses
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);
 
-
-    obj := g_object_new(GST_TYPE_INSERT_BIN, nil);
-    WriteLn(GST_IS_INSERT_BIN(obj));
+    obj := g_object_new(GST_TYPE_WEBRTC_SESSION_DESCRIPTION, nil);
+    WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
     GObjectShowProperty(obj);
     g_object_unref(obj);
 

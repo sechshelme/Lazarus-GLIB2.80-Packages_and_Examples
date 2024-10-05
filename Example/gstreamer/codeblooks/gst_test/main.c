@@ -4,6 +4,7 @@
 #include <gst/pbutils/install-plugins.h>
 #include <gst/pbutils/encoding-target.h>
 #include <gst/allocators/allocators.h>
+#include <gst/sdp/sdp.h>
 #include <gst/check/check.h>
 #include <gst/analytics/analytics.h>
 #include <gst/audio/gstnonstreamaudiodecoder.h>

@@ -1,13 +1,12 @@
-unit gstsdpmessage;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 05-10-2024   19:50                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gstsdp, gstmikey;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   TGstSDPOrigin = record
@@ -254,7 +253,10 @@ function GST_SDP_MESSAGE(obj: Pointer): PGstSDPMessage;
 
 function GST_TYPE_SDP_MESSAGE: TGType;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_SDP_MESSAGE: TGType;
 begin
@@ -272,4 +274,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

@@ -1,13 +1,12 @@
-unit gstmikey;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 05-10-2024   19:50                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 function gst_mikey_message_get_type: TGType; cdecl; external libgstsdp;
 
@@ -324,7 +323,10 @@ function gst_mikey_message_copy(payload: PGstMIKEYMessage): PGstMIKEYMessage;
 function GST_TYPE_MIKEY_MESSAGE: TGType;
 function GST_TYPE_MIKEY_PAYLOAD: TGType;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function gst_mikey_payload_ref(payload: PGstMIKEYPayload): PGstMIKEYPayload;
 begin
@@ -371,4 +373,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}
