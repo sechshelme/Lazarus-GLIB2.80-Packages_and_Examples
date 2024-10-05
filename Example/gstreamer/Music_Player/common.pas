@@ -9,7 +9,7 @@ const
   FATime = FITime;
 
 type
-  Tcommand = (cmNone, cmNew, cmSave, cmOpen, cmClose, cmAdd, cmRemove, cmRemoveAll, cmUp, cmDown, cmPlay, cmPause, cmStop, cmNext, cmPrev);
+  Tcommand = (cmNone, cmNew, cmSave, cmOpen, cmClose, cmAdd, cmRemove, cmRemoveAll, cmUp, cmDown, cmPlay, cmPause, cmStop, cmNext, cmPrev, cmDefaultSongs);
 
   TPlayBoxEvent = procedure(cmd: Tcommand) of object;
 
@@ -28,6 +28,8 @@ const
     (cmd: cmNone; Caption: '-'; IconPath: ''),
     (cmd: cmSave; Caption: 'Speichern'; IconPath: ''),
     (cmd: cmOpen; Caption: 'Öffnen'; IconPath: ''),
+    (cmd: cmNone; Caption: '-'; IconPath: ''),
+    (cmd: cmDefaultSongs; Caption: 'Default'; IconPath: ''),
     (cmd: cmNone; Caption: '-'; IconPath: ''),
     (cmd: cmClose; Caption: 'Beenden'; IconPath: ''));
 

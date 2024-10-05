@@ -51,7 +51,7 @@ var
 begin
   propsCount := Length(props);
 
-    Height := propsCount * (BT_HEIGHT + BORDER) + BORDER;
+  Height := propsCount * (BT_HEIGHT + BORDER) + BORDER;
   Width := BT_WIDTH + 2 * BORDER;
 
   pic := TPicture.Create;

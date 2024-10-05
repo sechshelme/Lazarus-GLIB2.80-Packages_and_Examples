@@ -1,5 +1,9 @@
 unit SoundListBox;
 
+{$modeswitch typehelpers on}
+{$modeswitch arrayoperators on}
+{$modeswitch advancedrecords on}
+
 interface
 
 uses
@@ -9,8 +13,28 @@ uses
   Streamer;
 
 type
+  TSongInfo = record
+    title: string;
+    Duration: TGstClockTime;
+  end;
+  TSongInfos = array of TSongInfo;
+
+  { TSongInfosHelper }
+
+  TSongInfosHelper = type helper for TSongInfos
+    procedure Add(const path: string);
+    procedure Remove(index: integer);
+    procedure Move(index0, index1: integer);
+    function getTotalDuration:TGstClockTime;
+  end;
+
+type
+
+  { TSongsListPanel }
+
   TSongsListPanel = class(TPanel)
   private
+    SongInfos: TSongInfos;
     ListView: TListView;
     function GetCount: integer;
     function GetItemIndex: integer;
@@ -26,6 +50,7 @@ type
     function Next: boolean;
     function Prev: boolean;
     function GetTitle: string;
+    function getDurationTotal:TGstClockTime;
     procedure SaveToXML;
     procedure LoadToXML;
 
@@ -34,6 +59,42 @@ type
   end;
 
 implementation
+
+{ TSongInfosHelper }
+
+procedure TSongInfosHelper.Add(const path: string);
+var
+  si: TSongInfo;
+begin
+  si.title := path;
+  si.Duration := get_duration(path);
+  Self += [si];
+end;
+
+procedure TSongInfosHelper.Remove(index: integer);
+begin
+  Delete(Self, index, 1);
+  WriteLn('len: ', Length(Self));
+end;
+
+procedure TSongInfosHelper.Move(index0, index1: integer);
+var
+  si: TSongInfo;
+begin
+  si := Self[index0];
+  Self[index0] := Self[index1];
+  Self[index1] := si;
+end;
+
+function TSongInfosHelper.getTotalDuration: TGstClockTime;
+var
+  i: Integer;
+begin
+  Result:=0;
+  for i:=0 to Length(Self)-1 do Result+=Self[i].Duration;
+end;
+
+// ========
 
 function TSongsListPanel.GetItemIndex: integer;
 begin
@@ -55,15 +116,17 @@ begin
   inherited Create(TheOwner);
   Anchors := [akTop, akLeft, akBottom, akRight];
 
+  SetLength(SongInfos, 0);
+
   ListView := TListView.Create(Self);
   ListView.Parent := Self;
   ListView.Align := alClient;
-  ListView.ReadOnly:=True;
+  ListView.ReadOnly := True;
 
   ListView.ViewStyle := vsReport;
   ListView.Columns.Add.Caption := 'Song Titel';
- // ListView.Columns[0].Width := Width- 100;
-//  WriteLn(Width);
+  // ListView.Columns[0].Width := Width- 100;
+  //  WriteLn(Width);
   ListView.Columns[0].Width := 800;
   ListView.Columns.Add.Caption := 'Dauer';
   ListView.Columns[1].Width := 100;
@@ -72,12 +135,16 @@ end;
 procedure TSongsListPanel.Add(const song: string);
 var
   ad: TListItem;
-  dur: Tguint64;
+  dur: string;
+  //  dur: Tguint64;
 begin
-  dur:=get_duration(song);
+  SongInfos.Add(song);
+  dur := GstClockToStr(SongInfos[Length(SongInfos) - 1].Duration);
+
   ad := ListView.Items.Add;
-  ad.Caption := song;
-  ad.SubItems.Add(IntToStr(dur));
+  ad.Caption := SongInfos[Length(SongInfos) - 1].title;
+  //  ad.SubItems.Add(IntToStr(dur));
+  ad.SubItems.Add(dur);
 end;
 
 procedure TSongsListPanel.Add(const song: TStringList);
@@ -97,6 +164,7 @@ begin
   index := ListView.ItemIndex;
   if (index >= 0) and (index < ListView.Items.Count) then  begin
     ListView.Items.Delete(index);
+    SongInfos.Remove(index);
     if index < ListView.Items.Count then  begin
       ListView.ItemIndex := index;
     end else if index > 0 then  begin
@@ -107,6 +175,7 @@ end;
 
 procedure TSongsListPanel.RemoveAll;
 begin
+  SetLength(SongInfos, 0);
   ListView.Clear;
 end;
 
@@ -120,6 +189,7 @@ begin
   end;
   if index < ListView.Items.Count - 1 then  begin
     ListView.Items.Move(index, index + 1);
+    SongInfos.Move(index, index + 1);
     ListView.ItemIndex := index + 1;
   end;
 end;
@@ -134,6 +204,7 @@ begin
   end;
   if index > 0 then  begin
     ListView.Items.Move(index, index - 1);
+    SongInfos.Move(index, index - 1);
     ListView.ItemIndex := index - 1;
   end;
 end;
@@ -173,15 +244,21 @@ begin
 end;
 
 function TSongsListPanel.GetTitle: string;
-var
-  si: TListItem;
+  //var
+  //  si: TListItem;
 begin
   if ListView.ItemIndex >= 0 then begin
-    si:=ListView.Items[ListView.ItemIndex];
-    Result:=si.Caption;
+    //    si := ListView.Items[ListView.ItemIndex];
+    //    Result := si.Caption;
+    Result := SongInfos[ListView.ItemIndex].title;
   end else begin
     Result := '';
   end;
+end;
+
+function TSongsListPanel.getDurationTotal: TGstClockTime;
+begin
+  Result:=SongInfos.getTotalDuration;
 end;
 
 procedure TSongsListPanel.SaveToXML;
@@ -193,7 +270,7 @@ begin
   xml.Filename := 'test.xml';
   xml.Clear;
   for i := 1 to ListView.Items.Count do begin
-//    xml.SetValue('songs/items[' + IntToStr(i) + ']/song', ListView.Items[i - 1]);
+    //    xml.SetValue('songs/items[' + IntToStr(i) + ']/song', ListView.Items[i - 1]);
   end;
   xml.Free;
 end;
@@ -209,8 +286,8 @@ begin
 
   cnt := xml.GetChildCount('songs');
   for i := 1 to cnt do begin
-//    s := xml.GetValue('songs/items[' + IntToStr(i) + ']/song', '');
-//    WriteLn(s);
+    //    s := xml.GetValue('songs/items[' + IntToStr(i) + ']/song', '');
+    //    WriteLn(s);
   end;
   xml.Free;
 end;

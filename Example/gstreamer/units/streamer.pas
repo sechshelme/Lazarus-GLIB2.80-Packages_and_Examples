@@ -28,14 +28,11 @@ type
       Level: TLevel;
       end;
     function GetDuration: TGstClockTime;
-//    function GetLevelL: Tguint32;
-//    function GetLevelR: Tguint32;
     procedure SetOnLevelChange(AValue: TStreamerLevel);
     procedure SetVolume(vol: gdouble);
     function GetVolume: gdouble;
     procedure SetPosition(AValue: TGstClockTime);
     function GetPosition: TGstClockTime;
-//    function dB_to_Prozent(db: gdouble): Tguint32;
   public
     constructor Create(const AsongPath: string);
     destructor Destroy; override;
@@ -51,8 +48,6 @@ type
     property Position: TGstClockTime read GetPosition write SetPosition;
     property Duration: TGstClockTime read GetDuration;
     property Volume: gdouble read GetVolume write SetVolume;
-//    property LevelL: Tguint32 read GetLevelL;
-//    property LevelR: Tguint32 read GetLevelR;
     function isPlayed: boolean;
     function isEnd: boolean;
     property OnLevelChange: TStreamerLevel read FOnLevelChange write SetOnLevelChange;
@@ -68,7 +63,7 @@ const
 
 
 function GstClockToStr(t: TGstClockTime): string;
-function get_duration(s: string): Tguint64;
+function get_duration(s: string):TGstClockTime;
 
 
 implementation
@@ -90,7 +85,7 @@ function gst_discoverer_new(timeout: TGstClockTime; err: PPGError): Pointer; cde
 function gst_discoverer_discover_uri(discoverer: Pointer; uri: Pgchar; err: PPGError): Pointer; cdecl; external libgstpbutils;
 function gst_discoverer_info_get_duration(info: Pointer): TGstClockTime; cdecl; external libgstpbutils;
 
-function get_duration(s: string): Tguint64;
+function get_duration(s: string): TGstClockTime;
 var
   discoverer: Pointer;
   info: Pointer;
@@ -116,7 +111,7 @@ begin
   min := t div 60000;
   s := (t mod 60000) div 1000;
   ms := t mod 1000;
-  WriteStr(Result, min: 3, ':', s: 2, ':', ms: 3);
+  WriteStr(Result, min: 3, ':', s: 2, ':', ms div 100: 1);
   for i := 1 to Length(Result) do begin
     if Result[i] = ' ' then begin
       Result[i] := '0';
@@ -161,12 +156,10 @@ end;
 
 procedure state_changed_cb(bus: PGstBus; msg: PGstMessage; user_data: TGpointer);
 var
-  //  pE: PPipelineElement absolute user_data;
   streamer: TStreamer absolute user_data;
   old_state, new_state, pending_state: TGstState;
 begin
   gst_message_parse_state_changed(msg, @old_state, @new_state, @pending_state);
-  //  pE^.state := new_state;
   streamer.pipelineElement.state := new_state;
 end;
 
@@ -179,7 +172,6 @@ end;
 
 function message_cb(bus: PGstBus; msg: PGstMessage; user_data: Tgpointer): Tgboolean; cdecl;
 var
-  //   pE: PPipelineElement absolute user_data;
   streamer: TStreamer absolute user_data;
   s: PGstStructure;
   Name: Pgchar;
@@ -306,21 +298,6 @@ begin
   end;
   Result := pipelineElement.Duration div G_USEC_PER_SEC;
 end;
-
-//function TStreamer.dB_to_Prozent(db: gdouble): Tguint32;
-//begin
-//  Result := 300 - abs(Round(db) * 10);
-//end;
-//
-//function TStreamer.GetLevelL: Tguint32;
-//begin
-//  Result := dB_to_Prozent(pipelineElement.Level.L);
-//end;
-//
-//function TStreamer.GetLevelR: Tguint32;
-//begin
-//  Result := dB_to_Prozent(pipelineElement.Level.R);
-//end;
 
 function TStreamer.GetVolume: gdouble;
 begin

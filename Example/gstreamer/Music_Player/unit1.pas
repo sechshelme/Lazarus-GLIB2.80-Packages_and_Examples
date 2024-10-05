@@ -20,6 +20,7 @@ type
   private
     MainMenu: TMenuBar;
     EditBox: TEditBox;
+    Lab_Total: TLabel;
     PlayPanel: TPlayPanel;
     Timer: TTimer;
     IsTrackBarMDown: boolean;
@@ -48,6 +49,7 @@ procedure TForm1.BoxEventProc(cmd: Tcommand);
 var
   index: integer;
   s: string;
+  sl: TStringList;
 begin
   case cmd of
     cmNone: begin
@@ -61,6 +63,35 @@ begin
     cmOpen: begin
       SongListPanel.LoadToXML;
     end;
+    cmDefaultSongs: begin
+      sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
+      SongListPanel.Add(sl);
+      sl.Free;
+
+      //  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
+      sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16', '*.mp3');
+      SongListPanel.Add(sl);
+      sl.Free;
+
+      sl := FindAllFiles('/home/tux/Schreibtisch/sound', '*.mp3');
+      SongListPanel.Add(sl);
+      sl.Free;
+
+      SongListPanel.Add('/n4800/Multimedia/Videos/WNDSURF1.AVI');
+      SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+      SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+      SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+      SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+      SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+      SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_1.wav');
+      SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_2.wav');
+      SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_3.wav');
+      SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_4.wav');
+      SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
+      SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
+
+      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
+    end;
     cmClose: begin
       Close;
     end;
@@ -68,20 +99,25 @@ begin
     cmAdd: begin
       SoundAddForm.SongListBox := SongListPanel;
       SoundAddForm.ShowModal;
+      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmRemove: begin
       SongListPanel.Remove;
+      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmRemoveAll: begin
       if MessageDlg('Songs Löschen', 'Alle Einträge entfernen ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then begin
         SongListPanel.RemoveAll;
       end;
+      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmUp: begin
       SongListPanel.Up;
+      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmDown: begin
       SongListPanel.Down;
+      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
 
     cmPlay: begin
@@ -204,8 +240,6 @@ begin
         volume := 0.0;
       end;
       SekStream.Volume := volume;
-      //      WriteLn(SekStream.Volume: 4: 2);
-      //if volume<=0 then ;
     end;
 
     if SekStream.isEnd then begin
@@ -216,7 +250,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
-  sl: TStringList;
+  h: integer;
 begin
   Width := 1024;
 
@@ -249,31 +283,42 @@ begin
   SongListPanel.Height := ClientHeight - PlayPanel.Height;
   SongListPanel.Parent := self;
 
-  sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
-  SongListPanel.Add(sl);
-  sl.Free;
+  h := EditBox.Height + PlayPanel.Height + 10;
 
-  //  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
-  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16', '*.mp3');
-  SongListPanel.Add(sl);
-  sl.Free;
+  Lab_Total := TLabel.Create(Self);
+  Lab_Total.Parent := self;
+  Lab_Total.Anchors := [akTop, akRight];
+  Lab_Total.Top := h;
+  Lab_Total.Left := SongListPanel.Width + 10;
+  Lab_Total.Caption := 'Total';
 
-  sl := FindAllFiles('/home/tux/Schreibtisch/sound', '*.mp3');
-  SongListPanel.Add(sl);
-  sl.Free;
 
-  SongListPanel.Add('/n4800/Multimedia/Videos/WNDSURF1.AVI');
-  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_1.wav');
-  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_2.wav');
-  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_3.wav');
-  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_4.wav');
-  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
-  SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
+
+  //sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
+  //SongListPanel.Add(sl);
+  //sl.Free;
+  //
+  ////  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
+  //sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16', '*.mp3');
+  //SongListPanel.Add(sl);
+  //sl.Free;
+  //
+  //sl := FindAllFiles('/home/tux/Schreibtisch/sound', '*.mp3');
+  //SongListPanel.Add(sl);
+  //sl.Free;
+  //
+  //SongListPanel.Add('/n4800/Multimedia/Videos/WNDSURF1.AVI');
+  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
+  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_1.wav');
+  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_2.wav');
+  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_3.wav');
+  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_4.wav');
+  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
+  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
 
   PlayPanel.TrackBar.TickStyle := tsNone;
   PlayPanel.TrackBar.Max := 1000;
