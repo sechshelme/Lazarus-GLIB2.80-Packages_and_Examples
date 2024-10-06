@@ -32,6 +32,7 @@ type
     len: Tguint;
   end;
   PGPtrArray = ^TGPtrArray;
+  PPGPtrArray = ^PGPtrArray;
 
 
 { #define g_array_index(a,t,i)      (((t*) (void *) (a)->data) [(i)]) }

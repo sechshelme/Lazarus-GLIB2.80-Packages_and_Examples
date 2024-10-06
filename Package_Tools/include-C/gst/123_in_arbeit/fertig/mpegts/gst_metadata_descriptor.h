@@ -108,7 +108,7 @@ struct _GstMpegtsMetadataDescriptor
  */
 #define GST_TYPE_MPEGTS_METADATA_DESCRIPTOR (gst_mpegts_metadata_descriptor_get_type ())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_metadata_descriptor_get_type (void);
 
 

@@ -25,8 +25,8 @@
 #define _GST_MPEGTS_H_
 
 #ifndef GST_USE_UNSTABLE_API
-#warning "The GStreamer mpegts library is unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#warning "The GStreamer mpegts library is unstable API and may change in future."
+//#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
 #endif
 
 #include <gst/mpegts/mpegts-prelude.h>
@@ -45,7 +45,7 @@
 
 
 
-GST_MPEGTS_API
+
 void gst_mpegts_initialize (void);
 
 

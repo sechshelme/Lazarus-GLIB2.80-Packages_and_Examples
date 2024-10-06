@@ -224,22 +224,22 @@ struct _GstMpegtsNIT
   GPtrArray *streams;
 };
 
-GST_MPEGTS_API
+
 GType gst_mpegts_nit_get_type (void);
 
-GST_MPEGTS_API
+
 GType gst_mpegts_nit_stream_get_type (void);
 
-GST_MPEGTS_API
+
 const GstMpegtsNIT *gst_mpegts_section_get_nit (GstMpegtsSection *section);
 
-GST_MPEGTS_API
+
 GstMpegtsSection *gst_mpegts_section_from_nit (GstMpegtsNIT *nit);
 
-GST_MPEGTS_API
+
 GstMpegtsNIT *gst_mpegts_nit_new (void);
 
-GST_MPEGTS_API
+
 GstMpegtsNITStream *gst_mpegts_nit_stream_new (void);
 
 
@@ -273,13 +273,13 @@ struct _GstMpegtsBAT
   GPtrArray  *streams;
 };
 
-GST_MPEGTS_API
+
 GType gst_mpegts_bat_get_type (void);
 
-GST_MPEGTS_API
+
 GType gst_mpegts_bat_stream_get_type (void);
 
-GST_MPEGTS_API
+
 const GstMpegtsBAT *gst_mpegts_section_get_bat (GstMpegtsSection *section);
 
 /* SDT */
@@ -330,22 +330,22 @@ struct _GstMpegtsSDT
   GPtrArray *services;
 };
 
-GST_MPEGTS_API
+
 GType gst_mpegts_sdt_get_type (void);
 
-GST_MPEGTS_API
+
 GType gst_mpegts_sdt_service_get_type (void);
 
-GST_MPEGTS_API
+
 const GstMpegtsSDT *gst_mpegts_section_get_sdt (GstMpegtsSection *section);
 
-GST_MPEGTS_API
+
 GstMpegtsSection *gst_mpegts_section_from_sdt (GstMpegtsSDT * sdt);
 
-GST_MPEGTS_API
+
 GstMpegtsSDT *gst_mpegts_sdt_new (void);
 
-GST_MPEGTS_API
+
 GstMpegtsSDTService *gst_mpegts_sdt_service_new (void);
 
 /* EIT */
@@ -395,18 +395,18 @@ struct _GstMpegtsEIT
   GPtrArray     *events;
 };
 
-GST_MPEGTS_API
+
 GType gst_mpegts_eit_get_type (void);
 
-GST_MPEGTS_API
+
 GType gst_mpegts_eit_event_get_type (void);
 
-GST_MPEGTS_API
+
 const GstMpegtsEIT *gst_mpegts_section_get_eit (GstMpegtsSection *section);
 
 /* TDT */
 
-GST_MPEGTS_API
+
 GstDateTime *gst_mpegts_section_get_tdt (GstMpegtsSection *section);
 
 /* TOT */
@@ -427,10 +427,10 @@ struct _GstMpegtsTOT
   GPtrArray     *descriptors;
 };
 
-GST_MPEGTS_API
+
 GType gst_mpegts_tot_get_type (void);
 
-GST_MPEGTS_API
+
 const GstMpegtsTOT *gst_mpegts_section_get_tot (GstMpegtsSection *section);
 
 /* SIT */
@@ -485,13 +485,13 @@ struct _GstMpegtsSIT
 };
 
 
-GST_MPEGTS_API
+
 GType gst_mpegts_sit_get_type (void);
 
-GST_MPEGTS_API
+
 GType gst_mpegts_sit_service_get_type (void);
 
-GST_MPEGTS_API
+
 const GstMpegtsSIT *gst_mpegts_section_get_sit (GstMpegtsSection *section);
 
 

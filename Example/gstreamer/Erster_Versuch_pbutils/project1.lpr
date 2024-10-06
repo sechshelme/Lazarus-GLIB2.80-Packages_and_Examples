@@ -22,33 +22,22 @@ uses
   gst124_sdp,
   gst124_webrtc,
   gst124_webrtc_nice,
+  gst124_mpegts,
 
 
-  //// --- sdp
-  //gstmikey,                        // io.
-  //gstsdp,                          // io.
-  //gstsdpmessage,                   // io. -> gstsdp, gstmikey
-
-
-  // --- webrtc
-  //webrtc_enumtypes,                // io.
-  //rtptransceiver,                  // io.
-  //sctptransport,                   // io.
-  //datachannel,                     // io.
-  //dtlstransport,                   // io.
-  //rtpreceiver,                     // io.
-  //webrtc_fwd,                      // io.
-  //icetransport,                    // io. -> webrtc_fwd
-  //ice,                             // io. -> webrtc_fwd, icestream, icetransport
-  //icestream,                       // io. -> webrtc_fwd, icetransport
-  //rtcsessiondescription,           // io. -> webrtc_fwd
-  //rtpsender,                       // io. -> webrtc_enumtypes, webrtc_fwd
-
-
-  // --- webrtc/nice
-  //nice,                            // io. -> ice
-  //nicestream,                      // io. -> icestream, webrtc_fwd, ice
-  //nicetransport,                   // io. -> icetransport, nicestream, webrtc_fwd
+  //mpegts,                          // io.
+  //gstmpegts_enumtypes,             // io.
+  //gst_atsc_descriptor,             // io.
+  //gstmpegtssection,                // io.
+  //gst_atsc_section,                // io. -> gstmpegtssection
+  //gst_dvb_section,                 // io. -> gstmpegtssection
+  //gst_scte_section,                // io. -> gstmpegtssection
+  //gst_metadata_descriptor,         // io.
+  //gstmpegtsdescriptor,             // io. -> gst_metadata_descriptor
+  //gst_dvb_descriptor,              // io. -> gstmpegtsdescriptor
+  //gst_hdmv_section,                // io.
+  //gst_isdb_descriptor,             // io.
+  //gst_mpegtspesmetadatameta,       // io.
 
 
 
@@ -110,6 +99,20 @@ uses
 
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);
+
+
+
+                        obj := g_object_new(GST_MPEGTS_PES_METADATA_META_API_TYPE, nil);
+                        WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
+                        GObjectShowProperty(obj);
+                        g_object_unref(obj);
+
+                        obj := g_object_new(GST_TYPE_MPEGTS_DVB_CABLE_DELIVERY_SYSTEM_DESCRIPTOR, nil);
+                        WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
+                        GObjectShowProperty(obj);
+                        g_object_unref(obj);
+
+                        WriteLn('xxxxxxxxxxxxxxxxxxx');
 
     obj := g_object_new(GST_TYPE_WEBRTC_SESSION_DESCRIPTION, nil);
     WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));

@@ -36,7 +36,7 @@ typedef struct _GstMpegtsPESMetadataMeta GstMpegtsPESMetadataMeta;
  *
  * Since: 1.24
  */
-GST_MPEGTS_API
+
 GType gst_mpegts_pes_metadata_meta_api_get_type (void);
 
 /**
@@ -66,7 +66,7 @@ GType gst_mpegts_pes_metadata_meta_api_get_type (void);
  *
  * Since: 1.24
  */
-GST_MPEGTS_API
+
 const GstMetaInfo * gst_mpegts_pes_metadata_meta_get_info (void);
 
 /**
@@ -99,7 +99,7 @@ struct _GstMpegtsPESMetadataMeta {
  *
  * Since: 1.24
  */
-GST_MPEGTS_API
+
 GstMpegtsPESMetadataMeta *
 gst_buffer_add_mpegts_pes_metadata_meta (GstBuffer * buffer);
 

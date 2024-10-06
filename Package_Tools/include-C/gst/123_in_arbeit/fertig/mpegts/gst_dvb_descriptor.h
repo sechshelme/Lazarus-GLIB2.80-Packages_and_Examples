@@ -174,16 +174,16 @@ typedef enum {
 
 /* GST_MTS_DESC_DVB_NETWORK_NAME (0x40) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_network_name (const GstMpegtsDescriptor *descriptor,
 						       gchar **name);
 
-GST_MPEGTS_API
+
 GstMpegtsDescriptor *gst_mpegts_descriptor_from_dvb_network_name (const gchar * name);
 
 /* GST_MTS_DESC_DVB_STUFFING (0x42) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_stuffing (const GstMpegtsDescriptor * descriptor,
                                                    guint8 ** stuffing_bytes);
 
@@ -272,10 +272,10 @@ struct _GstMpegtsSatelliteDeliverySystemDescriptor
 
 #define GST_TYPE_MPEGTS_SATELLITE_DELIVERY_SYSTEM_DESCRIPTOR (gst_mpegts_satellite_delivery_system_descriptor_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_satellite_delivery_system_descriptor_get_type(void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_satellite_delivery_system (const GstMpegtsDescriptor *descriptor,
 								GstMpegtsSatelliteDeliverySystemDescriptor *res);
 
@@ -310,19 +310,19 @@ struct _GstMpegtsCableDeliverySystemDescriptor
 
 #define GST_TYPE_MPEGTS_DVB_CABLE_DELIVERY_SYSTEM_DESCRIPTOR ( gst_mpegts_dvb_cable_system_delivery_descriptor_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_cable_delivery_system_descriptor_get_type (void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_cable_delivery_system (const GstMpegtsDescriptor *descriptor,
 							    GstMpegtsCableDeliverySystemDescriptor *res);
 
-GST_MPEGTS_API
+
 void gst_mpegts_dvb_cable_delivery_system_descriptor_free (GstMpegtsCableDeliverySystemDescriptor * source);
 
 /* GST_MTS_DESC_DVB_BOUQUET_NAME (0x47) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_bouquet_name (const GstMpegtsDescriptor * descriptor,
                                                        gchar ** bouquet_name);
 
@@ -369,13 +369,13 @@ typedef enum {
   GST_DVB_SERVICE_RESERVED_FF
 } GstMpegtsDVBServiceType;
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_service (const GstMpegtsDescriptor *descriptor,
 						  GstMpegtsDVBServiceType *service_type,
 						  gchar **service_name,
 						  gchar **provider_name);
 
-GST_MPEGTS_API
+
 GstMpegtsDescriptor *gst_mpegts_descriptor_from_dvb_service (GstMpegtsDVBServiceType service_type,
 							     const gchar * service_name,
 							     const gchar * service_provider);
@@ -396,10 +396,10 @@ struct _GstMpegtsDVBServiceListItem
 
 #define GST_TYPE_MPEGTS_DVB_SERVICE_LIST_ITEM (gst_mpegts_dvb_service_list_item_get_type ())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_service_list_item_get_type (void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_service_list (const GstMpegtsDescriptor * descriptor,
     GPtrArray ** list);
 
@@ -499,46 +499,46 @@ struct _GstMpegtsDVBLinkageDescriptor
 
 #define GST_TYPE_MPEGTS_DVB_LINKAGE_DESCRIPTOR ( gst_mpegts_dvb_linkage_descriptor_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_linkage_descriptor_get_type (void);
 
-GST_MPEGTS_API
+
 void gst_mpegts_dvb_linkage_descriptor_free (GstMpegtsDVBLinkageDescriptor * source);
 
 #define GST_TYPE_MPEGTS_DVB_LINKAGE_MOBILE_HAND_OVER (gst_mpegts_dvb_linkage_mobile_hand_over_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_linkage_mobile_hand_over_get_type (void);
 
-GST_MPEGTS_API
+
 const GstMpegtsDVBLinkageMobileHandOver * gst_mpegts_dvb_linkage_descriptor_get_mobile_hand_over
     (const GstMpegtsDVBLinkageDescriptor * desc);
 
 #define GST_TYPE_MPEGTS_DVB_LINKAGE_EVENT (gst_mpegts_dvb_linkage_event_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_linkage_event_get_type (void);
 
-GST_MPEGTS_API
+
 const GstMpegtsDVBLinkageEvent * gst_mpegts_dvb_linkage_descriptor_get_event
     (const GstMpegtsDVBLinkageDescriptor * desc);
 
 #define GST_TYPE_MPEGTS_DVB_LINKAGE_EXTENDED_EVENT (gst_mpegts_dvb_linkage_extended_event_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_linkage_extended_event_get_type (void);
 
-GST_MPEGTS_API
+
 const GPtrArray * gst_mpegts_dvb_linkage_descriptor_get_extended_event
     (const GstMpegtsDVBLinkageDescriptor * desc);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_linkage (const GstMpegtsDescriptor * descriptor,
                                                   GstMpegtsDVBLinkageDescriptor ** res);
 
 /* GST_MTS_DESC_DVB_SHORT_EVENT (0x4D) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_short_event (const GstMpegtsDescriptor *descriptor,
 						       gchar **language_code,
 						       gchar **event_name,
@@ -557,7 +557,7 @@ struct _GstMpegtsExtendedEventItem
 
 #define GST_TYPE_MPEGTS_EXTENDED_EVENT_ITEM (gst_mpegts_extended_event_item_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_extended_event_item_get_type(void);
 
 /**
@@ -581,13 +581,13 @@ struct _GstMpegtsExtendedEventDescriptor
 
 #define GST_TYPE_MPEGTS_EXTENDED_EVENT_DESCRIPTOR (gst_mpegts_extended_event_descriptor_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_extended_event_descriptor_get_type (void);
 
-GST_MPEGTS_API
+
 void gst_mpegts_extended_event_descriptor_free (GstMpegtsExtendedEventDescriptor * source);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_extended_event (const GstMpegtsDescriptor *descriptor,
 							  GstMpegtsExtendedEventDescriptor **res);
 
@@ -614,25 +614,25 @@ struct _GstMpegtsComponentDescriptor
   gchar  *text;
 };
 
-GST_MPEGTS_API
+
 GType gst_mpegts_component_descriptor_get_type (void);
 
-GST_MPEGTS_API
+
 void gst_mpegts_dvb_component_descriptor_free (GstMpegtsComponentDescriptor * source);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_component (const GstMpegtsDescriptor *descriptor,
 						    GstMpegtsComponentDescriptor **res);
 
 /* GST_MTS_DESC_DVB_STREAM_IDENTIFIER (0x52) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_stream_identifier (const GstMpegtsDescriptor *descriptor,
 							    guint8 *component_tag);
 
 /* GST_MTS_DESC_DVB_CA_IDENTIFIER (0x53) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_ca_identifier (const GstMpegtsDescriptor * descriptor,
                                                         GArray ** list);
 
@@ -661,10 +661,10 @@ struct _GstMpegtsContent
 
 #define GST_TYPE_MPEGTS_CONTENT (gst_mpegts_content_get_type ())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_content_get_type (void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_content (const GstMpegtsDescriptor *
 	descriptor, GPtrArray ** content);
 
@@ -673,7 +673,7 @@ typedef struct _GstMpegtsDVBParentalRatingItem GstMpegtsDVBParentalRatingItem;
 
 #define GST_TYPE_MPEGTS_DVB_PARENTAL_RATING_ITEM (gst_mpegts_dvb_parental_rating_item_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_parental_rating_item_get_type (void);
 
 /**
@@ -688,7 +688,7 @@ struct _GstMpegtsDVBParentalRatingItem
   guint8 rating;
 };
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_parental_rating (const GstMpegtsDescriptor
         * descriptor, GPtrArray ** rating);
 
@@ -708,28 +708,28 @@ typedef enum {
   HEARING_IMPAIRED_PAGE
 } GstMpegtsDVBTeletextType;
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_teletext_idx (const GstMpegtsDescriptor *
     descriptor, guint idx, gchar ** language_code,
     GstMpegtsDVBTeletextType * teletext_type, guint8 * magazine_number,
     guint8 * page_number);
 
-GST_MPEGTS_API
+
 guint gst_mpegts_descriptor_parse_dvb_teletext_nb (const GstMpegtsDescriptor *
     descriptor);
 
 /* GST_MTS_DESC_DVB_SUBTITLING (0x59) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_subtitling_idx (const GstMpegtsDescriptor *descriptor,
 							 guint idx, gchar ** lang,
 							 guint8 *type, guint16 *composition_page_id,
 							 guint16 *ancillary_page_id);
 
-GST_MPEGTS_API
+
 guint gst_mpegts_descriptor_parse_dvb_subtitling_nb (const GstMpegtsDescriptor *descriptor);
 
-GST_MPEGTS_API
+
 GstMpegtsDescriptor * gst_mpegts_descriptor_from_dvb_subtitling (const gchar *lang,
     guint8 type, guint16 composition, guint16 ancillary);
 
@@ -808,10 +808,10 @@ struct _GstMpegtsTerrestrialDeliverySystemDescriptor
 
 #define GST_TYPE_MPEGTS_TERRESTRIAL_DELIVERY_SYSTEM_DESCRIPTOR (gst_mpegts_terrestrial_delivery_system_descriptor_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_terrestrial_delivery_system_descriptor_get_type(void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_terrestrial_delivery_system (const GstMpegtsDescriptor
               *descriptor, GstMpegtsTerrestrialDeliverySystemDescriptor * res);
 
@@ -833,10 +833,10 @@ struct _GstMpegtsDvbMultilingualNetworkNameItem
 
 #define GST_TYPE_MPEGTS_DVB_MULTILINGUAL_NETWORK_NAME_ITEM (gst_mpegts_dvb_multilingual_network_name_item_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_multilingual_network_name_item_get_type(void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_multilingual_network_name (const GstMpegtsDescriptor
               *descriptor, GPtrArray ** network_name_items);
 
@@ -858,10 +858,10 @@ struct _GstMpegtsDvbMultilingualBouquetNameItem
 
 #define GST_TYPE_MPEGTS_DVB_MULTILINGUAL_BOUQUET_NAME_ITEM (gst_mpegts_dvb_multilingual_bouquet_name_item_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_multilingual_bouquet_name_item_get_type(void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_multilingual_bouquet_name (const GstMpegtsDescriptor
               *descriptor, GPtrArray ** bouquet_name_items);
 
@@ -885,10 +885,10 @@ struct _GstMpegtsDvbMultilingualServiceNameItem
 
 #define GST_TYPE_MPEGTS_DVB_MULTILINGUAL_SERVICE_NAME_ITEM (gst_mpegts_dvb_multilingual_service_name_item_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_multilingual_service_name_item_get_type(void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_multilingual_service_name (const GstMpegtsDescriptor
               *descriptor, GPtrArray ** service_name_items);
 
@@ -908,23 +908,23 @@ struct _GstMpegtsDvbMultilingualComponentItem
 
 #define GST_TYPE_MPEGTS_DVB_MULTILINGUAL_COMPONENT_ITEM (gst_mpegts_dvb_multilingual_component_item_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_multilingual_component_item_get_type(void);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_multilingual_component (const GstMpegtsDescriptor
               *descriptor, guint8 * component_tag, GPtrArray ** component_description_items);
 
 /* GST_MTS_DESC_DVB_PRIVATE_DATA_SPECIFIER (0x5F) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_private_data_specifier (const GstMpegtsDescriptor
               * descriptor, guint32 * private_data_specifier, guint8 ** private_data,
               guint8 * length);
 
 /* GST_MTS_DESC_DVB_FREQUENCY_LIST (0x62) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_frequency_list (const GstMpegtsDescriptor
     * descriptor, gboolean * offset, GArray ** list);
 
@@ -951,13 +951,13 @@ struct _GstMpegtsDataBroadcastDescriptor
 
 
 #define GST_TYPE_MPEGTS_DVB_DATA_BROADCAST_DESCRIPTOR (gst_mpegts_dvb_data_broadcast_descriptor_get_type ())
-GST_MPEGTS_API
+
 GType gst_mpegts_dvb_data_broadcast_descriptor_get_type (void);
 
-GST_MPEGTS_API
+
 void gst_mpegts_dvb_data_broadcast_descriptor_free (GstMpegtsDataBroadcastDescriptor * source);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_data_broadcast (const GstMpegtsDescriptor
               *descriptor, GstMpegtsDataBroadcastDescriptor ** res);
 
@@ -977,13 +977,13 @@ typedef enum
   GST_MPEGTS_DVB_SCRAMBLING_MODE_ATIS_F                = 0x7f,
 } GstMpegtsDVBScramblingModeType;
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_scrambling (const GstMpegtsDescriptor * descriptor,
        GstMpegtsDVBScramblingModeType * scrambling_mode);
 
 /* GST_MTS_DESC_DVB_DATA_BROADCAST_ID (0x66) */
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_data_broadcast_id (const GstMpegtsDescriptor
        * descriptor, guint16 * data_broadcast_id, guint8 ** id_selector_bytes, guint8 * len);
 
@@ -1006,7 +1006,7 @@ struct _GstMpegtsT2DeliverySystemCellExtension
 
 #define GST_TYPE_MPEGTS_T2_DELIVERY_SYSTEM_CELL_EXTENSION (gst_mpegts_t2_delivery_system_cell_extension_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_t2_delivery_system_cell_extension_get_type(void);
 
 typedef struct _GstMpegtsT2DeliverySystemCell GstMpegtsT2DeliverySystemCell;
@@ -1026,7 +1026,7 @@ struct _GstMpegtsT2DeliverySystemCell
 
 #define GST_TYPE_MPEGTS_T2_DELIVERY_SYSTEM_CELL (gst_mpegts_t2_delivery_system_cell_get_type())
 
-GST_MPEGTS_API
+
 GType gst_mpegts_t2_delivery_system_cell_get_type(void);
 
 typedef struct _GstMpegtsT2DeliverySystemDescriptor GstMpegtsT2DeliverySystemDescriptor;
@@ -1060,13 +1060,13 @@ struct _GstMpegtsT2DeliverySystemDescriptor
 };
 
 #define GST_TYPE_MPEGTS_T2_DELIVERY_SYSTEM_DESCRIPTOR (gst_mpegts_t2_delivery_system_descriptor_get_type ())
-GST_MPEGTS_API
+
 GType gst_mpegts_t2_delivery_system_descriptor_get_type (void);
 
-GST_MPEGTS_API
+
 void gst_mpegts_t2_delivery_system_descriptor_free (GstMpegtsT2DeliverySystemDescriptor * source);
 
-GST_MPEGTS_API
+
 gboolean gst_mpegts_descriptor_parse_dvb_t2_delivery_system (const GstMpegtsDescriptor
               *descriptor, GstMpegtsT2DeliverySystemDescriptor ** res);
 
@@ -1108,7 +1108,7 @@ struct _GstMpegtsAudioPreselectionDescriptor
   guint8                                message_id;
 };
 
-GST_MPEGTS_API
+
 gboolean
 gst_mpegts_descriptor_parse_audio_preselection_list (const GstMpegtsDescriptor
     * descriptor, GPtrArray ** list);
@@ -1118,7 +1118,7 @@ gst_mpegts_descriptor_parse_audio_preselection_list (const GstMpegtsDescriptor
  *
  * Since: 1.20
  */
-GST_MPEGTS_API
+
 void
 gst_mpegts_descriptor_parse_audio_preselection_free (GstMpegtsAudioPreselectionDescriptor
     * source);
@@ -1128,7 +1128,7 @@ gst_mpegts_descriptor_parse_audio_preselection_free (GstMpegtsAudioPreselectionD
  *
  * Since: 1.20
  */
-GST_MPEGTS_API
+
 void
 gst_mpegts_descriptor_parse_audio_preselection_dump (GstMpegtsAudioPreselectionDescriptor
     * source);

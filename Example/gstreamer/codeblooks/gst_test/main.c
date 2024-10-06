@@ -4,6 +4,7 @@
 #include <gst/pbutils/install-plugins.h>
 #include <gst/pbutils/encoding-target.h>
 #include <gst/allocators/allocators.h>
+#include <gst/mpegts/mpegts.h>
 #include <gst/sdp/sdp.h>
 #include <gst/check/check.h>
 #include <gst/analytics/analytics.h>
@@ -74,3 +75,4 @@ gst_buffer_get_ancillary_meta(0);
 GST_AUDIO_BASE_SINK_CLOCK(NULL);
 }
 
+GST_TYPE_MPEGTS_DVB_CABLE_DELIVERY_SYSTEM_DESCRIPTOR
