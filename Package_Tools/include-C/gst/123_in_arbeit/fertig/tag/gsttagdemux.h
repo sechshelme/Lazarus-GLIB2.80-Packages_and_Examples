@@ -128,7 +128,7 @@ struct _GstTagDemuxClass
   gpointer               reserved[GST_PADDING];
 };
 
-GST_TAG_API
+
 GType     gst_tag_demux_get_type (void);
 
 

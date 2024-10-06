@@ -23,6 +23,7 @@ uses
   gst124_webrtc,
   gst124_webrtc_nice,
   gst124_mpegts,
+  gst124_tag,
 
 
   //mpegts,                          // io.
@@ -38,6 +39,13 @@ uses
   //gst_hdmv_section,                // io.
   //gst_isdb_descriptor,             // io.
   //gst_mpegtspesmetadatameta,       // io.
+
+  //gsttagdemux,
+  //gsttagmux,
+  //tag,
+  //tag_enumtypes,
+  //xmpwriter,
+
 
 
 
@@ -100,6 +108,13 @@ uses
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);
 
+    obj := g_object_new(GST_TYPE_TAG_XMP_WRITER, nil);
+    if obj<>nil then WriteLn('io');
+    WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    WriteLn('xxxxxxxxxxxxxxxxxxx');
 
 
                         obj := g_object_new(GST_MPEGTS_PES_METADATA_META_API_TYPE, nil);
@@ -112,7 +127,6 @@ uses
                         GObjectShowProperty(obj);
                         g_object_unref(obj);
 
-                        WriteLn('xxxxxxxxxxxxxxxxxxx');
 
     obj := g_object_new(GST_TYPE_WEBRTC_SESSION_DESCRIPTION, nil);
     WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));

@@ -83,6 +83,10 @@
         <Filename Value="gst124_mpegts.pas"/>
         <UnitName Value="gst124_mpegts"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_tag.pas"/>
+        <UnitName Value="gst124_tag"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

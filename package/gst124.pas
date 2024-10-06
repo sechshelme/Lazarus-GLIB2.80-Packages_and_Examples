@@ -30,6 +30,7 @@ const
   libgstwebrtcnice = 'libgstwebrtcnice-1.0';
   libgstsdp = 'libgstsdp-1.0';
   libgstmpegts = 'libgstmpegts-1.0';
+  libgsttag = 'libgsttag-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -46,8 +47,9 @@ const
   libgstinsertbin = 'gstinsertbin-1.0-0.dll';
   libgstwebrtc = 'gstwebrtc-1.0-0.dll';
   libgstwebrtcnice = 'gstwebrtcnice-1.0-0.dll';
-  libgstsdp = 'libgstsdp-1.0-o.dll';
-  libgstmpegts = 'libgstmpegts-1.0-0.dll';
+  libgstsdp = 'gstsdp-1.0-o.dll';
+  libgstmpegts = 'gstmpegts-1.0-0.dll';
+  libgsttag = 'gsttag-1.0-0.dll';
   {$endif}
 
   // ==== Diverses
