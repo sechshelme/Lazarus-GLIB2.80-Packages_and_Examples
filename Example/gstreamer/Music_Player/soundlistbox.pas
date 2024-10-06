@@ -10,7 +10,8 @@ uses
   Classes, SysUtils, gst,
   StdCtrls, Controls, Dialogs, ExtCtrls, ComCtrls, Forms,
   Laz2_XMLCfg,
-  Streamer;
+  Common,
+  Streamer, SongEditBox;
 
 type
   TSongInfo = record
@@ -40,6 +41,7 @@ type
     function GetItemIndex: integer;
     procedure SetItemIndex(AValue: integer);
   public
+    EditBox: TEditBox;
     constructor Create(TheOwner: TComponent); override;
     procedure Add(const song: string); overload;
     procedure Add(const song: TStringList); overload;
@@ -53,7 +55,6 @@ type
     function getDurationTotal:TGstClockTime;
     procedure SaveToXML;
     procedure LoadToXML;
-
     property ItemIndex: integer read GetItemIndex write SetItemIndex;
     property Count: integer read GetCount;
   end;
@@ -112,11 +113,21 @@ begin
 end;
 
 constructor TSongsListPanel.Create(TheOwner: TComponent);
+var
+  ToolBox: TPanel;
 begin
   inherited Create(TheOwner);
-  Anchors := [akTop, akLeft, akBottom, akRight];
-
   SetLength(SongInfos, 0);
+
+  ToolBox:=TPanel.Create(Self);
+  ToolBox.Parent := Self;
+  ToolBox.Align:=alRight;
+  ToolBox.Width:=120;
+
+  EditBox := TEditBox.Create(ToolBox);
+  EditBox.Parent := ToolBox;
+  EditBox.Width:=ToolBox.Width;
+  EditBox.Align:=alTop;
 
   ListView := TListView.Create(Self);
   ListView.Parent := Self;
@@ -125,8 +136,6 @@ begin
 
   ListView.ViewStyle := vsReport;
   ListView.Columns.Add.Caption := 'Song Titel';
-  // ListView.Columns[0].Width := Width- 100;
-  //  WriteLn(Width);
   ListView.Columns[0].Width := 800;
   ListView.Columns.Add.Caption := 'Dauer';
   ListView.Columns[1].Width := 100;

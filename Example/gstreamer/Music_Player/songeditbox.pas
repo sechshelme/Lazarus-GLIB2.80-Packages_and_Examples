@@ -39,7 +39,6 @@ end;
 
 procedure TEditBox.LoadButtons(const props: TcmdProps);
 const
-  BT_WIDTH = 80;
   BT_HEIGHT = 28;
   BORDER = 5;
 var
@@ -52,7 +51,6 @@ begin
   propsCount := Length(props);
 
   Height := propsCount * (BT_HEIGHT + BORDER) + BORDER;
-  Width := BT_WIDTH + 2 * BORDER;
 
   pic := TPicture.Create;
   for i := 0 to propsCount - 1 do begin
@@ -60,7 +58,8 @@ begin
     Btn.Caption := props[i].Caption;
     Btn.Tag := PtrInt(props[i].cmd);
     Btn.OnClick := @BtnClick;
-    Btn.Width := BT_WIDTH;
+    Btn.Width := Self.Width - 2 * BORDER;
+    Btn.Anchors := [akTop, akLeft, akRight];
     Btn.Height := BT_HEIGHT;
     Btn.Left := BORDER;
     Btn.Top := i * (BT_HEIGHT + BORDER) + BORDER;

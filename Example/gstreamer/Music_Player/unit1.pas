@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, LCLType,
   Buttons, ExtCtrls, ComCtrls, Menus, Types, FileUtil,
-  Common, MenuBar, SoundListBox, PlayBtnBox, AddSongs, SongEditBox,
+  Common, MenuBar, SoundListBox, PlayPanel, AddSongs, SongEditBox,
   gst, Streamer;
 
 type
@@ -19,7 +19,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     MainMenu: TMenuBar;
-    EditBox: TEditBox;
+//    EditBox: TEditBox;
     Lab_Total: TLabel;
     PlayPanel: TPlayPanel;
     Timer: TTimer;
@@ -267,23 +267,17 @@ begin
   PlayPanel.Top := 0;
   PlayPanel.PlayBtnPanel.OnPlayBoxEvent := @BoxEventProc;
   PlayPanel.Width := ClientWidth - 10;
-  PlayPanel.Anchors := [akTop, akLeft, akRight];
-
-  EditBox := TEditBox.Create(Self);
-  EditBox.Top := PlayPanel.Height;
-  EditBox.Left := ClientWidth - EditBox.Width - 5;
-  EditBox.Parent := Self;
-  EditBox.OnPlayBoxEvent := @BoxEventProc;
+  PlayPanel.Align:=alTop;
 
   SongListPanel := TSongsListPanel.Create(self);
-  SongListPanel.Anchors := [akTop, akLeft, akBottom, akRight];
+  SongListPanel.Align:=alClient;
   SongListPanel.Top := PlayPanel.Height;
   SongListPanel.Left := 5;
-  SongListPanel.Width := ClientWidth - EditBox.Width - 10;
   SongListPanel.Height := ClientHeight - PlayPanel.Height;
   SongListPanel.Parent := self;
+  SongListPanel.EditBox.OnPlayBoxEvent:=@BoxEventProc;
 
-  h := EditBox.Height + PlayPanel.Height + 10;
+//  h := EditBox.Height + PlayPanel.Height + 10;
 
   Lab_Total := TLabel.Create(Self);
   Lab_Total.Parent := self;
@@ -291,34 +285,6 @@ begin
   Lab_Total.Top := h;
   Lab_Total.Left := SongListPanel.Width + 10;
   Lab_Total.Caption := 'Total';
-
-
-
-  //sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
-  //SongListPanel.Add(sl);
-  //sl.Free;
-  //
-  ////  sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16/Vol. 09/CD 1', '*.mp3');
-  //sl := FindAllFiles('/n4800/Multimedia/Music/Disco/Italo Disco/The Best Of Italo Disco Vol. 1-16', '*.mp3');
-  //SongListPanel.Add(sl);
-  //sl.Free;
-  //
-  //sl := FindAllFiles('/home/tux/Schreibtisch/sound', '*.mp3');
-  //SongListPanel.Add(sl);
-  //sl.Free;
-  //
-  //SongListPanel.Add('/n4800/Multimedia/Videos/WNDSURF1.AVI');
-  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  //SongListPanel.Add('/n4800/Multimedia/Music/Disco/Boney M/1981 - Boonoonoonoos/01 - Boonoonoonoos.flac');
-  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_1.wav');
-  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_2.wav');
-  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_3.wav');
-  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_4.wav');
-  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
-  //SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
 
   PlayPanel.TrackBar.TickStyle := tsNone;
   PlayPanel.TrackBar.Max := 1000;

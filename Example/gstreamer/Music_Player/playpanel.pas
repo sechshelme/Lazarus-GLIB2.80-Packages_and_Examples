@@ -1,4 +1,4 @@
-unit PlayBtnBox;
+unit PlayPanel;
 
 {$mode ObjFPC}{$H+}
 
@@ -97,7 +97,8 @@ begin
   TrackBar.Left := 5;
   TrackBar.Parent := Self;
   TrackBar.Width := Width - 10;
-  TrackBar.Anchors := [akTop, akLeft, akRight];
+//  TrackBar.Anchors := [akTop, akLeft, akRight];
+  TrackBar.Align:=alTop;
   h := TrackBar.Height + 10;
 
   PlayBtnPanel := TPlayBtnPanel.Create(Self);

@@ -52,9 +52,9 @@
         <UnitName Value="MenuBar"/>
       </Unit>
       <Unit>
-        <Filename Value="playbtnbox.pas"/>
+        <Filename Value="playpanel.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="PlayBtnBox"/>
+        <UnitName Value="PlayPanel"/>
       </Unit>
       <Unit>
         <Filename Value="common.pas"/>
