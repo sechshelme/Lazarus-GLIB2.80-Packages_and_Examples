@@ -9,7 +9,7 @@ interface
 uses
   Classes, SysUtils, gst,
   StdCtrls, Controls, Dialogs, ExtCtrls, ComCtrls, Forms,
-  Laz2_XMLCfg,
+  Laz2_XMLCfg, Types, Graphics,
   Common,
   Streamer, SongEditBox;
 
@@ -26,7 +26,7 @@ type
     procedure Add(const path: string);
     procedure Remove(index: integer);
     procedure Move(index0, index1: integer);
-    function getTotalDuration:TGstClockTime;
+    function getTotalDuration: TGstClockTime;
   end;
 
 type
@@ -36,12 +36,13 @@ type
   TSongsListPanel = class(TPanel)
   private
     SongInfos: TSongInfos;
-    ListView: TListView;
     function GetCount: integer;
     function GetItemIndex: integer;
     procedure SetItemIndex(AValue: integer);
   public
     EditBox: TEditBox;
+    ListView: TListView;
+    Lab_Total_Value, Lab_Track_Value: TLabel;
     constructor Create(TheOwner: TComponent); override;
     procedure Add(const song: string); overload;
     procedure Add(const song: TStringList); overload;
@@ -52,7 +53,7 @@ type
     function Next: boolean;
     function Prev: boolean;
     function GetTitle: string;
-    function getDurationTotal:TGstClockTime;
+    function getDurationTotal: TGstClockTime;
     procedure SaveToXML;
     procedure LoadToXML;
     property ItemIndex: integer read GetItemIndex write SetItemIndex;
@@ -89,10 +90,12 @@ end;
 
 function TSongInfosHelper.getTotalDuration: TGstClockTime;
 var
-  i: Integer;
+  i: integer;
 begin
-  Result:=0;
-  for i:=0 to Length(Self)-1 do Result+=Self[i].Duration;
+  Result := 0;
+  for i := 0 to Length(Self) - 1 do begin
+    Result += Self[i].Duration;
+  end;
 end;
 
 // ========
@@ -114,20 +117,53 @@ end;
 
 constructor TSongsListPanel.Create(TheOwner: TComponent);
 var
-  ToolBox: TPanel;
+  ToolBox, ListInfoBox: TPanel;
+  Lab_Total, Lab_Track: TLabel;
 begin
   inherited Create(TheOwner);
   SetLength(SongInfos, 0);
 
-  ToolBox:=TPanel.Create(Self);
+  ToolBox := TPanel.Create(Self);
   ToolBox.Parent := Self;
-  ToolBox.Align:=alRight;
-  ToolBox.Width:=120;
+  ToolBox.Align := alRight;
+  ToolBox.Width := 120;
 
   EditBox := TEditBox.Create(ToolBox);
   EditBox.Parent := ToolBox;
-  EditBox.Width:=ToolBox.Width;
-  EditBox.Align:=alTop;
+  EditBox.Width := ToolBox.Width;
+  EditBox.Align := alTop;
+
+  ListInfoBox := TPanel.Create(ToolBox);
+  ListInfoBox.Parent := ToolBox;
+  ListInfoBox.Width := ToolBox.Width;
+  ListInfoBox.Align := alBottom;
+  ListInfoBox.Height := 150;
+
+  Lab_Total := TLabel.Create(ListInfoBox);
+  Lab_Total.Parent := ListInfoBox;
+  Lab_Total.Font.Style := [fsbold];
+  Lab_Total.Top := 10;
+  Lab_Total.Left := 10;
+  Lab_Total.Caption := 'Total:';
+
+  Lab_Total_Value := TLabel.Create(ListInfoBox);
+  Lab_Total_Value.Parent := ListInfoBox;
+  Lab_Total_Value.Top := 30;
+  Lab_Total_Value.Left := 10;
+  Lab_Total_Value.Caption := '--:-';
+
+  Lab_Track := TLabel.Create(ListInfoBox);
+  Lab_Track.Parent := ListInfoBox;
+  Lab_Track.Font.Style := [fsbold];
+  Lab_Track.Top := 60;
+  Lab_Track.Left := 10;
+  Lab_Track.Caption := 'Track:';
+
+  Lab_Track_Value := TLabel.Create(ListInfoBox);
+  Lab_Track_Value.Parent := ListInfoBox;
+  Lab_Track_Value.Top := 80;
+  Lab_Track_Value.Left := 10;
+  Lab_Track_Value.Caption := '-/-';
 
   ListView := TListView.Create(Self);
   ListView.Parent := Self;
@@ -267,7 +303,7 @@ end;
 
 function TSongsListPanel.getDurationTotal: TGstClockTime;
 begin
-  Result:=SongInfos.getTotalDuration;
+  Result := SongInfos.getTotalDuration;
 end;
 
 procedure TSongsListPanel.SaveToXML;

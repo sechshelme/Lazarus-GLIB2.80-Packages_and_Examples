@@ -19,8 +19,6 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     MainMenu: TMenuBar;
-//    EditBox: TEditBox;
-    Lab_Total: TLabel;
     PlayPanel: TPlayPanel;
     Timer: TTimer;
     IsTrackBarMDown: boolean;
@@ -90,7 +88,7 @@ begin
       SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_6.wav');
       SongListPanel.Add('/n4800/DATEN/Programmierung/mit_GIT/Lazarus/Tutorial/SDL-3/examples/Audio/Boing_7.wav');
 
-      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
+      SongListPanel.Lab_Total_Value.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmClose: begin
       Close;
@@ -99,25 +97,25 @@ begin
     cmAdd: begin
       SoundAddForm.SongListBox := SongListPanel;
       SoundAddForm.ShowModal;
-      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
+      SongListPanel.Lab_Total_Value.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmRemove: begin
       SongListPanel.Remove;
-      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
+      SongListPanel.Lab_Total_Value.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmRemoveAll: begin
       if MessageDlg('Songs Löschen', 'Alle Einträge entfernen ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then begin
         SongListPanel.RemoveAll;
       end;
-      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
+      SongListPanel.Lab_Total_Value.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmUp: begin
       SongListPanel.Up;
-      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
+      SongListPanel.Lab_Total_Value.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
     cmDown: begin
       SongListPanel.Down;
-      Lab_Total.Caption := GstClockToStr(SongListPanel.getDurationTotal);
+      SongListPanel.Lab_Total_Value.Caption := GstClockToStr(SongListPanel.getDurationTotal);
     end;
 
     cmPlay: begin
@@ -246,6 +244,9 @@ begin
       FreeAndNil(SekStream);
     end;
   end;
+  with SongListPanel do begin
+    Lab_Track_Value.Caption := IntToStr(ListView.ItemIndex + 1) + '/' + ListView.Items.Count.ToString;
+  end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -267,24 +268,17 @@ begin
   PlayPanel.Top := 0;
   PlayPanel.PlayBtnPanel.OnPlayBoxEvent := @BoxEventProc;
   PlayPanel.Width := ClientWidth - 10;
-  PlayPanel.Align:=alTop;
+  PlayPanel.Align := alTop;
 
   SongListPanel := TSongsListPanel.Create(self);
-  SongListPanel.Align:=alClient;
+  SongListPanel.Align := alClient;
   SongListPanel.Top := PlayPanel.Height;
   SongListPanel.Left := 5;
   SongListPanel.Height := ClientHeight - PlayPanel.Height;
   SongListPanel.Parent := self;
-  SongListPanel.EditBox.OnPlayBoxEvent:=@BoxEventProc;
+  SongListPanel.EditBox.OnPlayBoxEvent := @BoxEventProc;
 
-//  h := EditBox.Height + PlayPanel.Height + 10;
-
-  Lab_Total := TLabel.Create(Self);
-  Lab_Total.Parent := self;
-  Lab_Total.Anchors := [akTop, akRight];
-  Lab_Total.Top := h;
-  Lab_Total.Left := SongListPanel.Width + 10;
-  Lab_Total.Caption := 'Total';
+  //  h := EditBox.Height + PlayPanel.Height + 10;
 
   PlayPanel.TrackBar.TickStyle := tsNone;
   PlayPanel.TrackBar.Max := 1000;

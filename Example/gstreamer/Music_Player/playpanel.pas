@@ -108,12 +108,14 @@ begin
 
   DurationLabel := TLabel.Create(Self);
   DurationLabel.Parent := Self;
+  DurationLabel.Font.Style := [fsbold];
   DurationLabel.Top := h;
   DurationLabel.Left := 200;
   DurationLabel.Caption := 'Duration';
 
   PositionLabel := TLabel.Create(Self);
   PositionLabel.Parent := Self;
+  PositionLabel.Font.Style := [fsbold];
   PositionLabel.Top := h;
   PositionLabel.Left := 400;
   PositionLabel.Caption := 'Position';
