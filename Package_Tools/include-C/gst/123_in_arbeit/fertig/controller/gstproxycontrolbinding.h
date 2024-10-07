@@ -70,10 +70,10 @@ struct _GstProxyControlBindingClass
   gpointer _padding[GST_PADDING];
 };
 
-GST_CONTROLLER_API
+
 GType                   gst_proxy_control_binding_get_type (void);
 
-GST_CONTROLLER_API
+
 GstControlBinding *     gst_proxy_control_binding_new (GstObject * object,
                                                        const gchar * property_name,
                                                        GstObject * ref_object,

@@ -110,15 +110,15 @@ struct _GstDirectControlBindingClass
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_CONTROLLER_API
+
 GType gst_direct_control_binding_get_type (void);
 
 /* Functions */
 
-GST_CONTROLLER_API
+
 GstControlBinding * gst_direct_control_binding_new (GstObject * object, const gchar * property_name,
                                                     GstControlSource * cs);
-GST_CONTROLLER_API
+
 GstControlBinding * gst_direct_control_binding_new_absolute (GstObject * object, const gchar * property_name, 
                                                     GstControlSource * cs);
 

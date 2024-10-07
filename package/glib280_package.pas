@@ -12,7 +12,7 @@ uses
   gst124_video, gst124_pbutils, gst124_allocators, gst124_analytics, 
   gst124_check, gst124_interfaces, gst124_mse, gst124_insertbin, gst124_sdp, 
   gst124_webrtc, gst124_webrtc_nice, gst124_mpegts, gst124_tag, gst124_fft, 
-  gst124_codecparsers, LazarusPackageIntf;
+  gst124_codecparsers, gst124_controller, LazarusPackageIntf;
 
 implementation
 

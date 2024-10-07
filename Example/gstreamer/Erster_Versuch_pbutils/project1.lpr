@@ -26,35 +26,17 @@ uses
   gst124_tag,
   gst124_fft,
   gst124_codecparsers,
+  gst124_controller,
 
 
-  //mpegts,                          // io.
-  //gstmpegts_enumtypes,             // io.
-  //gst_atsc_descriptor,             // io.
-  //gstmpegtssection,                // io.
-  //gst_atsc_section,                // io. -> gstmpegtssection
-  //gst_dvb_section,                 // io. -> gstmpegtssection
-  //gst_scte_section,                // io. -> gstmpegtssection
-  //gst_metadata_descriptor,         // io.
-  //gstmpegtsdescriptor,             // io. -> gst_metadata_descriptor
-  //gst_dvb_descriptor,              // io. -> gstmpegtsdescriptor
-  //gst_hdmv_section,                // io.
-  //gst_isdb_descriptor,             // io.
-  //gst_mpegtspesmetadatameta,       // io.
-
-  //gstav1parser,
-  //gsth264parser,
-  //gsth265parser,
-  //gstjpeg2000sampling,
-  //gstjpegparser,
-  //gstmpeg4parser,
-  //gstmpegvideoparser,
-  //gstmpegvideometa,           // io. -> gstmpegvideoparser
-  //gstvc1parser,
-  //gstvp8parser,
-  //gstvp8rangedecoder,
-  //gstvp9parser,
-
+  //controller_enumtypes,              // io.
+  //gstargbcontrolbinding,             // io.
+  //gstdirectcontrolbinding,           // io.
+  //gstlfocontrolsource,               // io.
+  //gstproxycontrolbinding,            // io.
+  //gsttimedvaluecontrolsource,        // io.
+  //gstinterpolationcontrolsource,     // io. -> gsttimedvaluecontrolsource
+  //gsttriggercontrolsource,           // io. -> gsttimedvaluecontrolsource
 
   GLIBTools,
   gstTools;
@@ -131,6 +113,12 @@ uses
     g_object_unref(obj);
 
     WriteLn('xxxxxxxxxxxxxxxxxxx');
+
+
+    obj := g_object_new(GST_TYPE_INTERPOLATION_CONTROL_SOURCE, nil);
+    WriteLn(GST_IS_INTERPOLATION_CONTROL_SOURCE(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
 
     obj := g_object_new(GST_MPEG_VIDEO_META_API_TYPE, nil);

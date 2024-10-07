@@ -95,6 +95,10 @@
         <Filename Value="gst124_codecparsers.pas"/>
         <UnitName Value="gst124_codecparsers"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_controller.pas"/>
+        <UnitName Value="gst124_controller"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>
