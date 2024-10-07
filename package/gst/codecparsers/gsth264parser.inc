@@ -1,13 +1,12 @@
-unit gsth264parser;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 07-10-2024   14:42                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gst124_base;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
   {#warning "The H.264 parsing library is unstable API and may change in future." }
   {#warning "You can define GST_USE_UNSTABLE_API to avoid this warning." }
@@ -686,7 +685,10 @@ function GST_H264_IS_MVC_NALU(nalu: PGstH264NalUnit): Tgboolean;
 // === Konventiert am: 7-10-24 11:29:51 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 function GST_H264_IS_P_SLICE(slice: PGstH264SliceHdr): Tgboolean;
@@ -725,4 +727,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

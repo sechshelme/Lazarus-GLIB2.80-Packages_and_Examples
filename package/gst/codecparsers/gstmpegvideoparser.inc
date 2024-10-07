@@ -1,13 +1,12 @@
-unit gstmpegvideoparser;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 07-10-2024   14:42                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gst124_base;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
   {#warning "The Mpeg video parsing library is unstable API and may change in future." }
   {#warning "You can define GST_USE_UNSTABLE_API to avoid this warning." }
@@ -261,7 +260,10 @@ function GST_MPEG_VIDEO_PACKET_IS_SLICE(typecode: longint): Tgboolean;
 // === Konventiert am: 7-10-24 11:30:16 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 function GST_MPEG_VIDEO_PACKET_IS_SLICE(typecode: longint): Tgboolean;
@@ -270,4 +272,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

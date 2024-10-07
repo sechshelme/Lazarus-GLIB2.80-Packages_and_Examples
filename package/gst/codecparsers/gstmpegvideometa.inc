@@ -1,13 +1,12 @@
-unit gstmpegvideometa;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 07-10-2024   14:42                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gstmpegvideoparser;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
   {#warning "The Mpeg video parsing library is unstable API and may change in future." }
   {#warning "You can define GST_USE_UNSTABLE_API to avoid this warning." }
@@ -39,7 +38,10 @@ function gst_buffer_get_mpeg_video_meta(b: PGstBuffer): PGstMpegVideoMeta;
 // === Konventiert am: 7-10-24 11:30:12 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_MPEG_VIDEO_META_API_TYPE: TGType;
 begin
@@ -57,4 +59,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

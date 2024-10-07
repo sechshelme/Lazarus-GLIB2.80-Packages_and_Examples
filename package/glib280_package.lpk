@@ -91,6 +91,10 @@
         <Filename Value="gst124_fft.pas"/>
         <UnitName Value="gst124_fft"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_codecparsers.pas"/>
+        <UnitName Value="gst124_codecparsers"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

@@ -25,6 +25,7 @@ uses
   gst124_mpegts,
   gst124_tag,
   gst124_fft,
+  gst124_codecparsers,
 
 
   //mpegts,                          // io.
@@ -41,18 +42,18 @@ uses
   //gst_isdb_descriptor,             // io.
   //gst_mpegtspesmetadatameta,       // io.
 
-  gstav1parser,
-  gsth264parser,
-  gsth265parser,
-  gstjpeg2000sampling,
-  gstjpegparser,
-  gstmpeg4parser,
-  gstmpegvideoparser,
-  gstmpegvideometa,           // io. -> gstmpegvideoparser
-  gstvc1parser,
-  gstvp8parser,
-  gstvp8rangedecoder,
-  gstvp9parser,
+  //gstav1parser,
+  //gsth264parser,
+  //gsth265parser,
+  //gstjpeg2000sampling,
+  //gstjpegparser,
+  //gstmpeg4parser,
+  //gstmpegvideoparser,
+  //gstmpegvideometa,           // io. -> gstmpegvideoparser
+  //gstvc1parser,
+  //gstvp8parser,
+  //gstvp8rangedecoder,
+  //gstvp9parser,
 
 
   GLIBTools,
@@ -111,14 +112,20 @@ uses
       WriteLn('mse error');
     end;
 
-fft:=    gst_fft_f64_new(1024, True);
-if fft=nil then WriteLn('fft error') else WriteLn('fft io.');
+    fft := gst_fft_f64_new(1024, True);
+    if fft = nil then begin
+      WriteLn('fft error');
+    end else begin
+      WriteLn('fft io.');
+    end;
 
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);
 
     obj := g_object_new(GST_TYPE_TAG_XMP_WRITER, nil);
-    if obj<>nil then WriteLn('io');
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
     WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
     GObjectShowProperty(obj);
     g_object_unref(obj);
@@ -126,15 +133,21 @@ if fft=nil then WriteLn('fft error') else WriteLn('fft io.');
     WriteLn('xxxxxxxxxxxxxxxxxxx');
 
 
-                        obj := g_object_new(GST_MPEGTS_PES_METADATA_META_API_TYPE, nil);
-                        WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
-                        GObjectShowProperty(obj);
-                        g_object_unref(obj);
+    obj := g_object_new(GST_MPEG_VIDEO_META_API_TYPE, nil);
+    WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
-                        obj := g_object_new(GST_TYPE_MPEGTS_DVB_CABLE_DELIVERY_SYSTEM_DESCRIPTOR, nil);
-                        WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
-                        GObjectShowProperty(obj);
-                        g_object_unref(obj);
+
+    obj := g_object_new(GST_MPEGTS_PES_METADATA_META_API_TYPE, nil);
+    WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_MPEGTS_DVB_CABLE_DELIVERY_SYSTEM_DESCRIPTOR, nil);
+    WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
 
     obj := g_object_new(GST_TYPE_WEBRTC_SESSION_DESCRIPTION, nil);

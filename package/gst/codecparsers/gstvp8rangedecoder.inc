@@ -1,13 +1,12 @@
-unit gstvp8rangedecoder;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 07-10-2024   14:42                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   TGstVp8RangeDecoder = record
@@ -33,8 +32,11 @@ procedure gst_vp8_range_decoder_get_state(rd: PGstVp8RangeDecoder; state: PGstVp
 // === Konventiert am: 7-10-24 11:30:29 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

@@ -1,13 +1,12 @@
-unit gstjpeg2000sampling;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 07-10-2024   14:42                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   PGstJPEG2000Sampling = ^TGstJPEG2000Sampling;
@@ -49,8 +48,11 @@ function gst_jpeg2000_colorspace_from_string(colorspace_string: Pgchar): TGstJPE
 // === Konventiert am: 7-10-24 11:29:59 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

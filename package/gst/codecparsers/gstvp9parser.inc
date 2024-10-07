@@ -1,13 +1,12 @@
-unit gstvp9parser;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 07-10-2024   14:42                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
   {#warning "The VP9 parsing library is unstable API and may change in future." }
   {#warning "You can define GST_USE_UNSTABLE_API to avoid this warning." }
@@ -234,8 +233,11 @@ procedure gst_vp9_parser_free(parser: PGstVp9Parser); cdecl; external libgstcode
 // === Konventiert am: 7-10-24 11:30:35 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}
