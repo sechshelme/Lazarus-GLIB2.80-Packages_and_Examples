@@ -22,8 +22,8 @@
 #define GST_JPEG_PARSER_H
 
 #ifndef GST_USE_UNSTABLE_API
-#  warning "The JPEG parsing library is unstable API and may change in future."
-#  warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#  warning "The JPEG parsing library is unstable API and may change in future."
+//#  warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
 #endif
 
 #include <gst/gst.h>
@@ -375,36 +375,36 @@ struct _GstJpegSegment
   gssize size;
 };
 
-GST_CODEC_PARSERS_API
+
 gboolean  gst_jpeg_parse (GstJpegSegment * seg,
                           const guint8   * data,
                           gsize            size,
                           guint            offset);
 
-GST_CODEC_PARSERS_API
+
 gboolean  gst_jpeg_segment_parse_frame_header  (const GstJpegSegment  * segment,
                                                 GstJpegFrameHdr       * frame_hdr);
 
-GST_CODEC_PARSERS_API
+
 gboolean  gst_jpeg_segment_parse_scan_header   (const GstJpegSegment * segment,
                                                 GstJpegScanHdr       * scan_hdr);
 
-GST_CODEC_PARSERS_API
+
 gboolean  gst_jpeg_segment_parse_huffman_table (const GstJpegSegment * segment,
                                                 GstJpegHuffmanTables * huff_tables);
 
-GST_CODEC_PARSERS_API
+
 gboolean  gst_jpeg_segment_parse_restart_interval (const GstJpegSegment * segment,
                                                    guint                * interval);
 
-GST_CODEC_PARSERS_API
+
 gboolean  gst_jpeg_segment_parse_quantization_table (const GstJpegSegment * segment,
                                                      GstJpegQuantTables   * quant_tables);
 
-GST_CODEC_PARSERS_API
+
 void      gst_jpeg_get_default_quantization_tables (GstJpegQuantTables * quant_tables);
 
-GST_CODEC_PARSERS_API
+
 void      gst_jpeg_get_default_huffman_tables (GstJpegHuffmanTables * huff_tables);
 
 

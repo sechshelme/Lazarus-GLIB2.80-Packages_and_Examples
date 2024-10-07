@@ -41,18 +41,18 @@ uses
   //gst_isdb_descriptor,             // io.
   //gst_mpegtspesmetadatameta,       // io.
 
-  //gsttagdemux,
-  //gsttagmux,
-  //tag,
-  //tag_enumtypes,
-  //xmpwriter,
-
-  //gstfft,
-  //gstfftf32,
-  //gstfftf64,
-  //gstffts16,
-  //gstffts32,
-
+  gstav1parser,
+  gsth264parser,
+  gsth265parser,
+  gstjpeg2000sampling,
+  gstjpegparser,
+  gstmpeg4parser,
+  gstmpegvideoparser,
+  gstmpegvideometa,           // io. -> gstmpegvideoparser
+  gstvc1parser,
+  gstvp8parser,
+  gstvp8rangedecoder,
+  gstvp9parser,
 
 
   GLIBTools,

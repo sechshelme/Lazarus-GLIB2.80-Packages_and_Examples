@@ -59,21 +59,21 @@ struct _GstVp8RangeDecoderState {
   guint8 count;
 };
 
-GST_CODEC_PARSERS_API
+
 gboolean  gst_vp8_range_decoder_init (GstVp8RangeDecoder * rd,
                                       const guchar * buf,
                                       guint buf_size);
 
-GST_CODEC_PARSERS_API
+
 gint       gst_vp8_range_decoder_read (GstVp8RangeDecoder * rd, guint8 prob);
 
-GST_CODEC_PARSERS_API
+
 gint       gst_vp8_range_decoder_read_literal (GstVp8RangeDecoder * rd, gint bits);
 
-GST_CODEC_PARSERS_API
+
 guint      gst_vp8_range_decoder_get_pos (GstVp8RangeDecoder * rd);
 
-GST_CODEC_PARSERS_API
+
 void       gst_vp8_range_decoder_get_state (GstVp8RangeDecoder      * rd,
                                             GstVp8RangeDecoderState * state);
 

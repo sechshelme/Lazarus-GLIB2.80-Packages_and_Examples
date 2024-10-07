@@ -1,4 +1,16 @@
-/*
+unit gstvp8parser;
+
+interface
+
+uses
+  glib280, gst124;
+
+{$IFDEF FPC}
+{$PACKRECORDS C}
+{$ENDIF}
+
+
+{
  * gstvp8parser.h - VP8 parser
  *
  * Copyright (C) 2013-2014 Intel Corporation
@@ -19,45 +31,33 @@
  * License along with this library; if not, write to the
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA 02110-1301, USA.
- */
-
-#ifndef GST_VP8_PARSER_H
-#define GST_VP8_PARSER_H
-
-#include <gst/gst.h>
-#include <gst/codecparsers/codecparsers-prelude.h>
-
-#ifndef GST_USE_UNSTABLE_API
-#warning "The VP8 parsing library is unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
-#endif
-
-
-
-typedef struct _GstVp8FrameHdr          GstVp8FrameHdr;
-typedef struct _GstVp8QuantIndices      GstVp8QuantIndices;
-typedef struct _GstVp8Segmentation      GstVp8Segmentation;
-typedef struct _GstVp8MbLfAdjustments   GstVp8MbLfAdjustments;
-typedef struct _GstVp8TokenProbs        GstVp8TokenProbs;
-typedef struct _GstVp8MvProbs           GstVp8MvProbs;
-typedef struct _GstVp8ModeProbs         GstVp8ModeProbs;
-typedef struct _GstVp8Parser            GstVp8Parser;
-
-/**
+  }
+{$ifndef GST_VP8_PARSER_H}
+{$define GST_VP8_PARSER_H}
+{$include <gst/gst.h>}
+{$include <gst/codecparsers/codecparsers-prelude.h>}
+{$ifndef GST_USE_UNSTABLE_API}
+{#warning "The VP8 parsing library is unstable API and may change in future." }
+{#warning "You can define GST_USE_UNSTABLE_API to avoid this warning." }
+{$endif}
+type
+{*
  * GstVp8ParserResult:
  * @GST_VP8_PARSER_OK: The parsing succeeded
  * @GST_VP8_PARSER_BROKEN_DATA: The data to parse is broken
  * @GST_VP8_PARSER_ERROR: An error accured when parsing
  *
  * The result of parsing VP8 data.
- */
-typedef enum {
-  GST_VP8_PARSER_OK,
-  GST_VP8_PARSER_BROKEN_DATA,
-  GST_VP8_PARSER_ERROR,
-} GstVp8ParserResult;
+  }
 
-/**
+  PGstVp8ParserResult = ^TGstVp8ParserResult;
+  TGstVp8ParserResult =  Longint;
+  Const
+    GST_VP8_PARSER_OK = 0;
+    GST_VP8_PARSER_BROKEN_DATA = 1;
+    GST_VP8_PARSER_ERROR = 2;
+;
+{*
  * GstVpQuantIndices:
  * @y_ac_qi: indicates the dequantization table index used for the
  *   luma AC coefficients
@@ -78,18 +78,19 @@ typedef enum {
  *   index
  *
  * Dequantization indices.
- */
-struct _GstVp8QuantIndices
-{
-  guint8 y_ac_qi;
-  gint8 y_dc_delta;
-  gint8 y2_dc_delta;
-  gint8 y2_ac_delta;
-  gint8 uv_dc_delta;
-  gint8 uv_ac_delta;
-};
+  }
+type
+  PGstVp8QuantIndices = ^TGstVp8QuantIndices;
+  TGstVp8QuantIndices = record
+      y_ac_qi : Tguint8;
+      y_dc_delta : Tgint8;
+      y2_dc_delta : Tgint8;
+      y2_ac_delta : Tgint8;
+      uv_dc_delta : Tgint8;
+      uv_ac_delta : Tgint8;
+    end;
 
-/**
+{*
  * GstVp8Segmentation:
  * @segmentation_enabled: enables the segmentation feature for the
  *   current frame
@@ -106,23 +107,21 @@ struct _GstVp8QuantIndices
  *   decoding tree
  *
  * Segmentation feature data.
- */
-struct _GstVp8Segmentation
-{
-  guint8 segmentation_enabled;
-  guint8 update_mb_segmentation_map;
-  guint8 update_segment_feature_data;
+  }
+{ if update_segment_feature_data == 1  }
+{ if update_mb_segmentation_map == 1  }
+  PGstVp8Segmentation = ^TGstVp8Segmentation;
+  TGstVp8Segmentation = record
+      segmentation_enabled : Tguint8;
+      update_mb_segmentation_map : Tguint8;
+      update_segment_feature_data : Tguint8;
+      segment_feature_mode : Tguint8;
+      quantizer_update_value : array[0..3] of Tgint8;
+      lf_update_value : array[0..3] of Tgint8;
+      segment_prob : array[0..2] of Tguint8;
+    end;
 
-  /* if update_segment_feature_data == 1 */
-  guint8 segment_feature_mode;
-  gint8 quantizer_update_value[4];
-  gint8 lf_update_value[4];
-
-  /* if update_mb_segmentation_map == 1 */
-  guint8 segment_prob[3];
-};
-
-/**
+{*
  * GstVp8MbLfAdjustments:
  * @loop_filter_adj_enable: indicates if the MB-level loop filter
  *   adjustment is on for the current frame
@@ -134,18 +133,17 @@ struct _GstVp8Segmentation
  *   to a certain MB prediction mode
  *
  * MB-level loop filter adjustments.
- */
-struct _GstVp8MbLfAdjustments
-{
-  guint8 loop_filter_adj_enable;
-  guint8 mode_ref_lf_delta_update;
+  }
+{ if mode_ref_lf_delta_update == 1  }
+  PGstVp8MbLfAdjustments = ^TGstVp8MbLfAdjustments;
+  TGstVp8MbLfAdjustments = record
+      loop_filter_adj_enable : Tguint8;
+      mode_ref_lf_delta_update : Tguint8;
+      ref_frame_delta : array[0..3] of Tgint8;
+      mb_mode_delta : array[0..3] of Tgint8;
+    end;
 
-  /* if mode_ref_lf_delta_update == 1 */
-  gint8 ref_frame_delta[4];
-  gint8 mb_mode_delta[4];
-};
-
-/**
+{*
  * GstVp8TokenProbs:
  * @prob: token probability
  *
@@ -153,13 +151,13 @@ struct _GstVp8MbLfAdjustments
  *
  * Each probability value in this matrix is live across frames, until
  * they are reset to their default values on key frame.
- */
-struct _GstVp8TokenProbs
-{
-  guint8 prob[4][8][3][11];
-};
+  }
+  PGstVp8TokenProbs = ^TGstVp8TokenProbs;
+  TGstVp8TokenProbs = record
+      prob : array[0..3] of array[0..7] of array[0..2] of array[0..10] of Tguint8;
+    end;
 
-/**
+{*
  * GstVp8MvProbs:
  * @prob: MV probability
  *
@@ -168,13 +166,13 @@ struct _GstVp8TokenProbs
  *
  * Each probability value in this matrix is live across frames, until
  * they are reset to their default values on key frame.
- */
-struct _GstVp8MvProbs
-{
-  guint8 prob[2][19];
-};
+  }
+  PGstVp8MvProbs = ^TGstVp8MvProbs;
+  TGstVp8MvProbs = record
+      prob : array[0..1] of array[0..18] of Tguint8;
+    end;
 
-/**
+{*
  * GstVp8ModeProbs:
  * @y_prob: indicates the branch probabilities of the luma
  *   intra-prediction mode decoding tree
@@ -185,14 +183,14 @@ struct _GstVp8MvProbs
  *
  * Each probability value in thie structure is live across frames,
  * until they are reset to their default values on key frame.
- */
-struct _GstVp8ModeProbs
-{
-  guint8 y_prob[4];
-  guint8 uv_prob[3];
-};
+  }
+  PGstVp8ModeProbs = ^TGstVp8ModeProbs;
+  TGstVp8ModeProbs = record
+      y_prob : array[0..3] of Tguint8;
+      uv_prob : array[0..2] of Tguint8;
+    end;
 
-/**
+{*
  * GstVp8FrameHdr:
  * @key_frame: indicates whether the frame is a key frame (1), or an
  *   inter frame (0)
@@ -256,62 +254,54 @@ struct _GstVp8ModeProbs
  *   any Uncompressed Data Chunk bytes
  *
  * Frame header.
- */
-struct _GstVp8FrameHdr
-{
-  guint8 key_frame;
-  guint8 version;
-  guint8 show_frame;
-  guint8 data_chunk_size;
-  guint32 first_part_size;
+  }
+{ if key_frame == 1  }
+{ if key_frame != 1  }
+{ if key_frame != 1  }
+{ Range decoder state  }
+{ Size of the Frame Header in bits  }
+  PGstVp8FrameHdr = ^TGstVp8FrameHdr;
+  TGstVp8FrameHdr = record
+      key_frame : Tguint8;
+      version : Tguint8;
+      show_frame : Tguint8;
+      data_chunk_size : Tguint8;
+      first_part_size : Tguint32;
+      width : Tguint16;
+      height : Tguint16;
+      horiz_scale_code : Tguint8;
+      vert_scale_code : Tguint8;
+      color_space : Tguint8;
+      clamping_type : Tguint8;
+      filter_type : Tguint8;
+      loop_filter_level : Tguint8;
+      sharpness_level : Tguint8;
+      log2_nbr_of_dct_partitions : Tguint8;
+      partition_size : array[0..7] of Tguint;
+      quant_indices : TGstVp8QuantIndices;
+      token_probs : TGstVp8TokenProbs;
+      mv_probs : TGstVp8MvProbs;
+      mode_probs : TGstVp8ModeProbs;
+      refresh_entropy_probs : Tguint8;
+      refresh_last : Tguint8;
+      refresh_golden_frame : Tguint8;
+      refresh_alternate_frame : Tguint8;
+      copy_buffer_to_golden : Tguint8;
+      copy_buffer_to_alternate : Tguint8;
+      sign_bias_golden : Tguint8;
+      sign_bias_alternate : Tguint8;
+      mb_no_skip_coeff : Tguint8;
+      prob_skip_false : Tguint8;
+      prob_intra : Tguint8;
+      prob_last : Tguint8;
+      prob_gf : Tguint8;
+      rd_range : Tguint8;
+      rd_value : Tguint8;
+      rd_count : Tguint8;
+      header_size : Tguint;
+    end;
 
-  /* if key_frame == 1 */
-  guint16 width;
-  guint16 height;
-  guint8 horiz_scale_code;
-  guint8 vert_scale_code;
-  guint8 color_space;
-  guint8 clamping_type;
-
-  guint8 filter_type;
-  guint8 loop_filter_level;
-  guint8 sharpness_level;
-  guint8 log2_nbr_of_dct_partitions;
-  guint partition_size[8];
-
-  GstVp8QuantIndices quant_indices;
-  GstVp8TokenProbs token_probs;
-  GstVp8MvProbs mv_probs;
-  GstVp8ModeProbs mode_probs;
-
-  guint8 refresh_entropy_probs;
-  guint8 refresh_last;
-  /* if key_frame != 1 */
-  guint8 refresh_golden_frame;
-  guint8 refresh_alternate_frame;
-  guint8 copy_buffer_to_golden;
-  guint8 copy_buffer_to_alternate;
-  guint8 sign_bias_golden;
-  guint8 sign_bias_alternate;
-
-  guint8 mb_no_skip_coeff;
-  guint8 prob_skip_false;
-
-  /* if key_frame != 1 */
-  guint8 prob_intra;
-  guint8 prob_last;
-  guint8 prob_gf;
-
-  /* Range decoder state */
-  guint8 rd_range;
-  guint8 rd_value;
-  guint8 rd_count;
-
-  /* Size of the Frame Header in bits */
-  guint header_size;
-};
-
-/**
+{*
  * GstVp8Parser:
  * @segmentation: segmentation feature data
  * @mb_lf_adjust: MB-level loop filter adjustments
@@ -322,25 +312,27 @@ struct _GstVp8FrameHdr
  * Parser context that needs to be live across frames. For instance
  * the probabilities tables stored in #GstVp8FrameHdr may depend on
  * the previous frames.
- */
-struct _GstVp8Parser
-{
-  GstVp8Segmentation segmentation;
-  GstVp8MbLfAdjustments mb_lf_adjust;
-  GstVp8TokenProbs token_probs;
-  GstVp8MvProbs mv_probs;
-  GstVp8ModeProbs mode_probs;
-};
-
-GST_CODEC_PARSERS_API
-void                gst_vp8_parser_init (GstVp8Parser * parser);
-
-GST_CODEC_PARSERS_API
-GstVp8ParserResult  gst_vp8_parser_parse_frame_header (GstVp8Parser   * parser,
-                                                       GstVp8FrameHdr * frame_hdr,
-                                                       const guint8   * data,
-                                                       gsize            size);
+  }
+  PGstVp8Parser = ^TGstVp8Parser;
+  TGstVp8Parser = record
+      segmentation : TGstVp8Segmentation;
+      mb_lf_adjust : TGstVp8MbLfAdjustments;
+      token_probs : TGstVp8TokenProbs;
+      mv_probs : TGstVp8MvProbs;
+      mode_probs : TGstVp8ModeProbs;
+    end;
 
 
+procedure gst_vp8_parser_init(parser:PGstVp8Parser);cdecl;external libgstcodecparsers;
+function gst_vp8_parser_parse_frame_header(parser:PGstVp8Parser; frame_hdr:PGstVp8FrameHdr; data:Pguint8; size:Tgsize):TGstVp8ParserResult;cdecl;external libgstcodecparsers;
+{$endif}
+{ GST_VP8_PARSER_H  }
 
-#endif /* GST_VP8_PARSER_H */
+// === Konventiert am: 7-10-24 11:30:24 ===
+
+
+implementation
+
+
+
+end.

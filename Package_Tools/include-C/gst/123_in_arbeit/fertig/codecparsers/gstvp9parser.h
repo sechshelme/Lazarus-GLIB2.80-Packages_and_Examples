@@ -26,8 +26,8 @@
 #define GST_VP9_PARSER_H
 
 #ifndef GST_USE_UNSTABLE_API
-#warning "The VP9 parsing library is unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#warning "The VP9 parsing library is unstable API and may change in future."
+//#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
 #endif
 
 #include <gst/gst.h>
@@ -505,16 +505,16 @@ struct _GstVp9Parser
   GstVp9Segmentation segmentation[GST_VP9_MAX_SEGMENTS];
 };
 
-GST_CODEC_PARSERS_API
+
 GstVp9Parser *     gst_vp9_parser_new (void);
 
-GST_CODEC_PARSERS_API
+
 GstVp9ParserResult gst_vp9_parser_parse_frame_header (GstVp9Parser* parser, GstVp9FrameHdr * frame_hdr, const guint8 * data, gsize size);
 
-GST_CODEC_PARSERS_API
+
 GstVp9ParserResult gst_vp9_parser_parse_superframe_info (GstVp9Parser* parser, GstVp9SuperframeInfo * superframe_info, const guint8 * data, gsize size);
 
-GST_CODEC_PARSERS_API
+
 void               gst_vp9_parser_free (GstVp9Parser * parser);
 
 
