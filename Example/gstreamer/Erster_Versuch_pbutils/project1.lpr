@@ -27,16 +27,20 @@ uses
   gst124_fft,
   gst124_codecparsers,
   gst124_controller,
+  gst124_rtp,
 
 
-  //controller_enumtypes,              // io.
-  //gstargbcontrolbinding,             // io.
-  //gstdirectcontrolbinding,           // io.
-  //gstlfocontrolsource,               // io.
-  //gstproxycontrolbinding,            // io.
-  //gsttimedvaluecontrolsource,        // io.
-  //gstinterpolationcontrolsource,     // io. -> gsttimedvaluecontrolsource
-  //gsttriggercontrolsource,           // io. -> gsttimedvaluecontrolsource
+
+  //gstrtp_enumtypes,           // io.
+  //gstrtcpbuffer,              // io.
+  //gstrtpbasepayload,          // io.
+  //gstrtpbaseaudiopayload,     // io. -> gstrtpbasepayload
+  //gstrtpbuffer,               // io.
+  //gstrtpbasedepayload,        // io. -> gstrtpbuffer
+  //gstrtpdefs,                 // io.
+  //gstrtphdrext,               // io.
+  //gstrtpmeta,                 // io.
+  //gstrtppayloads,             // io.
 
   GLIBTools,
   gstTools;
@@ -113,6 +117,14 @@ uses
     g_object_unref(obj);
 
     WriteLn('xxxxxxxxxxxxxxxxxxx');
+
+
+
+
+    obj := g_object_new(GST_TYPE_RTP_BASE_AUDIO_PAYLOAD, nil);
+    WriteLn(GST_IS_RTP_BASE_AUDIO_PAYLOAD(obj));
+//    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
 
     obj := g_object_new(GST_TYPE_INTERPOLATION_CONTROL_SOURCE, nil);

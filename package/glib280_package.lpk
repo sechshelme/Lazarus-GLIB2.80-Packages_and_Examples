@@ -99,6 +99,10 @@
         <Filename Value="gst124_controller.pas"/>
         <UnitName Value="gst124_controller"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_rtp.pas"/>
+        <UnitName Value="gst124_rtp"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>
