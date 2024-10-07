@@ -31,6 +31,7 @@ const
   libgstsdp = 'libgstsdp-1.0';
   libgstmpegts = 'libgstmpegts-1.0';
   libgsttag = 'libgsttag-1.0';
+  libgstfft = 'libgstfft-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -50,6 +51,7 @@ const
   libgstsdp = 'gstsdp-1.0-o.dll';
   libgstmpegts = 'gstmpegts-1.0-0.dll';
   libgsttag = 'gsttag-1.0-0.dll';
+  libgstfft = 'gstfft-1.0-0.dll';
   {$endif}
 
   // ==== Diverses

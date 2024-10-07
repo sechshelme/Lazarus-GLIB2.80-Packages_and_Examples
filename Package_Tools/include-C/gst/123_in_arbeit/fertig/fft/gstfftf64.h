@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __GST_FFT_F32_H__
-#define __GST_FFT_F32_H__
+#ifndef __GST_FFT_F64_H__
+#define __GST_FFT_F64_H__
 
 #include <glib.h>
 #include <gst/gst.h>
@@ -27,45 +27,45 @@
 
 
 
-typedef struct _GstFFTF32 GstFFTF32;
-typedef struct _GstFFTF32Complex GstFFTF32Complex;
+typedef struct _GstFFTF64 GstFFTF64;
+typedef struct _GstFFTF64Complex GstFFTF64Complex;
 
-/* Copy of kiss_fft_f32_cpx for documentation reasons,
+/* Copy of kiss_fft_f64_cpx for documentation reasons,
  * do NOT change! */
 
 /**
- * GstFFTF32Complex:
+ * GstFFTF64Complex:
  * @r: Real part
  * @i: Imaginary part
  *
  * Data type for complex numbers composed of
- * 32 bit float.
+ * 64 bit float.
  */
-struct _GstFFTF32Complex
+struct _GstFFTF64Complex
 {
-  gfloat r;
-  gfloat i;
+  gdouble r;
+  gdouble i;
 };
 
 /* Functions */
 
-GST_FFT_API
-GstFFTF32 *   gst_fft_f32_new           (gint len, gboolean inverse);
 
-GST_FFT_API
-void          gst_fft_f32_free          (GstFFTF32 *self);
-
-GST_FFT_API
-void          gst_fft_f32_fft           (GstFFTF32 *self, const gfloat *timedata,
-                                         GstFFTF32Complex *freqdata);
-
-GST_FFT_API
-void          gst_fft_f32_inverse_fft   (GstFFTF32 *self, const GstFFTF32Complex *freqdata,
-                                         gfloat *timedata);
-
-GST_FFT_API
-void          gst_fft_f32_window        (GstFFTF32 *self, gfloat *timedata, GstFFTWindow window);
+GstFFTF64 *     gst_fft_f64_new         (gint len, gboolean inverse);
 
 
+void            gst_fft_f64_free        (GstFFTF64 *self);
 
-#endif /* __GST_FFT_F32_H__ */
+
+void            gst_fft_f64_fft         (GstFFTF64 *self, const gdouble *timedata,
+                                         GstFFTF64Complex *freqdata);
+
+
+void            gst_fft_f64_inverse_fft (GstFFTF64 *self, const GstFFTF64Complex *freqdata,
+                                         gdouble *timedata);
+
+
+void            gst_fft_f64_window      (GstFFTF64 *self, gdouble *timedata, GstFFTWindow window);
+
+
+
+#endif /* __GST_FFT_F64_H__ */

@@ -24,6 +24,7 @@ uses
   gst124_webrtc_nice,
   gst124_mpegts,
   gst124_tag,
+  gst124_fft,
 
 
   //mpegts,                          // io.
@@ -46,7 +47,11 @@ uses
   //tag_enumtypes,
   //xmpwriter,
 
-
+  //gstfft,
+  //gstfftf32,
+  //gstfftf64,
+  //gstffts16,
+  //gstffts32,
 
 
 
@@ -94,6 +99,7 @@ uses
     sl: TStringList;
     obj: PGstShmAllocator;
     pipeline, mse: PGstElement;
+    fft: PGstFFTF64;
   begin
     gst_init(nil, nil);
 
@@ -104,6 +110,9 @@ uses
     if mse = nil then begin
       WriteLn('mse error');
     end;
+
+fft:=    gst_fft_f64_new(1024, True);
+if fft=nil then WriteLn('fft error') else WriteLn('fft io.');
 
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);

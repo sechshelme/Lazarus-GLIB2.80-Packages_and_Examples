@@ -8,6 +8,7 @@
 #include <gst/sdp/sdp.h>
 #include <gst/check/check.h>
 #include <gst/analytics/analytics.h>
+#include <gst/fft/fft.h>
 #include <gst/audio/gstnonstreamaudiodecoder.h>
 #include <gst/base/base.h>
 #include <gst/mse/mse.h>
@@ -75,4 +76,4 @@ gst_buffer_get_ancillary_meta(0);
 GST_AUDIO_BASE_SINK_CLOCK(NULL);
 }
 
-GST_TYPE_MPEGTS_DVB_CABLE_DELIVERY_SYSTEM_DESCRIPTOR
+

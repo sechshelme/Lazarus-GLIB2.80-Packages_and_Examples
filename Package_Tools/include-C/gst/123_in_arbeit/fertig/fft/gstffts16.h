@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __GST_FFT_F64_H__
-#define __GST_FFT_F64_H__
+#ifndef __GST_FFT_S16_H__
+#define __GST_FFT_S16_H__
 
 #include <glib.h>
 #include <gst/gst.h>
@@ -27,45 +27,45 @@
 
 
 
-typedef struct _GstFFTF64 GstFFTF64;
-typedef struct _GstFFTF64Complex GstFFTF64Complex;
+typedef struct _GstFFTS16 GstFFTS16;
+typedef struct _GstFFTS16Complex GstFFTS16Complex;
 
-/* Copy of kiss_fft_f64_cpx for documentation reasons,
+/* Copy of kiss_fft_s16_cpx for documentation reasons,
  * do NOT change! */
 
 /**
- * GstFFTF64Complex:
+ * GstFFTS16Complex:
  * @r: Real part
  * @i: Imaginary part
  *
  * Data type for complex numbers composed of
- * 64 bit float.
+ * signed 16 bit integers.
  */
-struct _GstFFTF64Complex
+struct _GstFFTS16Complex
 {
-  gdouble r;
-  gdouble i;
+  gint16 r;
+  gint16 i;
 };
 
 /* Functions */
 
-GST_FFT_API
-GstFFTF64 *     gst_fft_f64_new         (gint len, gboolean inverse);
 
-GST_FFT_API
-void            gst_fft_f64_free        (GstFFTF64 *self);
-
-GST_FFT_API
-void            gst_fft_f64_fft         (GstFFTF64 *self, const gdouble *timedata,
-                                         GstFFTF64Complex *freqdata);
-
-GST_FFT_API
-void            gst_fft_f64_inverse_fft (GstFFTF64 *self, const GstFFTF64Complex *freqdata,
-                                         gdouble *timedata);
-
-GST_FFT_API
-void            gst_fft_f64_window      (GstFFTF64 *self, gdouble *timedata, GstFFTWindow window);
+GstFFTS16 *     gst_fft_s16_new         (gint len, gboolean inverse);
 
 
+void            gst_fft_s16_free        (GstFFTS16 *self);
 
-#endif /* __GST_FFT_F64_H__ */
+
+void            gst_fft_s16_fft         (GstFFTS16 *self, const gint16 *timedata,
+                                         GstFFTS16Complex *freqdata);
+
+
+void            gst_fft_s16_inverse_fft (GstFFTS16 *self, const GstFFTS16Complex *freqdata,
+                                         gint16 *timedata);
+
+
+void            gst_fft_s16_window      (GstFFTS16 *self, gint16 *timedata, GstFFTWindow window);
+
+
+
+#endif /* __GST_FFT_S16_H__ */

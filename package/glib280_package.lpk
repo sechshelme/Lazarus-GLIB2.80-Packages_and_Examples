@@ -87,6 +87,10 @@
         <Filename Value="gst124_tag.pas"/>
         <UnitName Value="gst124_tag"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_fft.pas"/>
+        <UnitName Value="gst124_fft"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>
