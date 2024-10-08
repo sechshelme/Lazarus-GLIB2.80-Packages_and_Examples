@@ -115,6 +115,10 @@
         <Filename Value="gst124_va.pas"/>
         <UnitName Value="gst124_va"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_player.pas"/>
+        <UnitName Value="gst124_player"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

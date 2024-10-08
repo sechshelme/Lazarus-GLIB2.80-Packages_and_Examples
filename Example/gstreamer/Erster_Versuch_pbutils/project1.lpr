@@ -31,6 +31,7 @@ uses
   gst124_rtsp,
   gst124_wayland,
   gst124_va,
+  gst124_player,
 
   //gstva,                            // io.
   //va_enumtypes,                     // io.
@@ -39,6 +40,14 @@ uses
   //gstvadisplay_wrapped,             // io. -> gstvadisplay
   //gstvaallocator,                   // io. -> gstva, gstvadisplay
   //gstvautils,                       // io. -> gstvadisplay
+
+  //gstplayer_media_info,                           // io.
+  //gstplayer,                                      // io. -> gstplayer_media_info
+  //gstplayer_g_main_context_signal_dispatcher,     // io. -> gstplayer
+  //gstplayer_signal_dispatcher,                    // io. -> gstplayer
+  //gstplayer_video_overlay_video_renderer,         // io. -> gstplayer
+  //gstplayer_video_renderer,                       // io. -> gstplayer
+  //gstplayer_visualization,                        // io.
 
 
   GLIBTools,
@@ -108,22 +117,29 @@ uses
     //  gst_check_remove_log_filter(nil);
 
 
+    obj := g_object_new(GST_TYPE_PLAYER_G_MAIN_CONTEXT_SIGNAL_DISPATCHER, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_PLAYER_G_MAIN_CONTEXT_SIGNAL_DISPATCHER(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
-     obj := g_object_new(GST_TYPE_VA_DMABUF_ALLOCATOR, nil);
-     if obj <> nil then begin
-       WriteLn('io');
-     end;
-     WriteLn(GST_IS_VA_DMABUF_ALLOCATOR(obj));
-     GObjectShowProperty(obj);
-     g_object_unref(obj);
+    obj := g_object_new(GST_TYPE_VA_DMABUF_ALLOCATOR, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_VA_DMABUF_ALLOCATOR(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
-     obj := g_object_new(GST_TYPE_TAG_XMP_WRITER, nil);
-     if obj <> nil then begin
-       WriteLn('io');
-     end;
-     WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
-     GObjectShowProperty(obj);
-     g_object_unref(obj);
+    obj := g_object_new(GST_TYPE_TAG_XMP_WRITER, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
     obj := g_object_new(GST_TYPE_RTSP_EXTENSION, nil);
     if obj <> nil then begin
@@ -133,15 +149,13 @@ uses
     GObjectShowProperty(obj);
     g_object_unref(obj);
 
-//    obj := g_object_new(GST_TYPE_WL_WINDOW, nil);
+    //    obj := g_object_new(GST_TYPE_WL_WINDOW, nil);
     if obj <> nil then begin
       WriteLn('io');
     end;
     WriteLn(GST_IS_WL_WINDOW(obj));
-//    GObjectShowProperty(obj);
+    //    GObjectShowProperty(obj);
     g_object_unref(obj);
-
-
 
 
 
@@ -153,7 +167,7 @@ uses
 
     obj := g_object_new(GST_TYPE_RTP_BASE_AUDIO_PAYLOAD, nil);
     WriteLn(GST_IS_RTP_BASE_AUDIO_PAYLOAD(obj));
-//    GObjectShowProperty(obj);
+    //    GObjectShowProperty(obj);
     g_object_unref(obj);
 
 
