@@ -36,6 +36,8 @@ const
   libgstcontroller = 'libgstcontroller-1.0';
   libgstrtp = 'libgstrtp-1.0';
   libgstrtsp = 'libgstrtsp-1.0';
+  libgstwayland = 'libgstwayland-1.0';
+  libgstva = 'libgstva-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -60,6 +62,8 @@ const
   libgstcontroller = 'gstcontroller-1.0-0.dll';
   libgstrtp = 'gstrtp-1.0-0.dll';
   libgstrtsp = 'gstrtsp-1.0-0.dll';
+  libgstwayland = 'lstwayland-1.0-0.dll';
+  libgstva = 'gstva-1.0-0.dll';
   {$endif}
 
   // ==== Diverses
@@ -75,8 +79,13 @@ type
     tv_nsec: int64;
   end;
 
-  // === GST
+  // ==== va.h
+type
+  TVAGenericID = cuint;
+  PVASurfaceID = ^TVASurfaceID;
+  TVASurfaceID = TVAGenericID;
 
+  // === GST
 const
   GST_PADDING = 4;
 
@@ -268,20 +277,21 @@ type
   end;
   PGstDeviceProviderFactory = ^TGstDeviceProviderFactory;
 
-// video/video_chroma
+  // video/video_chroma
 type
   PGstVideoChromaSite = ^TGstVideoChromaSite;
-  TGstVideoChromaSite =  Longint;
-  Const
-    GST_VIDEO_CHROMA_SITE_UNKNOWN = 0;
-    GST_VIDEO_CHROMA_SITE_NONE = 1 shl 0;
-    GST_VIDEO_CHROMA_SITE_H_COSITED = 1 shl 1;
-    GST_VIDEO_CHROMA_SITE_V_COSITED = 1 shl 2;
-    GST_VIDEO_CHROMA_SITE_ALT_LINE = 1 shl 3;
-    GST_VIDEO_CHROMA_SITE_COSITED = GST_VIDEO_CHROMA_SITE_H_COSITED or GST_VIDEO_CHROMA_SITE_V_COSITED;
-    GST_VIDEO_CHROMA_SITE_JPEG = GST_VIDEO_CHROMA_SITE_NONE;
-    GST_VIDEO_CHROMA_SITE_MPEG2 = GST_VIDEO_CHROMA_SITE_H_COSITED;
-    GST_VIDEO_CHROMA_SITE_DV = GST_VIDEO_CHROMA_SITE_COSITED or GST_VIDEO_CHROMA_SITE_ALT_LINE;
+  TGstVideoChromaSite = longint;
+
+const
+  GST_VIDEO_CHROMA_SITE_UNKNOWN = 0;
+  GST_VIDEO_CHROMA_SITE_NONE = 1 shl 0;
+  GST_VIDEO_CHROMA_SITE_H_COSITED = 1 shl 1;
+  GST_VIDEO_CHROMA_SITE_V_COSITED = 1 shl 2;
+  GST_VIDEO_CHROMA_SITE_ALT_LINE = 1 shl 3;
+  GST_VIDEO_CHROMA_SITE_COSITED = GST_VIDEO_CHROMA_SITE_H_COSITED or GST_VIDEO_CHROMA_SITE_V_COSITED;
+  GST_VIDEO_CHROMA_SITE_JPEG = GST_VIDEO_CHROMA_SITE_NONE;
+  GST_VIDEO_CHROMA_SITE_MPEG2 = GST_VIDEO_CHROMA_SITE_H_COSITED;
+  GST_VIDEO_CHROMA_SITE_DV = GST_VIDEO_CHROMA_SITE_COSITED or GST_VIDEO_CHROMA_SITE_ALT_LINE;
 
 
   {$DEFINE read_interface}

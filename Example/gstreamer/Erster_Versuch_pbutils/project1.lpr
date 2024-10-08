@@ -29,16 +29,17 @@ uses
   gst124_controller,
   gst124_rtp,
   gst124_rtsp,
+  gst124_wayland,
+  gst124_va,
 
+  //gstva,                            // io.
+  //va_enumtypes,                     // io.
+  //gstvadisplay,                     // io.
+  //gstvadisplay_drm,                 // io. -> gstvadisplay
+  //gstvadisplay_wrapped,             // io. -> gstvadisplay
+  //gstvaallocator,                   // io. -> gstva, gstvadisplay
+  //gstvautils,                       // io. -> gstvadisplay
 
-  //gstrtspdefs,                  // io.
-  //gstrtsp_enumtypes,            // io.
-  //gstrtspmessage,               // io. -> gstrtspdefs
-  //gstrtsprange,                 // io. -> gstrtspdefs
-  //gstrtsptransport,             // io. -> gstrtspdefs
-  //gstrtspurl,                   // io. -> gstrtsptransport, gstrtspdefs
-  //gstrtspconnection,            // io. -> gstrtspurl, gstrtspdefs, gstrtspmessage
-  //gstrtspextension,             // io. -> gstrtspmessage, gstrtspdefs, gstrtsptransport, gstrtspurl
 
   GLIBTools,
   gstTools;
@@ -106,13 +107,23 @@ uses
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);
 
-    obj := g_object_new(GST_TYPE_TAG_XMP_WRITER, nil);
-    if obj <> nil then begin
-      WriteLn('io');
-    end;
-    WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
-    GObjectShowProperty(obj);
-    g_object_unref(obj);
+
+
+     obj := g_object_new(GST_TYPE_VA_DMABUF_ALLOCATOR, nil);
+     if obj <> nil then begin
+       WriteLn('io');
+     end;
+     WriteLn(GST_IS_VA_DMABUF_ALLOCATOR(obj));
+     GObjectShowProperty(obj);
+     g_object_unref(obj);
+
+     obj := g_object_new(GST_TYPE_TAG_XMP_WRITER, nil);
+     if obj <> nil then begin
+       WriteLn('io');
+     end;
+     WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
+     GObjectShowProperty(obj);
+     g_object_unref(obj);
 
     obj := g_object_new(GST_TYPE_RTSP_EXTENSION, nil);
     if obj <> nil then begin
@@ -121,6 +132,17 @@ uses
     WriteLn(GST_IS_RTSP_EXTENSION(obj));
     GObjectShowProperty(obj);
     g_object_unref(obj);
+
+//    obj := g_object_new(GST_TYPE_WL_WINDOW, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_WL_WINDOW(obj));
+//    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+
+
 
 
 

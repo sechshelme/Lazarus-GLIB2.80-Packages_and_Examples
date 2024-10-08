@@ -107,6 +107,14 @@
         <Filename Value="gst124_rtsp.pas"/>
         <UnitName Value="gst124_rtsp"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_wayland.pas"/>
+        <UnitName Value="gst124_wayland"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_va.pas"/>
+        <UnitName Value="gst124_va"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

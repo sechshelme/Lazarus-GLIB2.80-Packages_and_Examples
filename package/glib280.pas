@@ -16,14 +16,14 @@ const
   libglib2 = 'libglib-2.0';
   libgobject2_0 = 'libgobject-2.0';
   libgio2 = 'libgio-2.0';
-//  libgtk4 = 'libgtk-4';
+  libgtk4 = 'libgtk-4';
   {$ENDIF}
 
   {$IFDEF Windows}
   libgio2 = 'gio-2.0-0.dll';
   libglib2 = 'glib-2.0-0.dll';
   libgobject2_0 = 'gobject-2.0-0.dll';
-//  libgtk4 = 'gtk-4.dll';
+  libgtk4 = 'gtk-4.dll';
   {$ENDIF}
 
   // === Externes
@@ -42,6 +42,74 @@ type
     tm_zone: PChar;
   end;
   Ptm = ^Ttm;
+
+  // Wayland;
+
+  Twl_surface = Pointer;
+  Pwl_surface = ^Twl_surface;
+
+  Twl_seat = Pointer;
+  Pwl_seat = ^Twl_seat;
+
+  Twl_output = Pointer;
+  Pwl_output = ^Twl_output;
+
+  Twl_display = Pointer;
+  Pwl_display = ^Twl_display;
+
+  Twl_compositor = Pointer;
+  Pwl_compositor = ^Twl_compositor;
+
+  Twl_pointer = Pointer;
+  Pwl_pointer = ^Twl_pointer;
+
+  Twl_keyboard = Pointer;
+  Pwl_keyboard = ^Twl_keyboard;
+
+  Txkb_keymap = Pointer;
+  Pxkb_keymap = ^Txkb_keymap;
+
+  Twl_shm_format=Pointer;
+  Pwl_shm_format=^Twl_shm_format;
+
+  Twl_callback_listener=Pointer;
+  Pwl_callback_listener=^Twl_callback_listener;
+
+  Twl_callback=Pointer;
+  Pwl_callback=^Twl_callback;
+  PPwl_callback=^Pwl_callback;
+
+  Twl_event_queue=Pointer;
+  Pwl_event_queue=^Twl_event_queue;
+
+  Twl_subcompositor=Pointer;
+  Pwl_subcompositor=^Twl_subcompositor;
+
+  Twl_shm=Pointer;
+  Pwl_shm=^Twl_shm;
+
+  Twl_subsurface=Pointer;
+  Pwl_subsurface=^Twl_subsurface;
+
+  Twl_buffer=Pointer;
+  Pwl_buffer=^Twl_buffer;
+
+  Txdg_wm_base=Pointer;
+  Pxdg_wm_base=^Txdg_wm_base;
+
+  Tzwp_fullscreen_shell_v1=Pointer;
+  Pzwp_fullscreen_shell_v1=^Tzwp_fullscreen_shell_v1;
+
+  Twp_viewporter=Pointer;
+  Pwp_viewporter=^Twp_viewporter;
+
+  Tzwp_linux_dmabuf_v1=Pointer;
+  Pzwp_linux_dmabuf_v1=^Tzwp_linux_dmabuf_v1;
+
+  Twp_single_pixel_buffer_manager_v1=Pointer;
+  Pwp_single_pixel_buffer_manager_v1=^Twp_single_pixel_buffer_manager_v1;
+
+
 
   // ====
 
@@ -112,6 +180,8 @@ type
   Pguintptr = PPtrUInt;
 
   Tgoffset = SizeInt;
+
+  Tuintptr_t=PtrUInt;
 
   // gio
 

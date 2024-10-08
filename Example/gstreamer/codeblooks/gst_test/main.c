@@ -12,6 +12,9 @@
 #include <gst/audio/gstnonstreamaudiodecoder.h>
 #include <gst/base/base.h>
 #include <gst/mse/mse.h>
+#include <gst/va/gstva.h>
+#include <gst/wayland/wayland.h>
+#include <wayland-client-core.h>
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
@@ -76,4 +79,9 @@ gst_buffer_get_ancillary_meta(0);
 GST_AUDIO_BASE_SINK_CLOCK(NULL);
 }
 
+wl_display
+gst_wl_display_new_existing
 
+G_PASTE
+GST_VA_DISPLAY_IS_IMPLEMENTATION
+VASurfaceID

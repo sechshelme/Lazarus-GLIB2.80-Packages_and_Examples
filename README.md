@@ -18,6 +18,10 @@ Plugin-Infos:
 - `gst-inspect-1.0 --plugin`
 - `gst-inspect-1.0 --plugin alsa`
 
+### Pakete
+`sudo apt install libva-dev`
+
+
 
 ### C-Examples
 https://gstreamer.freedesktop.org/documentation/tutorials/basic/hello-world.html?gi-language=c
