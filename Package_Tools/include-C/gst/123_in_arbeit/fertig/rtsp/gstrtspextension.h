@@ -76,44 +76,44 @@ struct _GstRTSPExtensionInterface {
   gpointer                 _gst_reserved[GST_PADDING];
 };
 
-GST_RTSP_API
+
 GType           gst_rtsp_extension_get_type          (void);
 
 /* invoke vfunction on interface */
 
-GST_RTSP_API
+
 gboolean        gst_rtsp_extension_detect_server     (GstRTSPExtension *ext, GstRTSPMessage *resp);
 
-GST_RTSP_API
+
 GstRTSPResult   gst_rtsp_extension_before_send       (GstRTSPExtension *ext, GstRTSPMessage *req);
 
-GST_RTSP_API
+
 GstRTSPResult   gst_rtsp_extension_after_send        (GstRTSPExtension *ext, GstRTSPMessage *req,
                                                       GstRTSPMessage *resp);
 
-GST_RTSP_API
+
 GstRTSPResult   gst_rtsp_extension_parse_sdp         (GstRTSPExtension *ext, GstSDPMessage *sdp,
                                                       GstStructure *s);
 
-GST_RTSP_API
+
 GstRTSPResult   gst_rtsp_extension_setup_media       (GstRTSPExtension *ext, GstSDPMedia *media);
 
-GST_RTSP_API
+
 gboolean        gst_rtsp_extension_configure_stream  (GstRTSPExtension *ext, GstCaps *caps);
 
-GST_RTSP_API
+
 GstRTSPResult   gst_rtsp_extension_get_transports    (GstRTSPExtension *ext, GstRTSPLowerTrans protocols,
                                                       gchar **transport);
 
-GST_RTSP_API
+
 GstRTSPResult   gst_rtsp_extension_stream_select     (GstRTSPExtension *ext, GstRTSPUrl *url);
 
-GST_RTSP_API
+
 GstRTSPResult   gst_rtsp_extension_receive_request   (GstRTSPExtension *ext, GstRTSPMessage *req);
 
 /* signal emission */
 
-GST_RTSP_API
+
 GstRTSPResult   gst_rtsp_extension_send              (GstRTSPExtension *ext, GstRTSPMessage *req,
                                                       GstRTSPMessage *resp);
 

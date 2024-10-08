@@ -1,4 +1,40 @@
-/* GStreamer
+
+unit gstrtsptransport;
+interface
+
+{
+  Automatically converted by H2Pas 1.0.0 from gstrtsptransport.h
+  The following command line parameters were used:
+    -p
+    -T
+    -d
+    -c
+    -e
+    gstrtsptransport.h
+}
+
+{ Pointers to basic pascal types, inserted by h2pas conversion program.}
+Type
+  PLongint  = ^Longint;
+  PSmallInt = ^SmallInt;
+  PByte     = ^Byte;
+  PWord     = ^Word;
+  PDWord    = ^DWord;
+  PDouble   = ^Double;
+
+Type
+Pgchar  = ^gchar;
+PGstRTSPLowerTrans  = ^GstRTSPLowerTrans;
+PGstRTSPProfile  = ^GstRTSPProfile;
+PGstRTSPRange  = ^GstRTSPRange;
+PGstRTSPTransMode  = ^GstRTSPTransMode;
+PGstRTSPTransport  = ^GstRTSPTransport;
+{$IFDEF FPC}
+{$PACKRECORDS C}
+{$ENDIF}
+
+
+{ GStreamer
  * Copyright (C) <2005,2006> Wim Taymans <wim@fluendo.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -15,8 +51,8 @@
  * License along with this library; if not, write to the
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA 02110-1301, USA.
- */
-/*
+  }
+{
  * Unless otherwise indicated, Source Code is licensed under MIT license.
  * See further explanation attached in License Statement (distributed in the file
  * LICENSE).
@@ -38,32 +74,29 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */
-
-#ifndef __GST_RTSP_TRANSPORT_H__
-#define __GST_RTSP_TRANSPORT_H__
-
-#include <gst/gstconfig.h>
-#include <gst/rtsp/gstrtspdefs.h>
-#include <gst/rtsp/gstrtsp-enumtypes.h>
-
-
-
-/**
+  }
+{$ifndef __GST_RTSP_TRANSPORT_H__}
+{$define __GST_RTSP_TRANSPORT_H__}
+{$include <gst/gstconfig.h>}
+{$include <gst/rtsp/gstrtspdefs.h>}
+{$include <gst/rtsp/gstrtsp-enumtypes.h>}
+{*
  * GstRTSPTransMode:
  * @GST_RTSP_TRANS_UNKNOWN: invalid tansport mode
  * @GST_RTSP_TRANS_RTP: transfer RTP data
  * @GST_RTSP_TRANS_RDT: transfer RDT (RealMedia) data
  *
  * The transfer mode to use.
- */
-typedef enum {
-  GST_RTSP_TRANS_UNKNOWN =  0,
-  GST_RTSP_TRANS_RTP     = (1 << 0),
-  GST_RTSP_TRANS_RDT     = (1 << 1)
-} GstRTSPTransMode;
-
-/**
+  }
+type
+  PGstRTSPTransMode = ^TGstRTSPTransMode;
+  TGstRTSPTransMode =  Longint;
+  Const
+    GST_RTSP_TRANS_UNKNOWN = 0;
+    GST_RTSP_TRANS_RTP = 1 shl 0;
+    GST_RTSP_TRANS_RDT = 1 shl 1;
+;
+{*
  * GstRTSPProfile:
  * @GST_RTSP_PROFILE_UNKNOWN: invalid profile
  * @GST_RTSP_PROFILE_AVP: the Audio/Visual profile (RFC 3551)
@@ -72,18 +105,20 @@ typedef enum {
  * @GST_RTSP_PROFILE_SAVPF: the secure Audio/Visual profile with feedback (RFC 5124)
  *
  * The transfer profile to use.
- */
-/* FIXME 2.0: This should probably be an enum, not flags and maybe be replaced
- * by GstRTPTransport */
-typedef enum {
-  GST_RTSP_PROFILE_UNKNOWN =  0,
-  GST_RTSP_PROFILE_AVP     = (1 << 0),
-  GST_RTSP_PROFILE_SAVP    = (1 << 1),
-  GST_RTSP_PROFILE_AVPF    = (1 << 2),
-  GST_RTSP_PROFILE_SAVPF   = (1 << 3),
-} GstRTSPProfile;
-
-/**
+  }
+{ FIXME 2.0: This should probably be an enum, not flags and maybe be replaced
+ * by GstRTPTransport  }
+type
+  PGstRTSPProfile = ^TGstRTSPProfile;
+  TGstRTSPProfile =  Longint;
+  Const
+    GST_RTSP_PROFILE_UNKNOWN = 0;
+    GST_RTSP_PROFILE_AVP = 1 shl 0;
+    GST_RTSP_PROFILE_SAVP = 1 shl 1;
+    GST_RTSP_PROFILE_AVPF = 1 shl 2;
+    GST_RTSP_PROFILE_SAVPF = 1 shl 3;
+;
+{*
  * GstRTSPLowerTrans:
  * @GST_RTSP_LOWER_TRANS_UNKNOWN: invalid transport flag
  * @GST_RTSP_LOWER_TRANS_UDP: stream data over UDP
@@ -93,33 +128,33 @@ typedef enum {
  * @GST_RTSP_LOWER_TRANS_TLS: encrypt TCP and HTTP with TLS
  *
  * The different transport methods.
- */
-typedef enum {
-  GST_RTSP_LOWER_TRANS_UNKNOWN   = 0,
-  GST_RTSP_LOWER_TRANS_UDP       = (1 << 0),
-  GST_RTSP_LOWER_TRANS_UDP_MCAST = (1 << 1),
-  GST_RTSP_LOWER_TRANS_TCP       = (1 << 2),
-  GST_RTSP_LOWER_TRANS_HTTP      = (1 << 4),
-  GST_RTSP_LOWER_TRANS_TLS       = (1 << 5)
-} GstRTSPLowerTrans;
-
-typedef struct _GstRTSPRange GstRTSPRange;
-typedef struct _GstRTSPTransport GstRTSPTransport;
-
-/**
+  }
+type
+  PGstRTSPLowerTrans = ^TGstRTSPLowerTrans;
+  TGstRTSPLowerTrans =  Longint;
+  Const
+    GST_RTSP_LOWER_TRANS_UNKNOWN = 0;
+    GST_RTSP_LOWER_TRANS_UDP = 1 shl 0;
+    GST_RTSP_LOWER_TRANS_UDP_MCAST = 1 shl 1;
+    GST_RTSP_LOWER_TRANS_TCP = 1 shl 2;
+    GST_RTSP_LOWER_TRANS_HTTP = 1 shl 4;
+    GST_RTSP_LOWER_TRANS_TLS = 1 shl 5;
+;
+type
+{*
  * GstRTSPRange:
  * @min: minimum value of the range
  * @max: maximum value of the range
  *
  * A type to specify a range.
- */
+  }
+  PGstRTSPRange = ^TGstRTSPRange;
+  TGstRTSPRange = record
+      min : Tgint;
+      max : Tgint;
+    end;
 
-struct _GstRTSPRange {
-  gint min;
-  gint max;
-};
-
-/**
+{*
  * GstRTSPTransport:
  * @trans: the transport mode
  * @profile: the tansport profile
@@ -142,60 +177,48 @@ struct _GstRTSPRange {
  * @ssrc: the ssrc that the sender/receiver will use
  *
  * A structure holding the RTSP transport values.
- */
-
-struct _GstRTSPTransport {
-  GstRTSPTransMode  trans;
-  GstRTSPProfile    profile;
-  GstRTSPLowerTrans lower_transport;
-
-  gchar         *destination;
-  gchar         *source;
-  guint          layers;
-  gboolean       mode_play;
-  gboolean       mode_record;
-  gboolean       append;
-  GstRTSPRange   interleaved;
-
-  /* multicast specific */
-  guint  ttl;
-  GstRTSPRange   port;
-
-  /* UDP/TCP specific */
-  GstRTSPRange   client_port;
-  GstRTSPRange   server_port;
-  /* RTP specific */
-  guint          ssrc;
-
-  /*< private >*/
-  gpointer _gst_reserved[GST_PADDING];
-};
-
-GST_RTSP_API
-GstRTSPResult      gst_rtsp_transport_new          (GstRTSPTransport **transport);
-
-GST_RTSP_API
-GstRTSPResult      gst_rtsp_transport_init         (GstRTSPTransport *transport);
-
-GST_RTSP_API
-GstRTSPResult      gst_rtsp_transport_parse        (const gchar *str, GstRTSPTransport *transport);
-
-GST_RTSP_API
-gchar*             gst_rtsp_transport_as_text      (GstRTSPTransport *transport);
-
-GST_RTSP_DEPRECATED_FOR(gst_rtsp_transport_get_media_type)
-GstRTSPResult      gst_rtsp_transport_get_mime     (GstRTSPTransMode trans, const gchar **mime);
-
-GST_RTSP_API
-GstRTSPResult      gst_rtsp_transport_get_manager  (GstRTSPTransMode trans, const gchar **manager, guint option);
-
-GST_RTSP_API
-GstRTSPResult      gst_rtsp_transport_get_media_type (GstRTSPTransport *transport,
-                                                      const gchar **media_type);
-
-GST_RTSP_API
-GstRTSPResult      gst_rtsp_transport_free         (GstRTSPTransport *transport);
+  }
+{ multicast specific  }
+{ UDP/TCP specific  }
+{ RTP specific  }
+{< private > }
+  PGstRTSPTransport = ^TGstRTSPTransport;
+  TGstRTSPTransport = record
+      trans : TGstRTSPTransMode;
+      profile : TGstRTSPProfile;
+      lower_transport : TGstRTSPLowerTrans;
+      destination : Pgchar;
+      source : Pgchar;
+      layers : Tguint;
+      mode_play : Tgboolean;
+      mode_record : Tgboolean;
+      append : Tgboolean;
+      interleaved : TGstRTSPRange;
+      ttl : Tguint;
+      port : TGstRTSPRange;
+      client_port : TGstRTSPRange;
+      server_port : TGstRTSPRange;
+      ssrc : Tguint;
+      _gst_reserved : array[0..(GST_PADDING)-1] of Tgpointer;
+    end;
 
 
+function gst_rtsp_transport_new(transport:PPGstRTSPTransport):TGstRTSPResult;cdecl;external;
+function gst_rtsp_transport_init(transport:PGstRTSPTransport):TGstRTSPResult;cdecl;external;
+(* Const before type ignored *)
+function gst_rtsp_transport_parse(str:Pgchar; transport:PGstRTSPTransport):TGstRTSPResult;cdecl;external;
+function gst_rtsp_transport_as_text(transport:PGstRTSPTransport):Pgchar;cdecl;external;
+(* Const before type ignored *)
+function gst_rtsp_transport_get_mime(trans:TGstRTSPTransMode; mime:PPgchar):TGstRTSPResult;cdecl;external;
+(* Const before type ignored *)
+function gst_rtsp_transport_get_manager(trans:TGstRTSPTransMode; manager:PPgchar; option:Tguint):TGstRTSPResult;cdecl;external;
+(* Const before type ignored *)
+function gst_rtsp_transport_get_media_type(transport:PGstRTSPTransport; media_type:PPgchar):TGstRTSPResult;cdecl;external;
+function gst_rtsp_transport_free(transport:PGstRTSPTransport):TGstRTSPResult;cdecl;external;
+{$endif}
+{ __GST_RTSP_TRANSPORT_H__  }
 
-#endif /* __GST_RTSP_TRANSPORT_H__ */
+implementation
+
+
+end.

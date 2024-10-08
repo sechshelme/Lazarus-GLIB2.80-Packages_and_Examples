@@ -103,6 +103,10 @@
         <Filename Value="gst124_rtp.pas"/>
         <UnitName Value="gst124_rtp"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_rtsp.pas"/>
+        <UnitName Value="gst124_rtsp"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

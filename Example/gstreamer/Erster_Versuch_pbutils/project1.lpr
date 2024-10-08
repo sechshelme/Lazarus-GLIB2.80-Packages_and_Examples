@@ -28,19 +28,17 @@ uses
   gst124_codecparsers,
   gst124_controller,
   gst124_rtp,
+  gst124_rtsp,
 
 
-
-  //gstrtp_enumtypes,           // io.
-  //gstrtcpbuffer,              // io.
-  //gstrtpbasepayload,          // io.
-  //gstrtpbaseaudiopayload,     // io. -> gstrtpbasepayload
-  //gstrtpbuffer,               // io.
-  //gstrtpbasedepayload,        // io. -> gstrtpbuffer
-  //gstrtpdefs,                 // io.
-  //gstrtphdrext,               // io.
-  //gstrtpmeta,                 // io.
-  //gstrtppayloads,             // io.
+  //gstrtspdefs,                  // io.
+  //gstrtsp_enumtypes,            // io.
+  //gstrtspmessage,               // io. -> gstrtspdefs
+  //gstrtsprange,                 // io. -> gstrtspdefs
+  //gstrtsptransport,             // io. -> gstrtspdefs
+  //gstrtspurl,                   // io. -> gstrtsptransport, gstrtspdefs
+  //gstrtspconnection,            // io. -> gstrtspurl, gstrtspdefs, gstrtspmessage
+  //gstrtspextension,             // io. -> gstrtspmessage, gstrtspdefs, gstrtsptransport, gstrtspurl
 
   GLIBTools,
   gstTools;
@@ -115,6 +113,16 @@ uses
     WriteLn(GST_IS_WEBRTC_NICE_TRANSPORT(obj));
     GObjectShowProperty(obj);
     g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_RTSP_EXTENSION, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_RTSP_EXTENSION(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+
 
     WriteLn('xxxxxxxxxxxxxxxxxxx');
 

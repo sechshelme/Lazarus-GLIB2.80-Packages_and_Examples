@@ -35,6 +35,7 @@ const
   libgstcodecparsers = 'libgstcodecparsers-1.0';
   libgstcontroller = 'libgstcontroller-1.0';
   libgstrtp = 'libgstrtp-1.0';
+  libgstrtsp = 'libgstrtsp-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -58,6 +59,7 @@ const
   libgstcodecparsers = 'gstcodecparsers-1.0-0.dll';
   libgstcontroller = 'gstcontroller-1.0-0.dll';
   libgstrtp = 'gstrtp-1.0-0.dll';
+  libgstrtsp = 'gstrtsp-1.0-0.dll';
   {$endif}
 
   // ==== Diverses

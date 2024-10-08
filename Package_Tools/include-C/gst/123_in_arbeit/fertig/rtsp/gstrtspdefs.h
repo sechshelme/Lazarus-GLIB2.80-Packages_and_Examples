@@ -56,11 +56,11 @@
  * Macro that checks the return value of @stmt and jumps to @label when it does
  * not equal #GST_RTSP_OK.
  */
-#define GST_RTSP_CHECK(stmt, label)  \
-G_STMT_START { \
-  if (G_UNLIKELY ((res = (stmt)) != GST_RTSP_OK)) \
-    goto label; \
-} G_STMT_END
+//#define GST_RTSP_CHECK(stmt, label)  \
+//G_STMT_START { \
+//  if (G_UNLIKELY ((res = (stmt)) != GST_RTSP_OK)) \
+//    goto label; \
+//} G_STMT_END
 
 /**
  * GstRTSPResult:
@@ -432,37 +432,37 @@ typedef enum {
   GST_RTSP_STS_OPTION_NOT_SUPPORTED                 = 551
 } GstRTSPStatusCode;
 
-GST_RTSP_API
+
 gchar*             gst_rtsp_strresult          (GstRTSPResult result);
 
-GST_RTSP_API
+
 const gchar*       gst_rtsp_method_as_text     (GstRTSPMethod method);
 
-GST_RTSP_API
+
 const gchar*       gst_rtsp_version_as_text    (GstRTSPVersion version);
 
-GST_RTSP_API
+
 const gchar*       gst_rtsp_header_as_text     (GstRTSPHeaderField field);
 
-GST_RTSP_API
+
 const gchar*       gst_rtsp_status_as_text     (GstRTSPStatusCode code);
 
-GST_RTSP_API
+
 gchar*             gst_rtsp_options_as_text    (GstRTSPMethod options);
 
-GST_RTSP_API
+
 GstRTSPMethod      gst_rtsp_options_from_text  (const gchar *options);
 
-GST_RTSP_API
+
 GstRTSPHeaderField gst_rtsp_find_header_field  (const gchar *header);
 
-GST_RTSP_API
+
 GstRTSPMethod      gst_rtsp_find_method        (const gchar *method);
 
-GST_RTSP_API
+
 gboolean           gst_rtsp_header_allow_multiple (GstRTSPHeaderField field);
 
-GST_RTSP_API
+
 gchar *            gst_rtsp_generate_digest_auth_response (const gchar *algorithm,
                                                            const gchar *method,
                                                            const gchar *realm,
@@ -471,7 +471,7 @@ gchar *            gst_rtsp_generate_digest_auth_response (const gchar *algorith
                                                            const gchar *uri,
                                                            const gchar *nonce);
 
-GST_RTSP_API
+
 gchar *            gst_rtsp_generate_digest_auth_response_from_md5 (const gchar *algorithm,
                                                                     const gchar * method,
                                                                     const gchar * md5,
