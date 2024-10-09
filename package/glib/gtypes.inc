@@ -54,6 +54,24 @@ type
   Pgconstpointer = ^Tgconstpointer;
   Tgconstpointer = pointer;
 
+const
+  G_MAXINT8 = Tgint8($7f);
+  G_MAXUINT8 = Tguint8($ff);
+  G_MININT8 = Tgint8((-(G_MAXINT8)) - 1);
+
+  G_MAXINT16 = Tgint16($7fff);
+  G_MAXUINT16 = Tguint16($ffff);
+  G_MININT16 = Tgint16((-(G_MAXINT16)) - 1);
+
+  G_MAXINT32 = Tgint32($7fffffff);
+  G_MAXUINT32 = Tguint32($ffffffff);
+  G_MININT32 = Tgint32((-(G_MAXINT32)) - 1);
+
+  G_MAXINT64 = $7fffffffffffffff;
+  G_MAXUINT64 = $ffffffffffffffff;
+  G_MININT64 = Tgint64(-G_MAXINT64 - 1);
+
+type
   TGCompareFunc = function(a: Tgconstpointer; b: Tgconstpointer): Tgint; cdecl;
   TGCompareDataFunc = function(a: Tgconstpointer; b: Tgconstpointer; user_data: Tgpointer): Tgint; cdecl;
   TGEqualFunc = function(a: Tgconstpointer; b: Tgconstpointer): Tgboolean; cdecl;

@@ -109,6 +109,9 @@ type
   Twp_single_pixel_buffer_manager_v1=Pointer;
   Pwp_single_pixel_buffer_manager_v1=^Twp_single_pixel_buffer_manager_v1;
 
+  // egl
+  Tkhronos_int32_t=int32;
+  TEGLint= Tkhronos_int32_t;
 
 
   // ====
@@ -140,9 +143,6 @@ const
   G_MINLONG = G_MININT;
   G_MAXLONG = G_MAXINT;
   G_MAXULONG = G_MAXUINT;
-  G_MAXINT64 = 9223372036854775807;
-  G_MININT64 = -G_MAXINT64 - 1;
-  G_MAXUINT64 = qword(2) * qword(G_MAXINT64) + 1;
 
 type
   Tgint8 = int8;

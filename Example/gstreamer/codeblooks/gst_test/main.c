@@ -15,6 +15,8 @@
 #include <gst/va/gstva.h>
 #include <gst/wayland/wayland.h>
 #include <wayland-client-core.h>
+#include <gst/gl/gl.h>
+#include <gst/gl/egl/egl.h>
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
@@ -85,3 +87,11 @@ gst_wl_display_new_existing
 G_PASTE
 GST_VA_DISPLAY_IS_IMPLEMENTATION
 VASurfaceID
+
+G_MAXUINT32
+GstGLTextureTarget
+__FILE__
+__LINE__
+EGLint
+
+gst_egl_get_error_string

@@ -39,6 +39,7 @@ const
   libgstwayland = 'libgstwayland-1.0';
   libgstva = 'libgstva-1.0';
   libgstplayer = 'libgstplayer-1.0';
+  libgstgl = 'libgstgl-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -66,6 +67,7 @@ const
   libgstwayland = 'lstwayland-1.0-0.dll';
   libgstva = 'gstva-1.0-0.dll';
   libgstplayer = 'gstplayer-1.0-0.dd';
+  libgstgl = 'gstgl-1.0-.dll';
   {$endif}
 
   // ==== Diverses

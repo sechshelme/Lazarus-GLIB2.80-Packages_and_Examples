@@ -49,6 +49,33 @@ uses
   //gstplayer_video_renderer,                       // io. -> gstplayer
   //gstplayer_visualization,                        // io.
 
+  // ==== gl
+
+  gstgl_enums,              // io.
+  gl_enumtypes,             // io.
+  gstglfuncs,               // io.
+  gstglwindow,              // io. -> gstglfuncs
+  gstgldebug,               // io. -> gstglwindow                       makros entfernt
+  gstglquery,               // io. -> gstglwindow, gstgldebug           makros entfernt
+  gstglbasememory,          // io, -> gstglwindow, gstglquery
+  gstglbuffer,              // io. -> gstglbasememory, gstglwindow
+  gstglformat,              // io. -> gstgl_enums, gstglwindow
+  gstglmemory,              // io. -> gstgl_enums, gstglbasememory, gstglwindow, gstglformat
+  gstglmemorypbo,           // io. -> gstglmemory, gstgl_enums, gstglformat
+  gstglapi,                 // io.
+  gstglcontext,             // io. -> gstglapi, gstglwindow
+  gstgldisplay,             // io. -> gstglapi, gstglwindow
+  gstglbasefilter,          // io. -> gstglapi, gstglwindow
+  gstglbasemixer,           // io. -> gstglapi, gstglwindow
+
+  // === gl/rgl
+
+  gstegl,                   // io.
+  gstgldisplay_egl,         // io.
+  gstgldisplay_egl_device,  // io. -> gstgldisplay_egl
+  gsteglimage,              // io.
+  gstglmemoryegl,           // io. -> gsteglimage
+
 
   GLIBTools,
   gstTools;
@@ -159,6 +186,13 @@ uses
 
 
 
+    obj := g_object_new( GST_TYPE_GL_MEMORY_ALLOCATOR, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_GL_MEMORY_ALLOCATOR(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
     WriteLn('xxxxxxxxxxxxxxxxxxx');
 
