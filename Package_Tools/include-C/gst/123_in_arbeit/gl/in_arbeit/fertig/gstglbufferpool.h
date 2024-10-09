@@ -32,8 +32,8 @@
 extern
 GType gst_gl_buffer_pool_get_type (void);
 #define GST_TYPE_GL_BUFFER_POOL      (gst_gl_buffer_pool_get_type())
-#define GST_IS_GL_BUFFER_POOL(obj)   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_GL_BUFFER_POOL))
 #define GST_GL_BUFFER_POOL(obj)      (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_GL_BUFFER_POOL, GstGLBufferPool))
+#define GST_IS_GL_BUFFER_POOL(obj)   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_GL_BUFFER_POOL))
 #define GST_GL_BUFFER_POOL_CAST(obj) ((GstGLBufferPool*)(obj))
 
 /**

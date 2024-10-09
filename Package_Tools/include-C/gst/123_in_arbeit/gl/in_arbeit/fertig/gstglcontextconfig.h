@@ -112,10 +112,6 @@ extern const char * GST_GL_CONFIG_ATTRIB_MAX_SWAP_INTERVAL_NAME;
  *
  * Since: 1.20
  */
-#define GST_GL_CONFIG_STRUCTURE_SET_ARGS(def_name,ctype,val) \
-    GST_GL_CONFIG_ATTRIB_NAME(def_name), \
-    GST_GL_CONFIG_ATTRIB_GTYPE(def_name), \
-    (ctype) (val)
 
 /**
  * GstGLConfigCaveat:

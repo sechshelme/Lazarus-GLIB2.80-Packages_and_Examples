@@ -49,10 +49,9 @@
 
 
 
-#define GST_GL_CHECK_GL_VERSION(driver_major, driver_minor, \
-                                target_major, target_minor) \
-  ((driver_major) > (target_major) || \
-   ((driver_major) == (target_major) && (driver_minor) >= (target_minor)))
+#define GST_GL_CHECK_GL_VERSION(driver_major, driver_minor, target_major, target_minor) \
+  ((driver_major) > (target_major) | \
+   ((driver_major) == (target_major) & (driver_minor) >= (target_minor)))
 
 extern
 gboolean gst_gl_check_extension (const char *name, const gchar * ext);

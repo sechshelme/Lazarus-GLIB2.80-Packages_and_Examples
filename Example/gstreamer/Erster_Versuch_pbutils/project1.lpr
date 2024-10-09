@@ -67,6 +67,15 @@ uses
   gstgldisplay,             // io. -> gstglapi, gstglwindow
   gstglbasefilter,          // io. -> gstglapi, gstglwindow
   gstglbasemixer,           // io. -> gstglapi, gstglwindow
+  gstglsl,                  // io. -> gstglapi, gstglwindow
+  gstglslstage,             // io. -> gstglwindow, gstglsl
+  gstglshader,              // io. -> gstglwindow, gstglsl, gstglslstage
+  gstglframebuffer,         // io. -> gstglwindow, gstglbasememory, gstglmemory
+  gstglbasesrc,             // io. -> gstglwindow, gstglapi, gstglmemory
+  gstglbufferpool,          // io. -> gstglwindow, gstglbasememory
+  gstglcolorconvert,        // io. -> gstglwindow, gstglframebuffer, gstglshader
+  gstglcontextconfig,       // io. -> gl_enumtypes
+  gstglfeature,             // io.
 
   // === gl/rgl
 
