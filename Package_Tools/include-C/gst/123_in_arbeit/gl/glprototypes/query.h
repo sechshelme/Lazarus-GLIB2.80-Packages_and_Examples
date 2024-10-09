@@ -18,46 +18,40 @@
  * Boston, MA 02110-1301, USA.
  */
 
-GST_GL_EXT_BEGIN (timer_query,
-                  extern_OPENGL3,
-                  3, 3,
-                  3, 0,
-                  "ARB:\0ANGLE\0EXT\0",
-                  "timer_query\0disjoint_timer_query\0")
-GST_GL_EXT_FUNCTION (void, GenQueries,
+void GenQueries
                      (GLsizei n,
-                     GLuint *ids))
-GST_GL_EXT_FUNCTION (void, DeleteQueries,
+                     GLuint *ids);
+void DeleteQueries
                      (GLsizei n,
-                      GLuint *ids))
-GST_GL_EXT_FUNCTION (GLboolean, IsQuery,
-                     (GLuint id))
-GST_GL_EXT_FUNCTION (void, BeginQuery,
+                      GLuint *ids);
+GLboolean IsQuery
+                     (GLuint id);
+void BeginQuery
                      (GLenum target,
-                      GLuint id))
-GST_GL_EXT_FUNCTION (void, EndQuery,
-                     (GLenum target))
-GST_GL_EXT_FUNCTION (void, QueryCounter,
+                      GLuint id);
+void EndQuery
+                     (GLenum target);
+void QueryCounter
                      (GLuint id,
-                     GLenum target))
-GST_GL_EXT_FUNCTION (void, GetQueryiv,
+                     GLenum target);
+void GetQueryiv
                      (GLenum target,
                       GLenum pname,
-                      GLint *params))
-GST_GL_EXT_FUNCTION (void, GetQueryObjectiv,
+                      GLint *params);
+void GetQueryObjectiv
                      (GLuint id,
                       GLenum pname,
-                      GLint *params))
-GST_GL_EXT_FUNCTION (void, GetQueryObjectuiv,
+                      GLint *params);
+void GetQueryObjectuiv
                      (GLuint id,
                       GLenum pname,
-                      GLuint *params))
-GST_GL_EXT_FUNCTION (void, GetQueryObjecti64v,
+                      GLuint *params);
+void GetQueryObjecti64v
                      (GLuint id,
                       GLenum pname,
-                      GLint64 *params))
-GST_GL_EXT_FUNCTION (void, GetQueryObjectui64v,
+                      GLint64 *params);
+void GetQueryObjectui64v
                      (GLuint id,
                       GLenum pname,
-                      GLuint64 *params))
-GST_GL_EXT_END ()
+                      GLuint64 *params);
+

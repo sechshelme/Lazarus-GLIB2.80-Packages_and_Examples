@@ -93,5 +93,6 @@ GstGLTextureTarget
 __FILE__
 __LINE__
 EGLint
+ptrdiff_t
 
 gst_egl_get_error_string

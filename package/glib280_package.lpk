@@ -119,6 +119,26 @@
         <Filename Value="gst124_player.pas"/>
         <UnitName Value="gst124_player"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_gl.pas"/>
+        <UnitName Value="gst124_gl"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_gl_egl.pas"/>
+        <UnitName Value="gst124_gl_egl"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_gl_wayland.pas"/>
+        <UnitName Value="gst124_gl_wayland"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_gl_x11.pas"/>
+        <UnitName Value="gst124_gl_x11"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_gl_glprototypes.pas"/>
+        <UnitName Value="gst124_gl_glprototypes"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

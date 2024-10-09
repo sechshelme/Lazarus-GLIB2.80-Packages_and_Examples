@@ -38,89 +38,62 @@
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-GST_GL_EXT_BEGIN (multitexture_part1,
-                  extern_OPENGL |
-                  extern_GLES1,
-                  1, 3,
-                  1, 0,
-                  "ARB\0",
-                  "multitexture\0")
-GST_GL_EXT_FUNCTION (void, ClientActiveTexture,
-                     (GLenum                texture))
-GST_GL_EXT_END ()
-
-/* These are the core GL functions which are available when the API
-   supports fixed-function (ie, GL and GLES1.1) */
-GST_GL_EXT_BEGIN (fixed_function_core,
-                  extern_OPENGL |
-                  extern_GLES1,
-                  0, 0,
-                  1, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, AlphaFunc,
-                     (GLenum func, GLclampf ref))
-GST_GL_EXT_FUNCTION (void, Fogf,
-                     (GLenum pname, GLfloat param))
-GST_GL_EXT_FUNCTION (void, Fogfv,
-                     (GLenum pname, const GLfloat *params))
-GST_GL_EXT_FUNCTION (void, LoadMatrixf,
-                     (const GLfloat *m))
-GST_GL_EXT_FUNCTION (void, Materialfv,
-                     (GLenum face, GLenum pname, const GLfloat *params))
-GST_GL_EXT_FUNCTION (void, PointSize,
-                     (GLfloat size))
-GST_GL_EXT_FUNCTION (void, TexEnvfv,
-                     (GLenum target, GLenum pname, const GLfloat *params))
-GST_GL_EXT_FUNCTION (void, Color4ub,
-                     (GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha))
-GST_GL_EXT_FUNCTION (void, ColorPointer,
+void ClientActiveTexture
+                     (GLenum                texture);
+void AlphaFunc
+                     (GLenum func, GLclampf ref);
+void Fogf
+                     (GLenum pname, GLfloat param);
+void Fogfv
+                     (GLenum pname, const GLfloat *params);
+void LoadMatrixf
+                     (const GLfloat *m);
+void Materialfv
+                     (GLenum face, GLenum pname, const GLfloat *params);
+void PointSize
+                     (GLfloat size);
+void TexEnvfv
+                     (GLenum target, GLenum pname, const GLfloat *params);
+void Color4ub
+                     (GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha);
+void ColorPointer
                      (GLint size,
                       GLenum type,
                       GLsizei stride,
-                      const GLvoid *pointer))
-GST_GL_EXT_FUNCTION (void, DisableClientState,
-                     (GLenum array))
-GST_GL_EXT_FUNCTION (void, EnableClientState,
-                     (GLenum array))
-GST_GL_EXT_FUNCTION (void, LoadIdentity,
-                     (void))
-GST_GL_EXT_FUNCTION (void, MatrixMode,
-                     (GLenum mode))
-GST_GL_EXT_FUNCTION (void, NormalPointer,
-                     (GLenum type, GLsizei stride, const GLvoid *pointer))
-GST_GL_EXT_FUNCTION (void, TexCoordPointer,
+                      const GLvoid *pointer);
+void DisableClientState
+                     (GLenum array);
+void EnableClientState
+                     (GLenum array);
+void LoadIdentity
+                     (void);
+void MatrixMode
+                     (GLenum mode);
+void NormalPointer
+                     (GLenum type, GLsizei stride, const GLvoid *pointer);
+void TexCoordPointer
                      (GLint size,
                       GLenum type,
                       GLsizei stride,
-                      const GLvoid *pointer))
-GST_GL_EXT_FUNCTION (void, TexEnvi,
+                      const GLvoid *pointer);
+void TexEnvi
                      (GLenum target,
                       GLenum pname,
-                      GLint param))
-GST_GL_EXT_FUNCTION (void, VertexPointer,
+                      GLint param);
+void VertexPointer
                      (GLint size,
                       GLenum type,
                       GLsizei stride,
-                      const GLvoid *pointer))
-GST_GL_EXT_FUNCTION (void, PushMatrix,
-                     (void))
-GST_GL_EXT_FUNCTION (void, PopMatrix,
-                     (void))
-GST_GL_EXT_END ()
-
-/* Eventually we want to remove this category */
-GST_GL_EXT_BEGIN (fixed_function_gl_only,
-                  extern_OPENGL,
-                  0, 0,
-                  0, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, PushAttrib,
-                     (GLbitfield            mask))
-GST_GL_EXT_FUNCTION (void, PopAttrib,
-                     (void))
-GST_GL_EXT_FUNCTION (void, TexImage1D,
+                      const GLvoid *pointer);
+void PushMatrix
+                     (void);
+void PopMatrix
+                     (void);
+void PushAttrib
+                     (GLbitfield            mask);
+void PopAttrib
+                     (void);
+void TexImage1D
                      (GLenum                target,
                       GLint                 level,
                       GLint                 internalFormat,
@@ -128,17 +101,17 @@ GST_GL_EXT_FUNCTION (void, TexImage1D,
                       GLint                 border,
                       GLenum                format,
                       GLenum                type,
-                      const GLvoid         *data))
-GST_GL_EXT_FUNCTION (void, Rotatef,
-                     (GLfloat angle, GLfloat x, GLfloat y, GLfloat z))
-GST_GL_EXT_FUNCTION (void, Translatef,
-                     (GLfloat x, GLfloat y, GLfloat z))
-GST_GL_EXT_FUNCTION (void, Scalef,
-                     (GLfloat x, GLfloat y, GLfloat z))
-GST_GL_EXT_FUNCTION (void, Lightfv,
-                     (GLenum light, GLenum pname, const GLfloat *params))
-GST_GL_EXT_FUNCTION (void, ColorMaterial,
-                     (GLenum face, GLenum pname))
-GST_GL_EXT_FUNCTION (void, ShadeModel,
-                     (GLenum value))
-GST_GL_EXT_END ()
+                      const GLvoid         *data);
+void Rotatef
+                     (GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
+void Translatef
+                     (GLfloat x, GLfloat y, GLfloat z);
+void Scalef
+                     (GLfloat x, GLfloat y, GLfloat z);
+void Lightfv
+                     (GLenum light, GLenum pname, const GLfloat *params);
+void ColorMaterial
+                     (GLenum face, GLenum pname);
+void ShadeModel
+                     (GLenum value);
+

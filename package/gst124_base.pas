@@ -18,6 +18,8 @@ const
   GST_VIDEO_MAX_COMPONENTS = 4;
 
 type
+  Tguint8_arr_256 = array[0..255] of Tguint8;
+
   Tguintarr4 = array[0..3] of Tguint;
   Tguintarr16 = array[0..15] of Tguint;
   Tguint8arr16 = array[0..15] of Tguint8;

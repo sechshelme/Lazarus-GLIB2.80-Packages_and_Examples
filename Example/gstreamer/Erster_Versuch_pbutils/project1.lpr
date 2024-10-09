@@ -3,7 +3,7 @@ program project1;
 uses
   crt,
   Classes,
-  SysUtils,
+  SysUtils, GL,
   FileUtil,
 
 
@@ -32,58 +32,73 @@ uses
   gst124_wayland,
   gst124_va,
   gst124_player,
-
-  //gstva,                            // io.
-  //va_enumtypes,                     // io.
-  //gstvadisplay,                     // io.
-  //gstvadisplay_drm,                 // io. -> gstvadisplay
-  //gstvadisplay_wrapped,             // io. -> gstvadisplay
-  //gstvaallocator,                   // io. -> gstva, gstvadisplay
-  //gstvautils,                       // io. -> gstvadisplay
-
-  //gstplayer_media_info,                           // io.
-  //gstplayer,                                      // io. -> gstplayer_media_info
-  //gstplayer_g_main_context_signal_dispatcher,     // io. -> gstplayer
-  //gstplayer_signal_dispatcher,                    // io. -> gstplayer
-  //gstplayer_video_overlay_video_renderer,         // io. -> gstplayer
-  //gstplayer_video_renderer,                       // io. -> gstplayer
-  //gstplayer_visualization,                        // io.
+  gst124_gl,
+  gst124_gl_egl,
+  gst124_gl_x11,
+  gst124_gl_wayland,
+  gst124_gl_glprototypes,
 
   // ==== gl
 
-  gstgl_enums,              // io.
-  gl_enumtypes,             // io.
-  gstglfuncs,               // io.
-  gstglwindow,              // io. -> gstglfuncs
-  gstgldebug,               // io. -> gstglwindow                       makros entfernt
-  gstglquery,               // io. -> gstglwindow, gstgldebug           makros entfernt
-  gstglbasememory,          // io, -> gstglwindow, gstglquery
-  gstglbuffer,              // io. -> gstglbasememory, gstglwindow
-  gstglformat,              // io. -> gstgl_enums, gstglwindow
-  gstglmemory,              // io. -> gstgl_enums, gstglbasememory, gstglwindow, gstglformat
-  gstglmemorypbo,           // io. -> gstglmemory, gstgl_enums, gstglformat
-  gstglapi,                 // io.
-  gstglcontext,             // io. -> gstglapi, gstglwindow
-  gstgldisplay,             // io. -> gstglapi, gstglwindow
-  gstglbasefilter,          // io. -> gstglapi, gstglwindow
-  gstglbasemixer,           // io. -> gstglapi, gstglwindow
-  gstglsl,                  // io. -> gstglapi, gstglwindow
-  gstglslstage,             // io. -> gstglwindow, gstglsl
-  gstglshader,              // io. -> gstglwindow, gstglsl, gstglslstage
-  gstglframebuffer,         // io. -> gstglwindow, gstglbasememory, gstglmemory
-  gstglbasesrc,             // io. -> gstglwindow, gstglapi, gstglmemory
-  gstglbufferpool,          // io. -> gstglwindow, gstglbasememory
-  gstglcolorconvert,        // io. -> gstglwindow, gstglframebuffer, gstglshader
-  gstglcontextconfig,       // io. -> gl_enumtypes
-  gstglfeature,             // io.
+  //gstgl_enums,              // io.
+  //gl_enumtypes,             // io.
+  //gstglfuncs,               // io.
+  //gstglwindow,              // io. -> gstglfuncs
+  //gstgldebug,               // io. -> gstglwindow                       makros entfernt
+  //gstglquery,               // io. -> gstglwindow, gstgldebug           makros entfernt
+  //gstglbasememory,          // io, -> gstglwindow, gstglquery
+  //gstglbuffer,              // io. -> gstglbasememory, gstglwindow
+  //gstglformat,              // io. -> gstgl_enums, gstglwindow
+  //gstglmemory,              // io. -> gstgl_enums, gstglbasememory, gstglwindow, gstglformat
+  //gstglmemorypbo,           // io. -> gstglmemory, gstgl_enums, gstglformat
+  //gstglapi,                 // io.
+  //gstglcontext,             // io. -> gstglapi, gstglwindow
+  //gstgldisplay,             // io. -> gstglapi, gstglwindow
+  //gstglbasefilter,          // io. -> gstglapi, gstglwindow
+  //gstglbasemixer,           // io. -> gstglapi, gstglwindow
+  //gstglsl,                  // io. -> gstglapi, gstglwindow
+  //gstglslstage,             // io. -> gstglwindow, gstglsl
+  //gstglshader,              // io. -> gstglwindow, gstglsl, gstglslstage
+  //gstglframebuffer,         // io. -> gstglwindow, gstglbasememory, gstglmemory
+  //gstglbasesrc,             // io. -> gstglwindow, gstglapi, gstglmemory
+  //gstglbufferpool,          // io. -> gstglwindow, gstglbasememory
+  //gstglcolorconvert,        // io. -> gstglwindow, gstglframebuffer, gstglshader
+  //gstglcontextconfig,       // io. -> gl_enumtypes
+  //gstglfeature,             // io.
+  //gstglfilter,              // io. -> gstglmemory, gstglbasefilter, gstgl_enums, gstglframebuffer, gstglshader
+  //gstglmixer,               // io. -> gstglbasemixer, gstglmemory, gstglframebuffer
+  //gstgloverlaycompositor,   // io. -> gstglwindow, gstglshader
+  //gstglrenderbuffer,        // io. -> gstglwindow, gstglbasememory, gstglformat
+  //gstglshaderstrings,       // io. -> gstglwindow, gstglsl
+  //gstglsyncmeta,            // io. -> gstglwindow
+  //gstglupload,              // io. -> gstglwindow
+  //gstglutils,               // io. -> gstglwindow, gstgl_enums
+  //gstglviewconvert,         // io. -> gstglwindow, gl_enumtypes, gstgl_enums, gstglshader, gstglframebuffer
 
-  // === gl/rgl
+  // === gl/egl
 
-  gstegl,                   // io.
-  gstgldisplay_egl,         // io.
-  gstgldisplay_egl_device,  // io. -> gstgldisplay_egl
-  gsteglimage,              // io.
-  gstglmemoryegl,           // io. -> gsteglimage
+  //gstegl,                   // io.
+  //gstgldisplay_egl,         // io.
+  //gstgldisplay_egl_device,  // io. -> gstgldisplay_egl
+  //gsteglimage,              // io.
+  //gstglmemoryegl,           // io. -> gsteglimage
+
+  // ==== gl/glprototypes
+
+  //base,
+  //blending,
+  //buffers,
+  //buffer_storage,
+  //debug,
+  //eglimage,
+  //fbo,
+  //fixedfunction,
+  //gles,
+  //opengl,
+  //query,
+  //shaders,
+  //sync,
+  //vao,
 
 
   GLIBTools,
@@ -131,11 +146,15 @@ uses
     obj: PGstShmAllocator;
     pipeline, mse: PGstElement;
     fft: PGstFFTF64;
+    prg: TGLuint;
   begin
     gst_init(nil, nil);
 
     pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! decodebin ! audioconvert  ! autoaudiosink'), nil);
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
+
+//prg:=    CreateProgram;
+//WriteLn('GL Programm: ', prg);
 
     mse := gst_bin_get_by_interface(GST_BIN(pipeline), GST_TYPE_MSE_SRC);
     if mse = nil then begin
@@ -195,7 +214,15 @@ uses
 
 
 
-    obj := g_object_new( GST_TYPE_GL_MEMORY_ALLOCATOR, nil);
+    obj := g_object_new(GST_TYPE_GL_VIEW_CONVERT, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_GL_VIEW_CONVERT(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_GL_MEMORY_ALLOCATOR, nil);
     if obj <> nil then begin
       WriteLn('io');
     end;

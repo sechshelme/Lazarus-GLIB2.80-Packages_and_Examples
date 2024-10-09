@@ -38,62 +38,25 @@
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-GST_GL_EXT_BEGIN (blending,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  1, 2,
-                  2, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, BlendEquation,
-                     (GLenum                mode))
-GST_GL_EXT_FUNCTION (void, BlendColor,
+ void BlendEquation
+                     (GLenum                mode);
+ void BlendColor
                      (GLclampf              red,
                       GLclampf              green,
                       GLclampf              blue,
-                      GLclampf              alpha))
-GST_GL_EXT_END ()
-
-/* Optional, declared in 1.4 or GLES 1.2 */
-GST_GL_EXT_BEGIN (blend_func_separate,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  1, 4,
-                  2, 0,
-                  "EXT\0",
-                  "blend_func_separate\0")
-GST_GL_EXT_FUNCTION (void, BlendFuncSeparate,
+                      GLclampf              alpha);
+ void BlendFuncSeparate
                      (GLenum                srcRGB,
                       GLenum                dstRGB,
                       GLenum                srcAlpha,
-                      GLenum                dstAlpha))
-GST_GL_EXT_END ()
-
-/* Optional, declared in 2.0 */
-GST_GL_EXT_BEGIN (blend_equation_separate,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  2, 0,
-                  2, 0,
-                  "EXT\0",
-                  "blend_equation_separate\0")
-GST_GL_EXT_FUNCTION (void, BlendEquationSeparate,
+                      GLenum                dstAlpha);
+ void BlendEquationSeparate
                      (GLenum                modeRGB,
-                      GLenum                modeAlpha))
-GST_GL_EXT_END ()
+                      GLenum                modeAlpha);
+ void StencilFuncSeparate
+                     (GLenum face, GLenum func, GLint ref, GLuint mask);
+ void StencilMaskSeparate
+                     (GLenum face, GLuint mask);
+ void StencilOpSeparate
+                     (GLenum face, GLenum fail, GLenum zfail, GLenum zpass);
 
-/* GL and GLES 2.0 apis */
-GST_GL_EXT_BEGIN (two_point_zero_api,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  2, 0,
-                  2, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, StencilFuncSeparate,
-                     (GLenum face, GLenum func, GLint ref, GLuint mask))
-GST_GL_EXT_FUNCTION (void, StencilMaskSeparate,
-                     (GLenum face, GLuint mask))
-GST_GL_EXT_FUNCTION (void, StencilOpSeparate,
-                     (GLenum face, GLenum fail, GLenum zfail, GLenum zpass))
-GST_GL_EXT_END ()

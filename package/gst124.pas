@@ -70,11 +70,6 @@ const
   libgstgl = 'gstgl-1.0-.dll';
   {$endif}
 
-  // ==== Diverses
-
-type
-  Tguint8_arr_256 = array[0..255] of Tguint8;
-
   // ==== Externes;
 
 type
@@ -82,6 +77,46 @@ type
     tv_sec: int64;
     tv_nsec: int64;
   end;
+
+  // ===== gl.h
+
+type
+  Tptrdiff_t=PtrInt;
+
+  PGLeglImageOES = ^TGLeglImageOES;
+  TGLeglImageOES = Tgpointer;
+
+  PGLchar = ^TGLchar;
+  TGLchar = Tgchar;
+
+  PGLsizeiptr = ^TGLsizeiptr;
+  TGLsizeiptr = Tptrdiff_t;
+
+  PGLintptr = ^TGLintptr;
+  TGLintptr = Tptrdiff_t;
+
+  PGLsync = ^TGLsync;
+  TGLsync = Tgpointer;
+
+  PGLuint64 = ^TGLuint64;
+  TGLuint64 = Tguint64;
+
+  PGLint64 = ^TGLint64;
+  TGLint64 = Tgint64;
+
+  // ==== xcb.h
+  Txcb_connection_t = record
+  end;
+  Pxcb_connection_t = ^Txcb_connection_t;
+
+  // ==== wayland
+  Twl_registry=record
+      end;
+  Pwl_registry=^Twl_registry;
+
+  Twl_shell=record
+      end;
+  Pwl_shell=^Twl_shell;
 
   // ==== va.h
 type

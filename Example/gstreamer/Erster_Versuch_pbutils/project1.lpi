@@ -45,7 +45,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../../Package_Tools/pas_units/gst/gl/egl;../../../Package_Tools/pas_units/gst/gl"/>
+      <OtherUnitFiles Value="../../../Package_Tools/pas_units/gst/gl/egl;../../../Package_Tools/pas_units/gst/gl;../../../Package_Tools/pas_units/gst/gl/glprototypes"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

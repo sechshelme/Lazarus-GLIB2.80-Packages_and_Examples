@@ -40,33 +40,18 @@
 
 /* These are the core GL functions which are only available in big
    GL */
-GST_GL_EXT_BEGIN (only_in_big_gl,
-                  extern_OPENGL | extern_OPENGL3,
-                  1, 0,
-                  255, 255, /* not in GLES */
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, GetTexLevelParameteriv,
+void GetTexLevelParameteriv
                      (GLenum target, GLint level,
-                      GLenum pname, GLint *params))
-GST_GL_EXT_FUNCTION (void, GetTexImage,
+                      GLenum pname, GLint *params);
+void GetTexImage
                      (GLenum target, GLint level,
                       GLenum format, GLenum type,
-                      GLvoid *pixels))
-GST_GL_EXT_FUNCTION (void, DepthRange,
-                     (double near_val, double far_val))
-GST_GL_EXT_FUNCTION (void, DrawBuffer,
-                     (GLenum mode))
-GST_GL_EXT_FUNCTION (void, ClearDepth,
-                     (double depth))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (only_in_big_gl_compat,
-                  extern_OPENGL,
-                  1, 0,
-                  255, 255, /* not in GLES */
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, ClipPlane,
-                     (GLenum plane, const double *equation))
-GST_GL_EXT_END ()
+                     GLvoid *pixels);
+void DepthRange
+                     (double near_val, double far_val);
+void DrawBuffer
+                     (GLenum mode);
+void ClearDepth
+                     (double depth);
+void ClipPlane
+                     (GLenum plane, const double *equation);

@@ -18,32 +18,25 @@
  * Boston, MA 02110-1301, USA.
  */
 
-GST_GL_EXT_BEGIN (sync,
-                  extern_OPENGL3 | extern_OPENGL |
-                  extern_GLES2,
-                  3, 2,
-                  3, 0,
-                  "APPLE\0",
-                  "sync\0")
-GST_GL_EXT_FUNCTION (GLsync, FenceSync,
+GLsync FenceSync
                      (GLenum condition,
-                      GLbitfield flags))
-GST_GL_EXT_FUNCTION (GLboolean, IsSync,
-                     (GLsync sync))
-GST_GL_EXT_FUNCTION (void, DeleteSync,
-                     (GLsync sync))
-GST_GL_EXT_FUNCTION (GLenum, ClientWaitSync,
+                      GLbitfield flags);
+GLboolean IsSync
+                     (GLsync sync);
+void DeleteSync
+                     (GLsync sync);
+GLenum ClientWaitSync
                      (GLsync sync,
                       GLbitfield flags,
-                      GLuint64 timeout))
-GST_GL_EXT_FUNCTION (void, WaitSync,
+                      GLuint64 timeout);
+void WaitSync
                      (GLsync sync,
                       GLbitfield flags,
-                      GLuint64 timeout))
-GST_GL_EXT_FUNCTION (void, GetSynciv,
+                      GLuint64 timeout);
+void GetSynciv
                      (GLsync sync,
                       GLenum name,
                       GLsizei buf_size,
                       GLsizei *length,
-                      GLint *values))
-GST_GL_EXT_END ()
+                      GLint *values);
+

@@ -18,25 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-GST_GL_EXT_BEGIN (buffer_storage,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  4, 4,
-                  255, 255,
-                  "EXT\0ARB:\0", /* ARB version doesn't have function suffixes */
-                  "buffer_storage\0")
-GST_GL_EXT_FUNCTION (void, BufferStorage,
-                     (GLenum target, GLsizeiptr, const void * data, GLbitfield flags))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (flush_mapped,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  3, 0,
-                  3, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, FlushMappedBufferRange,
-                     (GLenum target, GLintptr offset, GLsizeiptr length))
-GST_GL_EXT_END ()
+ void BufferStorage
+                     (GLenum target, GLsizeiptr, const void * data, GLbitfield flags);
+ void FlushMappedBufferRange
+                     (GLenum target, GLintptr offset, GLsizeiptr length);
 

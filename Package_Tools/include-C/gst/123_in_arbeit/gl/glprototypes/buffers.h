@@ -18,31 +18,15 @@
  * Boston, MA 02110-1301, USA.
  */
 
-GST_GL_EXT_BEGIN (buffer_copy_sub_data,
-                  extern_OPENGL3 |
-                  extern_GLES2,
-                  3, 1,
-                  3, 0,
-                  /* extension is available in GL 3.0 */
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, CopyBufferSubData,
+ void CopyBufferSubData
                      (GLenum                readTarget,
                       GLenum                writeTarget,
                       GLintptr              readOffset,
                       GLintptr              writeOffset,
-                      GLsizeiptr            size))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (get_buffer_sub_data,
-                  extern_OPENGL3,
-                  1, 5,
-                  255, 255,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, GetBufferSubData,
+                      GLsizeiptr            size);
+ void GetBufferSubData
                      (GLenum                target,
                       GLintptr              offset,
                       GLsizeiptr            size,
-                      void *                data))
-GST_GL_EXT_END ()
+                      void *                data);
+

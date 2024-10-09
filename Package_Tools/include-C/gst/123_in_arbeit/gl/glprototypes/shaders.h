@@ -40,335 +40,267 @@
 
 /* This lists functions that are unique to GL 2.0 or GLES 2.0 and are
  * not in the old GLSL extensions */
-GST_GL_EXT_BEGIN (shaders_glsl_2_only,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  2, 0,
-                  2, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (GLuint, CreateProgram,
-                     (void))
-GST_GL_EXT_FUNCTION (GLuint, CreateShader,
-                     (GLenum                shaderType))
-GST_GL_EXT_FUNCTION (void, DeleteShader,
-                     (GLuint                shader))
-GST_GL_EXT_FUNCTION (void, AttachShader,
+GLuint CreateProgram
+                     (void);
+GLuint CreateShader
+                     (GLenum                shaderType);
+void DeleteShader
+                     (GLuint                shader);
+void AttachShader
                      (GLuint                program,
-                      GLuint                shader))
-GST_GL_EXT_FUNCTION (void, UseProgram,
-                     (GLuint                program))
-GST_GL_EXT_FUNCTION (void, DeleteProgram,
-                     (GLuint                program))
-GST_GL_EXT_FUNCTION (void, GetShaderInfoLog,
+                      GLuint                shader);
+void UseProgram
+                     (GLuint                program);
+void DeleteProgram
+                     (GLuint                program);
+void GetShaderInfoLog
                      (GLuint                shader,
                       GLsizei               maxLength,
                       GLsizei              *length,
-                      char                 *infoLog))
-GST_GL_EXT_FUNCTION (void, GetProgramInfoLog,
+                      char                 *infoLog);
+void GetProgramInfoLog
                      (GLuint                program,
                       GLsizei               bufSize,
                       GLsizei              *length,
-                      char                 *infoLog))
-GST_GL_EXT_FUNCTION (void, GetShaderiv,
+                      char                 *infoLog);
+void GetShaderiv
                      (GLuint                shader,
                       GLenum                pname,
-                      GLint                *params))
-GST_GL_EXT_FUNCTION (void, GetProgramiv,
+                      GLint                *params);
+void GetProgramiv
                      (GLuint                program,
                       GLenum                pname,
-                      GLint                *params))
-GST_GL_EXT_FUNCTION (void, DetachShader,
-                     (GLuint program, GLuint shader))
-GST_GL_EXT_FUNCTION (void, GetAttachedShaders,
+                      GLint                *params);
+void DetachShader
+                     (GLuint program, GLuint shader);
+void GetAttachedShaders
                      (GLuint program,
                       GLsizei maxcount,
                       GLsizei* count,
-                      GLuint* shaders))
-GST_GL_EXT_FUNCTION (GLboolean, IsShader,
-                     (GLuint shader))
-GST_GL_EXT_FUNCTION (GLboolean, IsProgram,
-                     (GLuint program))
-GST_GL_EXT_END ()
-
-/* These functions are provided by GL_ARB_shader_objects or are in GL
- * 2.0 core */
-GST_GL_EXT_BEGIN (shader_objects_or_gl2,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  2, 0,
-                  2, 0,
-                  "ARB\0",
-                  "shader_objects\0")
-GST_GL_EXT_FUNCTION (void, ShaderSource,
+                      GLuint* shaders);
+GLboolean IsShader
+                     (GLuint shader);
+GLboolean IsProgram
+                     (GLuint program);
+void ShaderSource
                      (GLuint                shader,
                       GLsizei               count,
                       const char          **string,
-                      const GLint          *length))
-GST_GL_EXT_FUNCTION (void, CompileShader,
-                     (GLuint                shader))
-GST_GL_EXT_FUNCTION (void, LinkProgram,
-                     (GLuint                program))
-GST_GL_EXT_FUNCTION (GLint, GetUniformLocation,
+                      const GLint          *length);
+void CompileShader
+                     (GLuint                shader);
+void LinkProgram
+                     (GLuint                program);
+GLint GetUniformLocation
                      (GLuint                program,
-                      const char           *name))
-GST_GL_EXT_FUNCTION (void, Uniform1f,
+                      const char           *name);
+void Uniform1f
                      (GLint                 location,
-                      GLfloat               v0))
-GST_GL_EXT_FUNCTION (void, Uniform2f,
+                      GLfloat               v0);
+void Uniform2f
                      (GLint                 location,
                       GLfloat               v0,
-                      GLfloat               v1))
-GST_GL_EXT_FUNCTION (void, Uniform3f,
+                      GLfloat               v1);
+void Uniform3f
                      (GLint                 location,
                       GLfloat               v0,
                       GLfloat               v1,
-                      GLfloat               v2))
-GST_GL_EXT_FUNCTION (void, Uniform4f,
+                      GLfloat               v2);
+void Uniform4f
                      (GLint                 location,
                       GLfloat               v0,
                       GLfloat               v1,
                       GLfloat               v2,
-                      GLfloat               v3))
-GST_GL_EXT_FUNCTION (void, Uniform1fv,
+                      GLfloat               v3);
+void Uniform1fv
                      (GLint                 location,
                       GLsizei               count,
-                      const GLfloat *       value))
-GST_GL_EXT_FUNCTION (void, Uniform2fv,
+                      const GLfloat *       value);
+void Uniform2fv
                      (GLint                 location,
                       GLsizei               count,
-                      const GLfloat *       value))
-GST_GL_EXT_FUNCTION (void, Uniform3fv,
+                      const GLfloat *       value);
+void Uniform3fv
                      (GLint                 location,
                       GLsizei               count,
-                      const GLfloat *       value))
-GST_GL_EXT_FUNCTION (void, Uniform4fv,
+                      const GLfloat *       value);
+void Uniform4fv
                      (GLint                 location,
                       GLsizei               count,
-                      const GLfloat *       value))
-GST_GL_EXT_FUNCTION (void, Uniform1i,
+                      const GLfloat *       value);
+void Uniform1i
                      (GLint                 location,
-                      GLint                 v0))
-GST_GL_EXT_FUNCTION (void, Uniform2i,
+                      GLint                 v0);
+void Uniform2i
                      (GLint                 location,
                       GLint                 v0,
-                      GLint                 v1))
-GST_GL_EXT_FUNCTION (void, Uniform3i,
+                      GLint                 v1);
+void Uniform3i
                      (GLint                 location,
                       GLint                 v0,
                       GLint                 v1,
-                      GLint                 v2))
-GST_GL_EXT_FUNCTION (void, Uniform4i,
+                      GLint                 v2);
+void Uniform4i
                      (GLint                 location,
                       GLint                 v0,
                       GLint                 v1,
                       GLint                 v2,
-                      GLint                 v3))
-GST_GL_EXT_FUNCTION (void, Uniform1iv,
+                      GLint                 v3);
+void Uniform1iv
                      (GLint                 location,
                       GLsizei               count,
-                      const GLint *         value))
-GST_GL_EXT_FUNCTION (void, Uniform2iv,
+                      const GLint *         value);
+void Uniform2iv
                      (GLint                 location,
                       GLsizei               count,
-                      const GLint *         value))
-GST_GL_EXT_FUNCTION (void, Uniform3iv,
+                      const GLint *         value);
+void Uniform3iv
                      (GLint                 location,
                       GLsizei               count,
-                      const GLint *         value))
-GST_GL_EXT_FUNCTION (void, Uniform4iv,
+                      const GLint *         value);
+void Uniform4iv
                      (GLint                 location,
                       GLsizei               count,
-                      const GLint *         value))
-GST_GL_EXT_FUNCTION (void, UniformMatrix2fv,
-                     (GLint                 location,
-                      GLsizei               count,
-                      GLboolean             transpose,
-                      const GLfloat        *value))
-GST_GL_EXT_FUNCTION (void, UniformMatrix3fv,
+                      const GLint *         value);
+void UniformMatrix2fv
                      (GLint                 location,
                       GLsizei               count,
                       GLboolean             transpose,
-                      const GLfloat        *value))
-GST_GL_EXT_FUNCTION (void, UniformMatrix4fv,
+                      const GLfloat        *value);
+void UniformMatrix3fv
                      (GLint                 location,
                       GLsizei               count,
                       GLboolean             transpose,
-                      const GLfloat        *value))
+                      const GLfloat        *value);
+void UniformMatrix4fv
+                     (GLint                 location,
+                      GLsizei               count,
+                      GLboolean             transpose,
+                      const GLfloat        *value);
 
-GST_GL_EXT_FUNCTION (void, GetUniformfv,
+void GetUniformfv
                      (GLuint                program,
                       GLint                 location,
-                      GLfloat              *params))
-GST_GL_EXT_FUNCTION (void, GetUniformiv,
+                      GLfloat              *params);
+void GetUniformiv
                      (GLuint                program,
                       GLint                 location,
-                      GLint                *params))
-GST_GL_EXT_FUNCTION (void, GetActiveUniform,
+                      GLint                *params);
+void GetActiveUniform
                      (GLuint program,
                       GLuint index,
                       GLsizei bufsize,
                       GLsizei* length,
                       GLint* size,
                       GLenum* type,
-                      GLchar* name))
-GST_GL_EXT_FUNCTION (void, GetShaderSource,
+                      GLchar* name);
+void GetShaderSource
                      (GLuint shader,
                       GLsizei bufsize,
                       GLsizei* length,
-                      GLchar* source))
-GST_GL_EXT_FUNCTION (void, ValidateProgram, (GLuint program))
-GST_GL_EXT_END ()
-
-/* These functions are provided by GL_ARB_vertex_shader or are in GL
- * 2.0 core */
-GST_GL_EXT_BEGIN (vertex_shaders,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  2, 0,
-                  2, 0,
-                  "ARB\0",
-                  "vertex_shader\0")
-GST_GL_EXT_FUNCTION (void, VertexAttribPointer,
+                      GLchar* source);
+void ValidateProgram (GLuint program);
+void VertexAttribPointer
                      (GLuint		 index,
                       GLint		 size,
                       GLenum		 type,
                       GLboolean		 normalized,
                       GLsizei		 stride,
-                      const GLvoid        *pointer))
-GST_GL_EXT_FUNCTION (void, EnableVertexAttribArray,
-                     (GLuint		 index))
-GST_GL_EXT_FUNCTION (void, DisableVertexAttribArray,
-                     (GLuint		 index))
-GST_GL_EXT_FUNCTION (void, VertexAttrib1f, (GLuint indx, GLfloat x))
-GST_GL_EXT_FUNCTION (void, VertexAttrib1fv,
-                     (GLuint indx, const GLfloat* values))
-GST_GL_EXT_FUNCTION (void, VertexAttrib2f, (GLuint indx, GLfloat x, GLfloat y))
-GST_GL_EXT_FUNCTION (void, VertexAttrib2fv,
-                     (GLuint indx, const GLfloat* values))
-GST_GL_EXT_FUNCTION (void, VertexAttrib3f,
-                     (GLuint indx, GLfloat x, GLfloat y, GLfloat z))
-GST_GL_EXT_FUNCTION (void, VertexAttrib3fv,
-                     (GLuint indx, const GLfloat* values))
-GST_GL_EXT_FUNCTION (void, VertexAttrib4f,
-                     (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w))
-GST_GL_EXT_FUNCTION (void, VertexAttrib4fv,
-                     (GLuint indx, const GLfloat* values))
-GST_GL_EXT_FUNCTION (void, GetVertexAttribfv,
-                     (GLuint index, GLenum pname, GLfloat* params))
-GST_GL_EXT_FUNCTION (void, GetVertexAttribiv,
-                     (GLuint index, GLenum pname, GLint* params))
-GST_GL_EXT_FUNCTION (void, GetVertexAttribPointerv,
-                     (GLuint index, GLenum pname, GLvoid** pointer))
-GST_GL_EXT_FUNCTION (GLint, GetAttribLocation,
-                     (GLuint program, const char *name))
-GST_GL_EXT_FUNCTION (void, BindAttribLocation,
+                      const GLvoid        *pointer);
+void EnableVertexAttribArray
+                     (GLuint		 index);
+void DisableVertexAttribArray
+                     (GLuint		 index);
+void VertexAttrib1f (GLuint indx, GLfloat x);
+void VertexAttrib1fv
+                     (GLuint indx, const GLfloat* values);
+void VertexAttrib2f (GLuint indx, GLfloat x, GLfloat y);
+void VertexAttrib2fv
+                     (GLuint indx, const GLfloat* values);
+void VertexAttrib3f
+                     (GLuint indx, GLfloat x, GLfloat y, GLfloat z);
+void VertexAttrib3fv
+                     (GLuint indx, const GLfloat* values);
+void VertexAttrib4f
+                     (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+void VertexAttrib4fv
+                     (GLuint indx, const GLfloat* values);
+void GetVertexAttribfv
+                     (GLuint index, GLenum pname, GLfloat* params);
+void GetVertexAttribiv
+                     (GLuint index, GLenum pname, GLint* params);
+void GetVertexAttribPointerv
+                     (GLuint index, GLenum pname, GLvoid** pointer);
+GLint GetAttribLocation
+                     (GLuint program, const char *name);
+void BindAttribLocation
                      (GLuint program,
                       GLuint index,
-                      const GLchar* name))
-GST_GL_EXT_FUNCTION (void, GetActiveAttrib,
+                      const GLchar* name);
+void GetActiveAttrib
                      (GLuint program,
                       GLuint index,
                       GLsizei bufsize,
                       GLsizei* length,
                       GLint* size,
                       GLenum* type,
-                      GLchar* name))
-GST_GL_EXT_END ()
-
-/* These only list functions that come from the old GLSL extensions.
- * Functions that are common to the extensions and GLSL 2.0 should
- * instead be listed in cogl-glsl-functions.h */
-GST_GL_EXT_BEGIN (shader_objects,
-                  extern_NONE,
-                  255, 255,
-                  255, 255, /* not in either GLES */
-                  "ARB\0",
-                  "shader_objects\0")
-GST_GL_EXT_FUNCTION (GLuint, CreateProgramObject,
-                     (void))
-GST_GL_EXT_FUNCTION (GLuint, CreateShaderObject,
-                     (GLenum shaderType))
-GST_GL_EXT_FUNCTION (void, DeleteObject,
-                     (GLuint obj))
-GST_GL_EXT_FUNCTION (void, AttachObject,
-                     (GLuint container, GLuint obj))
-GST_GL_EXT_FUNCTION (void, UseProgramObject,
-                     (GLuint programObj))
-GST_GL_EXT_FUNCTION (void, GetInfoLog,
+                      GLchar* name);
+GLuint CreateProgramObject
+                     (void);
+GLuint CreateShaderObject
+                     (GLenum shaderType);
+void DeleteObject
+                     (GLuint obj);
+void AttachObject
+                     (GLuint container, GLuint obj);
+void UseProgramObject
+                     (GLuint programObj);
+void GetInfoLog
                      (GLuint                obj,
                       GLsizei               maxLength,
                       GLsizei              *length,
-                      char                 *infoLog))
-GST_GL_EXT_FUNCTION (void, GetObjectParameteriv,
+                      char                 *infoLog);
+void GetObjectParameteriv
                      (GLuint                obj,
                       GLenum                pname,
-                      GLint                *params))
-GST_GL_EXT_FUNCTION (void, DetachObject,
-                     (GLuint container, GLuint obj))
-GST_GL_EXT_FUNCTION (void, GetAttachedObjects,
+                      GLint                *params);
+void DetachObject
+                     (GLuint container, GLuint obj);
+void GetAttachedObjects
                      (GLuint program,
                       GLsizei maxcount,
                       GLsizei* count,
-                      GLuint* shaders))
-GST_GL_EXT_END ()
-
-/* ARB_fragment_program */
-GST_GL_EXT_BEGIN (arbfp,
-                  extern_NONE,
-                  255, 255,
-                  255, 255, /* not in either GLES */
-                  "ARB\0",
-                  "fragment_program\0")
-GST_GL_EXT_FUNCTION (void, GenPrograms,
+                      GLuint* shaders);
+void GenPrograms
                      (GLsizei               n,
-                      GLuint               *programs))
-GST_GL_EXT_FUNCTION (void, DeletePrograms,
+                      GLuint               *programs);
+void DeletePrograms
                      (GLsizei               n,
-                      GLuint               *programs))
-GST_GL_EXT_FUNCTION (void, BindProgram,
+                      GLuint               *programs);
+void BindProgram
                      (GLenum                target,
-                      GLuint                program))
-GST_GL_EXT_FUNCTION (void, ProgramString,
+                      GLuint                program);
+void ProgramString
                      (GLenum                target,
                       GLenum                format,
                       GLsizei               len,
-                      const void           *program))
-GST_GL_EXT_FUNCTION (void, ProgramLocalParameter4fv,
+                      const void           *program);
+void ProgramLocalParameter4fv
                      (GLenum                target,
                       GLuint                index,
-                      GLfloat              *params))
-GST_GL_EXT_END ()
+                      GLfloat              *params);
+void UniformMatrix2x3fv
+                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+void UniformMatrix3x2fv
+                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+void UniformMatrix2x4fv
+                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+void UniformMatrix4x2fv
+                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+void UniformMatrix3x4fv
+                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+void UniformMatrix4x3fv
+                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+void BindFragDataLocation
+                     (GLuint program, GLuint index, const GLchar * name);
 
-/* This lists functions that are unique to GL 2.1 or GLES 3.0 and are
- * not in the old GLSL extensions */
-GST_GL_EXT_BEGIN (shaders_2_1,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  2, 1,
-                  3, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, UniformMatrix2x3fv,
-                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
-GST_GL_EXT_FUNCTION (void, UniformMatrix3x2fv,
-                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
-GST_GL_EXT_FUNCTION (void, UniformMatrix2x4fv,
-                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
-GST_GL_EXT_FUNCTION (void, UniformMatrix4x2fv,
-                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
-GST_GL_EXT_FUNCTION (void, UniformMatrix3x4fv,
-                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
-GST_GL_EXT_FUNCTION (void, UniformMatrix4x3fv,
-                     (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (bind_frag_data,
-                  extern_OPENGL | extern_OPENGL3,
-                  3, 0,
-                  255, 255,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, BindFragDataLocation,
-                     (GLuint program, GLuint index, const GLchar * name))
-GST_GL_EXT_END ()

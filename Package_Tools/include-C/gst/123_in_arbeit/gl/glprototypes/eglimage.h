@@ -38,16 +38,10 @@
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-GST_GL_EXT_BEGIN (EGL_image,
-                extern_NONE,
-                255, 255,
-                255, 255, /* not in either GLES */
-                "OES\0",
-                "EGL_image\0")
-GST_GL_EXT_FUNCTION (void, EGLImageTargetTexture2D,
+ void EGLImageTargetTexture2D
                      (GLenum           target,
-                      GLeglImageOES    image))
-GST_GL_EXT_FUNCTION (void, EGLImageTargetRenderbufferStorage,
+                      GLeglImageOES    image);
+ void EGLImageTargetRenderbufferStorage
                      (GLenum           target,
-                      GLeglImageOES    image))
-GST_GL_EXT_END ()
+                      GLeglImageOES    image);
+

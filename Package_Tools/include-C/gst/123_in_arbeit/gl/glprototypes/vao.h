@@ -18,20 +18,14 @@
  * Boston, MA 02110-1301, USA.
  */
 
-GST_GL_EXT_BEGIN (vao,
-                  extern_OPENGL3 | extern_GLES2,
-                  3, 0,
-                  3, 0,
-                  "ARB:\0OES\0",
-                  "vertex_array_object\0")
-GST_GL_EXT_FUNCTION (void, GenVertexArrays,
+void GenVertexArrays
                      (GLsizei               n,
-                      GLuint               *arrays))
-GST_GL_EXT_FUNCTION (void, DeleteVertexArrays,
+                      GLuint               *arrays);
+void DeleteVertexArrays
                      (GLsizei               n,
-                      GLuint               *arrays))
-GST_GL_EXT_FUNCTION (void, BindVertexArray,
-                     (GLuint                array))
-GST_GL_EXT_FUNCTION (GLboolean, IsVertexArray,
-                     (GLuint                array))
-GST_GL_EXT_END ()
+                      GLuint               *arrays);
+void BindVertexArray
+                     (GLuint                array);
+GLboolean IsVertexArray
+                     (GLuint                array);
+

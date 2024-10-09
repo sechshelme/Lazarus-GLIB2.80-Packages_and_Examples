@@ -38,65 +38,34 @@
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-GST_GL_EXT_BEGIN (only_in_both_gles,
-                  extern_GLES1 |
-                  extern_GLES2,
-                  255, 255,
-                  1, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, DepthRangef,
-                     (GLfloat near_val, GLfloat far_val))
-GST_GL_EXT_FUNCTION (void, ClearDepthf,
-                     (GLclampf depth))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (only_in_gles1,
-                extern_GLES1,
-                255, 255,
-                1, 0,
-                "\0",
-                "\0")
-GST_GL_EXT_FUNCTION (void, ClipPlanef, (GLenum plane, const GLfloat *equation))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (gles2_only_api,
-                  extern_GLES2,
-                  255, 255,
-                  2, 0,
-                  "ARB:\0",
-                  "ES2_compatibility\0")
-GST_GL_EXT_FUNCTION (void, ReleaseShaderCompiler, (void))
-GST_GL_EXT_FUNCTION (void, GetShaderPrecisionFormat,
+void DepthRangef
+                     (GLfloat near_val, GLfloat far_val);
+void ClearDepthf
+                     (GLclampf depth);
+void ClipPlanef (GLenum plane, const GLfloat *equation);
+void ReleaseShaderCompiler (void);
+void GetShaderPrecisionFormat
                      (GLenum shadertype,
                       GLenum precisiontype,
                       GLint* range,
-                      GLint* precision))
-GST_GL_EXT_FUNCTION (void, ShaderBinary,
+                      GLint* precision);
+void ShaderBinary
                      (GLsizei n,
                       const GLuint* shaders,
                       GLenum binaryformat,
                       const GLvoid* binary,
-                      GLsizei length))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (IMG_multisampled_render_to_texture,
-                  extern_NONE,
-                  255, 255,
-                  255, 255, /* not in either GLES */
-                  "\0",
-                  "IMG_multisampled_render_to_texture\0")
-GST_GL_EXT_FUNCTION (void, RenderbufferStorageMultisampleIMG,
+                      GLsizei length);
+void RenderbufferStorageMultisampleIMG
                      (GLenum           target,
                       GLsizei          samples,
                       GLenum           internal_format,
                       GLsizei          width,
-                      GLsizei          height))
-GST_GL_EXT_FUNCTION (void, FramebufferTexture2DMultisampleIMG,
+                      GLsizei          height);
+void FramebufferTexture2DMultisampleIMG
                      (GLenum           target,
                       GLenum           attachment,
                       GLenum           textarget,
                       GLuint           texture,
                       GLint            level,
-                      GLsizei          samples))
-GST_GL_EXT_END ()
+                      GLsizei          samples);
+

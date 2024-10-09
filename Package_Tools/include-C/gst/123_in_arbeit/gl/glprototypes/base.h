@@ -41,32 +41,25 @@
 
 /* These are the core GL functions which we assume will always be
    available */
-GST_GL_EXT_BEGIN (core,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES1 | extern_GLES2,
-                  1, 0,
-                  1, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, BindTexture,
-                     (GLenum target, GLuint texture))
-GST_GL_EXT_FUNCTION (void, BlendFunc,
-                     (GLenum sfactor, GLenum dfactor))
-GST_GL_EXT_FUNCTION (void, Clear,
-                     (GLbitfield mask))
-GST_GL_EXT_FUNCTION (void, ClearColor,
+void BindTexture
+                     (GLenum target, GLuint texture);
+ void BlendFunc
+                     (GLenum sfactor, GLenum dfactor);
+ void Clear
+                     (GLbitfield mask);
+void ClearColor
                      (GLclampf red,
                       GLclampf green,
                       GLclampf blue,
-                      GLclampf alpha))
-GST_GL_EXT_FUNCTION (void, ClearStencil,
-                     (GLint s))
-GST_GL_EXT_FUNCTION (void, ColorMask,
+                      GLclampf alpha);
+void ClearStencil
+                     (GLint s);
+ void ColorMask
                      (GLboolean red,
                       GLboolean green,
                       GLboolean blue,
-                      GLboolean alpha))
-GST_GL_EXT_FUNCTION (void, CopyTexSubImage2D,
+                      GLboolean alpha);
+ void CopyTexSubImage2D
                      (GLenum target,
                       GLint level,
                       GLint xoffset,
@@ -74,67 +67,67 @@ GST_GL_EXT_FUNCTION (void, CopyTexSubImage2D,
                       GLint x,
                       GLint y,
                       GLsizei width,
-                      GLsizei height))
-GST_GL_EXT_FUNCTION (void, DeleteTextures,
-                     (GLsizei n, const GLuint* textures))
-GST_GL_EXT_FUNCTION (void, DepthFunc,
-                     (GLenum func))
-GST_GL_EXT_FUNCTION (void, DepthMask,
-                     (GLboolean flag))
-GST_GL_EXT_FUNCTION (void, Disable,
-                     (GLenum cap))
-GST_GL_EXT_FUNCTION (void, DrawArrays,
-                     (GLenum mode, GLint first, GLsizei count))
-GST_GL_EXT_FUNCTION (void, DrawElements,
+                      GLsizei height);
+ void DeleteTextures
+                     (GLsizei n, const GLuint* textures);
+ void DepthFunc
+                     (GLenum func);
+ void DepthMask
+                     (GLboolean flag);
+ void Disable
+                     (GLenum cap);
+ void DrawArrays
+                     (GLenum mode, GLint first, GLsizei count);
+ void DrawElements
                      (GLenum mode,
                       GLsizei count,
                       GLenum type,
-                      const GLvoid* indices))
-GST_GL_EXT_FUNCTION (void, Enable,
-                     (GLenum cap))
-GST_GL_EXT_FUNCTION (void, Finish,
-                     (void))
-GST_GL_EXT_FUNCTION (void, Flush,
-                     (void))
-GST_GL_EXT_FUNCTION (void, FrontFace,
-                     (GLenum mode))
-GST_GL_EXT_FUNCTION (void, CullFace,
-                     (GLenum mode))
-GST_GL_EXT_FUNCTION (void, GenTextures,
-                     (GLsizei n, GLuint* textures))
-GST_GL_EXT_FUNCTION (GLenum, GetError,
-                     (void))
-GST_GL_EXT_FUNCTION (void, GetIntegerv,
-                     (GLenum pname, GLint* params))
-GST_GL_EXT_FUNCTION (void, GetBooleanv,
-                     (GLenum pname, GLboolean* params))
-GST_GL_EXT_FUNCTION (void, GetFloatv,
-                     (GLenum pname, GLfloat* params))
-GST_GL_EXT_FUNCTION (const GLubyte*, GetString,
-                     (GLenum name))
-GST_GL_EXT_FUNCTION (void, Hint,
-                     (GLenum target, GLenum mode))
-GST_GL_EXT_FUNCTION (GLboolean, IsTexture,
-                     (GLuint texture))
-GST_GL_EXT_FUNCTION (void, PixelStorei,
-                     (GLenum pname, GLint param))
-GST_GL_EXT_FUNCTION (void, ReadPixels,
+                      const GLvoid* indices);
+void Enable
+                     (GLenum cap);
+ void Finish
+                     (void);
+ void Flush
+                     (void);
+ void FrontFace
+                     (GLenum mode);
+ void CullFace
+                     (GLenum mode);
+ void GenTextures
+                     (GLsizei n, GLuint* textures);
+ GLenum GetError
+                     (void);
+ void GetIntegerv
+                     (GLenum pname, GLint* params);
+ void GetBooleanv
+                     (GLenum pname, GLboolean* params);
+ void GetFloatv
+                     (GLenum pname, GLfloat* params);
+ const GLubyte* GetString
+                     (GLenum name);
+ void Hint
+                     (GLenum target, GLenum mode);
+ GLboolean IsTexture
+                     (GLuint texture);
+ void PixelStorei
+                     (GLenum pname, GLint param);
+ void ReadPixels
                      (GLint x,
                       GLint y,
                       GLsizei width,
                       GLsizei height,
                       GLenum format,
                       GLenum type,
-                      GLvoid* pixels))
-GST_GL_EXT_FUNCTION (void, Scissor,
-                     (GLint x, GLint y, GLsizei width, GLsizei height))
-GST_GL_EXT_FUNCTION (void, StencilFunc,
-                     (GLenum func, GLint ref, GLuint mask))
-GST_GL_EXT_FUNCTION (void, StencilMask,
-                     (GLuint mask))
-GST_GL_EXT_FUNCTION (void, StencilOp,
-                     (GLenum fail, GLenum zfail, GLenum zpass))
-GST_GL_EXT_FUNCTION (void, TexImage2D,
+                      GLvoid* pixels);
+ void Scissor
+                     (GLint x, GLint y, GLsizei width, GLsizei height);
+ void StencilFunc
+                     (GLenum func, GLint ref, GLuint mask);
+ void StencilMask
+                     (GLuint mask);
+ void StencilOp
+                     (GLenum fail, GLenum zfail, GLenum zpass);
+ void TexImage2D
                      (GLenum target,
                       GLint level,
                       GLint internalformat,
@@ -143,18 +136,18 @@ GST_GL_EXT_FUNCTION (void, TexImage2D,
                       GLint border,
                       GLenum format,
                       GLenum type,
-                      const GLvoid* pixels))
-GST_GL_EXT_FUNCTION (void, TexParameterfv,
-                     (GLenum target, GLenum pname, const GLfloat* params))
-GST_GL_EXT_FUNCTION (void, TexParameteri,
-                     (GLenum target, GLenum pname, GLint param))
-GST_GL_EXT_FUNCTION (void, TexParameteriv,
-                     (GLenum target, GLenum pname, const GLint* params))
-GST_GL_EXT_FUNCTION (void, GetTexParameterfv,
-                     (GLenum target, GLenum pname, GLfloat* params))
-GST_GL_EXT_FUNCTION (void, GetTexParameteriv,
-                     (GLenum target, GLenum pname, GLint* params))
-GST_GL_EXT_FUNCTION (void, TexSubImage2D,
+                      const GLvoid* pixels);
+ void TexParameterfv
+                     (GLenum target, GLenum pname, const GLfloat* params);
+ void TexParameteri
+                     (GLenum target, GLenum pname, GLint param);
+ void TexParameteriv
+                     (GLenum target, GLenum pname, const GLint* params);
+ void GetTexParameterfv
+                     (GLenum target, GLenum pname, GLfloat* params);
+ void GetTexParameteriv
+                     (GLenum target, GLenum pname, GLint* params);
+ void TexSubImage2D
                      (GLenum target,
                       GLint level,
                       GLint xoffset,
@@ -163,8 +156,8 @@ GST_GL_EXT_FUNCTION (void, TexSubImage2D,
                       GLsizei height,
                       GLenum format,
                       GLenum type,
-                      const GLvoid* pixels))
-GST_GL_EXT_FUNCTION (void, CopyTexImage2D,
+                      const GLvoid* pixels);
+void CopyTexImage2D
                      (GLenum target,
                       GLint level,
                       GLenum internalformat,
@@ -172,48 +165,31 @@ GST_GL_EXT_FUNCTION (void, CopyTexImage2D,
                       GLint y,
                       GLsizei width,
                       GLsizei height,
-                      GLint border))
-GST_GL_EXT_FUNCTION (void, Viewport,
-                     (GLint x, GLint y, GLsizei width, GLsizei height))
-GST_GL_EXT_FUNCTION (GLboolean, IsEnabled, (GLenum cap))
-GST_GL_EXT_FUNCTION (void, LineWidth, (GLfloat width))
-GST_GL_EXT_FUNCTION (void, PolygonOffset, (GLfloat factor, GLfloat units))
-GST_GL_EXT_FUNCTION (void, TexParameterf,
+                      GLint border);
+void Viewport
+                     (GLint x, GLint y, GLsizei width, GLsizei height);
+ GLboolean IsEnabled (GLenum cap);
+ void LineWidth (GLfloat width);
+ void PolygonOffset (GLfloat factor, GLfloat units);
+ void TexParameterf
                      (GLenum target,
                       GLenum pname,
-                      GLfloat param))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (texture_3d,
-                  extern_OPENGL | extern_OPENGL3,
-                  1, 2,
-                  255, 255, /* not in either GLES */
-                  "OES\0",
-                  "texture_3D\0")
-GST_GL_EXT_FUNCTION (void, TexImage3D,
+                      GLfloat param);
+ void TexImage3D
                      (GLenum target, GLint level,
                       GLint internalFormat,
                       GLsizei width, GLsizei height,
                       GLsizei depth, GLint border,
                       GLenum format, GLenum type,
-                      const GLvoid *pixels))
-GST_GL_EXT_FUNCTION (void, TexSubImage3D,
+                      const GLvoid *pixels);
+ void TexSubImage3D
                      (GLenum target, GLint level,
                       GLint xoffset, GLint yoffset,
                       GLint zoffset, GLsizei width,
                       GLsizei height, GLsizei depth,
                       GLenum format,
-                      GLenum type, const GLvoid *pixels))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (only_in_both_gles_and_gl_1_3,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES1 | extern_GLES2,
-                  1, 3,
-                  1, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, CompressedTexImage2D,
+                      GLenum type, const GLvoid *pixels);
+ void CompressedTexImage2D
                      (GLenum target,
                       GLint level,
                       GLenum internalformat,
@@ -221,8 +197,8 @@ GST_GL_EXT_FUNCTION (void, CompressedTexImage2D,
                       GLsizei height,
                       GLint border,
                       GLsizei imageSize,
-                      const GLvoid* data))
-GST_GL_EXT_FUNCTION (void, CompressedTexSubImage2D,
+                      const GLvoid* data);
+ void CompressedTexSubImage2D
                      (GLenum target,
                       GLint level,
                       GLint xoffset,
@@ -231,98 +207,41 @@ GST_GL_EXT_FUNCTION (void, CompressedTexSubImage2D,
                       GLsizei height,
                       GLenum format,
                       GLsizei imageSize,
-                      const GLvoid* data))
-GST_GL_EXT_FUNCTION (void, SampleCoverage,
-                     (GLclampf value, GLboolean invert))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (only_in_both_gles_and_gl_1_5,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES1 | extern_GLES2,
-                  1, 5,
-                  1, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (void, GetBufferParameteriv,
-                     (GLenum target, GLenum pname, GLint* params))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (vbos,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES1 | extern_GLES2,
-                  1, 5,
-                  1, 0,
-                  "ARB\0",
-                  "vertex_buffer_object\0")
-GST_GL_EXT_FUNCTION (void, GenBuffers,
+                      const GLvoid* data);
+ void SampleCoverage
+                     (GLclampf value, GLboolean invert);
+ void GetBufferParameteriv
+                     (GLenum target, GLenum pname, GLint* params);
+ void GenBuffers
                      (GLsizei		 n,
-                      GLuint		*buffers))
-GST_GL_EXT_FUNCTION (void, BindBuffer,
+                      GLuint		*buffers);
+ void BindBuffer
                      (GLenum		 target,
-                      GLuint		 buffer))
-GST_GL_EXT_FUNCTION (void, BufferData,
+                      GLuint		 buffer);
+ void BufferData
                      (GLenum		 target,
                       GLsizeiptr		 size,
                       const GLvoid		*data,
-                      GLenum		 usage))
-GST_GL_EXT_FUNCTION (void, BufferSubData,
+                      GLenum		 usage);
+ void BufferSubData
                      (GLenum		 target,
                       GLintptr		 offset,
                       GLsizeiptr		 size,
-                      const GLvoid		*data))
-GST_GL_EXT_FUNCTION (void, DeleteBuffers,
+                      const GLvoid		*data);
+ void DeleteBuffers
                      (GLsizei		 n,
-                      const GLuint		*buffers))
-GST_GL_EXT_FUNCTION (GLboolean, IsBuffer,
-                     (GLuint               buffer))
-GST_GL_EXT_END ()
-
-/* Available in GL 1.3, the multitexture extension or GLES. These are
-   required */
-GST_GL_EXT_BEGIN (multitexture_part0,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES1 | extern_GLES2,
-                  1, 3,
-                  1, 0,
-                  "ARB\0",
-                  "multitexture\0")
-GST_GL_EXT_FUNCTION (void, ActiveTexture,
-                   (GLenum                texture))
-GST_GL_EXT_END ()
-
-
- /* GLES doesn't support mapping buffers in core so this has to be a
-   separate check */
-GST_GL_EXT_BEGIN (map_vbos, 
-                  extern_OPENGL | extern_OPENGL3,
-                  1, 5,
-                  255, 255, /* not in GLES core */
-                  "ARB\0OES\0",
-                  "vertex_buffer_object\0mapbuffer\0")
-GST_GL_EXT_FUNCTION (void *, MapBuffer,
+                      const GLuint		*buffers);
+ GLboolean IsBuffer
+                     (GLuint               buffer);
+ void ActiveTexture
+                   (GLenum                texture);
+ void * MapBuffer
                    (GLenum		 target,
-                    GLenum		 access))
-GST_GL_EXT_END ()
+                    GLenum		 access);
+ GLboolean UnmapBuffer
+                   (GLenum		 target);
+ const GLubyte* GetStringi
+                     (GLenum name, GLint index);
+ void * MapBufferRange
+                     (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access);
 
-GST_GL_EXT_BEGIN (unmap_buffer,
-                  extern_OPENGL | extern_OPENGL3 | extern_GLES2,
-                  1, 5,
-                  3, 0,
-                  "ARB\0OES\0",
-                  "vertex_buffer_object\0mapbuffer\0")
-GST_GL_EXT_FUNCTION (GLboolean, UnmapBuffer,
-                   (GLenum		 target))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (gl3,
-                  extern_OPENGL | extern_OPENGL3 |
-                  extern_GLES2,
-                  3, 0,
-                  3, 0,
-                  "\0",
-                  "\0")
-GST_GL_EXT_FUNCTION (const GLubyte*, GetStringi,
-                     (GLenum name, GLint index))
-GST_GL_EXT_FUNCTION (void *, MapBufferRange,
-                     (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access))
-GST_GL_EXT_END ()

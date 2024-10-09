@@ -18,30 +18,24 @@
  * Boston, MA 02110-1301, USA.
  */
 
-GST_GL_EXT_BEGIN (debug,
-                  extern_OPENGL3,
-                  4, 3,
-                  255, 255,
-                  "KHR:\0KHR\0ARB\0",
-                  "debug\0debug_output\0")
-GST_GL_EXT_FUNCTION (void, DebugMessageControl,
+ void DebugMessageControl
                      (GLenum source,
                       GLenum type,
                       GLenum severity,
                       GLsizei count,
                       const GLuint* ids,
-                      gboolean enabled))
-GST_GL_EXT_FUNCTION (void, DebugMessageInsert,
+                      gboolean enabled);
+ void DebugMessageInsert
                      (GLenum source,
                       GLenum type,
                       GLuint id,
                       GLenum severity,
                       GLsizei length,
-                      const gchar *message))
-GST_GL_EXT_FUNCTION (void, DebugMessageCallback,
+                      const gchar *message);
+ void DebugMessageCallback
                      (GST_GL_DEBUG_PROC callback,
-                      gpointer user_data))
-GST_GL_EXT_FUNCTION (GLuint, GetDebugMessageLog,
+                      gpointer user_data);
+GLuint GetDebugMessageLog
                      (GLuint count,
                       GLsizei bufSize,
                       GLenum* sources,
@@ -49,69 +43,45 @@ GST_GL_EXT_FUNCTION (GLuint, GetDebugMessageLog,
                       GLuint* ids,
                       GLenum* severities,
                       GLsizei* lengths,
-                      gchar* messageLog))
-GST_GL_EXT_FUNCTION (void, GetPointerv,
+                      gchar* messageLog);
+ void GetPointerv
                      (GLenum pname,
-                      gpointer * params))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (khr_debug,
-                  extern_OPENGL3,
-                  4, 3,
-                  255, 255,
-                  "KHR:\0KHR\0",
-                  "debug\0")
-GST_GL_EXT_FUNCTION (void, PushDebugGroup,
+                      gpointer * params);
+ void PushDebugGroup
                      (GLenum source,
                       GLuint id,
                       GLsizei length,
-                      const gchar * message))
-GST_GL_EXT_FUNCTION (void, PopDebugGroup, (void))
-GST_GL_EXT_FUNCTION (void, ObjectLabel,
+                      const gchar * message);
+ void PopDebugGroup (void);
+ void ObjectLabel
                      (GLenum identifier,
                       GLuint name,
                       GLsizei length,
-                      const gchar *label))
-GST_GL_EXT_FUNCTION (void, GetObjectLabel,
+                      const gchar *label);
+ void GetObjectLabel
                      (GLenum identifier,
                       GLuint name,
                       GLsizei bufSize, 
                       GLsizei *length,
-                      gchar *label))
-GST_GL_EXT_FUNCTION (void, ObjectPtrLabel,
+                      gchar *label);
+ void ObjectPtrLabel
                      (gpointer ptr,
                       GLsizei length,
-                      const gchar *label))
-GST_GL_EXT_FUNCTION (void, GetObjectPtrLabel,
+                      const gchar *label);
+ void GetObjectPtrLabel
                      (gpointer ptr,
                       GLsizei bufSize,
                       GLsizei *length,
-                      gchar *label))
-GST_GL_EXT_END ()
+                      gchar *label);
+ void InsertEventMarker
+                     (GLsizei length,
+                      const gchar * message);
+ void PushGroupMarker
+                     (GLsizei length,
+                      const gchar * message);
+ void PopGroupMarker
+                     (void);
+ void StringMarker
+                     (GLsizei length,
+                      const gchar * message);
 
-GST_GL_EXT_BEGIN (ext_debug_marker,
-                  extern_NONE,
-                  255, 255,
-                  255, 255,
-                  "EXT\0",
-                  "debug_marker\0")
-GST_GL_EXT_FUNCTION (void, InsertEventMarker,
-                     (GLsizei length,
-                      const gchar * message))
-GST_GL_EXT_FUNCTION (void, PushGroupMarker,
-                     (GLsizei length,
-                      const gchar * message))
-GST_GL_EXT_FUNCTION (void, PopGroupMarker,
-                     (void))
-GST_GL_EXT_END ()
-
-GST_GL_EXT_BEGIN (gremedy_string_marker,
-                  extern_NONE,
-                  255, 255,
-                  255, 255,
-                  "GREMEDY\0",
-                  "string_marker\0")
-GST_GL_EXT_FUNCTION (void, StringMarker,
-                     (GLsizei length,
-                      const gchar * message))
-GST_GL_EXT_END ()
