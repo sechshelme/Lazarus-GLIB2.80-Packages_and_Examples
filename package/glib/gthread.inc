@@ -162,8 +162,7 @@ function G_THREAD_ERROR: TGQuark;
 {$IFDEF read_implementation}
 
 
-{ was #define dname def_expr }
-function G_THREAD_ERROR: TGQuark; { return type might be wrong }
+function G_THREAD_ERROR: TGQuark;
 begin
   G_THREAD_ERROR := g_thread_error_quark;
 end;

@@ -35,6 +35,8 @@ type
   Tplanes_GstMemory_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of PGstMemory;
   Tplanes_Tuintptr_t_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tuintptr_t;
 
+  Tplanes_TVKFormat_arr=  array[0..(GST_VIDEO_MAX_PLANES)-1] of TVkFormat;
+
 
   {$DEFINE read_interface}
   {$include gst/base/gstaggregator.inc}// io.

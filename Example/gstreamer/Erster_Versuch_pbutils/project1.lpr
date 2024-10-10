@@ -37,51 +37,9 @@ uses
   gst124_gl_x11,
   gst124_gl_wayland,
   gst124_gl_glprototypes,
-
-  // ==== gl
-
-  //gstgl_enums,              // io.
-  //gl_enumtypes,             // io.
-  //gstglfuncs,               // io.
-  //gstglwindow,              // io. -> gstglfuncs
-  //gstgldebug,               // io. -> gstglwindow                       makros entfernt
-  //gstglquery,               // io. -> gstglwindow, gstgldebug           makros entfernt
-  //gstglbasememory,          // io, -> gstglwindow, gstglquery
-  //gstglbuffer,              // io. -> gstglbasememory, gstglwindow
-  //gstglformat,              // io. -> gstgl_enums, gstglwindow
-  //gstglmemory,              // io. -> gstgl_enums, gstglbasememory, gstglwindow, gstglformat
-  //gstglmemorypbo,           // io. -> gstglmemory, gstgl_enums, gstglformat
-  //gstglapi,                 // io.
-  //gstglcontext,             // io. -> gstglapi, gstglwindow
-  //gstgldisplay,             // io. -> gstglapi, gstglwindow
-  //gstglbasefilter,          // io. -> gstglapi, gstglwindow
-  //gstglbasemixer,           // io. -> gstglapi, gstglwindow
-  //gstglsl,                  // io. -> gstglapi, gstglwindow
-  //gstglslstage,             // io. -> gstglwindow, gstglsl
-  //gstglshader,              // io. -> gstglwindow, gstglsl, gstglslstage
-  //gstglframebuffer,         // io. -> gstglwindow, gstglbasememory, gstglmemory
-  //gstglbasesrc,             // io. -> gstglwindow, gstglapi, gstglmemory
-  //gstglbufferpool,          // io. -> gstglwindow, gstglbasememory
-  //gstglcolorconvert,        // io. -> gstglwindow, gstglframebuffer, gstglshader
-  //gstglcontextconfig,       // io. -> gl_enumtypes
-  //gstglfeature,             // io.
-  //gstglfilter,              // io. -> gstglmemory, gstglbasefilter, gstgl_enums, gstglframebuffer, gstglshader
-  //gstglmixer,               // io. -> gstglbasemixer, gstglmemory, gstglframebuffer
-  //gstgloverlaycompositor,   // io. -> gstglwindow, gstglshader
-  //gstglrenderbuffer,        // io. -> gstglwindow, gstglbasememory, gstglformat
-  //gstglshaderstrings,       // io. -> gstglwindow, gstglsl
-  //gstglsyncmeta,            // io. -> gstglwindow
-  //gstglupload,              // io. -> gstglwindow
-  //gstglutils,               // io. -> gstglwindow, gstgl_enums
-  //gstglviewconvert,         // io. -> gstglwindow, gl_enumtypes, gstgl_enums, gstglshader, gstglframebuffer
-
-  // === gl/egl
-
-  //gstegl,                   // io.
-  //gstgldisplay_egl,         // io.
-  //gstgldisplay_egl_device,  // io. -> gstgldisplay_egl
-  //gsteglimage,              // io.
-  //gstglmemoryegl,           // io. -> gsteglimage
+  gst124_vulkan,
+  gst124_vulkan_xcb,
+  gst124_vulkan_wayland,
 
   // ==== gl/glprototypes
 
@@ -99,6 +57,40 @@ uses
   //shaders,
   //sync,
   //vao,
+
+  //vulkan_enumtypes,              // io.
+  //gstvkbarrier,                  // io.
+  //gstvkdevice,                   // io. -> gstvkbarrier
+  //gstvkhandlepool,               // io. -> gstvkdevice
+  //gstvkfence,                    // io. -> gstvkdevice, gstvkhandlepool
+  //gstvkmemory,                   // io. -> gstvkdevice
+  //gstvkimagememory,              // io. -> gstvkdevice
+  //gstvkvideoutils,               // io.
+  //gstvkimageview,                // io. -> gstvkdevice
+  //gstvkdecoder,                  // io. -> gstvkdevice, gstvkvideoutils
+  //gstvkphysicaldevice,           // io. -> gstvkdevice
+  //gstvkinstance,                 // io. -> gstvkdevice
+  //gstvkcommandpool,              // io. -> gstvkdevice
+  //gstvkcommandbuffer,            // io. -> gstvkcommandpool, gstvkdevice
+  //gstvkqueue,                    // io. -> gstvkdevice, gstvkdecoder
+  //gstvktrash,                    // io. -> gstvkdevice, gstvkhandlepool
+  //gstvkbuffermemory,             // io. -> gstvkdevice
+  //gstvkhandle,                   // io. -> gstvkdevice
+  //gstvkerror,                    // io.
+  //gstvkdisplay,                  // io. -> gstvkdevice
+  //gstvkwindow,                   // io. -> gstvkdevice
+  //gstvkdescriptorset,            // io. -> gstvkdevice, gstvkhandle
+  //gstvkdescriptorpool,           // io. -> gstvkdevice, gstvkhandle, gstvkdescriptorset
+  //gstvkdescriptorcache,          // io. -> gstvkdevice, gstvkhandle, gstvkhandlepool, gstvkdescriptorset
+  //gstvkfullscreenquad,           // io. -> gstvkdevice, gstvkhandle, gstvkdescriptorset, gstvktrash
+  //gstvkdebug,                    // io.
+  //gstvkbufferpool,               // io. -> gstvkdevice
+  //gstvkvideofilter,              // io. -> gstvkdevice
+  //gstvkformat,                   // io. -> gstvkdevice
+  //gstvkimagebufferpool,          // io. -> gstvkdevice
+  //gstvkoperation,                // io. -> gstvkdevice
+  //gstvkswapper,                  // io. -> gstvkdevice
+  //gstvkutils,                    // io. -> gstvkdevice, gstvkhandle
 
 
   GLIBTools,
@@ -171,6 +163,34 @@ uses
     //    gst_check_init(nil,nil);
     //  gst_check_remove_log_filter(nil);
 
+
+
+
+
+
+    obj := g_object_new(GST_TYPE_VULKAN_DISPLAY_XCB, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_VULKAN_DISPLAY_XCB(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_VULKAN_DISPLAY_WAYLAND, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_VULKAN_DISPLAY_WAYLAND(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_VULKAN_COMMAND_POOL, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_VULKAN_COMMAND_POOL(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
     obj := g_object_new(GST_TYPE_PLAYER_G_MAIN_CONTEXT_SIGNAL_DISPATCHER, nil);
     if obj <> nil then begin

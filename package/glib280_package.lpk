@@ -139,6 +139,18 @@
         <Filename Value="gst124_gl_glprototypes.pas"/>
         <UnitName Value="gst124_gl_glprototypes"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_vulkan.pas"/>
+        <UnitName Value="gst124_vulkan"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_vulkan_wayland.pas"/>
+        <UnitName Value="gst124_vulkan_wayland"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_vulkan_xcb.pas"/>
+        <UnitName Value="gst124_vulkan_xcb"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

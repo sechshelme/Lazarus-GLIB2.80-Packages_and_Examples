@@ -3,6 +3,9 @@ unit gst124;
 interface
 
 uses
+  {$ifdef Linux}
+  x, xlib,
+  {$endif}
   glib280,
   Strings,
   ctypes;
@@ -40,6 +43,7 @@ const
   libgstva = 'libgstva-1.0';
   libgstplayer = 'libgstplayer-1.0';
   libgstgl = 'libgstgl-1.0';
+  libgstvulkan = 'libgstvulkan-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -68,6 +72,7 @@ const
   libgstva = 'gstva-1.0-0.dll';
   libgstplayer = 'gstplayer-1.0-0.dd';
   libgstgl = 'gstgl-1.0-.dll';
+  libgstvulkan = 'gstvulkan-1.0-0.dll';
   {$endif}
 
   // ==== Externes;
@@ -81,7 +86,7 @@ type
   // ===== gl.h
 
 type
-  Tptrdiff_t=PtrInt;
+  Tptrdiff_t = PtrInt;
 
   PGLeglImageOES = ^TGLeglImageOES;
   TGLeglImageOES = Tgpointer;
@@ -104,19 +109,109 @@ type
   PGLint64 = ^TGLint64;
   TGLint64 = Tgint64;
 
+  {$ifdef Linux}
   // ==== xcb.h
   Txcb_connection_t = record
   end;
   Pxcb_connection_t = ^Txcb_connection_t;
 
-  // ==== wayland
-  Twl_registry=record
-      end;
-  Pwl_registry=^Twl_registry;
+  Txcb_window_t = TWindow;
+  Pxcb_screen_t = PScreen;
+  {$endif}
 
-  Twl_shell=record
-      end;
-  Pwl_shell=^Twl_shell;
+
+  // ==== wayland
+  Twl_registry = record
+  end;
+  Pwl_registry = ^Twl_registry;
+
+  Twl_shell = record
+  end;
+  Pwl_shell = ^Twl_shell;
+
+  // ==== Vulkan
+  TVkDevice = Pointer; // ?????
+  TVkQueue = Pointer;
+  TVkInstance = Pointer;
+  TVkPhysicalDeviceProperties = Pointer;
+  TVkPhysicalDeviceFeatures = Pointer;
+  TVkPhysicalDeviceMemoryProperties = Pointer;
+  TVkFence = Pointer;
+  TVkSemaphore = Pointer;
+  TVkCommandPool = Pointer;
+  TVkCommandBuffer = Pointer;
+  TVkCommandBufferLevel = Pointer;
+  TVkImageLayout = Pointer;
+  TVkImageSubresourceRange = Pointer;
+  TVkImage = Pointer;
+  TVkDeviceMemory = Pointer;
+  TVkMemoryAllocateInfo = Pointer;
+  TVkMemoryPropertyFlags = Pointer;
+  TVkImageFormatProperties = Pointer;
+  TVkImageView = Pointer;
+  TVkFormat = Pointer;
+  TVkImageTiling = Pointer;
+  TVkVideoPictureResourceInfoKHR = Pointer;
+  TVkVideoReferenceSlotInfoKHR = Pointer;
+  TVkVideoDecodeInfoKHR = Pointer;
+  TVkVideoProfileInfoKHR = Pointer;
+  TVkVideoDecodeUsageInfoKHR = Pointer;
+  TVkBaseInStructure = Pointer;
+  TVkVideoDecodeH264ProfileInfoKHR = Pointer;
+  TVkVideoDecodeH265ProfileInfoKHR = Pointer;
+  TVkVideoCapabilitiesKHR = Pointer;
+  TVkVideoDecodeH264CapabilitiesKHR = Pointer;
+  TVkVideoDecodeH265CapabilitiesKHR = Pointer;
+  TVkVideoDecodeH264SessionParametersCreateInfoKHR = Pointer;
+  TVkVideoDecodeH265SessionParametersCreateInfoKHR = Pointer;
+  TVkSamplerYcbcrRange = Pointer;
+  TVkChromaLocation = Pointer;
+  TVkDeviceSize = Pointer;
+  TVkBuffer = Pointer;
+  TVkBufferUsageFlags = Pointer;
+  TVkResult = Pointer;
+  TVkSurfaceKHR = Pointer;
+  TVkDescriptorPool = Pointer;
+  TVkDescriptorSet = Pointer;
+  TVkBlendOp = Pointer;
+  TVkBlendFactor = Pointer;
+  TVkPhysicalDeviceType = Pointer;
+  TVkMemoryHeapFlags = Pointer;
+  TVkQueueFlags = Pointer;
+  TVkSampleCountFlags = Pointer;
+  TVkPresentModeKHR = Pointer;
+  TVkQueryType = Pointer;
+  TVkImageAspectFlags = Pointer;
+  // ?????????????????????
+
+  TVkQueueFlagBits = longint; // enum
+
+  TVkPhysicalDevice = Pointer;
+  PVkPhysicalDevice = ^TVkPhysicalDevice;
+
+  TVkQueueFamilyProperties = Pointer;
+  PVkQueueFamilyProperties = ^TVkQueueFamilyProperties;
+
+  TGstVulkanQueueFamilyOps = Pointer;
+  PGstVulkanQueueFamilyOps = ^TGstVulkanQueueFamilyOps;
+
+  TVkMemoryRequirements = Pointer;
+  PVkMemoryRequirements = ^TVkMemoryRequirements;
+
+  TVkImageCreateInfo = Pointer;
+  PVkImageCreateInfo = ^TVkImageCreateInfo;
+
+  TVkImageViewCreateInfo = Pointer;
+  PVkImageViewCreateInfo = ^TVkImageViewCreateInfo;
+
+  TVkVideoFormatPropertiesKHR = Pointer;
+  PVkVideoFormatPropertiesKHR = ^TVkVideoFormatPropertiesKHR;
+
+  TVkBufferCreateInfo = Pointer;
+  PVkBufferCreateInfo = ^TVkBufferCreateInfo;
+
+  TVkImageUsageFlags = Pointer;
+  PVkImageUsageFlags = ^TVkImageUsageFlags;
 
   // ==== va.h
 type

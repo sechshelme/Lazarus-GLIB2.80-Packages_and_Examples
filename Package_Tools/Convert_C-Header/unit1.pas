@@ -60,6 +60,7 @@ begin
       slHeader[j] := StringReplace(slHeader[j], 'GST_BASE_API', 'extern', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'GST_GL_API', 'extern', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'GST_GL_EXT_FUNCTION', 'extern', [rfReplaceAll]);
+      slHeader[j] := StringReplace(slHeader[j], 'GST_VULKAN_API', 'extern', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'G_BEGIN_DECLS', '', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'G_END_DECLS', '', [rfReplaceAll]);
       slHeader[j] := StringReplace(slHeader[j], 'G_GNUC_CONST', '', [rfReplaceAll]);
