@@ -44,6 +44,8 @@ const
   libgstplayer = 'libgstplayer-1.0';
   libgstgl = 'libgstgl-1.0';
   libgstvulkan = 'libgstvulkan-1.0';
+  libgstnet = 'libgstnet-1.0';
+  libgstcuda = 'libgstcuda-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -73,6 +75,8 @@ const
   libgstplayer = 'gstplayer-1.0-0.dd';
   libgstgl = 'gstgl-1.0-.dll';
   libgstvulkan = 'gstvulkan-1.0-0.dll';
+  libgstnet = 'gstnet-1.0-0.dll';
+  libgstcuda = 'gstcuda-1.0-0.dll';
   {$endif}
 
   // ==== Externes;
@@ -218,6 +222,38 @@ type
   TVAGenericID = cuint;
   PVASurfaceID = ^TVASurfaceID;
   TVASurfaceID = TVAGenericID;
+
+// ==== cuda
+ TCUresult=LongInt; // enum
+
+ TCUcontext=Pointer;
+ PCUcontext=^TCUcontext;
+
+ TCUdevice=Pointer;
+ PCUdevice=^TCUdevice;
+
+ TCUgraphicsResource=Pointer;
+ PCUgraphicsResource=^TCUgraphicsResource;
+
+ TCUstream=Pointer;
+ PCUstream=^TCUstream;
+
+ TCUfilter_mode=Pointer;
+ PCUfilter_mode=^TCUfilter_mode;
+
+ TCUtexObject=Pointer;
+ PCUtexObject=^TCUtexObject;
+
+ TCUdeviceptr=Pointer;
+ PCUdeviceptr=^TCUdeviceptr;
+
+ TCUmemAllocationProp=Pointer;
+ PCUmemAllocationProp=^TCUmemAllocationProp;
+
+ TCUgraphicsRegisterFlags=LongInt;
+ TCUgraphicsMapResourceFlags=LongInt;
+ TCUmemAllocationGranularity_flags=LongInt;
+
 
   // === GST
 const

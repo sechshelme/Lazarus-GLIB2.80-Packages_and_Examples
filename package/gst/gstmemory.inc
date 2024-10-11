@@ -29,6 +29,7 @@ const
 
 type
   PGstMemory = ^TGstMemory;
+  PPGstMemory = ^PGstMemory;
 
   TGstMemory = record
     mini_object: TGstMiniObject;

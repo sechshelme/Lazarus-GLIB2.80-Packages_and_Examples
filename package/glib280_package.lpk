@@ -151,6 +151,14 @@
         <Filename Value="gst124_vulkan_xcb.pas"/>
         <UnitName Value="gst124_vulkan_xcb"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_net.pas"/>
+        <UnitName Value="gst124_net"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_cuda.pas"/>
+        <UnitName Value="gst124_cuda"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

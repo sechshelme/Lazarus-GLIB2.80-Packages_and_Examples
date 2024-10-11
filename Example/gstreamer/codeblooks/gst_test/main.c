@@ -12,6 +12,7 @@
 #include <gst/audio/gstnonstreamaudiodecoder.h>
 #include <gst/base/base.h>
 #include <gst/mse/mse.h>
+#include <gst/cuda/gstcuda.h>
 #include <gst/va/gstva.h>
 #include <gst/wayland/wayland.h>
 #include <wayland-client-core.h>
@@ -76,23 +77,10 @@ main (int argc, char *argv[])
 
 GstVideoFormatInfo * info;
 
-GST_VIDEO_FORMAT_INFO_DATA(info,0,0);
-gst_buffer_get_ancillary_meta(0);
-GST_AUDIO_BASE_SINK_CLOCK(NULL);
+CuGraphicsMapResources(0,0,9);
+
+//GST_VIDEO_FORMAT_INFO_DATA(info,0,0);
+//gst_buffer_get_ancillary_meta(0);
+//GST_AUDIO_BASE_SINK_CLOCK(NULL);
 }
 
-wl_display
-gst_wl_display_new_existing
-
-G_PASTE
-GST_VA_DISPLAY_IS_IMPLEMENTATION
-VASurfaceID
-
-G_MAXUINT32
-GstGLTextureTarget
-__FILE__
-__LINE__
-EGLint
-ptrdiff_t
-
-gst_egl_get_error_string

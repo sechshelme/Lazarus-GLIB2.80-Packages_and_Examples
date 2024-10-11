@@ -40,57 +40,24 @@ uses
   gst124_vulkan,
   gst124_vulkan_xcb,
   gst124_vulkan_wayland,
+  gst124_net,
+  gst124_cuda,
 
-  // ==== gl/glprototypes
+  //gstnetaddressmeta,
+  //gstnetclientclock,
+  //gstnetcontrolmessagemeta,
+  //gstnettimepacket,
+  //gstnettimeprovider,
+  //gstnetutils,
+  //gstptpclock,
 
-  //base,
-  //blending,
-  //buffers,
-  //buffer_storage,
-  //debug,
-  //eglimage,
-  //fbo,
-  //fixedfunction,
-  //gles,
-  //opengl,
-  //query,
-  //shaders,
-  //sync,
-  //vao,
-
-  //vulkan_enumtypes,              // io.
-  //gstvkbarrier,                  // io.
-  //gstvkdevice,                   // io. -> gstvkbarrier
-  //gstvkhandlepool,               // io. -> gstvkdevice
-  //gstvkfence,                    // io. -> gstvkdevice, gstvkhandlepool
-  //gstvkmemory,                   // io. -> gstvkdevice
-  //gstvkimagememory,              // io. -> gstvkdevice
-  //gstvkvideoutils,               // io.
-  //gstvkimageview,                // io. -> gstvkdevice
-  //gstvkdecoder,                  // io. -> gstvkdevice, gstvkvideoutils
-  //gstvkphysicaldevice,           // io. -> gstvkdevice
-  //gstvkinstance,                 // io. -> gstvkdevice
-  //gstvkcommandpool,              // io. -> gstvkdevice
-  //gstvkcommandbuffer,            // io. -> gstvkcommandpool, gstvkdevice
-  //gstvkqueue,                    // io. -> gstvkdevice, gstvkdecoder
-  //gstvktrash,                    // io. -> gstvkdevice, gstvkhandlepool
-  //gstvkbuffermemory,             // io. -> gstvkdevice
-  //gstvkhandle,                   // io. -> gstvkdevice
-  //gstvkerror,                    // io.
-  //gstvkdisplay,                  // io. -> gstvkdevice
-  //gstvkwindow,                   // io. -> gstvkdevice
-  //gstvkdescriptorset,            // io. -> gstvkdevice, gstvkhandle
-  //gstvkdescriptorpool,           // io. -> gstvkdevice, gstvkhandle, gstvkdescriptorset
-  //gstvkdescriptorcache,          // io. -> gstvkdevice, gstvkhandle, gstvkhandlepool, gstvkdescriptorset
-  //gstvkfullscreenquad,           // io. -> gstvkdevice, gstvkhandle, gstvkdescriptorset, gstvktrash
-  //gstvkdebug,                    // io.
-  //gstvkbufferpool,               // io. -> gstvkdevice
-  //gstvkvideofilter,              // io. -> gstvkdevice
-  //gstvkformat,                   // io. -> gstvkdevice
-  //gstvkimagebufferpool,          // io. -> gstvkdevice
-  //gstvkoperation,                // io. -> gstvkdevice
-  //gstvkswapper,                  // io. -> gstvkdevice
-  //gstvkutils,                    // io. -> gstvkdevice, gstvkhandle
+  //gstcudanvrtc,        // io.
+  //gstcudaloader,       // io.
+  //gstcudacontext,      // io.
+  //gstcudastream,       // io. -> gstcudacontext
+  //gstcudamemory,       // io. -> gstcudacontext, gstcudastream
+  //gstcudabufferpool,   // io. -> gstcudacontext, gstcudastream, gstcudamemory
+  //gstcudautils,        // io. -> gstcudacontext
 
 
   GLIBTools,
@@ -164,17 +131,29 @@ uses
     //  gst_check_remove_log_filter(nil);
 
 
-
-
-
-
-    obj := g_object_new(GST_TYPE_VULKAN_DISPLAY_XCB, nil);
+    obj := g_object_new(GST_TYPE_CUDA_BUFFER_POOL, nil);
     if obj <> nil then begin
       WriteLn('io');
     end;
-    WriteLn(GST_IS_VULKAN_DISPLAY_XCB(obj));
+    WriteLn(GST_IS_CUDA_BUFFER_POOL(obj));
     GObjectShowProperty(obj);
     g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_NET_CLIENT_CLOCK, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_NET_CLIENT_CLOCK(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+     obj := g_object_new(GST_TYPE_VULKAN_DISPLAY_XCB, nil);
+     if obj <> nil then begin
+       WriteLn('io');
+     end;
+     WriteLn(GST_IS_VULKAN_DISPLAY_XCB(obj));
+     GObjectShowProperty(obj);
+     g_object_unref(obj);
 
     obj := g_object_new(GST_TYPE_VULKAN_DISPLAY_WAYLAND, nil);
     if obj <> nil then begin
