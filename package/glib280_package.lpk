@@ -159,6 +159,10 @@
         <Filename Value="gst124_cuda.pas"/>
         <UnitName Value="gst124_cuda"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_play.pas"/>
+        <UnitName Value="gst124_play"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

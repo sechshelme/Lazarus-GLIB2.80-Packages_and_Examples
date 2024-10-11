@@ -41,19 +41,19 @@ struct _GstPlayVisualization {
   gchar *description;
 };
 
-GST_PLAY_API
+
 GType                     gst_play_visualization_get_type (void);
 
-GST_PLAY_API
+
 GstPlayVisualization *  gst_play_visualization_copy  (const GstPlayVisualization *vis);
 
-GST_PLAY_API
+
 void                      gst_play_visualization_free  (GstPlayVisualization *vis);
 
-GST_PLAY_API
+
 GstPlayVisualization ** gst_play_visualizations_get  (void);
 
-GST_PLAY_API
+
 void                      gst_play_visualizations_free (GstPlayVisualization **viss);
 
 #ifdef G_DEFINE_AUTOPTR_CLEANUP_FUNC

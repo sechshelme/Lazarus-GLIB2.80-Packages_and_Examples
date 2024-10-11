@@ -31,8 +31,16 @@
 #include <gst/play/gstplay-media-info.h>
 
 
+#define GST_TYPE_PLAY             (gst_play_get_type ())
+#define GST_PLAY(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PLAY, GstPlay))
+#define GST_PLAY_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PLAY, GstPlayClass))
+#define GST_IS_PLAY(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PLAY))
+#define GST_IS_PLAY_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PLAY))
+#define GST_PLAY_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_PLAY, GstPlayClass))
 
-GST_PLAY_API
+
+
+
 GType        gst_play_state_get_type                (void);
 
 /**
@@ -41,7 +49,7 @@ GType        gst_play_state_get_type                (void);
  */
 #define      GST_TYPE_PLAY_STATE                    (gst_play_state_get_type ())
 
-GST_PLAY_API
+
 GType        gst_play_message_get_type              (void);
 
 /**
@@ -108,16 +116,16 @@ typedef enum
   GST_PLAY_MESSAGE_SEEK_DONE
 } GstPlayMessage;
 
-GST_PLAY_API
+
 const gchar *gst_play_state_get_name                (GstPlayState state);
 
-GST_PLAY_API
+
 const gchar *gst_play_message_get_name              (GstPlayMessage message_type);
 
-GST_PLAY_API
+
 GQuark       gst_play_error_quark                   (void);
 
-GST_PLAY_API
+
 GType        gst_play_error_get_type                (void);
 
 /**
@@ -144,10 +152,10 @@ typedef enum {
   GST_PLAY_ERROR_FAILED = 0
 } GstPlayError;
 
-GST_PLAY_API
+
 const gchar *gst_play_error_get_name                (GstPlayError error);
 
-GST_PLAY_API
+
 GType gst_play_color_balance_type_get_type          (void);
 
 /**
@@ -175,15 +183,9 @@ typedef enum
   GST_PLAY_COLOR_BALANCE_HUE,
 } GstPlayColorBalanceType;
 
-GST_PLAY_API
+
 const gchar *gst_play_color_balance_type_get_name   (GstPlayColorBalanceType type);
 
-#define GST_TYPE_PLAY             (gst_play_get_type ())
-#define GST_IS_PLAY(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PLAY))
-#define GST_IS_PLAY_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PLAY))
-#define GST_PLAY_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_PLAY, GstPlayClass))
-#define GST_PLAY(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PLAY, GstPlay))
-#define GST_PLAY_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PLAY, GstPlayClass))
 
 /**
  * GST_PLAY_CAST:
@@ -195,194 +197,194 @@ const gchar *gst_play_color_balance_type_get_name   (GstPlayColorBalanceType typ
 
 #endif
 
-GST_PLAY_API
+
 GType        gst_play_get_type                      (void);
 
-GST_PLAY_API
+
 GstPlay *    gst_play_new                           (GstPlayVideoRenderer * video_renderer);
 
-GST_PLAY_API
+
 GstBus *     gst_play_get_message_bus               (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_play                          (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_pause                         (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_stop                          (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_seek                          (GstPlay    * play,
                                                      GstClockTime   position);
 
-GST_PLAY_API
+
 void         gst_play_set_rate                      (GstPlay    * play,
                                                      gdouble        rate);
 
-GST_PLAY_API
+
 gdouble      gst_play_get_rate                      (GstPlay    * play);
 
-GST_PLAY_API
+
 gchar *      gst_play_get_uri                       (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_set_uri                       (GstPlay    * play,
                                                      const gchar  * uri);
 
-GST_PLAY_API
+
 gchar *      gst_play_get_subtitle_uri              (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_set_subtitle_uri              (GstPlay    * play,
                                                      const gchar *uri);
 
-GST_PLAY_API
+
 GstClockTime gst_play_get_position                  (GstPlay    * play);
 
-GST_PLAY_API
+
 GstClockTime gst_play_get_duration                  (GstPlay    * play);
 
-GST_PLAY_API
+
 gdouble      gst_play_get_volume                    (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_set_volume                    (GstPlay    * play,
                                                      gdouble        val);
 
-GST_PLAY_API
+
 gboolean     gst_play_get_mute                      (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_set_mute                      (GstPlay    * play,
                                                      gboolean       val);
 
-GST_PLAY_API
+
 GstElement * gst_play_get_pipeline                  (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_set_video_track_enabled       (GstPlay    * play,
                                                      gboolean enabled);
 
-GST_PLAY_API
+
 void         gst_play_set_audio_track_enabled       (GstPlay    * play,
                                                      gboolean enabled);
 
-GST_PLAY_API
+
 void         gst_play_set_subtitle_track_enabled    (GstPlay    * play,
                                                      gboolean enabled);
 
-GST_PLAY_API
+
 gboolean     gst_play_set_audio_track               (GstPlay    *play,
                                                      gint stream_index);
 
-GST_PLAY_API
+
 gboolean     gst_play_set_video_track               (GstPlay    *play,
                                                      gint stream_index);
 
-GST_PLAY_API
+
 gboolean     gst_play_set_subtitle_track            (GstPlay    *play,
                                                      gint stream_index);
 
-GST_PLAY_API
+
 GstPlayMediaInfo *    gst_play_get_media_info     (GstPlay * play);
 
-GST_PLAY_API
+
 GstPlayAudioInfo *    gst_play_get_current_audio_track (GstPlay * play);
 
-GST_PLAY_API
+
 GstPlayVideoInfo *    gst_play_get_current_video_track (GstPlay * play);
 
-GST_PLAY_API
+
 GstPlaySubtitleInfo * gst_play_get_current_subtitle_track (GstPlay * play);
 
-GST_PLAY_API
+
 gboolean     gst_play_set_visualization             (GstPlay    * play,
                                                      const gchar *name);
 
-GST_PLAY_API
+
 void         gst_play_set_visualization_enabled     (GstPlay    * play,
                                                      gboolean enabled);
 
-GST_PLAY_API
+
 gchar *      gst_play_get_current_visualization     (GstPlay    * play);
 
-GST_PLAY_API
+
 gboolean     gst_play_has_color_balance             (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_set_color_balance             (GstPlay    * play,
                                                      GstPlayColorBalanceType type,
                                                      gdouble value);
 
-GST_PLAY_API
+
 gdouble      gst_play_get_color_balance             (GstPlay    * play,
                                                      GstPlayColorBalanceType type);
 
 
-GST_PLAY_API
+
 GstVideoMultiviewFramePacking gst_play_get_multiview_mode (GstPlay    * play);
 
-GST_PLAY_API
+
 void                     gst_play_set_multiview_mode (GstPlay    * play,
                                                       GstVideoMultiviewFramePacking mode);
 
-GST_PLAY_API
+
 GstVideoMultiviewFlags  gst_play_get_multiview_flags  (GstPlay  * play);
 
-GST_PLAY_API
+
 void                    gst_play_set_multiview_flags  (GstPlay  * play,
                                                        GstVideoMultiviewFlags flags);
 
-GST_PLAY_API
+
 gint64       gst_play_get_audio_video_offset        (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_set_audio_video_offset        (GstPlay    * play,
                                                      gint64 offset);
 
-GST_PLAY_API
+
 gint64       gst_play_get_subtitle_video_offset        (GstPlay    * play);
 
-GST_PLAY_API
+
 void         gst_play_set_subtitle_video_offset        (GstPlay    * play,
                                                         gint64 offset);
 
-GST_PLAY_API
+
 gboolean       gst_play_set_config                  (GstPlay * play,
                                                      GstStructure * config);
 
-GST_PLAY_API
+
 GstStructure * gst_play_get_config                  (GstPlay * play);
 
 /* helpers for configuring the config structure */
 
-GST_PLAY_API
+
 void           gst_play_config_set_user_agent       (GstStructure * config,
                                                      const gchar * agent);
 
-GST_PLAY_API
+
 gchar *        gst_play_config_get_user_agent       (const GstStructure * config);
 
-GST_PLAY_API
+
 void           gst_play_config_set_position_update_interval  (GstStructure * config,
                                                               guint          interval);
 
-GST_PLAY_API
+
 guint          gst_play_config_get_position_update_interval  (const GstStructure * config);
 
-GST_PLAY_API
+
 void           gst_play_config_set_seek_accurate (GstStructure * config, gboolean accurate);
 
-GST_PLAY_API
+
 gboolean       gst_play_config_get_seek_accurate (const GstStructure * config);
 
-GST_PLAY_API
+
 void           gst_play_config_set_pipeline_dump_in_error_details (GstStructure * config,
                                                                    gboolean       value);
 
-GST_PLAY_API
+
 gboolean       gst_play_config_get_pipeline_dump_in_error_details (const GstStructure * config);
 
 /**
@@ -404,44 +406,44 @@ typedef enum
   GST_PLAY_THUMBNAIL_PNG
 } GstPlaySnapshotFormat;
 
-GST_PLAY_API
+
 GstSample * gst_play_get_video_snapshot (GstPlay * play,
     GstPlaySnapshotFormat format, const GstStructure * config);
 
-GST_PLAY_API
+
 gboolean       gst_play_is_play_message                        (GstMessage *msg);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_type                       (GstMessage *msg, GstPlayMessage *type);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_duration_updated           (GstMessage *msg, GstClockTime *duration);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_position_updated           (GstMessage *msg, GstClockTime *position);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_state_changed              (GstMessage *msg, GstPlayState *state);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_buffering_percent          (GstMessage *msg, guint *percent);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_error                      (GstMessage *msg, GError **error, GstStructure **details);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_warning                    (GstMessage *msg, GError **error, GstStructure **details);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_video_dimensions_changed   (GstMessage *msg, guint *width, guint *height);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_media_info_updated         (GstMessage *msg, GstPlayMediaInfo **info);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_volume_changed             (GstMessage *msg, gdouble *volume);
 
-GST_PLAY_API
+
 void           gst_play_message_parse_muted_changed              (GstMessage *msg, gboolean *muted);
 
 

@@ -53,7 +53,7 @@ struct _GstPlayVideoRendererInterface {
 
 #endif
 
-GST_PLAY_API
+
 GType        gst_play_video_renderer_get_type       (void);
 
 

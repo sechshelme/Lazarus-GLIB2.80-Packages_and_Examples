@@ -27,11 +27,11 @@
 
 
 #define GST_TYPE_PLAY_SIGNAL_ADAPTER             (gst_play_signal_adapter_get_type ())
+#define GST_PLAY_SIGNAL_ADAPTER(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PLAY_SIGNAL_ADAPTER, GstPlaySignalAdapter))
+#define GST_PLAY_SIGNAL_ADAPTER_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PLAY_SIGNAL_ADAPTER, GstPlaySignalAdapterClass))
 #define GST_IS_PLAY_SIGNAL_ADAPTER(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_PLAY_SIGNAL_ADAPTER))
 #define GST_IS_PLAY_SIGNAL_ADAPTER_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_PLAY_SIGNAL_ADAPTER))
 #define GST_PLAY_SIGNAL_ADAPTER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_PLAY_SIGNAL_ADAPTER, GstPlaySignalAdapterClass))
-#define GST_PLAY_SIGNAL_ADAPTER(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_PLAY_SIGNAL_ADAPTER, GstPlaySignalAdapter))
-#define GST_PLAY_SIGNAL_ADAPTER_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_PLAY_SIGNAL_ADAPTER, GstPlaySignalAdapterClass))
 
 /**
  * GST_PLAY_SIGNAL_ADAPTER_CAST:
@@ -43,19 +43,19 @@
 
 #endif
 
-GST_PLAY_API
+
 GType                  gst_play_signal_adapter_get_type               (void);
 
-GST_PLAY_API
+
 GstPlaySignalAdapter * gst_play_signal_adapter_new                    (GstPlay * play);
 
-GST_PLAY_API
+
 GstPlaySignalAdapter * gst_play_signal_adapter_new_with_main_context  (GstPlay * play, GMainContext * context);
 
-GST_PLAY_API
+
 GstPlaySignalAdapter * gst_play_signal_adapter_new_sync_emit          (GstPlay * play);
 
-GST_PLAY_API
+
 GstPlay              * gst_play_signal_adapter_get_play               (GstPlaySignalAdapter * adapter);
 
 

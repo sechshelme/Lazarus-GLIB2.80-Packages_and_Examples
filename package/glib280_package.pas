@@ -16,7 +16,7 @@ uses
   gst124_wayland, gst124_va, gst124_player, gst124_gl, gst124_gl_egl, 
   gst124_gl_wayland, gst124_gl_x11, gst124_gl_glprototypes, gst124_vulkan, 
   gst124_vulkan_wayland, gst124_vulkan_xcb, gst124_net, gst124_cuda, 
-  LazarusPackageIntf;
+  gst124_play, LazarusPackageIntf;
 
 implementation
 

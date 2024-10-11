@@ -52,22 +52,22 @@
 typedef struct _GstPlayStreamInfo GstPlayStreamInfo;
 typedef struct _GstPlayStreamInfoClass GstPlayStreamInfoClass;
 
-GST_PLAY_API
+
 GType         gst_play_stream_info_get_type (void);
 
-GST_PLAY_API
+
 gint          gst_play_stream_info_get_index (const GstPlayStreamInfo *info);
 
-GST_PLAY_API
+
 const gchar*  gst_play_stream_info_get_stream_type (const GstPlayStreamInfo *info);
 
-GST_PLAY_API
+
 GstTagList*   gst_play_stream_info_get_tags  (const GstPlayStreamInfo *info);
 
-GST_PLAY_API
+
 GstCaps*      gst_play_stream_info_get_caps  (const GstPlayStreamInfo *info);
 
-GST_PLAY_API
+
 const gchar*  gst_play_stream_info_get_codec (const GstPlayStreamInfo *info);
 
 /**
@@ -94,27 +94,27 @@ const gchar*  gst_play_stream_info_get_codec (const GstPlayStreamInfo *info);
 typedef struct _GstPlayVideoInfo GstPlayVideoInfo;
 typedef struct _GstPlayVideoInfoClass GstPlayVideoInfoClass;
 
-GST_PLAY_API
+
 GType         gst_play_video_info_get_type (void);
 
-GST_PLAY_API
+
 gint          gst_play_video_info_get_bitrate     (const GstPlayVideoInfo * info);
 
-GST_PLAY_API
+
 gint          gst_play_video_info_get_max_bitrate (const GstPlayVideoInfo * info);
 
-GST_PLAY_API
+
 gint          gst_play_video_info_get_width       (const GstPlayVideoInfo * info);
 
-GST_PLAY_API
+
 gint          gst_play_video_info_get_height      (const GstPlayVideoInfo * info);
 
-GST_PLAY_API
+
 void          gst_play_video_info_get_framerate   (const GstPlayVideoInfo * info,
                                                      gint * fps_n,
                                                      gint * fps_d);
 
-GST_PLAY_API
+
 void          gst_play_video_info_get_pixel_aspect_ratio (const GstPlayVideoInfo * info,
                                                             guint * par_n,
                                                             guint * par_d);
@@ -143,22 +143,22 @@ void          gst_play_video_info_get_pixel_aspect_ratio (const GstPlayVideoInfo
 typedef struct _GstPlayAudioInfo GstPlayAudioInfo;
 typedef struct _GstPlayAudioInfoClass GstPlayAudioInfoClass;
 
-GST_PLAY_API
+
 GType         gst_play_audio_info_get_type (void);
 
-GST_PLAY_API
+
 gint          gst_play_audio_info_get_channels    (const GstPlayAudioInfo* info);
 
-GST_PLAY_API
+
 gint          gst_play_audio_info_get_sample_rate (const GstPlayAudioInfo* info);
 
-GST_PLAY_API
+
 gint          gst_play_audio_info_get_bitrate     (const GstPlayAudioInfo* info);
 
-GST_PLAY_API
+
 gint          gst_play_audio_info_get_max_bitrate (const GstPlayAudioInfo* info);
 
-GST_PLAY_API
+
 const gchar*  gst_play_audio_info_get_language    (const GstPlayAudioInfo* info);
 
 /**
@@ -185,10 +185,10 @@ const gchar*  gst_play_audio_info_get_language    (const GstPlayAudioInfo* info)
 typedef struct _GstPlaySubtitleInfo GstPlaySubtitleInfo;
 typedef struct _GstPlaySubtitleInfoClass GstPlaySubtitleInfoClass;
 
-GST_PLAY_API
+
 GType         gst_play_subtitle_info_get_type (void);
 
-GST_PLAY_API
+
 const gchar * gst_play_subtitle_info_get_language (const GstPlaySubtitleInfo* info);
 
 /**
@@ -219,64 +219,61 @@ typedef struct _GstPlayMediaInfoClass GstPlayMediaInfoClass;
 
 #endif
 
-GST_PLAY_API
+
 GType         gst_play_media_info_get_type (void);
 
-GST_PLAY_API
+
 const gchar * gst_play_media_info_get_uri (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 gboolean      gst_play_media_info_is_seekable (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 gboolean      gst_play_media_info_is_live (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 GstClockTime  gst_play_media_info_get_duration (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 GList*        gst_play_media_info_get_stream_list (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 guint         gst_play_media_info_get_number_of_streams (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 GList*        gst_play_media_info_get_video_streams (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 guint         gst_play_media_info_get_number_of_video_streams (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 GList*        gst_play_media_info_get_audio_streams (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 guint         gst_play_media_info_get_number_of_audio_streams (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 GList*        gst_play_media_info_get_subtitle_streams (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 guint         gst_play_media_info_get_number_of_subtitle_streams (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 GstTagList*   gst_play_media_info_get_tags (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 const gchar*  gst_play_media_info_get_title (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 const gchar*  gst_play_media_info_get_container_format (const GstPlayMediaInfo *info);
 
-GST_PLAY_API
+
 GstSample*    gst_play_media_info_get_image_sample (const GstPlayMediaInfo *info);
 
-GST_PLAY_DEPRECATED_FOR(gst_play_media_info_get_video_streams)
 GList*        gst_play_get_video_streams    (const GstPlayMediaInfo *info);
 
-GST_PLAY_DEPRECATED_FOR(gst_play_media_info_get_audio_streams)
 GList*        gst_play_get_audio_streams    (const GstPlayMediaInfo *info);
 
-GST_PLAY_DEPRECATED_FOR(gst_play_media_info_get_subtitle_streams)
 GList*        gst_play_get_subtitle_streams (const GstPlayMediaInfo *info);
 
 

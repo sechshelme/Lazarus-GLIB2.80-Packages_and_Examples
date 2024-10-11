@@ -46,6 +46,7 @@ const
   libgstvulkan = 'libgstvulkan-1.0';
   libgstnet = 'libgstnet-1.0';
   libgstcuda = 'libgstcuda-1.0';
+  libgstplay = 'libgstplay-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -72,11 +73,12 @@ const
   libgstrtsp = 'gstrtsp-1.0-0.dll';
   libgstwayland = 'lstwayland-1.0-0.dll';
   libgstva = 'gstva-1.0-0.dll';
-  libgstplayer = 'gstplayer-1.0-0.dd';
+  libgstplayer = 'gstplayer-1.0-0.dll';
   libgstgl = 'gstgl-1.0-.dll';
   libgstvulkan = 'gstvulkan-1.0-0.dll';
   libgstnet = 'gstnet-1.0-0.dll';
   libgstcuda = 'gstcuda-1.0-0.dll';
+  libgstplay = 'gstplay-1.0-0.dll';
   {$endif}
 
   // ==== Externes;
