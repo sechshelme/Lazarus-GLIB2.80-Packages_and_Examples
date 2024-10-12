@@ -10,15 +10,15 @@
 
 /* enumerations from "gsttranscoder.h" */
 
-GST_TRANSCODER_API
+
 GType gst_transcoder_error_get_type (void);
 #define GST_TYPE_TRANSCODER_ERROR (gst_transcoder_error_get_type())
 
-GST_TRANSCODER_API
+
 GType gst_transcoder_state_get_type (void);
 #define GST_TYPE_TRANSCODER_STATE (gst_transcoder_state_get_type())
 
-GST_TRANSCODER_API
+
 GType gst_transcoder_message_get_type (void);
 #define GST_TYPE_TRANSCODER_MESSAGE (gst_transcoder_message_get_type())
 

@@ -39,16 +39,16 @@
  * Since: 1.20
  */
 #define GST_TYPE_TRANSCODER_SIGNAL_ADAPTER             (gst_transcoder_signal_adapter_get_type ())
-GST_TRANSCODER_API
+
 
 /**
  * GstTranscoderSignalAdapterClass:
  *
  * Since: 1.20
  */
-G_DECLARE_FINAL_TYPE(GstTranscoderSignalAdapter, gst_transcoder_signal_adapter, GST, TRANSCODER_SIGNAL_ADAPTER, GObject)
+//G_DECLARE_FINAL_TYPE (GstTranscoderSignalAdapter, gst_transcoder_signal_adapter, GST, TRANSCODER_SIGNAL_ADAPTER, GObject)
 
-GST_TRANSCODER_API
+
 GstTranscoder * gst_transcoder_signal_adapter_get_transcoder             (GstTranscoderSignalAdapter * self);
 
 

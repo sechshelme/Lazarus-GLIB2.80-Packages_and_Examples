@@ -22,8 +22,8 @@
 #define __GST_CAMERABIN_ENUM_H__
 
 #ifndef GST_USE_UNSTABLE_API
-#warning "camerabin enums are unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#warning "camerabin enums are unstable API and may change in future."
+//)#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
 #endif
 
 #include <gst/gst.h>
@@ -60,7 +60,7 @@ typedef enum
 
 /* FIXME: should be CAMERA_BIN_MODE and camera_bin_mode */
 #define GST_TYPE_CAMERABIN_MODE (gst_camerabin_mode_get_type ())
-GST_BASE_CAMERA_BIN_SRC_API
+
 GType gst_camerabin_mode_get_type (void);
 
 

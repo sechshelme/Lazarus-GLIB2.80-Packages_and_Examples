@@ -24,8 +24,8 @@
 #define __GST_BASE_CAMERA_SRC_H__
 
 #ifndef GST_USE_UNSTABLE_API
-#warning "GstBaseCameraSrc is unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#warning "GstBaseCameraSrc is unstable API and may change in future."
+//#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
 #endif
 
 #include <gst/gst.h>
@@ -40,17 +40,17 @@
   (gst_base_camera_src_get_type())
 #define GST_BASE_CAMERA_SRC(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_BASE_CAMERA_SRC,GstBaseCameraSrc))
-#define GST_BASE_CAMERA_SRC_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_BASE_CAMERA_SRC, GstBaseCameraSrcClass))
 #define GST_BASE_CAMERA_SRC_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_BASE_CAMERA_SRC,GstBaseCameraSrcClass))
 #define GST_IS_BASE_CAMERA_SRC(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_BASE_CAMERA_SRC))
 #define GST_IS_BASE_CAMERA_SRC_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_BASE_CAMERA_SRC))
+#define GST_BASE_CAMERA_SRC_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_BASE_CAMERA_SRC, GstBaseCameraSrcClass))
 #define GST_BASE_CAMERA_SRC_CAST(obj) \
   ((GstBaseCameraSrc *) (obj))
-GST_BASE_CAMERA_BIN_SRC_API
+
 GType gst_base_camera_src_get_type (void);
 
 typedef struct _GstBaseCameraSrc GstBaseCameraSrc;
@@ -132,25 +132,25 @@ struct _GstBaseCameraSrcClass
 
 /* FIXME: these should be properly namespaced if they're meant as exposed API */
 #ifndef __GI_SCANNER__
-#define MIN_ZOOM 1.0f
-#define MAX_ZOOM 10.0f
+#define MIN_ZOOM 1.0
+#define MAX_ZOOM 10.0
 #define ZOOM_1X MIN_ZOOM
 #endif /* !__GI_SCANNER__ */
 
-GST_BASE_CAMERA_BIN_SRC_API
+
 gboolean gst_base_camera_src_set_mode (GstBaseCameraSrc *self, GstCameraBinMode mode);
 
-GST_BASE_CAMERA_BIN_SRC_API
+
 void gst_base_camera_src_setup_zoom (GstBaseCameraSrc * self);
 
-GST_BASE_CAMERA_BIN_SRC_API
+
 void gst_base_camera_src_setup_preview (GstBaseCameraSrc * self, GstCaps * preview_caps);
 
-GST_BASE_CAMERA_BIN_SRC_API
+
 void gst_base_camera_src_finish_capture (GstBaseCameraSrc *self);
 
 
-GST_BASE_CAMERA_BIN_SRC_API
+
 void gst_base_camera_src_post_preview (GstBaseCameraSrc *self, GstSample * sample);
 // XXX add methods to get/set img capture and vid capture caps..
 

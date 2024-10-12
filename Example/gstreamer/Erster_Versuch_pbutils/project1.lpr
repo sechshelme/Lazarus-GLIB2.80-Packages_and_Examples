@@ -3,7 +3,8 @@ program project1;
 uses
   crt,
   Classes,
-  SysUtils, GL,
+  SysUtils,
+  GL,
   FileUtil,
 
 
@@ -61,6 +62,18 @@ uses
   riff_read,
   riff_media,
 
+  // basecamerabinsrc
+  gstcamerabinpreview,
+  gstbasecamerasrc,      // io. -> gstcamerabinpreview
+  gstcamerabin_enum,     // io. -> gstbasecamerasrc
+
+  // trancoder
+  gsttranscoder,                // io.
+  gsttranscoder_signal_adapter, // io. -> gsttranscoder
+  transcoder_enumtypes,         // io.
+
+
+
 
   GLIBTools,
   gstTools;
@@ -108,14 +121,24 @@ uses
     pipeline, mse: PGstElement;
     fft: PGstFFTF64;
     prg: TGLuint;
+    riff: PGstCaps;
   begin
     gst_init(nil, nil);
 
     pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! decodebin ! audioconvert  ! autoaudiosink'), nil);
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
-//prg:=    CreateProgram;
-//WriteLn('GL Programm: ', prg);
+    //prg:=    CreateProgram;
+    //WriteLn('GL Programm: ', prg);
+
+    riff := gst_riff_create_audio_template_caps;
+    if riff <> nil then begin
+      WriteLn('riff io.');
+    end;
+    riff := gst_riff_create_audio_template_caps;
+    if riff <> nil then begin
+      WriteLn('riff io.');
+    end;
 
     mse := gst_bin_get_by_interface(GST_BIN(pipeline), GST_TYPE_MSE_SRC);
     if mse = nil then begin
@@ -133,6 +156,25 @@ uses
     //  gst_check_remove_log_filter(nil);
 
 
+    WriteLn(gst_camerabin_preview_set_filter(nil, nil));
+
+
+
+    obj := g_object_new(GST_TYPE_TRANSCODER, nil);
+    if obj <> nil then begin
+      WriteLn('play_video io');
+    end;
+    WriteLn(GST_IS_TRANSCODER(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_BASE_CAMERA_SRC, nil);
+    if obj <> nil then begin
+      WriteLn('play_video io');
+    end;
+    WriteLn(GST_IS_BASE_CAMERA_SRC(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
 
     obj := g_object_new(GST_TYPE_APP_SRC, nil);
@@ -171,7 +213,6 @@ uses
 
 
 
-
     obj := g_object_new(GST_TYPE_NET_CLIENT_CLOCK, nil);
     if obj <> nil then begin
       WriteLn('io');
@@ -180,13 +221,13 @@ uses
     GObjectShowProperty(obj);
     g_object_unref(obj);
 
-     obj := g_object_new(GST_TYPE_VULKAN_DISPLAY_XCB, nil);
-     if obj <> nil then begin
-       WriteLn('io');
-     end;
-     WriteLn(GST_IS_VULKAN_DISPLAY_XCB(obj));
-     GObjectShowProperty(obj);
-     g_object_unref(obj);
+    obj := g_object_new(GST_TYPE_VULKAN_DISPLAY_XCB, nil);
+    if obj <> nil then begin
+      WriteLn('io');
+    end;
+    WriteLn(GST_IS_VULKAN_DISPLAY_XCB(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
     obj := g_object_new(GST_TYPE_VULKAN_DISPLAY_WAYLAND, nil);
     if obj <> nil then begin

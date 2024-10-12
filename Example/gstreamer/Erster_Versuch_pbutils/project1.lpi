@@ -45,7 +45,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../../Package_Tools/pas_units/gst/riff;../../../Package_Tools/pas_units/gst/app"/>
+      <OtherUnitFiles Value="../../../Package_Tools/pas_units/gst/riff;../../../Package_Tools/pas_units/gst/app;../../../Package_Tools/pas_units/gst/basecamerabinsrc;../../../Package_Tools/pas_units/gst/transcoder"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
