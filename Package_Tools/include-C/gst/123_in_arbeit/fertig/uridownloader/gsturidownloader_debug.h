@@ -5,7 +5,9 @@
 
 
 
-GST_DEBUG_CATEGORY_EXTERN (uridownloader_debug);
+//GST_DEBUG_CATEGORY_EXTERN (uridownloader_debug);
+
+extern GstDebugCategory *uridownloader_debug;
 
 
 

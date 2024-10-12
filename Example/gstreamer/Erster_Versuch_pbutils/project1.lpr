@@ -44,33 +44,21 @@ uses
   gst124_net,
   gst124_cuda,
   gst124_play,
+  gst124_app,
+  gst124_riff,
+  gst124_basecamerabinsrc,
+  gst124_transcoder,
+  gst124_uridownloader,
 
-  //gstplay,                                  // io.
-  //gstplay_visualization,                    // io.
-  //gstplay_media_info,                       // io. -> gstplay
-  //gstplay_signal_adapter,                   // io. -> gstplay
-  //gstplay_video_overlay_video_renderer,     // io. -> gstplay
-  //gstplay_video_renderer,                   // io. -> gstplay
 
-  // app
-  app_enumtypes,
-  gstappsink,
-  gstappsrc,
+  // transcoder
+  //gsttranscoder,                // io.
+  //gsttranscoder_signal_adapter, // io. -> gsttranscoder
+  //transcoder_enumtypes,         // io.
 
-  // riff
-  riff_ids,
-  riff_read,
-  riff_media,
-
-  // basecamerabinsrc
-  gstcamerabinpreview,
-  gstbasecamerasrc,      // io. -> gstcamerabinpreview
-  gstcamerabin_enum,     // io. -> gstbasecamerasrc
-
-  // trancoder
-  gsttranscoder,                // io.
-  gsttranscoder_signal_adapter, // io. -> gsttranscoder
-  transcoder_enumtypes,         // io.
+  //gstfragment,
+  //gsturidownloader,
+  //gsturidownloader_debug,
 
 
 
@@ -157,6 +145,26 @@ uses
 
 
     WriteLn(gst_camerabin_preview_set_filter(nil, nil));
+
+
+
+
+
+    obj := g_object_new(GST_TYPE_FRAGMENT, nil);
+    if obj <> nil then begin
+      WriteLn('play_video io');
+    end;
+    WriteLn(GST_IS_FRAGMENT(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_URI_DOWNLOADER, nil);
+    if obj <> nil then begin
+      WriteLn('play_video io');
+    end;
+    WriteLn(GST_IS_URI_DOWNLOADER(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
 
 

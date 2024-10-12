@@ -163,6 +163,26 @@
         <Filename Value="gst124_play.pas"/>
         <UnitName Value="gst124_play"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_app.pas"/>
+        <UnitName Value="gst124_app"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_riff.pas"/>
+        <UnitName Value="gst124_riff"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_basecamerabinsrc.pas"/>
+        <UnitName Value="gst124_basecamerabinsrc"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_transcoder.pas"/>
+        <UnitName Value="gst124_transcoder"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_uridownloader.pas"/>
+        <UnitName Value="gst124_uridownloader"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

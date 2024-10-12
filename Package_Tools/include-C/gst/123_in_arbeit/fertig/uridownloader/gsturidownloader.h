@@ -23,8 +23,8 @@
 #define __GSTURI_DOWNLOADER_H__
 
 #ifndef GST_USE_UNSTABLE_API
-#warning "The UriDownloaded library from gst-plugins-bad is unstable API and may change in future."
-#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+//#warning "The UriDownloaded library from gst-plugins-bad is unstable API and may change in future."
+//#warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
 #endif
 
 #include <glib-object.h>
@@ -58,25 +58,25 @@ struct _GstUriDownloaderClass
   gpointer _gst_reserved[GST_PADDING];
 };
 
-GST_URI_DOWNLOADER_API
+
 GType gst_uri_downloader_get_type (void);
 
-GST_URI_DOWNLOADER_API
+
 GstUriDownloader * gst_uri_downloader_new (void);
 
-GST_URI_DOWNLOADER_API
+
 void gst_uri_downloader_set_parent (GstUriDownloader * downloader, GstElement * parent);
 
-GST_URI_DOWNLOADER_API
+
 GstFragment * gst_uri_downloader_fetch_uri (GstUriDownloader * downloader, const gchar * uri, const gchar * referer, gboolean compress, gboolean refresh, gboolean allow_cache, GError ** err);
 
-GST_URI_DOWNLOADER_API
+
 GstFragment * gst_uri_downloader_fetch_uri_with_range (GstUriDownloader * downloader, const gchar * uri, const gchar * referer, gboolean compress, gboolean refresh, gboolean allow_cache, gint64 range_start, gint64 range_end, GError ** err);
 
-GST_URI_DOWNLOADER_API
+
 void gst_uri_downloader_reset (GstUriDownloader *downloader);
 
-GST_URI_DOWNLOADER_API
+
 void gst_uri_downloader_cancel (GstUriDownloader *downloader);
 
 

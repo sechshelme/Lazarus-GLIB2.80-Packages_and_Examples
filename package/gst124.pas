@@ -51,6 +51,7 @@ const
   libgstriff = 'libgstriff-1.0';
   libgstbasecamerabinsrc='libgstbasecamerabinsrc-1.0';
   libgsttranscoder = 'libgsttranscoder-1.0';
+  libgsturidownloader = 'libgsturidownloader-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -87,6 +88,7 @@ const
   libgstriff = 'gstriff-1.0-0.dll';
   libgstbasecamerabinsrc='gstbasecamerabinsrc-1.0-0.dll';
   libgsttranscoder = 'gsttranscoder-1.0-0.dll';
+  libgsturidownloader = 'gsturidownloader-1.0-0.dll';
   {$endif}
 
   // ==== Externes;

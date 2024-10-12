@@ -1,13 +1,12 @@
-unit riff_read;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 12-10-2024   19:09                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, riff_ids;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 function gst_riff_read_chunk(element: PGstElement; pad: PGstPad; offset: Pguint64; tag: Pguint32; chunk_data: PPGstBuffer): TGstFlowReturn; cdecl; external libgstriff;
 function gst_riff_parse_chunk(element: PGstElement; buf: PGstBuffer; offset: Pguint; fourcc: Pguint32; chunk_data: PPGstBuffer): Tgboolean; cdecl; external libgstriff;
@@ -22,8 +21,11 @@ procedure gst_riff_init; cdecl; external libgstriff;
 // === Konventiert am: 12-10-24 15:21:32 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

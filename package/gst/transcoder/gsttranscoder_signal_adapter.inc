@@ -1,13 +1,12 @@
-unit gsttranscoder_signal_adapter;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 12-10-2024   19:09                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gsttranscoder;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
   {G_DECLARE_FINAL_TYPE (GstTranscoderSignalAdapter, gst_transcoder_signal_adapter, GST, TRANSCODER_SIGNAL_ADAPTER, GObject) }
 type
@@ -25,7 +24,10 @@ function GST_TYPE_TRANSCODER_SIGNAL_ADAPTER: TGType;
 function GST_TRANSCODER_SIGNAL_ADAPTER(obj: Pointer): PGstTranscoderSignalAdapter;
 function GST_IS_TRANSCODER_SIGNAL_ADAPTER(obj: Pointer): Tgboolean;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_TRANSCODER_SIGNAL_ADAPTER: TGType;
 begin
@@ -45,4 +47,4 @@ end;
 
 
 
-end.
+{$ENDIF read_implementation}

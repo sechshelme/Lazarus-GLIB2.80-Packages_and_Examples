@@ -1,13 +1,12 @@
-unit riff_ids;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 12-10-2024   19:09                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 const
   GST_RIFF_RIFF_WAVE = (Ord('W') or (Ord('A') shl 8) or (Ord('V') shl 16) or (Ord('E') shl 24));
@@ -481,8 +480,11 @@ type
   // === Konventiert am: 12-10-24 15:21:23 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

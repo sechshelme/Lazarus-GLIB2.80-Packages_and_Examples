@@ -1,13 +1,12 @@
-unit gstcamerabinpreview;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 12-10-2024   19:09                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
   {#warning "camera bin preview is unstable API and may change in future." }
   {#warning "You can define GST_USE_UNSTABLE_API to avoid this warning." }
@@ -35,8 +34,11 @@ function gst_camerabin_preview_set_filter(preview: PGstCameraBinPreviewPipelineD
 // === Konventiert am: 12-10-24 17:25:04 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

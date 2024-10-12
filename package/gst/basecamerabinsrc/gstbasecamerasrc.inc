@@ -1,13 +1,12 @@
-unit gstbasecamerasrc;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 12-10-2024   19:09                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gstcamerabinpreview;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 function gst_base_camera_src_get_type: TGType; cdecl; external libgstbasecamerabinsrc;
 
@@ -79,7 +78,10 @@ function GST_IS_BASE_CAMERA_SRC(obj: Pointer): Tgboolean;
 function GST_IS_BASE_CAMERA_SRC_CLASS(klass: Pointer): Tgboolean;
 function GST_BASE_CAMERA_SRC_GET_CLASS(obj: Pointer): PGstBaseCameraSrcClass;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_BASE_CAMERA_SRC: TGType;
 begin
@@ -119,4 +121,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}

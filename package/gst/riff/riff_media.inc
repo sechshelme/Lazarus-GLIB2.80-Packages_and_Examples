@@ -1,13 +1,12 @@
-unit riff_media;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 12-10-2024   19:09                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gst124_base, riff_ids;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 function gst_riff_create_video_caps(codec_fcc: Tguint32; strh: Pgst_riff_strh; strf: Pgst_riff_strf_vids; strf_data: PGstBuffer; strd_data: PGstBuffer;
   codec_name: PPansichar): PGstCaps; cdecl; external libgstriff;
@@ -22,8 +21,11 @@ function gst_riff_create_iavs_template_caps: PGstCaps; cdecl; external libgstrif
 // === Konventiert am: 12-10-24 15:21:27 ===
 
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 
 
-end.
+{$ENDIF read_implementation}

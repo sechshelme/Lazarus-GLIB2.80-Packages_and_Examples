@@ -1,13 +1,12 @@
-unit gstappsink;
+/////////////////////////////////////////////////////////////
+//                                                         //
+//   WARNUNG, dies Datei wird automatisch durch            //
+//   das Program "Convert_Unit_to_pas_includes" erzeugt !  //
+//   Erzeugt am: 12-10-2024   19:09                        //
+//                                                         //
+/////////////////////////////////////////////////////////////
 
-interface
-
-uses
-  glib280, gst124, gst124_base;
-
-  {$IFDEF FPC}
-  {$PACKRECORDS C}
-  {$ENDIF}
+{$IFDEF read_interface}
 
 type
   TGstAppSinkPrivate = record
@@ -81,7 +80,10 @@ function GST_APP_SINK_CLASS(klass: Pointer): PGstAppSinkClass;
 function GST_IS_APP_SINK(obj: Pointer): Tgboolean;
 function GST_IS_APP_SINK_CLASS(klass: Pointer): Tgboolean;
 
-implementation
+{$ENDIF read_interface}
+
+
+{$IFDEF read_implementation}
 
 function GST_TYPE_APP_SINK: TGType;
 begin
@@ -116,4 +118,4 @@ begin
 end;
 
 
-end.
+{$ENDIF read_implementation}
