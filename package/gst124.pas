@@ -47,6 +47,8 @@ const
   libgstnet = 'libgstnet-1.0';
   libgstcuda = 'libgstcuda-1.0';
   libgstplay = 'libgstplay-1.0';
+  libgstapp = 'libgstapp-1.0';
+  libgstriff = 'libgstriff-1.0';
   {$endif}
   {$ifdef Windows}
   libgstreamer = 'gstreamer-1.0-0.dll';
@@ -79,6 +81,8 @@ const
   libgstnet = 'gstnet-1.0-0.dll';
   libgstcuda = 'gstcuda-1.0-0.dll';
   libgstplay = 'gstplay-1.0-0.dll';
+  libgstapp = 'gstapp-1.0-0.dll';
+  libgstriff = 'gstriff-1.0-o.dll';
   {$endif}
 
   // ==== Externes;

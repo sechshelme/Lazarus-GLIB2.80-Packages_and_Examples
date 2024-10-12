@@ -44,28 +44,22 @@ uses
   gst124_cuda,
   gst124_play,
 
-  //gstnetaddressmeta,
-  //gstnetclientclock,
-  //gstnetcontrolmessagemeta,
-  //gstnettimepacket,
-  //gstnettimeprovider,
-  //gstnetutils,
-  //gstptpclock,
-
-  //gstcudanvrtc,        // io.
-  //gstcudaloader,       // io.
-  //gstcudacontext,      // io.
-  //gstcudastream,       // io. -> gstcudacontext
-  //gstcudamemory,       // io. -> gstcudacontext, gstcudastream
-  //gstcudabufferpool,   // io. -> gstcudacontext, gstcudastream, gstcudamemory
-  //gstcudautils,        // io. -> gstcudacontext
-
   //gstplay,                                  // io.
   //gstplay_visualization,                    // io.
   //gstplay_media_info,                       // io. -> gstplay
   //gstplay_signal_adapter,                   // io. -> gstplay
   //gstplay_video_overlay_video_renderer,     // io. -> gstplay
   //gstplay_video_renderer,                   // io. -> gstplay
+
+  // app
+  app_enumtypes,
+  gstappsink,
+  gstappsrc,
+
+  // riff
+  riff_ids,
+  riff_read,
+  riff_media,
 
 
   GLIBTools,
@@ -139,6 +133,23 @@ uses
     //  gst_check_remove_log_filter(nil);
 
 
+
+
+    obj := g_object_new(GST_TYPE_APP_SRC, nil);
+    if obj <> nil then begin
+      WriteLn('play_video io');
+    end;
+    WriteLn(GST_IS_APP_SRC_CLASS(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
+
+    obj := g_object_new(GST_TYPE_APP_SINK, nil);
+    if obj <> nil then begin
+      WriteLn('play_audio io');
+    end;
+    WriteLn(GST_IS_APP_SINK(obj));
+    GObjectShowProperty(obj);
+    g_object_unref(obj);
 
 
     obj := g_object_new(GST_TYPE_PLAY_VIDEO_INFO, nil);

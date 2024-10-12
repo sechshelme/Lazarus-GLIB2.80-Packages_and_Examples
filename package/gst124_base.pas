@@ -20,6 +20,7 @@ const
 type
   Tguint8_arr_256 = array[0..255] of Tguint8;
 
+  Tgintarr18 = array[0..17] of Tgint;
   Tguintarr4 = array[0..3] of Tguint;
   Tguintarr16 = array[0..15] of Tguint;
   Tguint8arr16 = array[0..15] of Tguint8;
@@ -35,7 +36,7 @@ type
   Tplanes_GstMemory_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of PGstMemory;
   Tplanes_Tuintptr_t_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of Tuintptr_t;
 
-  Tplanes_TVKFormat_arr=  array[0..(GST_VIDEO_MAX_PLANES)-1] of TVkFormat;
+  Tplanes_TVKFormat_arr = array[0..(GST_VIDEO_MAX_PLANES) - 1] of TVkFormat;
 
 
   {$DEFINE read_interface}

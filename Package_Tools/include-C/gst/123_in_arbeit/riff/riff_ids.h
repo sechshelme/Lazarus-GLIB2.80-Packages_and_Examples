@@ -26,6 +26,9 @@
 #include "riff-prelude.h"
 
 
+#define GST_MAKE_FOURCC(a,b,c,d) \
+  ( (guint32)(a) | ((guint32) (b)) << 8  | ((guint32) (c)) << 16 | ((guint32) (d)) << 24 )
+
 
 /* RIFF types */
 #define GST_RIFF_RIFF_WAVE GST_MAKE_FOURCC ('W','A','V','E')
@@ -252,14 +255,15 @@
 
 #define GST_RIFF_rec  GST_MAKE_FOURCC ('r', 'e', 'c', ' ')
 
+
+#define GST_RIFF_STRH_DISABLED        0x000000001
+#define GST_RIFF_STRH_VIDEOPALCHANGES 0x000010000
 /* common data structures */
 typedef struct _gst_riff_strh {
   guint32 type;             /* stream type */
   guint32 fcc_handler;       /* fcc_handler */
   guint32 flags;
 /* flags values */
-#define GST_RIFF_STRH_DISABLED        0x000000001
-#define GST_RIFF_STRH_VIDEOPALCHANGES 0x000010000
   guint32 priority;
   guint32 init_frames;       /* initial frames (???) */
   guint32 scale;
@@ -292,10 +296,6 @@ typedef struct _gst_riff_strf_vids {       /* == BitMapInfoHeader */
   /* may be more for some codecs */
 } gst_riff_strf_vids;
 
-
-typedef struct _gst_riff_strf_auds {       /* == WaveHeader (?) */
-  guint16 format;
-/**** from public Microsoft RIFF docs ******/
 #define GST_RIFF_WAVE_FORMAT_UNKNOWN        (0x0000)
 #define GST_RIFF_WAVE_FORMAT_PCM            (0x0001)
 #define GST_RIFF_WAVE_FORMAT_ADPCM          (0x0002)
@@ -459,6 +459,12 @@ typedef struct _gst_riff_strf_auds {       /* == WaveHeader (?) */
 #define GST_RIFF_WAVE_FORMAT_GSM_AMR_VBR    (0x7A22)
 #define GST_RIFF_WAVE_FORMAT_FLAC           (0xF1AC)
 #define GST_RIFF_WAVE_FORMAT_EXTENSIBLE     (0xFFFE)
+
+
+
+typedef struct _gst_riff_strf_auds {       /* == WaveHeader (?) */
+  guint16 format;
+/**** from public Microsoft RIFF docs ******/
   guint16 channels;
   guint32 rate;
   guint32 av_bps;
@@ -481,13 +487,13 @@ typedef struct _gst_riff_strf_iavs {
   guint32 DVReserved2;
 } gst_riff_strf_iavs;
 
-typedef struct _gst_riff_index_entry {
-  guint32 id;
-  guint32 flags;
 #define GST_RIFF_IF_LIST                (0x00000001L)
 #define GST_RIFF_IF_KEYFRAME            (0x00000010L)
 #define GST_RIFF_IF_NO_TIME             (0x00000100L)
 #define GST_RIFF_IF_COMPUSE             (0x0FFF0000L)
+typedef struct _gst_riff_index_entry {
+  guint32 id;
+  guint32 flags;
   guint32 offset;
   guint32 size;
 } gst_riff_index_entry;

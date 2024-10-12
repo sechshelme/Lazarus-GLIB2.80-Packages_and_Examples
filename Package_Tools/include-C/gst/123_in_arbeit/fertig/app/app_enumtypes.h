@@ -10,11 +10,9 @@
 
 /* enumerations from "gstappsrc.h" */
 
-GST_APP_API
 GType gst_app_stream_type_get_type (void);
 #define GST_TYPE_APP_STREAM_TYPE (gst_app_stream_type_get_type())
 
-GST_APP_API
 GType gst_app_leaky_type_get_type (void);
 #define GST_TYPE_APP_LEAKY_TYPE (gst_app_leaky_type_get_type())
 
