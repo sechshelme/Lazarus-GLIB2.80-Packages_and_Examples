@@ -53,25 +53,6 @@ uses
   gst124_sctp,
   gst124_opencv,
 
-
-  //gstfragment,
-  //gsturidownloader,
-  //gsturidownloader_debug,
-
-  //// sctp
-  //sctpreceivemeta,
-  //sctpsendmeta,
-  //
-  //// opencv
-  //gstopencvutils,
-  //gstopencvvideofilter,
-  //
-  //// isoff
-  //gstisoff,
-
-
-
-
   GLIBTools,
   gstTools;
 

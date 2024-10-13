@@ -8,14 +8,24 @@
 
 {$IFDEF read_interface}
 
-
-
-
 function GST_BUFFER_TIMESTAMP(buf: PGstBuffer): TGstClockTime;
 function GST_BUFFER_TIMESTAMP_IS_VALID(buf: PGstBuffer): TGstClockTime;
 
 function gst_buffer_new_and_alloc(s: Tgsize): PGstBuffer;
 function gst_pad_set_caps(pad: PGstPad; caps: PGstCaps): Tgboolean;
+
+
+function gst_element_factory_get_longname(f : PGstElementFactory) : Pgchar;
+function gst_element_factory_get_klass(f : PGstElementFactory) : Pgchar;
+function gst_element_factory_get_description(f : PGstElementFactory) : Pgchar;
+function gst_element_factory_get_author(f : PGstElementFactory) : Pgchar;
+function gst_element_factory_get_documentation_uri(f : PGstElementFactory) : Pgchar;
+function gst_element_factory_get_icon_name(f : PGstElementFactory) : Pgchar;
+
+//function gst_pad_get_caps_reffed(p : longint) : longint;
+//function gst_pad_peer_get_caps_reffed(p : longint) : longint;
+
+procedure gst_tag_list_free(taglist : PGstTagList);
 
 
 // === Konventiert am: 17-9-24 17:52:07 ===
@@ -90,5 +100,51 @@ begin
   end;
 end;
 
+function gst_element_factory_get_longname(f: PGstElementFactory): Pgchar;
+begin
+  gst_element_factory_get_longname := gst_element_factory_get_metadata(f, GST_ELEMENT_METADATA_LONGNAME);
+end;
+
+function gst_element_factory_get_klass(f: PGstElementFactory): Pgchar;
+begin
+  gst_element_factory_get_klass := gst_element_factory_get_metadata(f, GST_ELEMENT_METADATA_KLASS);
+end;
+
+function gst_element_factory_get_description(f: PGstElementFactory): Pgchar;
+begin
+  gst_element_factory_get_description := gst_element_factory_get_metadata(f, GST_ELEMENT_METADATA_DESCRIPTION);
+end;
+
+function gst_element_factory_get_author(f: PGstElementFactory): Pgchar;
+begin
+  gst_element_factory_get_author := gst_element_factory_get_metadata(f, GST_ELEMENT_METADATA_AUTHOR);
+end;
+
+function gst_element_factory_get_documentation_uri(f: PGstElementFactory): Pgchar;
+begin
+  gst_element_factory_get_documentation_uri := gst_element_factory_get_metadata(f, GST_ELEMENT_METADATA_DOC_URI);
+end;
+
+function gst_element_factory_get_icon_name(f: PGstElementFactory): Pgchar;
+begin
+  gst_element_factory_get_icon_name := gst_element_factory_get_metadata(f, GST_ELEMENT_METADATA_ICON_NAME);
+end;
+
+function gst_pad_get_caps_reffed(p: longint): longint;
+begin
+  // im C-Header fehlerhaft
+  //  gst_pad_get_caps_reffed:=gst_pad_get_caps(p);
+end;
+
+function gst_pad_peer_get_caps_reffed(p: longint): longint;
+begin
+  // im C-Header fehlerhaft
+  //  gst_pad_peer_get_caps_reffed:=gst_pad_peer_get_caps(p);
+end;
+
+procedure gst_tag_list_free(taglist: PGstTagList);
+begin
+  gst_tag_list_unref(taglist);
+end;
 
 {$ENDIF read_implementation}
