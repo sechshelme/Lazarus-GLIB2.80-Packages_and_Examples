@@ -8,6 +8,105 @@ uses
   GLIBTools,
   gst124;
 
+
+// === print Factory
+
+function print_field(field_id: TGQuark; Value: PGValue; pfx: Tgpointer): Tgboolean; cdecl;
+var
+  s: Pgchar;
+begin
+  s := gst_value_serialize(Value);
+  g_print('%s %15s: %s'#10, pfx, g_quark_to_string(field_id), s);
+  g_free(s);
+  Result := True;
+end;
+
+procedure print_caps(caps: PGstCaps; pfx: Pgchar);
+var
+  i: integer;
+  structure: PGstStructure;
+begin
+  if caps = nil then begin
+    g_print('caps error !'#10);
+    Exit;
+  end;
+
+  if gst_caps_is_any(caps) then begin
+    g_print('%sANY'#10, pfx);
+    Exit;
+  end;
+
+  if gst_caps_is_empty(caps) then begin
+    g_print('%sEMPTY'#10, pfx);
+    Exit;
+  end;
+
+  for i := 0 to gst_caps_get_size(caps) - 1 do begin
+    structure := gst_caps_get_structure(caps, i);
+    g_print('%s%s'#10, pfx, gst_structure_get_name(structure));
+    gst_structure_foreach(structure, @print_field, pfx);
+  end;
+end;
+
+procedure print_pad_templates_information(factory: PGstElementFactory);
+const
+  pads: PGList = nil;
+var
+  padtemplate: PGstStaticPadTemplate;
+  caps: PGstCaps;
+begin
+  //  gst_element_factory_get_metadata(factory, GST_ELEMENT_METADATA_LONGNAME);
+  g_print('Pad Templates for %s:'#10, gst_element_factory_get_longname(factory));
+  if gst_element_factory_get_num_pad_templates(factory) = 0 then begin
+    g_print('  none'#10);
+    exit;
+  end;
+
+  pads := gst_element_factory_get_static_pad_templates(factory);
+  while pads <> nil do begin
+    padtemplate := pads^.Data;
+    pads := g_list_next(pads);
+
+    case padtemplate^.direction of
+      GST_PAD_SRC: begin
+        g_print('  SRC template: ''%s'''#10, padtemplate^.name_template);
+      end;
+      GST_PAD_SINK: begin
+        g_print('  SINK template: ''%s'''#10, padtemplate^.name_template);
+      end;
+      else begin
+        g_print('  UNKNOWN!!! template: ''%s'''#10, padtemplate^.name_template);
+      end;
+    end;
+
+    case padtemplate^.presence of
+      GST_PAD_ALWAYS: begin
+        g_print('   Availability: Always'#10);
+      end;
+      GST_PAD_SOMETIMES: begin
+        g_print('   Availability: Sometines'#10);
+      end;
+      GST_PAD_REQUEST: begin
+        g_print('   Availability: On request'#10);
+      end;
+      else begin
+        g_print('   Availability: UNKKNOW!!!!'#10);
+      end;
+    end;
+
+    if padtemplate^.static_caps._string <> nil then begin
+      g_print('  Capabilities:'#10);
+      caps := gst_static_caps_get(@padtemplate^.static_caps);
+      print_caps(caps, '    ');
+      gst_caps_unref(caps);
+    end;
+  end;
+
+  g_print(#10);
+end;
+
+// =======
+
 var
   Width: Tgint = 320;
   Height: Tgint = 200;
@@ -30,13 +129,13 @@ var
     GObjectShowProperty(sink);
   end;
 
-
   procedure ViewPipeline(pipeline: PGstElement);
   var
     itr, e: PGstIterator;
     done: boolean = False;
     item: TGValue;
     elem: PGstElement;
+    factory: PGstElementFactory;
   begin
     item := G_VALUE_INIT_;
     itr := gst_bin_iterate_elements(GST_BIN(pipeline));
@@ -47,6 +146,8 @@ var
           elem := GST_ELEMENT(g_value_get_object(@item));
           WriteLn(gst_object_get_name(GST_OBJECT(elem)));
           GObjectShowProperty(elem);
+          factory:=gst_element_get_factory(elem);
+          print_pad_templates_information(factory);
           g_value_reset(@item);
         end;
         GST_ITERATOR_RESYNC_: begin
