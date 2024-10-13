@@ -49,16 +49,25 @@ uses
   gst124_basecamerabinsrc,
   gst124_transcoder,
   gst124_uridownloader,
+  gst124_isoff,
+  gst124_sctp,
+  gst124_opencv,
 
-
-  // transcoder
-  //gsttranscoder,                // io.
-  //gsttranscoder_signal_adapter, // io. -> gsttranscoder
-  //transcoder_enumtypes,         // io.
 
   //gstfragment,
   //gsturidownloader,
   //gsturidownloader_debug,
+
+  //// sctp
+  //sctpreceivemeta,
+  //sctpsendmeta,
+  //
+  //// opencv
+  //gstopencvutils,
+  //gstopencvvideofilter,
+  //
+  //// isoff
+  //gstisoff,
 
 
 
@@ -119,7 +128,11 @@ uses
     //prg:=    CreateProgram;
     //WriteLn('GL Programm: ', prg);
 
-    riff := gst_riff_create_audio_template_caps;
+    WriteLn(GST_SCTP_RECEIVE_META_API_TYPE);
+    WriteLn(GST_SCTP_SEND_META_API_TYPE);
+    WriteLn(GST_TYPE_OPENCV_VIDEO_FILTER);
+
+        riff := gst_riff_create_audio_template_caps;
     if riff <> nil then begin
       WriteLn('riff io.');
     end;
@@ -147,12 +160,9 @@ uses
     WriteLn(gst_camerabin_preview_set_filter(nil, nil));
 
 
-
-
-
     obj := g_object_new(GST_TYPE_FRAGMENT, nil);
     if obj <> nil then begin
-      WriteLn('play_video io');
+      WriteLn('opencv io');
     end;
     WriteLn(GST_IS_FRAGMENT(obj));
     GObjectShowProperty(obj);

@@ -17,7 +17,8 @@ uses
   gst124_gl_wayland, gst124_gl_x11, gst124_gl_glprototypes, gst124_vulkan, 
   gst124_vulkan_wayland, gst124_vulkan_xcb, gst124_net, gst124_cuda, 
   gst124_play, gst124_app, gst124_riff, gst124_basecamerabinsrc, 
-  gst124_transcoder, gst124_uridownloader, LazarusPackageIntf;
+  gst124_transcoder, gst124_uridownloader, gst124_sctp, gst124_opencv, 
+  gst124_isoff, LazarusPackageIntf;
 
 implementation
 

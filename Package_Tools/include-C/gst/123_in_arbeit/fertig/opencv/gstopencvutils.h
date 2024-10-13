@@ -33,21 +33,21 @@
 
 
 
-GST_OPENCV_API
+
 gboolean gst_opencv_parse_cv_mat_params_from_caps
     (GstCaps * caps, gint * width, gint * height, int * cv_type, 
     GError ** err);
 
-GST_OPENCV_API
+
 gboolean gst_opencv_cv_mat_params_from_video_info
     (GstVideoInfo * info, gint * width, gint * height, int *cv_type, 
     GError ** err);
 
-GST_OPENCV_API
+
 gboolean gst_opencv_cv_image_type_from_video_format (GstVideoFormat format,
     int * cv_type, GError ** err);
 
-GST_OPENCV_API
+
 GstCaps * gst_opencv_caps_from_cv_image_type (int cv_type);
 
 

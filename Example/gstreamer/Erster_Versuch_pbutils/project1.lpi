@@ -45,7 +45,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../../Package_Tools/pas_units/gst/uridownloader"/>
+      <OtherUnitFiles Value="../../../Package_Tools/pas_units/gst/sctp;../../../Package_Tools/pas_units/gst/opencv;../../../Package_Tools/pas_units/gst/isoff"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

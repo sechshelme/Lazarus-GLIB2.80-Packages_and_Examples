@@ -30,11 +30,11 @@
 
 
 
-#ifndef GST_ISOFF_API
+#ifndef 
 # ifdef BUILDING_GST_ISOFF
-#  define GST_ISOFF_API extern_EXPORT         /* from config.h */
+#  define  extern_EXPORT         /* from config.h */
 # else
-#  define GST_ISOFF_API extern_IMPORT
+#  define  extern_IMPORT
 # endif
 #endif
 
@@ -45,7 +45,7 @@ typedef enum {
   GST_ISOFF_PARSER_ERROR
 } GstIsoffParserResult;
 
-GST_ISOFF_API
+
 gboolean gst_isoff_parse_box_header (GstByteReader * reader, guint32 * type, guint8 extended_type[16], guint * header_size, guint64 * size);
 
 #define GST_ISOFF_FOURCC_UUID GST_MAKE_FOURCC('u','u','i','d')
@@ -63,8 +63,6 @@ gboolean gst_isoff_parse_box_header (GstByteReader * reader, guint32 * type, gui
 #define GST_ISOFF_FOURCC_MDHD GST_MAKE_FOURCC('m','d','h','d')
 #define GST_ISOFF_FOURCC_HDLR GST_MAKE_FOURCC('h','d','l','r')
 #define GST_ISOFF_FOURCC_SIDX GST_MAKE_FOURCC('s','i','d','x')
-
-/* handler type */
 #define GST_ISOFF_FOURCC_SOUN GST_MAKE_FOURCC('s','o','u','n')
 #define GST_ISOFF_FOURCC_VIDE GST_MAKE_FOURCC('v','i','d','e')
 
@@ -190,10 +188,10 @@ typedef struct _GstMoofBox
   GArray *traf;
 } GstMoofBox;
 
-GST_ISOFF_API
+
 GstMoofBox * gst_isoff_moof_box_parse (GstByteReader *reader);
 
-GST_ISOFF_API
+
 void gst_isoff_moof_box_free (GstMoofBox *moof);
 
 typedef struct _GstTkhdBox
@@ -228,10 +226,10 @@ typedef struct _GstMoovBox
   GArray *trak;
 } GstMoovBox;
 
-GST_ISOFF_API
+
 GstMoovBox * gst_isoff_moov_box_parse (GstByteReader *reader);
 
-GST_ISOFF_API
+
 void gst_isoff_moov_box_free (GstMoovBox *moov);
 
 typedef struct _GstSidxBoxEntry
@@ -282,16 +280,16 @@ typedef struct _GstSidxParser
   GstSidxBox sidx;
 } GstSidxParser;
 
-GST_ISOFF_API
+
 void gst_isoff_sidx_parser_init (GstSidxParser * parser);
 
-GST_ISOFF_API
+
 void gst_isoff_sidx_parser_clear (GstSidxParser * parser);
 
-GST_ISOFF_API
+
 GstIsoffParserResult gst_isoff_sidx_parser_parse (GstSidxParser * parser, GstByteReader * reader, guint * consumed);
 
-GST_ISOFF_API
+
 GstIsoffParserResult gst_isoff_sidx_parser_add_buffer (GstSidxParser * parser, GstBuffer * buf, guint * consumed);
 
 

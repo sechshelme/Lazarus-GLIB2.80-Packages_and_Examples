@@ -183,6 +183,18 @@
         <Filename Value="gst124_uridownloader.pas"/>
         <UnitName Value="gst124_uridownloader"/>
       </Item>
+      <Item>
+        <Filename Value="gst124_sctp.pas"/>
+        <UnitName Value="gst124_sctp"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_opencv.pas"/>
+        <UnitName Value="gst124_opencv"/>
+      </Item>
+      <Item>
+        <Filename Value="gst124_isoff.pas"/>
+        <UnitName Value="gst124_isoff"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

@@ -74,10 +74,10 @@ typedef struct _GstOpencvVideoFilter GstOpencvVideoFilter;
 typedef struct _GstOpencvVideoFilterClass GstOpencvVideoFilterClass;
 
 typedef GstFlowReturn (*GstOpencvVideoFilterTransformIPFunc)
-    (GstOpencvVideoFilter * transform, GstBuffer * buffer, cv::Mat img);
+    (GstOpencvVideoFilter * transform, GstBuffer * buffer, cv_Mat img);
 typedef GstFlowReturn (*GstOpencvVideoFilterTransformFunc)
-    (GstOpencvVideoFilter * transform, GstBuffer * buffer, cv::Mat img,
-    GstBuffer * outbuf, cv::Mat outimg);
+    (GstOpencvVideoFilter * transform, GstBuffer * buffer, cv_Mat img,
+    GstBuffer * outbuf, cv_Mat outimg);
 
 typedef gboolean (*GstOpencvVideoFilterSetCaps)
     (GstOpencvVideoFilter * transform, gint in_width, gint in_height,
@@ -90,8 +90,8 @@ struct _GstOpencvVideoFilter
 
   gboolean in_place;
 
-  cv::Mat cvImage;
-  cv::Mat out_cvImage;
+  cv_Mat cvImage;
+  cv_Mat out_cvImage;
 };
 
 struct _GstOpencvVideoFilterClass
@@ -104,10 +104,10 @@ struct _GstOpencvVideoFilterClass
   GstOpencvVideoFilterSetCaps cv_set_caps;
 };
 
-GST_OPENCV_API
+
 GType gst_opencv_video_filter_get_type (void);
 
-GST_OPENCV_API
+
 void gst_opencv_video_filter_set_in_place (GstOpencvVideoFilter * transform,
                                            gboolean ip);
 
