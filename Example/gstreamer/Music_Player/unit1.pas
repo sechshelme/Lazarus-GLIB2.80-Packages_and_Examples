@@ -62,6 +62,10 @@ begin
       SongListPanel.LoadToXML;
     end;
     cmDefaultSongs: begin
+      sl := FindAllFiles('/n4800/Multimedia/Music/Diverses/Games/The Witcher, Pt 3 Wild Hunt', '*.flac');
+      SongListPanel.Add(sl);
+      sl.Free;
+
       sl := FindAllFiles('/n4800/Multimedia/Music/Schlager/Various/25 Jahre Deutscher Schlager', '*.flac');
       SongListPanel.Add(sl);
       sl.Free;

@@ -39,6 +39,7 @@ type
     function GetCount: integer;
     function GetItemIndex: integer;
     procedure SetItemIndex(AValue: integer);
+    procedure Renum;
   public
     EditBox: TEditBox;
     ListView: TListView;
@@ -110,6 +111,13 @@ begin
   ListView.ItemIndex := AValue;
 end;
 
+procedure TSongsListPanel.Renum;
+var
+  i: Integer;
+begin
+  for i:=0 to ListView.Items.Count-1 do ListView.Items[i].Caption:=IntToStr(i);
+end;
+
 function TSongsListPanel.GetCount: integer;
 begin
   Result := ListView.Items.Count;
@@ -171,25 +179,28 @@ begin
   ListView.ReadOnly := True;
 
   ListView.ViewStyle := vsReport;
-  ListView.Columns.Add.Caption := 'Song Titel';
-  ListView.Columns[0].Width := 800;
-  ListView.Columns.Add.Caption := 'Dauer';
-  ListView.Columns[1].Width := 100;
+  ListView.Columns.Add.Caption := 'Track';
+  ListView.Columns[0].Width := 50;
+  ListView.Columns.Add.Caption := 'Titel';
+  ListView.Columns[1].Width := 800;
+  ListView.Columns.Add.Caption := 'Time';
+  ListView.Columns[2].Width := 100;
 end;
 
 procedure TSongsListPanel.Add(const song: string);
 var
   ad: TListItem;
   dur: string;
-  //  dur: Tguint64;
 begin
   SongInfos.Add(song);
   dur := GstClockToStr(SongInfos[Length(SongInfos) - 1].Duration);
 
   ad := ListView.Items.Add;
-  ad.Caption := SongInfos[Length(SongInfos) - 1].title;
-  //  ad.SubItems.Add(IntToStr(dur));
+  ad.Caption:='';
+
+  ad.SubItems.Add(SongInfos[Length(SongInfos) - 1].title);
   ad.SubItems.Add(dur);
+  Renum;
 end;
 
 procedure TSongsListPanel.Add(const song: TStringList);
@@ -216,6 +227,7 @@ begin
       ListView.ItemIndex := index - 1;
     end;
   end;
+  Renum;
 end;
 
 procedure TSongsListPanel.RemoveAll;
@@ -237,6 +249,7 @@ begin
     SongInfos.Move(index, index + 1);
     ListView.ItemIndex := index + 1;
   end;
+  Renum;
 end;
 
 procedure TSongsListPanel.Up;
@@ -252,6 +265,7 @@ begin
     SongInfos.Move(index, index - 1);
     ListView.ItemIndex := index - 1;
   end;
+  Renum;
 end;
 
 function TSongsListPanel.Next: boolean;
@@ -289,12 +303,8 @@ begin
 end;
 
 function TSongsListPanel.GetTitle: string;
-  //var
-  //  si: TListItem;
 begin
   if ListView.ItemIndex >= 0 then begin
-    //    si := ListView.Items[ListView.ItemIndex];
-    //    Result := si.Caption;
     Result := SongInfos[ListView.ItemIndex].title;
   end else begin
     Result := '';
