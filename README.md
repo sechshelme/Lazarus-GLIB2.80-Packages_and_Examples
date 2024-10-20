@@ -1,7 +1,7 @@
 # Lazarus-GLIB2.80-Packages_and_Examples
 
 ## Paketinfo
-pkg-config --cflags --libs gstreamer-1.0 gstreamer-pbutils-1.0
+- `pkg-config --cflags --libs gstreamer-1.0 gstreamer-pbutils-1.0`
 
 ## GLIB2 
 https://github.com/wadester/wh_test_glib/blob/master/glib_test1.c
@@ -21,10 +21,9 @@ Plugin-Infos:
 ### Pakete
 `sudo apt install libva-dev`
 
-
-
 ### C-Examples
-https://gstreamer.freedesktop.org/documentation/tutorials/basic/hello-world.html?gi-language=c
+- (https://gstreamer.freedesktop.org/documentation/tutorials/basic/hello-world.html?gi-language=c)
+- (https://github.com/GStreamer/gst-plugins-good/blob/master/tests/check/elements/id3demux.c)
 
 ### wine PATH
 Folgende Datei editieren:
