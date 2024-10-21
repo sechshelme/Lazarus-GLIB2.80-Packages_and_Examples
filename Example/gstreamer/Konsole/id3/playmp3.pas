@@ -8,9 +8,14 @@ uses
   glib280,
   GLIBTools,
   gst124,
+  gst124_tag,
   gst124_audio;
 
+
   // https://github.com/GStreamer/gst-plugins-good/blob/master/tests/check/elements/id3demux.c
+  // id3v2
+  // sudo apt install kid3
+
 
 const
   path = '/home/tux/Schreibtisch/sound/test2.mp3';
@@ -40,8 +45,8 @@ const
   var
     tag_value: Pgchar;
   begin
-    gst_tag_list_get_string(list, tag, @tag_value);
-    WriteLn(tag, ': ', tag_value);
+//    gst_tag_list_get_string(list, tag, @tag_value);
+//    WriteLn(tag, ': ', tag_value);
 
   end;
 
@@ -49,10 +54,13 @@ const
   var
     pipeline, src, sep, id3demux, sink: PGstElement;
     bus: PGstBus;
-    path_: Pgchar;
+    path_, Name, tag_value: Pgchar;
     state_ret: TGstStateChangeReturn;
     msg: PGstMessage;
     tags: PGstTagList;
+    Count: Tgint;
+    i: integer;
+    valueType: PGValue;
   begin
     pipeline := gst_pipeline_new('pipeline');
     fail_unless(pipeline <> nil, 'Failed to create pipeline!');
@@ -116,8 +124,26 @@ const
     gst_tag_list_foreach(tags, @printtag, nil);
     //    WriteLn(gst_tag_list_get_boolean(tags, 'artist', nil));
 
+    Count := gst_tag_list_n_tags(tags);
+    WriteLn('Count: ', Count);
+    for i := 0 to Count - 1 do begin
+      Name := gst_tag_list_nth_tag_name(tags, i);
+//      valueType := gst_tag_list_get_value_index(tags, Name, 0);
+      valueType := gst_tag_list_get_value_index(tags, Name, 0);
+      Write('name: ', Name, 'Typ: ', valueType^.g_type, '    ');
+      if valueType^.g_type = G_TYPE_STRING then begin
+        gst_tag_list_get_string(tags, name, @tag_value);
+        WriteLn(tag_value);
+      end else begin
+        WriteLn();
+      end;
+
+    end;
+
+    //    WriteLn(gst_tag_list_to_string(tags));
 
     Result := tags;
+    WriteLn(#10);
   end;
 
   procedure main;
