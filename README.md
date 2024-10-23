@@ -33,6 +33,11 @@ Folgendes an Ende einfügen:
 Aktualisieren:
 - `source ~/.bashrc`
 
+### mp3 Tag Tools
+- id3v2
+- mp3tag
+- kid3
+
 
 
 

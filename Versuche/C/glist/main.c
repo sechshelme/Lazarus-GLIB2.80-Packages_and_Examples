@@ -1,4 +1,4 @@
-// gcc main.c -o main `pkg-config --cflags --libs glib-2.0 `
+// gcc main.c -o main `pkg-config --cflags --libs glib-2.0`
 
 #include <glib.h>
 

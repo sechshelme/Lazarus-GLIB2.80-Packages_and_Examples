@@ -36,7 +36,7 @@ uses
     end;
 
     sink:=gst_bin_get_by_name(GST_BIN(pipeline), 'sink');
-    if src = nil then begin
+    if sink = nil then begin
       WriteLn('sink error');
     end else begin
       WriteLn('sink io.');
