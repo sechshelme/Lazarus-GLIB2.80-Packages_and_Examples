@@ -18,47 +18,50 @@ uses
 
 
 const
-  path = '/home/tux/Schreibtisch/sound/test2.mp3';
-//  path = '/home/tux/Schreibtisch/sound/test.wav';
+//  path = '/home/tux/Schreibtisch/sound/test2.mp3';
+  //  path = '/home/tux/Schreibtisch/sound/test.wav';
+    path = '/n4800/Multimedia/Videos/WNDSURF1.AVI';
 
-procedure read_tags_from_file_new(msg: PGstMessage);
-var
-   Name, tag_value: Pgchar;
-  tags: PGstTagList=nil;
-  Count: Tgint;
-  i: integer;
-  valueType: PGValue;
-  quit:Boolean=False;
-begin
-  gst_message_parse_tag(msg, @tags);
-  if tags<>nil then WriteLn('Tags io.');
-
-  WriteLn('Tag List: ',gst_tag_list_to_string(tags));
-
-  Count := gst_tag_list_n_tags(tags);
-  WriteLn('Count: ', Count);
-  for i := 0 to Count - 1 do begin
-    Name := gst_tag_list_nth_tag_name(tags, i);
-    valueType := gst_tag_list_get_value_index(tags, Name, 0);
-    Write('name: ', Name, 'Typ: ', valueType^.g_type, '    ');
-    if valueType^.g_type = G_TYPE_STRING then begin
-      gst_tag_list_get_string(tags, name, @tag_value);
-      WriteLn(tag_value);
-    end else begin
-      WriteLn();
+  procedure read_tags_from_file_new(msg: PGstMessage);
+  var
+    Name, tag_value: Pgchar;
+    tags: PGstTagList = nil;
+    Count: Tgint;
+    i: integer;
+    valueType: PGValue;
+    quit: boolean = False;
+  begin
+    gst_message_parse_tag(msg, @tags);
+    if tags <> nil then begin
+      WriteLn('Tags io.');
     end;
+
+    WriteLn('Tag List: ', gst_tag_list_to_string(tags));
+
+    Count := gst_tag_list_n_tags(tags);
+    WriteLn('Count: ', Count);
+    for i := 0 to Count - 1 do begin
+      Name := gst_tag_list_nth_tag_name(tags, i);
+      valueType := gst_tag_list_get_value_index(tags, Name, 0);
+      Write('name: ', Name, 'Typ: ', valueType^.g_type, '    ');
+      if valueType^.g_type = G_TYPE_STRING then begin
+        gst_tag_list_get_string(tags, Name, @tag_value);
+        WriteLn(tag_value);
+      end else begin
+        WriteLn();
+      end;
+    end;
+
+    gst_tag_list_unref(tags);
+
+    WriteLn(#10);
   end;
 
-  gst_tag_list_unref(tags);
 
-  WriteLn(#10);
-end;
-
-
-procedure duration_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer); cdecl;
-begin
-  read_tags_from_file_new(msg);
-end;
+  procedure duration_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer); cdecl;
+  begin
+    read_tags_from_file_new(msg);
+  end;
 
 
 
@@ -76,7 +79,7 @@ end;
   begin
     gst_init(@argc, @argv);
 
-//    read_tags_from_file(path);
+    //    read_tags_from_file(path);
 
     pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! queue ! id3demux name=demux ! decodebin ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! autoaudiosink'), nil);
 
@@ -96,21 +99,17 @@ end;
     if demux = nil then begin
       WriteLn('Demux Error');
     end;
-
-
     GObjectShowProperty(demux);
 
-    bus:=gst_element_get_bus(pipeline);
-    if bus=nil then WriteLn('bus error');
-
-        gst_bus_add_signal_watch(bus);
-           g_signal_connect(G_OBJECT(bus), 'message::tag', TGCallback(@duration_cb), pipeline);
-           gst_object_unref(bus);
-
+    bus := gst_element_get_bus(pipeline);
+    if bus = nil then begin
+      WriteLn('bus error');
+    end;
+    gst_bus_add_signal_watch(bus);
+    g_signal_connect(G_OBJECT(bus), 'message::tag', TGCallback(@duration_cb), pipeline);
+    gst_object_unref(bus);
 
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
-
-//    read_tags_from_file_new(pipeline);
 
     repeat
       g_main_iteration(False);
@@ -182,10 +181,15 @@ end;
             end;
             WriteLn('Bass: ', equ[0]: 4: 2);
           end;
+          'p': begin
+            gst_element_set_state(pipeline, GST_STATE_NULL);
+            gst_element_set_state(pipeline, GST_STATE_PLAYING);
+          end;
         end;
       end;
     until quit;
 
+    gst_element_set_state(pipeline, GST_STATE_NULL);
     gst_object_unref(pipeline);
   end;
 
