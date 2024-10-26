@@ -12,12 +12,15 @@
 #include <gst/audio/gstnonstreamaudiodecoder.h>
 #include <gst/base/base.h>
 #include <gst/mse/mse.h>
-#include <gst/cuda/gstcuda.h>
+//#include <gst/cuda/gstcuda.h>
 #include <gst/va/gstva.h>
 #include <gst/wayland/wayland.h>
 #include <wayland-client-core.h>
-#include <gst/gl/gl.h>
-#include <gst/gl/egl/egl.h>
+//#include <gst/gl/gl.h>
+//#include <gst/gl/egl/egl.h>
+
+#include <stdbool.h> // Include this header for bool type
+
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
@@ -82,5 +85,6 @@ CuGraphicsMapResources(0,0,9);
 //GST_VIDEO_FORMAT_INFO_DATA(info,0,0);
 //gst_buffer_get_ancillary_meta(0);
 //GST_AUDIO_BASE_SINK_CLOCK(NULL);
+bool b=false;
 }
 

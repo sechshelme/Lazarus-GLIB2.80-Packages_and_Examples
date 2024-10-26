@@ -18,9 +18,9 @@ uses
 
 
 const
-//  path = '/home/tux/Schreibtisch/sound/test2.mp3';
+  path = '/home/tux/Schreibtisch/sound/test2.mp3';
   //  path = '/home/tux/Schreibtisch/sound/test.wav';
-    path = '/n4800/Multimedia/Videos/WNDSURF1.AVI';
+//    path = '/n4800/Multimedia/Videos/WNDSURF1.AVI';
 
   procedure read_tags_from_file_new(msg: PGstMessage);
   var
@@ -58,7 +58,7 @@ const
   end;
 
 
-  procedure duration_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer); cdecl;
+  procedure tag_msg_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer); cdecl;
   begin
     read_tags_from_file_new(msg);
   end;
@@ -84,7 +84,6 @@ const
     pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! queue ! id3demux name=demux ! decodebin ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! autoaudiosink'), nil);
 
     volume := gst_bin_get_by_interface(GST_BIN(pipeline), gst_stream_volume_get_type());
-
     // volume := gst_bin_get_by_name(GST_BIN(pipeline), 'vol');
     if volume = nil then begin
       WriteLn('Volume Error');
@@ -106,7 +105,7 @@ const
       WriteLn('bus error');
     end;
     gst_bus_add_signal_watch(bus);
-    g_signal_connect(G_OBJECT(bus), 'message::tag', TGCallback(@duration_cb), pipeline);
+    g_signal_connect(G_OBJECT(bus), 'message::tag', TGCallback(@tag_msg_cb), pipeline);
     gst_object_unref(bus);
 
     gst_element_set_state(pipeline, GST_STATE_PLAYING);

@@ -220,7 +220,7 @@ begin
   pipelineElement.Duration := 0;
   pipelineElement.Level.L := 0.0;
   pipelineElement.Level.R := 0.0;
-  pipelineElement.pipeline := gst_parse_launch(PChar('filesrc location="' + fsongPath + '" ! decodebin3 ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! level name=level ! autoaudiosink'), nil);
+  pipelineElement.pipeline := gst_parse_launch(PChar('filesrc location="' + fsongPath + '" ! queue ! decodebin3 ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! level name=level ! autoaudiosink'), nil);
 
   pipelineElement.volume := gst_bin_get_by_name(GST_BIN(pipelineElement.pipeline), 'vol');
   if pipelineElement.volume = nil then begin
