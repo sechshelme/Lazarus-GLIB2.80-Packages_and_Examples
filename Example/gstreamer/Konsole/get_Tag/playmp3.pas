@@ -8,6 +8,7 @@ uses
   glib280,
   GLIBTools,
   gst124,
+  gstTools,
   gst124_tag,
   gst124_audio;
 
@@ -20,100 +21,34 @@ uses
 const
   path = '/home/tux/Schreibtisch/sound/test2.mp3';
   //  path = '/home/tux/Schreibtisch/sound/test.wav';
-//    path = '/n4800/Multimedia/Videos/WNDSURF1.AVI';
+  //    path = '/n4800/Multimedia/Videos/WNDSURF1.AVI';
 
 type
-  TTagInfo=record
-    ready:Boolean;
-    pipeline:PGstElement;
+  TTagInfo = record
+    ready: boolean;
+    duration: int64;
     title,
     artist,
-    album:String;
+    album: string;
   end;
-  PTagInfo=^TTagInfo;
+  PTagInfo = ^TTagInfo;
 
 
-procedure tag_message_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer); cdecl;
-var
-  tags: PGstTagList;
-  Count: Tgint;
-  i: Integer;
-  Name, tag_value: Pgchar;
-  valueType: PGValue;
-  TagInfo:PTagInfo absolute Data;
-begin
-  gst_message_parse_tag(msg, @tags);
-  if tags <> nil then begin
-    WriteLn('Tags io.');
-  end;
-
-  TagInfo^.ready:=True;
-
-  WriteLn('Tag List: ', gst_tag_list_to_string(tags));
-
-  Count := gst_tag_list_n_tags(tags);
-  WriteLn('Count: ', Count);
-  for i := 0 to Count - 1 do begin
-    Name := gst_tag_list_nth_tag_name(tags, i);
-    valueType := gst_tag_list_get_value_index(tags, Name, 0);
-    Write('name: ', Name, 'Typ: ', valueType^.g_type, '    ');
-    if valueType^.g_type = G_TYPE_STRING then begin
-      gst_tag_list_get_string(tags, Name, @tag_value);
-      WriteLn(tag_value);
-    end else begin
-      WriteLn();
-    end;
-  end;
-
-  gst_tag_list_unref(tags);
-
-  WriteLn(#10);
-end;
-
-
-  function GetTag(const path:String):TTagInfo;
+  procedure tag_message_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer); cdecl;
   var
-    pipeline: PGstElement;
-    bus: PGstBus;
-  begin
-    pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! queue ! id3demux name=demux ! decodebin ! audioconvert ! audioresample ! fakesink'), nil);
-
-        bus := gst_element_get_bus(pipeline);
-    if bus = nil then begin
-      WriteLn('bus error');
-    end;
-    gst_bus_add_signal_watch(bus);
-
-    Result.ready:=False;
-    Result.pipeline:=pipeline;
-
-    g_signal_connect(G_OBJECT(bus), 'message::tag', TGCallback(@tag_message_cb), @Result);
-    gst_object_unref(bus);
-
-    gst_element_set_state(pipeline, GST_STATE_PLAYING);
-    repeat
-      g_main_iteration(False);
-    until Result.ready;
-
-    gst_element_set_state(pipeline, GST_STATE_NULL);
-    gst_object_unref(pipeline);
-  end;
-
-// ===========================================
-
-  procedure read_tags_from_file_new(msg: PGstMessage);
-  var
-    Name, tag_value: Pgchar;
-    tags: PGstTagList = nil;
+    tags: PGstTagList;
     Count: Tgint;
     i: integer;
+    Name, tag_value, value: Pgchar;
     valueType: PGValue;
-    quit: boolean = False;
+    TagInfo: PTagInfo absolute Data;
   begin
     gst_message_parse_tag(msg, @tags);
     if tags <> nil then begin
       WriteLn('Tags io.');
     end;
+
+    TagInfo^.ready := True;
 
     WriteLn('Tag List: ', gst_tag_list_to_string(tags));
 
@@ -133,16 +68,51 @@ end;
 
     gst_tag_list_unref(tags);
 
+    gst_tag_list_get_string(tags, 'album', @value);
+    TagInfo^.album := value;
+
     WriteLn(#10);
   end;
 
 
-  procedure tag_msg_cb(bus: PGstBus; msg: PGstMessage; Data: Pointer); cdecl;
+  function GetTagAndDuration(const path: string): TTagInfo;
+  var
+    pipeline: PGstElement;
+    bus: PGstBus;
+    duration: int64;
   begin
-//    read_tags_from_file_new(msg);
+    Result.ready := False;
+
+    pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! queue ! id3demux name=demux ! decodebin ! audioconvert ! audioresample ! fakesink'), nil);
+
+    bus := gst_element_get_bus(pipeline);
+    if bus = nil then begin
+      WriteLn('bus error');
+    end;
+    gst_bus_add_signal_watch(bus);
+
+    g_signal_connect(G_OBJECT(bus), 'message::tag', TGCallback(@tag_message_cb), @Result);
+    gst_object_unref(bus);
+
+    gst_element_set_state(pipeline, GST_STATE_PLAYING);
+    duration := 0;
+    repeat
+      gst_element_query_duration(pipeline, GST_FORMAT_TIME, @duration);
+    until duration > 0;
+
+    duration := duration div G_USEC_PER_SEC;
+    WriteLn('duration: 0', GstClockToStr(duration));
+    Result.duration := duration;
+
+    repeat
+      g_main_iteration(False);
+    until Result.ready;
+
+    gst_element_set_state(pipeline, GST_STATE_NULL);
+    gst_object_unref(pipeline);
   end;
 
-
+  // ===========================================
 
   procedure main;
   var
@@ -155,12 +125,15 @@ end;
     equ: array [0..2] of Tgdouble = (0.0, 0.0, 0.0);
     ch: ansichar;
     bus: PGstBus;
+    taglist: TTagInfo;
   begin
     gst_init(@argc, @argv);
 
-    GetTag(path);
-
-    //    read_tags_from_file(path);
+    taglist := GetTagAndDuration(path);
+    WriteLn('=======================');
+    WriteLn('Album: ', taglist.album);
+    WriteLn('Dauer: ', GstClockToStr(taglist.duration));
+    WriteLn('=======================');
 
     pipeline := gst_parse_launch(PChar('filesrc location="' + path + '" ! queue ! id3demux name=demux ! decodebin ! audioconvert ! audioresample ! equalizer-3bands name=equ ! volume name=vol ! autoaudiosink'), nil);
 
@@ -186,7 +159,6 @@ end;
       WriteLn('bus error');
     end;
     gst_bus_add_signal_watch(bus);
-    g_signal_connect(G_OBJECT(bus), 'message::tag', TGCallback(@tag_msg_cb), pipeline);
     gst_object_unref(bus);
 
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
