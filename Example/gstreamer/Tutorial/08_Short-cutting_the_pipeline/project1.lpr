@@ -24,10 +24,6 @@ type
   end;
   PCustomData = ^TCustomData;
 
-  TTestRec = record
-    a, b: byte;
-  end;
-
   function push_data(user_data: Tgpointer): Tgboolean; cdecl;
   var
     buffer: PGstBuffer;
@@ -67,22 +63,35 @@ type
     Exit(True);
   end;
 
-procedure start_feed(Source: PGstElement; size: Tguint; Data: PCustomData); cdecl;
-begin
-  if Data^.sourceid = 0 then begin
-    g_print('Start feeding'#10);
-    Data^.sourceid := g_idle_add(@push_data, Data);
+  procedure start_feed(Source: PGstElement; size: Tguint; Data: PCustomData); cdecl;
+  begin
+    if Data^.sourceid = 0 then begin
+      g_print('Start feeding'#10);
+      Data^.sourceid := g_idle_add(@push_data, Data);
+    end;
   end;
-end;
 
-procedure stop_feed(Source: PGstElement; size: Tguint; Data: PCustomData); cdecl;
-begin
-  if Data^.sourceid <> 0 then begin
-    g_print('Stop feeding'#10);
-    g_source_remove(Data^.sourceid);
-    Data^.sourceid := 0;
+  procedure stop_feed(Source: PGstElement; size: Tguint; Data: PCustomData); cdecl;
+  begin
+    if Data^.sourceid <> 0 then begin
+      g_print('Stop feeding'#10);
+      g_source_remove(Data^.sourceid);
+      Data^.sourceid := 0;
+    end;
   end;
-end;
+
+  function new_sample(sink: PGstElement; Data: PCustomData): TGstFlowReturn; cdecl;
+  var
+    sample: PGstSample;
+  begin
+    g_signal_emit_by_name(sink, 'pull-sample', @sample);
+    if sample <> nil then begin
+      g_print('*');
+      gst_sample_unref(sample);
+      Exit(GST_FLOW_OK);
+    end;
+    Exit(GST_FLOW_ERROR);
+  end;
 
   function main(argc: cint; argv: PPChar): cint;
   var
@@ -125,6 +134,24 @@ end;
     g_object_set(Data.app_source, 'caps', audio_caps, 'format', GST_FORMAT_TIME, nil);
     g_signal_connect(Data.app_source, 'need-data', G_CALLBACK(@start_feed), @Data);
     g_signal_connect(Data.app_source, 'enough-data', G_CALLBACK(@stop_feed), @Data);
+
+    g_object_set(Data.app_sink, 'emit-signals', True, 'caps', audio_caps, nil);
+    g_signal_connect(Data.app_sink, 'new-sample', G_CALLBACK(@new_sample), @Data);
+    gst_caps_unref(audio_caps);
+
+    gst_bin_add_many(GST_BIN(Data.pipeline), Data.app_source, Data.tee, Data.audio_queue, Data.audio_convert1, Data.audio_resample,
+      Data.audio_sink, Data.video_queue, Data.audio_convert2, Data.visual, Data.video_convert, Data.video_sink, Data.app_queue,
+      Data.app_sink, nil);
+
+    if (not gst_element_link_many(Data.app_source, Data.tee, nil)) or
+      (not gst_element_link_many(Data.audio_queue, Data.audio_convert1, Data.audio_resample, Data.audio_sink, nil)) or
+      (not gst_element_link_many(Data.video_queue, Data.audio_convert2, Data.visual, Data.video_convert, Data.video_sink, nil)) or
+      (not gst_element_link_many(Data.app_queue, Data.app_sink, nil)) then begin
+      g_printerr('Elements could not linked'#10);
+      gst_object_unref(Data.pipeline);
+      Exit(-1);
+    end;
+
 
     // ====================
 
