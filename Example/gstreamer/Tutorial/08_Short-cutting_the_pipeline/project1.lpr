@@ -20,7 +20,7 @@ type
     num_samples: Tguint64;
     a, b, c, d: Tgfloat;
     sourceid: Tguint;
-    main_loop: TGMainLoop;
+    main_loop: PGMainLoop;
   end;
   PCustomData = ^TCustomData;
 
@@ -52,7 +52,7 @@ type
       raw[i] := Trunc(500 * Data^.a);
     end;
     gst_buffer_unmap(buffer, @map);
-    Data^.num_samples := num_samples;
+    Data^.num_samples += num_samples;
 
     g_signal_emit_by_name(Data^.app_source, 'push-buffer', buffer, @ret);
     gst_buffer_unref(buffer);
@@ -93,11 +93,27 @@ type
     Exit(GST_FLOW_ERROR);
   end;
 
+  procedure error_cb(bus: PGstBus; msg: PGstMessage; Data: PCustomData);
+  var
+    debug_info: Pgchar;
+    err: PGError;
+  begin
+    gst_message_parse_error(msg, @err, @debug_info);
+    g_printerr ('Error received from element %s: %s'#10, GST_OBJECT_NAME (msg^.src), err^.message);
+    g_printerr ('Debugging information: %s\n'#10, debug_info);
+    g_clear_error (@err);
+    g_free (debug_info);
+
+    g_main_loop_quit (data^.main_loop);  end;
+
   function main(argc: cint; argv: PPChar): cint;
   var
     Data: TCustomData;
     info: TGstAudioInfo;
     audio_caps: PGstCaps;
+    tee_audio_pad, queue_audio_pad, tee_video_pad, queue_video_pad,
+    tee_app_pad, queue_app_pad: PGstPad;
+    bus: PGstBus;
   begin
     FillChar(Data, SizeOf(Data), $00);
     Data.b := 1;
@@ -152,9 +168,49 @@ type
       Exit(-1);
     end;
 
+    tee_audio_pad := gst_element_request_pad_simple(Data.tee, 'src_%u');
+    g_print('Obtained request pad %s for audio branch.'#10, gst_pad_get_name(tee_audio_pad));
+    queue_audio_pad := gst_element_get_static_pad(Data.audio_queue, 'sink');
 
-    // ====================
+    tee_video_pad := gst_element_request_pad_simple(Data.tee, 'src_%u');
+    g_print('Obtained request pad %s for video branch.'#10, gst_pad_get_name(tee_video_pad));
+    queue_video_pad := gst_element_get_static_pad(Data.video_queue, 'sink');
 
+    tee_app_pad := gst_element_request_pad_simple(Data.tee, 'src_%u');
+    g_print('Obtained request pad %s for app branch.'#10, gst_pad_get_name(tee_app_pad));
+    queue_app_pad := gst_element_get_static_pad(Data.app_queue, 'sink');
+
+    if (gst_pad_link(tee_audio_pad, queue_audio_pad) <> GST_PAD_LINK_OK) or
+      (gst_pad_link(tee_video_pad, queue_video_pad) <> GST_PAD_LINK_OK) or
+      (gst_pad_link(tee_app_pad, queue_app_pad) <> GST_PAD_LINK_OK) then begin
+      g_printerr('Tee could mot be linked'#10);
+    end;
+
+    gst_object_unref(queue_audio_pad);
+    gst_object_unref(queue_video_pad);
+    gst_object_unref(queue_app_pad);
+
+    bus := gst_element_get_bus(Data.pipeline);
+    gst_bus_add_signal_watch(bus);
+    g_signal_connect(G_OBJECT(bus), 'message::error', G_CALLBACK(@error_cb), @Data);
+    gst_object_unref(bus);
+
+    gst_element_set_state(Data.pipeline, GST_STATE_PLAYING);
+
+    Data.main_loop := g_main_loop_new(nil, False);
+    g_main_loop_run(Data.main_loop);
+
+    gst_element_release_request_pad(Data.tee, tee_audio_pad);
+    gst_element_release_request_pad(Data.tee, tee_video_pad);
+    gst_element_release_request_pad(Data.tee, tee_app_pad);
+    gst_object_unref(tee_audio_pad);
+    gst_object_unref(tee_video_pad);
+    gst_object_unref(tee_app_pad);
+
+    gst_element_set_state(Data.pipeline, GST_STATE_NULL);
+    gst_object_unref(Data.pipeline);
+
+    Result := 0;
   end;
 
 begin
